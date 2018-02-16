@@ -1,10 +1,10 @@
 <template>
     <div id="contact">
-        <div v-for="person in contact" v-if="">
-            <span id="name">Cool-guy McFly</span>
-            <span id="position">Data Influencer</span>
+        <div class="contact-inner" :id="person.charID" v-for="person in contact" v-on:click="chooseCharacter($event.target.parentElement.id)">
+            <span id="name">Cool-guy McFly</span><br>
+            <span id="position">Data Influencer</span><br>
             <img id="photo" src="">
-            <span v-if="active.includes(person.charID)">ACTIVE</span>
+            <span v-if="activeContacts.includes(person.charID)">ACTIVE</span><br>
         </div>
     </div>
 </template>
@@ -17,21 +17,13 @@
         mounted() {
             console.log('Component mounted.')
         },
-        props: ['contact'],
+        props: ['contact', 'activeContacts'],
         computed:{
-            active: function() {
-                var temp = [];
-                for (var x in this.contact) {
-                    if (this.contact[x].day === this.contact[x].current_Day ) {
-                        temp.push(this.contact[x].charID);
-                    }
-                }
-                return temp;
-            }
-
         },
         methods: {
-
+            chooseCharacter(charID) {
+                this.$store.commit('chooseCharacter', {charID});
+            },
         }
     }
 </script>

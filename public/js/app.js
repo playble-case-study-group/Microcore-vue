@@ -45813,8 +45813,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             for (var x in this.videos) {
                 temp.push({
                     charID: this.videos[x].character_ID,
-                    day: this.videos[x].day,
-                    current_Day: this.currentDay
+                    day: this.videos[x].day
                 });
             }
             //sort array of objects to prevent duplicates from being passed
@@ -45824,7 +45823,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return result;
         }
-
     },
     methods: {}
 });
@@ -45894,7 +45892,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -45909,7 +45906,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'contact': __WEBPACK_IMPORTED_MODULE_1__contact_vue___default.a
 
     },
-    methods: {}
+    computed: {
+        activeContacts: function activeContacts() {
+            var temp = [];
+            for (var contact in this.contacts) {
+                if (this.contacts[contact].day === this.$store.state.user.current_day) {
+                    temp.push(this.contacts[contact].charID);
+                }
+            }
+            return temp;
+        }
+
+    }
 });
 
 /***/ }),
@@ -45985,20 +45993,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-    props: ['contact'],
-    computed: {
-        active: function active() {
-            var temp = [];
-            for (var x in this.contact) {
-                if (this.contact[x].day === this.contact[x].current_Day) {
-                    temp.push(this.contact[x].charID);
-                }
-            }
-            return temp;
+    props: ['contact', 'activeContacts'],
+    computed: {},
+    methods: {
+        chooseCharacter: function chooseCharacter(charID) {
+            this.$store.commit('chooseCharacter', { charID: charID });
         }
-
-    },
-    methods: {}
+    }
 });
 
 /***/ }),
@@ -46013,17 +46014,34 @@ var render = function() {
     "div",
     { attrs: { id: "contact" } },
     _vm._l(_vm.contact, function(person) {
-      return _c("div", [
-        _c("span", { attrs: { id: "name" } }, [_vm._v("Cool-guy McFly")]),
-        _vm._v(" "),
-        _c("span", { attrs: { id: "position" } }, [_vm._v("Data Influencer")]),
-        _vm._v(" "),
-        _c("img", { attrs: { id: "photo", src: "" } }),
-        _vm._v(" "),
-        _vm.active.includes(person.charID)
-          ? _c("span", [_vm._v("ACTIVE")])
-          : _vm._e()
-      ])
+      return _c(
+        "div",
+        {
+          staticClass: "contact-inner",
+          attrs: { id: person.charID },
+          on: {
+            click: function($event) {
+              _vm.chooseCharacter($event.target.parentElement.id)
+            }
+          }
+        },
+        [
+          _c("span", { attrs: { id: "name" } }, [_vm._v("Cool-guy McFly")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("span", { attrs: { id: "position" } }, [
+            _vm._v("Data Influencer")
+          ]),
+          _c("br"),
+          _vm._v(" "),
+          _c("img", { attrs: { id: "photo", src: "" } }),
+          _vm._v(" "),
+          _vm.activeContacts.includes(person.charID)
+            ? _c("span", [_vm._v("ACTIVE")])
+            : _vm._e(),
+          _c("br")
+        ]
+      )
     })
   )
 }
@@ -46045,11 +46063,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "contacts" } }, [
-    _c("h1", [_vm._v("Contact List")]),
-    _vm._v(" "),
-    _c("div", [_c("contact", { attrs: { contact: _vm.contacts } })], 1)
-  ])
+  return _c(
+    "div",
+    { attrs: { id: "contacts" } },
+    [
+      _c("h1", [_vm._v("Contact List")]),
+      _vm._v(" "),
+      _c("contact", {
+        attrs: { contact: _vm.contacts, activeContacts: _vm.activeContacts }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46139,7 +46164,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
     },
-    methods: {}
+    methods: {
+        charVideo: function charVideo() {
+            this.$on('charData', console.log('got it!'));
+        }
+
+    }
 });
 
 /***/ }),
@@ -46528,8 +46558,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 var state = {
     tasks: [],
-    videos: [],
     user: {},
+    chosen_contact: {},
     simulation: {}
 };
 
@@ -46585,7 +46615,7 @@ var mutations = {
         }
     },
     toggleTask: function toggleTask(state, payload) {
-        console.log(payload);
+        //console.log(payload)
         var task = state.tasks.find(function (task) {
             return task.id === payload;
         });
@@ -46595,6 +46625,10 @@ var mutations = {
         }).catch(function (error) {
             console.log(error.response.data);
         });
+    },
+    chooseCharacter: function chooseCharacter(state, payload) {
+        console.log(payload);
+        Object.assign(state.chosen_contact, payload);
     }
 };
 

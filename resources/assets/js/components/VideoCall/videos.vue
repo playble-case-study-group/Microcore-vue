@@ -23,6 +23,9 @@
 
         },
         methods: {
+            charVideo: function() {
+                this.$on('charData', console.log('got it!'));
+            }
 
         }
     }

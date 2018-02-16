@@ -53,12 +53,11 @@
             },
             contactsList: function() {
                 var temp = [];
-                for(var x in this.videos) {
-                        temp.push({
-                            charID: this.videos[x].character_ID,
-                            day: this.videos[x].day,
-                            current_Day: this.currentDay
-                        });
+                for (var x in this.videos) {
+                    temp.push({
+                        charID: this.videos[x].character_ID,
+                        day: this.videos[x].day,
+                    });
                 }
                 //sort array of objects to prevent duplicates from being passed
                 var result = temp.filter(function (a) {
@@ -67,7 +66,6 @@
 
                 return result;
             }
-
         },
         methods: {
 

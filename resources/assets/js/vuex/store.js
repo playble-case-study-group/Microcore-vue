@@ -7,8 +7,8 @@ Vue.use(Vuex);
 
 const state = {
     tasks: [],
-    videos: [],
     user: {},
+    chosen_contact: {},
     simulation: {}
 }
 
@@ -59,7 +59,7 @@ const mutations = {
         }
     },
     toggleTask: (state, payload) => {
-        console.log(payload)
+        //console.log(payload)
         let task = state.tasks.find(task => task.id === payload);
         task.complete = !task.complete;
         axios.post('/tasks/complete', {id: payload, complete: task.complete})
@@ -68,6 +68,10 @@ const mutations = {
             }).catch((error) => {
                 console.log(error.response.data)
         })
+    },
+    chooseCharacter: (state, payload) => {
+        console.log(payload);
+        Object.assign(state.chosen_contact, payload);
     }
 }
 

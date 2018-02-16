@@ -2,9 +2,8 @@
     <div id="contacts">
 
         <h1>Contact List</h1>
-        <div>
-            <contact :contact="contacts"></contact>
-        </div>
+            <contact :contact="contacts" :activeContacts="activeContacts"></contact>
+
     </div>
 </template>
 
@@ -22,7 +21,16 @@
             'contact': contact,
 
         },
-        methods: {
+        computed: {
+            activeContacts: function() {
+                var temp = [];
+                for(var contact in this.contacts){
+                    if(this.contacts[contact].day === this.$store.state.user.current_day){
+                        temp.push(this.contacts[contact].charID);
+                    }
+                }
+                return temp;
+            }
 
         }
     }
