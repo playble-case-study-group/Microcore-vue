@@ -69,8 +69,10 @@
             </div>
         </nav>
         <div class="wrapper">
+            @auth
             <left-menu></left-menu>
             <right-menu></right-menu>
+            @endauth
             @yield('content')
         </div>
 

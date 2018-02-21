@@ -5,10 +5,12 @@
             <user-progress v-bind:tasks="tasks">
             </user-progress>
 
+
             <user-tasks>
             </user-tasks>
             <div id="next-day">
-                <button v-on:click="NEXT_DAY()">NEXT DAY</button>
+                <button type="button" class="btn btn-invert" v-on:click="PREVIOUS_DAY()"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button type="button" class="btn btn-invert" v-on:click="NEXT_DAY()">NEXT DAY <i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         </div>
     </div>
@@ -36,7 +38,10 @@
 
         },
         methods: {
-            ...mapActions(['NEXT_DAY'])
+            ...mapActions([
+                'NEXT_DAY',
+                'PREVIOUS_DAY'
+            ])
         }
 
     }
@@ -59,4 +64,5 @@
         list-style: none;
         padding-left: 0 !important;
     }
+
 </style>

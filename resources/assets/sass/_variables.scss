@@ -40,3 +40,11 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+// Border-radii
+$border-radius-base:        0px;
+$border-radius-large:       0px;
+$border-radius-small:       0px;
+
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         20px;
