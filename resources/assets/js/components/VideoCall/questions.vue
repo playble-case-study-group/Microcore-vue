@@ -1,6 +1,6 @@
 <template>
     <div id="questions">
-        <question></question>
+        <question :question="activeQuestions"></question>
     </div>
 </template>
 
@@ -13,10 +13,19 @@
         mounted() {
             console.log('Component mounted.')
         },
-        props: ['questions'],
+        props: ['questions', 'active'],
         components: {
             'question': question,
-
+        },
+        computed: {
+            activeQuestions: function() {
+                let question = this.questions.filter((el) => {
+                    if (el.charID === this.active) {
+                        return el;
+                    }
+                })
+                return question;
+            }
         },
         methods: {
 

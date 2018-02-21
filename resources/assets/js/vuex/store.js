@@ -8,7 +8,6 @@ Vue.use(Vuex);
 const state = {
     tasks: [],
     user: {},
-    chosen_contact: {},
     simulation: {}
 }
 
@@ -68,10 +67,6 @@ const mutations = {
             }).catch((error) => {
                 console.log(error.response.data)
         })
-    },
-    chooseCharacter: (state, payload) => {
-        console.log(payload);
-        Object.assign(state.chosen_contact, payload);
     }
 }
 

@@ -1,10 +1,13 @@
 <template>
-    <div id="videocall">
-
+    <div id="videocall" class="container">
         <h1>Video Mail</h1>
-        <videos :video="videoList"></videos>
-        <contacts :contacts="contactsList"></contacts>
-        <questions :questions="questionsList"></questions>
+        <contacts
+                :contacts="contactsList"
+                :video="videoList"
+                :chosenContact="chosenContact"
+                :questions="questionsList">
+
+        </contacts>
         <notes></notes>
 
     </div>
@@ -13,9 +16,8 @@
 <script>
     import { mapActions } from 'vuex'
     import contacts from './contacts.vue'
-    import video from './videos.vue'
     import notes from './notes.vue'
-    import questions from './questions.vue'
+
 
     export default {
 
@@ -24,51 +26,50 @@
         },
         components: {
             'contacts': contacts,
-            'videos': video,
-            'notes': notes,
-            'questions': questions
+            'notes': notes
         },
         props: ['videos'],
+        data: function() {
+            return {
+                chosenContact: 0
+            }
+        },
         computed:{
             currentDay: function(){
                 return this.$store.state.user.current_day;
             },
             videoList: function() {
-                var temp = []
-                for(var x in this.videos){
-                    if(this.videos[x].day === this.currentDay){
-                        temp.push({'url': this.videos[x].video, 'charID': this.videos[x].character_ID});
-                    }
-                }
-                return temp;
+                  let videos = this.videos.filter((video) => {
+                        if(video.day === this.currentDay){
+                            return video
+                        }
+                    })
+                      .map((video) => {
+                      return {'url': video.video, 'charID': video.character_ID}
+                })
+
+                return videos;
             },
             questionsList: function() {
-                var temp = []
-                for(var x in this.videos){
-                    if(this.videos[x].day === this.currentDay){
-                        temp.push({'charID': this.videos[x].character_ID,'question': this.videos[x].question, 'start': this.videos[x].video_startTime, 'end': this.videos[x].video_endTime});
+                let questions = this.videos.filter((question) => {
+                    if(question.day === this.currentDay){
+                        return question
                     }
-                }
-                return temp;
+                })
+                    .map((question) => {
+                        return {'question': question.question, 'charID': question.character_ID,'start': question.video_startTime, 'end': question.video_endTime }
+                    })
+
+                return questions;
+
             },
             contactsList: function() {
-                var temp = [];
-                for (var x in this.videos) {
-                    temp.push({
-                        charID: this.videos[x].character_ID,
-                        day: this.videos[x].day,
-                    });
-                }
-                //sort array of objects to prevent duplicates from being passed
-                var result = temp.filter(function (a) {
-                    return !this[a.charID] && (this[a.charID] = true);
-                }, Object.create(null));
+                let characters = this.videos.map((character) => {
+                    return {'charID': character.character_ID, 'day': character.day }
+                })
 
-                return result;
+                return characters;
             }
-        },
-        methods: {
-
         }
     }
 </script>

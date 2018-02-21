@@ -16,7 +16,7 @@ class VideoCallController extends Controller
     {
         $videos = DB::table('video')->get();
 
-        return view('videocall', ['videos' => $videos]);
+        return view('videocall', compact('videos'));
     }
 
     /**

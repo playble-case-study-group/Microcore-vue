@@ -13144,7 +13144,7 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(102);
+module.exports = __webpack_require__(99);
 
 
 /***/ }),
@@ -13153,7 +13153,7 @@ module.exports = __webpack_require__(102);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(0);
 
 /**
@@ -45678,7 +45678,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "gallery" } },
+    { staticClass: "container", attrs: { id: "gallery" } },
     [_c("h1", [_vm._v("Welcome to the Gallery")]), _vm._v(" "), _c("artifact")],
     1
   )
@@ -45702,7 +45702,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(81)
 /* template */
-var __vue_template__ = __webpack_require__(100)
+var __vue_template__ = __webpack_require__(97)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45749,12 +45749,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contacts_vue__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__contacts_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notes_vue__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__notes_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__questions_vue__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__questions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__questions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__notes_vue__);
 //
 //
 //
@@ -45767,8 +45763,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
+//
+//
+//
 
 
 
@@ -45781,50 +45778,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         'contacts': __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default.a,
-        'videos': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a,
-        'notes': __WEBPACK_IMPORTED_MODULE_3__notes_vue___default.a,
-        'questions': __WEBPACK_IMPORTED_MODULE_4__questions_vue___default.a
+        'notes': __WEBPACK_IMPORTED_MODULE_2__notes_vue___default.a
     },
     props: ['videos'],
+    data: function data() {
+        return {
+            chosenContact: 0
+        };
+    },
     computed: {
         currentDay: function currentDay() {
             return this.$store.state.user.current_day;
         },
         videoList: function videoList() {
-            var temp = [];
-            for (var x in this.videos) {
-                if (this.videos[x].day === this.currentDay) {
-                    temp.push({ 'url': this.videos[x].video, 'charID': this.videos[x].character_ID });
+            var _this = this;
+
+            var videos = this.videos.filter(function (video) {
+                if (video.day === _this.currentDay) {
+                    return video;
                 }
-            }
-            return temp;
+            }).map(function (video) {
+                return { 'url': video.video, 'charID': video.character_ID };
+            });
+
+            return videos;
         },
         questionsList: function questionsList() {
-            var temp = [];
-            for (var x in this.videos) {
-                if (this.videos[x].day === this.currentDay) {
-                    temp.push({ 'charID': this.videos[x].character_ID, 'question': this.videos[x].question, 'start': this.videos[x].video_startTime, 'end': this.videos[x].video_endTime });
+            var _this2 = this;
+
+            var questions = this.videos.filter(function (question) {
+                if (question.day === _this2.currentDay) {
+                    return question;
                 }
-            }
-            return temp;
+            }).map(function (question) {
+                return { 'question': question.question, 'charID': question.character_ID, 'start': question.video_startTime, 'end': question.video_endTime };
+            });
+
+            return questions;
         },
         contactsList: function contactsList() {
-            var temp = [];
-            for (var x in this.videos) {
-                temp.push({
-                    charID: this.videos[x].character_ID,
-                    day: this.videos[x].day
-                });
-            }
-            //sort array of objects to prevent duplicates from being passed
-            var result = temp.filter(function (a) {
-                return !this[a.charID] && (this[a.charID] = true);
-            }, Object.create(null));
+            var characters = this.videos.map(function (character) {
+                return { 'charID': character.character_ID, 'day': character.day };
+            });
 
-            return result;
+            return characters;
         }
-    },
-    methods: {}
+    }
 });
 
 /***/ }),
@@ -45836,7 +45835,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(83)
 /* template */
-var __vue_template__ = __webpack_require__(87)
+var __vue_template__ = __webpack_require__(93)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45881,8 +45880,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contact_vue__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contact_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__contact_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__questions_vue__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__questions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__questions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
 //
 //
 //
@@ -45892,6 +45893,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -45901,20 +45912,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-    props: ['contacts'],
+    data: function data() {
+        return {
+            chosenContact: 0
+        };
+    },
+    props: ['contacts', 'video', 'questions'],
     components: {
-        'contact': __WEBPACK_IMPORTED_MODULE_1__contact_vue___default.a
-
+        'videos': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a,
+        'questions': __WEBPACK_IMPORTED_MODULE_1__questions_vue___default.a
     },
     computed: {
         activeContacts: function activeContacts() {
-            var temp = [];
-            for (var contact in this.contacts) {
-                if (this.contacts[contact].day === this.$store.state.user.current_day) {
-                    temp.push(this.contacts[contact].charID);
+            var _this = this;
+
+            var contacts = this.contacts.filter(function (contact) {
+                if (contact.day === _this.$store.state.user.current_day) {
+                    return contact.charID;
                 }
-            }
-            return temp;
+            }).map(function (contact) {
+                return contact.charID;
+            });
+            return contacts;
         }
 
     }
@@ -45929,393 +45948,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(85)
 /* template */
-var __vue_template__ = __webpack_require__(86)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/VideoCall/contact.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a61f813a", Component.options)
-  } else {
-    hotAPI.reload("data-v-a61f813a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 85 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-    props: ['contact', 'activeContacts'],
-    computed: {},
-    methods: {
-        chooseCharacter: function chooseCharacter(charID) {
-            this.$store.commit('chooseCharacter', { charID: charID });
-        }
-    }
-});
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "contact" } },
-    _vm._l(_vm.contact, function(person) {
-      return _c(
-        "div",
-        {
-          staticClass: "contact-inner",
-          attrs: { id: person.charID },
-          on: {
-            click: function($event) {
-              _vm.chooseCharacter($event.target.parentElement.id)
-            }
-          }
-        },
-        [
-          _c("span", { attrs: { id: "name" } }, [_vm._v("Cool-guy McFly")]),
-          _c("br"),
-          _vm._v(" "),
-          _c("span", { attrs: { id: "position" } }, [
-            _vm._v("Data Influencer")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("img", { attrs: { id: "photo", src: "" } }),
-          _vm._v(" "),
-          _vm.activeContacts.includes(person.charID)
-            ? _c("span", [_vm._v("ACTIVE")])
-            : _vm._e(),
-          _c("br")
-        ]
-      )
-    })
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a61f813a", module.exports)
-  }
-}
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "contacts" } },
-    [
-      _c("h1", [_vm._v("Contact List")]),
-      _vm._v(" "),
-      _c("contact", {
-        attrs: { contact: _vm.contacts, activeContacts: _vm.activeContacts }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-167963c0", module.exports)
-  }
-}
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(89)
-/* template */
-var __vue_template__ = __webpack_require__(90)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/VideoCall/videos.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-00e307e5", Component.options)
-  } else {
-    hotAPI.reload("data-v-00e307e5", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 89 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-    props: ['video'],
-    computed: {
-        videourl: function videourl() {
-            return this.video.url;
-        }
-
-    },
-    methods: {
-        charVideo: function charVideo() {
-            this.$on('charData', console.log('got it!'));
-        }
-
-    }
-});
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "video" } }, [
-      _c("video", [_c("source", { attrs: { src: "", type: "video/mp4" } })])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-00e307e5", module.exports)
-  }
-}
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(92)
-/* template */
-var __vue_template__ = __webpack_require__(93)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/VideoCall/notes.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-767f6044", Component.options)
-  } else {
-    hotAPI.reload("data-v-767f6044", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 92 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-    methods: {}
-});
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "notes" } }, [
-      _c("h1", [_vm._v("This is a Note")]),
-      _vm._v(" "),
-      _c("textarea", { attrs: { rows: "5", cols: "50" } })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-767f6044", module.exports)
-  }
-}
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(95)
-/* template */
-var __vue_template__ = __webpack_require__(99)
+var __vue_template__ = __webpack_require__(89)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46354,13 +45987,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 95 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__question_vue__);
 //
 //
@@ -46377,24 +46010,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-    props: ['questions'],
+    props: ['questions', 'active'],
     components: {
         'question': __WEBPACK_IMPORTED_MODULE_1__question_vue___default.a
+    },
+    computed: {
+        activeQuestions: function activeQuestions() {
+            var _this = this;
 
+            var question = this.questions.filter(function (el) {
+                if (el.charID === _this.active) {
+                    return el;
+                }
+            });
+            return question;
+        }
     },
     methods: {}
 });
 
 /***/ }),
-/* 96 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(88)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46433,12 +46077,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
+//
+//
+//
+//
 //
 //
 //
@@ -46455,12 +46103,322 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-
+    props: ['question', 'active'],
     methods: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])([])
 });
 
 /***/ }),
-/* 98 */
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "question" } },
+    _vm._l(_vm.question, function(single) {
+      return _c(
+        "div",
+        { staticClass: "question", on: { click: function($event) {} } },
+        [_vm._v("\n        " + _vm._s(single.question) + "\n    ")]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c56baf9a", module.exports)
+  }
+}
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "questions" } },
+    [_c("question", { attrs: { question: _vm.activeQuestions } })],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0fa67f50", module.exports)
+  }
+}
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(91)
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/VideoCall/videos.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00e307e5", Component.options)
+  } else {
+    hotAPI.reload("data-v-00e307e5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    },
+
+    props: ['video', 'active'],
+    computed: {
+        videourl: function videourl() {
+            var _this = this;
+
+            var contacts = this.video.filter(function (el) {
+                if (el.charID === _this.active) {
+                    return el;
+                }
+            }).map(function (el) {
+                return el.url;
+            });
+            return contacts;
+        }
+    },
+    watch: {}
+});
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "video" } }, [
+    _c("video", [
+      _c("source", { attrs: { src: _vm.videourl, type: "video/mp4" } })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00e307e5", module.exports)
+  }
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "'container" },
+    [
+      _c("videos", {
+        attrs: { video: this.video, active: this.chosenContact }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { id: "contacts" } },
+        _vm._l(_vm.contacts, function(person) {
+          return _c(
+            "div",
+            {
+              staticClass: "contact-inner",
+              attrs: { id: person.charID },
+              on: {
+                click: function($event) {
+                  _vm.chosenContact = person.charID
+                }
+              }
+            },
+            [
+              _c("span", { attrs: { id: "name" } }, [_vm._v("Cool-guy McFly")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", { attrs: { id: "position" } }, [
+                _vm._v("Data Influencer")
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("img", { attrs: { id: "photo", src: "" } }),
+              _vm._v(" "),
+              _vm.activeContacts.includes(person.charID)
+                ? _c("span", [_vm._v("ACT IVE")])
+                : _vm._e(),
+              _c("br")
+            ]
+          )
+        })
+      ),
+      _vm._v(" "),
+      _c("questions", {
+        attrs: { questions: this.questions, active: this.chosenContact }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-167963c0", module.exports)
+  }
+}
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(95)
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/VideoCall/notes.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-767f6044", Component.options)
+  } else {
+    hotAPI.reload("data-v-767f6044", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(0);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    },
+
+    methods: {}
+});
+
+/***/ }),
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46474,8 +46432,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "question" } }, [
-      _c("h1", [_vm._v("This is an Question ")])
+    return _c("div", { attrs: { id: "notes" } }, [
+      _c("h1", [_vm._v("This is a Note")]),
+      _vm._v(" "),
+      _c("textarea", { attrs: { rows: "5", cols: "50" } })
     ])
   }
 ]
@@ -46484,32 +46444,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c56baf9a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-767f6044", module.exports)
   }
 }
 
 /***/ }),
-/* 99 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "questions" } }, [_c("question")], 1)
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0fa67f50", module.exports)
-  }
-}
-
-/***/ }),
-/* 100 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46518,15 +46458,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "videocall" } },
+    { staticClass: "container", attrs: { id: "videocall" } },
     [
       _c("h1", [_vm._v("Video Mail")]),
       _vm._v(" "),
-      _c("videos", { attrs: { video: _vm.videoList } }),
-      _vm._v(" "),
-      _c("contacts", { attrs: { contacts: _vm.contactsList } }),
-      _vm._v(" "),
-      _c("questions", { attrs: { questions: _vm.questionsList } }),
+      _c("contacts", {
+        attrs: {
+          contacts: _vm.contactsList,
+          video: _vm.videoList,
+          chosenContact: _vm.chosenContact,
+          questions: _vm.questionsList
+        }
+      }),
       _vm._v(" "),
       _c("notes")
     ],
@@ -46544,7 +46487,7 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46559,7 +46502,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 var state = {
     tasks: [],
     user: {},
-    chosen_contact: {},
     simulation: {}
 };
 
@@ -46625,10 +46567,6 @@ var mutations = {
         }).catch(function (error) {
             console.log(error.response.data);
         });
-    },
-    chooseCharacter: function chooseCharacter(state, payload) {
-        console.log(payload);
-        Object.assign(state.chosen_contact, payload);
     }
 };
 
@@ -46662,7 +46600,7 @@ var actions = {
 }));
 
 /***/ }),
-/* 102 */
+/* 99 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

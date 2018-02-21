@@ -1,35 +1,52 @@
 <template>
-    <div id="contacts">
-
-        <h1>Contact List</h1>
-            <contact :contact="contacts" :activeContacts="activeContacts"></contact>
-
+    <div class="'container">
+    <videos :video="this.video" :active="this.chosenContact"></videos>
+        <div id="contacts">
+        <div class="contact-inner"
+             :id="person.charID"
+             v-for="person in contacts"
+             v-on:click="chosenContact = (person.charID)">
+                <span id="name">Cool-guy McFly</span><br>
+                <span id="position">Data Influencer</span><br>
+                <img id="photo" src="">
+                <span v-if="activeContacts.includes(person.charID)">ACT IVE</span><br>
+        </div>
+    </div>
+    <questions :questions="this.questions" :active="this.chosenContact"></questions>
     </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex'
-    import contact from './contact.vue'
+    import questions from './questions.vue'
+    import video from './videos.vue'
 
     export default {
 
         mounted() {
             console.log('Component mounted.')
         },
-        props: ['contacts'],
+        data: function(){
+            return {
+                chosenContact: 0
+            }
+        },
+        props: ['contacts', 'video', 'questions'],
         components: {
-            'contact': contact,
-
+            'videos': video,
+            'questions': questions
         },
         computed: {
             activeContacts: function() {
-                var temp = [];
-                for(var contact in this.contacts){
-                    if(this.contacts[contact].day === this.$store.state.user.current_day){
-                        temp.push(this.contacts[contact].charID);
+                let contacts = this.contacts.filter((contact) => {
+                    if(contact.day === this.$store.state.user.current_day){
+                        return contact.charID;
                     }
-                }
-                return temp;
+                })
+                    .map((contact) => {
+                        return contact.charID;
+                    })
+                return contacts;
             }
 
         }

@@ -1,5 +1,5 @@
 <template>
-    <div id="gallery">
+    <div id="gallery" class="container">
 
         <h1>Welcome to the Gallery</h1>
         <artifact></artifact>
