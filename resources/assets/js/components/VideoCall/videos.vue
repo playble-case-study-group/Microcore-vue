@@ -13,7 +13,6 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
         },
         props: ['video', 'active'],
         computed: {
@@ -33,3 +32,14 @@
         }
     }
 </script>
+
+<style scoped>
+    .content {
+        padding: 20px;
+    }
+
+    #video {
+        border: solid 1px;
+    }
+
+</style>

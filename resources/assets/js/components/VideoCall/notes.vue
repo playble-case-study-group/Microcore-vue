@@ -1,8 +1,8 @@
 <template>
     <div id="notes">
 
-        <h1>This is a Note</h1>
-        <textarea rows="5" cols="50"></textarea>
+        <h3> Notes </h3>
+        <textarea rows="5" cols="50" v-model="note" v-on:keydown="update" ></textarea>
 
     </div>
 </template>
@@ -13,10 +13,23 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
+        },
+        data: function() {
+          return {
+              note: ""
+          }
         },
         methods: {
-
+            update: function (notes) {
+                axios.post('/videocall', {data: this.note})
+                    .then((response)=>{
+                        console.log(response)
+                    }).catch((error)=>{
+                    console.log(error.response.data)
+                })
+            }
         }
+
     }
+
 </script>

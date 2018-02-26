@@ -1,6 +1,6 @@
 <template>
     <div id="question">
-        <div class="question"
+        <div class="single-question"
              v-for="single in question"
              v-on:click="">
             {{ single.question }}
@@ -17,10 +17,20 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
         },
         props: ['question', 'active'],
         methods: mapActions([
         ])
     }
 </script>
+
+<style scoped>
+    .content {
+        padding: 20px;
+    }
+
+    #question {
+
+    }
+
+</style>

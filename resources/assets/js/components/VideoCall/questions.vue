@@ -11,7 +11,6 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
         },
         props: ['questions', 'active'],
         components: {

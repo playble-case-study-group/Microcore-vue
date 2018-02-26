@@ -1,6 +1,5 @@
 <template>
     <div id="videocall" class="container">
-        <h1>Video Mail</h1>
         <contacts
                 :contacts="contactsList"
                 :video="videoList"
@@ -22,7 +21,6 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
         },
         components: {
             'contacts': contacts,
@@ -45,7 +43,7 @@
                         }
                     })
                       .map((video) => {
-                      return {'url': video.video, 'charID': video.character_ID}
+                      return {'url': video.video, 'charID': video.character_id}
                 })
 
                 return videos;
@@ -57,7 +55,7 @@
                     }
                 })
                     .map((question) => {
-                        return {'question': question.question, 'charID': question.character_ID,'start': question.video_startTime, 'end': question.video_endTime }
+                        return {'question': question.question, 'charID': question.character_id,'start': question.video_starttime, 'end': question.video_endtime }
                     })
 
                 return questions;
@@ -65,7 +63,7 @@
             },
             contactsList: function() {
                 let characters = this.videos.map((character) => {
-                    return {'charID': character.character_ID, 'day': character.day }
+                    return {'charID': character.character_id, 'day': character.day }
                 })
 
                 return characters;
