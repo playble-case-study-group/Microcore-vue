@@ -2,7 +2,7 @@
     <div id="notes">
 
         <h3> Notes </h3>
-        <textarea rows="5" cols="50" v-model="note" v-on:keydown="update" ></textarea>
+        <textarea rows="5" cols="50" v-model="note" v-on:keyup="update" ></textarea>
 
     </div>
 </template>
@@ -16,17 +16,34 @@
         },
         data: function() {
           return {
-              note: ""
+              note: ''
           }
         },
         methods: {
-            update: function (notes) {
-                axios.post('/videocall', {data: this.note})
-                    .then((response)=>{
-                        console.log(response)
-                    }).catch((error)=>{
-                    console.log(error.response.data)
-                })
+            update: function () {
+                axios
+                    .post(
+                        "/videocall",
+                        {
+                            note: this.note,
+                            user: this.$store.state.user.id,
+                            day: this.$store.state.user.current_day
+                        }
+                    )
+                    .then(r => console.log(r))
+                    .catch(e => console.log(e));
+            },
+            fetch: function() {
+                axios
+                    .get(
+                        "/videocall",
+                        {
+                            user: this.$store.state.user.id,
+                            day: this.$store.state.user.current_day
+                        }
+                    )
+                    .then(r => console.log(r))
+                    .catch(e => console.log(e));
             }
         }
 

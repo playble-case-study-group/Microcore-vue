@@ -8,6 +8,7 @@ Vue.use(Vuex);
 const state = {
     tasks: [],
     user: {},
+    notes: {},
     simulation: {}
 }
 
@@ -42,6 +43,12 @@ const mutations = {
     // See app.js mounted for call
     GET_USER: (state) => {
         axios.get('/user').then(response => state.user = response.data);
+    },
+
+    GET_NOTES: (state) => {
+        axios.get('/video').then(response => {
+            state.notes = response.data;
+        });
     },
 
     // Increments day in user object while it is less than the amount of days
@@ -88,6 +95,7 @@ const actions = {
     GET_SIMULATION: ({commit}) => commit('GET_SIMULATION'),
     GET_TASKS: ({commit}) => commit('GET_TASKS'),
     GET_USER: ({commit}) => commit('GET_USER'),
+    GET_NOTES: ({commit}) => commit('GET_NOTES'),
     NEXT_DAY: ({commit}) => commit('NEXT_DAY'),
     PREVIOUS_DAY: ({commit}) => commit('PREVIOUS_DAY'),
     toggleTask(context, payload) {

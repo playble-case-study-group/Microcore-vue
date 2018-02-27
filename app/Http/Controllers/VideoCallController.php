@@ -38,6 +38,29 @@ class VideoCallController extends Controller
     public function store(Request $request)
     {
         //
+        $user_id = $request->user;
+        $day = $request->day;
+        $note = $request->note;
+        $date = date("Y-m-d H:i:s",time());
+
+        $exist = DB::table('notes')
+            ->select('user_id')
+            ->where('user_id', $user_id)
+            ->where('day', $day)
+            ->get();
+        $exist = json_encode($exist);
+
+        if($exist !== "[]"){
+            DB::table('notes')
+                ->where('user_id', $user_id)
+                ->where('day', $day)
+                ->update(['note' => $note]);
+        }else{
+            DB::table('notes')
+                ->insert(['day'=>$day,'user_id' => $user_id,'note' => $note,'timestamp'=> $date]);
+        }
+        return $request->all();
+
     }
 
     /**

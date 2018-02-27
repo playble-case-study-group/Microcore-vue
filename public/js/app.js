@@ -46632,15 +46632,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            note: ""
+            note: ''
         };
     },
     methods: {
-        update: function update(notes) {
-            axios.post('/videocall', { data: this.note }).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                console.log(error.response.data);
+        update: function update() {
+            axios.post("/videocall", {
+                note: this.note,
+                user: this.$store.state.user.id,
+                day: this.$store.state.user.current_day
+            }).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        },
+        fetch: function fetch() {
+            axios.get("/videocall", {
+                user: this.$store.state.user.id,
+                day: this.$store.state.user.current_day
+            }).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
             });
         }
     }
@@ -46670,7 +46684,7 @@ var render = function() {
       attrs: { rows: "5", cols: "50" },
       domProps: { value: _vm.note },
       on: {
-        keydown: _vm.update,
+        keyup: _vm.update,
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -47034,6 +47048,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 var state = {
     tasks: [],
     user: {},
+    notes: {},
     simulation: {}
 };
 
@@ -47071,6 +47086,12 @@ var mutations = {
     GET_USER: function GET_USER(state) {
         axios.get('/user').then(function (response) {
             return state.user = response.data;
+        });
+    },
+
+    GET_NOTES: function GET_NOTES(state) {
+        axios.get('/video').then(function (response) {
+            state.notes = response.data;
         });
     },
 
@@ -47123,12 +47144,16 @@ var actions = {
         var commit = _ref3.commit;
         return commit('GET_USER');
     },
-    NEXT_DAY: function NEXT_DAY(_ref4) {
+    GET_NOTES: function GET_NOTES(_ref4) {
         var commit = _ref4.commit;
+        return commit('GET_NOTES');
+    },
+    NEXT_DAY: function NEXT_DAY(_ref5) {
+        var commit = _ref5.commit;
         return commit('NEXT_DAY');
     },
-    PREVIOUS_DAY: function PREVIOUS_DAY(_ref5) {
-        var commit = _ref5.commit;
+    PREVIOUS_DAY: function PREVIOUS_DAY(_ref6) {
+        var commit = _ref6.commit;
         return commit('PREVIOUS_DAY');
     },
     toggleTask: function toggleTask(context, payload) {
