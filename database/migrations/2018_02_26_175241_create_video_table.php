@@ -21,8 +21,6 @@ class CreateVideoTable extends Migration
             $table->string('question');
             $table->time('start_time');
             $table->time('end_time');
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
         });
     }
 
