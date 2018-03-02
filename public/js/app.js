@@ -46505,14 +46505,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        this.fetch();
+    },
 
     data: function data() {
         return {
             note: ''
         };
     },
-    computed: {
+    computed: {},
+    methods: {
+        update: function update() {
+            axios.post("/videocall", {
+                note: this.note,
+                user: this.$store.state.user.id,
+                day: this.$store.state.user.current_day
+            }).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        },
         fetch: function fetch() {
             var _this = this;
 
@@ -46527,20 +46541,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.note = day_note.note;
                     return day_note.note;
                 });
+                console.log(notes);
                 return notes;
-            });
-        }
-    },
-    methods: {
-        update: function update() {
-            axios.post("/videocall", {
-                note: this.note,
-                user: this.$store.state.user.id,
-                day: this.$store.state.user.current_day
-            }).then(function (r) {
-                return console.log(r);
-            }).catch(function (e) {
-                return console.log(e);
             });
         }
     }
@@ -46558,27 +46560,31 @@ var render = function() {
   return _c("div", { attrs: { id: "notes" } }, [
     _c("h3", [_vm._v(" Notes ")]),
     _vm._v(" "),
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.note,
-          expression: "note"
-        }
-      ],
-      attrs: { rows: "5", cols: "50" },
-      domProps: { value: _vm.note },
-      on: {
-        keyup: _vm.update,
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+    _c(
+      "textarea",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.note,
+            expression: "note"
           }
-          _vm.note = $event.target.value
+        ],
+        attrs: { rows: "5", cols: "50" },
+        domProps: { value: _vm.note },
+        on: {
+          keyup: _vm.update,
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.note = $event.target.value
+          }
         }
-      }
-    })
+      },
+      [_vm._v(_vm._s(_vm.note))]
+    )
   ])
 }
 var staticRenderFns = []
