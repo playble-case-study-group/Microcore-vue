@@ -45779,7 +45779,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'contacts': __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default.a,
         'notes': __WEBPACK_IMPORTED_MODULE_2__notes_vue___default.a
     },
-    props: ['videos'],
+    props: ['videos', 'notes'],
     data: function data() {
         return {
             chosenContact: 0
@@ -46500,6 +46500,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -46511,20 +46512,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             note: ''
         };
     },
+    computed: {
+        fetch: function fetch() {
+            var _this = this;
+
+            var current_day = this.$store.state.user.current_day;
+            axios.get('/videocall/' + this.$store.state.user.id).then(function (data) {
+                var arr = data.data;
+                var notes = arr.filter(function (day_note) {
+                    if (day_note.day === current_day) {
+                        return day_note;
+                    }
+                }).map(function (day_note) {
+                    _this.note = day_note.note;
+                    return day_note.note;
+                });
+                return notes;
+            });
+        }
+    },
     methods: {
         update: function update() {
             axios.post("/videocall", {
                 note: this.note,
-                user: this.$store.state.user.id,
-                day: this.$store.state.user.current_day
-            }).then(function (r) {
-                return console.log(r);
-            }).catch(function (e) {
-                return console.log(e);
-            });
-        },
-        fetch: function fetch() {
-            axios.get("/videocall", {
                 user: this.$store.state.user.id,
                 day: this.$store.state.user.current_day
             }).then(function (r) {

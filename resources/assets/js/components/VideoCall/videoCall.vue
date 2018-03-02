@@ -26,7 +26,7 @@
             'contacts': contacts,
             'notes': notes
         },
-        props: ['videos'],
+        props: ['videos', 'notes'],
         data: function() {
             return {
                 chosenContact: 0

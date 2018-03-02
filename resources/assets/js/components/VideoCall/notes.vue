@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
     <div id="notes">
 
@@ -19,6 +20,24 @@
               note: ''
           }
         },
+        computed: {
+            fetch: function () {
+                let current_day = this.$store.state.user.current_day;
+                axios.get('/videocall/'+this.$store.state.user.id)
+                    .then((data) => {
+                        let arr = data.data
+                        let notes = arr.filter((day_note) => {
+                            if(day_note.day === current_day){
+                                return day_note
+                            }
+                        }).map((day_note) => {
+                            this.note = day_note.note;
+                            return day_note.note;
+                        })
+                        return notes;
+                })
+            }
+        },
         methods: {
             update: function () {
                 axios
@@ -31,19 +50,7 @@
                         }
                     )
                     .then(r => console.log(r))
-                    .catch(e => console.log(e));
-            },
-            fetch: function() {
-                axios
-                    .get(
-                        "/videocall",
-                        {
-                            user: this.$store.state.user.id,
-                            day: this.$store.state.user.current_day
-                        }
-                    )
-                    .then(r => console.log(r))
-                    .catch(e => console.log(e));
+            .catch(e => console.log(e));
             }
         }
 

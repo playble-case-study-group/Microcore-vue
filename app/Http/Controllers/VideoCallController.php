@@ -57,7 +57,7 @@ class VideoCallController extends Controller
                 ->update(['note' => $note]);
         }else{
             DB::table('notes')
-                ->insert(['day'=>$day,'user_id' => $user_id,'note' => $note,'timestamp'=> $date]);
+                ->insert(['day'=>$day,'user_id' => $user_id,'note' => $note,'created_at'=> $date]);
         }
         return $request->all();
 
@@ -72,6 +72,12 @@ class VideoCallController extends Controller
     public function show($id)
     {
         //
+        $notes = DB::table('notes')
+            ->select('day', 'note')
+            ->where('user_id', $id)
+            ->get();
+        return response()->json($notes);
+
     }
 
     /**
