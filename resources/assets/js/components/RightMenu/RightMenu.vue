@@ -1,7 +1,7 @@
 <template>
     <div id="right-menu">
         <a href="#"><img src="/img/right-menu/library.png" alt="library"></a>
-        <a href="#"><img src="/img/right-menu/gallery.png" alt="gallery"></a>
+        <a href="/gallery"><img src="/img/right-menu/gallery.png" alt="gallery"></a>
         <a href="#"><img src="/img/right-menu/chat.png" alt="chat"></a>
         <a href="#"><img src="/img/right-menu/msg.png" alt="msg"></a>
     </div>
