@@ -1,9 +1,10 @@
 <template>
     <div id="question">
+        <br>
         <div class="single-question"
              v-for="single in question"
              v-on:click="">
-            {{ single.question }}
+            <b>{{ single.question }}</b>
         </div>
 
 

@@ -4,12 +4,12 @@
         <div id="contacts">
         <div class="contact-inner"
              :id="person.charID"
-             v-for="person in contacts"
+             v-for="person in idList"
              v-on:click="chosenContact = (person.charID)">
-                <span id="name">Cool-guy McFly</span><br>
-                <span id="position">Data Influencer</span><br>
-                <img id="photo" src="">
-                <span v-if="activeContacts.includes(person.charID)">ACT IVE</span><br>
+                <img id="photo" src=""><br>
+                <span id="name">John Smith</span><br>
+                <span id="position">Data Influencer</span>
+                <span v-if="activeContacts.includes(person.charID)">    ACTIVE</span><br>
         </div>
     </div>
     <questions :questions="this.questions" :active="this.chosenContact"></questions>
@@ -46,7 +46,15 @@
                         return contact.charID;
                     })
                 return contacts;
+            },
+            idList: function() {
+                //sort array of objects to prevent duplicates from being passed
+                let result = this.contacts.filter(function (a) {
+                    return !this[a.charID] && (this[a.charID] = true);
+                }, Object.create(null));
+                return result;
             }
+
 
         }
     }

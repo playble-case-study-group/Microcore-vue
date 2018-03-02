@@ -1,7 +1,6 @@
 <template>
     <div id="video">
-        <video>
-            <source :src="videourl" type="video/mp4">
+        <video width="520" height="340" :src="videourl" controls>
         </video>
 
     </div>
@@ -39,7 +38,7 @@
     }
 
     #video {
-        border: solid 1px;
+        /*border: solid 1px;*/
     }
 
 </style>
