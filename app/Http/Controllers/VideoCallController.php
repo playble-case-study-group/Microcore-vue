@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class VideoCallController extends Controller
 {
@@ -15,8 +16,13 @@ class VideoCallController extends Controller
     public function index()
     {
         $videos = DB::table('video')->get();
+        $notes = DB::table('notes')
+            ->select('note')
+            ->where('user_id', Auth::id())
+            ->get();
+        $notes = json_encode($notes);
 
-        return view('videocall', compact('videos'));
+        return view('videocall', compact('videos', 'notes'));
     }
 
     /**
@@ -39,25 +45,22 @@ class VideoCallController extends Controller
     {
         //
         $user_id = $request->user;
-        $day = $request->day;
         $note = $request->note;
         $date = date("Y-m-d H:i:s",time());
 
         $exist = DB::table('notes')
             ->select('user_id')
             ->where('user_id', $user_id)
-            ->where('day', $day)
             ->get();
         $exist = json_encode($exist);
 
         if($exist !== "[]"){
             DB::table('notes')
                 ->where('user_id', $user_id)
-                ->where('day', $day)
                 ->update(['note' => $note]);
         }else{
             DB::table('notes')
-                ->insert(['day'=>$day,'user_id' => $user_id,'note' => $note,'created_at'=> $date]);
+                ->insert(['user_id' => $user_id,'note' => $note,'created_at'=> $date]);
         }
         return $request->all();
 

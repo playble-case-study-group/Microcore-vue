@@ -7,7 +7,7 @@
                 :questions="questionsList">
 
         </contacts>
-        <notes></notes>
+        <notes :notes="extractNote"></notes>
 
     </div>
 </template>
@@ -67,6 +67,13 @@
                 })
 
                 return characters;
+            },
+            extractNote: function(){
+                let note = this.notes.map((note) => {
+                    return note.note;
+                })
+
+                return note;
             }
         }
     }

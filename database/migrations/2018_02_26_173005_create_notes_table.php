@@ -18,7 +18,6 @@ class CreateNotesTable extends Migration
             $table->timestamps();
             $table->text('note');
             $table->integer('user_id');
-            $table->integer('day');
         });
     }
 
