@@ -1,5 +1,5 @@
 <template>
-    <div class="'container">
+    <div class="container">
     <videos :video="this.video" :active="this.chosenContact"></videos>
         <div id="contacts">
         <div class="contact-inner"
@@ -59,3 +59,12 @@
         }
     }
 </script>
+
+<style scoped>
+    .container {
+
+
+    }
+
+
+</style>

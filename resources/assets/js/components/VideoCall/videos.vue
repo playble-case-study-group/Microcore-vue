@@ -1,6 +1,6 @@
 <template>
     <div id="video">
-        <video width="520" height="340" :src="videourl" controls>
+        <video width="520" height="340" id="char_vid" :src="videourl" controls>
         </video>
 
     </div>
@@ -25,6 +25,9 @@
                         return el.url;
                     })
                 return contacts;
+            },
+            videoEl: function(){
+                return document.getElementById('char_vid');
             }
         },
         watch: {
