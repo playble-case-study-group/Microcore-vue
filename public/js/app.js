@@ -47171,7 +47171,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-167963c0] {\n}\n\n\n", ""]);
+exports.push([module.i, "\n#contacts[data-v-167963c0] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-flow: wrap;\n        flex-flow: wrap;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n\n\n", ""]);
 
 // exports
 
