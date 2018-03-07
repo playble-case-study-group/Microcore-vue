@@ -63,3 +63,17 @@
         }
     }
 </script>
+
+<style scoped>
+    #contacts {
+        display: flex;
+        flex-flow: wrap;
+
+
+    }
+    .contact-inner{
+        padding: 10px;
+    }
+
+
+</style>

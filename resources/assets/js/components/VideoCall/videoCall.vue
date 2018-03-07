@@ -1,14 +1,13 @@
 <template>
     <div id="videocall" class="container">
-        <contacts
+        <notes id="notes" :notes="extractNote"></notes>
+        <contacts id="contacts"
                 :contacts="contactsList"
                 :video="videoList"
                 :chosenContact="chosenContact"
                 :questions="questionsList">
 
         </contacts>
-        <notes :notes="extractNote"></notes>
-
     </div>
 </template>
 
@@ -78,3 +77,18 @@
         }
     }
 </script>
+
+<style scoped>
+    #videocall{
+        display: flex;
+        flex-direction: row;
+
+    }
+    #notes{
+
+    }
+    #contacts{
+
+    }
+
+</style>

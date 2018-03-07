@@ -1,6 +1,10 @@
 <template>
     <div id="video">
+<<<<<<< HEAD
         <video width="520" id="char_vid" height="340" :src="videourl" controls>
+=======
+        <video width="520" height="340" id="char_vid" :src="videourl" controls>
+>>>>>>> 931c417e4af8ec8938c086064d14a6eaabf7c3a9
         </video>
 
     </div>
@@ -35,7 +39,11 @@
                     .map((el) => {
                         return el.url;
                     })
+
                 return contacts[0];
+            },
+            videoEl: function(){
+                return document.getElementById('char_vid');
             }
 
         },

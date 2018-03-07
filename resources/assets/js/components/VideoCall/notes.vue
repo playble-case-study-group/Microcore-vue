@@ -1,9 +1,8 @@
 <!--suppress ALL -->
 <template>
     <div id="notes">
-
-        <h3> Notes </h3>
-        <textarea rows="5" cols="50" v-model="note" v-on:keyup="update"></textarea>
+        <div id="header" ><h3>Notes</h3></div>
+        <textarea v-model="note" v-on:keyup="update"></textarea>
 
     </div>
 </template>
@@ -45,3 +44,27 @@
     }
 
 </script>
+
+<style scoped>
+    #notes{
+        margin: 20px;
+        width: 35%
+
+    }
+    textarea{
+        width: 100%;
+        height: 75%;
+        border:none;
+        padding: 20px;
+
+    }
+    #header{
+        color: white;
+        background-color: #2b2b2b;
+        height: 40px;
+    }
+    h3{
+        padding: 10px;
+    }
+
+</style>

@@ -33,3 +33,15 @@
         }
     }
 </script>
+
+<style scoped>
+    #questions{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        background-color: white;
+
+    }
+
+</style>
