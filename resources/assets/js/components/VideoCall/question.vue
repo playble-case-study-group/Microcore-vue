@@ -1,11 +1,12 @@
 <template>
     <div id="question">
         <br>
-        <div class="single-question"
+        <button class="single-question"
              v-for="single in question"
-             v-on:click="">
+             :id="single.id"
+             v-on:click="play(single.id)">
             <b>{{ single.question }}</b>
-        </div>
+        </button>
 
 
     </div>
@@ -20,8 +21,12 @@
         mounted() {
         },
         props: ['question', 'active'],
-        methods: mapActions([
-        ])
+        methods: {
+            play: function (qId) {
+                this.$emit('play', qId);
+            }
+
+        }
     }
 </script>
 

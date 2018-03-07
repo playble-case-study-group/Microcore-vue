@@ -1,6 +1,6 @@
 <template>
     <div class="'container">
-    <videos :video="this.video" :active="this.chosenContact"></videos>
+    <videos :video="this.video" :active="this.chosenContact" :question="this.qID" ></videos>
         <div id="contacts">
         <div class="contact-inner"
              :id="person.charID"
@@ -12,7 +12,7 @@
                 <span v-if="activeContacts.includes(person.charID)">    ACTIVE</span><br>
         </div>
     </div>
-    <questions :questions="this.questions" :active="this.chosenContact"></questions>
+    <questions v-on:vPlay="play" :questions="this.questions" :active="this.chosenContact"></questions>
     </div>
 </template>
 
@@ -27,7 +27,8 @@
         },
         data: function(){
             return {
-                chosenContact: 0
+                chosenContact: 0,
+                qID: 0
             }
         },
         props: ['contacts', 'video', 'questions'],
@@ -54,8 +55,11 @@
                 }, Object.create(null));
                 return result;
             }
-
-
+        },
+        methods:{
+            play: function(id) {
+                this.qID =  id;
+            },
         }
     }
 </script>

@@ -45936,7 +45936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return video;
                 }
             }).map(function (video) {
-                return { 'url': video.video, 'charID': video.character_id };
+                return { 'id': video.id, 'url': video.video, 'charID': video.character_id, 'start': video.video_starttime, 'end': video.video_endtime };
             });
 
             return videos;
@@ -45949,7 +45949,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return question;
                 }
             }).map(function (question) {
-                return { 'question': question.question, 'charID': question.character_id, 'start': question.video_starttime, 'end': question.video_endtime };
+                return { 'question': question.question, 'charID': question.character_id, 'id': question.id };
             });
 
             return questions;
@@ -46057,7 +46057,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            chosenContact: 0
+            chosenContact: 0,
+            qID: 0
         };
     },
     props: ['contacts', 'video', 'questions'],
@@ -46085,7 +46086,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, Object.create(null));
             return result;
         }
-
+    },
+    methods: {
+        play: function play(id) {
+            this.qID = id;
+        }
     }
 });
 
@@ -46174,7 +46179,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return question;
         }
     },
-    methods: {}
+    methods: {
+        vPlay: function vPlay(qId) {
+            this.$emit('vPlay', qId);
+        }
+    }
 });
 
 /***/ }),
@@ -46288,6 +46297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -46295,7 +46305,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {},
 
     props: ['question', 'active'],
-    methods: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])([])
+    methods: {
+        play: function play(qId) {
+            this.$emit('play', qId);
+        }
+
+    }
 });
 
 /***/ }),
@@ -46314,10 +46329,15 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.question, function(single) {
         return _c(
-          "div",
+          "button",
           {
             staticClass: "single-question",
-            on: { click: function($event) {} }
+            attrs: { id: single.id },
+            on: {
+              click: function($event) {
+                _vm.play(single.id)
+              }
+            }
           },
           [_c("b", [_vm._v(_vm._s(single.question))])]
         )
@@ -46347,7 +46367,13 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "questions" } },
-    [_c("question", { attrs: { question: _vm.activeQuestions } })],
+    [
+      _c("question", {
+        attrs: { question: _vm.activeQuestions },
+        on: { play: _vm.vPlay }
+      }),
+      _c("br")
+    ],
     1
   )
 }
@@ -46471,9 +46497,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {},
+    data: function data() {
+        return {
+            start: 0,
+            end: 0
+        };
+    },
+    beforeUpdate: function beforeUpdate() {
+        this.vidTiming();
+    },
+    update: function update() {
+        this.begin(this.start, this.end);
+    },
 
-    props: ['video', 'active'],
+    props: ['video', 'active', 'question'],
     computed: {
         videourl: function videourl() {
             var _this = this;
@@ -46485,10 +46522,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).map(function (el) {
                 return el.url;
             });
-            return contacts;
+            return contacts[0];
         }
+
     },
-    watch: {}
+    methods: {
+        vidTiming: function vidTiming() {
+            var _this2 = this;
+
+            this.video.filter(function (el) {
+                if (el.id === _this2.question) {
+                    _this2.start = el.start;
+                    _this2.end = el.end;
+                    return el;
+                }
+            });
+        },
+        begin: function begin(start, end) {
+            var object = document.getElementById('char_vid');
+            console.log(object);
+            object.addEventListener("timeupdate", function () {
+                if (object.currentTime >= this.end && object.currentTime <= parseInt(this.end, 10) + 0.5) {
+                    object.pause();
+                }
+            }, false);
+            object.currentTime = start;
+        }
+    }
 });
 
 /***/ }),
@@ -46501,7 +46561,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "video" } }, [
     _c("video", {
-      attrs: { width: "520", height: "340", src: _vm.videourl, controls: "" }
+      attrs: {
+        width: "520",
+        id: "char_vid",
+        height: "340",
+        src: _vm.videourl,
+        controls: ""
+      }
     })
   ])
 }
@@ -46528,7 +46594,11 @@ var render = function() {
     { staticClass: "'container" },
     [
       _c("videos", {
-        attrs: { video: this.video, active: this.chosenContact }
+        attrs: {
+          video: this.video,
+          active: this.chosenContact,
+          question: this.qID
+        }
       }),
       _vm._v(" "),
       _c(
@@ -46567,7 +46637,8 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("questions", {
-        attrs: { questions: this.questions, active: this.chosenContact }
+        attrs: { questions: this.questions, active: this.chosenContact },
+        on: { vPlay: _vm.play }
       })
     ],
     1
