@@ -27,8 +27,8 @@
             }
         },
         methods: {
-            vPlay: function(qId){
-                this.$emit('vPlay', qId);
+            vPlay: function(start, end){
+                this.$emit('vPlay', start, end);
             }
         }
     }

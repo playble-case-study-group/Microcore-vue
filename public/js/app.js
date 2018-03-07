@@ -45939,7 +45939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return video;
                 }
             }).map(function (video) {
-                return { 'id': video.id, 'url': video.video, 'charID': video.character_id, 'start': video.video_starttime, 'end': video.video_endtime };
+                return { 'url': video.video, 'charID': video.character_id };
             });
 
             return videos;
@@ -45952,7 +45952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return question;
                 }
             }).map(function (question) {
-                return { 'question': question.question, 'charID': question.character_id, 'id': question.id };
+                return { 'question': question.question, 'charID': question.character_id, 'start': question.video_starttime, 'end': question.video_endtime };
             });
 
             return questions;
@@ -46065,7 +46065,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             chosenContact: 0,
-            qID: 0
+            start: 0,
+            end: 0
         };
     },
     props: ['contacts', 'video', 'questions'],
@@ -46095,8 +46096,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        play: function play(id) {
-            this.qID = id;
+        play: function play(start, end) {
+            this.start = start;
+            this.end = end;
         }
     }
 });
@@ -46191,8 +46193,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        vPlay: function vPlay(qId) {
-            this.$emit('vPlay', qId);
+        vPlay: function vPlay(start, end) {
+            this.$emit('vPlay', start, end);
         }
     }
 });
@@ -46317,8 +46319,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['question', 'active'],
     methods: {
-        play: function play(qId) {
-            this.$emit('play', qId);
+        play: function play(start, end) {
+            this.$emit('play', start, end);
         }
 
     }
@@ -46346,7 +46348,7 @@ var render = function() {
             attrs: { id: single.id },
             on: {
               click: function($event) {
-                _vm.play(single.id)
+                _vm.play(single.start, single.end)
               }
             }
           },
@@ -46474,28 +46476,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            start: 0,
-            end: 0
-        };
-    },
-    beforeUpdate: function beforeUpdate() {
-        this.vidTiming();
-    },
-    update: function update() {
-        this.begin(this.start, this.end);
-    },
 
-    props: ['video', 'active', 'question'],
+    watch: {
+        vid_end: function vid_end() {
+            this.begin();
+        }
+    },
+    props: ['video', 'active', 'vid_start', 'vid_end'],
     computed: {
         videourl: function videourl() {
             var _this = this;
@@ -46509,33 +46500,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             return contacts[0];
-        },
-        videoEl: function videoEl() {
-            return document.getElementById('char_vid');
         }
-
     },
     methods: {
-        vidTiming: function vidTiming() {
-            var _this2 = this;
-
-            this.video.filter(function (el) {
-                if (el.id === _this2.question) {
-                    _this2.start = el.start;
-                    _this2.end = el.end;
-                    return el;
+        begin: function begin() {
+            var videoEl = document.getElementById('char_vid');
+            videoEl.currentTime = this.vid_start;
+            videoEl.play();
+            videoEl.addEventListener("timeupdate", function () {
+                if (videoEl.currentTime >= this.vid_end) {
+                    videoEl.pause();
                 }
-            });
-        },
-        begin: function begin(start, end) {
-            var object = document.getElementById('char_vid');
-            console.log(object);
-            object.addEventListener("timeupdate", function () {
-                if (object.currentTime >= this.end && object.currentTime <= parseInt(this.end, 10) + 0.5) {
-                    object.pause();
-                }
-            }, false);
-            object.currentTime = start;
+            }.bind(this), false);
         }
     }
 });
@@ -46544,7 +46520,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function(){},staticRenderFns:[]}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "video" } }, [
+    _c("video", {
+      attrs: {
+        width: "520",
+        id: "char_vid",
+        height: "340",
+        src: _vm.videourl,
+        controls: ""
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -47257,7 +47251,8 @@ var render = function() {
         attrs: {
           video: this.video,
           active: this.chosenContact,
-          question: this.qID
+          vid_start: this.start,
+          vid_end: this.end
         }
       }),
       _vm._v(" "),

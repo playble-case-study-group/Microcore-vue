@@ -4,7 +4,7 @@
         <button class="single-question"
              v-for="single in question"
              :id="single.id"
-             v-on:click="play(single.id)">
+             v-on:click="play(single.start, single.end)">
             <b>{{ single.question }}</b>
         </button>
 
@@ -22,8 +22,8 @@
         },
         props: ['question', 'active'],
         methods: {
-            play: function (qId) {
-                this.$emit('play', qId);
+            play: function (start, end) {
+                this.$emit('play', start, end);
             }
 
         }

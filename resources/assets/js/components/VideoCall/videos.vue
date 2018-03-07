@@ -1,10 +1,6 @@
 <template>
     <div id="video">
-<<<<<<< HEAD
         <video width="520" id="char_vid" height="340" :src="videourl" controls>
-=======
-        <video width="520" height="340" id="char_vid" :src="videourl" controls>
->>>>>>> 931c417e4af8ec8938c086064d14a6eaabf7c3a9
         </video>
 
     </div>
@@ -16,19 +12,12 @@
     export default {
 
 
-        data() {
-            return {
-                start: 0,
-                end: 0
+        watch:{
+            vid_end: function(){
+                this.begin();
             }
         },
-        beforeUpdate() {
-            this.vidTiming();
-        },
-        update(){
-            this.begin(this.start, this.end);
-        },
-        props: ['video', 'active', 'question'],
+        props: ['video', 'active', 'vid_start', 'vid_end'],
         computed: {
             videourl: function() {
                 let contacts = this.video.filter((el) => {
@@ -42,30 +31,18 @@
 
                 return contacts[0];
             },
-            videoEl: function(){
-                return document.getElementById('char_vid');
-            }
-
         },
         methods: {
-            vidTiming: function() {
-                this.video.filter((el) => {
-                    if (el.id === this.question) {
-                        this.start = el.start;
-                        this.end = el.end;
-                        return el;
+            begin: function(){
+                let videoEl = document.getElementById('char_vid');
+                videoEl.currentTime = this.vid_start;
+                videoEl.play();
+                videoEl.addEventListener("timeupdate", function() {
+                    if (videoEl.currentTime >= this.vid_end ) {
+                        videoEl.pause();
                     }
-                })
-            },
-            begin: function(start, end){
-                let object = document.getElementById('char_vid');
-                console.log(object);
-                object.addEventListener("timeupdate", function() {
-                    if (object.currentTime >= this.end && object.currentTime <= parseInt(this.end, 10) + 0.5) {
-                        object.pause();
-                    }
-                }, false);
-                object.currentTime = start;
+                }.bind(this), false);
+
             }
         }
     }

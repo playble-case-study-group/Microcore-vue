@@ -1,6 +1,6 @@
 <template>
     <div class="'container">
-    <videos :video="this.video" :active="this.chosenContact" :question="this.qID" ></videos>
+    <videos :video="this.video" :active="this.chosenContact" :vid_start="this.start" :vid_end="this.end" ></videos>
         <div id="contacts">
         <div class="contact-inner"
              :id="person.charID"
@@ -28,7 +28,8 @@
         data: function(){
             return {
                 chosenContact: 0,
-                qID: 0
+                start: 0,
+                end: 0
             }
         },
         props: ['contacts', 'video', 'questions'],
@@ -57,8 +58,9 @@
             }
         },
         methods:{
-            play: function(id) {
-                this.qID =  id;
+            play: function(start, end) {
+                this.start =  start;
+                this.end = end;
             },
         }
     }
