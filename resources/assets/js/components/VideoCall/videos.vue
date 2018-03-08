@@ -1,6 +1,7 @@
 <template>
     <div id="video">
-        <video width="520" id="char_vid" height="340" :src="videourl" controls>
+        <video preload="yes" width="520" id="char_vid" height="340" controls="true">
+            <source :src="videourl" type="video/mp4">
         </video>
 
     </div>
@@ -10,7 +11,6 @@
     import { mapActions } from 'vuex'
 
     export default {
-
 
         watch:{
             vid_end: function(){
@@ -35,8 +35,10 @@
         methods: {
             begin: function(){
                 let videoEl = document.getElementById('char_vid');
+                videoEl.load();
                 videoEl.currentTime = this.vid_start;
                 videoEl.play();
+                console.log(videoEl.currentTime);
                 videoEl.addEventListener("timeupdate", function() {
                     if (videoEl.currentTime >= this.vid_end ) {
                         videoEl.pause();

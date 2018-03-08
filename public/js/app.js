@@ -46476,6 +46476,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -46505,8 +46506,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         begin: function begin() {
             var videoEl = document.getElementById('char_vid');
+            videoEl.load();
             videoEl.currentTime = this.vid_start;
             videoEl.play();
+            console.log(videoEl.currentTime);
             videoEl.addEventListener("timeupdate", function () {
                 if (videoEl.currentTime >= this.vid_end) {
                     videoEl.pause();
@@ -46525,15 +46528,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "video" } }, [
-    _c("video", {
-      attrs: {
-        width: "520",
-        id: "char_vid",
-        height: "340",
-        src: _vm.videourl,
-        controls: ""
-      }
-    })
+    _c(
+      "video",
+      {
+        attrs: {
+          preload: "yes",
+          width: "520",
+          id: "char_vid",
+          height: "340",
+          controls: "true"
+        }
+      },
+      [_c("source", { attrs: { src: _vm.videourl, type: "video/mp4" } })]
+    )
   ])
 }
 var staticRenderFns = []
