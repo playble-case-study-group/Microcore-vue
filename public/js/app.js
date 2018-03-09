@@ -45809,6 +45809,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -45821,7 +45822,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'contacts': __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default.a,
         'notes': __WEBPACK_IMPORTED_MODULE_2__notes_vue___default.a
     },
-    props: ['videos', 'notes'],
+    props: ['videos', 'notes', 'contacts'],
     data: function data() {
         return {
             chosenContact: 0
@@ -45960,7 +45961,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#contacts[data-v-167963c0] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-flow: wrap;\n        flex-flow: wrap;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#contacts[data-v-167963c0] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-flow: wrap;\n        flex-flow: wrap;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n#active[data-v-167963c0]{\n    color: #3c763d;\n}\n\n", ""]);
 
 // exports
 
@@ -46009,7 +46010,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             end: 0
         };
     },
-    props: ['contacts', 'video', 'questions'],
+    props: ['contacts_info', 'contacts', 'video', 'questions'],
     components: {
         'videos': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a,
         'questions': __WEBPACK_IMPORTED_MODULE_1__questions_vue___default.a
@@ -46018,7 +46019,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         activeContacts: function activeContacts() {
             var _this = this;
 
-            var contacts = this.contacts.filter(function (contact) {
+            var contacts = this.contacts_info.filter(function (contact) {
                 if (contact.day === _this.$store.state.user.current_day) {
                     return contact.charID;
                 }
@@ -46026,13 +46027,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return contact.charID;
             });
             return contacts;
-        },
-        idList: function idList() {
-            //sort array of objects to prevent duplicates from being passed
-            var result = this.contacts.filter(function (a) {
-                return !this[a.charID] && (this[a.charID] = true);
-            }, Object.create(null));
-            return result;
         }
     },
     methods: {
@@ -46466,7 +46460,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.content[data-v-00e307e5] {\n    padding: 20px;\n}\n#video[data-v-00e307e5] {\n    /*border: solid 1px;*/\n}\n\n", ""]);
+exports.push([module.i, "\n#video[data-v-00e307e5] {\n    float: top;\n}\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #2b2b2b;\n    height: 40px;\n}\n#volume[data-v-00e307e5]{\n}\n#call[data-v-00e307e5], #end_call[data-v-00e307e5]{\n}\n\n", ""]);
 
 // exports
 
@@ -46487,6 +46481,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46494,7 +46497,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         vid_end: function vid_end() {
-            this.begin();
+            this.question_seek();
         }
     },
     props: ['video', 'active', 'vid_start', 'vid_end'],
@@ -46514,17 +46517,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        begin: function begin() {
+        question_seek: function question_seek() {
             var videoEl = document.getElementById('char_vid');
             videoEl.load();
-            videoEl.currentTime = this.vid_start;
             videoEl.play();
+            vdieoEl = this.vid_start;
             console.log(videoEl.currentTime);
             videoEl.addEventListener("timeupdate", function () {
                 if (videoEl.currentTime >= this.vid_end) {
                     videoEl.pause();
                 }
             }.bind(this), false);
+        },
+        call: function call() {
+            if (document.getElementById('call').innerText === "call") {
+                document.getElementById('char_vid').pause();
+                document.getElementById('call').innerText = "call_end";
+            } else {
+                document.getElementById('char_vid').play();
+                document.getElementById('call').innerText = "call";
+            }
+        },
+        volume_up: function volume_up() {
+            document.getElementById('char_vid').volume = document.getElementById("char_vid").volume + 0.1;
+        },
+        volume_down: function volume_down() {
+            document.getElementById('char_vid').volume = document.getElementById('char_vid').volume - 0.1;
         }
     }
 });
@@ -46541,19 +46559,58 @@ var render = function() {
     _c(
       "video",
       {
-        attrs: {
-          preload: "yes",
-          width: "520",
-          id: "char_vid",
-          height: "340",
-          controls: "true"
-        }
+        attrs: { preload: "yes", width: "520", id: "char_vid", height: "340" }
       },
       [_c("source", { attrs: { src: _vm.videourl, type: "video/mp4" } })]
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "controlBar" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" }, on: { click: _vm.call } }, [
+        _c("i", { staticClass: "material-icons", attrs: { id: "call" } }, [
+          _vm._v("call")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "volume" } }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.volume_down } }, [
+          _c("i", { staticClass: "material-icons", attrs: { id: "volume" } }, [
+            _vm._v("remove")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.volume_up } }, [
+          _c("i", { staticClass: "material-icons", attrs: { id: "volume" } }, [
+            _vm._v("add")
+          ])
+        ])
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
+        _vm._v("contacts")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("volume_down")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -46587,15 +46644,15 @@ var render = function() {
       _c(
         "div",
         { attrs: { id: "contacts" } },
-        _vm._l(_vm.idList, function(person) {
+        _vm._l(this.contacts, function(person) {
           return _c(
             "div",
             {
               staticClass: "contact-inner",
-              attrs: { id: person.charID },
+              attrs: { id: person.id },
               on: {
                 click: function($event) {
-                  _vm.chosenContact = person.charID
+                  _vm.chosenContact = person.id
                 }
               }
             },
@@ -46603,15 +46660,26 @@ var render = function() {
               _c("img", { attrs: { id: "photo", src: "" } }),
               _c("br"),
               _vm._v(" "),
-              _c("span", { attrs: { id: "name" } }, [_vm._v("John Smith")]),
+              _c("span", { attrs: { id: "name" } }, [
+                _vm._v(_vm._s(person.name))
+              ]),
               _c("br"),
               _vm._v(" "),
               _c("span", { attrs: { id: "position" } }, [
-                _vm._v("Data Influencer")
+                _vm._v(_vm._s(person.role))
               ]),
               _vm._v(" "),
-              _vm.activeContacts.includes(person.charID)
-                ? _c("span", [_vm._v("    ACTIVE")])
+              _vm.activeContacts.includes(person.id)
+                ? _c("span", [
+                    _c(
+                      "i",
+                      {
+                        staticClass: "material-icons",
+                        attrs: { id: "active" }
+                      },
+                      [_vm._v("fiber_manual_record")]
+                    )
+                  ])
                 : _vm._e(),
               _c("br")
             ]
@@ -46844,7 +46912,8 @@ var render = function() {
       _c("contacts", {
         attrs: {
           id: "contacts",
-          contacts: _vm.contactsList,
+          contacts_info: _vm.contactsList,
+          contacts: this.contacts,
           video: _vm.videoList,
           chosenContact: _vm.chosenContact,
           questions: _vm.questionsList
@@ -47288,7 +47357,7 @@ var actions = {
 /* 119 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /home/matalyn/Projects/VueSim/node_modules/node-sass/vendor/linux-x64-59/binding.node\nNode Sass could not find a binding for your current environment: Linux 64-bit with Node.js 9.x\n\nFound bindings for the following environments:\n  - Linux 64-bit with Node.js 4.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass --force` to build the binding for your current environment.\n    at module.exports (/home/matalyn/Projects/VueSim/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/home/matalyn/Projects/VueSim/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:662:30)\n    at Object.Module._extensions..js (module.js:673:10)\n    at Module.load (module.js:575:32)\n    at tryModuleLoad (module.js:515:12)\n    at Function.Module._load (module.js:507:3)\n    at Module.require (module.js:606:17)\n    at require (internal/module.js:11:18)\n    at Object.<anonymous> (/home/matalyn/Projects/VueSim/node_modules/sass-loader/lib/loader.js:3:14)\n    at Module._compile (module.js:662:30)\n    at Object.Module._extensions..js (module.js:673:10)\n    at Module.load (module.js:575:32)\n    at tryModuleLoad (module.js:515:12)\n    at Function.Module._load (module.js:507:3)\n    at Module.require (module.js:606:17)\n    at require (internal/module.js:11:18)\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModule.js:182:3)\n    at NormalModule.build (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModule.js:275:15)\n    at Compilation.buildModule (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/Compilation.js:151:10)\n    at moduleFactory.create (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/Compilation.js:456:10)\n    at runLoaders (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModule.js:195:19)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:170:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/home/matalyn/Projects/VueSim/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModule.js:182:3)\n    at NormalModule.build (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModule.js:275:15)\n    at Compilation.buildModule (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/Compilation.js:151:10)\n    at moduleFactory.create (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/Compilation.js:456:10)\n    at factory (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModuleFactory.js:241:5)\n    at applyPluginsAsyncWaterfall (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModuleFactory.js:94:13)\n    at /home/matalyn/Projects/VueSim/node_modules/tapable/lib/Tapable.js:268:11\n    at NormalModuleFactory.params.normalModuleFactory.plugin (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (/home/matalyn/Projects/VueSim/node_modules/tapable/lib/Tapable.js:272:13)\n    at resolver (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModuleFactory.js:69:10)\n    at process.nextTick (/home/matalyn/Projects/VueSim/node_modules/webpack/lib/NormalModuleFactory.js:194:7)\n    at process._tickCallback (internal/process/next_tick.js:112:11)");
 
 /***/ })
 /******/ ]);

@@ -15,6 +15,7 @@ class VideoCallController extends Controller
      */
     public function index()
     {
+        $contacts = DB::table('characters')->get();
         $videos = DB::table('video')->get();
         $notes = DB::table('notes')
             ->select('note')
@@ -22,7 +23,7 @@ class VideoCallController extends Controller
             ->get();
         $notes = json_encode($notes);
 
-        return view('videocall', compact('videos', 'notes'));
+        return view('videocall', compact('videos', 'notes', 'contacts'));
     }
 
     /**

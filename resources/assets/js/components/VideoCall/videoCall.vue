@@ -2,7 +2,8 @@
     <div id="videocall" class="container">
         <notes id="notes" :notes="extractNote"></notes>
         <contacts id="contacts"
-                :contacts="contactsList"
+                :contacts_info="contactsList"
+                :contacts="this.contacts"
                 :video="videoList"
                 :chosenContact="chosenContact"
                 :questions="questionsList">
@@ -24,7 +25,7 @@
             'contacts': contacts,
             'notes': notes
         },
-        props: ['videos', 'notes'],
+        props: ['videos', 'notes', 'contacts'],
         data: function() {
             return {
                 chosenContact: 0

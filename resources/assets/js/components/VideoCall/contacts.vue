@@ -3,13 +3,13 @@
     <videos :video="this.video" :active="this.chosenContact" :vid_start="this.start" :vid_end="this.end" ></videos>
         <div id="contacts">
         <div class="contact-inner"
-             :id="person.charID"
-             v-for="person in idList"
-             v-on:click="chosenContact = (person.charID)">
+             v-for="person in this.contacts"
+             :id="person.id"
+             v-on:click="chosenContact = (person.id)">
                 <img id="photo" src=""><br>
-                <span id="name">John Smith</span><br>
-                <span id="position">Data Influencer</span>
-                <span v-if="activeContacts.includes(person.charID)">    ACTIVE</span><br>
+                <span id="name">{{person.name}}</span><br>
+                <span id="position">{{person.role}}</span>
+                <span v-if="activeContacts.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
         </div>
     </div>
     <questions v-on:vPlay="play" :questions="this.questions" :active="this.chosenContact"></questions>
@@ -32,14 +32,14 @@
                 end: 0
             }
         },
-        props: ['contacts', 'video', 'questions'],
+        props: ['contacts_info','contacts', 'video', 'questions'],
         components: {
             'videos': video,
             'questions': questions
         },
         computed: {
             activeContacts: function() {
-                let contacts = this.contacts.filter((contact) => {
+                let contacts = this.contacts_info.filter((contact) => {
                     if(contact.day === this.$store.state.user.current_day){
                         return contact.charID;
                     }
@@ -48,13 +48,6 @@
                         return contact.charID;
                     })
                 return contacts;
-            },
-            idList: function() {
-                //sort array of objects to prevent duplicates from being passed
-                let result = this.contacts.filter(function (a) {
-                    return !this[a.charID] && (this[a.charID] = true);
-                }, Object.create(null));
-                return result;
             }
         },
         methods:{
@@ -76,6 +69,8 @@
     .contact-inner{
         padding: 10px;
     }
-
+    #active{
+        color: #3c763d;
+    }
 
 </style>
