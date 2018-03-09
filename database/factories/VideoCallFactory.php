@@ -10,9 +10,9 @@ $factory->define(App\video::class, function (Faker $faker) {
         'id' => $faker->unique()->randomNumber($nbDigits = 2),
         'character_id' => $character_ids->random(),
         'day' => $faker->randomElement($array = array('1', '2', '3')),
-        'video_starttime' => $faker->randomNumber($nbDigits = 2, $strict = true),
-        'video_endtime' => $faker->randomNumber($nbDigits = 3, $strict = true),
-        'video' => $faker->randomElement($array = array('/video/fun.mp4', '/video/junk.mp4', '/video/test.mp4', '/video/me.mp4', '/video/you.mp4')),
+        'start_time' => $faker->randomNumber($nbDigits = 2, $strict = true),
+        'end_time' => $faker->randomNumber($nbDigits = 3, $strict = true),
+        'video_url' => $faker->randomElement($array = array('/video/fun.mp4', '/video/junk.mp4', '/video/test.mp4', '/video/me.mp4', '/video/you.mp4')),
         'question' => $faker->text($maxNbChars = 50)
     ];
 });

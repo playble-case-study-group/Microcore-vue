@@ -6,7 +6,6 @@
                 :video="videoList"
                 :chosenContact="chosenContact"
                 :questions="questionsList">
-
         </contacts>
     </div>
 </template>
