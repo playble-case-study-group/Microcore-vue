@@ -18,6 +18,9 @@ const getters = {
     },
     TASKS_BY_DAY: (state) => {
         return _.groupBy(state.tasks, 'day');
+    },
+    CURRENT_DAY: (state) => {
+        return state.user.current_day;
     }
 }
 

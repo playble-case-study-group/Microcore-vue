@@ -13,7 +13,7 @@ class CreateCharactersTable extends Migration
      */
     public function up()
     {
-        Schema::table('characters', function (Blueprint $table) {
+        Schema::create('characters', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->char('name');

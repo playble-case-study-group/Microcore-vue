@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
 {
@@ -13,7 +14,20 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        return view('library');
+        $wiki = DB::table('wiki')->get();
+
+        foreach ($wiki as $article) {
+            $article->english = DB::table('article')
+                ->where('id', $article->lang_1_ar)
+                ->first();
+
+            $article->spanish = DB::table('article')
+                ->where('id', $article->lang_2_ar)
+                ->first();
+        }
+
+        //dd($wiki);
+        return view('library', compact('wiki'));
     }
 
     /**

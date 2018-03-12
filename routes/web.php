@@ -34,9 +34,21 @@ Route::resource('/email', 'EmailController');
 Route::post('/returnemails', 'EmailController@emailData');
 
 Route::resource('/gallery', 'GalleryController');
+
 Route::resource('/videocall', 'VideoCallController');
 Route::resource('/library', 'LibraryController');
 
+Route::resource('/chat', 'ChatController');
+
+Route::get('/chatbot', function () {
+    return view('chatbot');
+});
 
 
+Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+
+
+Route::resource('/library', 'LibraryController');
+
+Route::resource('/phone', 'PhoneController');
 

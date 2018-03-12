@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<library></library>
+<library :wiki="{{$wiki}}">
+
+
+
+</library>
 @endsection
