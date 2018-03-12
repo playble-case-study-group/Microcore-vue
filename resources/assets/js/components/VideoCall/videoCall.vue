@@ -42,7 +42,7 @@
                         }
                     })
                       .map((video) => {
-                      return {'url': video.video, 'charID': video.character_id}
+                      return {'url': video.video_url, 'charID': video.character_id}
                 })
 
                 return videos;
@@ -54,7 +54,7 @@
                     }
                 })
                     .map((question) => {
-                        return {'question': question.question, 'charID': question.character_id, 'start': question.video_starttime, 'end': question.video_endtime }
+                        return {'question': question.question, 'charID': question.character_id, 'start': question.start_time, 'end': question.end_time }
                     })
 
                 return questions;

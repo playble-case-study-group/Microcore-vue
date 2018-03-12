@@ -46,7 +46,7 @@
                 let videoEl = document.getElementById('char_vid');
                 videoEl.load();
                 videoEl.play();
-                vdieoEl = this.vid_start;
+                videoEl = this.vid_start;
                 console.log(videoEl.currentTime);
                 videoEl.addEventListener("timeupdate", function() {
                     if (videoEl.currentTime >= this.vid_end ) {
