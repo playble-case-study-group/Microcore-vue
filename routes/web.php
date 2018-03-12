@@ -50,3 +50,5 @@ Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
 
 Route::resource('/library', 'LibraryController');
 
+Route::resource('/phone', 'PhoneController');
+
