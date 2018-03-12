@@ -71801,9 +71801,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-    components: {
-        'vimeo-player': vueVimeoPlayer
-    },
     props: ['video', 'current_question'],
     data: function data() {
         return {

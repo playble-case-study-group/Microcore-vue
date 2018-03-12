@@ -20,9 +20,6 @@
         mounted() {
             console.log('Component mounted.')
         },
-        components: {
-            'vimeo-player': vueVimeoPlayer
-        },
         props: ['video', 'current_question'],
         data: function () {
             return {
