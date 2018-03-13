@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,8 @@ class UpdateVideoTable extends Migration
     {
         Schema::table('video', function (Blueprint $table) {
             $table->renameColumn('char_id', 'character_id');
-            $table->integer('start_time')->change();
-            $table->integer('end_time')->change();
+            $table->drop('start_time');
+            $table->('end_time')->change();
             $table->string('video_url');
         });
     }

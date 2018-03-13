@@ -2,10 +2,10 @@
     <div id="question">
         <br>
         <button class="single-question"
-             v-for="single in question"
-             :id="single.id"
-             v-on:click="play(single.start, single.end)">
-            <b>{{ single.question }}</b>
+             v-for="question in questions"
+             :id="question.id"
+                @click="submit_question(question)">
+            <b>{{ question.question }}</b>
         </button>
 
 
@@ -13,22 +13,23 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
-
+    import { mapGetter, mapActions } from 'vuex'
 
     export default {
 
         mounted() {
+            console.log('Component mounted.')
         },
-        props: ['question', 'active'],
+        props: ['questions'],
         methods: {
-            play: function (start, end) {
-                this.$emit('play', start, end);
+            submit_question: function (question) {
+                this.$emit('question', question)
             }
+        },
 
-        }
     }
 </script>
+
 
 <style scoped>
     button {

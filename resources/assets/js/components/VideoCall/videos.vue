@@ -1,8 +1,9 @@
 <template>
     <div id="video">
-        <video preload="yes" width="520" id="char_vid" height="340">
-            <source :src="videourl" type="video/mp4">
+        <video width="520" id="call_video" height="340">
+            <source :src="current_src" type="video/mp4">
         </video>
+
         <div id="controlBar">
             <a href="#"><i id="phonebook" class="material-icons">contacts</i></a>
             <a href="#" v-on:click="call"><i id="call" class="material-icons">call</i></a>
@@ -21,51 +22,39 @@
 
     export default {
 
-        watch:{
-            vid_end: function(){
-                this.question_seek();
+        props: ['video', 'current_question'],
+        data: function () {
+            return {
+                video_el: {},
+                current_src: "",
             }
         },
-        props: ['video', 'active', 'vid_start', 'vid_end'],
-        computed: {
-            videourl: function() {
-                let contacts = this.video.filter((el) => {
-                    if (el.charID === this.active) {
-                        return el;
-                    }
-                })
-                    .map((el) => {
-                        return el.url;
-                    })
+        watch: {
 
-                return contacts[0];
+            video: function () {
+                this.video_el = document.getElementById('call_video');
+                this.current_src = this.video.call_url;
+                this.video_el.load();
+            },
+            current_question: function () {
+                document.getElementById('call_video').currentTime = (parseInt(this.current_question.start_time) + 0.51);
+                console.log(this.video_el.currentTime);
+                document.getElementById('call_video').play()
+
             }
         },
         methods: {
-            question_seek: function(){
-                let videoEl = document.getElementById('char_vid');
-                videoEl.load();
-                videoEl.play();
-                videoEl = this.vid_start;
-                console.log(videoEl.currentTime);
-                videoEl.addEventListener("timeupdate", function() {
-                    if (videoEl.currentTime >= this.vid_end ) {
-                        videoEl.pause();
-                    }
-                }.bind(this), false);
-
-            },
             call: function(){
                 if(document.getElementById('call').innerText === "call"){
-                    document.getElementById('char_vid').pause();
+                    this.video_el.pause();
                     document.getElementById('call').innerText = "call_end";
                 }else{
-                    document.getElementById('char_vid').play();
+                    this.video_el.play();
                     document.getElementById('call').innerText = "call";
                 }
             },
             volume_up: function(){
-                document.getElementById('char_vid').volume = document.getElementById("char_vid").volume + 0.1;
+                this.video_el.volume = this.video_el.volume + 0.1;
             },
             volume_down: function(){
                 document.getElementById('char_vid').volume = document.getElementById('char_vid').volume - 0.1;
@@ -74,6 +63,9 @@
     }
 
 </script>
+
+
+
 
 <style scoped>
     #video {

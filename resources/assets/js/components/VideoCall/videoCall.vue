@@ -1,12 +1,10 @@
 <template>
     <div id="videocall" class="container">
-        <notes id="notes" :notes="extractNote"></notes>
+        <notes id="notes" :notes="this.notes"></notes>
         <contacts id="contacts"
-                :contacts_info="contactsList"
                 :contacts="this.contacts"
-                :video="videoList"
-                :chosenContact="chosenContact"
-                :questions="questionsList">
+                :calls="this.calls"
+                :questions="this.questions">
         </contacts>
     </div>
 </template>
@@ -25,56 +23,7 @@
             'contacts': contacts,
             'notes': notes
         },
-        props: ['videos', 'notes', 'contacts'],
-        data: function() {
-            return {
-                chosenContact: 0
-            }
-        },
-        computed:{
-            currentDay: function(){
-                return this.$store.state.user.current_day;
-            },
-            videoList: function() {
-                  let videos = this.videos.filter((video) => {
-                        if(video.day === this.currentDay){
-                            return video
-                        }
-                    })
-                      .map((video) => {
-                      return {'url': video.video_url, 'charID': video.character_id}
-                })
-
-                return videos;
-            },
-            questionsList: function() {
-                let questions = this.videos.filter((question) => {
-                    if(question.day === this.currentDay){
-                        return question
-                    }
-                })
-                    .map((question) => {
-                        return {'question': question.question, 'charID': question.character_id, 'start': question.start_time, 'end': question.end_time }
-                    })
-
-                return questions;
-
-            },
-            contactsList: function() {
-                let characters = this.videos.map((character) => {
-                    return {'charID': character.character_id, 'day': character.day }
-                })
-
-                return characters;
-            },
-            extractNote: function(){
-                let note = this.notes.map((note) => {
-                    return note.note;
-                })
-
-                return note;
-            }
-        }
+        props: ['calls', 'questions', 'notes', 'contacts'],
     }
 </script>
 
