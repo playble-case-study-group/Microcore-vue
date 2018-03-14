@@ -2,7 +2,7 @@
 <template>
     <div id="notes">
         <div id="header" ><h3>Notes</h3></div>
-        <textarea v-model="note" v-on:keyup="update"></textarea>
+        <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
 
     </div>
 </template>
@@ -13,7 +13,7 @@
     export default {
 
         mounted() {
-            this.setNote();
+            this.extractNoteObject();
         },
         data: function() {
           return {
@@ -24,7 +24,7 @@
         computed: {
         },
         methods: {
-            update: function () {
+            postUpdatedNote: function () {
                 axios
                     .post(
                         "/videocall",
@@ -36,11 +36,10 @@
                     .then(r => console.log(r))
             .catch(e => console.log(e));
             },
-            setNote: function(){
-                this.note = this.notes;
+            extractNoteObject: function(){
+                this.note = this.notes[0].note;
             }
         }
-
     }
 
 </script>

@@ -50349,9 +50349,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            current_video: {},
-            current_questions: [],
-            current_question: {}
+            currentVideo: {},
+            currentQuestions: [],
+            currentQuestion: {}
         };
     },
     computed: {
@@ -50369,7 +50369,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        load_call: function load_call(person_id) {
+        loadCallVideo: function loadCallVideo(person_id) {
             var _this2 = this;
 
             var activeCall = this.calls.filter(function (call) {
@@ -50384,11 +50384,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
 
-            this.current_video = activeCall[0];
-            this.current_questions = activeCallQuestions;
+            this.currentVideo = activeCall[0];
+            this.currentQuestions = activeCallQuestions;
         },
-        question_asked: function question_asked(question) {
-            this.current_question = question;
+        askQuestion: function askQuestion(question) {
+            this.currentQuestion = question;
         }
     }
 });
@@ -50508,48 +50508,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['video', 'current_question'],
+    props: ['video', 'currentQuestion'],
     data: function data() {
         return {
-            video_el: {},
-            current_src: ""
+            videoEl: {},
+            currentSrc: ""
         };
     },
     watch: {
-
         video: function video() {
-            this.video_el = document.getElementById('call_video');
-            this.current_src = this.video.call_url;
-            this.video_el.load();
+            this.videoEl = document.getElementById('call_video');
+            this.currentSrc = this.video.call_url;
+            this.videoEl.load();
+            document.getElementById('call').innerHTML = "call";
         },
-        current_question: function current_question() {
-            document.getElementById('call_video').currentTime = parseInt(this.current_question.start_time) + 0.51;
-            console.log(this.video_el.currentTime);
+        currentQuestion: function currentQuestion() {
+            document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
+            console.log(this.videoEl.currentTime);
             document.getElementById('call_video').play();
         }
     },
     methods: {
-        call: function call() {
+        changePhoneIcon: function changePhoneIcon() {
             if (document.getElementById('call').innerText === "call") {
-                this.video_el.pause();
+                this.videoEl.pause();
                 document.getElementById('call').innerText = "call_end";
             } else {
-                this.video_el.play();
+                this.videoEl.play();
                 document.getElementById('call').innerText = "call";
             }
         },
-        volume_up: function volume_up() {
-            this.video_el.volume = this.video_el.volume + 0.1;
-        },
-        volume_down: function volume_down() {
-            document.getElementById('char_vid').volume = document.getElementById('char_vid').volume - 0.1;
+        changeMicIcon: function changeMicIcon() {
+            if (document.getElementById('mic').innerText === "mic") {
+                document.getElementById('mic').innerText = "mic_off";
+            } else {
+                document.getElementById('mic').innerText = "mic";
+            }
         }
     }
 });
@@ -50564,30 +50562,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "video" } }, [
     _c("video", { attrs: { width: "520", id: "call_video", height: "340" } }, [
-      _c("source", { attrs: { src: _vm.current_src, type: "video/mp4" } })
+      _c("source", { attrs: { src: _vm.currentSrc, type: "video/mp4" } })
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "controlBar" } }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("a", { attrs: { href: "#" }, on: { click: _vm.call } }, [
+      _c("a", { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } }, [
         _c("i", { staticClass: "material-icons", attrs: { id: "call" } }, [
           _vm._v("call")
         ])
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "volume" } }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "#" }, on: { click: _vm.volume_down } }, [
-          _c("i", { staticClass: "material-icons", attrs: { id: "volume" } }, [
-            _vm._v("remove")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "#" }, on: { click: _vm.volume_up } }, [
-          _c("i", { staticClass: "material-icons", attrs: { id: "volume" } }, [
-            _vm._v("add")
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.changeMicIcon } }, [
+          _c("i", { staticClass: "material-icons", attrs: { id: "mic" } }, [
+            _vm._v("mic")
           ])
         ])
       ])
@@ -50603,14 +50593,6 @@ var staticRenderFns = [
       _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
         _vm._v("contacts")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("volume_down")])
     ])
   }
 ]
@@ -50636,10 +50618,7 @@ var render = function() {
     { staticClass: "'container" },
     [
       _c("character-video", {
-        attrs: {
-          video: _vm.current_video,
-          current_question: _vm.current_question
-        }
+        attrs: { video: _vm.currentVideo, currentQuestion: _vm.currentQuestion }
       }),
       _vm._v(" "),
       _c(
@@ -50653,7 +50632,7 @@ var render = function() {
               attrs: { id: person.id },
               on: {
                 click: function($event) {
-                  _vm.load_call(person.id)
+                  _vm.loadCallVideo(person.id)
                 }
               }
             },
@@ -50689,8 +50668,8 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("character-questions", {
-        attrs: { questions: _vm.current_questions },
-        on: { question: _vm.question_asked }
+        attrs: { questions: _vm.currentQuestions },
+        on: { question: _vm.askQuestion }
       })
     ],
     1
@@ -50818,7 +50797,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        this.setNote();
+        this.extractNoteObject();
     },
 
     data: function data() {
@@ -50829,7 +50808,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['notes'],
     computed: {},
     methods: {
-        update: function update() {
+        postUpdatedNote: function postUpdatedNote() {
             axios.post("/videocall", {
                 note: this.note,
                 user: this.$store.state.user.id
@@ -50839,11 +50818,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return console.log(e);
             });
         },
-        setNote: function setNote() {
-            this.note = this.notes;
+        extractNoteObject: function extractNoteObject() {
+            this.note = this.notes[0].note;
         }
     }
-
 });
 
 /***/ }),
@@ -50868,7 +50846,7 @@ var render = function() {
       ],
       domProps: { value: _vm.note },
       on: {
-        keyup: _vm.update,
+        keyup: _vm.postUpdatedNote,
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -71652,18 +71630,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            current_video: {},
-            current_questions: [],
-            current_question: {}
+            currentVideo: {},
+            currentQuestions: [],
+            currentQuestion: {}
         };
     },
     methods: {
-        load_call: function load_call(call) {
-            this.current_video = call;
-            this.current_questions = this.questions[call.id];
+        loadCallVideo: function loadCallVideo(call) {
+            this.currentVideo = call;
+            this.currentQuestions = this.questions[call.id];
         },
-        question_asked: function question_asked(question) {
-            this.current_question = question;
+        askQuestion: function askQuestion(question) {
+            this.currentQuestion = question;
         }
     }
 
@@ -71745,24 +71723,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component mounted.');
     },
 
-    props: ['video', 'current_question'],
+    props: ['video', 'currentQuestion'],
     data: function data() {
         return {
-            video_el: {},
-            current_src: ""
+            videoEl: {},
+            currentSrc: ""
         };
     },
     methods: {},
     watch: {
 
         video: function video() {
-            this.video_el = document.getElementById('call_video');
-            this.current_src = this.video.call_url;
-            this.video_el.load();
+            this.videoEl = document.getElementById('call_video');
+            this.currentSrc = this.video.call_url;
+            this.videoEl.load();
         },
-        current_question: function current_question() {
-            document.getElementById('call_video').currentTime = parseInt(this.current_question.start_time) + 0.51;
-            console.log(this.video_el.currentTime);
+        currentQuestion: function currentQuestion() {
+            document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
+            console.log(this.videoEl.currentTime);
             document.getElementById('call_video').play();
         }
     }
@@ -71785,7 +71763,7 @@ var render = function() {
         attrs: { id: "call_video", width: "320", height: "240", controls: "" }
       },
       [
-        _c("source", { attrs: { src: _vm.current_src, type: "video/mp4" } }),
+        _c("source", { attrs: { src: _vm.currentSrc, type: "video/mp4" } }),
         _vm._v("\n        Your browser does not support the video tag.\n    ")
       ]
     ),
@@ -71878,7 +71856,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['questions'],
     methods: {
-        submit_question: function submit_question(question) {
+        submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
         }
     }
@@ -71904,7 +71882,7 @@ var render = function() {
           {
             on: {
               click: function($event) {
-                _vm.submit_question(question)
+                _vm.submitQuestion(question)
               }
             }
           },
@@ -71944,7 +71922,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  _vm.load_call(call)
+                  _vm.loadCallVideo(call)
                 }
               }
             },
@@ -71955,14 +71933,14 @@ var render = function() {
       _vm._v(" "),
       _c("character-video", {
         attrs: {
-          video: _vm.current_video,
-          current_question: _vm.current_question
+          video: _vm.currentVideo,
+          current_question: _vm.currentQuestion
         }
       }),
       _vm._v(" "),
       _c("character-questions", {
-        attrs: { questions: _vm.current_questions },
-        on: { question: _vm.question_asked }
+        attrs: { questions: _vm.currentQuestions },
+        on: { question: _vm.askQuestion }
       })
     ],
     1
@@ -72247,7 +72225,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['questions'],
     methods: {
-        submit_question: function submit_question(question) {
+        submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
         }
     }
@@ -72276,7 +72254,7 @@ var render = function() {
             attrs: { id: question.id },
             on: {
               click: function($event) {
-                _vm.submit_question(question)
+                _vm.submitQuestion(question)
               }
             }
           },

@@ -4,7 +4,7 @@
         <button class="single-question"
              v-for="question in questions"
              :id="question.id"
-                @click="submit_question(question)">
+                @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
         </button>
 
@@ -22,7 +22,7 @@
         },
         props: ['questions'],
         methods: {
-            submit_question: function (question) {
+            submitQuestion: function (question) {
                 this.$emit('question', question)
             }
         },

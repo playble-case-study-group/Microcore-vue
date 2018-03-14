@@ -1,12 +1,12 @@
 <template>
     <div class="container">
         <ul>
-            <li v-for="call in calls" @click="load_call(call)">
+            <li v-for="call in calls" @click="loadCallVideo(call)">
                 {{ call.call_url }}
             </li>
         </ul>
-        <character-video :video="current_video" :current_question="current_question"></character-video>
-        <character-questions :questions="current_questions" v-on:question="question_asked"></character-questions>
+        <character-video :video="currentVideo" :current_question="currentQuestion"></character-video>
+        <character-questions :questions="currentQuestions" v-on:question="askQuestion"></character-questions>
     </div>
 </template>
 
@@ -27,18 +27,18 @@
         },
         data: function () {
             return {
-                current_video: {},
-                current_questions: [],
-                current_question: {}
+                currentVideo: {},
+                currentQuestions: [],
+                currentQuestion: {}
             }
         },
         methods: {
-            load_call: function (call) {
-                this.current_video = call;
-                this.current_questions = this.questions[call.id];
+            loadCallVideo: function (call) {
+                this.currentVideo = call;
+                this.currentQuestions = this.questions[call.id];
             },
-            question_asked: function (question) {
-                this.current_question = question;
+            askQuestion: function (question) {
+                this.currentQuestion = question;
             }
         }
 

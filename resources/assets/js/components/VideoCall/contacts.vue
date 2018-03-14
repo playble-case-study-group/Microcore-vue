@@ -1,18 +1,18 @@
 <template>
     <div class="'container">
-    <character-video :video="current_video" :current_question="current_question"></character-video>
+    <character-video :video="currentVideo" :currentQuestion="currentQuestion"></character-video>
         <div id="contacts">
         <div class="contact-inner"
              v-for="person in this.contacts"
              :id="person.id"
-             @click="load_call(person.id)">
+             @click="loadCallVideo(person.id)">
                 <img id="photo" src=""><br>
                 <span id="name">{{person.name}}</span><br>
                 <span id="position">{{person.role}}</span>
                 <span v-if="activeContacts.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
         </div>
     </div>
-        <character-questions :questions="current_questions" v-on:question="question_asked"></character-questions>
+        <character-questions :questions="currentQuestions" v-on:question="askQuestion"></character-questions>
     </div>
 </template>
 
@@ -33,9 +33,9 @@
         },
         data: function () {
             return {
-                current_video: {},
-                current_questions: [],
-                current_question: {}
+                currentVideo: {},
+                currentQuestions: [],
+                currentQuestion: {}
             }
         },
         computed: {
@@ -52,7 +52,7 @@
             }
         },
         methods: {
-            load_call: function (person_id) {
+            loadCallVideo: function (person_id) {
 
                 let activeCall = this.calls.filter((call) => {
                     if(call.day === this.$store.state.user.current_day && call.character_id === person_id){
@@ -66,11 +66,11 @@
                     }
                 })
 
-                this.current_video = activeCall[0];
-                this.current_questions = activeCallQuestions;
+                this.currentVideo = activeCall[0];
+                this.currentQuestions = activeCallQuestions;
             },
-            question_asked: function (question) {
-                this.current_question = question;
+            askQuestion: function (question) {
+                this.currentQuestion = question;
             }
         }
     }
