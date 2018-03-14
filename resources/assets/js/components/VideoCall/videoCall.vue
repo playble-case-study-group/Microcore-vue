@@ -1,7 +1,7 @@
 <template>
     <div id="videocall" class="container">
         <notes id="notes" :notes="this.notes"></notes>
-        <contacts id="contacts"
+        <contacts
                 :contacts="this.contacts"
                 :calls="this.calls"
                 :questions="this.questions">

@@ -1,12 +1,11 @@
 <template>
     <div class="'container">
-    <character-video :video="currentVideo" :currentQuestion="currentQuestion"></character-video>
-        <div id="contacts">
+    <character-video :video="currentVideo" :currentQuestion="currentQuestion" v-on:showContacts="toggleContacts"></character-video>
+        <div id="contacts" style="display: inherit">
         <div class="contact-inner"
              v-for="person in this.contacts"
              :id="person.id"
              @click="loadCallVideo(person.id)">
-                <img id="photo" src=""><br>
                 <span id="name">{{person.name}}</span><br>
                 <span id="position">{{person.role}}</span>
                 <span v-if="activeContacts.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
@@ -71,6 +70,11 @@
             },
             askQuestion: function (question) {
                 this.currentQuestion = question;
+            },
+            toggleContacts: function(){
+                let contactsContainer = document.getElementById('contacts');
+                console.log(contactsContainer.style.display);
+                contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inherit' : 'none';
             }
         }
     }

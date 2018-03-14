@@ -5,8 +5,8 @@
         </video>
 
         <div id="controlBar">
-            <a href="#"><i id="phonebook" class="material-icons">contacts</i></a>
-            <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">call</i></a>
+            <a href="#" v-on:click="showContacts"><i id="phonebook" class="material-icons">contacts</i></a>
+            <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
             <div id="volume" >
                 <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
             </div>
@@ -24,6 +24,7 @@
             return {
                 videoEl: {},
                 currentSrc: "",
+                callIconToggleStatus: "call",
             }
         },
         watch: {
@@ -31,23 +32,24 @@
                 this.videoEl = document.getElementById('call_video');
                 this.currentSrc = this.video.call_url;
                 this.videoEl.load();
-                document.getElementById('call').innerHTML = "call";
+                this.callIconToggleStatus = "call";
             },
             currentQuestion: function () {
                 document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
                 console.log(this.videoEl.currentTime);
                 document.getElementById('call_video').play()
+                this.callIconToggleStatus = "call_end";
 
             }
         },
         methods: {
             changePhoneIcon: function(){
-                if(document.getElementById('call').innerText === "call"){
-                    this.videoEl.pause();
-                    document.getElementById('call').innerText = "call_end";
-                }else{
+                if(this.callIconToggleStatus === "call"){
                     this.videoEl.play();
-                    document.getElementById('call').innerText = "call";
+                    this.callIconToggleStatus = "call_end";
+                } else {
+                    this.videoEl.pause();
+                    this.callIconToggleStatus = "call";
                 }
             },
             changeMicIcon: function(){
@@ -56,6 +58,9 @@
                 } else{
                     document.getElementById('mic').innerText = "mic";
                 }
+            },
+            showContacts: function(){
+                this.$emit('showContacts');
             }
         }
     }

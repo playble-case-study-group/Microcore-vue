@@ -50328,7 +50328,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -50389,6 +50388,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         askQuestion: function askQuestion(question) {
             this.currentQuestion = question;
+        },
+        toggleContacts: function toggleContacts() {
+            var contactsContainer = document.getElementById('contacts');
+            console.log(contactsContainer.style.display);
+            contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inherit' : 'none';
         }
     }
 });
@@ -50516,7 +50520,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             videoEl: {},
-            currentSrc: ""
+            currentSrc: "",
+            callIconToggleStatus: "call"
         };
     },
     watch: {
@@ -50524,22 +50529,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.videoEl = document.getElementById('call_video');
             this.currentSrc = this.video.call_url;
             this.videoEl.load();
-            document.getElementById('call').innerHTML = "call";
+            this.callIconToggleStatus = "call";
         },
         currentQuestion: function currentQuestion() {
             document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
             console.log(this.videoEl.currentTime);
             document.getElementById('call_video').play();
+            this.callIconToggleStatus = "call_end";
         }
     },
     methods: {
         changePhoneIcon: function changePhoneIcon() {
-            if (document.getElementById('call').innerText === "call") {
-                this.videoEl.pause();
-                document.getElementById('call').innerText = "call_end";
-            } else {
+            if (this.callIconToggleStatus === "call") {
                 this.videoEl.play();
-                document.getElementById('call').innerText = "call";
+                this.callIconToggleStatus = "call_end";
+            } else {
+                this.videoEl.pause();
+                this.callIconToggleStatus = "call";
             }
         },
         changeMicIcon: function changeMicIcon() {
@@ -50548,6 +50554,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 document.getElementById('mic').innerText = "mic";
             }
+        },
+        showContacts: function showContacts() {
+            this.$emit('showContacts');
         }
     }
 });
@@ -50566,11 +50575,15 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "controlBar" } }, [
-      _vm._m(0),
+      _c("a", { attrs: { href: "#" }, on: { click: _vm.showContacts } }, [
+        _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
+          _vm._v("contacts")
+        ])
+      ]),
       _vm._v(" "),
       _c("a", { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } }, [
         _c("i", { staticClass: "material-icons", attrs: { id: "call" } }, [
-          _vm._v("call")
+          _vm._v(_vm._s(this.callIconToggleStatus))
         ])
       ]),
       _vm._v(" "),
@@ -50584,18 +50597,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
-        _vm._v("contacts")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -50618,12 +50620,16 @@ var render = function() {
     { staticClass: "'container" },
     [
       _c("character-video", {
-        attrs: { video: _vm.currentVideo, currentQuestion: _vm.currentQuestion }
+        attrs: {
+          video: _vm.currentVideo,
+          currentQuestion: _vm.currentQuestion
+        },
+        on: { showContacts: _vm.toggleContacts }
       }),
       _vm._v(" "),
       _c(
         "div",
-        { attrs: { id: "contacts" } },
+        { staticStyle: { display: "inherit" }, attrs: { id: "contacts" } },
         _vm._l(this.contacts, function(person) {
           return _c(
             "div",
@@ -50637,9 +50643,6 @@ var render = function() {
               }
             },
             [
-              _c("img", { attrs: { id: "photo", src: "" } }),
-              _c("br"),
-              _vm._v(" "),
               _c("span", { attrs: { id: "name" } }, [
                 _vm._v(_vm._s(person.name))
               ]),
@@ -50890,7 +50893,6 @@ var render = function() {
       _vm._v(" "),
       _c("contacts", {
         attrs: {
-          id: "contacts",
           contacts: this.contacts,
           calls: this.calls,
           questions: this.questions
