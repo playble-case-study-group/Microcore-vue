@@ -1,6 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Cinzel|Open+Sans');
 
+// Icons
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 // Variables
 @import "variables";
 
@@ -9,6 +12,7 @@
 
 h1  {
   font-size: 18pt;
+  font-weight: bold;
 }
 
 h2 {
@@ -29,4 +33,28 @@ body {
 .wrapper {
   display: flex;
   align-items: stretch;
+}
+
+.btn-selected {
+  background-color: #4A4A4A;
+  color: white;
+}
+
+.btn-group {
+  font-family: $font-family-serif;
+}
+
+//.btn-invert {
+//  background-color: #4A4A4A;
+//  color: white;
+//  font-family: $font-family-serif;
+//}
+
+.btn-invert {
+  @include button-variant( #ffffff, #4A4A4A, #4A4A4A);
+}
+
+.material-icons {
+  font-size: inherit;
+  line-height: inherit;
 }

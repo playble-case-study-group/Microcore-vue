@@ -32,7 +32,7 @@
         },
         methods: mapActions([
             'toggleTask'
-        ]),
+        ])
 //            {
 //            check: function (id) {
 //                this.taskComplete = !this.taskComplete;
