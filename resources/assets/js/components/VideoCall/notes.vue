@@ -46,8 +46,6 @@
 
 <style scoped>
     #notes{
-        margin: 20px;
-        width: 35%
 
     }
     textarea{
@@ -59,7 +57,7 @@
     }
     #header{
         color: white;
-        background-color: #2b2b2b;
+        background-color: #4A4A4A;
         height: 40px;
     }
     h3{
