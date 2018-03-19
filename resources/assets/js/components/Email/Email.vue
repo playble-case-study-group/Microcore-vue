@@ -1,44 +1,67 @@
 <template>
     <div class="container">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-        </button>
-        <h1>Welcome to email</h1>
-        <table>
-            <tr>
-                <th>From</th>
-                <th>Subject</th>
-                <th>Body</th>
-                <th>Date</th>
-                <th></th>
-            </tr>
-            <tr v-for="email in characterEmails">
-                <td>
-                   {{email.subject}}
-                </td>
-                <td>
-                    {{email.body}}
-                </td>
-            </tr>
-        </table>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="row">
+            <div class="heading col-sm-12">
+                <h1>Messages</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3" style="background-color: #ffffff; height: 100vh">
+                <ul>
+                    <li>Inbox</li>
+                    <li>Sent</li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Body</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                    <tr v-for="email in characterEmails"
+                        @click="readEmail(email)"
+                        :key="email.character_email_id">
+                        <td>
+                            <img :src="email.img_small" alt="">
+                        </td>
+                        <td>
+                            {{ email.name }}
+                        </td>
+                        <td>
+                            {{ email.subject }}
+                        </td>
+                        <td>
+                            {{ email.body }}
+                        </td>
+                        <td>
+                            {{ email.day }}
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Read Modal -->
+        <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title">{{ readModalData.readSubject }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" v-model="draftemailsubject"><br>
-                        <textarea v-model="draftemailbody"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" @click="sendemail()">Save changes</button>
+                        <h4><b>{{ readModalData.readFrom }}</b></h4>
+                        <p>{{ readModalData.readBody }}</p>
                     </div>
                 </div>
             </div>
@@ -56,6 +79,12 @@
             return {
                 draftemailsubject: "",
                 draftemailbody: "",
+                readModalData: {
+                    readFrom: "",
+                    readSubject: "",
+                    readBody: ""
+                }
+
             }
         },
         props: ['characterEmails'],
@@ -66,16 +95,48 @@
         },
         methods: {
             sendemail: function () {
-                axios.post('/email', {subject: this.draftemailsubject, body: this.draftemailbody}).then(response => {
-                    console.log(response)
-                    this.emails.push(response.data)
+                axios.post('/email', {subject: this.draftemailsubject, body: this.draftemailbody})
+                    .then( response => {
+                    console.log(response);
+                    this.emails.push(response.data);
                 })
+            },
+            readEmail: function (email) {
+                this.readModalData.readFrom = email.name;
+                this.readModalData.readSubject = email.subject;
+                this.readModalData.readBody = email.body;
+
+                $('#readModal').modal();
+                console.log(email)
             }
         }
 
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+    .container {
+        margin-left: 40px;
+        margin-top: 40px;
+        padding: 0;
+        /*padding: 20px;*/
+        background-color: white;
+    }
+
+    .heading {
+        background-color: #4A4A4A;
+        height: 40px;
+        color: white;
+
+        h1 {
+            margin: 0;
+            padding: 8px 10px;
+        }
+
+    }
+
+    td, th {
+        padding: 10px;
+    }
 </style>

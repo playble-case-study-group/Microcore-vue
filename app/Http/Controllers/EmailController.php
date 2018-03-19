@@ -16,6 +16,8 @@ class EmailController extends Controller
     public function index()
     {
         $characterEmails = DB::table('character_email')
+            ->join('characters', 'characters.id', 'character_email.character_id')
+            ->select('characters.name', 'characters.role', 'character_email.subject', 'character_email.body', 'character_email.day', 'character_email.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
 

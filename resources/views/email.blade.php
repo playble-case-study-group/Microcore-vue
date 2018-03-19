@@ -2,6 +2,6 @@
 
 @section('content')
 
-<email :characterEmails="{{ $characterEmails }}">
+<email :character-emails="{{ $characterEmails }}">
 </email>
 @endsection
