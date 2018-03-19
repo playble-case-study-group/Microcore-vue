@@ -45,11 +45,6 @@
 </script>
 
 <style scoped>
-    @include media-breakpoint-up(xs, md){
-        #notes{
-            display:block;
-        }
-    }
     #notes{
 
     }

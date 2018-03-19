@@ -50392,7 +50392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         toggleContacts: function toggleContacts() {
             var contactsContainer = document.getElementById('contacts');
             console.log(contactsContainer.style.display);
-            contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inherit' : 'none';
+            contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inline-block' : 'none';
         }
     }
 });
@@ -50483,7 +50483,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#video[data-v-00e307e5]{\n    width: 600px;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
 
 // exports
 
@@ -50495,8 +50495,6 @@ exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#controlB
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
 //
 //
 //
@@ -50629,7 +50627,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticStyle: { display: "inherit" }, attrs: { id: "contacts" } },
+        { staticStyle: { display: "inline-block" }, attrs: { id: "contacts" } },
         _vm._l(this.contacts, function(person) {
           return _c(
             "div",
@@ -50774,7 +50772,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n@include media-breakpoint-up(xs, md){\n#notes{\n        display:block;\n}\n}\n#notes[data-v-767f6044]{\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #4A4A4A;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\n#notes[data-v-767f6044]{\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #4A4A4A;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -50889,7 +50887,10 @@ var render = function() {
     "div",
     { staticClass: "container", attrs: { id: "videocall" } },
     [
-      _c("notes", { attrs: { id: "notesParent", notes: this.notes } }),
+      _c("notes", {
+        staticClass: "col-lg-12",
+        attrs: { id: "notesParent", notes: this.notes }
+      }),
       _vm._v(" "),
       _c("contacts", {
         attrs: {

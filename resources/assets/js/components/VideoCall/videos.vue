@@ -3,7 +3,6 @@
         <video id="call_video">
             <source :src="currentSrc" type="video/mp4">
         </video>
-
         <div id="controlBar">
             <a href="#" v-on:click="showContacts"><i id="phonebook" class="material-icons">contacts</i></a>
             <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
@@ -11,7 +10,6 @@
                 <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -70,6 +68,9 @@
 <style scoped>
     a {
         color: white;
+    }
+    #video{
+        width: 600px;
     }
     #controlBar{
         display: flex;

@@ -1,6 +1,6 @@
 <template>
     <div id="videocall" class="container">
-        <notes id="notesParent" :notes="this.notes"></notes>
+        <notes id="notesParent"  class="col-lg-12" :notes="this.notes"></notes>
         <contacts id="contactsParent"
                 :contacts="this.contacts"
                 :calls="this.calls"

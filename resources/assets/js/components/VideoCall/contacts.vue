@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <character-video :video="currentVideo" :currentQuestion="currentQuestion" v-on:showContacts="toggleContacts"></character-video>
-        <div id="contacts" style="display: inherit">
+        <div id="contacts" style="display: inline-block">
         <div class="contact-inner"
              v-for="person in this.contacts"
              :id="person.id"
@@ -74,7 +74,7 @@
             toggleContacts: function(){
                 let contactsContainer = document.getElementById('contacts');
                 console.log(contactsContainer.style.display);
-                contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inherit' : 'none';
+                contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inline-block' : 'none';
             }
         }
     }
