@@ -1,14 +1,11 @@
 <template>
     <div id="question">
-        <br>
-        <button type="button" class="btn btn-success"
+        <button type="button" class="btn btn-success button"
              v-for="question in questions"
              :id="question.id"
                 @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
         </button>
-
-
     </div>
 </template>
 
@@ -32,14 +29,8 @@
 
 
 <style scoped>
-    #question {
-        display:flex;
-        justify-content: space-between;
-        height: auto;
-        background-color: white;
-    }
-    #single-question{
-        display: block;
-    }
+    .button {
+        margin: 20px;
 
+    }
 </style>

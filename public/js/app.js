@@ -49974,17 +49974,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(348)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(139)
 /* template */
-var __vue_template__ = __webpack_require__(140)
+var __vue_template__ = __webpack_require__(350)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-52d1ee62"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -50029,6 +50033,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -50036,52 +50105,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            emails: []
+            draftemailsubject: "",
+            draftemailbody: "",
+            readModalData: {
+                readFrom: "",
+                readSubject: "",
+                readBody: ""
+            }
+
         };
     },
+    props: ['characterEmails'],
     mounted: function mounted() {
         console.log('Component mounted.');
-
-        axios.post('/returnemails').then(function (response) {
-            //console.log(response.data);
-            console.log(this.emails);
-            this.emails = response.data;
-        });
     },
 
-    methods: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask'])
+    methods: {
+        sendemail: function sendemail() {
+            var _this = this;
+
+            axios.post('/email', { subject: this.draftemailsubject, body: this.draftemailbody }).then(function (response) {
+                console.log(response);
+                _this.emails.push(response.data);
+            });
+        },
+        readEmail: function readEmail(email) {
+            this.readModalData.readFrom = email.name;
+            this.readModalData.readSubject = email.subject;
+            this.readModalData.readBody = email.body;
+
+            $('#readModal').modal();
+            console.log(email);
+        }
+    }
+
 });
 
 /***/ }),
-/* 140 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Welcome to email")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-52d1ee62", module.exports)
-  }
-}
-
-/***/ }),
+/* 140 */,
 /* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50167,7 +50228,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 0px 20px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: column-reverse;\n            flex-direction: column-reverse;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n}\n#notesParent[data-v-31d2957c]{\n   width: inherit;\n}\n#contactsParent[data-v-31d2957c]{\n}\n@media (min-width: 992px){\n#videocall[data-v-31d2957c]{\n        -webkit-box-orient:horizontal;\n        -webkit-box-direction:normal;\n            -ms-flex-direction:row;\n                flex-direction:row;\n}\n#notesParent[data-v-31d2957c]{\n        margin: 20px;\n        width: 35%\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 0px 20px;\n}\n#notesParent[data-v-31d2957c]{\n    height:70rem;\n}\n#contactsParent[data-v-31d2957c]{\n}\n\n", ""]);
 
 // exports
 
@@ -50183,6 +50244,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__contacts_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__notes_vue__);
+//
+//
 //
 //
 //
@@ -50295,7 +50358,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#contacts[data-v-167963c0] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-flow: wrap;\n        flex-flow: wrap;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n#active[data-v-167963c0]{\n    color: #3c763d;\n}\n\n", ""]);
+exports.push([module.i, "\n#contacts[data-v-167963c0] {\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n#active[data-v-167963c0]{\n    color: #3c763d;\n}\n#characterQuestions[data-v-167963c0]{\n    height: 150px;\n    overflow-y: scroll;\n    background-color: white;\n}\n\n", ""]);
 
 // exports
 
@@ -50311,6 +50374,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__question_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50388,12 +50458,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         askQuestion: function askQuestion(question) {
             this.currentQuestion = question;
-        },
-        toggleContacts: function toggleContacts() {
-            var contactsContainer = document.getElementById('contacts');
-            console.log(contactsContainer.style.display);
-            contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inline-block' : 'none';
         }
+
     }
 });
 
@@ -50483,7 +50549,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#video[data-v-00e307e5]{\n    width: 600px;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#video[data-v-00e307e5]{\n    /*width: 600px;*/\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    /*height: inherit;\n    width: inherit;*/\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
 
 // exports
 
@@ -50552,9 +50618,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 document.getElementById('mic').innerText = "mic";
             }
-        },
-        showContacts: function showContacts() {
-            this.$emit('showContacts');
         }
     }
 });
@@ -50573,11 +50636,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "controlBar" } }, [
-      _c("a", { attrs: { href: "#" }, on: { click: _vm.showContacts } }, [
-        _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
-          _vm._v("contacts")
-        ])
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("a", { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } }, [
         _c("i", { staticClass: "material-icons", attrs: { id: "call" } }, [
@@ -50595,7 +50654,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-toggle": "popover" } }, [
+      _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
+        _vm._v("contacts")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -50618,58 +50688,67 @@ var render = function() {
     { staticClass: "container" },
     [
       _c("character-video", {
-        attrs: {
-          video: _vm.currentVideo,
-          currentQuestion: _vm.currentQuestion
-        },
-        on: { showContacts: _vm.toggleContacts }
+        attrs: { video: _vm.currentVideo, currentQuestion: _vm.currentQuestion }
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticStyle: { display: "inline-block" }, attrs: { id: "contacts" } },
-        _vm._l(this.contacts, function(person) {
-          return _c(
+      _c("div", { staticClass: "popover", attrs: { role: "tooltip" } }, [
+        _c("div", { staticClass: "popover-arrow" }),
+        _vm._v(" "),
+        _c("h5", { staticClass: "popover-title" }, [_vm._v("Contacts")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "popover-content" }, [
+          _c(
             "div",
             {
-              staticClass: "contact-inner",
-              attrs: { id: person.id },
-              on: {
-                click: function($event) {
-                  _vm.loadCallVideo(person.id)
-                }
-              }
+              staticStyle: { display: "inline-block" },
+              attrs: { id: "contacts" }
             },
-            [
-              _c("span", { attrs: { id: "name" } }, [
-                _vm._v(_vm._s(person.name))
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("span", { attrs: { id: "position" } }, [
-                _vm._v(_vm._s(person.role))
-              ]),
-              _vm._v(" "),
-              _vm.activeContacts.includes(person.id)
-                ? _c("span", [
-                    _c(
-                      "i",
-                      {
-                        staticClass: "material-icons",
-                        attrs: { id: "active" }
-                      },
-                      [_vm._v("fiber_manual_record")]
-                    )
-                  ])
-                : _vm._e(),
-              _c("br")
-            ]
+            _vm._l(this.contacts, function(person) {
+              return _c(
+                "div",
+                {
+                  staticClass: "contact-inner",
+                  attrs: { id: person.id },
+                  on: {
+                    click: function($event) {
+                      _vm.loadCallVideo(person.id)
+                    }
+                  }
+                },
+                [
+                  _c("img", { attrs: { src: person.img_small } }),
+                  _vm._v(" "),
+                  _c("span", { attrs: { id: "name" } }, [
+                    _vm._v(_vm._s(person.name))
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { attrs: { id: "position" } }, [
+                    _vm._v(_vm._s(person.role))
+                  ]),
+                  _vm._v(" "),
+                  _vm.activeContacts.includes(person.id)
+                    ? _c("span", [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "material-icons",
+                            attrs: { id: "active" }
+                          },
+                          [_vm._v("fiber_manual_record")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _c("br")
+                ]
+              )
+            })
           )
-        })
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c("character-questions", {
-        attrs: { questions: _vm.currentQuestions },
+        attrs: { id: "characterQuestions", questions: _vm.currentQuestions },
         on: { question: _vm.askQuestion }
       })
     ],
@@ -50883,26 +50962,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container", attrs: { id: "videocall" } },
-    [
-      _c("notes", {
-        staticClass: "col-lg-12",
-        attrs: { id: "notesParent", notes: this.notes }
-      }),
-      _vm._v(" "),
-      _c("contacts", {
-        attrs: {
-          id: "contactsParent",
-          contacts: this.contacts,
-          calls: this.calls,
-          questions: this.questions
-        }
-      })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container", attrs: { id: "videocall" } }, [
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _c("notes", {
+          staticClass: "col-md-12 col-lg-4 order-sm-12",
+          attrs: { id: "notesParent", notes: this.notes }
+        }),
+        _vm._v(" "),
+        _c("contacts", {
+          staticClass: "col-md-12 col-lg-8 order-sm-1",
+          attrs: {
+            id: "contactsParent",
+            contacts: this.contacts,
+            calls: this.calls,
+            questions: this.questions
+          }
+        })
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -72193,7 +72275,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#question[data-v-c56baf9a] {\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    height: auto;\n    background-color: white;\n}\n#single-question[data-v-c56baf9a]{\n    display: block;\n}\n\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 20px;\n}\n", ""]);
 
 // exports
 
@@ -72205,9 +72287,6 @@ exports.push([module.i, "\n#question[data-v-c56baf9a] {\n    display:-webkit-box
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
-//
 //
 //
 //
@@ -72247,26 +72326,21 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "question" } },
-    [
-      _c("br"),
-      _vm._v(" "),
-      _vm._l(_vm.questions, function(question) {
-        return _c(
-          "button",
-          {
-            staticClass: "btn btn-success",
-            attrs: { type: "button", id: question.id },
-            on: {
-              click: function($event) {
-                _vm.submitQuestion(question)
-              }
+    _vm._l(_vm.questions, function(question) {
+      return _c(
+        "button",
+        {
+          staticClass: "btn btn-success button",
+          attrs: { type: "button", id: question.id },
+          on: {
+            click: function($event) {
+              _vm.submitQuestion(question)
             }
-          },
-          [_c("b", [_vm._v(_vm._s(question.question))])]
-        )
-      })
-    ],
-    2
+          }
+        },
+        [_c("b", [_vm._v(_vm._s(question.question))])]
+      )
+    })
   )
 }
 var staticRenderFns = []
@@ -72276,6 +72350,245 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-c56baf9a", module.exports)
+  }
+}
+
+/***/ }),
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(349);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("ea05ecac", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52d1ee62\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Email.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52d1ee62\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Email.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.container[data-v-52d1ee62] {\n  margin-left: 40px;\n  margin-top: 40px;\n  padding: 0;\n  /*padding: 20px;*/\n  background-color: white;\n}\n.heading[data-v-52d1ee62] {\n  background-color: #4A4A4A;\n  height: 40px;\n  color: white;\n}\n.heading h1[data-v-52d1ee62] {\n    margin: 0;\n    padding: 8px 10px;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 350 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-9" }, [
+        _c(
+          "table",
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._l(_vm.characterEmails, function(email) {
+              return _c(
+                "tr",
+                {
+                  key: email.character_email_id,
+                  on: {
+                    click: function($event) {
+                      _vm.readEmail(email)
+                    }
+                  }
+                },
+                [
+                  _c("td", [
+                    _c("img", { attrs: { src: email.img_small, alt: "" } })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(email.name) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(email.subject) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(email.body) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(email.day) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td")
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "readModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "readModal",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v(_vm._s(_vm.readModalData.readSubject))
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h4", [
+                  _c("b", [_vm._v(_vm._s(_vm.readModalData.readFrom))])
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.readModalData.readBody))])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "heading col-sm-12" }, [
+        _c("h1", [_vm._v("Messages")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-sm-3",
+        staticStyle: { "background-color": "#ffffff", height: "100vh" }
+      },
+      [
+        _c("ul", [
+          _c("li", [_vm._v("Inbox")]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Sent")])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th"),
+      _vm._v(" "),
+      _c("th", [_vm._v("From")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Subject")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Body")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Date")]),
+      _vm._v(" "),
+      _c("th")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-52d1ee62", module.exports)
   }
 }
 

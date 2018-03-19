@@ -1,17 +1,24 @@
 <template>
     <div class="container">
-    <character-video :video="currentVideo" :currentQuestion="currentQuestion" v-on:showContacts="toggleContacts"></character-video>
-        <div id="contacts" style="display: inline-block">
-        <div class="contact-inner"
-             v-for="person in this.contacts"
-             :id="person.id"
-             @click="loadCallVideo(person.id)">
-                <span id="name">{{person.name}}</span><br>
-                <span id="position">{{person.role}}</span>
-                <span v-if="activeContacts.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
+    <character-video :video="currentVideo" :currentQuestion="currentQuestion"></character-video>
+    <div class="popover" role="tooltip">
+        <div class="popover-arrow"></div>
+        <h5 class="popover-title">Contacts</h5>
+        <div class="popover-content">
+            <div id="contacts" style="display: inline-block">
+                <div class="contact-inner"
+                     v-for="person in this.contacts"
+                     :id="person.id"
+                     @click="loadCallVideo(person.id)">
+                    <img :src="person.img_small">
+                    <span id="name">{{person.name}}</span><br>
+                    <span id="position">{{person.role}}</span>
+                    <span v-if="activeContacts.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
+                </div>
+            </div>
         </div>
     </div>
-        <character-questions :questions="currentQuestions" v-on:question="askQuestion"></character-questions>
+        <character-questions id="characterQuestions" :questions="currentQuestions" v-on:question="askQuestion"></character-questions>
     </div>
 </template>
 
@@ -71,25 +78,24 @@
             askQuestion: function (question) {
                 this.currentQuestion = question;
             },
-            toggleContacts: function(){
-                let contactsContainer = document.getElementById('contacts');
-                console.log(contactsContainer.style.display);
-                contactsContainer.style.display = contactsContainer.style.display === 'none' ? 'inline-block' : 'none';
-            }
+
         }
     }
 </script>
 
 <style scoped>
     #contacts {
-        display: flex;
-        flex-flow: wrap;
     }
     .contact-inner{
         padding: 10px;
     }
     #active{
         color: #3c763d;
+    }
+    #characterQuestions{
+        height: 150px;
+        overflow-y: scroll;
+        background-color: white;
     }
 
 </style>

@@ -1,11 +1,13 @@
 <template>
     <div id="videocall" class="container">
-        <notes id="notesParent"  class="col-lg-12" :notes="this.notes"></notes>
-        <contacts id="contactsParent"
+        <div class="row">
+            <notes id="notesParent"  class="col-md-12 col-lg-4 order-sm-12" :notes="this.notes"></notes>
+            <contacts id="contactsParent" class="col-md-12 col-lg-8 order-sm-1"
                 :contacts="this.contacts"
                 :calls="this.calls"
                 :questions="this.questions">
         </contacts>
+        </div>
     </div>
 </template>
 
@@ -30,24 +32,12 @@
 <style scoped>
     #videocall{
         margin: 0px 20px;
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: flex-end;
     }
     #notesParent{
-       width: inherit;
+        height:70rem;
     }
     #contactsParent{
 
-    }
-    @media (min-width: 992px){
-        #videocall{
-            flex-direction:row;
-        }
-        #notesParent{
-            margin: 20px;
-            width: 35%
-        }
     }
 
 </style>

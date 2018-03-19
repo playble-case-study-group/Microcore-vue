@@ -4,7 +4,7 @@
             <source :src="currentSrc" type="video/mp4">
         </video>
         <div id="controlBar">
-            <a href="#" v-on:click="showContacts"><i id="phonebook" class="material-icons">contacts</i></a>
+            <a href="#" data-toggle="popover"><i id="phonebook" class="material-icons">contacts</i></a>
             <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
             <div id="volume" >
                 <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
@@ -57,9 +57,6 @@
                     document.getElementById('mic').innerText = "mic";
                 }
             },
-            showContacts: function(){
-                this.$emit('showContacts');
-            }
         }
     }
 
@@ -70,7 +67,7 @@
         color: white;
     }
     #video{
-        width: 600px;
+        /*width: 600px;*/
     }
     #controlBar{
         display: flex;
@@ -81,8 +78,8 @@
         font-size: 30px
     }
     #call_video{
-        height: inherit;
-        width: inherit;
+        /*height: inherit;
+        width: inherit;*/
     }
     #call{
     }
