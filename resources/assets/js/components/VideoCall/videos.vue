@@ -67,9 +67,6 @@
 
 </script>
 
-
-
-
 <style scoped>
     a {
         color: white;
@@ -77,15 +74,21 @@
     #controlBar{
         display: flex;
         justify-content: space-between;
-        background-color: #2b2b2b;
-        height: 40px;
-
+        padding: 0px 25px;
+        background-color: #4A4A4A;
+        height: 50px;
+        font-size: 30px
     }
     #call_video{
         height: inherit;
         width: inherit;
     }
     #call{
+    }
+    @media(min-width: 992px){
+        #controlBar{
+
+        }
     }
 
 </style>

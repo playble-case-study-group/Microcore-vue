@@ -1,7 +1,7 @@
 <template>
-    <div id="videocall" class="container row">
-        <notes id="notes" :notes="this.notes"></notes>
-        <contacts
+    <div id="videocall" class="container">
+        <notes id="notesParent" :notes="this.notes"></notes>
+        <contacts id="contactsParent"
                 :contacts="this.contacts"
                 :calls="this.calls"
                 :questions="this.questions">
@@ -29,12 +29,25 @@
 
 <style scoped>
     #videocall{
+        margin: 0px 20px;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
     }
-    #notes{
+    #notesParent{
+       width: inherit;
+    }
+    #contactsParent{
 
     }
-    #contacts{
-
+    @media (min-width: 992px){
+        #videocall{
+            flex-direction:row;
+        }
+        #notesParent{
+            margin: 20px;
+            width: 35%
+        }
     }
 
 </style>

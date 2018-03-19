@@ -1,5 +1,5 @@
 <template>
-    <div class="'container">
+    <div class="container">
     <character-video :video="currentVideo" :currentQuestion="currentQuestion" v-on:showContacts="toggleContacts"></character-video>
         <div id="contacts" style="display: inherit">
         <div class="contact-inner"
@@ -84,8 +84,6 @@
     #contacts {
         display: flex;
         flex-flow: wrap;
-
-
     }
     .contact-inner{
         padding: 10px;

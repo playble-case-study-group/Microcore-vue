@@ -50167,7 +50167,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n}\n#notes[data-v-31d2957c]{\n}\n#contacts[data-v-31d2957c]{\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 0px 20px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: column-reverse;\n            flex-direction: column-reverse;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n}\n#notesParent[data-v-31d2957c]{\n   width: inherit;\n}\n#contactsParent[data-v-31d2957c]{\n}\n@media (min-width: 992px){\n#videocall[data-v-31d2957c]{\n        -webkit-box-orient:horizontal;\n        -webkit-box-direction:normal;\n            -ms-flex-direction:row;\n                flex-direction:row;\n}\n#notesParent[data-v-31d2957c]{\n        margin: 20px;\n        width: 35%\n}\n}\n\n", ""]);
 
 // exports
 
@@ -50483,7 +50483,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #2b2b2b;\n    height: 40px;\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
 
 // exports
 
@@ -50617,7 +50617,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "'container" },
+    { staticClass: "container" },
     [
       _c("character-video", {
         attrs: {
@@ -50774,7 +50774,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n@include media-breakpoint-up(xs, md){\n#notes{\n        display:block;\n}\n}\n#notes[data-v-767f6044]{\n    margin: 20px;\n    width: 35%\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #2b2b2b;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\n@include media-breakpoint-up(xs, md){\n#notes{\n        display:block;\n}\n}\n#notes[data-v-767f6044]{\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #4A4A4A;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -50887,12 +50887,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container row", attrs: { id: "videocall" } },
+    { staticClass: "container", attrs: { id: "videocall" } },
     [
-      _c("notes", { attrs: { id: "notes", notes: this.notes } }),
+      _c("notes", { attrs: { id: "notesParent", notes: this.notes } }),
       _vm._v(" "),
       _c("contacts", {
         attrs: {
+          id: "contactsParent",
           contacts: this.contacts,
           calls: this.calls,
           questions: this.questions
