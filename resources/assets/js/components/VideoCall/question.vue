@@ -1,7 +1,7 @@
 <template>
     <div id="question">
         <br>
-        <button class="single-question"
+        <button type="button" class="btn btn-success"
              v-for="question in questions"
              :id="question.id"
                 @click="submitQuestion(question)">
@@ -32,18 +32,14 @@
 
 
 <style scoped>
-    button {
-        padding: 20px;
-        background-color: #2ab27b;
-        color: white;
-        border: none;
-    }
-    button:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);
-    }
-
     #question {
-
+        display:flex;
+        justify-content: space-between;
+        height: auto;
+        background-color: white;
+    }
+    #single-question{
+        display: block;
     }
 
 </style>

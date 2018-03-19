@@ -50167,7 +50167,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n#notes[data-v-31d2957c]{\n}\n#contacts[data-v-31d2957c]{\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n}\n#notes[data-v-31d2957c]{\n}\n#contacts[data-v-31d2957c]{\n}\n\n", ""]);
 
 // exports
 
@@ -50483,7 +50483,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#video[data-v-00e307e5] {\n    float: top;\n}\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #2b2b2b;\n    height: 40px;\n}\n#volume[data-v-00e307e5]{\n}\n#call[data-v-00e307e5], #end_call[data-v-00e307e5]{\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #2b2b2b;\n    height: 40px;\n}\n#call_video[data-v-00e307e5]{\n    height: inherit;\n    width: inherit;\n}\n#call[data-v-00e307e5]{\n}\n\n", ""]);
 
 // exports
 
@@ -50570,7 +50570,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "video" } }, [
-    _c("video", { attrs: { width: "520", id: "call_video", height: "340" } }, [
+    _c("video", { attrs: { id: "call_video" } }, [
       _c("source", { attrs: { src: _vm.currentSrc, type: "video/mp4" } })
     ]),
     _vm._v(" "),
@@ -50774,7 +50774,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#notes[data-v-767f6044]{\n    margin: 20px;\n    width: 35%\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #2b2b2b;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
+exports.push([module.i, "\n@include media-breakpoint-up(xs, md){\n#notes{\n        display:block;\n}\n}\n#notes[data-v-767f6044]{\n    margin: 20px;\n    width: 35%\n}\ntextarea[data-v-767f6044]{\n    width: 100%;\n    height: 75%;\n    border:none;\n    padding: 20px;\n}\n#header[data-v-767f6044]{\n    color: white;\n    background-color: #2b2b2b;\n    height: 40px;\n}\nh3[data-v-767f6044]{\n    padding: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -50887,7 +50887,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container", attrs: { id: "videocall" } },
+    { staticClass: "container row", attrs: { id: "videocall" } },
     [
       _c("notes", { attrs: { id: "notes", notes: this.notes } }),
       _vm._v(" "),
@@ -72191,7 +72191,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nbutton[data-v-c56baf9a] {\n    padding: 20px;\n    background-color: #2ab27b;\n    color: white;\n    border: none;\n}\nbutton[data-v-c56baf9a]:hover {\n    -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);\n            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);\n}\n#question[data-v-c56baf9a] {\n}\n\n", ""]);
+exports.push([module.i, "\n#question[data-v-c56baf9a] {\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    height: auto;\n    background-color: white;\n}\n#single-question[data-v-c56baf9a]{\n    display: block;\n}\n\n", ""]);
 
 // exports
 
@@ -72252,8 +72252,8 @@ var render = function() {
         return _c(
           "button",
           {
-            staticClass: "single-question",
-            attrs: { id: question.id },
+            staticClass: "btn btn-success",
+            attrs: { type: "button", id: question.id },
             on: {
               click: function($event) {
                 _vm.submitQuestion(question)

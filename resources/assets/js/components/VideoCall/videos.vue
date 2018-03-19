@@ -1,6 +1,6 @@
 <template>
     <div id="video">
-        <video width="520" id="call_video" height="340">
+        <video id="call_video">
             <source :src="currentSrc" type="video/mp4">
         </video>
 
@@ -71,9 +71,6 @@
 
 
 <style scoped>
-    #video {
-        float: top;
-    }
     a {
         color: white;
     }
@@ -84,9 +81,11 @@
         height: 40px;
 
     }
-    #volume{
+    #call_video{
+        height: inherit;
+        width: inherit;
     }
-    #call, #end_call{
+    #call{
     }
 
 </style>

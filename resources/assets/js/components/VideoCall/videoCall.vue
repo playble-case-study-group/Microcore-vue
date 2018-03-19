@@ -1,5 +1,5 @@
 <template>
-    <div id="videocall" class="container">
+    <div id="videocall" class="container row">
         <notes id="notes" :notes="this.notes"></notes>
         <contacts
                 :contacts="this.contacts"
@@ -29,9 +29,6 @@
 
 <style scoped>
     #videocall{
-        display: flex;
-        flex-direction: row;
-
     }
     #notes{
 
