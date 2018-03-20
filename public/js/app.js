@@ -50240,12 +50240,12 @@ exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 0px 20px;\n
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contacts_vue__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__contacts_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue__ = __webpack_require__(155);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__notes_vue__);
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__notes_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__question_vue__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__question_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videos_vue__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__videos_vue__);
 //
 //
 //
@@ -50258,157 +50258,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {},
-
-    components: {
-        'contacts': __WEBPACK_IMPORTED_MODULE_1__contacts_vue___default.a,
-        'notes': __WEBPACK_IMPORTED_MODULE_2__notes_vue___default.a
-    },
-    props: ['calls', 'questions', 'notes', 'contacts']
-});
-
-/***/ }),
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(146)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(148)
-/* template */
-var __vue_template__ = __webpack_require__(154)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-167963c0"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/VideoCall/contacts.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-167963c0", Component.options)
-  } else {
-    hotAPI.reload("data-v-167963c0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(147);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("32ad5fd8", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-167963c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./contacts.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-167963c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./contacts.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 147 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n#contacts[data-v-167963c0] {\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n}\n#active[data-v-167963c0]{\n    color: #3c763d;\n}\n#characterQuestions[data-v-167963c0]{\n    height: 150px;\n    overflow-y: scroll;\n    background-color: white;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 148 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__question_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__question_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     components: {
-        'character-video': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a,
-        'character-questions': __WEBPACK_IMPORTED_MODULE_1__question_vue___default.a
+        'notes': __WEBPACK_IMPORTED_MODULE_1__notes_vue___default.a,
+        'character-video': __WEBPACK_IMPORTED_MODULE_3__videos_vue___default.a,
+        'character-questions': __WEBPACK_IMPORTED_MODULE_2__question_vue___default.a
     },
-    props: ['calls', 'questions', 'contacts'],
+    props: ['calls', 'questions', 'notes', 'contacts'],
     mounted: function mounted() {
         console.log('Component mounted.');
         this.$on('question', function (question) {
@@ -50427,14 +50289,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         activeContacts: function activeContacts() {
             var _this = this;
 
-            var contacts = this.calls.filter(function (contact) {
-                if (contact.day === _this.$store.state.user.current_day) {
-                    return contact.character_id;
+            var characters = this.calls.filter(function (character) {
+                if (character.day === _this.$store.state.user.current_day) {
+                    return character.character_id;
                 }
-            }).map(function (contact) {
-                return contact.character_id;
+            }).map(function (character) {
+                return character.character_id;
             });
-            return contacts;
+            return characters;
         }
     },
     methods: {
@@ -50459,11 +50321,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         askQuestion: function askQuestion(question) {
             this.currentQuestion = question;
         }
-
     }
 });
 
 /***/ }),
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
 /* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50549,7 +50414,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#video[data-v-00e307e5]{\n    /*width: 600px;*/\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    /*height: inherit;\n    width: inherit;*/\n}\n#call[data-v-00e307e5]{\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n    color: white;\n}\n#video[data-v-00e307e5]{\n    /*width: 600px;*/\n}\n#controlBar[data-v-00e307e5]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 0px 25px;\n    background-color: #4A4A4A;\n    height: 50px;\n    font-size: 30px\n}\n#call_video[data-v-00e307e5]{\n    /*height: inherit;\n    width: inherit;*/\n}\n#call[data-v-00e307e5]{\n}\n.contact-inner[data-v-00e307e5]{\n    padding: 10px;\n}\n#active[data-v-00e307e5]{\n    color: #3c763d;\n}\n#characterQuestions[data-v-00e307e5]{\n    height: 150px;\n    overflow-y: scroll;\n    background-color: white;\n}\n@media(min-width: 992px){\n#controlBar[data-v-00e307e5]{\n}\n}\n\n", ""]);
 
 // exports
 
@@ -50576,11 +50441,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['video', 'currentQuestion'],
+    props: ['active', 'video', 'currentQuestion', 'characters'],
     data: function data() {
         return {
             videoEl: {},
@@ -50588,6 +50468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             callIconToggleStatus: "call"
         };
     },
+    computed: {},
     watch: {
         video: function video() {
             this.videoEl = document.getElementById('call_video');
@@ -50603,6 +50484,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        loadCallVideo: function loadCallVideo(person_id) {
+            this.$emit('loadVideo', person_id);
+        },
         changePhoneIcon: function changePhoneIcon() {
             if (this.callIconToggleStatus === "call") {
                 this.videoEl.play();
@@ -50618,6 +50502,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 document.getElementById('mic').innerText = "mic";
             }
+        },
+        popover: function popover() {
+            $('#junk').popover('toggle');
+            console.log('test');
         }
     }
 });
@@ -50631,6 +50519,64 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "video" } }, [
+    _c(
+      "a",
+      {
+        attrs: {
+          "data-toggle": "popover",
+          "data-trigger": "focus",
+          id: "junk",
+          title: "Contacts",
+          "data-html": "true",
+          "data-content": "test"
+        },
+        on: { click: _vm.popover }
+      },
+      [_vm._v("test")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticStyle: { display: "inline-block" }, attrs: { id: "contacts" } },
+      _vm._l(this.characters, function(person) {
+        return _c(
+          "div",
+          {
+            staticClass: "contact-inner",
+            attrs: { id: person.id },
+            on: {
+              click: function($event) {
+                _vm.loadCallVideo(person.id)
+              }
+            }
+          },
+          [
+            _c("img", { attrs: { src: person.img_small } }),
+            _vm._v(" "),
+            _c("span", { attrs: { id: "name" } }, [
+              _vm._v(_vm._s(person.name))
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", { attrs: { id: "position" } }, [
+              _vm._v(_vm._s(person.role))
+            ]),
+            _vm._v(" "),
+            _vm.active.includes(person.id)
+              ? _c("span", [
+                  _c(
+                    "i",
+                    { staticClass: "material-icons", attrs: { id: "active" } },
+                    [_vm._v("fiber_manual_record")]
+                  )
+                ])
+              : _vm._e(),
+            _c("br")
+          ]
+        )
+      })
+    ),
+    _vm._v(" "),
     _c("video", { attrs: { id: "call_video" } }, [
       _c("source", { attrs: { src: _vm.currentSrc, type: "video/mp4" } })
     ]),
@@ -50659,7 +50605,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#", "data-toggle": "popover" } }, [
+    return _c("a", { attrs: { href: "#" } }, [
       _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
         _vm._v("contacts")
       ])
@@ -50676,96 +50622,7 @@ if (false) {
 }
 
 /***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("character-video", {
-        attrs: { video: _vm.currentVideo, currentQuestion: _vm.currentQuestion }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "popover", attrs: { role: "tooltip" } }, [
-        _c("div", { staticClass: "popover-arrow" }),
-        _vm._v(" "),
-        _c("h5", { staticClass: "popover-title" }, [_vm._v("Contacts")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "popover-content" }, [
-          _c(
-            "div",
-            {
-              staticStyle: { display: "inline-block" },
-              attrs: { id: "contacts" }
-            },
-            _vm._l(this.contacts, function(person) {
-              return _c(
-                "div",
-                {
-                  staticClass: "contact-inner",
-                  attrs: { id: person.id },
-                  on: {
-                    click: function($event) {
-                      _vm.loadCallVideo(person.id)
-                    }
-                  }
-                },
-                [
-                  _c("img", { attrs: { src: person.img_small } }),
-                  _vm._v(" "),
-                  _c("span", { attrs: { id: "name" } }, [
-                    _vm._v(_vm._s(person.name))
-                  ]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("span", { attrs: { id: "position" } }, [
-                    _vm._v(_vm._s(person.role))
-                  ]),
-                  _vm._v(" "),
-                  _vm.activeContacts.includes(person.id)
-                    ? _c("span", [
-                        _c(
-                          "i",
-                          {
-                            staticClass: "material-icons",
-                            attrs: { id: "active" }
-                          },
-                          [_vm._v("fiber_manual_record")]
-                        )
-                      ])
-                    : _vm._e(),
-                  _c("br")
-                ]
-              )
-            })
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("character-questions", {
-        attrs: { id: "characterQuestions", questions: _vm.currentQuestions },
-        on: { question: _vm.askQuestion }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-167963c0", module.exports)
-  }
-}
-
-/***/ }),
+/* 154 */,
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50972,14 +50829,19 @@ var render = function() {
           attrs: { id: "notesParent", notes: this.notes }
         }),
         _vm._v(" "),
-        _c("contacts", {
-          staticClass: "col-md-12 col-lg-8 order-sm-1",
+        _c("character-video", {
           attrs: {
-            id: "contactsParent",
-            contacts: this.contacts,
-            calls: this.calls,
-            questions: this.questions
-          }
+            active: _vm.activeContacts,
+            characters: this.contacts,
+            video: _vm.currentVideo,
+            currentQuestion: _vm.currentQuestion
+          },
+          on: { loadVideo: _vm.loadCallVideo }
+        }),
+        _vm._v(" "),
+        _c("character-questions", {
+          attrs: { id: "characterQuestions", questions: _vm.currentQuestions },
+          on: { question: _vm.askQuestion }
         })
       ],
       1
