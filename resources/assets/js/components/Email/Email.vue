@@ -75,8 +75,8 @@
                                 <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
                             </div>
                             <div class="row form-group">
-                                <label for="toBody">Body</label>
-                                <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                                <label for="replyBody">Body</label>
+                                <textarea type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
                         </div>
                     </div>

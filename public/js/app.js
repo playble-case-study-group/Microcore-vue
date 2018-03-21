@@ -50443,7 +50443,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _c("label", { attrs: { for: "toBody" } }, [_vm._v("Body")]),
+                    _c("label", { attrs: { for: "replyBody" } }, [
+                      _vm._v("Body")
+                    ]),
                     _vm._v(" "),
                     _c("textarea", {
                       directives: [
@@ -50454,7 +50456,7 @@ var render = function() {
                           expression: "draftEmail.body"
                         }
                       ],
-                      attrs: { type: "text", id: "toBody" },
+                      attrs: { type: "text", id: "replyBody" },
                       domProps: { value: _vm.draftEmail.body },
                       on: {
                         input: function($event) {
