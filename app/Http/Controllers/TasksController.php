@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Events\TaskToggle;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
@@ -16,6 +17,19 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = DB::table('Tasks')->get();
+
+        foreach ($tasks as $task) {
+            $studentTask = DB::table('student_task')->where([
+                ['task_id', $task->id],
+                ['student_id', Auth::id()]
+            ])->first();
+
+            if ($studentTask) {
+                $task->complete = $studentTask->complete;
+            } else {
+                $task->complete = 0;
+            }
+        }
 
         return $tasks;
     }
@@ -76,11 +90,30 @@ class TasksController extends Controller
     }
 
     public function complete(Request $request) {
-        DB::table('Tasks')
-            ->where('id', $request->id)
-            ->update(['complete' => $request->complete]);
+        $task = DB::table('student_task')
+            ->where([
+                ['task_id', $request->id],
+                ['student_id', Auth::id()]
+            ])
+            ->first();
 
-        event(new TaskToggle($request->id));
+
+        if ($task) {
+            DB::table('student_task')
+                ->where([
+                    ['task_id', $request->id],
+                    ['student_id', Auth::id()]
+                ])
+                ->update(['complete' => $request->complete, 'updated_at' => DB::raw('NOW()')]);
+        } else {
+            DB::table('student_task')
+                ->insert([
+                    'task_id' => $request->id,
+                    'student_id' => Auth::id(),
+                    'created_at' => DB::raw('NOW()')
+                ]);
+
+        }
 
         return ('Good');
     }

@@ -6,14 +6,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3" style="background-color: #ffffff; height: 100vh">
+            <div class="col-sm-2" style="background-color: #ffffff; height: 100vh">
+                <button @click="composeModal">Compose</button>
                 <ul>
-                    <li>Inbox</li>
-                    <li>Sent</li>
+                    <li @click="toggleInbox">Inbox</li>
+                    <li @click="toggleSent">Sent</li>
                 </ul>
             </div>
-            <div class="col-sm-9">
-                <table>
+            <div class="col-sm-10">
+                <table id="inbox">
                     <tr>
                         <th></th>
                         <th>From</th>
@@ -45,6 +46,11 @@
                         </td>
                     </tr>
                 </table>
+                <table id="sent">
+                    <tr>
+                        <td>Something</td>
+                    </tr>
+                </table>
             </div>
 
         </div>
@@ -54,14 +60,59 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ readModalData.readSubject }}</h5>
+                        <h5 class="modal-title">{{ readModalData.subject }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h4><b>{{ readModalData.readFrom }}</b></h4>
-                        <p>{{ readModalData.readBody }}</p>
+                        <h4><b>{{ readModalData.from }}</b></h4>
+                        <p>{{ readModalData.body }}</p>
+                        <button @click="replyEmail">Reply</button>
+                        <div id="replyForm">
+                            <div class="row form-group">
+                                <label for="replySubject" class="col-sm-2">Subject:</label>
+                                <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
+                            </div>
+                            <div class="row form-group">
+                                <label for="toBody">Body</label>
+                                <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Compose Modal -->
+        <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4><b>Compose modal</b></h4>
+                        <div class="row form-group">
+                            <label for="toList" class="col-sm-2">To:</label>
+                            <div class="col-sm-10">
+                                <select id="toList" class="form-control" v-model="draftEmail.to">
+                                    <option value="0" disabled selected>Select a recipient</option>
+                                    <option v-for="character in characters"
+                                            :value="character.id"
+                                            :key="character.id">
+                                        {{ character.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="toSubject" class="col-sm-2">Subject:</label>
+                            <input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">
+                        </div>
+                        <div class="row form-group">
+                            <label for="toBody">Body</label>
+                            <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button @click="sendEmail">Send</button>
                     </div>
                 </div>
             </div>
@@ -80,17 +131,25 @@
                 draftemailsubject: "",
                 draftemailbody: "",
                 readModalData: {
-                    readFrom: "",
-                    readSubject: "",
-                    readBody: ""
+                    id: 0,
+                    from: "",
+                    subject: "",
+                    body: ""
+                },
+                draftEmail: {
+                    to: 0,
+                    reply: 0,
+                    subject: "",
+                    body: ""
                 }
 
             }
         },
-        props: ['characterEmails'],
+        props: ['characterEmails', 'characters'],
         mounted() {
             console.log('Component mounted.');
-
+            $('#sent').hide();
+            $('#replyForm').hide();
 
         },
         methods: {
@@ -102,12 +161,51 @@
                 })
             },
             readEmail: function (email) {
-                this.readModalData.readFrom = email.name;
-                this.readModalData.readSubject = email.subject;
-                this.readModalData.readBody = email.body;
+                this.resetDraftEmail();
+                this.readModalData.id = email.character_email_id;
+                this.readModalData.from = email.name;
+                this.readModalData.subject = email.subject;
+                this.readModalData.body = email.body;
 
                 $('#readModal').modal();
                 console.log(email)
+            },
+            toggleInbox: function () {
+                $('#inbox').show();
+                $('#sent').hide();
+                console.log('inbox');
+            },
+            toggleSent: function () {
+                $('#inbox').hide();
+                $('#sent').show();
+                console.log('sent');
+            },
+            composeModal: function () {
+                this.resetDraftEmail();
+
+                $('#composeModal').modal('show');
+            },
+            sendEmail: function () {
+                axios.post('/email', this.draftEmail).then( response => {
+                    console.log(response.data)
+
+                    this.resetDraftEmail();
+                });
+            },
+            replyEmail: function () {
+
+                this.draftEmail.reply = this.readModalData.id;
+
+                $('#replyForm').show();
+            },
+            resetDraftEmail: function () {
+                // Reset the draft email
+                this.draftEmail = {
+                    to: 0,
+                    reply: 0,
+                    subject: "",
+                    body: ""
+                };
             }
         }
 
@@ -122,6 +220,7 @@
         padding: 0;
         /*padding: 20px;*/
         background-color: white;
+
     }
 
     .heading {
@@ -134,6 +233,11 @@
             padding: 8px 10px;
         }
 
+    }
+
+    ul {
+        padding-left: 0;
+        list-style: none;
     }
 
     td, th {

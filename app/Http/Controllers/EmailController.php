@@ -21,7 +21,9 @@ class EmailController extends Controller
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
 
-        return view('email', compact('characterEmails'));
+        $characters = DB::table('characters')->get();
+
+        return view('email', compact('characterEmails', 'characters'));
     }
 
     /**
@@ -42,12 +44,12 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('emails')->insert([
-            'from' => Auth::user()->name,
-           'to' => "Dan",
-           'subject'=> $request->subject,
-            'body' => $request->body
-        ]);
+//        DB::table('emails')->insert([
+//            'from' => Auth::user()->name,
+//           'to' => "Dan",
+//           'subject'=> $request->subject,
+//            'body' => $request->body
+//        ]);
         return $request->all();
     }
 
