@@ -16,7 +16,7 @@ class VideoCallController extends Controller
     public function index()
     {
         $contacts = DB::table('characters')->get();
-        $calls = DB::table('video')->get();
+        $calls = DB::table('call')->get();
         $questions = DB::table('question')->get();
         $notes = DB::table('notes')
             ->select('note')

@@ -1,29 +1,33 @@
 <template>
     <div id="video">
-
-        <a data-toggle="popover" data-trigger="focus" id="junk" v-on:click="popover" title="Contacts" data-html="true"
-           data-content='test'>test</a>
-        <div id="contacts" style="display: inline-block">
-                <div class="contact-inner"
-                     v-for="person in this.characters"
-                     :id="person.id"
-                     @click="loadCallVideo(person.id)">
-                    <img :src="person.img_small">
-                    <span id="name">{{person.name}}</span><br>
-                    <span id="position">{{person.role}}</span>
-                    <span v-if="active.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
-                </div>
-            </div>
         <video id="call_video">
             <source :src="currentSrc" type="video/mp4">
         </video>
 
         <div id="controlBar">
-            <a href="#" ><i id="phonebook" class="material-icons">contacts</i></a>
-            <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
-            <div id="volume" >
-                <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
+
+            <div class="dropup">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i id="phonebook" class="material-icons">contacts</i>
+                </a>
+
+                <div id="contacts" class="dropdown-menu">
+                    <div class="contact-inner dropdown-item"
+                         v-for="person in this.characters"
+                         :id="person.id"
+                         @click="loadCallVideo(person.id)">
+                        <img :src="person.img_small">
+                        <div id="contactInfo">
+                            <span id="name">{{person.name}}</span><br>
+                            <span id="position">{{person.role}}</span>
+                            <span v-if="active.includes(person.id)"><i id="active" class="material-icons">fiber_manual_record</i></span><br>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
+            <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
         </div>
     </div>
 </template>
@@ -78,10 +82,6 @@
                     document.getElementById('mic').innerText = "mic";
                 }
             },
-            popover: function() {
-                $('#junk').popover('toggle');
-                console.log('test')
-            }
         }
     }
 

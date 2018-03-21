@@ -13,7 +13,7 @@ class CallSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        factory(App\characters::class, 9)->create();
+        //factory(App\characters::class, 9)->create();
         factory(App\call::class, 20)->create();
         factory(App\notes::class, 20)->create();
     }
