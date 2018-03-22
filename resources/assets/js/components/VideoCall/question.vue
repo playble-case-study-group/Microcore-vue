@@ -1,6 +1,6 @@
 <template>
     <div id="question">
-        <button type="button" class="btn btn-success button"
+        <button type="button" class="btn btn-success btn-lg button"
              v-for="question in questions"
              :id="question.id"
                 @click="submitQuestion(question)">
@@ -30,7 +30,15 @@
 
 <style scoped>
     .button {
-        margin: 20px;
-
+        margin: 2rem;
+        height: 5rem;
+        width: 22rem;
+    }
+    @media(min-width: 992px){
+        .button {
+            margin: 2rem 4rem;
+            height: 5rem;
+            width: 29rem;
+        }
     }
 </style>

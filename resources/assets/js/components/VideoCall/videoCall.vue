@@ -1,10 +1,19 @@
 <template>
     <div id="videocall" class="container">
         <div class="row">
-            <notes id="notesParent"  class="col-md-12 col-lg-4 order-sm-12" :notes="this.notes"></notes>
-            <character-video v-on:loadVideo="loadCallVideo" :active="activeContacts" :characters="this.contacts" :video="currentVideo" :currentQuestion="currentQuestion"></character-video>
-            <character-questions id="characterQuestions" :questions="currentQuestions" v-on:question="askQuestion"></character-questions>
+            <div class="d-flex">
+                <notes id="notesParent" class="col-sm-11 col-md-11 col-lg-3"
+                       :notes="this.notes">
+                </notes>
+                <character-video class="col-sm-11 col-md-11 col-lg-8"
+                                 v-on:loadVideo="loadCallVideo"
+                                 :active="activeContacts"
+                                 :characters="this.contacts"
+                                 :video="currentVideo"
+                                 :questions="currentQuestions">
 
+                </character-video>
+           </div>
         </div>
     </div>
 </template>
@@ -12,16 +21,13 @@
 <script>
     import { mapActions } from 'vuex'
     import notes from './notes.vue'
-    import question from './question.vue'
     import videos from './videos.vue'
-
 
     export default {
 
         components: {
             'notes': notes,
             'character-video': videos,
-            'character-questions': question
         },
         props: ['calls', 'questions', 'notes', 'contacts'],
         mounted() {
@@ -32,7 +38,6 @@
             return {
                 currentVideo: {},
                 currentQuestions: [],
-                currentQuestion: {}
             }
         },
         computed: {
@@ -65,22 +70,31 @@
                 this.currentVideo = activeCall[0];
                 this.currentQuestions = activeCallQuestions;
             },
-            askQuestion: function (question) {
-                this.currentQuestion = question;
-            },
         }
     }
 </script>
 
 <style scoped>
     #videocall{
-        margin: 0px 20px;
+        margin: 3rem 3rem;
     }
     #notesParent{
-        height:70rem;
+        height:40rem;
+        top: 15px;
     }
-    #contactsParent{
-
+    .d-flex{
+        display: flex;
+        flex-flow: column-reverse;
+    }
+    @media(min-width:992px){
+        .d-flex{
+            flex-flow: initial;
+            justify-content: space-evenly;
+        }
+        #notesParent{
+            height:70rem;
+            top: -22px;
+        }
     }
 
 </style>

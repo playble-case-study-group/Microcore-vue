@@ -3,7 +3,6 @@
     <div id="notes">
         <div id="header" ><h3>Notes</h3></div>
         <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
-
     </div>
 </template>
 
@@ -45,12 +44,9 @@
 </script>
 
 <style scoped>
-    #notes{
-
-    }
     textarea{
         width: 100%;
-        height: 75%;
+        height: 87%;
         border:none;
         padding: 20px;
 
@@ -58,10 +54,10 @@
     #header{
         color: white;
         background-color: #4A4A4A;
-        height: 40px;
+        height: 50px;
     }
     h3{
-        padding: 10px;
+        padding: 15px;
     }
 
 </style>
