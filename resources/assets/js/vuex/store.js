@@ -45,7 +45,7 @@ const mutations = {
     // Retrieves user from database when appliction loads.
     // See app.js mounted for call
     GET_USER: (state) => {
-        axios.get('/user').then(response => state.user = response.data);
+        axios.get('/user').then(response => state.user = response.data).catch( error => console.log(error));
     },
 
     GET_NOTES: (state) => {

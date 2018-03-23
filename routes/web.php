@@ -52,3 +52,8 @@ Route::resource('/library', 'LibraryController');
 
 Route::resource('/phone', 'PhoneController');
 
+Route::resource('/group', 'GroupController');
+Route::post('/addToGroup', 'GroupController@addToGroup');
+
+Route::resource('/classes', 'ClassController');
+

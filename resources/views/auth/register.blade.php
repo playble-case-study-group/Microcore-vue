@@ -61,6 +61,79 @@
                             </div>
                         </div>
 
+                        <hr>
+
+                        {{-- Simulation Key --}}
+
+                        <div class="form-group{{ $errors->has('sim-key') ? ' has-error' : '' }}">
+                            <label for="sim-key" class="col-md-4 control-label">Simulation Key</label>
+
+                            <div class="col-md-6">
+                                <input id="sim-key" type="sim-key" class="form-control" name="sim-key" required>
+
+                                @if ($errors->has('sim-key'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sim-key') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary" onclick="role('student')">
+                                        <input type="radio" name="options" id="student" onclick="role('student')" autocomplete="off"> Student
+                                    </label>
+                                    <label class="btn btn-primary" onclick="role('teacher')">
+                                        <input type="radio" name="options" id="teacher" onclick="role('teacher')" autocomplete="off"> Teacher
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Student Form --}}
+
+                        <div id="student-form" class="hidden">
+                            <div class="form-group{{ $errors->has('class-key') ? ' has-error' : '' }}">
+                                <label for="class-key" class="col-md-4 control-label">Class Key</label>
+
+                                <div class="col-md-6">
+                                    <input id="class-key" type="class-key" class="form-control" name="class-key">
+
+                                    @if ($errors->has('class-key'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('class-key') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {{-- Teacher Form --}}
+
+                        <div id="teacher-form" class="hidden">
+                            <div class="form-group{{ $errors->has('instructor-key') ? ' has-error' : '' }}">
+                                <label for="instructor-key" class="col-md-4 control-label">Instructor Key</label>
+
+                                <div class="col-md-6">
+                                    <input id="instructor-key" type="instructor-key" class="form-control" name="instructor-key">
+
+                                    @if ($errors->has('instructor-key'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('instructor-key') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -74,4 +147,22 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('page-script')
+
+    <script type="text/javascript">
+
+        function role(role) {
+            console.log(role);
+            if (role === 'student') {
+                $('#teacher-form').addClass('hidden').val('');
+                $('#student-form').removeClass('hidden');
+            } else {
+                $('#student-form').addClass('hidden').val('');
+                $('#teacher-form').removeClass('hidden');
+            }
+        }
+    </script>
 @endsection

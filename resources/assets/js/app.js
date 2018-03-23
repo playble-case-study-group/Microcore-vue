@@ -9,6 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -28,7 +30,8 @@ Vue.component('library', require('./components/Library/library.vue'));
 Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
 Vue.component('phone', require('./components/Phone/Phone.vue'));
-
+Vue.component('classes', require('./components/Classes/Classes.vue'));
+// Vue.component('v-select', require('vue-select'));
 
 
 import store from './vuex/store';
@@ -50,9 +53,14 @@ const app = new Vue({
     ]),
     mounted() {
         // When the program loads we are going to get the user object and all tasks.  See store.js
-        this.GET_TASKS();
-        this.GET_USER();
-        this.GET_SIMULATION();
+        axios.get('/user').then( response => {
+            this.GET_TASKS();
+            this.GET_USER();
+            this.GET_SIMULATION();
+        }).catch(error => {
+            console.log( error);
+        })
+
     }
 
 });
