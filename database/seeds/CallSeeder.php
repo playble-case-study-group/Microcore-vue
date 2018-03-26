@@ -16,5 +16,6 @@ class CallSeeder extends Seeder
         //factory(App\characters::class, 9)->create();
         factory(App\call::class, 20)->create();
         factory(App\notes::class, 20)->create();
+        factory(App\questions::class, 20)->create();
     }
 }

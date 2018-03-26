@@ -36,9 +36,17 @@
     }
     @media(min-width: 992px){
         .button {
+            margin: 1rem 3rem;
+            height: 7rem;
+            width: 21rem;
+            white-space: normal;
+        }
+    }
+    @media(min-width: 1400px){
+        .button {
             margin: 2rem 4rem;
             height: 5rem;
-            width: 29rem;
+            width: 28rem;
         }
     }
 </style>

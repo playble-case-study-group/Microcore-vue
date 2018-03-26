@@ -1,7 +1,7 @@
 <template>
     <div id="video">
-        <video id="call_video">
-            <source :src="currentSrc" type="video/mp4">
+        <video id="call_video" autoplay controls>
+            <source :src="currentVideo.call_url" type="video/mp4">
         </video>
         <div id="controlBar">
             <div class="dropup">
@@ -18,7 +18,7 @@
                             <span id="name">{{person.name}}</span><br>
                             <span id="position">{{person.role}}</span>
                         </div>
-                        <span id="active" v-if="active.includes(person.id)"><i class="material-icons">fiber_manual_record</i></span>
+                        <span id="active" v-if="activeContacts.includes(person.id)"><i class="material-icons">fiber_manual_record</i></span>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
         </div>
         <character-questions id="characterQuestions"
-                             :questions="this.questions"
+                             :questions="this.currentQuestions"
                              v-on:question="askQuestion">
         </character-questions>
 
@@ -38,22 +38,24 @@
     import question from './question.vue'
 
     export default {
-        props: ['active', 'video', 'characters', 'questions'],
+        props: ['calls', 'characters', 'questions'],
         data: function () {
             return {
                 videoEl: {},
-                currentSrc: "",
                 callIconToggleStatus: "call",
-                currentQuestion: {}
+                currentQuestion: {},
+                currentQuestions: [],
+                currentVideo: {},
+                record: false
             }
         },
         components: {
             'character-questions': question
         },
         watch: {
-            video: function () {
+            currentVideo: function () {
                 this.videoEl = document.getElementById('call_video');
-                this.currentSrc = this.video.call_url;
+                this.currentSrc = this.currentVideo.call_url;
                 this.videoEl.load();
                 this.callIconToggleStatus = "call";
             },
@@ -65,9 +67,69 @@
 
             }
         },
+        computed: {
+            activeContacts: function() {
+                let characters = this.calls.filter((character) => {
+                    if(character.day === this.$store.state.user.current_day){
+                        return character.character_id;
+                    }
+                })
+                    .map((character) => {
+                        return character.character_id;
+                    })
+                return characters;
+            }
+        },
         methods: {
             loadCallVideo: function (person_id) {
-                this.$emit('loadVideo', person_id)
+                let activeCall = this.calls.filter((call) => {
+                    if (call.day === this.$store.state.user.current_day && call.character_id === person_id) {
+                        return call;
+                    }
+                })
+                if (activeCall.length != 0) {
+                    this.record = false;
+                    let activeCallQuestions = this.questions.filter((question) => {
+                        if (question.call_id == activeCall[0].id) {
+                            return question;
+                        }
+                    })
+                    this.currentVideo = activeCall[0];
+                    this.currentQuestions = activeCallQuestions;
+                } else{
+                    this.leaveMessage();
+                }
+            },
+            leaveMessage: function(){
+                this.record = true;
+               this.requestAudioVideo();
+            },
+            requestAudioVideo: function(){
+                function hasGetUserMedia() {
+                    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+                }
+                const constraints = {
+                    video: true,
+                    audio: true
+                };
+                const video = document.querySelector('video');
+                console.log(video);
+                function handleSuccess(stream) {
+                    video.srcObject = stream;
+                }
+
+                function handleError(error) {
+                    console.error('Reeeejected!', error);
+                }
+
+                if (hasGetUserMedia()) {
+                    console.log('got it~');
+                    console.log(video.srcObject);
+                    navigator.mediaDevices.getUserMedia(constraints).
+                    then(handleSuccess).catch(handleError);
+                } else {
+                    alert('getUserMedia() is not supported by your browser');
+                }
             },
             changePhoneIcon: function(){
                 if(this.callIconToggleStatus === "call"){
@@ -129,7 +191,7 @@
     }
     #characterQuestions{
         height: 20rem;
-        overflow-y: hidden;
+        overflow-y: scroll;
         background-color: white;
         display: flex;
         flex-flow: wrap;
