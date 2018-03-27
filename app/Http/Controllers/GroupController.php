@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -39,6 +40,12 @@ class GroupController extends Controller
 
     public function addToGroup(Request $request)
     {
+        DB::table('user_has_group')
+            ->insert([
+                'user_id' => $request->userId,
+                'group_id' => $request->groupId
+            ]);
+
         return $request->all();
     }
 

@@ -23,7 +23,20 @@ class EmailController extends Controller
 
         $characters = DB::table('characters')->get();
 
-        return view('email', compact('characterEmails', 'characters'));
+        $studentEmails = DB::table('student_email')
+            ->join('characters','characters.id', 'student_email.character_id')
+            ->select('student_email.body', 'characters.name', 'student_email.day', 'student_email.student_email_id', 'student_email.subject', 'student_email.character_email_id')
+            ->where('user_id', Auth::id())
+            ->get();
+
+        foreach ($studentEmails as $email) {
+            if ($email->character_email_id) {
+                $email->reply = DB::table('character_email')
+                    ->where('character_email_id', $email->character_email_id)
+                    ->get();
+            }
+        }
+        return view('email', compact('characterEmails', 'characters', 'studentEmails'));
     }
 
     /**
@@ -44,12 +57,16 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-//        DB::table('emails')->insert([
-//            'from' => Auth::user()->name,
-//           'to' => "Dan",
-//           'subject'=> $request->subject,
-//            'body' => $request->body
-//        ]);
+//        dd($request->all());
+        DB::table('student_email')->insert([
+            'user_id' => Auth::id(),
+            'character_id' => $request->to['id'],
+            'day' => Auth::user()->current_day,
+            'subject'=> $request->subject,
+            'body' => $request->body,
+            'created_at'=> DB::raw('NOW()'),
+            'character_email_id' => $request->reply
+        ]);
         return $request->all();
     }
 

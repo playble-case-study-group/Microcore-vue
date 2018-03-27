@@ -59,11 +59,11 @@
                                     <td>{{ group.name }}</td>
                                     <td>
                                         <ul>
-                                            <li v-for="student in group.students">
+                                            <li v-for="student in group.students" :key="student.id">
                                                 {{ student.name }} <button class="btn btn-sm btn-danger">x</button>
                                             </li>
                                             <li>
-                                                <v-select v-model="selected" label="name" :options="clss.unAssigned"></v-select>
+                                                <v-select v-model="newGroupUser" label="name" :options="clss.unAssigned"></v-select>
                                                 <button class="btn btn-success" @click="addStudent(clss.class_id, group.group_id)">
                                                     Add Student
                                                 </button>
@@ -107,7 +107,7 @@
         },
         data: function () {
             return {
-                selected: "",
+                newGroupUser: "",
                 curClass: {},
                 curUnassigned: [],
                 curGroupMembers: [],
@@ -119,19 +119,33 @@
         },
         methods: {
             addStudent: function (classId, groupId) {
-                if (this.selected) {
-                    let data = {
-                        'groupId': groupId,
-                        'userId': this.selected.id
-                    };
+                if (this.newGroupUser) {
+                    // Get class.
+                    let clss = _.find(this.classes, {'class_id': classId});
 
-                    axios.post('/addToGroup', data).then( response => {
-                        let clss = _.find(this.classes, {'class_id': classId});
-                        _.remove(clss.unAssigned, this.selected);
-                        let group = _.find(clss.groups, {'group_id': groupId});
-                        console.log(group);
-                        group.students.push(this.selected);
-                    })
+                    // Get group and see if the student is there already.
+                    let group = _.find(clss.groups, {'group_id': groupId});
+
+                    // If user is already in a group
+                    if (!clss.unAssigned.includes(this.newGroupUser)) {
+                        alert('Student is already in a group.');
+                    } else {
+                        let data = {
+                            'groupId': groupId,
+                            'userId': this.newGroupUser.id
+                        };
+
+                        axios.post('/addToGroup', data).then( response => {
+                            group.students.push(this.newGroupUser);
+                            _.remove(clss.unAssigned, this.newGroupUser);
+                            console.log('posting');
+                            this.newGroupUser = "";
+
+                        })
+                    }
+
+
+
                 }
             }
         }

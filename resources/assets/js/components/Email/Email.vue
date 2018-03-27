@@ -48,7 +48,30 @@
                 </table>
                 <table id="sent">
                     <tr>
-                        <td>Something</td>
+                        <th>To</th>
+                        <th>Subject</th>
+                        <th>Body</th>
+                        <th>Day</th>
+                        <th></th>
+                    </tr>
+                    <tr v-for="email in studentEmails"
+                        @click="readEmail(email)"
+                        :key="email.student_email_id">
+                        <td>
+                            {{ email.name }}
+                        </td>
+                        <td>
+                            {{ email.subject }}
+                        </td>
+                        <td>
+                            {{ email.body }}
+                        </td>
+                        <td>
+                            {{ email.day }}
+                        </td>
+                        <td>
+
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -83,6 +106,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Compose Modal -->
         <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -92,14 +116,9 @@
                         <div class="row form-group">
                             <label for="toList" class="col-sm-2">To:</label>
                             <div class="col-sm-10">
-                                <select id="toList" class="form-control" v-model="draftEmail.to">
-                                    <option value="0" disabled selected>Select a recipient</option>
-                                    <option v-for="character in characters"
-                                            :value="character.id"
-                                            :key="character.id">
-                                        {{ character.name }}
-                                    </option>
-                                </select>
+                                <v-select :options="characters" label="name" v-model="draftEmail.to" id="toList">
+
+                                </v-select>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -122,14 +141,17 @@
 
 <script>
     import { mapGetter, mapActions } from 'vuex'
-
+    import  vSelect  from 'vue-select'
     export default {
 
-
+        components: {
+            'v-select': vSelect
+        },
         data: function () {
             return {
                 draftemailsubject: "",
                 draftemailbody: "",
+                toCharacter: "",
                 readModalData: {
                     id: 0,
                     from: "",
@@ -145,7 +167,7 @@
 
             }
         },
-        props: ['characterEmails', 'characters'],
+        props: ['characterEmails', 'characters', 'studentEmails'],
         mounted() {
             console.log('Component mounted.');
             $('#sent').hide();
