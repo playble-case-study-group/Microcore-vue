@@ -1,8 +1,13 @@
 <template>
     <div id="video">
-        <video id="call_video" autoplay controls>
+        <video v-if="!record" id="call_video">
             <source :src="currentVideo.call_url" type="video/mp4">
         </video>
+        <video v-if="record" id="record_video" height="175px" width="150px" autoplay controls>
+            <source src="/video/record.mp4" type="video/mp4">
+        </video>
+        <a id="download">Download</a>
+        <button id="stop">Stop</button>
         <div id="controlBar">
             <div class="dropup">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,17 +59,20 @@
         },
         watch: {
             currentVideo: function () {
-                this.videoEl = document.getElementById('call_video');
-                this.currentSrc = this.currentVideo.call_url;
-                this.videoEl.load();
-                this.callIconToggleStatus = "call";
+                this.videoEl = document.querySelector('video');
+                if(!this.record) {
+                    this.currentSrc = this.currentVideo.call_url;
+                    this.videoEl.load();
+                    this.callIconToggleStatus = "call";
+                }
             },
             currentQuestion: function () {
-                document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
-                console.log(this.videoEl.currentTime);
-                document.getElementById('call_video').play()
-                this.callIconToggleStatus = "call_end";
-
+                if(!this.record) {
+                    document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
+                    console.log(this.videoEl.currentTime);
+                    document.getElementById('call_video').play()
+                    this.callIconToggleStatus = "call_end";
+                }
             }
         },
         computed: {
@@ -102,33 +110,72 @@
             },
             leaveMessage: function(){
                 this.record = true;
+                this.currentQuestions = [];
+                this.currentQuestion = {};
+                this.currentVideo = {};
                this.requestAudioVideo();
             },
             requestAudioVideo: function(){
                 function hasGetUserMedia() {
                     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
                 }
+
+                function fallback(error) {
+                    console.error('Reeeejected!', error);
+                    video.src = 'fallbackvideo.webm';
+                }
+
                 const constraints = {
                     video: true,
                     audio: true
                 };
                 const video = document.querySelector('video');
-                console.log(video);
-                function handleSuccess(stream) {
-                    video.srcObject = stream;
-                }
 
-                function handleError(error) {
-                    console.error('Reeeejected!', error);
-                }
+                let shouldStop = false;
+                let stopped = false;
+                const downloadLink = document.getElementById('download');
+                const stopButton = document.getElementById('stop');
+
+                stopButton.addEventListener('click', function() {
+                    console.log('stopping...')
+                    shouldStop = true;
+                })
+
+                var handleSuccess = function(stream) {
+                    const options = {mimeType: 'video/webm'};
+                    const recordedChunks = [];
+                    const mediaRecorder = new MediaRecorder(stream, options);
+                    //video.srcObject = stream;
+
+                    mediaRecorder.addEventListener('onstart', function(e) {
+                        console.log('listening');
+                        if (e.data.size > 0) {
+                            console.log('getting data');
+                            recordedChunks.push(e.data);
+                        }
+
+                        console.log(shouldStop);
+                        console.log(stopped);
+                        if(shouldStop === true && stopped === false) {
+                            console.log('should stop...')
+                            mediaRecorder.stop();
+                            stopped = true;
+                        }
+                    });
+
+                    mediaRecorder.addEventListener('stop', function() {
+                        downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                        downloadLink.download = 'acetest.webm';
+                    });
+
+                    mediaRecorder.start();
+                };
 
                 if (hasGetUserMedia()) {
-                    console.log('got it~');
-                    console.log(video.srcObject);
                     navigator.mediaDevices.getUserMedia(constraints).
-                    then(handleSuccess).catch(handleError);
+                    then(handleSuccess).catch(fallback);
                 } else {
-                    alert('getUserMedia() is not supported by your browser');
+                    fallback();
                 }
             },
             changePhoneIcon: function(){
