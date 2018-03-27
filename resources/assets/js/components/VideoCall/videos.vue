@@ -141,13 +141,15 @@
                     shouldStop = true;
                 })
 
-                var handleSuccess = function(stream) {
-                    const options = {mimeType: 'video/webm'};
+                function handleSuccess(stream) {
                     const recordedChunks = [];
-                    const mediaRecorder = new MediaRecorder(stream, options);
-                    //video.srcObject = stream;
+                    const mediaRecorder = new MediaRecorder(stream);
+                    video.srcObject = stream;
+                    video.addEventListener('loadeddata', function(){
+                        mediaRecorder.start(3000);
+                    })
 
-                    mediaRecorder.addEventListener('onstart', function(e) {
+                    mediaRecorder.addEventListener('dataavailable', function(e) {
                         console.log('listening');
                         if (e.data.size > 0) {
                             console.log('getting data');
@@ -167,9 +169,7 @@
                         downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
                         downloadLink.download = 'acetest.webm';
                     });
-
-                    mediaRecorder.start();
-                };
+                }
 
                 if (hasGetUserMedia()) {
                     navigator.mediaDevices.getUserMedia(constraints).
