@@ -1,13 +1,9 @@
 <template>
     <div id="video">
-        <video v-if="!record" id="call_video">
+        <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
             <source :src="currentVideo.call_url" type="video/mp4">
         </video>
-        <video v-if="record" id="record_video" height="175px" width="150px" autoplay controls>
-            <source src="/video/record.mp4" type="video/mp4">
-        </video>
-        <a id="download">Download</a>
-        <button id="stop">Stop</button>
+        <video-message v-if="showRecordingInterface" :recording="recording"></video-message>
         <div id="controlBar">
             <div class="dropup">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,7 +23,8 @@
                     </div>
                 </div>
             </div>
-            <a href="#" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
+            <a href="#" v-if="showRecordingInterface" v-on:click="startStopRecording"><i id="recording" class="material-icons">fiber_manual_record</i></a>
+            <a href="#" v-if="!showRecordingInterface" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
             <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
         </div>
         <character-questions id="characterQuestions"
@@ -41,6 +38,8 @@
 <script>
     import { mapActions } from 'vuex'
     import question from './question.vue'
+    import videoMessage from './record_message.vue'
+    import VideoMessage from "./record_message";
 
     export default {
         props: ['calls', 'characters', 'questions'],
@@ -51,23 +50,26 @@
                 currentQuestion: {},
                 currentQuestions: [],
                 currentVideo: {},
-                record: false
+                showRecordingInterface: false,
+                recording: false
             }
         },
         components: {
-            'character-questions': question
+            VideoMessage,
+            'character-questions': question,
+            'video-message': videoMessage
         },
         watch: {
             currentVideo: function () {
                 this.videoEl = document.querySelector('video');
-                if(!this.record) {
+                if(!this.showRecordingInterface) {
                     this.currentSrc = this.currentVideo.call_url;
                     this.videoEl.load();
                     this.callIconToggleStatus = "call";
                 }
             },
             currentQuestion: function () {
-                if(!this.record) {
+                if(!this.showRecordingInterface) {
                     document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
                     console.log(this.videoEl.currentTime);
                     document.getElementById('call_video').play()
@@ -96,7 +98,7 @@
                     }
                 })
                 if (activeCall.length != 0) {
-                    this.record = false;
+                    this.showRecordingInterface = false;
                     let activeCallQuestions = this.questions.filter((question) => {
                         if (question.call_id == activeCall[0].id) {
                             return question;
@@ -109,74 +111,10 @@
                 }
             },
             leaveMessage: function(){
-                this.record = true;
+                this.showRecordingInterface = true;
                 this.currentQuestions = [];
                 this.currentQuestion = {};
                 this.currentVideo = {};
-               this.requestAudioVideo();
-            },
-            requestAudioVideo: function(){
-                function hasGetUserMedia() {
-                    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-                }
-
-                function fallback(error) {
-                    console.error('Reeeejected!', error);
-                    video.src = 'fallbackvideo.webm';
-                }
-
-                const constraints = {
-                    video: true,
-                    audio: true
-                };
-                const video = document.querySelector('video');
-
-                let shouldStop = false;
-                let stopped = false;
-                const downloadLink = document.getElementById('download');
-                const stopButton = document.getElementById('stop');
-
-                stopButton.addEventListener('click', function() {
-                    console.log('stopping...')
-                    shouldStop = true;
-                })
-
-                function handleSuccess(stream) {
-                    const recordedChunks = [];
-                    const mediaRecorder = new MediaRecorder(stream);
-                    video.srcObject = stream;
-                    video.addEventListener('loadeddata', function(){
-                        mediaRecorder.start(3000);
-                    })
-
-                    mediaRecorder.addEventListener('dataavailable', function(e) {
-                        console.log('listening');
-                        if (e.data.size > 0) {
-                            console.log('getting data');
-                            recordedChunks.push(e.data);
-                        }
-
-                        console.log(shouldStop);
-                        console.log(stopped);
-                        if(shouldStop === true && stopped === false) {
-                            console.log('should stop...')
-                            mediaRecorder.stop();
-                            stopped = true;
-                        }
-                    });
-
-                    mediaRecorder.addEventListener('stop', function() {
-                        downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-                        downloadLink.download = 'acetest.webm';
-                    });
-                }
-
-                if (hasGetUserMedia()) {
-                    navigator.mediaDevices.getUserMedia(constraints).
-                    then(handleSuccess).catch(fallback);
-                } else {
-                    fallback();
-                }
             },
             changePhoneIcon: function(){
                 if(this.callIconToggleStatus === "call"){
@@ -193,6 +131,9 @@
                 } else{
                     document.getElementById('mic').innerText = "mic";
                 }
+            },
+            startStopRecording: function(){
+                this.recording = !this.recording;
             },
             askQuestion: function (question) {
                 this.currentQuestion = question;
@@ -213,6 +154,9 @@
         background-color: #4A4A4A;
         height: 50px;
         font-size: 30px
+    }
+    #recording{
+        color: red;
     }
     #call_video{
         height: 40rem;
