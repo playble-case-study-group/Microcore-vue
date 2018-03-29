@@ -68,10 +68,20 @@
 
                 //when recording stops, save the video object and stop displaying video stream
                 mediaRecorder.addEventListener('stop', function() {
-                    downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-                    downloadLink.download = 'acetest.webm';
                     audioStream.stop();
                     videoStream.stop();
+                    downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                    downloadLink.download = 'acetest.webm';
+                    axios
+                        .post(
+                            "/saveFile",
+                            {
+                                note: this.note,
+                                user: this.$store.state.user.id,
+                            }
+                        )
+                        .then(r => console.log(r))
+                        .catch(e => console.log(e));
                 });
 
             },

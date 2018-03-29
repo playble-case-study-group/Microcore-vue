@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div id="notes">
-        <div id="header" ><h3>Notes</h3></div>
+        <div id="header"><h3>Notes</h3></div>
         <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
     </div>
 </template>
@@ -11,9 +11,6 @@
 
     export default {
 
-        mounted() {
-
-        },
         data: function() {
           return {
               note: this.notes.note
@@ -33,7 +30,7 @@
                         }
                     )
                     .then(r => console.log(r))
-            .catch(e => console.log(e));
+                    .catch(e => console.log(e));
             },
         }
     }

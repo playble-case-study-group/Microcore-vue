@@ -50672,7 +50672,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {},
 
     data: function data() {
         return {
@@ -50968,7 +50967,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return call;
                 }
             });
-            console.log(activeCall);
             if (activeCall) {
                 //if active, return the questions associated with them
                 this.showRecordingInterface = false;
@@ -51293,10 +51291,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //when recording stops, save the video object and stop displaying video stream
             mediaRecorder.addEventListener('stop', function () {
-                downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-                downloadLink.download = 'acetest.webm';
                 audioStream.stop();
                 videoStream.stop();
+                downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                downloadLink.download = 'acetest.webm';
+                axios.post("/saveFile", {
+                    note: this.note,
+                    user: this.$store.state.user.id
+                }).then(function (r) {
+                    return console.log(r);
+                }).catch(function (e) {
+                    return console.log(e);
+                });
             });
         }
     }

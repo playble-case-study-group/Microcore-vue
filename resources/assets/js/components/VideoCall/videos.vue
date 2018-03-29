@@ -115,7 +115,6 @@
                         return call;
                     }
                 })
-                console.log(activeCall);
                 if (activeCall) {
                     //if active, return the questions associated with them
                     this.showRecordingInterface = false;

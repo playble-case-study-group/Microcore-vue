@@ -36,6 +36,8 @@ Route::post('/returnemails', 'EmailController@emailData');
 Route::resource('/gallery', 'GalleryController');
 
 Route::resource('/videocall', 'VideoCallController');
+Route::post('/saveFile', 'VideoCallController@saveFile');
+
 Route::resource('/library', 'LibraryController');
 
 Route::resource('/chat', 'ChatController');
