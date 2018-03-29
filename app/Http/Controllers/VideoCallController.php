@@ -16,12 +16,14 @@ class VideoCallController extends Controller
     public function index()
     {
         $contacts = DB::table('characters')->get();
-        $calls = DB::table('call')->get();
+        $calls = DB::table('call')
+            ->where('day', Auth::user()->current_day)
+            ->get();
         $questions = DB::table('question')->get();
         $notes = DB::table('notes')
             ->select('note')
             ->where('user_id', Auth::id())
-            ->get();
+            ->first();
         $notes = json_encode($notes);
 
         return view('videocall', compact('calls', 'questions', 'notes', 'contacts'));

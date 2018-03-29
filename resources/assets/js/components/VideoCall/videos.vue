@@ -1,32 +1,51 @@
 <template>
     <div id="video">
+        <!--video element to show standard videocalls, hidden when recording component is shown-->
         <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
             <source :src="currentVideo.call_url" type="video/mp4">
         </video>
+
+        <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording"></video-message>
+
         <div id="controlBar">
+
+            <!--dropup module for contacts-->
             <div class="dropup">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i id="phonebook" class="material-icons">contacts</i>
                 </a>
                 <div id="contacts" class="dropdown-menu">
                     <div class="contact-inner dropdown-item"
-                         v-for="person in this.characters"
+                         v-for="person in characters"
                          :id="person.id"
                          @click="loadCallVideo(person.id)">
-                        <img id="characterImage" :src="person.img_small">
-                        <div id="contactInfo">
-                            <span id="name">{{person.name}}</span><br>
-                            <span id="position">{{person.role}}</span>
+                        <img class="characterImage" :src="person.img_small">
+                        <div class="characterInfo">
+                            <span class="characterName">{{person.name}}</span><br>
+                            <span class="characterPosition">{{person.role}}</span>
                         </div>
-                        <span id="active" v-if="activeContacts.includes(person.id)"><i class="material-icons">fiber_manual_record</i></span>
+                        <span class="characterActive" v-if="activeContacts.includes(person.id)">
+                            <i class="material-icons">fiber_manual_record</i>
+                        </span>
                     </div>
                 </div>
             </div>
-            <a href="#" v-if="showRecordingInterface" v-on:click="startStopRecording"><i id="recording" class="material-icons">fiber_manual_record</i></a>
-            <a href="#" v-if="!showRecordingInterface" v-on:click="changePhoneIcon"><i id="call" class="material-icons">{{this.callIconToggleStatus}}</i></a>
-            <a href="#" v-on:click="changeMicIcon"><i id="mic" class="material-icons">mic</i></a>
+
+            <!--toolbar buttons-->
+            <a href="#" v-if="showRecordingInterface" @click="startStopRecording">
+                <i id="recording" class="material-icons">fiber_manual_record</i>
+            </a>
+            <a href="#" v-if="!showRecordingInterface" @click="changePhoneIcon">
+                <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
+            </a>
+            <a href="#" @click="changeMicIcon">
+                <i id="mic" class="material-icons">mic</i>
+            </a>
+
         </div>
+
+        <!--show character questions-->
         <character-questions id="characterQuestions"
                              :questions="this.currentQuestions"
                              v-on:question="askQuestion">
@@ -79,34 +98,35 @@
         },
         computed: {
             activeContacts: function() {
-                let characters = this.calls.filter((character) => {
+                return this.calls.filter((character) => {
                     if(character.day === this.$store.state.user.current_day){
                         return character.character_id;
                     }
+                }).map((character) => {
+                    return character.character_id;
                 })
-                    .map((character) => {
-                        return character.character_id;
-                    })
-                return characters;
             }
         },
         methods: {
             loadCallVideo: function (person_id) {
-                let activeCall = this.calls.filter((call) => {
-                    if (call.day === this.$store.state.user.current_day && call.character_id === person_id) {
+                //check if the contact clicked on is active
+                let activeCall = this.calls.find((call) => {
+                    if (call.character_id === person_id) {
                         return call;
                     }
                 })
-                if (activeCall.length != 0) {
+                console.log(activeCall);
+                if (activeCall) {
+                    //if active, return the questions associated with them
                     this.showRecordingInterface = false;
-                    let activeCallQuestions = this.questions.filter((question) => {
-                        if (question.call_id == activeCall[0].id) {
+                    this.currentQuestions = this.questions.filter((question) => {
+                        if (question.call_id == activeCall.id) {
                             return question;
                         }
                     })
-                    this.currentVideo = activeCall[0];
-                    this.currentQuestions = activeCallQuestions;
+                    this.currentVideo = activeCall;
                 } else{
+                    //if not active, leave a message
                     this.leaveMessage();
                 }
             },
@@ -172,11 +192,11 @@
         border-bottom: solid 1px;
         border-color: #d9dcde;
     }
-    #contactInfo{
+    .characterInfo{
         margin-left: 2rem;
         width: 58%;
     }
-    #active{
+    .characterActive{
         color: #3c763d;
         align-self:center;
     }

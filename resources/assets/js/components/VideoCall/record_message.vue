@@ -21,49 +21,52 @@
         },
         methods: {
             leaveMessage: function(){
-                function hasGetUserMedia() {
-                    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-                }
-
-                function fallback(error) {
-                    console.error('Reeeejected!', error);
-                    video.src = 'fallbackvideo.webm';
-                }
-
+                //set that we want both audio and video
                 const constraints = {
                     video: true,
                     audio: true
                 };
-                if (hasGetUserMedia()) {
-                    navigator.mediaDevices.getUserMedia(constraints).
-                    then(this.handleSuccess.bind(this)).catch(fallback);
-                } else {
-                    fallback();
-                }
+
+                //start recording
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(this.handleSuccess.bind(this))
+                    .catch(this.handleFailure);
+            },
+            handleFailure: function(error){
+                //if they don't have browser support, try a lower compatibility function or fail
+                console.error('Reeeejected!', error);
             },
             handleSuccess: function(stream){
                 const video = document.querySelector('video');
                 const downloadLink = document.getElementById('download');
-                let that = this;
+
                 const recordedChunks = [];
-                var audioStream = stream.getTracks()[0];
-                var videoStream = stream.getTracks()[1];
+                let audioStream = stream.getTracks()[0];
+                let videoStream = stream.getTracks()[1];
+
+                //initialize and display recording stream
                 const mediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
+                //start recording when video is loaded
                 video.addEventListener('loadeddata', function(){
                     mediaRecorder.start(3000);
                 })
 
+                //set local variable to set correct scope
+                let appScope = this;
+
+                //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function(e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if(that.recording == false) {
+                    if(appScope.recording == false) {
                         mediaRecorder.stop();
                     }
                 });
 
+                //when recording stops, save the video object and stop displaying video stream
                 mediaRecorder.addEventListener('stop', function() {
                     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
                     downloadLink.download = 'acetest.webm';

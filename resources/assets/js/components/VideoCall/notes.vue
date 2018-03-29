@@ -12,11 +12,11 @@
     export default {
 
         mounted() {
-            this.extractNoteObject();
+
         },
         data: function() {
           return {
-              note: ''
+              note: this.notes.note
           }
         },
         props: ['notes'],
@@ -35,9 +35,6 @@
                     .then(r => console.log(r))
             .catch(e => console.log(e));
             },
-            extractNoteObject: function(){
-                this.note = this.notes[0].note;
-            }
         }
     }
 
