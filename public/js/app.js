@@ -50920,7 +50920,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentQuestions: [],
             currentVideo: {},
             showRecordingInterface: false,
-            recording: false
+            recording: false,
+            clickedCharacter: 0
         };
     },
     components: {
@@ -50961,6 +50962,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         loadCallVideo: function loadCallVideo(person_id) {
+            this.clickedCharacter = person_id;
+
             //check if the contact clicked on is active
             var activeCall = this.calls.find(function (call) {
                 if (call.character_id === person_id) {
@@ -51236,7 +51239,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['recording'],
+    props: ['recording', 'clickedCharacter'],
     watch: {
         recording: function recording() {
             if (this.recording) {
@@ -51293,12 +51296,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             mediaRecorder.addEventListener('stop', function () {
                 audioStream.stop();
                 videoStream.stop();
+                var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
                 downloadLink.download = 'acetest.webm';
-                axios.post("/saveFile", {
-                    note: this.note,
-                    user: this.$store.state.user.id
-                }).then(function (r) {
+                var axiosHeaders = {
+                    headers: { 'content-type': 'text/csv' }
+                };
+
+                var data = new FormData();
+                data.append('file', blob);
+                data.append('user', appScope.$store.state.user.id);
+                data.append('character', appScope.clickedCharacter);
+
+                axios.post("/saveFile", data, axiosHeaders).then(function (r) {
                     return console.log(r);
                 }).catch(function (e) {
                     return console.log(e);
@@ -51383,7 +51393,12 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.showRecordingInterface
-        ? _c("video-message", { attrs: { recording: _vm.recording } })
+        ? _c("video-message", {
+            attrs: {
+              recording: _vm.recording,
+              clickedCharacter: _vm.clickedCharacter
+            }
+          })
         : _vm._e(),
       _vm._v(" "),
       _c("div", { attrs: { id: "controlBar" } }, [

@@ -6,7 +6,7 @@
         </video>
 
         <!--video recording component, hidden until click on inactive character-->
-        <video-message v-if="showRecordingInterface" :recording="recording"></video-message>
+        <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
         <div id="controlBar">
 
@@ -70,7 +70,8 @@
                 currentQuestions: [],
                 currentVideo: {},
                 showRecordingInterface: false,
-                recording: false
+                recording: false,
+                clickedCharacter: 0,
             }
         },
         components: {
@@ -109,6 +110,8 @@
         },
         methods: {
             loadCallVideo: function (person_id) {
+                this.clickedCharacter = person_id;
+
                 //check if the contact clicked on is active
                 let activeCall = this.calls.find((call) => {
                     if (call.character_id === person_id) {

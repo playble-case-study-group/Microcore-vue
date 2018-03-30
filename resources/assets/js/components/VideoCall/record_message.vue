@@ -11,7 +11,7 @@
     import { mapActions } from 'vuex'
 
     export default {
-        props: ['recording'],
+        props: ['recording', 'clickedCharacter'],
         watch:{
            recording: function(){
                if(this.recording){
@@ -70,15 +70,23 @@
                 mediaRecorder.addEventListener('stop', function() {
                     audioStream.stop();
                     videoStream.stop();
+                    const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
                     downloadLink.download = 'acetest.webm';
+                    const axiosHeaders = {
+                        headers: { 'content-type': 'text/csv' }
+                    }
+
+                    let data = new FormData();
+                    data.append('file', blob);
+                    data.append('user', appScope.$store.state.user.id);
+                    data.append('character',appScope.clickedCharacter);
+
                     axios
                         .post(
                             "/saveFile",
-                            {
-                                note: this.note,
-                                user: this.$store.state.user.id,
-                            }
+                            data,
+                            axiosHeaders
                         )
                         .then(r => console.log(r))
                         .catch(e => console.log(e));

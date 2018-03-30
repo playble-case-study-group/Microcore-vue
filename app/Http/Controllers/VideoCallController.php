@@ -122,7 +122,14 @@ class VideoCallController extends Controller
         //
     }
 
-    public function saveFile(){
+    public function saveFile(Request $request){
+        $user_id = $request->user;
+        $character_id = $request->character;
+        $video = $request->video;
+        $day = Auth::user()->current_day;
 
+        var_dump($video);
+
+        return $request->all();
     }
 }
