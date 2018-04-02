@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class VideoCallController extends Controller
 {
@@ -125,10 +126,18 @@ class VideoCallController extends Controller
     public function saveFile(Request $request){
         $user_id = $request->user;
         $character_id = $request->character;
-        $video = $request->video;
+        $video = $request->blob;
         $day = Auth::user()->current_day;
+        $mysql_blob = base64_encode($video);
 
-        var_dump($video);
+        header('Content-Type: video/webm');
+        $data = base64_decode($video);
+        $name = 'video-'.str_random(4).'.webm';
+        $target_file = base_path()."/public/storage/".$name;
+        file_put_contents($target_file,$data);
+
+
+        //Storage::disk('local')->put('/public/video.webm', $mysql_blob);
 
         return $request->all();
     }

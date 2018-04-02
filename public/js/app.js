@@ -51297,21 +51297,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 audioStream.stop();
                 videoStream.stop();
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
-                downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                downloadLink.href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
                 downloadLink.download = 'acetest.webm';
-                var axiosHeaders = {
-                    headers: { 'content-type': 'text/csv' }
-                };
 
                 var data = new FormData();
-                data.append('file', blob);
                 data.append('user', appScope.$store.state.user.id);
                 data.append('character', appScope.clickedCharacter);
 
-                axios.post("/saveFile", data, axiosHeaders).then(function (r) {
-                    return console.log(r);
-                }).catch(function (e) {
-                    return console.log(e);
+                axios.get(download.href, {
+                    responseType: 'blob'
+                }).then(function (response) {
+                    var reader = new FileReader();
+                    reader.readAsBinaryString(response.data, { type: 'application/octet-stream' });
+                    reader.onloadend = function () {
+                        var base64data = reader.result;
+                        data.append('blob', base64data);
+                        axios.post("/saveFile", data).then(function (r) {
+                            return console.log(r);
+                        }).catch(function (e) {
+                            return console.log(e);
+                        });
+                    };
                 });
             });
         }

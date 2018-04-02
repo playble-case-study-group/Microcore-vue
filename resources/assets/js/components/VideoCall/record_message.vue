@@ -36,7 +36,7 @@
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error('Reeeejected!', error);
             },
-            handleSuccess: function(stream){
+            handleSuccess: function(stream) {
                 const video = document.querySelector('video');
                 const downloadLink = document.getElementById('download');
 
@@ -49,7 +49,7 @@
                 video.srcObject = stream;
 
                 //start recording when video is loaded
-                video.addEventListener('loadeddata', function(){
+                video.addEventListener('loadeddata', function () {
                     mediaRecorder.start(3000);
                 })
 
@@ -57,42 +57,49 @@
                 let appScope = this;
 
                 //save data as it becomes available. Stop recording if stop button has been triggered
-                mediaRecorder.addEventListener('dataavailable', function(e) {
+                mediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if(appScope.recording == false) {
+                    if (appScope.recording == false) {
                         mediaRecorder.stop();
                     }
                 });
 
                 //when recording stops, save the video object and stop displaying video stream
-                mediaRecorder.addEventListener('stop', function() {
+                mediaRecorder.addEventListener('stop', function () {
                     audioStream.stop();
                     videoStream.stop();
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
-                    downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                    downloadLink.href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
                     downloadLink.download = 'acetest.webm';
-                    const axiosHeaders = {
-                        headers: { 'content-type': 'text/csv' }
-                    }
 
                     let data = new FormData();
-                    data.append('file', blob);
                     data.append('user', appScope.$store.state.user.id);
-                    data.append('character',appScope.clickedCharacter);
+                    data.append('character', appScope.clickedCharacter);
 
                     axios
-                        .post(
-                            "/saveFile",
-                            data,
-                            axiosHeaders
-                        )
-                        .then(r => console.log(r))
-                        .catch(e => console.log(e));
-                });
-
-            },
+                        .get(
+                            download.href,
+                            {
+                                responseType: 'blob'
+                            }).then(function (response) {
+                        var reader = new FileReader();
+                        reader.readAsBinaryString(response.data, { type: 'application/octet-stream' });
+                        reader.onloadend = function () {
+                            var base64data = reader.result;
+                            data.append('blob', base64data);
+                            axios
+                                .post(
+                                    "/saveFile",
+                                    data
+                                )
+                                .then(r => console.log(r))
+                                .catch(e => console.log(e));
+                        };
+                    })
+                })
+            }
         }
     }
 
