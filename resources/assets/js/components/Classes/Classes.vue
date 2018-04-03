@@ -60,7 +60,7 @@
                                     <td>
                                         <ul>
                                             <li v-for="student in group.students" :key="student.id">
-                                                {{ student.name }} <button class="btn btn-sm btn-danger">x</button>
+                                                {{ student.name }} <button class="btn btn-sm btn-danger" @click="removeStudent(student, group.group_id, clss.class_id)">x</button>
                                             </li>
                                             <li>
                                                 <v-select v-model="newGroupUser" label="name" :options="clss.unAssigned"></v-select>
@@ -121,10 +121,10 @@
             addStudent: function (classId, groupId) {
                 if (this.newGroupUser) {
                     // Get class.
-                    let clss = _.find(this.classes, {'class_id': classId});
+                    let clss = this.getClass(classId);
 
                     // Get group and see if the student is there already.
-                    let group = _.find(clss.groups, {'group_id': groupId});
+                    let group = this.getGroup(clss, groupId);
 
                     // If user is already in a group
                     if (!clss.unAssigned.includes(this.newGroupUser)) {
@@ -147,6 +147,31 @@
 
 
                 }
+            },
+            removeStudent: function (student, groupId, classId) {
+                let clss = this.getClass(classId);
+                let group = this.getGroup(clss, groupId);
+                let data = {
+                    _method: 'delete',
+                    userId: student.id,
+                    groupId: group.group_id
+                };
+
+                axios.post('/group/' + group.group_id, data).then( response => {
+                    group.students.splice(_.findIndex(group.students, student), 1);
+                    clss.unAssigned.push(student);
+                    this.$forceUpdate();
+                });
+
+
+
+
+            },
+            getGroup: function (clss, groupId) {
+                return _.find(clss.groups, {'group_id': groupId});
+            },
+            getClass: function (classId) {
+                return _.find(this.classes, {'class_id': classId});
             }
         }
     }

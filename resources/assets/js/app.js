@@ -52,6 +52,7 @@ const app = new Vue({
         'GET_SIMULATION'
     ]),
     mounted() {
+
         // When the program loads we are going to get the user object and all tasks.  See store.js
         axios.get('/user').then( response => {
             this.GET_TASKS();

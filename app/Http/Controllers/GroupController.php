@@ -89,8 +89,14 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        DB::table('user_has_group')
+            ->where([
+                ['user_id', $request->userId],
+                ['group_id', $request->groupId]
+            ])->delete();
+
+        return $request->all();
     }
 }
