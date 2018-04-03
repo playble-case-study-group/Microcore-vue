@@ -11,7 +11,7 @@ $factory->define(App\question::class, function (Faker $faker) {
         'created_at' => $faker->dateTime($max = 'now', $timezone = null),
         'start_time' => $faker->randomNumber($nbDigits = 2, $strict = true),
         'end_time' => $faker->randomNumber($nbDigits = 3, $strict = true),
-        'question' => $faker->text($maxNbChars = 50)
+        'question' => $faker->text($maxNbChars = 25)
     ];
 });
 

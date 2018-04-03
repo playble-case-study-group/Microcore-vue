@@ -2,7 +2,7 @@
     <div id="video">
         <!--video element to show standard videocalls, hidden when recording component is shown-->
         <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
-            <source :src="currentVideo.call_url" type="video/mp4">
+            <source :src="currentVideo.video_url" type="video/mp4">
         </video>
 
         <!--video recording component, hidden until click on inactive character-->
@@ -122,7 +122,7 @@
                     //if active, return the questions associated with them
                     this.showRecordingInterface = false;
                     this.currentQuestions = this.questions.filter((question) => {
-                        if (question.call_id == activeCall.id) {
+                        if (question.call_id == activeCall.video_id) {
                             return question;
                         }
                     })
