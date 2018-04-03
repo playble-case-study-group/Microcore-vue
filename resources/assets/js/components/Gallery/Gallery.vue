@@ -50,10 +50,10 @@
     import axios from 'axios';
 
     export default {
-
+        props: ['gallery'],
         data: function(){
             return {
-                artifacts: [],
+                artifacts: this.gallery,
                 groupArt: [],
                 showModal: false,
                 modalImage: '',
@@ -70,12 +70,12 @@
 
         mounted() {
             console.log('Created()');
-            axios.get('/getartifacts').then(response => {
-            this.artifacts = response.data;
-            this.filterArtifacts(false);
-                }).catch((error) => {
-                console.log(error.config);
-            });
+//            axios.get('/getartifacts').then(response => {
+//            this.artifacts = response.data;
+//            this.filterArtifacts(false);
+//                }).catch((error) => {
+//                console.log(error.config);
+//            });
         },
         methods: {
             filterArtifacts: function(filter) {
