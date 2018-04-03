@@ -49474,10 +49474,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
+    props: ['gallery'],
     data: function data() {
         return {
-            artifacts: [],
+            artifacts: this.gallery,
             groupArt: [],
             showModal: false,
             modalImage: '',
@@ -49493,15 +49493,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
-        var _this = this;
-
         console.log('Created()');
-        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/getartifacts').then(function (response) {
-            _this.artifacts = response.data;
-            _this.filterArtifacts(false);
-        }).catch(function (error) {
-            console.log(error.config);
-        });
+        //            axios.get('/getartifacts').then(response => {
+        //            this.artifacts = response.data;
+        //            this.filterArtifacts(false);
+        //                }).catch((error) => {
+        //                console.log(error.config);
+        //            });
     },
 
     methods: {

@@ -15,8 +15,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
-        return view('gallery');
+        $gallery = DB::table('gallery')->get();
+
+        return view('gallery', compact('gallery'));
 
     }
 
