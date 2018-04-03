@@ -12,7 +12,7 @@ class VideoCallSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\characters::class, 9)->create();
+        //factory(App\characters::class, 9)->create();
         factory(App\video::class, 20)->create();
         factory(App\notes::class, 20)->create();
     }
