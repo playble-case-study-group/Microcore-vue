@@ -42,6 +42,8 @@
                 console.log(this.video_el.currentTime);
                 document.getElementById('call_video').play()
 
+
+
             }
         }
     }
