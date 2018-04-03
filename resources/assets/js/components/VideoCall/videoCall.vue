@@ -1,14 +1,12 @@
 <template>
     <div id="videocall" class="container">
-        <contacts
+        <notes id="notes" :notes="extractNote"></notes>
+        <contacts id="contacts"
                 :contacts="contactsList"
                 :video="videoList"
                 :chosenContact="chosenContact"
                 :questions="questionsList">
-
         </contacts>
-        <notes></notes>
-
     </div>
 </template>
 
@@ -26,7 +24,7 @@
             'contacts': contacts,
             'notes': notes
         },
-        props: ['videos'],
+        props: ['videos', 'notes'],
         data: function() {
             return {
                 chosenContact: 0
@@ -55,7 +53,7 @@
                     }
                 })
                     .map((question) => {
-                        return {'question': question.question, 'charID': question.character_id,'start': question.video_starttime, 'end': question.video_endtime }
+                        return {'question': question.question, 'charID': question.character_id, 'start': question.video_starttime, 'end': question.video_endtime }
                     })
 
                 return questions;
@@ -67,7 +65,29 @@
                 })
 
                 return characters;
+            },
+            extractNote: function(){
+                let note = this.notes.map((note) => {
+                    return note.note;
+                })
+
+                return note;
             }
         }
     }
 </script>
+
+<style scoped>
+    #videocall{
+        display: flex;
+        flex-direction: row;
+
+    }
+    #notes{
+
+    }
+    #contacts{
+
+    }
+
+</style>

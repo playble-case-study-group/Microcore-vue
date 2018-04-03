@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <videocall :videos="{{ $videos }}">
+    <videocall :notes="{{ $notes }}" :videos="{{ $videos }}">
 
     </videocall>
 @endsection

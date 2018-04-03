@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "erusev/parsedown": "^1.7",
+        "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "jenssegers/mongodb": "v3.3.x",
         "laravel/framework": "5.5.*",

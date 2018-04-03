@@ -1,11 +1,12 @@
 <template>
     <div id="question">
         <br>
-        <div class="single-question"
+        <button class="single-question"
              v-for="single in question"
-             v-on:click="">
+             :id="single.id"
+             v-on:click="play(single.start, single.end)">
             <b>{{ single.question }}</b>
-        </div>
+        </button>
 
 
     </div>
@@ -20,14 +21,24 @@
         mounted() {
         },
         props: ['question', 'active'],
-        methods: mapActions([
-        ])
+        methods: {
+            play: function (start, end) {
+                this.$emit('play', start, end);
+            }
+
+        }
     }
 </script>
 
 <style scoped>
-    .content {
+    button {
         padding: 20px;
+        background-color: #2ab27b;
+        color: white;
+        border: none;
+    }
+    button:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
 
     #question {

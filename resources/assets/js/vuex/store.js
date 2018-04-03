@@ -8,7 +8,6 @@ Vue.use(Vuex);
 const state = {
     tasks: [],
     user: {},
-    notes: {},
     simulation: {}
 }
 
@@ -48,11 +47,6 @@ const mutations = {
         axios.get('/user').then(response => state.user = response.data).catch( error => console.log(error));
     },
 
-    GET_NOTES: (state) => {
-        axios.get('/video').then(response => {
-            state.notes = response.data;
-        });
-    },
 
     // Increments day in user object while it is less than the amount of days
     // Consider making a simulation table with basic data like how many days there are in the simulation...

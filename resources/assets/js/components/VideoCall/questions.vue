@@ -1,6 +1,6 @@
 <template>
     <div id="questions">
-        <question :question="activeQuestions"></question>
+        <question v-on:play="vPlay" :question="activeQuestions"></question><br>
     </div>
 </template>
 
@@ -27,7 +27,21 @@
             }
         },
         methods: {
-
+            vPlay: function(start, end){
+                this.$emit('vPlay', start, end);
+            }
         }
     }
 </script>
+
+<style scoped>
+    #questions{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        background-color: white;
+
+    }
+
+</style>

@@ -1,8 +1,8 @@
+<!--suppress ALL -->
 <template>
     <div id="notes">
-
-        <h3> Notes </h3>
-        <textarea rows="5" cols="50" v-model="note" v-on:keyup="update" ></textarea>
+        <div id="header" ><h3>Notes</h3></div>
+        <textarea v-model="note" v-on:keyup="update"></textarea>
 
     </div>
 </template>
@@ -13,11 +13,15 @@
     export default {
 
         mounted() {
+            this.setNote();
         },
         data: function() {
           return {
               note: ''
           }
+        },
+        props: ['notes'],
+        computed: {
         },
         methods: {
             update: function () {
@@ -27,26 +31,40 @@
                         {
                             note: this.note,
                             user: this.$store.state.user.id,
-                            day: this.$store.state.user.current_day
                         }
                     )
                     .then(r => console.log(r))
-                    .catch(e => console.log(e));
+            .catch(e => console.log(e));
             },
-            fetch: function() {
-                axios
-                    .get(
-                        "/videocall",
-                        {
-                            user: this.$store.state.user.id,
-                            day: this.$store.state.user.current_day
-                        }
-                    )
-                    .then(r => console.log(r))
-                    .catch(e => console.log(e));
+            setNote: function(){
+                this.note = this.notes;
             }
         }
 
     }
 
 </script>
+
+<style scoped>
+    #notes{
+        margin: 20px;
+        width: 35%
+
+    }
+    textarea{
+        width: 100%;
+        height: 75%;
+        border:none;
+        padding: 20px;
+
+    }
+    #header{
+        color: white;
+        background-color: #2b2b2b;
+        height: 40px;
+    }
+    h3{
+        padding: 10px;
+    }
+
+</style>
