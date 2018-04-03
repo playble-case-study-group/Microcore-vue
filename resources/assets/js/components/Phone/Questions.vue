@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Questions</h1>
         <ul>
-            <li v-for="question in questions" @click="submit_question(question)">
+            <li v-for="question in questions" @click="submitQuestion(question)">
                 {{ question.question }}
             </li>
         </ul>
@@ -19,7 +19,7 @@
         },
         props: ['questions'],
         methods: {
-            submit_question: function (question) {
+            submitQuestion: function (question) {
                 this.$emit('question', question)
             }
         },

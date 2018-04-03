@@ -1,93 +1,60 @@
 <template>
     <div id="videocall" class="container">
-        <notes id="notes" :notes="extractNote"></notes>
-        <contacts id="contacts"
-                :contacts="contactsList"
-                :video="videoList"
-                :chosenContact="chosenContact"
-                :questions="questionsList">
-        </contacts>
+        <div class="row">
+            <div class="d-flex">
+                <notes id="notesParent" class="col-sm-11 col-md-3 col-lg-3"
+                       :notes="this.notes">
+                </notes>
+                <character-video class="col-sm-11 col-md-8 col-lg-8"
+                                 :characters="this.contacts"
+                                 :calls="this.calls"
+                                 :questions="this.questions">
+
+                </character-video>
+           </div>
+        </div>
     </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex'
-    import contacts from './contacts.vue'
     import notes from './notes.vue'
-
+    import videos from './videos.vue'
 
     export default {
 
-        mounted() {
-        },
         components: {
-            'contacts': contacts,
-            'notes': notes
+            'notes': notes,
+            'character-video': videos,
         },
-        props: ['videos', 'notes'],
-        data: function() {
-            return {
-                chosenContact: 0
-            }
-        },
-        computed:{
-            currentDay: function(){
-                return this.$store.state.user.current_day;
-            },
-            videoList: function() {
-                  let videos = this.videos.filter((video) => {
-                        if(video.day === this.currentDay){
-                            return video
-                        }
-                    })
-                      .map((video) => {
-                      return {'url': video.video, 'charID': video.character_id}
-                })
-
-                return videos;
-            },
-            questionsList: function() {
-                let questions = this.videos.filter((question) => {
-                    if(question.day === this.currentDay){
-                        return question
-                    }
-                })
-                    .map((question) => {
-                        return {'question': question.question, 'charID': question.character_id, 'start': question.video_starttime, 'end': question.video_endtime }
-                    })
-
-                return questions;
-
-            },
-            contactsList: function() {
-                let characters = this.videos.map((character) => {
-                    return {'charID': character.character_id, 'day': character.day }
-                })
-
-                return characters;
-            },
-            extractNote: function(){
-                let note = this.notes.map((note) => {
-                    return note.note;
-                })
-
-                return note;
-            }
+        props: ['calls', 'questions', 'notes', 'contacts'],
+        mounted() {
+            console.log('Component mounted.')
         }
     }
 </script>
 
 <style scoped>
     #videocall{
+        margin: 3rem 3rem;
+    }
+    #notesParent{
+        height:40rem;
+        top: 15px;
+    }
+    .d-flex{
         display: flex;
-        flex-direction: row;
-
+        flex-flow: column-reverse;
     }
-    #notes{
-
-    }
-    #contacts{
-
+    @media(min-width:992px){
+        .d-flex{
+            flex-flow: initial;
+            justify-content: space-evenly;
+        }
+        #notesParent{
+            height:70rem;
+            top: -22px;
+        }
     }
 
 </style>

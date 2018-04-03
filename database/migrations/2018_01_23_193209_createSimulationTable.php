@@ -26,6 +26,6 @@ class CreateSimulationTable extends Migration
      */
     public function down()
     {
-        chema::dropIfExists('simulation');
+        Schema::dropIfExists('simulation');
     }
 }
