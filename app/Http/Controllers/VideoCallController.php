@@ -123,21 +123,25 @@ class VideoCallController extends Controller
         //
     }
 
+
     public function saveFile(Request $request){
         $user_id = $request->user;
         $character_id = $request->character;
         $video = $request->blob;
         $day = Auth::user()->current_day;
-        $mysql_blob = base64_encode($video);
+        $date = date("Y-m-d H:i:s",time());
 
+
+        $data = base64_decode(preg_replace('#^data:text/\w+;base64,#i', '', $video));
         header('Content-Type: video/webm');
-        $data = base64_decode($video);
         $name = 'video-'.str_random(4).'.webm';
         $target_file = base_path()."/public/storage/".$name;
-        file_put_contents($target_file,$data);
+        file_put_contents($target_file, $data);
+        $filename = "/public/storage/".$name;
 
+        DB::table('student_video_submissions')
+            ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'created_at'=> $date]);
 
-        //Storage::disk('local')->put('/public/video.webm', $mysql_blob);
 
         return $request->all();
     }

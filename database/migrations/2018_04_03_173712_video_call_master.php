@@ -40,6 +40,17 @@ class VideoCallMaster extends Migration
             $table->integer('end_time');
             $table->timestamps();
         });
+
+        Schema::dropIfExists('student_video_submissions');
+        Schema::create('student_video_submissions', function (Blueprint $table) {
+            $table->increments('submission_id');
+            $table->string('submission_url');
+            $table->integer('submission_day');
+            $table->integer('character_id');
+            $table->integer('user_id');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -53,5 +64,6 @@ class VideoCallMaster extends Migration
         Schema::dropIfExists('video');
         Schema::dropIfExists('notes');
         Schema::dropIfExists('question');
+        Schema::dropIfExists('student_video_submissions');
     }
 }

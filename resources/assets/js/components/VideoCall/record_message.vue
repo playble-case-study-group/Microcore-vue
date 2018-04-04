@@ -3,7 +3,6 @@
         <video id="record_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
             <source src="/video/record.mp4" type="video/mp4">
         </video>
-        <a id="download">Download</a>
     </div>
 </template>
 
@@ -38,7 +37,6 @@
             },
             handleSuccess: function(stream) {
                 const video = document.querySelector('video');
-                const downloadLink = document.getElementById('download');
 
                 const recordedChunks = [];
                 let audioStream = stream.getTracks()[0];
@@ -70,34 +68,42 @@
                 mediaRecorder.addEventListener('stop', function () {
                     audioStream.stop();
                     videoStream.stop();
+
+                    //save the recorded data to a blob, and give it a url
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
-                    downloadLink.href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
-                    downloadLink.download = 'acetest.webm';
+                    var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
 
-                    let data = new FormData();
-                    data.append('user', appScope.$store.state.user.id);
-                    data.append('character', appScope.clickedCharacter);
+                    appScope.saveVideoMessage(blob, href);
+                })
+            },
+            saveVideoMessage: function(blob, href){
+                //append all needed information into a form
+                let data = new FormData();
+                data.append('user', this.$store.state.user.id);
+                data.append('character', this.clickedCharacter);
 
-                    axios
-                        .get(
-                            download.href,
-                            {
-                                responseType: 'blob'
-                            }).then(function (response) {
-                        var reader = new FileReader();
-                        reader.readAsBinaryString(response.data, { type: 'application/octet-stream' });
-                        reader.onloadend = function () {
-                            var base64data = reader.result;
-                            data.append('blob', base64data);
-                            axios
-                                .post(
-                                    "/saveFile",
-                                    data
-                                )
-                                .then(r => console.log(r))
-                                .catch(e => console.log(e));
-                        };
-                    })
+                //fetch the data saved into the blob
+                axios
+                    .get(
+                        href,
+                        { responseType: 'blob'}
+                    ).then(function (response) {
+                    //read in data from saved blob url
+                    var reader = new FileReader();
+                    reader.readAsDataURL(response.data, {type: 'application/octet-stream'});
+                    reader.onloadend = function () {
+                        var base64data = reader.result;
+                        //append blob data to the form
+                        data.append('blob', base64data);
+                        //submit form with all needed data
+                        axios
+                            .post(
+                                "/saveFile",
+                                data
+                            )
+                            .then(r => console.log(r))
+                            .catch(e => console.log(e));
+                    };
                 })
             }
         }
