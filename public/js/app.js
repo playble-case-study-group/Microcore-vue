@@ -49407,7 +49407,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "right-menu" } }, [
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { attrs: { href: "/library" } }, [
         _c("img", {
           attrs: { src: "/img/right-menu/library.png", alt: "library" }
         })
@@ -49419,11 +49419,11 @@ var staticRenderFns = [
         })
       ]),
       _vm._v(" "),
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { attrs: { href: "/videocall" } }, [
         _c("img", { attrs: { src: "/img/right-menu/chat.png", alt: "chat" } })
       ]),
       _vm._v(" "),
-      _c("a", { attrs: { href: "#" } }, [
+      _c("a", { attrs: { href: "/email" } }, [
         _c("img", { attrs: { src: "/img/right-menu/msg.png", alt: "msg" } })
       ])
     ])
