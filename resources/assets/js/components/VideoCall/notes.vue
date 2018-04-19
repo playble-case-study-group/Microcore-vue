@@ -37,7 +37,9 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
+
     textarea{
         width: 100%;
         height: 87%;
@@ -47,7 +49,7 @@
     }
     #header{
         color: white;
-        background-color: #4A4A4A;
+        background-color: $sim-heading;
         height: 50px;
     }
     h3{

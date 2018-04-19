@@ -5,6 +5,10 @@
             <source :src="currentVideo.video_url" type="video/mp4">
         </video>
 
+        <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
+            <source src="/video/record.mp4" type="video/mp4">
+        </video>
+
         <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
@@ -26,7 +30,7 @@
                             <span class="characterPosition">{{person.role}}</span>
                         </div>
                         <span class="characterActive" v-if="activeContacts.includes(person.id)">
-                            <i class="material-icons">fiber_manual_record</i>
+                            <i class="material-icons activeIcon">fiber_manual_record</i>
                         </span>
                     </div>
                 </div>
@@ -74,6 +78,9 @@
                 clickedCharacter: 0,
             }
         },
+        mounted() {
+            this.startSelfVideo();
+        },
         components: {
             VideoMessage,
             'character-questions': question,
@@ -94,6 +101,11 @@
                     console.log(this.videoEl.currentTime);
                     document.getElementById('call_video').play()
                     this.callIconToggleStatus = "call_end";
+                }
+            },
+            showRecordingInterface: function(){
+                if(this.showRecordingInterface == false){
+                    this.startSelfVideo();
                 }
             }
         },
@@ -160,12 +172,67 @@
             askQuestion: function (question) {
                 this.currentQuestion = question;
             },
+            startSelfVideo: function(){
+                //set that we want both audio and video
+                const constraints = {
+                    video: true,
+                    audio: true
+                };
+
+                //start recording
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(this.handleSuccess.bind(this))
+                    .catch(this.handleFailure);
+            },
+            handleFailure: function(error){
+                //if they don't have browser support, try a lower compatibility function or fail
+                console.error('Reeeejected!', error);
+            },
+            handleSuccess: function(stream) {
+                const video = document.getElementById('personal_video');
+
+                const recordedChunks = [];
+                let audioStream = stream.getTracks()[0];
+                let videoStream = stream.getTracks()[1];
+
+                //initialize and display recording stream
+                const mediaRecorder = new MediaRecorder(stream);
+                video.srcObject = stream;
+
+                //start recording when video is loaded
+                video.addEventListener('loadeddata', function () {
+                    mediaRecorder.start(3000);
+                })
+
+                //set local variable to set correct scope
+                let appScope = this;
+
+                //save data as it becomes available. Stop recording if stop button has been triggered
+                mediaRecorder.addEventListener('dataavailable', function (e) {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                    /*if (appScope.recording == false) {
+                        mediaRecorder.stop();
+                    }*/
+                });
+
+                //when recording stops, save the video object and stop displaying video stream
+                mediaRecorder.addEventListener('stop', function () {
+                    audioStream.stop();
+                    videoStream.stop();
+
+
+                })
+            },
         }
     }
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
+
     a {
         color: white;
     }
@@ -173,7 +240,7 @@
         display: flex;
         justify-content: space-between;
         padding: 0px 15px;
-        background-color: #4A4A4A;
+        background-color: $sim-heading;
         height: 50px;
         font-size: 30px
     }
@@ -202,6 +269,9 @@
         color: #3c763d;
         align-self:center;
     }
+    .activeIcon{
+        font-size: 14px;
+    }
     #characterQuestions{
         height: 20rem;
         overflow-y: scroll;
@@ -213,10 +283,9 @@
     .dropdown-menu{
         min-width: 220px;
     }
-    @media(min-width: 992px){
-        #controlBar{
-
-        }
+    #personal_video{
+        height: 125px;
+        width: 150px;
     }
 
 </style>
