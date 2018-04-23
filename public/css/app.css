@@ -8370,6 +8370,11 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.material-icons {
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8453,8 +8458,21 @@ fieldset[disabled] .btn-invert.focus {
   background-color: #ffffff;
 }
 
-.material-icons {
-  font-size: inherit;
-  line-height: inherit;
+.btn-selected {
+  background-color: #4A4A4A;
+  color: white;
+}
+
+.btn-invert.disabled:hover,
+.btn-invert.disabled:focus,
+.btn-invert.disabled.focus,
+.btn-invert[disabled]:hover,
+.btn-invert[disabled]:focus,
+.btn-invert[disabled].focus,
+fieldset[disabled] .btn-invert:hover,
+fieldset[disabled] .btn-invert:focus,
+fieldset[disabled] .btn-invert.focus {
+  background-color: #4A4A4A;
+  border-color: #4A4A4A;
 }
 

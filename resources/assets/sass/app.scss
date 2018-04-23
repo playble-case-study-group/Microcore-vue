@@ -22,12 +22,17 @@ h2 {
 
 h3 {
   font-size: 14pt;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-family-sans-serif;
 }
 
 body {
   font-size: 12pt;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-family-sans-serif;
+}
+
+.material-icons {
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .wrapper {
@@ -36,7 +41,7 @@ body {
 }
 
 .btn-selected {
-  background-color: #4A4A4A;
+  background-color: $sim-heading;
   color: white;
 }
 
@@ -51,10 +56,24 @@ body {
 //}
 
 .btn-invert {
-  @include button-variant( #ffffff, #4A4A4A, #4A4A4A);
+  @include button-variant( #ffffff, $sim-heading, $sim-heading);
 }
 
-.material-icons {
-  font-size: inherit;
-  line-height: inherit;
+
+.btn-selected {
+  background-color: $sim-heading;
+  color: white;
+}
+
+.btn-invert.disabled:hover,
+.btn-invert.disabled:focus,
+.btn-invert.disabled.focus,
+.btn-invert[disabled]:hover,
+.btn-invert[disabled]:focus,
+.btn-invert[disabled].focus,
+fieldset[disabled] .btn-invert:hover,
+fieldset[disabled] .btn-invert:focus,
+fieldset[disabled] .btn-invert.focus {
+  background-color: $sim-heading;
+  border-color: $sim-heading;
 }

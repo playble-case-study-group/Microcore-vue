@@ -235,6 +235,7 @@
 </script>
 
 <style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
 
     .container {
         margin-left: 40px;
@@ -246,7 +247,7 @@
     }
 
     .heading {
-        background-color: #4A4A4A;
+        background-color: $sim-heading;
         height: 40px;
         color: white;
 

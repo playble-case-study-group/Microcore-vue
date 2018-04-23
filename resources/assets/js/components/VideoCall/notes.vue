@@ -45,6 +45,7 @@
         height: 87%;
         border:none;
         padding: 20px;
+        resize:none;
 
     }
     #header{

@@ -90,7 +90,9 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
+
     .menubtn {
         cursor:pointer;
 
@@ -105,7 +107,7 @@
 
     #libraryMenu {
         height: 100vh;
-        border-right: solid 1px #4A4A4A;
+        border-right: solid 1px $sim-heading;
     }
 
     #content-container {
