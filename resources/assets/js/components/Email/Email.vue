@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container main">
         <div class="row">
             <div class="heading col-sm-12">
                 <h1>Messages</h1>
@@ -235,28 +235,7 @@
 </script>
 
 <style scoped lang="scss">
-
-    .container {
-        margin-left: 40px;
-        margin-top: 40px;
-        padding: 0;
-        /*padding: 20px;*/
-        background-color: white;
-
-    }
-
-    .heading {
-        background-color: #4A4A4A;
-        height: 40px;
-        color: white;
-
-        h1 {
-            margin: 0;
-            padding: 8px 10px;
-        }
-
-    }
-
+    @import "../../../sass/_variables.scss";
     ul {
         padding-left: 0;
         list-style: none;

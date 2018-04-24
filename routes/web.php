@@ -59,3 +59,4 @@ Route::post('/addToGroup', 'GroupController@addToGroup');
 
 Route::resource('/classes', 'ClassController');
 
+Route::get('/dashboard', 'DashController@loadDash');
