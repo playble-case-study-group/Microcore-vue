@@ -90,8 +90,8 @@
                         <p class="email-body">{{ readModalData.body }}</p>
                         <div id="replyForm">
                             <div class="row form-group">
-                                <label for="replySubject" class="col-sm-2">Subject:</label>
-                                <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
+                                <i class="material-icons reply">reply</i>
+                                <span>{{ readModalData.from }}</span>
                             </div>
                             <div class="row form-group">
                                 <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
@@ -275,6 +275,9 @@
     }
     .email-body{
         margin: 20px 0 40px;
+    }
+    .reply{
+        font-size: 25px;
     }
 
 

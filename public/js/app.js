@@ -50435,7 +50435,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 20rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 20rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n", ""]);
 
 // exports
 
@@ -50895,44 +50895,11 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { attrs: { id: "replyForm" } }, [
                   _c("div", { staticClass: "row form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2",
-                        attrs: { for: "replySubject" }
-                      },
-                      [_vm._v("Subject:")]
-                    ),
+                    _c("i", { staticClass: "material-icons reply" }, [
+                      _vm._v("reply")
+                    ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.draftEmail.subject,
-                          expression: "draftEmail.subject"
-                        }
-                      ],
-                      staticClass: "col-sm-10",
-                      attrs: {
-                        type: "text",
-                        id: "replySubject",
-                        name: "replySubject"
-                      },
-                      domProps: { value: _vm.draftEmail.subject },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.draftEmail,
-                            "subject",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
+                    _c("span", [_vm._v(_vm._s(_vm.readModalData.from))])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
