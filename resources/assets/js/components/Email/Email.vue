@@ -88,17 +88,18 @@
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
-                        <button class="btn btn-success" @click="replyEmail">Reply</button>
                         <div id="replyForm">
                             <div class="row form-group">
                                 <label for="replySubject" class="col-sm-2">Subject:</label>
                                 <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
                             </div>
                             <div class="row form-group">
-                                <label for="replyBody">Body</label>
-                                <textarea type="text" id="replyBody" v-model="draftEmail.body"></textarea>
+                                <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
                     </div>
                 </div>
             </div>
@@ -221,6 +222,7 @@
                 this.draftEmail.reply = this.readModalData.id;
 
                 $('#replyForm').show();
+                $('.replyEmail').html('Send');
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -250,7 +252,10 @@
         margin-right: -10px;
         padding: 10px 28px;
     }
-
+    textarea{
+        resize: none;
+        height: 20rem;
+    }
     .main{
         height: 115rem;
     }
@@ -271,4 +276,6 @@
     .email-body{
         margin: 20px 0 40px;
     }
+
+
 </style>
