@@ -50435,7 +50435,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.btn-success[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n", ""]);
 
 // exports
 
@@ -50646,11 +50646,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         toggleInbox: function toggleInbox() {
             $('#inbox').show();
+            $('.inboxToggle').css('background-color', 'white');
+            $('.sentToggle').css('background-color', '#c8c8c8');
             $('#sent').hide();
             console.log('inbox');
         },
         toggleSent: function toggleSent() {
             $('#inbox').hide();
+            $('.sentToggle').css('background-color', 'white');
+            $('.inboxToggle').css('background-color', '#c8c8c8');
             $('#sent').show();
             console.log('sent');
         },
@@ -50703,22 +50707,36 @@ var render = function() {
         "div",
         {
           staticClass: "col-sm-2",
-          staticStyle: { "background-color": "#ffffff", height: "100vh" }
+          staticStyle: { "background-color": "#c8c8c8", height: "111rem" }
         },
         [
-          _c("button", { on: { click: _vm.composeModal } }, [
-            _vm._v("Compose")
-          ]),
+          _c(
+            "button",
+            { staticClass: "btn btn-success", on: { click: _vm.composeModal } },
+            [_vm._v("Compose")]
+          ),
           _vm._v(" "),
           _c("ul", [
-            _c("li", { on: { click: _vm.toggleInbox } }, [_vm._v("Inbox")]),
+            _c(
+              "li",
+              {
+                staticClass: "inboxToggle",
+                staticStyle: { "background-color": "white" },
+                on: { click: _vm.toggleInbox }
+              },
+              [_vm._v("Inbox")]
+            ),
             _vm._v(" "),
-            _c("li", { on: { click: _vm.toggleSent } }, [_vm._v("Sent")])
+            _c(
+              "li",
+              { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
+              [_vm._v("Sent")]
+            )
           ])
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10" }, [
+      _c("div", { staticClass: "col-sm-10 emailList" }, [
         _c(
           "table",
           { attrs: { id: "inbox" } },
@@ -51085,9 +51103,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th"),
-      _vm._v(" "),
       _c("th", [_vm._v("From")]),
+      _vm._v(" "),
+      _c("th"),
       _vm._v(" "),
       _c("th", [_vm._v("Subject")]),
       _vm._v(" "),

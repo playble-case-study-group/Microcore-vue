@@ -6,18 +6,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2" style="background-color: #ffffff; height: 100vh">
-                <button @click="composeModal">Compose</button>
+            <div class="col-sm-2" style="background-color: #c8c8c8; height: 111rem">
+                <button class="btn btn-success" @click="composeModal">Compose</button>
                 <ul>
-                    <li @click="toggleInbox">Inbox</li>
-                    <li @click="toggleSent">Sent</li>
+                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox">Inbox</li>
+                    <li class="sentToggle" @click="toggleSent">Sent</li>
                 </ul>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-10 emailList">
                 <table id="inbox">
                     <tr>
-                        <th></th>
                         <th>From</th>
+                        <th></th>
                         <th>Subject</th>
                         <th>Body</th>
                         <th>Date</th>
@@ -194,11 +194,15 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
+                $('.inboxToggle').css('background-color', 'white');
+                $('.sentToggle').css('background-color', '#c8c8c8');
                 $('#sent').hide();
                 console.log('inbox');
             },
             toggleSent: function () {
                 $('#inbox').hide();
+                $('.sentToggle').css('background-color', 'white');
+                $('.inboxToggle').css('background-color', '#c8c8c8');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -239,9 +243,27 @@
     ul {
         padding-left: 0;
         list-style: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    li {
+        height: 40px;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 10px 28px;
     }
 
+    .main{
+        height: 115rem;
+    }
     td, th {
         padding: 10px;
+    }
+    .emailList{
+        margin-top: 20px;
+    }
+    .btn-success{
+        margin-top: 20px;
+        margin-left: 17px;
     }
 </style>
