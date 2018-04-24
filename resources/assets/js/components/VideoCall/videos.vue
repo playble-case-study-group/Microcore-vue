@@ -239,10 +239,10 @@
     #controlBar{
         display: flex;
         justify-content: space-between;
-        padding: 0px 15px;
+        padding: 0px 10px;
         background-color: $sim-heading;
-        height: 50px;
-        font-size: 30px
+        height: 40px;
+        font-size: 25px
     }
     #recording{
         color: red;

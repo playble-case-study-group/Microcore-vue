@@ -8476,3 +8476,21 @@ fieldset[disabled] .btn-invert.focus {
   border-color: #4A4A4A;
 }
 
+.heading {
+  background-color: #4A4A4A;
+  height: 40px;
+  color: white;
+}
+
+.heading h1 {
+  margin: 0;
+  padding: 8px 10px;
+}
+
+.main {
+  margin-left: 40px;
+  margin-top: 40px;
+  padding: 0;
+  background-color: white;
+}
+

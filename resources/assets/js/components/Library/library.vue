@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="library">
+    <div class="container main" id="library">
         <div class="row">
             <div class="col-sm-4 col-md-3" id="libraryMenu">
                 <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
@@ -95,12 +95,10 @@
 
     .menubtn {
         cursor:pointer;
-
     }
 
     #library {
-        background-color: white;
-        margin-left: 40px;
+        margin-top: 0px;
         padding: 20px;
         box-shadow: 2px 1px 2px;
     }

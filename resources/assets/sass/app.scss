@@ -49,11 +49,6 @@ body {
   font-family: $font-family-serif;
 }
 
-//.btn-invert {
-//  background-color: #4A4A4A;
-//  color: white;
-//  font-family: $font-family-serif;
-//}
 
 .btn-invert {
   @include button-variant( #ffffff, $sim-heading, $sim-heading);
@@ -76,4 +71,22 @@ fieldset[disabled] .btn-invert:focus,
 fieldset[disabled] .btn-invert.focus {
   background-color: $sim-heading;
   border-color: $sim-heading;
+}
+
+.heading{
+  background-color: $sim-heading;
+  height: $sim-margin;
+  color: white;
+
+  h1 {
+    margin: 0;
+    padding: 8px 10px;
+  }
+}
+
+.main{
+  margin-left: $sim-margin;
+  margin-top: $sim-margin;
+  padding: 0;
+  background-color: white;
 }

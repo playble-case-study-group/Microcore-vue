@@ -49532,7 +49532,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 //import mapState from 'vuex'
 
@@ -50436,7 +50435,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-52d1ee62] {\n  margin-left: 40px;\n  margin-top: 40px;\n  padding: 0;\n  /*padding: 20px;*/\n  background-color: white;\n}\n.heading[data-v-52d1ee62] {\n  background-color: #4A4A4A;\n  height: 40px;\n  color: white;\n}\n.heading h1[data-v-52d1ee62] {\n    margin: 0;\n    padding: 8px 10px;\n}\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -50696,7 +50695,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container main" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -51371,7 +51370,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-767f6044] {\n  width: 100%;\n  height: 87%;\n  border: none;\n  padding: 20px;\n  resize: none;\n}\n#header[data-v-767f6044] {\n  color: white;\n  background-color: #4A4A4A;\n  height: 50px;\n}\nh3[data-v-767f6044] {\n  padding: 15px;\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-767f6044] {\n  width: 100%;\n  height: 87%;\n  border: none;\n  padding: 20px;\n  resize: none;\n}\nh3[data-v-767f6044] {\n  padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -51455,7 +51454,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "header" } }, [_c("h3", [_vm._v("Notes")])])
+    return _c("div", { staticClass: "heading" }, [_c("h3", [_vm._v("Notes")])])
   }
 ]
 render._withStripped = true
@@ -51553,7 +51552,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 15px;\n  background-color: #4A4A4A;\n  height: 50px;\n  font-size: 30px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 40rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 40rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -52467,7 +52466,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  background-color: white;\n  margin-left: 40px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  border-right: solid 1px #4A4A4A;\n}\n#content-container[data-v-1c179b00] {\n  padding-left: 40px;\n  padding-right: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  border-right: solid 1px #4A4A4A;\n}\n#content-container[data-v-1c179b00] {\n  padding-left: 40px;\n  padding-right: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -71566,87 +71565,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container", attrs: { id: "library" } }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
-        [
-          _vm._l(_vm.languages, function(lang) {
-            return _c(
-              "div",
-              {
-                class: ["btn-group", "d-none", "d-sm-block", "d-md-none"],
-                attrs: { role: "group", "aria-label": "..." }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    class: [
-                      "btn",
-                      _vm.currentLang == lang ? "btn-invert" : "btn-default"
-                    ],
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.changeLang(lang)
+  return _c(
+    "div",
+    { staticClass: "container main", attrs: { id: "library" } },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
+          [
+            _vm._l(_vm.languages, function(lang) {
+              return _c(
+                "div",
+                {
+                  class: ["btn-group", "d-none", "d-sm-block", "d-md-none"],
+                  attrs: { role: "group", "aria-label": "..." }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      class: [
+                        "btn",
+                        _vm.currentLang == lang ? "btn-invert" : "btn-default"
+                      ],
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeLang(lang)
+                        }
                       }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(lang.charAt(0).toUpperCase() + lang.slice(1))
+                      )
+                    ]
+                  )
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("menu")]),
+            _vm._v(" "),
+            _vm._l(_vm.wiki, function(article) {
+              return _c(
+                "div",
+                {
+                  staticClass: "menubtn",
+                  attrs: { id: "title-" + article.id },
+                  on: {
+                    click: function($event) {
+                      _vm.showContent(article.id)
                     }
-                  },
-                  [_vm._v(_vm._s(lang.charAt(0).toUpperCase() + lang.slice(1)))]
-                )
-              ]
-            )
-          }),
-          _vm._v(" "),
-          _c("h1", [_vm._v("menu")]),
-          _vm._v(" "),
-          _vm._l(_vm.wiki, function(article) {
-            return _c(
-              "div",
-              {
-                staticClass: "menubtn",
-                attrs: { id: "title-" + article.id },
-                on: {
-                  click: function($event) {
-                    _vm.showContent(article.id)
                   }
-                }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(article[_vm.currentLang].title) +
+                      "\n\n            "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-sm-8 col-md-9",
+            attrs: { id: "content-container" }
+          },
+          [
+            _c("vue-markdown", {
+              attrs: {
+                source: _vm.currentContent,
+                toc: true,
+                "toc-id": _vm.currentArticle
               },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(article[_vm.currentLang].title) +
-                    "\n\n            "
-                )
-              ]
-            )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-sm-8 col-md-9",
-          attrs: { id: "content-container" }
-        },
-        [
-          _c("vue-markdown", {
-            attrs: {
-              source: _vm.currentContent,
-              toc: true,
-              "toc-id": _vm.currentArticle
-            },
-            on: { "toc-rendered": _vm.receiveToc }
-          })
-        ],
-        1
-      )
-    ])
-  ])
+              on: { "toc-rendered": _vm.receiveToc }
+            })
+          ],
+          1
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
