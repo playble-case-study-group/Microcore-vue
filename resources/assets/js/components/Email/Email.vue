@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-sm-2" style="background-color: #c8c8c8; height: 111rem">
-                <button class="btn btn-success" @click="composeModal">Compose</button>
+                <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
                     <li class="inboxToggle" style="background-color: white;" @click="toggleInbox">Inbox</li>
                     <li class="sentToggle" @click="toggleSent">Sent</li>
@@ -82,16 +82,13 @@
         <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header heading">
                         <h5 class="modal-title">{{ readModalData.subject }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
-                        <h4><b>{{ readModalData.from }}</b></h4>
-                        <p>{{ readModalData.body }}</p>
-                        <button @click="replyEmail">Reply</button>
+                        <h5><b>{{ readModalData.from }}</b></h5>
+                        <p class="email-body">{{ readModalData.body }}</p>
+                        <button class="btn btn-success" @click="replyEmail">Reply</button>
                         <div id="replyForm">
                             <div class="row form-group">
                                 <label for="replySubject" class="col-sm-2">Subject:</label>
@@ -111,8 +108,10 @@
         <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    <div class="modal-header heading">
+                        <h5 class="modal-title">New Email</h5>
+                    </div>
                     <div class="modal-body">
-                        <h4><b>Compose modal</b></h4>
                         <div class="row form-group">
                             <label for="toList" class="col-sm-2">To:</label>
                             <div class="col-sm-10">
@@ -126,12 +125,11 @@
                             <input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">
                         </div>
                         <div class="row form-group">
-                            <label for="toBody">Body</label>
-                            <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                            <textarea class="col-sm-12" type="text" id="toBody" v-model="draftEmail.body"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendEmail">Send</button>
                     </div>
                 </div>
             </div>
@@ -262,8 +260,15 @@
     .emailList{
         margin-top: 20px;
     }
-    .btn-success{
+    .compose{
         margin-top: 20px;
         margin-left: 17px;
+    }
+    #toBody{
+        height: 20rem;
+        resize: none;
+    }
+    .email-body{
+        margin: 20px 0 40px;
     }
 </style>

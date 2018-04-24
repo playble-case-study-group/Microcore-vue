@@ -50435,7 +50435,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.btn-success[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 20rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n", ""]);
 
 // exports
 
@@ -50449,8 +50449,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
-//
-//
 //
 //
 //
@@ -50712,7 +50710,10 @@ var render = function() {
         [
           _c(
             "button",
-            { staticClass: "btn btn-success", on: { click: _vm.composeModal } },
+            {
+              staticClass: "btn btn-success compose",
+              on: { click: _vm.composeModal }
+            },
             [_vm._v("Compose")]
           ),
           _vm._v(" "),
@@ -50877,22 +50878,27 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
+              _c("div", { staticClass: "modal-header heading" }, [
                 _c("h5", { staticClass: "modal-title" }, [
                   _vm._v(_vm._s(_vm.readModalData.subject))
-                ]),
-                _vm._v(" "),
-                _vm._m(3)
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("h4", [_c("b", [_vm._v(_vm._s(_vm.readModalData.from))])]),
+                _c("h5", [_c("b", [_vm._v(_vm._s(_vm.readModalData.from))])]),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.readModalData.body))]),
-                _vm._v(" "),
-                _c("button", { on: { click: _vm.replyEmail } }, [
-                  _vm._v("Reply")
+                _c("p", { staticClass: "email-body" }, [
+                  _vm._v(_vm._s(_vm.readModalData.body))
                 ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: { click: _vm.replyEmail }
+                  },
+                  [_vm._v("Reply")]
+                ),
                 _vm._v(" "),
                 _c("div", { attrs: { id: "replyForm" } }, [
                   _c("div", { staticClass: "row form-group" }, [
@@ -50988,9 +50994,9 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm._m(4),
-                _vm._v(" "),
                 _c("div", { staticClass: "row form-group" }, [
                   _c(
                     "label",
@@ -51052,8 +51058,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row form-group" }, [
-                  _c("label", { attrs: { for: "toBody" } }, [_vm._v("Body")]),
-                  _vm._v(" "),
                   _c("textarea", {
                     directives: [
                       {
@@ -51063,6 +51067,7 @@ var render = function() {
                         expression: "draftEmail.body"
                       }
                     ],
+                    staticClass: "col-sm-12",
                     attrs: { type: "text", id: "toBody" },
                     domProps: { value: _vm.draftEmail.body },
                     on: {
@@ -51078,7 +51083,14 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _c("button", { on: { click: _vm.sendEmail } }, [_vm._v("Send")])
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: { click: _vm.sendEmail }
+                  },
+                  [_vm._v("Send")]
+                )
               ])
             ])
           ]
@@ -51136,24 +51148,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", [_c("b", [_vm._v("Compose modal")])])
+    return _c("div", { staticClass: "modal-header heading" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("New Email")])
+    ])
   }
 ]
 render._withStripped = true
