@@ -38,6 +38,7 @@ class VideoCallMaster extends Migration
             $table->string('question');
             $table->integer('start_time');
             $table->integer('end_time');
+            $table->boolean('record_after')->default(0);
             $table->timestamps();
         });
 
