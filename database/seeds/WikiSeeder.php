@@ -49,7 +49,11 @@ more text
             [
                 'lang_id' => 2,
                 'title' => 'Guerra Civil',
-                'content' => "# Guerra Civil Contenido uno ## Madrid es una ciudad ### Edificio",
+                'content' => "# Guerra Civil 
+Contenido uno 
+## Madrid 
+es una ciudad 
+### Edificio",
             ]
         );
 

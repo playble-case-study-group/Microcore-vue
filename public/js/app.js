@@ -49472,7 +49472,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-3f7e9a0e] {\n  -moz-column-width: 18em;\n  -webkit-column-width: 18em;\n  -moz-column-gap: 1em;\n  -webkit-column-gap: 1em;\n}\n.item[data-v-3f7e9a0e] {\n  display: inline-block;\n  padding: .25rem;\n  width: 100%;\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-3f7e9a0e] {\n  -moz-column-width: 18em;\n  -webkit-column-width: 18em;\n  -moz-column-gap: 1em;\n  -webkit-column-gap: 1em;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  padding: .25rem;\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  max-width: 1200px;\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -49487,7 +49487,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Artifact_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-//
 //
 //
 //
@@ -49558,6 +49557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     mounted: function mounted() {
         console.log('Created()');
+        this.filterArtifacts(false);
         //            axios.get('/getartifacts').then(response => {
         //            this.artifacts = response.data;
         //            this.filterArtifacts(false);
@@ -49809,9 +49809,8 @@ var render = function() {
     "div",
     { staticClass: "container", attrs: { id: "gallery" } },
     [
-      _c("h1", [_vm._v("Welcome to the Gallery")]),
-      _vm._v(" "),
-      _c("hr"),
+      _c("br"),
+      _c("br"),
       _vm._v(" "),
       _c("ul", { staticClass: "nav nav-pills" }, [
         _c("li", { staticClass: "active" }, [
@@ -49879,13 +49878,13 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "row" },
+        { staticClass: "grid" },
         _vm._l(_vm.groupArt, function(artifact) {
-          return _c("div", { staticClass: "item" }, [
+          return _c("div", { staticClass: "item grid-item" }, [
             _c(
               "div",
               {
-                staticClass: "thumbnail",
+                staticClass: "thumbnail artifact",
                 on: {
                   click: function($event) {
                     _vm.openModal(artifact)

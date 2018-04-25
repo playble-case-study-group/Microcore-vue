@@ -3,8 +3,7 @@
 
 
         <!-- The Gallery View -->
-        <h1>Welcome to the Gallery</h1>
-        <hr>
+        <br><br>
         <ul class="nav nav-pills">
             <li class="active"><a data-toggle="pill" href="#all" @click="filterArtifacts(false)">All</a></li>
             <li><a data-toggle="pill" href="#group1" @click="filterArtifacts('group')">Group 1</a></li>
@@ -12,9 +11,9 @@
             <li><a data-toggle="pill" href="#group3" @click="filterArtifacts('group3')">Group 3</a></li>
         </ul>
         <hr>
-        <div class="row">
-            <div class="item" v-for="artifact in groupArt">
-                <div class="thumbnail" @click="openModal(artifact)">
+        <div class="grid">
+            <div class="item grid-item" v-for="artifact in groupArt">
+                <div class="thumbnail artifact" @click="openModal(artifact)">
                     <img :src="artifact.image" :alt="artifact.title">
                     <h4>{{ artifact.title }}</h4>
                     <p>{{ artifact.description}}</p>
@@ -69,6 +68,7 @@
 
         mounted() {
             console.log('Created()');
+            this.filterArtifacts(false);
 //            axios.get('/getartifacts').then(response => {
 //            this.artifacts = response.data;
 //            this.filterArtifacts(false);
@@ -133,17 +133,34 @@
         -moz-column-gap: 1em;
         -webkit-column-gap:1em;
 
+
+    }
+
+    .artifact{
+        background-color: white;
     }
 
     .item {
-        display: inline-block;
+        display: inline-flex;
         padding:  .25rem;
-        width:  100%;
     }
 
     .well {
         position:relative;
         display: block;
+    }
+    .grid{
+        max-width: 1200px;
+    }
+    .grid:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .grid-item{
+        float: left;
+        width: 240px;
+        height: auto;
     }
 
 </style>
