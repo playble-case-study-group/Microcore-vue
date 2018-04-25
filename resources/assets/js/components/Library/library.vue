@@ -15,7 +15,8 @@
             <div class="col-sm-8 col-md-9" id="content-container">
                 <vue-markdown :source="currentContent"
                               :toc="true"
-                              :toc-id="currentArticle"
+                              :toc-id="currentTitle"
+                              :toc-anchor-link="false"
                               v-on:toc-rendered="receiveToc">
                 </vue-markdown>
             </div>
@@ -87,7 +88,9 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-
+    a {
+        color: red;
+    }
     .menubtn {
         cursor:pointer;
     }
@@ -100,7 +103,7 @@
 
     #libraryMenu {
         height: 100vh;
-        border-right: solid 1px $sim-heading;
+        //border-right: solid 1px $sim-heading;
     }
 
     #content-container {
@@ -111,6 +114,7 @@
     #content-container h1 {
         margin-top: 0px;
     }
+
 
 </style>
 

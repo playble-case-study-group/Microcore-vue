@@ -52450,7 +52450,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  border-right: solid 1px #4A4A4A;\n}\n#content-container[data-v-1c179b00] {\n  padding-left: 40px;\n  padding-right: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-1c179b00] {\n  color: red;\n}\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n}\n#content-container[data-v-1c179b00] {\n  padding-left: 40px;\n  padding-right: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -52464,6 +52464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_markdown__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_markdown___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_markdown__);
+//
 //
 //
 //
@@ -71621,7 +71622,8 @@ var render = function() {
               attrs: {
                 source: _vm.currentContent,
                 toc: true,
-                "toc-id": _vm.currentArticle
+                "toc-id": _vm.currentTitle,
+                "toc-anchor-link": false
               },
               on: { "toc-rendered": _vm.receiveToc }
             })
