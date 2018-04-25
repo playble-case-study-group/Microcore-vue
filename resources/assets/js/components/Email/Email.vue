@@ -89,9 +89,9 @@
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
                         <div id="replyForm">
-                            <div class="row form-group">
+                            <div class="row form-group reply-contact">
                                 <i class="material-icons reply">reply</i>
-                                <span>{{ readModalData.from }}</span>
+                                <span class="reply-contact-name">{{ readModalData.from }}</span>
                             </div>
                             <div class="row form-group">
                                 <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
@@ -279,6 +279,15 @@
     .reply{
         font-size: 25px;
     }
-
-
+    .reply-contact{
+        border: solid 1px;
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+    .reply-contact-name{
+        padding-top: 9px;
+        padding-left: 7px;
+        position: absolute;
+        height: 20px;
+    }
 </style>
