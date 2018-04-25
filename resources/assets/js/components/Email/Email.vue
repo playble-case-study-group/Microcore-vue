@@ -256,11 +256,11 @@
         resize: none;
         height: 20rem;
     }
-    .main{
-        height: 115rem;
-    }
     td, th {
         padding: 10px;
+    }
+    .main{
+        height: 115rem;
     }
     .emailList{
         margin-top: 20px;
