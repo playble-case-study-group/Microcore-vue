@@ -60,8 +60,6 @@
 
                 this.currentTitle = content[this.currentLang].title;
                 this.currentContent = content[this.currentLang].content;
-                // this.currentTitle = content[this.currentLang].title;
-                // this.currentContent = JSON.parse(content[this.currentLang].content).content;
                 this.currentArticle = id;
 
             },
@@ -82,10 +80,7 @@
 
         },
         computed: {
-            // parsedContent: function (){
-            //     return JSON.parse(this.currentContent);
-            //
-            // }
+
         }
     }
 </script>
