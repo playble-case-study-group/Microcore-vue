@@ -88,8 +88,8 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    a {
-        color: red;
+    ul {
+        list-style-type: none;
     }
     .menubtn {
         cursor:pointer;
@@ -107,12 +107,14 @@
     }
 
     #content-container {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-right: 80px;
     }
 
     #content-container h1 {
         margin-top: 0px;
+    }
+    .container{
+        margin-right: 40px;
     }
 
 
