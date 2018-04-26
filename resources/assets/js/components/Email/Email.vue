@@ -6,11 +6,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2" style="background-color: #c8c8c8; height: 111rem">
+            <div class="col-sm-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
-                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox">Inbox</li>
-                    <li class="sentToggle" @click="toggleSent">Sent</li>
+                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
+                    <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
                 </ul>
             </div>
             <div class="col-sm-10 emailList">
@@ -193,15 +193,15 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
-                $('.inboxToggle').css('background-color', 'white');
-                $('.sentToggle').css('background-color', '#c8c8c8');
+                $('.keyline-inbox').css('border-color', '#c8c8c8');
+                $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
                 console.log('inbox');
             },
             toggleSent: function () {
                 $('#inbox').hide();
-                $('.sentToggle').css('background-color', 'white');
-                $('.inboxToggle').css('background-color', '#c8c8c8');
+                $('.keyline-inbox').css('border-color', 'white');
+                $('.keyline-sent').css('border-color', '#c8c8c8');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -250,7 +250,7 @@
         height: 40px;
         margin-left: -10px;
         margin-right: -10px;
-        padding: 10px 28px;
+        padding: 10px 12px;
     }
     textarea{
         resize: none;
@@ -258,6 +258,11 @@
     }
     td, th {
         padding: 10px;
+    }
+    hr {
+        width: 1px;
+        height: 25px;
+        color: #c8c8c8;
     }
     .main{
         height: 115rem;
@@ -270,7 +275,7 @@
         margin-left: 17px;
     }
     #toBody{
-        height: 20rem;
+        height: 30rem;
         resize: none;
     }
     .email-body{
@@ -289,5 +294,25 @@
         padding-left: 7px;
         position: absolute;
         height: 20px;
+    }
+    #composeModal > .modal-dialog > .modal-content{
+        height: 51rem;
+        width: 85rem;
+    }
+    #readModal > .modal-dialog > .modal-content{
+        width: 85rem;
+    }
+    .modal-body{
+        height: 80%
+    }
+    .keyline{
+        border-left: solid 4px #c8c8c8;
+        padding-left: 10px;
+    }
+    .keyline-sent{
+        border-color: white;
+    }
+    .keyline-inbox{
+        border-color: #c8c8c8;
     }
 </style>

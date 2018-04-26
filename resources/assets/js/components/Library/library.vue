@@ -35,15 +35,15 @@
 
         mounted() {
             console.log('Component mounted.')
+            for(let article in this.wiki){
+
+            }
         },
         components: {
             "vue-markdown": VueMarkdown
 
         },
-        props: [
-            'wiki'
-
-        ],
+        props: ['wiki'],
         data: function () {
             return {
 
@@ -88,7 +88,7 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    ul {
+    ul.table-of-contents {
         list-style-type: none;
     }
     .menubtn {

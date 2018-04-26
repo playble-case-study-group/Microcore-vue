@@ -50118,7 +50118,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n  width: 325px;\n  margin-top: 10rem;\n}\n.dash-med[data-v-06f5821c] {\n  height: 500px;\n  width: 325px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n  width: 660px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 3rem;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  width: 600px;\n  display: block;\n  margin: auto;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 4rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  color: #27ae60;\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 4rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  width: 275px;\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n}\n", ""]);
+exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n  width: 325px;\n  margin-top: 10rem;\n}\n.dash-med[data-v-06f5821c] {\n  height: 500px;\n  width: 325px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n  width: 660px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 3rem;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  width: 600px;\n  display: block;\n  margin: auto;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 4rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 4rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  width: 275px;\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n}\n", ""]);
 
 // exports
 
@@ -50179,17 +50179,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['notes'],
+    props: ['dash', 'notes'],
     mounted: function mounted() {
         console.log('Component mounted.');
+        this.changeStockCSS();
     },
 
     data: function data() {
         return {
-            note: this.notes.note
+            note: this.notes.note,
+            stockIconStatus: 'arrow_upward'
         };
     },
     methods: {
+        changeStockCSS: function changeStockCSS() {
+            if (this.dash.stock_status == 'down') {
+                $('.dash-stocks').css('color', '#ce0d0d');
+                this.stockIconStatus = 'arrow_downward';
+            } else {
+                $('.dash-stocks').css('color', '#27ae60');
+                this.stockIconStatus = 'arrow_upward';
+            }
+        },
         postUpdatedNote: function postUpdatedNote() {
             axios.post("/videocall", {
                 note: this.note,
@@ -50214,13 +50225,77 @@ var render = function() {
   return _c("div", { staticClass: "container", attrs: { id: "dash" } }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "d-flex" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "dash-card dash-small" }, [
+          _c("h3", { staticClass: "dash-heading" }, [_vm._v("Stock")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dash-stocks" }, [
+            _c("p", { staticClass: "dash-count" }, [
+              _vm._v("$" + _vm._s(this.dash.stock_value))
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("p", { staticClass: "dash-count" }, [
+              _c("i", { staticClass: "material-icons dash-stockStatus" }, [
+                _vm._v(_vm._s(this.stockIconStatus))
+              ]),
+              _vm._v(_vm._s(this.dash.stock_percentage) + "%")
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "dash-card dash-small" }, [
+          _c("h3", { staticClass: "dash-heading" }, [_vm._v("News")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dash-content" }, [
+            _c("h4", [_vm._v(_vm._s(this.dash.news_headline))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(this.dash.news_snippet))])
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "dash-card dash-small" }, [
+          _c("h3", { staticClass: "dash-heading" }, [_vm._v("Updates")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dash-content" }, [
+            _c("i", { staticClass: "material-icons dash-notify" }, [
+              _vm._v("priority_high")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "dash-update" }, [
+              _vm._v(_vm._s(this.dash.message_count) + " Unread Messages")
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _c("i", { staticClass: "material-icons dash-notify" }, [
+              _vm._v("priority_high")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "dash-update" }, [
+              _vm._v(" " + _vm._s(this.dash.email_count) + " Unread Emails")
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(3),
+        _c("div", { staticClass: "dash-card dash-big" }, [
+          _c("h3", { staticClass: "dash-heading" }, [_vm._v("Daily News")]),
+          _vm._v(" "),
+          _c(
+            "video",
+            {
+              staticClass: "dash-video",
+              attrs: {
+                poster: "/img/videocall/video-placeholder.jpg",
+                controls: ""
+              }
+            },
+            [
+              _c("source", {
+                attrs: { src: this.dash.day_video, type: "video/mp4" }
+              })
+            ]
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "dash-card dash-med" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Notes")]),
@@ -50251,94 +50326,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dash-card dash-small" }, [
-      _c("h3", { staticClass: "dash-heading" }, [_vm._v("News")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "dash-content" }, [
-        _c("h4", [_vm._v("Microcore has Micro-meltdown")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Lorem Ipsum, you need to be sure there isn't anything ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dash-card dash-small" }, [
-      _c("h3", { staticClass: "dash-heading" }, [_vm._v("Stock")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "dash-stocks" }, [
-        _c("p", { staticClass: "dash-count" }, [_vm._v("$2.50")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("p", { staticClass: "dash-count" }, [
-          _c("i", { staticClass: "material-icons dash-stockStatus" }, [
-            _vm._v("arrow_upward")
-          ]),
-          _vm._v("5%")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dash-card dash-small" }, [
-      _c("h3", { staticClass: "dash-heading" }, [_vm._v("Updates")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "dash-content" }, [
-        _c("i", { staticClass: "material-icons dash-notify" }, [
-          _vm._v("priority_high")
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "dash-update" }, [
-          _vm._v("2 Unread Messages")
-        ]),
-        _c("br"),
-        _vm._v(" "),
-        _c("i", { staticClass: "material-icons dash-notify" }, [
-          _vm._v("priority_high")
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "dash-update" }, [_vm._v("3 Unread Emails")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dash-card dash-big" }, [
-      _c("h3", { staticClass: "dash-heading" }, [_vm._v("Daily News")]),
-      _vm._v(" "),
-      _c(
-        "video",
-        {
-          staticClass: "dash-video",
-          attrs: {
-            poster: "/img/videocall/video-placeholder.jpg",
-            controls: ""
-          }
-        },
-        [
-          _c("source", {
-            attrs: { src: "/video/Bob05Ref.mp4", type: "video/mp4" }
-          })
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -50434,7 +50422,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 28px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 20rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #c8c8c8;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #c8c8c8;\n}\n", ""]);
 
 // exports
 
@@ -50644,15 +50632,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         toggleInbox: function toggleInbox() {
             $('#inbox').show();
-            $('.inboxToggle').css('background-color', 'white');
-            $('.sentToggle').css('background-color', '#c8c8c8');
+            $('.keyline-inbox').css('border-color', '#c8c8c8');
+            $('.keyline-sent').css('border-color', 'white');
             $('#sent').hide();
             console.log('inbox');
         },
         toggleSent: function toggleSent() {
             $('#inbox').hide();
-            $('.sentToggle').css('background-color', 'white');
-            $('.inboxToggle').css('background-color', '#c8c8c8');
+            $('.keyline-inbox').css('border-color', 'white');
+            $('.keyline-sent').css('border-color', '#c8c8c8');
             $('#sent').show();
             console.log('sent');
         },
@@ -50706,7 +50694,11 @@ var render = function() {
         "div",
         {
           staticClass: "col-sm-2",
-          staticStyle: { "background-color": "#c8c8c8", height: "111rem" }
+          staticStyle: {
+            "background-color": "white",
+            height: "111rem",
+            "border-right": "solid 1px #c8c8c8"
+          }
         },
         [
           _c(
@@ -50726,13 +50718,21 @@ var render = function() {
                 staticStyle: { "background-color": "white" },
                 on: { click: _vm.toggleInbox }
               },
-              [_vm._v("Inbox")]
+              [
+                _c("div", { staticClass: "keyline keyline-inbox" }, [
+                  _vm._v("Inbox")
+                ])
+              ]
             ),
             _vm._v(" "),
             _c(
               "li",
               { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
-              [_vm._v("Sent")]
+              [
+                _c("div", { staticClass: "keyline keyline-sent" }, [
+                  _vm._v("Sent")
+                ])
+              ]
             )
           ])
         ]
@@ -52450,7 +52450,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-1c179b00] {\n  list-style-type: none;\n}\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n.container[data-v-1c179b00] {\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\nul.table-of-contents[data-v-1c179b00] {\n  list-style-type: none;\n}\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n.container[data-v-1c179b00] {\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -52499,6 +52499,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
+        for (var article in this.wiki) {}
     },
 
     components: {
