@@ -50264,7 +50264,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #c8c8c8;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #c8c8c8;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #4A4A4A;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #4A4A4A;\n}\n", ""]);
 
 // exports
 
@@ -50474,7 +50474,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         toggleInbox: function toggleInbox() {
             $('#inbox').show();
-            $('.keyline-inbox').css('border-color', '#c8c8c8');
+            $('.keyline-inbox').css('border-color', '#4A4A4A');
             $('.keyline-sent').css('border-color', 'white');
             $('#sent').hide();
             console.log('inbox');
@@ -50482,7 +50482,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         toggleSent: function toggleSent() {
             $('#inbox').hide();
             $('.keyline-inbox').css('border-color', 'white');
-            $('.keyline-sent').css('border-color', '#c8c8c8');
+            $('.keyline-sent').css('border-color', '#4A4A4A');
             $('#sent').show();
             console.log('sent');
         },
@@ -52294,7 +52294,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul.table-of-contents[data-v-1c179b00] {\n  list-style-type: none;\n}\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  padding: 20px;\n  -webkit-box-shadow: 2px 1px 2px;\n          box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n.container[data-v-1c179b00] {\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 20px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -7px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -7px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 20px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n.container[data-v-1c179b00] {\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -52336,6 +52336,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -52343,7 +52345,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
-        for (var article in this.wiki) {}
+        this.getAllToc();
     },
 
     components: {
@@ -52358,8 +52360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentContent: "",
             currentLang: "spanish",
             currentArticle: 1,
-            languages: ['english', 'spanish'],
-            test: "# h1 \nthis is some text\n## h2\nmore text\n### h3"
+            languages: ['spanish']
         };
     },
     methods: {
@@ -52376,18 +52377,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentLang = lang;
             this.showContent(this.currentArticle);
         },
-        // receive: function (HtmlStr) {
-        //
-        //     console.log("content is parsed :", HtmlStr);
-        //
-        // },
+        getAllToc: function getAllToc() {
+            var _this = this;
+
+            var _loop = function _loop(article) {
+                var single = _this.wiki[article];
+                var appScope = _this;
+
+                setTimeout(function () {
+                    appScope.currentTitle = single.spanish.title;
+                    appScope.currentContent = single.spanish.content;
+                    appScope.currentArticle = single.id;
+                }, 100);
+            };
+
+            for (var article in this.wiki) {
+                _loop(article);
+            }
+        },
         receiveToc: function receiveToc(tocHtmlStr) {
-            $(".table-of-contents").remove();
-            $("#title-" + this.currentArticle).append(tocHtmlStr);
+            var title = "#title-" + this.currentArticle;
+
+            if ($(title).children().length <= 0) {
+                $(title).append(tocHtmlStr);
+                $('ul').css('list-style-type', 'none');
+                $('li > a').css('color', '#636b6f');
+                $('ul > li').css('margin-left', '-10px');
+            }
         }
 
-    },
-    computed: {}
+    }
 });
 
 /***/ }),
@@ -71397,46 +71416,15 @@ var render = function() {
           "div",
           { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
           [
-            _vm._l(_vm.languages, function(lang) {
-              return _c(
-                "div",
-                {
-                  class: ["btn-group", "d-none", "d-sm-block", "d-md-none"],
-                  attrs: { role: "group", "aria-label": "..." }
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      class: [
-                        "btn",
-                        _vm.currentLang == lang ? "btn-invert" : "btn-default"
-                      ],
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.changeLang(lang)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(lang.charAt(0).toUpperCase() + lang.slice(1))
-                      )
-                    ]
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
             _c("h1", [_vm._v("menu")]),
+            _vm._v(" "),
+            _c("br"),
             _vm._v(" "),
             _vm._l(_vm.wiki, function(article) {
               return _c(
                 "div",
                 {
                   staticClass: "menubtn",
-                  attrs: { id: "title-" + article.id },
                   on: {
                     click: function($event) {
                       _vm.showContent(article.id)
@@ -71444,11 +71432,11 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(article[_vm.currentLang].title) +
-                      "\n\n            "
-                  )
+                  _c("h4", { staticClass: "article-title" }, [
+                    _vm._v(_vm._s(article[_vm.currentLang].title))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { attrs: { id: "title-" + article.id } })
                 ]
               )
             })

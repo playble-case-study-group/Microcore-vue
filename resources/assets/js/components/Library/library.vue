@@ -2,14 +2,16 @@
     <div class="container main" id="library">
         <div class="row">
             <div class="col-sm-4 col-md-3" id="libraryMenu">
-                <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
+                <!-- <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
                     <button type="button" :class="['btn', currentLang == lang ? 'btn-invert' : 'btn-default']" @click="changeLang(lang)">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</button>
-                </div>
+                </div>-->
                 <h1>menu</h1>
+                <br>
+                <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" >
+                    <h4 class="article-title">{{article[currentLang].title}}</h4>
+                    <p :id="'title-' + article.id">
 
-                <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" :id="'title-' + article.id">
-                    {{article[currentLang].title}}
-
+                    </p>
                 </div>
             </div>
             <div class="col-sm-8 col-md-9" id="content-container">
@@ -35,9 +37,7 @@
 
         mounted() {
             console.log('Component mounted.')
-            for(let article in this.wiki){
-
-            }
+            this.getAllToc();
         },
         components: {
             "vue-markdown": VueMarkdown
@@ -51,8 +51,7 @@
                 currentContent:"",
                 currentLang:"spanish",
                 currentArticle: 1,
-                languages: ['english', 'spanish'],
-                test:"# h1 \nthis is some text\n## h2\nmore text\n### h3"
+                languages: ['spanish']
             }
         },
         methods: {
@@ -69,18 +68,28 @@
                 this.showContent(this.currentArticle);
 
             },
-            // receive: function (HtmlStr) {
-            //
-            //     console.log("content is parsed :", HtmlStr);
-            //
-            // },
-            receiveToc: function (tocHtmlStr) {
-                $(".table-of-contents").remove();
-                $("#title-"+this.currentArticle).append(tocHtmlStr);
-            }
+            getAllToc: function() {
+                for(let article in this.wiki){
+                    let single = this.wiki[article];
+                    let appScope = this;
 
-        },
-        computed: {
+                    setTimeout(function(){
+                        appScope.currentTitle = single.spanish.title;
+                        appScope.currentContent = single.spanish.content;
+                        appScope.currentArticle = single.id;
+                      }, 100);
+                }
+            },
+            receiveToc: function (tocHtmlStr) {
+                let title = "#title-" + this.currentArticle;
+
+                if( $(title).children().length <= 0 ) {
+                    $(title).append(tocHtmlStr);
+                    $('ul').css('list-style-type', 'none');
+                    $('li > a').css('color', '#636b6f');
+                    $('ul > li').css('margin-left', '-10px');
+                }
+            }
 
         }
     }
@@ -88,26 +97,34 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    ul.table-of-contents {
-        list-style-type: none;
-    }
     .menubtn {
         cursor:pointer;
+        margin-bottom: 3rem;
     }
-
+    .article-title{
+        //border-bottom: solid 1px #c8c8c8;
+    }
+    .article-title:hover{
+        text-decoration: underline;
+    }
     #library {
         margin-top: 0px;
-        padding: 20px;
-        box-shadow: 2px 1px 2px;
+        box-shadow: 0px -6px 10px;
     }
 
     #libraryMenu {
         height: 100vh;
+        padding-top: 20px;
+        padding-left: 40px;
         //border-right: solid 1px $sim-heading;
+        box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
     }
 
     #content-container {
         padding-right: 80px;
+        padding-left: 40px;
+        padding-top: 20px;
+
     }
 
     #content-container h1 {
@@ -116,7 +133,6 @@
     .container{
         margin-right: 40px;
     }
-
 
 </style>
 

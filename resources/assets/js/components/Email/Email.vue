@@ -193,7 +193,7 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
-                $('.keyline-inbox').css('border-color', '#c8c8c8');
+                $('.keyline-inbox').css('border-color', '#4A4A4A');
                 $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
                 console.log('inbox');
@@ -201,7 +201,7 @@
             toggleSent: function () {
                 $('#inbox').hide();
                 $('.keyline-inbox').css('border-color', 'white');
-                $('.keyline-sent').css('border-color', '#c8c8c8');
+                $('.keyline-sent').css('border-color', '#4A4A4A');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -306,13 +306,13 @@
         height: 80%
     }
     .keyline{
-        border-left: solid 4px #c8c8c8;
+        border-left: solid 4px $sim-heading;
         padding-left: 10px;
     }
     .keyline-sent{
         border-color: white;
     }
     .keyline-inbox{
-        border-color: #c8c8c8;
+        border-color: $sim-heading;
     }
 </style>
