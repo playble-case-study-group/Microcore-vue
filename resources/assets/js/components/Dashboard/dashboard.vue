@@ -2,7 +2,7 @@
     <div id="dash" class="container">
         <div class="row">
             <div class="d-flex">
-                <div class="dash-card dash-small">
+                <div class="dash-card dash-small col-sm-10 col-md-3">
                     <h3 class="dash-heading">Stock</h3>
                     <div class="dash-stocks">
                         <p class="dash-count">${{ this.dash.stock_value }}</p>
@@ -10,7 +10,7 @@
                         <p class="dash-count"><i class="material-icons dash-stockStatus">{{ this.stockIconStatus }}</i>{{ this.dash.stock_percentage }}%</p>
                     </div>
                 </div>
-                <div class="dash-card dash-small">
+                <div class="dash-card dash-small col-sm-10 col-md-3">
                     <h3 class="dash-heading">News</h3>
                     <div class="dash-content">
                         <h4>{{ this.dash.news_headline }}</h4>
@@ -18,24 +18,25 @@
 
                     </div>
                 </div>
-                <div class="dash-card dash-small">
+                <div class="dash-card dash-small col-sm-10 col-md-3">
                     <h3 class="dash-heading">Updates</h3>
                     <div class="dash-content">
                         <i class="material-icons dash-notify">priority_high</i>
-                        <span class="dash-update">{{ this.dash.message_count }} Unread Messages</span><br>
+                        <span class="dash-update">{{ this.dash.message_count }} Unread Messages</span>
+                        <br>
                         <i class="material-icons dash-notify">priority_high</i>
-                        <span class="dash-update"> {{ this.dash.email_count }} Unread Emails</span>
+                        <span class="dash-update">{{ this.dash.email_count }} Unread Emails</span>
                     </div>
                 </div>
-                <div class="dash-card dash-big">
+                <div class="dash-card dash-big col-sm-10 col-md-7">
                     <h3 class="dash-heading">Daily News</h3>
-                    <video class="dash-video" poster="/img/videocall/video-placeholder.jpg" controls>
+                    <video class="dash-video col-sm-12" poster="/img/videocall/video-placeholder.jpg" controls>
                         <source :src="this.dash.day_video" type="video/mp4">
                     </video>
                 </div>
-                <div class="dash-card dash-med">
-                    <h3 class="dash-heading">Notes</h3>
-                    <textarea class="dash-content" v-model="note" v-on:keyup="postUpdatedNote"></textarea>
+                <div class="dash-card dash-big col-sm-10 col-md-3">
+                    <h3 class="dash-heading">My Notes</h3>
+                    <textarea class="dash-content col-sm-10" v-model="note" v-on:keyup="postUpdatedNote"></textarea>
                 </div>
            </div>
         </div>
@@ -94,38 +95,30 @@
     .dash-card{
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin: auto;
         margin-top: 2rem;
     }
     .dash-small{
         height: 200px;
-        width: 325px;
-        margin-top: 10rem;
-    }
-    .dash-med{
-        height: 500px;
-        width: 325px;
     }
     .dash-big{
         height: 500px;
-        width: 660px;
     }
     .dash-heading{
         color: $sim-heading;
         text-align: center;
     }
-    .dash-content{
-        margin: 3rem;
-    }
     .dash-video{
         height: 425px;
-        width: 600px;
         display: block;
         margin: auto;
+    }
+    .dash-content{
+        margin: 2rem;
     }
     .dash-notify{
         color: #ce0d0d;
         font-size: 20px;
-
     }
     .dash-stocks{
         display: flex;
@@ -148,7 +141,6 @@
         background-color: $sim-heading;
     }
     textarea{
-        width: 275px;
         height: 400px;
         border:none;
         resize:none;
@@ -159,6 +151,20 @@
             justify-content: space-evenly;
             flex-wrap: wrap;
         }
+        .dash-card{
+            margin: 2rem 0;
+        }
+        .dash-small{
+            height: 200px;
+            margin-top: 10rem;
+        }
+        .col-md-3 {
+            width: 30%;
+        }
+        .col-md-7 {
+            width: 63%;
+        }
+
     }
 
 </style>

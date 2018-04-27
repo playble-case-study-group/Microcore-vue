@@ -17086,7 +17086,7 @@ class Request {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(74);
-module.exports = __webpack_require__(334);
+module.exports = __webpack_require__(339);
 
 
 /***/ }),
@@ -17095,7 +17095,7 @@ module.exports = __webpack_require__(334);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(338);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 
 /**
@@ -17116,7 +17116,7 @@ window.Vue = __webpack_require__(43);
 
 Vue.component('example-component', __webpack_require__(99));
 Vue.component('left-menu', __webpack_require__(102));
-Vue.component('right-menu', __webpack_require__(126));
+//Vue.component('right-menu', require('./components/RightMenu/RightMenu.vue'));
 
 Vue.component('gallery', __webpack_require__(44));
 Vue.component('dash', __webpack_require__(140));
@@ -17128,7 +17128,7 @@ Vue.component('chatbot', __webpack_require__(305));
 Vue.component('slackbot', __webpack_require__(313));
 Vue.component('classes', __webpack_require__(330));
 // Vue.component('v-select', require('vue-select'));
-Vue.component('editor', __webpack_require__(350));
+Vue.component('editor', __webpack_require__(333));
 
 
 
@@ -49273,171 +49273,11 @@ if (false) {
 }
 
 /***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(127)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(129)
-/* template */
-var __vue_template__ = __webpack_require__(130)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-b9f3bdc0"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/RightMenu/RightMenu.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b9f3bdc0", Component.options)
-  } else {
-    hotAPI.reload("data-v-b9f3bdc0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(128);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("12d4ada0", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b9f3bdc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RightMenu.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b9f3bdc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RightMenu.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n#right-menu[data-v-b9f3bdc0] {\n    z-index: 1000;\n    position: fixed;\n    top: 30%;\n    right: 0;\n    min-width: 80px;\n    max-width: 80px;\n    height: 320px;\n    background-color: white;\n    -webkit-box-shadow: 2px 1px 2px;\n            box-shadow: 2px 1px 2px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        //            console.log('Component mounted.')
-    },
-
-    methods: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask'])
-});
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "right-menu" } }, [
-      _c("a", { attrs: { href: "/library" } }, [
-        _c("img", {
-          attrs: { src: "/img/right-menu/library.png", alt: "library" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/gallery" } }, [
-        _c("img", {
-          attrs: { src: "/img/right-menu/gallery.png", alt: "gallery" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/videocall" } }, [
-        _c("img", { attrs: { src: "/img/right-menu/chat.png", alt: "chat" } })
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/email" } }, [
-        _c("img", { attrs: { src: "/img/right-menu/msg.png", alt: "msg" } })
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b9f3bdc0", module.exports)
-  }
-}
-
-/***/ }),
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
 /* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50118,7 +49958,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n  width: 325px;\n  margin-top: 10rem;\n}\n.dash-med[data-v-06f5821c] {\n  height: 500px;\n  width: 325px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n  width: 660px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 3rem;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  width: 600px;\n  display: block;\n  margin: auto;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 4rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 4rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  width: 275px;\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n}\n", ""]);
+exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 2rem;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 4rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 4rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 10rem;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
 
 // exports
 
@@ -50130,6 +49970,7 @@ exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
 //
 //
 //
@@ -50225,7 +50066,7 @@ var render = function() {
   return _c("div", { staticClass: "container", attrs: { id: "dash" } }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "d-flex" }, [
-        _c("div", { staticClass: "dash-card dash-small" }, [
+        _c("div", { staticClass: "dash-card dash-small col-sm-10 col-md-3" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Stock")]),
           _vm._v(" "),
           _c("div", { staticClass: "dash-stocks" }, [
@@ -50244,7 +50085,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "dash-card dash-small" }, [
+        _c("div", { staticClass: "dash-card dash-small col-sm-10 col-md-3" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("News")]),
           _vm._v(" "),
           _c("div", { staticClass: "dash-content" }, [
@@ -50254,7 +50095,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "dash-card dash-small" }, [
+        _c("div", { staticClass: "dash-card dash-small col-sm-10 col-md-3" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Updates")]),
           _vm._v(" "),
           _c("div", { staticClass: "dash-content" }, [
@@ -50265,6 +50106,7 @@ var render = function() {
             _c("span", { staticClass: "dash-update" }, [
               _vm._v(_vm._s(this.dash.message_count) + " Unread Messages")
             ]),
+            _vm._v(" "),
             _c("br"),
             _vm._v(" "),
             _c("i", { staticClass: "material-icons dash-notify" }, [
@@ -50272,18 +50114,18 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "dash-update" }, [
-              _vm._v(" " + _vm._s(this.dash.email_count) + " Unread Emails")
+              _vm._v(_vm._s(this.dash.email_count) + " Unread Emails")
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "dash-card dash-big" }, [
+        _c("div", { staticClass: "dash-card dash-big col-sm-10 col-md-7" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Daily News")]),
           _vm._v(" "),
           _c(
             "video",
             {
-              staticClass: "dash-video",
+              staticClass: "dash-video col-sm-12",
               attrs: {
                 poster: "/img/videocall/video-placeholder.jpg",
                 controls: ""
@@ -50297,8 +50139,8 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "dash-card dash-med" }, [
-          _c("h3", { staticClass: "dash-heading" }, [_vm._v("Notes")]),
+        _c("div", { staticClass: "dash-card dash-big col-sm-10 col-md-3" }, [
+          _c("h3", { staticClass: "dash-heading" }, [_vm._v("My Notes")]),
           _vm._v(" "),
           _c("textarea", {
             directives: [
@@ -50309,7 +50151,7 @@ var render = function() {
                 expression: "note"
               }
             ],
-            staticClass: "dash-content",
+            staticClass: "dash-content col-sm-10",
             domProps: { value: _vm.note },
             on: {
               keyup: _vm.postUpdatedNote,
@@ -51438,7 +51280,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "heading" }, [_c("h3", [_vm._v("Notes")])])
+    return _c("div", { staticClass: "heading" }, [
+      _c("h3", [_vm._v("My Notes")])
+    ])
   }
 ]
 render._withStripped = true
@@ -73494,6 +73338,303 @@ if (false) {
 
 /***/ }),
 /* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(334)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(336)
+/* template */
+var __vue_template__ = __webpack_require__(337)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3dab0688"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Library/articleEditor.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3dab0688", Component.options)
+  } else {
+    hotAPI.reload("data-v-3dab0688", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(335);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("fa56c916", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3dab0688\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./articleEditor.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3dab0688\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./articleEditor.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n    padding: 20px;\n    -webkit-box-shadow: 2px 1px 2px;\n            box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 80vh;\n    border-right: solid 1px #4A4A4A;\n}\n#content-container[data-v-3dab0688] {\n    padding-left: 40px;\n    padding-right: 40px;\n    height: 80vh;\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 336 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    },
+
+
+    props: ['wiki'],
+    data: function data() {
+        return {
+
+            currentTitle: ":)",
+            currentContent: "Select an Article",
+            currentLang: "spanish",
+            //currentArticle is the language specific article. This gets populated from the article table
+            currentArticle: 1,
+            //currentPair is an object containing a pair of articles. These objects come from the wiki table. Notice that the naming can eb confusing.
+            currentPair: 1,
+            languages: ['english', 'spanish'],
+            timeout: null
+        };
+    },
+    methods: {
+        showContent: function showContent(id) {
+            var content = this.wiki.find(function (title) {
+                return title.id == id;
+            });
+
+            this.currentTitle = content[this.currentLang].title;
+            this.currentContent = content[this.currentLang].content;
+            this.currentArticle = content[this.currentLang].id;
+            this.currentPair = id;
+        },
+        changeLang: function changeLang(lang) {
+            this.currentLang = lang;
+            this.showContent(this.currentPair);
+        },
+        updateArticle: function updateArticle() {
+            var _this = this;
+
+            var content = this.wiki.find(function (title) {
+                return title.id == _this.currentPair;
+            });
+            content[this.currentLang].content = this.currentContent;
+
+            var data = {
+                id: this.currentArticle,
+                content: this.currentContent
+            };
+            //notice that this axios response will post to the current article, not the current wiki.
+
+            axios.put("/editor/" + this.currentArticle, data).then(function (response) {
+                console.log(response.data);
+            });
+        },
+        setTime: function setTime() {
+
+            //use this to adjust how long it takes to make an update in the database. The program will wait for a pause in typing.
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(this.updateArticle, 500);
+        }
+
+    },
+    computed: {}
+});
+
+/***/ }),
+/* 337 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container", attrs: { id: "editor" } }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
+        [
+          _vm._l(_vm.languages, function(lang) {
+            return _c(
+              "div",
+              {
+                class: ["btn-group", "d-none", "d-sm-block", "d-md-none"],
+                attrs: { role: "group", "aria-label": "..." }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    class: [
+                      "btn",
+                      _vm.currentLang == lang ? "btn-invert" : "btn-default"
+                    ],
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.changeLang(lang)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(lang.charAt(0).toUpperCase() + lang.slice(1)))]
+                )
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _c("h1", [_vm._v("menu")]),
+          _vm._v(" "),
+          _vm._l(_vm.wiki, function(article) {
+            return _c(
+              "div",
+              {
+                staticClass: "menubtn",
+                attrs: { id: "title-" + article.id },
+                on: {
+                  click: function($event) {
+                    _vm.showContent(article.id)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(article[_vm.currentLang].title) +
+                    "\n\n            "
+                )
+              ]
+            )
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("form", [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentContent,
+              expression: "currentContent"
+            }
+          ],
+          staticClass: "col-sm-8 col-md-9",
+          attrs: { id: "content-container" },
+          domProps: { value: _vm.currentContent },
+          on: {
+            keyup: _vm.setTime,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.currentContent = $event.target.value
+            }
+          }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3dab0688", module.exports)
+  }
+}
+
+/***/ }),
+/* 338 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -73627,322 +73768,10 @@ var actions = {
 }));
 
 /***/ }),
-/* 334 */
+/* 339 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(351)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(353)
-/* template */
-var __vue_template__ = __webpack_require__(354)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-3dab0688"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Library/articleEditor.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3dab0688", Component.options)
-  } else {
-    hotAPI.reload("data-v-3dab0688", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 351 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(352);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("fa56c916", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3dab0688\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./articleEditor.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3dab0688\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./articleEditor.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 352 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n    padding: 20px;\n    -webkit-box-shadow: 2px 1px 2px;\n            box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 80vh;\n    border-right: solid 1px #4A4A4A;\n}\n#content-container[data-v-3dab0688] {\n    padding-left: 40px;\n    padding-right: 40px;\n    height: 80vh;\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 353 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-
-    props: ['wiki'],
-    data: function data() {
-        return {
-
-            currentTitle: ":)",
-            currentContent: "Select an Article",
-            currentLang: "spanish",
-            //currentArticle is the language specific article. This gets populated from the article table
-            currentArticle: 1,
-            //currentPair is an object containing a pair of articles. These objects come from the wiki table. Notice that the naming can eb confusing.
-            currentPair: 1,
-            languages: ['english', 'spanish'],
-            timeout: null
-        };
-    },
-    methods: {
-        showContent: function showContent(id) {
-            var content = this.wiki.find(function (title) {
-                return title.id == id;
-            });
-
-            this.currentTitle = content[this.currentLang].title;
-            this.currentContent = content[this.currentLang].content;
-            this.currentArticle = content[this.currentLang].id;
-            this.currentPair = id;
-        },
-        changeLang: function changeLang(lang) {
-            this.currentLang = lang;
-            this.showContent(this.currentPair);
-        },
-        updateArticle: function updateArticle() {
-            var _this = this;
-
-            var content = this.wiki.find(function (title) {
-                return title.id == _this.currentPair;
-            });
-            content[this.currentLang].content = this.currentContent;
-
-            var data = {
-                id: this.currentArticle,
-                content: this.currentContent
-            };
-            //notice that this axios response will post to the current article, not the current wiki.
-
-            axios.put("/editor/" + this.currentArticle, data).then(function (response) {
-                console.log(response.data);
-            });
-        },
-        setTime: function setTime() {
-
-            //use this to adjust how long it takes to make an update in the database. The program will wait for a pause in typing.
-            clearTimeout(this.timeout);
-            this.timeout = setTimeout(this.updateArticle, 500);
-        }
-
-    },
-    computed: {}
-});
-
-/***/ }),
-/* 354 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container", attrs: { id: "editor" } }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
-        [
-          _vm._l(_vm.languages, function(lang) {
-            return _c(
-              "div",
-              {
-                class: ["btn-group", "d-none", "d-sm-block", "d-md-none"],
-                attrs: { role: "group", "aria-label": "..." }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    class: [
-                      "btn",
-                      _vm.currentLang == lang ? "btn-invert" : "btn-default"
-                    ],
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.changeLang(lang)
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(lang.charAt(0).toUpperCase() + lang.slice(1)))]
-                )
-              ]
-            )
-          }),
-          _vm._v(" "),
-          _c("h1", [_vm._v("menu")]),
-          _vm._v(" "),
-          _vm._l(_vm.wiki, function(article) {
-            return _c(
-              "div",
-              {
-                staticClass: "menubtn",
-                attrs: { id: "title-" + article.id },
-                on: {
-                  click: function($event) {
-                    _vm.showContent(article.id)
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(article[_vm.currentLang].title) +
-                    "\n\n            "
-                )
-              ]
-            )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("form", [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.currentContent,
-              expression: "currentContent"
-            }
-          ],
-          staticClass: "col-sm-8 col-md-9",
-          attrs: { id: "content-container" },
-          domProps: { value: _vm.currentContent },
-          on: {
-            keyup: _vm.setTime,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.currentContent = $event.target.value
-            }
-          }
-        })
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3dab0688", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

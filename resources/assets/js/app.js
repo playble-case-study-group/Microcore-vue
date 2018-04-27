@@ -19,7 +19,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('left-menu', require('./components/LeftMenu/LeftMenu.vue'));
-Vue.component('right-menu', require('./components/RightMenu/RightMenu.vue'));
+//Vue.component('right-menu', require('./components/RightMenu/RightMenu.vue'));
 
 Vue.component('gallery', require('./components/Gallery/Gallery'));
 Vue.component('dash', require('./components/Dashboard/dashboard.vue'));
