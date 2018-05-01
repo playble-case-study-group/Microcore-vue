@@ -51375,7 +51375,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 40rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 40rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -51393,10 +51393,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
-//
-//
-//
-//
 //
 //
 //
@@ -51627,7 +51623,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         startAudio: function startAudio() {
-            var appScope = this;
+            var _this2 = this;
+
             navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
                 // store streaming data chunks in array
                 var chunks = [];
@@ -51639,11 +51636,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 analyser.smoothingTimeConstant = 0.85;
                 analyser.fftSize = 256;
 
-                var distortion = audioCtx.createWaveShaper();
-                var gainNode = audioCtx.createGain();
-                var biquadFilter = audioCtx.createBiquadFilter();
-                var convolver = audioCtx.createConvolver();
-
                 var canvasCtx = document.getElementById('visualizer');
                 canvasCtx = canvasCtx.getContext("2d");
 
@@ -51651,48 +51643,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var recorder = new MediaRecorder(stream);
 
                 var source = audioCtx.createMediaStreamSource(stream);
-                var WIDTH = 400;
-                var HEIGHT = 150;
                 source.connect(analyser);
+
+                _this2.visualize(analyser, canvasCtx);
 
                 // function to be called when data is received
                 recorder.ondataavailable = function (e) {
                     // add stream data to chunks
                     chunks.push(e.data);
-
-                    var bufferLength = analyser.frequencyBinCount;
-                    var dataArray = new Uint8Array(bufferLength);
-                    analyser.getByteFrequencyData(dataArray);
-
-                    canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-                    appScope.draw(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT);
                 };
                 // start recording with 1 second time between receiving 'ondataavailable' events
                 recorder.start(300);
             }).catch(console.error);
         },
-        draw: function draw(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT) {
+        visualize: function visualize(analyser, canvasCtx) {
+            var WIDTH = 400;
+            var HEIGHT = 150;
+
+            analyser.fftSize = 256;
+            var bufferLengthAlt = analyser.frequencyBinCount;
+            console.log(bufferLengthAlt);
+            var dataArrayAlt = new Uint8Array(bufferLengthAlt);
+
             canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-            var drawVisual = requestAnimationFrame(this.draw);
 
-            var dataArray = new Uint8Array(bufferLength);
-            analyser.getByteFrequencyData(dataArray);
+            var drawAlt = function drawAlt() {
+                var drawVisual = requestAnimationFrame(drawAlt);
 
-            canvasCtx.fillStyle = '#f5f8fa';
-            canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+                analyser.getByteFrequencyData(dataArrayAlt);
 
-            var barWidth = WIDTH / bufferLength * 2.5;
-            var barHeight;
-            var x = 0;
+                canvasCtx.fillStyle = '#4a4a4a';
+                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
-            for (var i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i] / 2;
+                var barWidth = WIDTH / bufferLengthAlt * 1.25;
+                var barHeight = void 0;
+                var x = 0;
 
-                canvasCtx.fillStyle = 'rgb(' + (barHeight + 50) + ',50,50)';
-                canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight);
+                for (var i = 0; i < bufferLengthAlt; i++) {
+                    barHeight = dataArrayAlt[i];
 
-                x += barWidth + 1;
-            }
+                    canvasCtx.fillStyle = 'rgb(255, ' + (barHeight + 210) + ', 255)';
+                    canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+
+                    x += barWidth + 1;
+                }
+            };
+
+            drawAlt();
         }
     }
 });
@@ -52092,8 +52089,6 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("canvas", { attrs: { id: "visualizer" } }),
-      _vm._v(" "),
       _vm.showRecordingInterface
         ? _c("video-message", {
             attrs: {
@@ -52180,11 +52175,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("a", { attrs: { href: "#" }, on: { click: _vm.changeMicIcon } }, [
-          _c("i", { staticClass: "material-icons", attrs: { id: "mic" } }, [
-            _vm._v("mic")
-          ])
-        ])
+        _c("canvas", { attrs: { id: "visualizer" } })
       ]),
       _vm._v(" "),
       _c("character-questions", {

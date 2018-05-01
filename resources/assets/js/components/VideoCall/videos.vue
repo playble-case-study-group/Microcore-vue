@@ -9,8 +9,6 @@
             <source src="/video/record.mp4" type="video/mp4">
         </video>
 
-        <canvas id="visualizer"></canvas>
-
         <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
@@ -45,9 +43,7 @@
             <a href="#" v-if="!showRecordingInterface" @click="changePhoneIcon">
                 <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
             </a>
-            <a href="#" @click="changeMicIcon">
-                <i id="mic" class="material-icons">mic</i>
-            </a>
+            <canvas id="visualizer"></canvas>
 
         </div>
 
@@ -233,7 +229,6 @@
                 })
             },
             startAudio: function(){
-                var appScope = this;
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
                     const chunks = [];
@@ -245,12 +240,6 @@
                     analyser.smoothingTimeConstant = 0.85;
                     analyser.fftSize = 256;
 
-                    var distortion = audioCtx.createWaveShaper();
-                    var gainNode = audioCtx.createGain();
-                    var biquadFilter = audioCtx.createBiquadFilter();
-                    var convolver = audioCtx.createConvolver();
-
-
                     let canvasCtx = document.getElementById('visualizer');
                     canvasCtx = canvasCtx.getContext("2d");
 
@@ -258,51 +247,54 @@
                     const recorder = new MediaRecorder(stream);
 
                     let source = audioCtx.createMediaStreamSource(stream);
-                    let WIDTH = 400;
-                    let HEIGHT = 150;
                     source.connect(analyser);
+
+                    this.visualize(analyser, canvasCtx);
 
                     // function to be called when data is received
                     recorder.ondataavailable = e => {
                         // add stream data to chunks
                         chunks.push(e.data);
-
-                        let bufferLength = analyser.frequencyBinCount;
-                        let dataArray = new Uint8Array(bufferLength);
-                        analyser.getByteFrequencyData(dataArray)
-
-                        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-                        appScope.draw(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT)
-
-
                     };
                     // start recording with 1 second time between receiving 'ondataavailable' events
                     recorder.start(300);
 
                 }).catch(console.error);
             },
-            draw: function(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT){
+            visualize: function (analyser, canvasCtx) {
+                let WIDTH = 400;
+                let HEIGHT = 150;
+
+                analyser.fftSize = 256;
+                let bufferLengthAlt = analyser.frequencyBinCount;
+                console.log(bufferLengthAlt);
+                let dataArrayAlt = new Uint8Array(bufferLengthAlt);
+
                 canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-                let drawVisual = requestAnimationFrame(this.draw);
 
-                let dataArray = new Uint8Array(bufferLength);
-                analyser.getByteFrequencyData(dataArray);
+                let drawAlt = function () {
+                    let drawVisual = requestAnimationFrame(drawAlt);
 
-                canvasCtx.fillStyle = '#f5f8fa';
-                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+                    analyser.getByteFrequencyData(dataArrayAlt);
 
-                var barWidth = (WIDTH / bufferLength) * 2.5;
-                var barHeight;
-                var x = 0;
+                    canvasCtx.fillStyle = '#4a4a4a';
+                    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
-                for(var i = 0; i < bufferLength; i++) {
-                    barHeight = dataArray[i]/2;
+                    let barWidth = (WIDTH / bufferLengthAlt) * 1.25;
+                    let barHeight;
+                    let x = 0;
 
-                    canvasCtx.fillStyle = 'rgb(' + (barHeight+50) + ',50,50)';
-                    canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight);
+                    for (let i = 0; i < bufferLengthAlt; i++) {
+                        barHeight = dataArrayAlt[i];
 
-                    x += barWidth + 1;
-                }
+                        canvasCtx.fillStyle = 'rgb(255, '+ (barHeight + 210) + ', 255)';
+                        canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+
+                        x += barWidth + 1;
+                    }
+                };
+
+                drawAlt();
             }
         }
     }
@@ -314,6 +306,10 @@
 
     a {
         color: white;
+    }
+    canvas {
+        height: 30px;
+        width: 40px;
     }
     #controlBar{
         display: flex;
