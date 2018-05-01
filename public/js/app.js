@@ -48707,7 +48707,7 @@ var render = function() {
               return task.complete
                 ? _c("span", { staticClass: "task" }, [
                     _c("img", {
-                      attrs: { src: "/img/complete.svg", alt: "complete" }
+                      attrs: { src: "/img/complete-blue.png", alt: "complete" }
                     })
                   ])
                 : _vm._e()
@@ -48717,7 +48717,10 @@ var render = function() {
               return !task.complete
                 ? _c("span", { staticClass: "task" }, [
                     _c("img", {
-                      attrs: { src: "/img/incomplete.svg", alt: "incomplete" }
+                      attrs: {
+                        src: "/img/incomplete-blue.png",
+                        alt: "incomplete"
+                      }
                     })
                   ])
                 : _vm._e()
@@ -48958,7 +48961,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 3px solid #4A4A4A;\n}\n\n/* On mouse-over, add a grey background color */\nlabel:hover input ~ .checkmark[data-v-70c68067] {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\nlabel input:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #4A4A4A;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\nlabel input:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
+exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 3px solid #ABDBFB;\n}\n\n/* On mouse-over, add a grey background color */\nlabel:hover input ~ .checkmark[data-v-70c68067] {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\nlabel input:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #ABDBFB;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\nlabel input:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
 
 // exports
 
