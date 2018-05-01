@@ -2,28 +2,19 @@
     <div class="container main">
 
         <div class="row">
-            <div role="banner" class="heading col-sm-12">
+            <div role="banner" class="heading flex-header col-sm-12">
                 <h1>Messages</h1>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons mobile-menu">menu</i>
-                    </a>
-                    <div id="contacts" class="dropdown-menu dropdown-menu-right">
-                        <div class="contact-inner dropdown-item">
-                            <button class="btn btn-success compose" @click="composeModal">Compose</button>
-                        </div>
-                        <div class="contact-inner dropdown-item">
-                            <div class="inboxToggle" style="background-color: white;" @click="toggleInbox"><span>Inbox</span></div>
-                        </div>
-                        <div class="contact-inner dropdown-item">
-                            <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
-                        </div>
-                    </div>
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+                    <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                    <div class="inboxToggle" @click="toggleInbox"><span>Inbox</span></div>
+                    <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
                 </div>
+                <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row content">
             <div class="sidebar col-md-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
@@ -250,6 +241,13 @@
                     subject: "",
                     body: ""
                 };
+            },
+            openNav: function() {
+                document.getElementById("mySidenav").style.width = "250px";
+                console.log('menu');
+            },
+            closeNav: function() {
+                document.getElementById("mySidenav").style.width = "0";
             }
         }
 
@@ -329,6 +327,7 @@
     }
     .modal-title{
         margin: -5px 0;
+        justify-content: flex-start;
     }
     .keyline{
         border-left: solid 4px #636b6f;
@@ -343,13 +342,68 @@
     .sidebar{
         display: none;
     }
-    .heading{
+    .flex-header{
         display: flex;
         justify-content: space-between;
     }
     .mobile-menu{
         font-size: 26px;
         color: white;
+    }
+    /* The side navigation menu */
+    .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        height: 115rem;
+        position: absolute; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        right: 0;
+        background-color: #4a4a4a;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    .content {
+        transition: margin-left .5s;
+        padding: 20px;
+    }
+    .inboxToggle{
+        margin: 20px;
+    }
+    .sentToggle{
+        margin: 20px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
     }
     @media(min-width: 1224px){
         .sidebar{
