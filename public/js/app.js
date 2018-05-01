@@ -50521,7 +50521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         openNav: function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.width = "200px";
             console.log('menu');
         },
         closeNav: function closeNav() {

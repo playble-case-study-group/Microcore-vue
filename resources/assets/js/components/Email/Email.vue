@@ -243,7 +243,7 @@
                 };
             },
             openNav: function() {
-                document.getElementById("mySidenav").style.width = "250px";
+                document.getElementById("mySidenav").style.width = "200px";
                 console.log('menu');
             },
             closeNav: function() {
