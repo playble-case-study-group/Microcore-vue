@@ -51625,10 +51625,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         startAudio: function startAudio() {
             var _this2 = this;
 
+            //start collecting audio stream
             navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
                 // store streaming data chunks in array
                 var chunks = [];
 
+                //set paramaters of the Audio Stream
                 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 var analyser = audioCtx.createAnalyser();
                 analyser.minDecibels = -90;
@@ -51636,15 +51638,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 analyser.smoothingTimeConstant = 0.85;
                 analyser.fftSize = 256;
 
+                //get canvas element that will display the animation
                 var canvasCtx = document.getElementById('visualizer');
                 canvasCtx = canvasCtx.getContext("2d");
 
                 // create media recorder instance to initialize recording
                 var recorder = new MediaRecorder(stream);
 
+                //connect the audio stream to the incoming audio
                 var source = audioCtx.createMediaStreamSource(stream);
                 source.connect(analyser);
 
+                //call animation function
                 _this2.visualize(analyser, canvasCtx);
 
                 // function to be called when data is received
@@ -51657,28 +51662,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(console.error);
         },
         visualize: function visualize(analyser, canvasCtx) {
+            //set the dimensions of animation
             var WIDTH = 400;
             var HEIGHT = 150;
 
+            //convert data to the correct format
             analyser.fftSize = 256;
             var bufferLengthAlt = analyser.frequencyBinCount;
             console.log(bufferLengthAlt);
             var dataArrayAlt = new Uint8Array(bufferLengthAlt);
 
+            //clear the canvas to prepare for animation
             canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
+            //set recursive function to continuously draw to canvas
             var drawAlt = function drawAlt() {
                 var drawVisual = requestAnimationFrame(drawAlt);
 
                 analyser.getByteFrequencyData(dataArrayAlt);
 
+                //set canvas background color and add animation
                 canvasCtx.fillStyle = '#4a4a4a';
                 canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
+                //define the width of audio bar display
                 var barWidth = WIDTH / bufferLengthAlt * 1.25;
                 var barHeight = void 0;
                 var x = 0;
 
+                //iterate through audio levels and add bars to canvas
                 for (var i = 0; i < bufferLengthAlt; i++) {
                     barHeight = dataArrayAlt[i];
 

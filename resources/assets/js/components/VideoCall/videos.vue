@@ -229,10 +229,12 @@
                 })
             },
             startAudio: function(){
+                //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
                     const chunks = [];
 
+                    //set paramaters of the Audio Stream
                     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                     var analyser = audioCtx.createAnalyser();
                     analyser.minDecibels = -90;
@@ -240,15 +242,18 @@
                     analyser.smoothingTimeConstant = 0.85;
                     analyser.fftSize = 256;
 
+                    //get canvas element that will display the animation
                     let canvasCtx = document.getElementById('visualizer');
                     canvasCtx = canvasCtx.getContext("2d");
 
                     // create media recorder instance to initialize recording
                     const recorder = new MediaRecorder(stream);
 
+                    //connect the audio stream to the incoming audio
                     let source = audioCtx.createMediaStreamSource(stream);
                     source.connect(analyser);
 
+                    //call animation function
                     this.visualize(analyser, canvasCtx);
 
                     // function to be called when data is received
@@ -262,28 +267,35 @@
                 }).catch(console.error);
             },
             visualize: function (analyser, canvasCtx) {
+                //set the dimensions of animation
                 let WIDTH = 400;
                 let HEIGHT = 150;
 
+                //convert data to the correct format
                 analyser.fftSize = 256;
                 let bufferLengthAlt = analyser.frequencyBinCount;
                 console.log(bufferLengthAlt);
                 let dataArrayAlt = new Uint8Array(bufferLengthAlt);
 
+                //clear the canvas to prepare for animation
                 canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
+                //set recursive function to continuously draw to canvas
                 let drawAlt = function () {
                     let drawVisual = requestAnimationFrame(drawAlt);
 
                     analyser.getByteFrequencyData(dataArrayAlt);
 
+                    //set canvas background color and add animation
                     canvasCtx.fillStyle = '#4a4a4a';
                     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
+                    //define the width of audio bar display
                     let barWidth = (WIDTH / bufferLengthAlt) * 1.25;
                     let barHeight;
                     let x = 0;
 
+                    //iterate through audio levels and add bars to canvas
                     for (let i = 0; i < bufferLengthAlt; i++) {
                         barHeight = dataArrayAlt[i];
 
