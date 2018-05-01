@@ -8488,8 +8488,7 @@ fieldset[disabled] .btn-invert.focus {
 }
 
 .main {
-  margin-left: 40px;
-  margin-top: 40px;
+  margin: 40px;
   padding: 0;
   background-color: white;
 }

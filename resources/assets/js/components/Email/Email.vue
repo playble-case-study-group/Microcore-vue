@@ -1,19 +1,37 @@
 <template>
     <div class="container main">
+
         <div class="row">
-            <div class="heading col-sm-12">
+            <div role="banner" class="heading col-sm-12">
                 <h1>Messages</h1>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons mobile-menu">menu</i>
+                    </a>
+                    <div id="contacts" class="dropdown-menu dropdown-menu-right">
+                        <div class="contact-inner dropdown-item">
+                            <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                        </div>
+                        <div class="contact-inner dropdown-item">
+                            <div class="inboxToggle" style="background-color: white;" @click="toggleInbox"><span>Inbox</span></div>
+                        </div>
+                        <div class="contact-inner dropdown-item">
+                            <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-sm-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
+            <div class="sidebar col-md-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
                     <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
                     <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
                 </ul>
             </div>
-            <div class="col-sm-10 emailList">
+            <div class="col-sm-12 col-lg-10 emailList">
                 <table id="inbox">
                     <tr>
                         <th>From</th>
@@ -267,6 +285,10 @@
     .main{
         height: 115rem;
     }
+    .row{
+        margin: 0px;
+
+    }
     .emailList{
         margin-top: 20px;
     }
@@ -305,6 +327,9 @@
     .modal-body{
         height: 80%
     }
+    .modal-title{
+        margin: -5px 0;
+    }
     .keyline{
         border-left: solid 4px #636b6f;
         padding-left: 10px;
@@ -314,5 +339,34 @@
     }
     .keyline-inbox{
         border-color: #636b6f;
+    }
+    .sidebar{
+        display: none;
+    }
+    .heading{
+        display: flex;
+        justify-content: space-between;
+    }
+    .mobile-menu{
+        font-size: 26px;
+        color: white;
+    }
+    @media(min-width: 1224px){
+        .sidebar{
+            display: inherit;
+        }
+        .compose{
+            height: auto;
+            width: auto;
+        }
+        .mobile-menu{
+            display: none;
+        }
+    }
+    @media(min-width: 1400px){
+        .compose{
+            height: 40px;
+            width: 130px;
+        }
     }
 </style>

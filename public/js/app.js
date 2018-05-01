@@ -50259,7 +50259,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -5px 0;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.heading[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: inherit;\n}\n.compose[data-v-52d1ee62] {\n    height: auto;\n    width: auto;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -50273,6 +50273,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50524,13 +50542,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container main" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "heading col-sm-12", attrs: { role: "banner" } },
+        [
+          _c("h1", [_vm._v("Messages")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dropdown" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right",
+                attrs: { id: "contacts" }
+              },
+              [
+                _c("div", { staticClass: "contact-inner dropdown-item" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success compose",
+                      on: { click: _vm.composeModal }
+                    },
+                    [_vm._v("Compose")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "contact-inner dropdown-item" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "inboxToggle",
+                      staticStyle: { "background-color": "white" },
+                      on: { click: _vm.toggleInbox }
+                    },
+                    [_c("span", [_vm._v("Inbox")])]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "contact-inner dropdown-item" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sentToggle",
+                      on: { click: _vm.toggleSent }
+                    },
+                    [_c("span", [_vm._v("Sent")])]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
         {
-          staticClass: "col-sm-2",
+          staticClass: "sidebar col-md-2",
           staticStyle: {
             "background-color": "white",
             height: "111rem",
@@ -50575,7 +50648,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10 emailList" }, [
+      _c("div", { staticClass: "col-sm-12 col-lg-10 emailList" }, [
         _c(
           "table",
           { attrs: { id: "inbox" } },
@@ -50910,11 +50983,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "heading col-sm-12" }, [
-        _c("h1", [_vm._v("Messages")])
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "dropdown-toggle",
+        attrs: {
+          href: "#",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "material-icons mobile-menu" }, [_vm._v("menu")])]
+    )
   },
   function() {
     var _vm = this
