@@ -9,6 +9,8 @@
             <source src="/video/record.mp4" type="video/mp4">
         </video>
 
+        <canvas id="visualizer"></canvas>
+
         <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
@@ -139,19 +141,19 @@
                         }
                     })
                     this.currentVideo = activeCall;
-                } else{
+                } else {
                     //if not active, leave a message
                     this.leaveMessage();
                 }
             },
-            leaveMessage: function(){
+            leaveMessage: function () {
                 this.showRecordingInterface = true;
                 this.currentQuestions = [];
                 this.currentQuestion = {};
                 this.currentVideo = {};
             },
-            changePhoneIcon: function(){
-                if(this.callIconToggleStatus === "call"){
+            changePhoneIcon: function () {
+                if (this.callIconToggleStatus === "call") {
                     this.videoEl.play();
                     this.callIconToggleStatus = "call_end";
                 } else {
@@ -159,36 +161,40 @@
                     this.callIconToggleStatus = "call";
                 }
             },
-            changeMicIcon: function(){
-                if(document.getElementById('mic').innerText === "mic"){
+            changeMicIcon: function () {
+                if (document.getElementById('mic').innerText === "mic") {
                     document.getElementById('mic').innerText = "mic_off";
-                } else{
+                } else {
                     document.getElementById('mic').innerText = "mic";
                 }
             },
-            startStopRecording: function(){
+            startStopRecording: function () {
                 this.recording = !this.recording;
             },
             askQuestion: function (question) {
                 this.currentQuestion = question;
             },
-            startSelfVideo: function(){
+            startSelfVideo: function () {
                 //set that we want both audio and video
                 const constraints = {
-                    video: true,
-                    audio: true
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true
+                    },
+                    video: true
                 };
 
+                //this.startAudio();
                 //start recording
                 navigator.mediaDevices.getUserMedia(constraints)
                     .then(this.handleSuccess.bind(this))
                     .catch(this.handleFailure);
             },
-            handleFailure: function(error){
+            handleFailure: function (error) {
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error('Reeeejected!', error);
             },
-            handleSuccess: function(stream) {
+            handleSuccess: function (stream) {
                 const video = document.getElementById('personal_video');
 
                 const recordedChunks = [];
@@ -202,11 +208,12 @@
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
                     mediaRecorder.start(3000);
+                    video.muted = 'true';
                 })
 
                 //set local variable to set correct scope
                 let appScope = this;
-
+                this.startAudio(stream);
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
@@ -225,6 +232,78 @@
 
                 })
             },
+            startAudio: function(){
+                var appScope = this;
+                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                    // store streaming data chunks in array
+                    const chunks = [];
+
+                    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    var analyser = audioCtx.createAnalyser();
+                    analyser.minDecibels = -90;
+                    analyser.maxDecibels = -10;
+                    analyser.smoothingTimeConstant = 0.85;
+                    analyser.fftSize = 256;
+
+                    var distortion = audioCtx.createWaveShaper();
+                    var gainNode = audioCtx.createGain();
+                    var biquadFilter = audioCtx.createBiquadFilter();
+                    var convolver = audioCtx.createConvolver();
+
+
+                    let canvasCtx = document.getElementById('visualizer');
+                    canvasCtx = canvasCtx.getContext("2d");
+
+                    // create media recorder instance to initialize recording
+                    const recorder = new MediaRecorder(stream);
+
+                    let source = audioCtx.createMediaStreamSource(stream);
+                    let WIDTH = 400;
+                    let HEIGHT = 150;
+                    source.connect(analyser);
+
+                    // function to be called when data is received
+                    recorder.ondataavailable = e => {
+                        // add stream data to chunks
+                        chunks.push(e.data);
+
+                        let bufferLength = analyser.frequencyBinCount;
+                        let dataArray = new Uint8Array(bufferLength);
+                        analyser.getByteFrequencyData(dataArray)
+
+                        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+                        appScope.draw(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT)
+
+
+                    };
+                    // start recording with 1 second time between receiving 'ondataavailable' events
+                    recorder.start(300);
+
+                }).catch(console.error);
+            },
+            draw: function(analyser, bufferLength, canvasCtx, WIDTH, HEIGHT){
+                canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+                let drawVisual = requestAnimationFrame(this.draw);
+
+                let dataArray = new Uint8Array(bufferLength);
+                analyser.getByteFrequencyData(dataArray);
+
+                canvasCtx.fillStyle = '#f5f8fa';
+                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+                var barWidth = (WIDTH / bufferLength) * 2.5;
+                var barHeight;
+                var x = 0;
+
+                for(var i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i]/2;
+
+                    canvasCtx.fillStyle = 'rgb(' + (barHeight+50) + ',50,50)';
+                    canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight);
+
+                    x += barWidth + 1;
+                }
+            }
         }
     }
 

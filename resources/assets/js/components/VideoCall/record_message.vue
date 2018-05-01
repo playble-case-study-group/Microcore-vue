@@ -1,6 +1,6 @@
 <template>
     <div id="record-message">
-        <video id="record_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
+        <video id="record_video" poster="/img/videocall/video-placeholder.jpg" autoplay muted="muted">
             <source src="/video/record.mp4" type="video/mp4">
         </video>
     </div>
