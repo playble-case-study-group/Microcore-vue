@@ -28,7 +28,6 @@ Vue.component('videocall', require('./components/VideoCall/videoCall.vue'));
 Vue.component('library', require('./components/Library/library.vue'));
 Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
-Vue.component('phone', require('./components/Phone/Phone.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
 // Vue.component('v-select', require('vue-select'));
 

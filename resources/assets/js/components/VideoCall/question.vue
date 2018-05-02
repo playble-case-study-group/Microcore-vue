@@ -1,48 +1,52 @@
 <template>
     <div id="question">
-        <br>
-        <button class="single-question"
-             v-for="single in question"
-             :id="single.id"
-             v-on:click="play(single.start, single.end)">
-            <b>{{ single.question }}</b>
+        <button type="button" class="btn btn-success btn-lg button"
+             v-for="question in questions"
+             :id="question.id"
+                @click="submitQuestion(question)">
+            <b>{{ question.question }}</b>
         </button>
-
-
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
-
+    import { mapGetter, mapActions } from 'vuex'
 
     export default {
 
         mounted() {
+            console.log('Component mounted.')
         },
-        props: ['question', 'active'],
+        props: ['questions'],
         methods: {
-            play: function (start, end) {
-                this.$emit('play', start, end);
+            submitQuestion: function (question) {
+                this.$emit('question', question)
             }
+        },
 
-        }
     }
 </script>
 
+
 <style scoped>
-    button {
-        padding: 20px;
-        background-color: #2ab27b;
-        color: white;
-        border: none;
+    .button {
+        margin: 2rem;
+        height: 5rem;
+        width: 22rem;
     }
-    button:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);
+    @media(min-width: 992px){
+        .button {
+            margin: 1rem 3rem;
+            height: 7rem;
+            width: 21rem;
+            white-space: normal;
+        }
     }
-
-    #question {
-
+    @media(min-width: 1400px){
+        .button {
+            margin: 2rem 4rem;
+            height: 5rem;
+            width: 28rem;
+        }
     }
-
 </style>

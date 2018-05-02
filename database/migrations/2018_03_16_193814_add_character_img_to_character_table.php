@@ -14,8 +14,8 @@ class AddCharacterImgToCharacterTable extends Migration
     public function up()
     {
         Schema::table('characters', function (Blueprint $table) {
-            $table->string('img_small');
-            $table->string('img_large');
+            $table->string('img_small')->default(null);
+            $table->string('img_large')->default(null);
         });
     }
 

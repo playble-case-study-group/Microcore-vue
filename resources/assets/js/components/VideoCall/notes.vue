@@ -1,9 +1,8 @@
 <!--suppress ALL -->
 <template>
     <div id="notes">
-        <div id="header" ><h3>Notes</h3></div>
-        <textarea v-model="note" v-on:keyup="update"></textarea>
-
+        <div id="header"><h3>Notes</h3></div>
+        <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
     </div>
 </template>
 
@@ -12,19 +11,16 @@
 
     export default {
 
-        mounted() {
-            this.setNote();
-        },
         data: function() {
           return {
-              note: ''
+              note: this.notes.note
           }
         },
         props: ['notes'],
         computed: {
         },
         methods: {
-            update: function () {
+            postUpdatedNote: function () {
                 axios
                     .post(
                         "/videocall",
@@ -34,37 +30,30 @@
                         }
                     )
                     .then(r => console.log(r))
-            .catch(e => console.log(e));
+                    .catch(e => console.log(e));
             },
-            setNote: function(){
-                this.note = this.notes;
-            }
         }
-
     }
 
 </script>
 
-<style scoped>
-    #notes{
-        margin: 20px;
-        width: 35%
+<style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
 
-    }
     textarea{
         width: 100%;
-        height: 75%;
+        height: 87%;
         border:none;
         padding: 20px;
 
     }
     #header{
         color: white;
-        background-color: #2b2b2b;
-        height: 40px;
+        background-color: $sim-heading;
+        height: 50px;
     }
     h3{
-        padding: 10px;
+        padding: 15px;
     }
 
 </style>
