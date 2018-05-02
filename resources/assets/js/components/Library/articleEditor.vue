@@ -1,15 +1,17 @@
 <template>
-    <div class="container" id="editor">
+    <div class="container main" id="editor">
         <div class="row">
             <div class="col-sm-4 col-md-3" id="libraryMenu">
-                <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
+                <!-- <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
                     <button type="button" :class="['btn', currentLang == lang ? 'btn-invert' : 'btn-default']" @click="changeLang(lang)">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</button>
-                </div>
+                </div>-->
                 <h1>menu</h1>
+                <br>
+                <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" >
+                    <h4 class="article-title">{{article[currentLang].title}}</h4>
+                    <p :id="'title-' + article.id">
 
-                <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" :id="'title-' + article.id">
-                    {{article[currentLang].title}}
-
+                    </p>
                 </div>
             </div>
             <form>
@@ -105,30 +107,52 @@
         cursor:pointer;
 
     }
-
-
-
+    .article-title:hover{
+        text-decoration: underline;
+    }
     #editor {
         background-color: white;
         margin-left: 40px;
-        padding: 20px;
         box-shadow: 2px 1px 2px;
     }
-
+    .menubtn {
+        cursor:pointer;
+        margin-bottom: 3rem;
+    }
+    .article-title{
+    //border-bottom: solid 1px #c8c8c8;
+    }
+    .article-title:hover{
+        text-decoration: underline;
+    }
     #libraryMenu {
-        height: 80vh;
-        border-right: solid 1px #4A4A4A;
+        height: 100vh;
+        padding-top: 20px;
+        padding-left: 40px;
+        box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
     }
 
     #content-container {
+        padding-right: 80px;
         padding-left: 40px;
-        padding-right: 40px;
-        height: 80vh;
-    }
+        padding-top: 40px;
+        resize: none;
+        border:none;
+        height: 100%;
+        height: fit-content;
+        height: -moz-available;          /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
 
+
+    }
     #content-container h1 {
         margin-top: 0px;
-
+    }
+    .main{
+        margin-top: 0px;
+    }
+    .row{
+        margin: 0px;
     }
 
 </style>

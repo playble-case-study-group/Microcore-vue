@@ -126,12 +126,8 @@
         padding-top: 20px;
 
     }
-
     #content-container h1 {
         margin-top: 0px;
-    }
-    .container{
-        margin-right: 40px;
     }
 
 </style>
