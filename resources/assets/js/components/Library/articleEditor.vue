@@ -28,21 +28,14 @@
 <script>
     import { mapGetter, mapActions } from 'vuex'
 
-
     export default {
 
         mounted() {
             console.log('Component mounted.')
         },
-
-        props: [
-            'wiki'
-
-        ],
+        props: ['wiki'],
         data: function () {
             return {
-
-
                 currentTitle: ":)",
                 currentContent: "Select an Article",
                 currentLang: "spanish",
@@ -92,19 +85,14 @@
 
 
             }
-
-
-
         },
-        computed: {
-
-        }
     }
 </script>
 
 <style scoped>
     .menubtn {
         cursor:pointer;
+        margin-bottom: 3rem;
 
     }
     .article-title:hover{
@@ -114,16 +102,6 @@
         background-color: white;
         margin-left: 40px;
         box-shadow: 2px 1px 2px;
-    }
-    .menubtn {
-        cursor:pointer;
-        margin-bottom: 3rem;
-    }
-    .article-title{
-    //border-bottom: solid 1px #c8c8c8;
-    }
-    .article-title:hover{
-        text-decoration: underline;
     }
     #libraryMenu {
         height: 100vh;
@@ -142,8 +120,6 @@
         height: fit-content;
         height: -moz-available;          /* WebKit-based browsers will ignore this. */
         height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-
-
     }
     #content-container h1 {
         margin-top: 0px;
