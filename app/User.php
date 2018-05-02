@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -26,4 +28,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+
+    protected $appends = [
+        'group_id'
+    ];
+
+    /**
+     * Get the user's group ID.
+     *
+     * @return string
+     */
+    public function getGroupIdAttribute()
+    {
+        $groupId = DB::table('user_has_group')
+            ->where('user_id', Auth::id())
+            ->select('group_id')
+            ->first();
+
+        return $groupId->group_id;
+    }
 }

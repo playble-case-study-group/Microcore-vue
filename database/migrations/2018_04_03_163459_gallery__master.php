@@ -35,6 +35,23 @@ class GalleryMaster extends Migration
             $table->integer('class_id')->default(0);
 
         });
+
+        Schema::dropIfExists('tag');
+        Schema::create('tag', function (Blueprint $table) {
+            $table->increments('tag_id');
+            $table->string('title');
+        });
+
+        Schema::dropIfExists('gallery_has_tag');
+        Schema::create('gallery_has_tag', function (Blueprint $table) {
+            $table->integer('gallery_id');
+            $table->integer('tag_id');
+        });
+
+//        Schema::dropIfExists('student_gallery_has_tag');
+//        Schema::create('student_gallery_has_tag', function (Blueprint $table) {
+//            $table->integer('')
+//        });
     }
 
     /**
@@ -46,5 +63,7 @@ class GalleryMaster extends Migration
     {
         Schema::dropIfExists('gallery');
         Schema::dropIfExists('student_gallery');
+        Schema::dropIfExists('tag');
+        Schema::dropIfExists('gallery_has_tag');
     }
 }

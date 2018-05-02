@@ -17,7 +17,32 @@ class GalleryController extends Controller
     {
         $gallery = DB::table('gallery')->get();
 
-        return view('gallery', compact('gallery'));
+        foreach ($gallery as $artifact) {
+            $edited = DB::table('student_gallery')
+                ->where([
+                    ['group_id', Auth::user()->groupId],
+                    ['gallery_id', $artifact->gallery_id],
+                ])
+                ->first();
+
+            if($edited) {
+                $artifact->title = $edited->title;
+                $artifact->description = $edited->description;
+            }
+
+//            dd($artifact);
+
+            $artifact->hidden = false;
+            $artifact->tags = DB::table('tag')
+                ->join('gallery_has_tag', 'gallery_has_tag.tag_id', 'tag.tag_id')
+                ->where('gallery_has_tag.gallery_id', $artifact->gallery_id)
+                ->select('tag.tag_id', 'tag.title')
+                ->get();
+        }
+
+        $tags = DB::table('tag')->get();
+
+        return view('gallery', compact('gallery', 'tags'));
 
     }
 
@@ -103,32 +128,47 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $artifact = DB::table('artifacts')
-            -> where('id', $id)
-            -> first();
-        // artifact has been edited before
-        if ($artifact->edit_id){
-            DB::table('artifacts')
-                -> where('id', $id)
-                -> update([
-                    'title'=> $request->artifactTitle,
-                    'description' => $request->artifactDescription
+
+
+        $usr = Auth::user();
+        $usr->classId = DB::table('user_has_class')
+            ->where('user_id', $usr->id)
+            ->select('class_id')
+            ->first();
+
+        $usr->groupId = DB::table('user_has_group')
+            ->where('user_id', $usr->id)
+            ->select('group_id')
+            ->first();
+
+        $art = DB::table('student_gallery')
+            ->where([
+                ['gallery_id', $id],
+                ['group_id', Auth::user()->groupId]
+            ])
+            ->first();
+
+        if($art) {
+            DB::table('student_gallery')
+                ->where('student_gallery_id', $art->student_gallery_id)
+                ->update([
+                    'title' => $request->title,
+                    'description' => $request->description
                 ]);
-        }
-        // if the artifact has being edited for the first time
-        else {
-            DB::table('artifacts')
+        } else {
+            DB::table('student_gallery')
                 ->insert([
-                    'title' => $request->artifactTitle,
-                    'description' => $request->artifactDescription,
-                    'image' => $request->artifactImage,
-                    'created_by' => $request->user,
-                    'edit_ID' => $request->artifactID,
-                    'catagory' => $request->catagory
+                    'gallery_id' => $request->galleryId,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'img' => $request->img,
+                    'user_id' => $usr->id,
+                    'group_id' => $usr->groupId->group_id,
+                    'class_id' => $usr->classId->class_id
                 ]);
         }
-        return 'Success';
+
+        return $request->all();
     }
 
     /**
