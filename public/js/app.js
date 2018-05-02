@@ -48961,7 +48961,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 3px solid #ABDBFB;\n}\n\n/* On mouse-over, add a grey background color */\nlabel:hover input ~ .checkmark[data-v-70c68067] {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\nlabel input:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #ABDBFB;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\nlabel input:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
+exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 1px solid #4A4A4A;\n}\n\n/* On mouse-over, add a grey background color */\nlabel:hover input ~ .checkmark[data-v-70c68067] {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\nlabel input:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #ABDBFB;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\nlabel input:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
 
 // exports
 
@@ -51533,7 +51533,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showRecordingInterface: false,
             recording: false,
             clickedCharacter: 0,
-            leaveResponse: false
+            leaveResponse: false,
+            responded: false
         };
     },
     mounted: function mounted() {
@@ -51566,7 +51567,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         document.getElementById('call_video').pause();
 
                         if (appScope.currentQuestion.record_after) {
-                            appScope.leaveResponse = true;
+                            console.log(!appScope.responded);
+                            if (!appScope.responded) {
+                                appScope.leaveResponse = true;
+                            }
                         }
                     }
                 });
@@ -51578,13 +51582,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         leaveResponse: function leaveResponse() {
+            var appScope = this;
             if (this.leaveResponse == true) {
-                this.answerQuestion();
-                var appScope = this;
-                setTimeout(function () {
-                    appScope.leaveResponse = false;
-                }, 100);
+                console.log('your video will start in three seconds');
+                appScope.answerQuestion();
             } else {
+                this.videoEl.play();
+                console.log('restart video');
                 this.startSelfVideo();
             }
         }
@@ -51652,6 +51656,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.recording = !this.recording;
         },
         askQuestion: function askQuestion(question) {
+            console.log(!this.responded);
+            this.responded = false;
             this.currentQuestion = question;
         },
 
@@ -51691,26 +51697,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var audioStream = stream.getTracks()[0];
             var videoStream = stream.getTracks()[1];
 
+            //set local variable to set correct scope
+            var appScope = this;
+
             //initialize and display recording stream
             var mediaRecorder = new MediaRecorder(stream);
             video.srcObject = stream;
 
             //start recording when video is loaded
             video.addEventListener('loadeddata', function () {
-                console.log('started');
-                mediaRecorder.start(3000);
+                if (appScope.leaveResponse == true) {
+                    setTimeout(function () {
+                        console.log('started');
+                        mediaRecorder.start(1000);
+                    }, 3000);
+                }
                 video.muted = 'true';
             });
 
-            //set local variable to set correct scope
-            var appScope = this;
+            var end = false;
+            var timeout = appScope.currentQuestion.recording_duration * 1000;
+            setTimeout(function () {
+                end = true;
+            }, timeout);
+
             this.startAudio(stream);
             //save data as it becomes available. Stop recording if stop button has been triggered
             mediaRecorder.addEventListener('dataavailable', function (e) {
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (appScope.leaveResponse == false) {
+                ;if (end) {
+                    console.log('stopped message');
                     mediaRecorder.stop();
                 }
             });
@@ -51719,6 +51737,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             mediaRecorder.addEventListener('stop', function () {
                 audioStream.stop();
                 videoStream.stop();
+
+                appScope.leaveResponse = false;
+                appScope.responded = true;
 
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
@@ -51779,7 +51800,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     //append blob data to the form
                     data.append('blob', base64data);
                     //submit form with all needed data
-                    axios.post("/saveQuestionResponse", data).then(function (r) {
+                    axios.post("/saveFile", data).then(function (r) {
                         return console.log(r);
                     }).catch(function (e) {
                         return console.log(e);
@@ -51834,7 +51855,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //convert data to the correct format
             analyser.fftSize = 256;
             var bufferLengthAlt = analyser.frequencyBinCount;
-            console.log(bufferLengthAlt);
             var dataArrayAlt = new Uint8Array(bufferLengthAlt);
 
             //clear the canvas to prepare for animation

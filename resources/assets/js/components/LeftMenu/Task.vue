@@ -83,7 +83,7 @@
         height: 16px;
         width: 16px;
         background-color: #eee;
-        border: 3px solid #ABDBFB;
+        border: 1px solid $sim-heading;
     }
 
     /* On mouse-over, add a grey background color */

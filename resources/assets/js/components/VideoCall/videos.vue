@@ -74,7 +74,8 @@
                 showRecordingInterface: false,
                 recording: false,
                 clickedCharacter: 0,
-                leaveResponse: false
+                leaveResponse: false,
+                responded: false
             }
         },
         mounted() {
@@ -106,7 +107,10 @@
                               document.getElementById('call_video').pause();
 
                               if(appScope.currentQuestion.record_after){
-                                  appScope.leaveResponse = true;
+                                  console.log(!appScope.responded);
+                                  if(!appScope.responded) {
+                                      appScope.leaveResponse = true;
+                                  }
                               }
                         }
                     });
@@ -118,13 +122,13 @@
                 }
             },
             leaveResponse: function(){
+                let appScope = this;
                 if(this.leaveResponse == true) {
-                    this.answerQuestion();
-                    let appScope = this;
-                    setTimeout(function () {
-                        appScope.leaveResponse = false;
-                    }, 100);
+                    console.log('your video will start in three seconds')
+                    appScope.answerQuestion();
                 } else {
+                    this.videoEl.play();
+                    console.log('restart video');
                     this.startSelfVideo();
                 }
             }
@@ -190,6 +194,8 @@
                 this.recording = !this.recording;
             },
             askQuestion: function (question) {
+                console.log(!this.responded);
+                this.responded = false;
                 this.currentQuestion = question;
             },
 
@@ -233,28 +239,41 @@
                 let audioStream = stream.getTracks()[0];
                 let videoStream = stream.getTracks()[1];
 
+                //set local variable to set correct scope
+                let appScope = this;
+
                 //initialize and display recording stream
                 const mediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
-                    console.log('started')
-                    mediaRecorder.start(3000);
+                        if(appScope.leaveResponse == true) {
+                            setTimeout(function () {
+                                console.log('started')
+                                mediaRecorder.start(1000);
+                            }, 3000);
+                        }
                     video.muted = 'true';
                 })
 
-                //set local variable to set correct scope
-                let appScope = this;
+                let end = false;
+                let timeout = appScope.currentQuestion.recording_duration * 1000;
+                setTimeout(function () {
+                    end = true;
+                }, timeout)
+
                 this.startAudio(stream);
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if (appScope.leaveResponse == false) {
+;                   if(end){
+                        console.log('stopped message')
                         mediaRecorder.stop();
                     }
+
                 });
 
                 //when recording stops, save the video object and stop displaying video stream
@@ -262,13 +281,18 @@
                     audioStream.stop();
                     videoStream.stop();
 
+                    appScope.leaveResponse = false;
+                    appScope.responded = true;
+
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
 
                     appScope.saveVideoMessage(blob, href);
 
 
+
                 })
+
             },
             handleSuccess: function (stream) {
                 const video = document.getElementById('personal_video');
@@ -331,7 +355,7 @@
                         //submit form with all needed data
                         axios
                             .post(
-                                "/saveQuestionResponse",
+                                "/saveFile",
                                 data
                             )
                             .then(r => console.log(r))
@@ -385,7 +409,6 @@
                 //convert data to the correct format
                 analyser.fftSize = 256;
                 let bufferLengthAlt = analyser.frequencyBinCount;
-                console.log(bufferLengthAlt);
                 let dataArrayAlt = new Uint8Array(bufferLengthAlt);
 
                 //clear the canvas to prepare for animation

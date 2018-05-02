@@ -140,34 +140,19 @@ class VideoCallController extends Controller
         file_put_contents($target_file, $data);
         $filename = "/public/storage/".$name;
 
-        DB::table('student_video_submissions')
-            ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'created_at'=> $date]);
+        if($request->has('question')){
+            $question_id = $request->question;
 
+            DB::table('student_video_submissions')
+                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'question_id' => $question_id,'created_at'=> $date]);
+        } else {
 
-        return $request->all();
-    }
-
-    public function questionResponse(Request $request){
-        $user_id = $request->user;
-        $character_id = $request->character;
-        $question_id = $request->question;
-        $video = $request->blob;
-        $day = Auth::user()->current_day;
-        $date = date("Y-m-d H:i:s",time());
-
-
-        $data = base64_decode(preg_replace('#^data:text/\w+;base64,#i', '', $video));
-        header('Content-Type: video/webm');
-        $name = 'video-'.str_random(4).'.webm';
-        $target_file = base_path()."/public/storage/".$name;
-        file_put_contents($target_file, $data);
-        $filename = "/public/storage/".$name;
-
-        DB::table('student_video_submissions')
-            ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'created_at'=> $date]);
-
+            DB::table('student_video_submissions')
+                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id, 'created_at' => $date]);
+        }
 
         return $request->all();
     }
+
 
 }

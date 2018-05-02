@@ -37,7 +37,6 @@ Route::resource('/gallery', 'GalleryController');
 
 Route::resource('/videocall', 'VideoCallController');
 Route::post('/saveFile', 'VideoCallController@saveFile');
-Route::post('/saveQuestionResponse', 'VideoCallController@questionResponse');
 
 Route::resource('/library', 'LibraryController');
 Route::resource('/editor', 'ArticleEditorController');

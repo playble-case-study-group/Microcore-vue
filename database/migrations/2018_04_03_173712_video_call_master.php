@@ -50,6 +50,7 @@ class VideoCallMaster extends Migration
             $table->integer('submission_day');
             $table->integer('character_id');
             $table->integer('user_id');
+            $table->integer('question_id')->default(null);
             $table->timestamps();
         });
 
