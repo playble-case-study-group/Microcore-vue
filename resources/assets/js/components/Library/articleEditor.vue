@@ -129,7 +129,7 @@
         height: 100vh;
         padding-top: 20px;
         padding-left: 40px;
-        box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
+        box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);
     }
 
     #content-container {
