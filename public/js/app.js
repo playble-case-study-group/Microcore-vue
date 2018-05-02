@@ -51532,7 +51532,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentVideo: {},
             showRecordingInterface: false,
             recording: false,
-            clickedCharacter: 0
+            clickedCharacter: 0,
+            leaveResponse: false
         };
     },
     mounted: function mounted() {
@@ -51556,13 +51557,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         currentQuestion: function currentQuestion() {
             if (!this.showRecordingInterface) {
                 document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
-                console.log(this.videoEl.currentTime);
                 document.getElementById('call_video').play();
                 this.callIconToggleStatus = "call_end";
+
+                var appScope = this;
+                document.getElementById('call_video').addEventListener("timeupdate", function () {
+                    if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
+                        document.getElementById('call_video').pause();
+
+                        if (appScope.currentQuestion.record_after) {
+                            appScope.leaveResponse = true;
+                        }
+                    }
+                });
             }
         },
         showRecordingInterface: function showRecordingInterface() {
             if (this.showRecordingInterface == false) {
+                this.startSelfVideo();
+            }
+        },
+        leaveResponse: function leaveResponse() {
+            if (this.leaveResponse == true) {
+                this.answerQuestion();
+                var appScope = this;
+                setTimeout(function () {
+                    appScope.leaveResponse = false;
+                }, 100);
+            } else {
                 this.startSelfVideo();
             }
         }
@@ -51632,8 +51654,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         askQuestion: function askQuestion(question) {
             this.currentQuestion = question;
         },
+
+        answerQuestion: function answerQuestion() {
+            //set that we want both audio and video
+            var constraints = {
+                video: true,
+                audio: true
+            };
+
+            //start recording
+            navigator.mediaDevices.getUserMedia(constraints).then(this.handleMessage.bind(this)).catch(this.handleFailure);
+        },
         startSelfVideo: function startSelfVideo() {
             //set that we want both audio and video
+            console.log('self video start');
             var constraints = {
                 audio: {
                     echoCancellation: true,
@@ -51649,6 +51683,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         handleFailure: function handleFailure(error) {
             //if they don't have browser support, try a lower compatibility function or fail
             console.error('Reeeejected!', error);
+        },
+        handleMessage: function handleMessage(stream) {
+            var video = document.getElementById('personal_video');
+
+            var recordedChunks = [];
+            var audioStream = stream.getTracks()[0];
+            var videoStream = stream.getTracks()[1];
+
+            //initialize and display recording stream
+            var mediaRecorder = new MediaRecorder(stream);
+            video.srcObject = stream;
+
+            //start recording when video is loaded
+            video.addEventListener('loadeddata', function () {
+                console.log('started');
+                mediaRecorder.start(3000);
+                video.muted = 'true';
+            });
+
+            //set local variable to set correct scope
+            var appScope = this;
+            this.startAudio(stream);
+            //save data as it becomes available. Stop recording if stop button has been triggered
+            mediaRecorder.addEventListener('dataavailable', function (e) {
+                if (e.data.size > 0) {
+                    recordedChunks.push(e.data);
+                }
+                if (appScope.leaveResponse == false) {
+                    mediaRecorder.stop();
+                }
+            });
+
+            //when recording stops, save the video object and stop displaying video stream
+            mediaRecorder.addEventListener('stop', function () {
+                audioStream.stop();
+                videoStream.stop();
+
+                var blob = new Blob(recordedChunks, { type: 'video/webm' });
+                var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
+
+                appScope.saveVideoMessage(blob, href);
+            });
         },
         handleSuccess: function handleSuccess(stream) {
             var video = document.getElementById('personal_video');
@@ -51675,15 +51751,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                /*if (appScope.recording == false) {
+                if (appScope.leaveResponse == true) {
                     mediaRecorder.stop();
-                }*/
+                }
             });
 
             //when recording stops, save the video object and stop displaying video stream
             mediaRecorder.addEventListener('stop', function () {
                 audioStream.stop();
                 videoStream.stop();
+            });
+        },
+        saveVideoMessage: function saveVideoMessage(blob, href) {
+            //append all needed information into a form
+            var data = new FormData();
+            data.append('user', this.$store.state.user.id);
+            data.append('character', this.clickedCharacter);
+            data.append('question', this.currentQuestion.question_id);
+
+            //fetch the data saved into the blob
+            axios.get(href, { responseType: 'blob' }).then(function (response) {
+                //read in data from saved blob url
+                var reader = new FileReader();
+                reader.readAsDataURL(response.data, { type: 'application/octet-stream' });
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    //append blob data to the form
+                    data.append('blob', base64data);
+                    //submit form with all needed data
+                    axios.post("/saveQuestionResponse", data).then(function (r) {
+                        return console.log(r);
+                    }).catch(function (e) {
+                        return console.log(e);
+                    });
+                };
             });
         },
         startAudio: function startAudio() {
