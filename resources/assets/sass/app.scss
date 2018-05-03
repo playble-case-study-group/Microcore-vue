@@ -22,12 +22,17 @@ h2 {
 
 h3 {
   font-size: 14pt;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-family-sans-serif;
 }
 
 body {
   font-size: 12pt;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font-family-sans-serif;
+}
+
+.material-icons {
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .wrapper {
@@ -36,7 +41,7 @@ body {
 }
 
 .btn-selected {
-  background-color: #4A4A4A;
+  background-color: $sim-heading;
   color: white;
 }
 
@@ -44,17 +49,54 @@ body {
   font-family: $font-family-serif;
 }
 
-//.btn-invert {
-//  background-color: #4A4A4A;
-//  color: white;
-//  font-family: $font-family-serif;
-//}
 
 .btn-invert {
-  @include button-variant( #ffffff, #4A4A4A, #4A4A4A);
+  @include button-variant( #ffffff, $sim-heading, $sim-heading);
 }
 
-.material-icons {
-  font-size: inherit;
-  line-height: inherit;
+
+.btn-selected {
+  background-color: $sim-heading;
+  color: white;
+}
+
+.btn-invert.disabled:hover,
+.btn-invert.disabled:focus,
+.btn-invert.disabled.focus,
+.btn-invert[disabled]:hover,
+.btn-invert[disabled]:focus,
+.btn-invert[disabled].focus,
+fieldset[disabled] .btn-invert:hover,
+fieldset[disabled] .btn-invert:focus,
+fieldset[disabled] .btn-invert.focus {
+  background-color: $sim-heading;
+  border-color: $sim-heading;
+}
+
+.heading{
+  background-color: $sim-heading;
+  height: $sim-margin;
+  color: white;
+
+  h1 {
+    margin: 0;
+    padding: 8px 10px;
+  }
+}
+
+.main{
+  margin-left: $sim-margin;
+  margin-top: $sim-margin;
+  padding: 0;
+  background-color: white;
+}
+
+.btn-success{
+  height: $sim-margin;
+  width: 130px;
+  font-size: 16px;
+}
+
+.contents{
+  margin: $sim-margin;
 }

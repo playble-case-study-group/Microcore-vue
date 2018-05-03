@@ -1,23 +1,23 @@
 <template>
-    <div class="container">
+    <div class="container main">
         <div class="row">
             <div class="heading col-sm-12">
                 <h1>Messages</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2" style="background-color: #ffffff; height: 100vh">
-                <button @click="composeModal">Compose</button>
+            <div class="col-sm-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
+                <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
-                    <li @click="toggleInbox">Inbox</li>
-                    <li @click="toggleSent">Sent</li>
+                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
+                    <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
                 </ul>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-10 emailList">
                 <table id="inbox">
                     <tr>
-                        <th></th>
                         <th>From</th>
+                        <th></th>
                         <th>Subject</th>
                         <th>Body</th>
                         <th>Date</th>
@@ -82,26 +82,24 @@
         <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header heading">
                         <h5 class="modal-title">{{ readModalData.subject }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
-                        <h4><b>{{ readModalData.from }}</b></h4>
-                        <p>{{ readModalData.body }}</p>
-                        <button @click="replyEmail">Reply</button>
+                        <h5><b>{{ readModalData.from }}</b></h5>
+                        <p class="email-body">{{ readModalData.body }}</p>
                         <div id="replyForm">
-                            <div class="row form-group">
-                                <label for="replySubject" class="col-sm-2">Subject:</label>
-                                <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
+                            <div class="row form-group reply-contact">
+                                <i class="material-icons reply">reply</i>
+                                <span class="reply-contact-name">{{ readModalData.from }}</span>
                             </div>
                             <div class="row form-group">
-                                <label for="replyBody">Body</label>
-                                <textarea type="text" id="replyBody" v-model="draftEmail.body"></textarea>
+                                <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
                     </div>
                 </div>
             </div>
@@ -111,8 +109,10 @@
         <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    <div class="modal-header heading">
+                        <h5 class="modal-title">New Email</h5>
+                    </div>
                     <div class="modal-body">
-                        <h4><b>Compose modal</b></h4>
                         <div class="row form-group">
                             <label for="toList" class="col-sm-2">To:</label>
                             <div class="col-sm-10">
@@ -126,12 +126,11 @@
                             <input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">
                         </div>
                         <div class="row form-group">
-                            <label for="toBody">Body</label>
-                            <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                            <textarea class="col-sm-12" type="text" id="toBody" v-model="draftEmail.body"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendEmail">Send</button>
                     </div>
                 </div>
             </div>
@@ -194,11 +193,15 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
+                $('.keyline-inbox').css('border-color', '#4A4A4A');
+                $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
                 console.log('inbox');
             },
             toggleSent: function () {
                 $('#inbox').hide();
+                $('.keyline-inbox').css('border-color', 'white');
+                $('.keyline-sent').css('border-color', '#4A4A4A');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -219,6 +222,7 @@
                 this.draftEmail.reply = this.readModalData.id;
 
                 $('#replyForm').show();
+                $('.replyEmail').html('Send');
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -235,34 +239,80 @@
 </script>
 
 <style scoped lang="scss">
-
-    .container {
-        margin-left: 40px;
-        margin-top: 40px;
-        padding: 0;
-        /*padding: 20px;*/
-        background-color: white;
-
-    }
-
-    .heading {
-        background-color: #4A4A4A;
-        height: 40px;
-        color: white;
-
-        h1 {
-            margin: 0;
-            padding: 8px 10px;
-        }
-
-    }
-
+    @import "../../../sass/_variables.scss";
     ul {
         padding-left: 0;
         list-style: none;
+        cursor: pointer;
+        margin-top: 20px;
     }
-
+    li {
+        height: 40px;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 10px 12px;
+    }
+    textarea{
+        resize: none;
+        height: 20rem;
+    }
     td, th {
         padding: 10px;
+    }
+    hr {
+        width: 1px;
+        height: 25px;
+        color: #c8c8c8;
+    }
+    .main{
+        height: 115rem;
+    }
+    .emailList{
+        margin-top: 20px;
+    }
+    .compose{
+        margin-top: 20px;
+        margin-left: 17px;
+    }
+    #toBody{
+        height: 30rem;
+        resize: none;
+    }
+    .email-body{
+        margin: 20px 0 40px;
+    }
+    .reply{
+        font-size: 25px;
+    }
+    .reply-contact{
+        border: solid 1px;
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+    .reply-contact-name{
+        padding-top: 9px;
+        padding-left: 7px;
+        position: absolute;
+        height: 20px;
+    }
+    #composeModal > .modal-dialog > .modal-content{
+        height: 51rem;
+        width: 85rem;
+    }
+    #readModal > .modal-dialog > .modal-content{
+        width: 85rem;
+    }
+    .modal-body{
+        height: 80%
+    }
+    .keyline{
+        border-left: solid 4px $sim-heading;
+        padding-left: 10px;
+    }
+    .keyline-sent{
+        border-color: white;
+    }
+    .keyline-inbox{
+        border-color: $sim-heading;
     }
 </style>

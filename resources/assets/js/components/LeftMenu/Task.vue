@@ -47,7 +47,9 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
+
     li {
         margin-top: 10px;
         margin-bottom: 12px;
@@ -81,7 +83,7 @@
         height: 16px;
         width: 16px;
         background-color: #eee;
-        border: 3px solid #4A4A4A;
+        border: 3px solid $sim-heading;
     }
 
     /* On mouse-over, add a grey background color */
@@ -91,7 +93,7 @@
 
     /* When the checkbox is checked, add a blue background */
     label input:checked ~ .checkmark {
-        background-color: #4A4A4A;
+        background-color: $sim-heading;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */

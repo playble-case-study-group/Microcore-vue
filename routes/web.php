@@ -39,6 +39,8 @@ Route::resource('/videocall', 'VideoCallController');
 Route::post('/saveFile', 'VideoCallController@saveFile');
 
 Route::resource('/library', 'LibraryController');
+Route::resource('/editor', 'ArticleEditorController');
+// Route::post('/updateArticle', 'ArticleEditorController@update');
 
 Route::resource('/chat', 'ChatController');
 
@@ -59,3 +61,4 @@ Route::post('/addToGroup', 'GroupController@addToGroup');
 
 Route::resource('/classes', 'ClassController');
 
+Route::get('/dashboard', 'DashController@loadDash');

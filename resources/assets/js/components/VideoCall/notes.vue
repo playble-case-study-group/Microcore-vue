@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div id="notes">
-        <div id="header"><h3>Notes</h3></div>
+        <div class="heading"><h3>My Notes</h3></div>
         <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
     </div>
 </template>
@@ -45,15 +45,11 @@
         height: 87%;
         border:none;
         padding: 20px;
+        resize:none;
 
     }
-    #header{
-        color: white;
-        background-color: $sim-heading;
-        height: 50px;
-    }
     h3{
-        padding: 15px;
+        padding: 10px;
     }
 
 </style>

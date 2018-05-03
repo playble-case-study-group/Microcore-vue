@@ -20,6 +20,7 @@ class VideoCallController extends Controller
         $calls = DB::table('video')
             ->where('day', Auth::user()->current_day)
             ->get();
+
         $questions = DB::table('question')->get();
         $notes = DB::table('notes')
             ->select('note')
