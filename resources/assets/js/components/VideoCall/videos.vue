@@ -475,7 +475,7 @@
         color: red;
     }
     #call_video{
-        height: 40rem;
+        height: 27rem;
         width: 100%;
     }
     .contact-inner{

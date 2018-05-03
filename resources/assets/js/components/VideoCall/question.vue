@@ -71,17 +71,17 @@
     }
     @media(min-width: 992px){
         .button {
-            margin: 1rem 3rem;
-            height: 7rem;
-            width: 21rem;
+            margin: 25px 25px;
+            height: 4rem;
+            width: 13rem;
             white-space: normal;
         }
     }
     @media(min-width: 1400px){
         .button {
-            margin: 2rem 4rem;
-            height: 5rem;
-            width: 28rem;
+            margin: 2rem 2rem;
+            height: 4rem;
+            width: 17rem;
         }
     }
 </style>

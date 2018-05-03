@@ -1,17 +1,15 @@
 <template>
     <div id="videocall" class="container">
         <div class="row">
-            <div class="d-flex">
-                <notes id="notesParent" class="col-sm-11 col-md-3 col-lg-3"
+                <notes id="notesParent" class="col-sm-11 col-lg-3"
                        :notes="this.notes">
                 </notes>
-                <character-video class="col-sm-11 col-md-8 col-lg-8"
+                <character-video class="col-sm-11 col-lg-8"
                                  :characters="this.contacts"
                                  :calls="this.calls"
                                  :questions="this.questions">
 
                 </character-video>
-           </div>
         </div>
     </div>
 </template>
@@ -42,18 +40,13 @@
         height:40rem;
         top: 15px;
     }
-    .d-flex{
-        display: flex;
-        flex-flow: column-reverse;
+    .row{
+        flex-flow: wrap-reverse;
     }
     @media(min-width:992px){
-        .d-flex{
-            flex-flow: initial;
-            justify-content: space-evenly;
-        }
         #notesParent{
             height:70rem;
-            top: -22px;
+            top: 0px;
         }
     }
 
