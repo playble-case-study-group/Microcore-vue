@@ -56786,7 +56786,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 40px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.table-of-contents ul[data-v-1c179b00] {\n  list-style-type: none;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 40px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -56892,9 +56892,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if ($(title).children().length <= 0) {
                 $(title).append(tocHtmlStr);
-                $('ul').css('list-style-type', 'none');
-                $('li > a').css('color', '#636b6f');
-                $('ul > li').css('margin-left', '-10px');
+                $(".table-of-contents").css('list-style-type', 'none');
+                $(".table-of-contents").find('ul').css('list-style-type', 'none');
+                $(".table-of-contents").find('a').css('color', '#636b6f');
+                $(".table-of-contents").find('li').css('margin-left', '-10px');
             }
         }
 

@@ -85,9 +85,10 @@
 
                 if( $(title).children().length <= 0 ) {
                     $(title).append(tocHtmlStr);
-                    $('ul').css('list-style-type', 'none');
-                    $('li > a').css('color', '#636b6f');
-                    $('ul > li').css('margin-left', '-10px');
+                    $(".table-of-contents").css('list-style-type', 'none');
+                    $(".table-of-contents").find('ul').css('list-style-type', 'none');
+                    $(".table-of-contents").find('a').css('color', '#636b6f');
+                    $(".table-of-contents").find('li').css('margin-left', '-10px');
                 }
             }
 
@@ -100,6 +101,9 @@
     .menubtn {
         cursor:pointer;
         margin-bottom: 3rem;
+    }
+    .table-of-contents ul {
+        list-style-type: none;
     }
     .article-title:hover{
         text-decoration: underline;
