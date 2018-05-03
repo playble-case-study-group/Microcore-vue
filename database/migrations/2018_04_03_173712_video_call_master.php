@@ -35,7 +35,7 @@ class VideoCallMaster extends Migration
         Schema::create('question', function (Blueprint $table) {
             $table->increments('question_id');
             $table->integer('call_id');
-            $table->string('question');
+            $table->string('question')->default(null);
             $table->integer('start_time');
             $table->integer('end_time');
             $table->boolean('record_after')->default(0);
