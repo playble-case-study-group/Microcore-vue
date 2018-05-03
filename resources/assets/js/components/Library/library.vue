@@ -85,9 +85,10 @@
 
                 if( $(title).children().length <= 0 ) {
                     $(title).append(tocHtmlStr);
-                    $('ul').css('list-style-type', 'none');
-                    $('li > a').css('color', '#636b6f');
-                    $('ul > li').css('margin-left', '-10px');
+                    $(".table-of-contents").css('list-style-type', 'none');
+                    $(".table-of-contents").find('ul').css('list-style-type', 'none');
+                    $(".table-of-contents").find('a').css('color', '#636b6f');
+                    $(".table-of-contents").find('li').css('margin-left', '-10px');
                 }
             }
 
@@ -101,6 +102,9 @@
         cursor:pointer;
         margin-bottom: 3rem;
     }
+    .table-of-contents ul {
+        list-style-type: none;
+    }
     .article-title:hover{
         text-decoration: underline;
     }
@@ -111,7 +115,7 @@
 
     #libraryMenu {
         height: 100vh;
-        padding-top: 20px;
+        padding-top: 40px;
         padding-left: 40px;
         box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);
     }
@@ -119,7 +123,7 @@
     #content-container {
         padding-right: 80px;
         padding-left: 40px;
-        padding-top: 20px;
+        padding-top: 40px;
 
     }
     #content-container h1 {

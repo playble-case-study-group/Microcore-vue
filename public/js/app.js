@@ -1529,13 +1529,17 @@ var singletonElement = null
 var singletonCounter = 0
 var isProduction = false
 var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
 
 // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 // tags it will allow on a page
 var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
 
-module.exports = function (parentId, list, _isProduction) {
+module.exports = function (parentId, list, _isProduction, _options) {
   isProduction = _isProduction
+
+  options = _options || {}
 
   var styles = listToStyles(parentId, list)
   addStylesToDom(styles)
@@ -1600,7 +1604,7 @@ function createStyleElement () {
 
 function addStyle (obj /* StyleObjectPart */) {
   var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
 
   if (styleElement) {
     if (isProduction) {
@@ -1681,6 +1685,9 @@ function applyToTag (styleElement, obj) {
 
   if (media) {
     styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
   }
 
   if (sourceMap) {
@@ -52037,7 +52044,7 @@ module.exports = function spread(callback) {
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var apply = Function.prototype.apply;
+/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
 
 // DOM APIs, for completeness
 
@@ -52088,9 +52095,17 @@ exports._unrefActive = exports.active = function(item) {
 
 // setimmediate attaches itself to the global object
 __webpack_require__(99);
-exports.setImmediate = setImmediate;
-exports.clearImmediate = clearImmediate;
+// On some exotic environments, it's not clear which object `setimmeidate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 99 */
@@ -52497,7 +52512,7 @@ var content = __webpack_require__(105);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7a7690d0", content, false);
+var update = __webpack_require__(4)("20d1e4ac", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -52676,7 +52691,7 @@ var content = __webpack_require__(110);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("19555dd8", content, false);
+var update = __webpack_require__(4)("55e7c666", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -52870,7 +52885,7 @@ var content = __webpack_require__(115);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("c750aa8a", content, false);
+var update = __webpack_require__(4)("745cd7d2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53001,7 +53016,7 @@ var content = __webpack_require__(119);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("447f8654", content, false);
+var update = __webpack_require__(4)("2efc2332", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53350,7 +53365,7 @@ var content = __webpack_require__(128);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5bc34600", content, false);
+var update = __webpack_require__(4)("a497e990", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -53708,7 +53723,7 @@ var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("9b9bc592", content, false);
+var update = __webpack_require__(4)("24c4ef85", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54296,7 +54311,7 @@ var content = __webpack_require__(138);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("05ffd021", content, false);
+var update = __webpack_require__(4)("3cd545bd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54602,7 +54617,7 @@ var content = __webpack_require__(143);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0dd8fe1e", content, false);
+var update = __webpack_require__(4)("ea05ecac", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -54626,7 +54641,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin-top: 20px;\n  margin-left: 17px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 85rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 85rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -5px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 10px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 115rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n.inboxToggle[data-v-52d1ee62] {\n  margin: 20px;\n}\n.sentToggle[data-v-52d1ee62] {\n  margin: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: inherit;\n}\n.compose[data-v-52d1ee62] {\n    height: auto;\n    width: auto;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\nhr[data-v-52d1ee62] {\n  width: 1px;\n  height: 25px;\n  color: #c8c8c8;\n}\n.main[data-v-52d1ee62] {\n  height: 115rem;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 7px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 51rem;\n  width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 50rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -5px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 115rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 111rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -54939,13 +54954,13 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "inboxToggle", on: { click: _vm.toggleInbox } },
+              { staticClass: "toggle", on: { click: _vm.toggleInbox } },
               [_c("span", [_vm._v("Inbox")])]
             ),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
+              { staticClass: "toggle", on: { click: _vm.toggleSent } },
               [_c("span", [_vm._v("Sent")])]
             )
           ]),
@@ -54965,53 +54980,42 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row content" }, [
-      _c(
-        "div",
-        {
-          staticClass: "sidebar col-md-2",
-          staticStyle: {
-            "background-color": "white",
-            height: "111rem",
-            "border-right": "solid 1px #c8c8c8"
-          }
-        },
-        [
+      _c("div", { staticClass: "sidebar col-md-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success compose",
+            on: { click: _vm.composeModal }
+          },
+          [_vm._v("Compose")]
+        ),
+        _vm._v(" "),
+        _c("ul", [
           _c(
-            "button",
+            "li",
             {
-              staticClass: "btn btn-success compose",
-              on: { click: _vm.composeModal }
+              staticClass: "inboxToggle",
+              staticStyle: { "background-color": "white" },
+              on: { click: _vm.toggleInbox }
             },
-            [_vm._v("Compose")]
+            [
+              _c("div", { staticClass: "keyline keyline-inbox" }, [
+                _vm._v("Inbox")
+              ])
+            ]
           ),
           _vm._v(" "),
-          _c("ul", [
-            _c(
-              "li",
-              {
-                staticClass: "inboxToggle",
-                staticStyle: { "background-color": "white" },
-                on: { click: _vm.toggleInbox }
-              },
-              [
-                _c("div", { staticClass: "keyline keyline-inbox" }, [
-                  _vm._v("Inbox")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
-              [
-                _c("div", { staticClass: "keyline keyline-sent" }, [
-                  _vm._v("Sent")
-                ])
-              ]
-            )
-          ])
-        ]
-      ),
+          _c(
+            "li",
+            { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
+            [
+              _c("div", { staticClass: "keyline keyline-sent" }, [
+                _vm._v("Sent")
+              ])
+            ]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-12 col-lg-10 emailList" }, [
         _c(
@@ -55458,7 +55462,7 @@ var content = __webpack_require__(148);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3daf17ae", content, false);
+var update = __webpack_require__(4)("0fca444f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55482,7 +55486,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 15px;\n}\n.d-flex[data-v-31d2957c]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: column-reverse;\n            flex-flow: column-reverse;\n}\n@media(min-width:992px){\n.d-flex[data-v-31d2957c]{\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-flow: initial;\n                flex-flow: initial;\n        -webkit-box-pack: space-evenly;\n            -ms-flex-pack: space-evenly;\n                justify-content: space-evenly;\n}\n#notesParent[data-v-31d2957c]{\n        height:70rem;\n        top: -22px;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 15px;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:70rem;\n        top: 0px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -55498,8 +55502,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__notes_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
-//
-//
 //
 //
 //
@@ -55595,7 +55597,7 @@ var content = __webpack_require__(152);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3c151b5b", content, false);
+var update = __webpack_require__(4)("2522d9c9", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55619,7 +55621,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-767f6044] {\n  width: 100%;\n  height: 87%;\n  border: none;\n  padding: 20px;\n  resize: none;\n}\nh3[data-v-767f6044] {\n  padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-767f6044] {\n  width: 100%;\n  height: 67%;\n  border: none;\n  padding: 20px;\n  resize: none;\n}\nh3[data-v-767f6044] {\n  padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -55779,7 +55781,7 @@ var content = __webpack_require__(157);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("7ddb3dba", content, false);
+var update = __webpack_require__(4)("0671ab90", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -55803,7 +55805,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 40rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 27rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -55821,6 +55823,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
+//
 //
 //
 //
@@ -55898,7 +55901,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             recording: false,
             clickedCharacter: 0,
             leaveResponse: false,
-            responded: false
+            responded: false,
+            countdownTime: 0
         };
     },
     mounted: function mounted() {
@@ -55950,9 +55954,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.leaveResponse == true) {
                 console.log('your video will start in three seconds');
                 appScope.answerQuestion();
+                appScope.countdownTime = appScope.currentQuestion.recording_duration;
             } else {
-                this.videoEl.play();
-                console.log('restart video');
+                this.currentQuestion = this.currentQuestions.find(function (question) {
+                    if (question.question_id == appScope.currentQuestion.next_question) {
+                        return question;
+                    }
+                });
                 this.startSelfVideo();
             }
         }
@@ -56074,13 +56082,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     setTimeout(function () {
                         console.log('started');
                         mediaRecorder.start(1000);
-                    }, 3000);
+                    }, 4000);
                 }
                 video.muted = 'true';
             });
 
             var end = false;
-            var timeout = appScope.currentQuestion.recording_duration * 1000;
+            var timeout = appScope.currentQuestion.recording_duration * 1400;
             setTimeout(function () {
                 end = true;
             }, timeout);
@@ -56317,7 +56325,7 @@ var content = __webpack_require__(161);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("158a2a95", content, false);
+var update = __webpack_require__(4)("e393add8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56341,7 +56349,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 5rem;\n    width: 22rem;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 3rem;\n        height: 7rem;\n        width: 21rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 4rem;\n        height: 5rem;\n        width: 28rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 5rem;\n    width: 22rem;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -56364,6 +56372,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -56371,11 +56383,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         console.log('Component mounted.');
     },
+    data: function data() {
+        return {
+            count: 0,
+            warning: 0
+        };
+    },
 
-    props: ['questions'],
+    watch: {
+        countdown: function countdown() {
+            if (this.count == 0) {
+                this.count = 3;
+                this.startCount();
+            }
+        },
+        warning: function warning() {
+            this.count = this.countdown;
+            this.startCount();
+        }
+    },
+    props: ['questions', 'countdown'],
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
+        },
+        startCount: function startCount() {
+            var appScope = this;
+            var timer = setInterval(function () {
+                if (appScope.count > 0) {
+                    appScope.count -= 1;
+                    console.log(appScope.count);
+                } else {
+                    appScope.warning = true;
+                    clearInterval(timer);
+                }
+            }, 1000);
         }
     }
 
@@ -56392,21 +56434,30 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "question" } },
-    _vm._l(_vm.questions, function(question) {
-      return _c(
-        "button",
-        {
-          staticClass: "btn btn-success btn-lg button",
-          attrs: { type: "button", id: question.id },
-          on: {
-            click: function($event) {
-              _vm.submitQuestion(question)
-            }
-          }
-        },
-        [_c("b", [_vm._v(_vm._s(question.question))])]
-      )
-    })
+    [
+      this.count > 0
+        ? _c("div", [_vm._v("\n        " + _vm._s(this.count) + "\n    ")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.questions, function(question) {
+        return question.question
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-lg button",
+                attrs: { type: "button", id: question.id },
+                on: {
+                  click: function($event) {
+                    _vm.submitQuestion(question)
+                  }
+                }
+              },
+              [_c("b", [_vm._v(_vm._s(question.question))])]
+            )
+          : _vm._e()
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -56430,7 +56481,7 @@ var content = __webpack_require__(165);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("94df6eec", content, false);
+var update = __webpack_require__(4)("05f38df2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56454,7 +56505,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: 40rem;\n    width: 100%;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: 27rem;\n    width: 100%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -56740,7 +56791,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("character-questions", {
-        attrs: { id: "characterQuestions", questions: this.currentQuestions },
+        attrs: {
+          id: "characterQuestions",
+          countdown: this.countdownTime,
+          questions: this.currentQuestions
+        },
         on: { question: _vm.askQuestion }
       })
     ],
@@ -56789,28 +56844,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "videocall" } }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "d-flex" },
-        [
-          _c("notes", {
-            staticClass: "col-sm-11 col-md-3 col-lg-3",
-            attrs: { id: "notesParent", notes: this.notes }
-          }),
-          _vm._v(" "),
-          _c("character-video", {
-            staticClass: "col-sm-11 col-md-8 col-lg-8",
-            attrs: {
-              characters: this.contacts,
-              calls: this.calls,
-              questions: this.questions
-            }
-          })
-        ],
-        1
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _c("notes", {
+          staticClass: "col-sm-11 col-lg-3",
+          attrs: { id: "notesParent", notes: this.notes }
+        }),
+        _vm._v(" "),
+        _c("character-video", {
+          staticClass: "col-sm-11 col-lg-8",
+          attrs: {
+            characters: this.contacts,
+            calls: this.calls,
+            questions: this.questions
+          }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -56885,7 +56938,7 @@ var content = __webpack_require__(172);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("6b302aba", content, false);
+var update = __webpack_require__(4)("e9670a38", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -56909,7 +56962,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 20px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 20px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.table-of-contents ul[data-v-1c179b00] {\n  list-style-type: none;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 40px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
 
 // exports
 
@@ -57015,9 +57068,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if ($(title).children().length <= 0) {
                 $(title).append(tocHtmlStr);
-                $('ul').css('list-style-type', 'none');
-                $('li > a').css('color', '#636b6f');
-                $('ul > li').css('margin-left', '-10px');
+                $(".table-of-contents").css('list-style-type', 'none');
+                $(".table-of-contents").find('ul').css('list-style-type', 'none');
+                $(".table-of-contents").find('a').css('color', '#636b6f');
+                $(".table-of-contents").find('li').css('margin-left', '-10px');
             }
         }
 
@@ -76593,7 +76647,7 @@ var content = __webpack_require__(311);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("44fd503f", content, false);
+var update = __webpack_require__(4)("f2736736", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -78151,7 +78205,7 @@ var content = __webpack_require__(334);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("39624483", content, false);
+var update = __webpack_require__(4)("fa56c916", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -78175,7 +78229,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 3rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n    -webkit-box-shadow: 2px 1px 2px;\n            box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 20px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    padding-right: 80px;\n    padding-left: 40px;\n    padding-top: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 3rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n    -webkit-box-shadow: 2px 1px 2px;\n            box-shadow: 2px 1px 2px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 40px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    margin-top: 20px;\n    padding-right: 80px;\n    padding-left: 40px;\n    padding-top: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    width: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
 
 // exports
 
@@ -78320,7 +78374,7 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("form", [
+      _c("form", { staticClass: "col-sm-8 col-md-9" }, [
         _c("textarea", {
           directives: [
             {
@@ -78330,7 +78384,6 @@ var render = function() {
               expression: "currentContent"
             }
           ],
-          staticClass: "col-sm-8 col-md-9",
           attrs: { id: "content-container" },
           domProps: { value: _vm.currentContent },
           on: {

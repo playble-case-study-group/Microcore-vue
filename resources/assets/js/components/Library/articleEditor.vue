@@ -14,8 +14,8 @@
                     </p>
                 </div>
             </div>
-            <form>
-                <textarea class="col-sm-8 col-md-9" id="content-container" v-model="currentContent" @keyup="setTime">
+            <form class="col-sm-8 col-md-9">
+                <textarea id="content-container" v-model="currentContent" @keyup="setTime">
                 </textarea>
             </form>
 
@@ -105,18 +105,20 @@
     }
     #libraryMenu {
         height: 100vh;
-        padding-top: 20px;
+        padding-top: 40px;
         padding-left: 40px;
         box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);
     }
 
     #content-container {
+        margin-top: 20px;
         padding-right: 80px;
         padding-left: 40px;
         padding-top: 40px;
         resize: none;
         border:none;
         height: 100%;
+        width: 100%;
         height: fit-content;
         height: -moz-available;          /* WebKit-based browsers will ignore this. */
         height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */

@@ -49,6 +49,7 @@
 
         <!--show character questions-->
         <character-questions id="characterQuestions"
+                             :countdown="this.countdownTime"
                              :questions="this.currentQuestions"
                              v-on:question="askQuestion">
         </character-questions>
@@ -75,7 +76,8 @@
                 recording: false,
                 clickedCharacter: 0,
                 leaveResponse: false,
-                responded: false
+                responded: false,
+                countdownTime: 0
             }
         },
         mounted() {
@@ -126,9 +128,13 @@
                 if(this.leaveResponse == true) {
                     console.log('your video will start in three seconds')
                     appScope.answerQuestion();
+                    appScope.countdownTime = appScope.currentQuestion.recording_duration;
                 } else {
-                    this.videoEl.play();
-                    console.log('restart video');
+                    this.currentQuestion = this.currentQuestions.find(function(question){
+                        if(question.question_id == appScope.currentQuestion.next_question){
+                            return question;
+                        }
+                    })
                     this.startSelfVideo();
                 }
             }
@@ -252,13 +258,13 @@
                             setTimeout(function () {
                                 console.log('started')
                                 mediaRecorder.start(1000);
-                            }, 3000);
+                            }, 4000);
                         }
                     video.muted = 'true';
                 })
 
                 let end = false;
-                let timeout = appScope.currentQuestion.recording_duration * 1000;
+                let timeout = appScope.currentQuestion.recording_duration * 1400;
                 setTimeout(function () {
                     end = true;
                 }, timeout)
@@ -469,7 +475,7 @@
         color: red;
     }
     #call_video{
-        height: 40rem;
+        height: 27rem;
         width: 100%;
     }
     .contact-inner{

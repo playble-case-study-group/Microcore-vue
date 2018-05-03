@@ -113,7 +113,7 @@
 
 <style scoped>
     #record_video{
-        height: 40rem;
+        height: 27rem;
         width: 100%;
     }
 
