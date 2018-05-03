@@ -45,48 +45,7 @@
                             </tbody>
                         </table>
 
-                        <h2>Group Students</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Group</th>
-                                    <th>Students</th>
-                                    <th>Manage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="group in clss.groups">
-                                    <td>{{ group.name }}</td>
-                                    <td>
-                                        <ul>
-                                            <li v-for="student in group.students" :key="student.id">
-                                                {{ student.name }} <button class="btn btn-sm btn-danger" @click="removeStudent(student, group.group_id, clss.class_id)">x</button>
-                                            </li>
-                                            <li>
-                                                <v-select v-model="newGroupUser" label="name" :options="clss.unAssigned"></v-select>
-                                                <button class="btn btn-success" @click="addStudent(clss.class_id, group.group_id)">
-                                                    Add Student
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-danger">Delete Group</button>
-                                            <!--<button type="button" class="btn btn-secondary">Right</button>-->
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-primary">
-                                            New Group
-                                        </button>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <groups :groups="clss.groups" :unassigned="clss.unAssigned"></groups>
                     </div>
 
                 </div>
@@ -97,13 +56,13 @@
 
 <script>
     import { mapGetter, mapActions } from 'vuex'
-    import  vSelect  from 'vue-select'
+    import groups from './Groups.vue'
 
     export default {
 
         props: ['classes'],
         components: {
-            'v-select': vSelect
+            'groups': groups
         },
         data: function () {
             return {

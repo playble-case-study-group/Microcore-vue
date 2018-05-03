@@ -15,22 +15,25 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="navbar-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-default navbar-static-top">
+            <!-- Branding Image -->
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            {{--<div class="navbar-header">--}}
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-            </div>
+                {{--<!-- Collapsed Hamburger -->--}}
+                {{--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">--}}
+                    {{--<span class="sr-only">Toggle Navigation</span>--}}
+                    {{--<span class="icon-bar"></span>--}}
+                    {{--<span class="icon-bar"></span>--}}
+                    {{--<span class="icon-bar"></span>--}}
+                {{--</button>--}}
+            {{--</div>--}}
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
@@ -39,45 +42,42 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                        <li class="nav-item"><a class="nav-link" href="/library">Biblioteca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/gallery">Galeria</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/videocall">Llamadas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/email">Mensajes</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/classes">
-                                        Classes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/classes">Classes</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
                         </li>
                     @endguest
                 </ul>
             </div>
         </nav>
         <div class="wrapper">
-            @auth
+            {{--@auth--}}
             <left-menu></left-menu>
-            <right-menu></right-menu>
-            @endauth
+            {{--<!-- <right-menu></right-menu> -->--}}
+            {{--@endauth--}}
             @yield('content')
         </div>
 

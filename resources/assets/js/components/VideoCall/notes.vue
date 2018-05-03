@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div id="notes">
-        <div class="heading"><h3>Notes</h3></div>
+        <div class="heading"><h3>My Notes</h3></div>
         <textarea v-model="note" v-on:keyup="postUpdatedNote"></textarea>
     </div>
 </template>

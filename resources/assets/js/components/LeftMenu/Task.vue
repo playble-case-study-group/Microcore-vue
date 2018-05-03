@@ -78,12 +78,12 @@
     /* Create a custom checkbox */
     .checkmark {
         position: absolute;
-        top: 0;
+        top: 4px;
         left: 0;
         height: 16px;
         width: 16px;
         background-color: #eee;
-        border: 3px solid $sim-heading;
+        border: 1px solid $sim-heading;
     }
 
     /* On mouse-over, add a grey background color */
@@ -93,7 +93,7 @@
 
     /* When the checkbox is checked, add a blue background */
     label input:checked ~ .checkmark {
-        background-color: $sim-heading;
+        background-color: #ABDBFB;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */

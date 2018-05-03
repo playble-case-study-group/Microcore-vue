@@ -10,7 +10,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,7 +18,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('left-menu', require('./components/LeftMenu/LeftMenu.vue'));
-Vue.component('right-menu', require('./components/RightMenu/RightMenu.vue'));
+//Vue.component('right-menu', require('./components/RightMenu/RightMenu.vue'));
 
 Vue.component('gallery', require('./components/Gallery/Gallery'));
 Vue.component('dash', require('./components/Dashboard/dashboard.vue'));
@@ -31,6 +30,7 @@ Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
 // Vue.component('v-select', require('vue-select'));
+Vue.component('editor', require('./components/Library/articleEditor.vue'));
 
 
 import store from './vuex/store';

@@ -43,9 +43,7 @@
             <a href="#" v-if="!showRecordingInterface" @click="changePhoneIcon">
                 <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
             </a>
-            <a href="#" @click="changeMicIcon">
-                <i id="mic" class="material-icons">mic</i>
-            </a>
+            <canvas id="visualizer"></canvas>
 
         </div>
 
@@ -76,6 +74,8 @@
                 showRecordingInterface: false,
                 recording: false,
                 clickedCharacter: 0,
+                leaveResponse: false,
+                responded: false
             }
         },
         mounted() {
@@ -98,13 +98,37 @@
             currentQuestion: function () {
                 if(!this.showRecordingInterface) {
                     document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
-                    console.log(this.videoEl.currentTime);
                     document.getElementById('call_video').play()
                     this.callIconToggleStatus = "call_end";
+
+                    let appScope = this;
+                    document.getElementById('call_video').addEventListener("timeupdate", function () {
+                          if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
+                              document.getElementById('call_video').pause();
+
+                              if(appScope.currentQuestion.record_after){
+                                  console.log(!appScope.responded);
+                                  if(!appScope.responded) {
+                                      appScope.leaveResponse = true;
+                                  }
+                              }
+                        }
+                    });
                 }
             },
             showRecordingInterface: function(){
                 if(this.showRecordingInterface == false){
+                    this.startSelfVideo();
+                }
+            },
+            leaveResponse: function(){
+                let appScope = this;
+                if(this.leaveResponse == true) {
+                    console.log('your video will start in three seconds')
+                    appScope.answerQuestion();
+                } else {
+                    this.videoEl.play();
+                    console.log('restart video');
                     this.startSelfVideo();
                 }
             }
@@ -139,19 +163,19 @@
                         }
                     })
                     this.currentVideo = activeCall;
-                } else{
+                } else {
                     //if not active, leave a message
                     this.leaveMessage();
                 }
             },
-            leaveMessage: function(){
+            leaveMessage: function () {
                 this.showRecordingInterface = true;
                 this.currentQuestions = [];
                 this.currentQuestion = {};
                 this.currentVideo = {};
             },
-            changePhoneIcon: function(){
-                if(this.callIconToggleStatus === "call"){
+            changePhoneIcon: function () {
+                if (this.callIconToggleStatus === "call") {
                     this.videoEl.play();
                     this.callIconToggleStatus = "call_end";
                 } else {
@@ -159,20 +183,23 @@
                     this.callIconToggleStatus = "call";
                 }
             },
-            changeMicIcon: function(){
-                if(document.getElementById('mic').innerText === "mic"){
+            changeMicIcon: function () {
+                if (document.getElementById('mic').innerText === "mic") {
                     document.getElementById('mic').innerText = "mic_off";
-                } else{
+                } else {
                     document.getElementById('mic').innerText = "mic";
                 }
             },
-            startStopRecording: function(){
+            startStopRecording: function () {
                 this.recording = !this.recording;
             },
             askQuestion: function (question) {
+                console.log(!this.responded);
+                this.responded = false;
                 this.currentQuestion = question;
             },
-            startSelfVideo: function(){
+
+            answerQuestion: function(){
                 //set that we want both audio and video
                 const constraints = {
                     video: true,
@@ -181,14 +208,93 @@
 
                 //start recording
                 navigator.mediaDevices.getUserMedia(constraints)
+                    .then(this.handleMessage.bind(this))
+                    .catch(this.handleFailure);
+            },
+            startSelfVideo: function () {
+                //set that we want both audio and video
+                console.log('self video start')
+                const constraints = {
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true
+                    },
+                    video: true
+                };
+
+                //this.startAudio();
+                //start recording
+                navigator.mediaDevices.getUserMedia(constraints)
                     .then(this.handleSuccess.bind(this))
                     .catch(this.handleFailure);
             },
-            handleFailure: function(error){
+            handleFailure: function (error) {
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error('Reeeejected!', error);
             },
-            handleSuccess: function(stream) {
+            handleMessage: function (stream) {
+                const video = document.getElementById('personal_video');
+
+                const recordedChunks = [];
+                let audioStream = stream.getTracks()[0];
+                let videoStream = stream.getTracks()[1];
+
+                //set local variable to set correct scope
+                let appScope = this;
+
+                //initialize and display recording stream
+                const mediaRecorder = new MediaRecorder(stream);
+                video.srcObject = stream;
+
+                //start recording when video is loaded
+                video.addEventListener('loadeddata', function () {
+                        if(appScope.leaveResponse == true) {
+                            setTimeout(function () {
+                                console.log('started')
+                                mediaRecorder.start(1000);
+                            }, 3000);
+                        }
+                    video.muted = 'true';
+                })
+
+                let end = false;
+                let timeout = appScope.currentQuestion.recording_duration * 1000;
+                setTimeout(function () {
+                    end = true;
+                }, timeout)
+
+                this.startAudio(stream);
+                //save data as it becomes available. Stop recording if stop button has been triggered
+                mediaRecorder.addEventListener('dataavailable', function (e) {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+;                   if(end){
+                        console.log('stopped message')
+                        mediaRecorder.stop();
+                    }
+
+                });
+
+                //when recording stops, save the video object and stop displaying video stream
+                mediaRecorder.addEventListener('stop', function () {
+                    audioStream.stop();
+                    videoStream.stop();
+
+                    appScope.leaveResponse = false;
+                    appScope.responded = true;
+
+                    const blob = new Blob(recordedChunks, {type: 'video/webm'});
+                    var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
+
+                    appScope.saveVideoMessage(blob, href);
+
+
+
+                })
+
+            },
+            handleSuccess: function (stream) {
                 const video = document.getElementById('personal_video');
 
                 const recordedChunks = [];
@@ -202,19 +308,20 @@
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
                     mediaRecorder.start(3000);
+                    video.muted = 'true';
                 })
 
                 //set local variable to set correct scope
                 let appScope = this;
-
+                this.startAudio(stream);
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    /*if (appScope.recording == false) {
+                    if (appScope.leaveResponse == true) {
                         mediaRecorder.stop();
-                    }*/
+                    }
                 });
 
                 //when recording stops, save the video object and stop displaying video stream
@@ -225,6 +332,116 @@
 
                 })
             },
+            saveVideoMessage: function(blob, href){
+                //append all needed information into a form
+                let data = new FormData();
+                data.append('user', this.$store.state.user.id);
+                data.append('character', this.clickedCharacter);
+                data.append('question', this.currentQuestion.question_id);
+
+                //fetch the data saved into the blob
+                axios
+                    .get(
+                        href,
+                        { responseType: 'blob'}
+                    ).then(function (response) {
+                    //read in data from saved blob url
+                    var reader = new FileReader();
+                    reader.readAsDataURL(response.data, {type: 'application/octet-stream'});
+                    reader.onloadend = function () {
+                        var base64data = reader.result;
+                        //append blob data to the form
+                        data.append('blob', base64data);
+                        //submit form with all needed data
+                        axios
+                            .post(
+                                "/saveFile",
+                                data
+                            )
+                            .then(r => console.log(r))
+                            .catch(e => console.log(e));
+                    };
+                })
+            },
+            startAudio: function(){
+                //start collecting audio stream
+                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                    // store streaming data chunks in array
+                    const chunks = [];
+
+                    //set paramaters of the Audio Stream
+                    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    var analyser = audioCtx.createAnalyser();
+                    analyser.minDecibels = -90;
+                    analyser.maxDecibels = -10;
+                    analyser.smoothingTimeConstant = 0.85;
+                    analyser.fftSize = 256;
+
+                    //get canvas element that will display the animation
+                    let canvasCtx = document.getElementById('visualizer');
+                    canvasCtx = canvasCtx.getContext("2d");
+
+                    // create media recorder instance to initialize recording
+                    const recorder = new MediaRecorder(stream);
+
+                    //connect the audio stream to the incoming audio
+                    let source = audioCtx.createMediaStreamSource(stream);
+                    source.connect(analyser);
+
+                    //call animation function
+                    this.visualize(analyser, canvasCtx);
+
+                    // function to be called when data is received
+                    recorder.ondataavailable = e => {
+                        // add stream data to chunks
+                        chunks.push(e.data);
+                    };
+                    // start recording with 1 second time between receiving 'ondataavailable' events
+                    recorder.start(300);
+
+                }).catch(console.error);
+            },
+            visualize: function (analyser, canvasCtx) {
+                //set the dimensions of animation
+                let WIDTH = 400;
+                let HEIGHT = 150;
+
+                //convert data to the correct format
+                analyser.fftSize = 256;
+                let bufferLengthAlt = analyser.frequencyBinCount;
+                let dataArrayAlt = new Uint8Array(bufferLengthAlt);
+
+                //clear the canvas to prepare for animation
+                canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+
+                //set recursive function to continuously draw to canvas
+                let drawAlt = function () {
+                    let drawVisual = requestAnimationFrame(drawAlt);
+
+                    analyser.getByteFrequencyData(dataArrayAlt);
+
+                    //set canvas background color and add animation
+                    canvasCtx.fillStyle = '#4a4a4a';
+                    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+                    //define the width of audio bar display
+                    let barWidth = (WIDTH / bufferLengthAlt) * 1.25;
+                    let barHeight;
+                    let x = 0;
+
+                    //iterate through audio levels and add bars to canvas
+                    for (let i = 0; i < bufferLengthAlt; i++) {
+                        barHeight = dataArrayAlt[i];
+
+                        canvasCtx.fillStyle = 'rgb(255, '+ (barHeight + 210) + ', 255)';
+                        canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+
+                        x += barWidth + 1;
+                    }
+                };
+
+                drawAlt();
+            }
         }
     }
 
@@ -235,6 +452,10 @@
 
     a {
         color: white;
+    }
+    canvas {
+        height: 30px;
+        width: 40px;
     }
     #controlBar{
         display: flex;

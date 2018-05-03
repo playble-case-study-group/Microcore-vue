@@ -1,23 +1,32 @@
 <template>
     <div class="container main">
+
         <div class="row">
-            <div class="heading col-sm-12">
+            <div role="banner" class="heading flex-header col-sm-12">
                 <h1>Messages</h1>
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+                    <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                    <div class="inboxToggle" @click="toggleInbox"><span>Inbox</span></div>
+                    <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
+                </div>
+                <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-2" style="background-color: #ffffff; height: 100vh">
-                <button @click="composeModal">Compose</button>
+
+        <div class="row content">
+            <div class="sidebar col-md-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
+                <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
-                    <li @click="toggleInbox">Inbox</li>
-                    <li @click="toggleSent">Sent</li>
+                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
+                    <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
                 </ul>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-12 col-lg-10 emailList">
                 <table id="inbox">
                     <tr>
-                        <th></th>
                         <th>From</th>
+                        <th></th>
                         <th>Subject</th>
                         <th>Body</th>
                         <th>Date</th>
@@ -82,26 +91,24 @@
         <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header heading">
                         <h5 class="modal-title">{{ readModalData.subject }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
-                        <h4><b>{{ readModalData.from }}</b></h4>
-                        <p>{{ readModalData.body }}</p>
-                        <button @click="replyEmail">Reply</button>
+                        <h5><b>{{ readModalData.from }}</b></h5>
+                        <p class="email-body">{{ readModalData.body }}</p>
                         <div id="replyForm">
-                            <div class="row form-group">
-                                <label for="replySubject" class="col-sm-2">Subject:</label>
-                                <input type="text" id="replySubject" name="replySubject" class="col-sm-10" v-model="draftEmail.subject">
+                            <div class="row form-group reply-contact">
+                                <i class="material-icons reply">reply</i>
+                                <span class="reply-contact-name">{{ readModalData.from }}</span>
                             </div>
                             <div class="row form-group">
-                                <label for="replyBody">Body</label>
-                                <textarea type="text" id="replyBody" v-model="draftEmail.body"></textarea>
+                                <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
                     </div>
                 </div>
             </div>
@@ -111,8 +118,10 @@
         <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    <div class="modal-header heading">
+                        <h5 class="modal-title">New Email</h5>
+                    </div>
                     <div class="modal-body">
-                        <h4><b>Compose modal</b></h4>
                         <div class="row form-group">
                             <label for="toList" class="col-sm-2">To:</label>
                             <div class="col-sm-10">
@@ -126,12 +135,11 @@
                             <input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">
                         </div>
                         <div class="row form-group">
-                            <label for="toBody">Body</label>
-                            <textarea type="text" id="toBody" v-model="draftEmail.body"></textarea>
+                            <textarea class="col-sm-12" type="text" id="toBody" v-model="draftEmail.body"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendEmail">Send</button>
                     </div>
                 </div>
             </div>
@@ -194,11 +202,15 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
+                $('.keyline-inbox').css('border-color', '#636b6f');
+                $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
                 console.log('inbox');
             },
             toggleSent: function () {
                 $('#inbox').hide();
+                $('.keyline-inbox').css('border-color', 'white');
+                $('.keyline-sent').css('border-color', '#636b6f');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -219,6 +231,7 @@
                 this.draftEmail.reply = this.readModalData.id;
 
                 $('#replyForm').show();
+                $('.replyEmail').html('Send');
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -228,6 +241,13 @@
                     subject: "",
                     body: ""
                 };
+            },
+            openNav: function() {
+                document.getElementById("mySidenav").style.width = "200px";
+                console.log('menu');
+            },
+            closeNav: function() {
+                document.getElementById("mySidenav").style.width = "0";
             }
         }
 
@@ -239,9 +259,168 @@
     ul {
         padding-left: 0;
         list-style: none;
+        cursor: pointer;
+        margin-top: 20px;
     }
-
+    li {
+        height: 40px;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 10px 12px;
+    }
+    textarea{
+        resize: none;
+        height: 20rem;
+    }
     td, th {
         padding: 10px;
+    }
+    hr {
+        width: 1px;
+        height: 25px;
+        color: #c8c8c8;
+    }
+    .main{
+        height: 115rem;
+    }
+    .row{
+        margin: 0px;
+
+    }
+    .emailList{
+        margin-top: 20px;
+    }
+    .compose{
+        margin-top: 20px;
+        margin-left: 17px;
+    }
+    #toBody{
+        height: 30rem;
+        resize: none;
+    }
+    .email-body{
+        margin: 20px 0 40px;
+    }
+    .reply{
+        font-size: 25px;
+    }
+    .reply-contact{
+        border: solid 1px;
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+    .reply-contact-name{
+        padding-top: 9px;
+        padding-left: 7px;
+        position: absolute;
+        height: 20px;
+    }
+    #composeModal > .modal-dialog > .modal-content{
+        height: 51rem;
+        width: 85rem;
+    }
+    #readModal > .modal-dialog > .modal-content{
+        width: 85rem;
+    }
+    .modal-body{
+        height: 80%
+    }
+    .modal-title{
+        margin: -5px 0;
+        justify-content: flex-start;
+    }
+    .keyline{
+        border-left: solid 4px #636b6f;
+        padding-left: 10px;
+    }
+    .keyline-sent{
+        border-color: white;
+    }
+    .keyline-inbox{
+        border-color: #636b6f;
+    }
+    .sidebar{
+        display: none;
+    }
+    .flex-header{
+        display: flex;
+        justify-content: space-between;
+    }
+    .mobile-menu{
+        font-size: 26px;
+        color: white;
+    }
+    /* The side navigation menu */
+    .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        height: 115rem;
+        position: absolute; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        right: 0;
+        background-color: #4a4a4a;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    .content {
+        transition: margin-left .5s;
+        padding: 20px;
+    }
+    .inboxToggle{
+        margin: 20px;
+    }
+    .sentToggle{
+        margin: 20px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    @media(min-width: 1224px){
+        .sidebar{
+            display: inherit;
+        }
+        .compose{
+            height: auto;
+            width: auto;
+        }
+        .mobile-menu{
+            display: none;
+        }
+    }
+    @media(min-width: 1400px){
+        .compose{
+            height: 40px;
+            width: 130px;
+        }
     }
 </style>

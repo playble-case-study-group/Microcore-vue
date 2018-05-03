@@ -76,5 +76,28 @@ class GallerySeeder extends Seeder
             ],
 
         ]);
+
+        DB::table('tag')->truncate();
+        DB::table('tag')->insert([
+            ['tag_id' => 1, 'title' => 'Tag 1'],
+            ['tag_id' => 2, 'title' => 'Tag 2'],
+            ['tag_id' => 3, 'title' => 'Tag 3'],
+            ['tag_id' => 4, 'title' => 'Tag 4']
+        ]);
+
+        DB::table('gallery_has_tag')->truncate();
+        DB::table('gallery_has_tag')->insert([
+            ['gallery_id' =>  1, 'tag_id' => 1],
+            ['gallery_id' =>  1, 'tag_id' => 2],
+            ['gallery_id' =>  1, 'tag_id' => 3],
+            ['gallery_id' =>  2, 'tag_id' => 1],
+            ['gallery_id' =>  2, 'tag_id' => 2],
+            ['gallery_id' =>  2, 'tag_id' => 4],
+            ['gallery_id' =>  3, 'tag_id' => 1],
+            ['gallery_id' =>  4, 'tag_id' => 1],
+            ['gallery_id' =>  5, 'tag_id' => 2],
+            ['gallery_id' =>  6, 'tag_id' => 2],
+            ['gallery_id' =>  7, 'tag_id' => 4]
+        ]);
     }
 }
