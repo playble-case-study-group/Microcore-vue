@@ -52521,7 +52521,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#left-menu[data-v-cc350930] {\n    min-width: 240px;\n    max-width: 240px;\n    min-height: 100vh;\n    background-color: white;\n    /*box-shadow: 2px 1px 2px;*/\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n    /*-webkit-box-shadow: 0 8px 6px -6px #999;*/\n    /*-moz-box-shadow: 0 8px 6px -6px #999;*/\n    /*box-shadow: 0 8px 6px -6px #999;*/\n}\n.content[data-v-cc350930] {\n    padding: 20px;\n}\nul[data-v-cc350930] {\n    list-style: none;\n    padding-left: 0 !important;\n}\n\n", ""]);
+exports.push([module.i, "\n#left-menu[data-v-cc350930] {\n    min-width: 240px;\n    max-width: 240px;\n    min-height: 100vh;\n    background-color: white;\n    /*box-shadow: 2px 1px 2px;*/\n    /*box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);*/\n    -webkit-box-shadow: 0px -6px 10px;\n            box-shadow: 0px -6px 10px;\n}\n.content[data-v-cc350930] {\n    padding: 20px;\n}\nul[data-v-cc350930] {\n    list-style: none;\n    padding-left: 0 !important;\n}\n\n", ""]);
 
 // exports
 
@@ -53374,7 +53374,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-3f7e9a0e], #edit-art[data-v-3f7e9a0e] {\n  margin-top: 20px;\n}\n.modal-body .btn[data-v-3f7e9a0e] {\n  margin-right: 10px;\n}\n.modal-body img[data-v-3f7e9a0e] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -53387,8 +53387,54 @@ exports.push([module.i, "\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Artifact_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53470,31 +53516,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //import mapState from 'vuex'
 
 
+//    import axios from 'axios';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['gallery', 'tags'],
+    components: {
+        'v-select': __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a
+    },
     data: function data() {
         return {
             artifacts: this.gallery,
             groupArt: [],
             showModal: false,
+            addTag: '',
             modal: {
                 id: 0,
                 editId: 0,
                 category: 0,
                 image: '',
                 title: '',
-                description: ''
+                description: '',
+                tags: []
             }
         };
     },
-    components: {
-        Artifact: __WEBPACK_IMPORTED_MODULE_0__Artifact_vue___default.a
-    },
-
     mounted: function mounted() {
         console.log('Created()');
         this.filterArtifacts(false);
+
+        $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges);
     },
 
     methods: {
@@ -53532,21 +53582,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         openModal: function openModal(modalArtifact) {
-            this.showModal = true;
+            $('.artifact-modal').modal();
             this.modal.image = modalArtifact.image;
             this.modal.title = modalArtifact.title;
             this.modal.description = modalArtifact.description;
             this.modal.id = modalArtifact.gallery_id;
             this.modal.editId = modalArtifact.edit_id;
             this.modal.category = modalArtifact.catagory;
+            this.modal.tags = modalArtifact.tags;
         },
         closeModal: function closeModal() {
-            this.showModal = false;
+            //                this.showModal = false;
+            $('.artifact-modal').modal();
         },
         saveChanges: function saveChanges() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/gallery/' + this.modal.id, {
+            axios.put('/gallery/' + this.modal.id, {
                 user: this.user.id,
                 title: this.modal.title,
                 description: this.modal.description,
@@ -53565,9 +53617,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             update.description = this.modal.description;
             update.title = this.modal.title;
-            $('#edit-art').addClass('hidden');
-            $('#save-art').addClass('hidden');
-            $('#display-art').removeClass('hidden');
+            $('#edit-art').addClass('d-none');
+            $('#save-art').addClass('d-none');
+            $('#display-art').removeClass('d-none');
         },
         cancelChanges: function cancelChanges() {
             var _this2 = this;
@@ -53577,14 +53629,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.modal.title = old.title;
             this.modal.description = old.description;
-            $('#edit-art').addClass('hidden');
-            $('#save-art').addClass('hidden');
-            $('#display-art').removeClass('hidden');
+            $('#edit-art').addClass('d-none');
+            $('#save-art').addClass('d-none');
+            $('#display-art').removeClass('d-none');
         },
         editArtifact: function editArtifact() {
-            $('#display-art').addClass('hidden');
-            $('#edit-art').removeClass('hidden');
-            $('#save-art').removeClass('hidden');
+            $('#display-art').addClass('d-none');
+            $('#edit-art').removeClass('d-none');
+            $('#save-art').removeClass('d-none');
         }
     },
     computed: {
@@ -53783,272 +53835,396 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container", attrs: { id: "gallery" } },
-    [
-      _c("h1", [_vm._v("Welcome to the Gallery")]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "dropdown" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "dropdownMenuButton",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("\n            Filter\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu",
-            attrs: { "aria-labelledby": "dropdownMenuButton" }
-          },
-          [
-            _c(
-              "a",
-              { attrs: { href: "#" }, on: { click: _vm.showAllGallery } },
-              [_vm._v("Show All")]
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.tags, function(tag, key) {
-              return _c(
-                "a",
-                {
-                  key: key,
-                  staticClass: "dropdown-item",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.filterGallery(tag)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " + _vm._s(tag.title) + "\n            "
-                  )
-                ]
-              )
-            })
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
+  return _c("div", { staticClass: "container", attrs: { id: "gallery" } }, [
+    _c("h1", [_vm._v("Welcome to the Gallery")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "dropdown" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary dropdown-toggle",
+          attrs: {
+            type: "button",
+            id: "dropdownMenuButton",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }
+        },
+        [_vm._v("\n            Filter\n        ")]
+      ),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-columns" },
-        _vm._l(_vm.gallery, function(artifact) {
-          return !artifact.hidden
-            ? _c(
-                "div",
-                {
-                  key: artifact.gallery_id,
-                  staticClass: "card",
-                  on: {
-                    click: function($event) {
-                      _vm.openModal(artifact)
-                    }
-                  }
-                },
-                [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: artifact.image, alt: artifact.title }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body artifact" }, [
-                    _c("h4", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(artifact.title))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(artifact.description))
-                    ])
-                  ])
-                ]
-              )
-            : _vm._e()
-        })
-      ),
-      _vm._v(" "),
-      _vm.showModal
-        ? _c("Artifact", [
-            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-info",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.closeModal()
-                    }
-                  }
-                },
-                [_vm._v(" Close ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-              _c("img", {
-                staticClass: "img-responsive",
-                attrs: {
-                  slot: "image",
-                  src: _vm.modal.image,
-                  alt: _vm.modal.title
-                },
-                slot: "image"
-              }),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "display-art" } }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary btn-sm",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.editArtifact()
-                      }
-                    }
-                  },
-                  [_vm._v("Edit Artifact")]
-                ),
-                _vm._v(" "),
-                _c("h4", [_vm._v(_vm._s(_vm.modal.title))]),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.modal.description))])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "hidden", attrs: { id: "edit-art" } }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("h4", [_vm._v("Title")]),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "studentGallery" } }, [
-                    _vm._v("Gallery")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox", id: "studentGallery" }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.modal.title,
-                        expression: "modal.title"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "formTitle",
-                      type: "text",
-                      "aria-describedby": "emailHelp",
-                      placeholder: "Please enter a title..."
-                    },
-                    domProps: { value: _vm.modal.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.modal, "title", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("h4", [_vm._v("Description")]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.modal.description,
-                        expression: "modal.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "formDescription",
-                      placeholder: "Please add artifact description...",
-                      rows: "4"
-                    },
-                    domProps: { value: _vm.modal.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.modal, "description", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "dropdownMenuButton" }
+        },
+        [
+          _c("a", { attrs: { href: "#" }, on: { click: _vm.showAllGallery } }, [
+            _vm._v("Show All")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.tags, function(tag, key) {
+            return _c(
+              "a",
               {
-                staticClass: "hidden",
-                attrs: { slot: "footer", id: "save-art" },
-                slot: "footer"
+                key: key,
+                staticClass: "dropdown-item",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    _vm.filterGallery(tag)
+                  }
+                }
               },
               [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-info",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.cancelChanges()
-                      }
-                    }
-                  },
-                  [_vm._v(" Cancel ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.saveChanges()
-                      }
-                    }
-                  },
-                  [_vm._v("Save changes")]
+                _vm._v(
+                  "\n                " + _vm._s(tag.title) + "\n            "
                 )
               ]
             )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-columns" },
+      _vm._l(_vm.gallery, function(artifact) {
+        return !artifact.hidden
+          ? _c(
+              "div",
+              {
+                key: artifact.gallery_id,
+                staticClass: "card",
+                on: {
+                  click: function($event) {
+                    _vm.openModal(artifact)
+                  }
+                }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: artifact.image, alt: artifact.title }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body artifact" }, [
+                  _c("h4", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(artifact.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(artifact.description))
+                  ])
+                ])
+              ]
+            )
+          : _vm._e()
+      })
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": ".artifact-modal"
+        }
+      },
+      [_vm._v("Large modal")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade artifact-modal",
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "artifactModalDialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("div", { staticClass: "row col-sm-12" }, [
+                  _c("img", {
+                    staticClass: "img-responsive",
+                    attrs: {
+                      slot: "image",
+                      src: _vm.modal.image,
+                      alt: _vm.modal.title
+                    },
+                    slot: "image"
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "display-art" } }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("h4", [_vm._v(_vm._s(_vm.modal.title))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.editArtifact()
+                            }
+                          }
+                        },
+                        [_vm._v("Edit Artifact")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "row col-sm-12" },
+                    _vm._l(_vm.modal.tags, function(tag) {
+                      return _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(tag.title) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-sm-12" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.modal.description))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "d-none", attrs: { id: "edit-art" } },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("h4", [_vm._v("Title")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.modal.title,
+                            expression: "modal.title"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "formTitle",
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Please enter a title..."
+                        },
+                        domProps: { value: _vm.modal.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.modal, "title", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("h4", [_vm._v("Description")]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.modal.description,
+                            expression: "modal.description"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "formDescription",
+                          placeholder: "Please add artifact description...",
+                          rows: "4"
+                        },
+                        domProps: { value: _vm.modal.description },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.modal,
+                              "description",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("h4", [_vm._v("Tags")]),
+                        _vm._v(" "),
+                        _vm._l(_vm.modal.tags, function(tag) {
+                          return _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(tag.title) +
+                                  "\n                                "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-6" },
+                        [
+                          _c("v-select", {
+                            attrs: { label: "title", options: _vm.modal.tags },
+                            model: {
+                              value: _vm.addTag,
+                              callback: function($$v) {
+                                _vm.addTag = $$v
+                              },
+                              expression: "addTag"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-2" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: {
+                              click: function($event) {
+                                _vm.addStudent(
+                                  _vm.clss.class_id,
+                                  _vm.group.group_id
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                       Add Tag\n                                   "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "row col-sm-12 d-none form-group",
+                  attrs: { id: "save-art" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-info",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.cancelChanges()
+                        }
+                      }
+                    },
+                    [_vm._v(" Cancel ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.saveChanges()
+                        }
+                      }
+                    },
+                    [_vm._v("Save changes")]
+                  )
+                ]
+              )
+            ])
           ])
-        : _vm._e()
-    ],
-    1
-  )
+        ])
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

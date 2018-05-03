@@ -21,7 +21,6 @@
             </div>
         </div>
 
-        <hr>
         <div class="card-columns">
             <div class="card" v-for="artifact in gallery"
                  v-if="!artifact.hidden"
@@ -36,74 +35,125 @@
         </div>
 
 
-        <!-- Modal View -->
-        <Artifact v-if="showModal">
-            <div slot="header">
-                <button type="button" class="btn btn-outline-info" @click="closeModal()"> Close </button>
-            </div>
-            <div slot="body">
-                <img slot="image" :src="modal.image" :alt="modal.title" class="img-responsive">
-                <div id="display-art">
-                    <button class="btn btn-primary btn-sm" @click="editArtifact()" type="button">Edit Artifact</button>
-                    <h4>{{ modal.title }}</h4>
-                    <p>{{ modal.description }}</p>
-                </div>
-                <div id="edit-art" class="hidden">
-                    <div class="form-group">
-                        <h4>Title</h4>
-                        <label for="studentGallery">Gallery</label>
-                        <input type="checkbox" id="studentGallery">
-                        <input id="formTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Please enter a title..." v-model="modal.title">
-                    </div>
-                    <div class="form-group">
-                        <h4>Description</h4>
-                        <textarea id="formDescription"
-                                  placeholder="Please add artifact description..."
-                                  class="form-control"
-                                  rows="4"
-                                  v-model="modal.description">
-                        </textarea>
-                    </div>
-                </div>
-            </div>
+        <!-- Large modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".artifact-modal">Large modal</button>
 
-            <div slot="footer" id="save-art" class="hidden">
-                <button type="button" class="btn btn-outline-info" @click="cancelChanges()"> Cancel </button>
-                <button type="button" class="btn btn-primary" @click="saveChanges()">Save changes</button>
+        <div class="modal fade artifact-modal" tabindex="-1" role="dialog" aria-labelledby="artifactModalDialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row col-sm-12">
+                                <img slot="image" :src="modal.image" :alt="modal.title" class="img-responsive">
+                            </div>
+                            <div id="display-art">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4>{{ modal.title }}</h4>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-primary btn-sm" @click="editArtifact()" type="button">Edit Artifact</button>
+                                    </div>
+                                </div>
+                                <div class="row col-sm-12">
+                                    <button v-for="tag in modal.tags"
+                                            type="button"
+                                            class="btn btn-primary">
+                                        {{ tag.title }}
+                                    </button>
+                                </div>
+                                <div class="row col-sm-12">
+                                    <p>{{ modal.description }}</p>
+                                </div>
+                            </div>
+                            <div id="edit-art" class="d-none">
+                                <div class="form-group">
+                                    <h4>Title</h4>
+                                    <input id="formTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Please enter a title..." v-model="modal.title">
+                                </div>
+                                <div class="form-group">
+                                    <h4>Description</h4>
+                                    <textarea id="formDescription"
+                                              placeholder="Please add artifact description..."
+                                              class="form-control"
+                                              rows="4"
+                                              v-model="modal.description">
+                                </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Tags</h4>
+                                    <button v-for="tag in modal.tags"
+                                            type="button"
+                                            class="btn btn-primary">
+                                        {{ tag.title }}
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <v-select v-model="addTag" label="title" :options="modal.tags"></v-select>
+                                    </div>
+                                   <div class="col-sm-2">
+                                       <button class="btn btn-success" @click="addStudent(clss.class_id, group.group_id)">
+                                           Add Tag
+                                       </button>
+                                   </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="save-art" class="row col-sm-12 d-none form-group">
+                            <button type="button" class="btn btn-outline-info" @click="cancelChanges()"> Cancel </button>
+                            <button type="button" class="btn btn-primary" @click="saveChanges()">Save changes</button>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
-        </Artifact>
+        </div>
+
     </div>
 </template>
 
 <script>
     //import mapState from 'vuex'
     import Artifact from './Artifact.vue'
-    import axios from 'axios';
+    import vSelect  from 'vue-select'
+//    import axios from 'axios';
 
     export default {
         props: ['gallery', 'tags'],
+        components: {
+            'v-select': vSelect
+        },
         data: function(){
             return {
                 artifacts: this.gallery,
                 groupArt: [],
                 showModal: false,
+                addTag: '',
                 modal: {
                     id: 0,
                     editId: 0,
                     category: 0,
                     image: '',
                     title: '',
-                    description: ''
+                    description: '',
+                    tags: []
                 }
             }
         },
-        components: {
-            Artifact
-        },
-
         mounted() {
             console.log('Created()');
             this.filterArtifacts(false);
+
+            $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges)
 
         },
         methods: {
@@ -134,16 +184,18 @@
                 }
             },
             openModal: function(modalArtifact) {
-                this.showModal = true;
+                $('.artifact-modal').modal();
                 this.modal.image = modalArtifact.image;
                 this.modal.title = modalArtifact.title;
                 this.modal.description = modalArtifact.description;
                 this.modal.id = modalArtifact.gallery_id;
                 this.modal.editId = modalArtifact.edit_id;
                 this.modal.category = modalArtifact.catagory;
+                this.modal.tags = modalArtifact.tags;
             },
             closeModal: function() {
-                this.showModal = false;
+//                this.showModal = false;
+                $('.artifact-modal').modal();
             },
             saveChanges: function() {
                 axios.put('/gallery/' + this.modal.id, {
@@ -163,22 +215,22 @@
                 let update = this.gallery.find ( art => art.gallery_id === this.modal.id);
                 update.description = this.modal.description;
                 update.title = this.modal.title;
-                $('#edit-art').addClass('hidden');
-                $('#save-art').addClass('hidden');
-                $('#display-art').removeClass('hidden');
+                $('#edit-art').addClass('d-none');
+                $('#save-art').addClass('d-none');
+                $('#display-art').removeClass('d-none');
             },
             cancelChanges: function () {
                 let old = this.gallery.find ( art => art.gallery_id === this.modal.id);
                 this.modal.title = old.title;
                 this.modal.description = old.description;
-                $('#edit-art').addClass('hidden');
-                $('#save-art').addClass('hidden');
-                $('#display-art').removeClass('hidden');
+                $('#edit-art').addClass('d-none');
+                $('#save-art').addClass('d-none');
+                $('#display-art').removeClass('d-none');
             },
             editArtifact: function () {
-                $('#display-art').addClass('hidden');
-                $('#edit-art').removeClass('hidden');
-                $('#save-art').removeClass('hidden');
+                $('#display-art').addClass('d-none');
+                $('#edit-art').removeClass('d-none');
+                $('#save-art').removeClass('d-none');
             }
         },
         computed: {
@@ -197,6 +249,19 @@
         /*-webkit-column-gap:1em;*/
 
 
+    }
+
+    #display-art, #edit-art {
+        margin-top: 20px;
+    }
+
+    .modal-body .btn {
+        margin-right: 10px;
+    }
+
+    .modal-body img {
+        width: 100%;
+        height: 100%;
     }
 
     .artifact{

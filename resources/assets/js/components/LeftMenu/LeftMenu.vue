@@ -53,10 +53,8 @@
         min-height: 100vh;
         background-color: white;
         /*box-shadow: 2px 1px 2px;*/
-        box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);
-        /*-webkit-box-shadow: 0 8px 6px -6px #999;*/
-        /*-moz-box-shadow: 0 8px 6px -6px #999;*/
-        /*box-shadow: 0 8px 6px -6px #999;*/
+        /*box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);*/
+        box-shadow: 0px -6px 10px;
     }
     .content {
         padding: 20px;
