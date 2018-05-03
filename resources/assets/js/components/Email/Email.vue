@@ -7,15 +7,15 @@
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
                     <button class="btn btn-success compose" @click="composeModal">Compose</button>
-                    <div class="inboxToggle" @click="toggleInbox"><span>Inbox</span></div>
-                    <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
+                    <div class="toggle" @click="toggleInbox"><span>Inbox</span></div>
+                    <div class="toggle" @click="toggleSent"><span>Sent</span></div>
                 </div>
                 <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
             </div>
         </div>
 
         <div class="row content">
-            <div class="sidebar col-md-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
+            <div class="sidebar col-md-2">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
                     <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
@@ -291,8 +291,7 @@
         margin-top: 20px;
     }
     .compose{
-        margin-top: 20px;
-        margin-left: 17px;
+        margin: 20px;
     }
     #toBody{
         height: 30rem;
@@ -317,10 +316,10 @@
     }
     #composeModal > .modal-dialog > .modal-content{
         height: 51rem;
-        width: 85rem;
+        width: 50rem;
     }
     #readModal > .modal-dialog > .modal-content{
-        width: 85rem;
+        width: 50rem;
     }
     .modal-body{
         height: 80%
@@ -331,7 +330,7 @@
     }
     .keyline{
         border-left: solid 4px #636b6f;
-        padding-left: 10px;
+        padding-left: 20px;
     }
     .keyline-sent{
         border-color: white;
@@ -341,6 +340,10 @@
     }
     .sidebar{
         display: none;
+    }
+    .toggle {
+        margin: 20px;
+        cursor: pointer;
     }
     .flex-header{
         display: flex;
@@ -393,12 +396,6 @@
         transition: margin-left .5s;
         padding: 20px;
     }
-    .inboxToggle{
-        margin: 20px;
-    }
-    .sentToggle{
-        margin: 20px;
-    }
 
     /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
     @media screen and (max-height: 450px) {
@@ -407,11 +404,17 @@
     }
     @media(min-width: 1224px){
         .sidebar{
-            display: inherit;
+            display: initial;
+            background-color: white;
+            height: 111rem;
+            border-right: 1px solid rgb(200, 200, 200);
+            padding-left: 0px;
         }
         .compose{
-            height: auto;
-            width: auto;
+            margin: 0;
+            margin-top: 20px;
+            //height: auto;
+            //width: auto;
         }
         .mobile-menu{
             display: none;
