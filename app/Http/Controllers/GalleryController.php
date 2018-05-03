@@ -144,7 +144,7 @@ class GalleryController extends Controller
         $art = DB::table('student_gallery')
             ->where([
                 ['gallery_id', $id],
-                ['group_id', Auth::user()->groupId]
+                ['group_id', $usr->groupId]
             ])
             ->first();
 

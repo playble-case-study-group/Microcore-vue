@@ -1,19 +1,28 @@
 <template>
     <div class="container main">
+
         <div class="row">
-            <div class="heading col-sm-12">
+            <div role="banner" class="heading flex-header col-sm-12">
                 <h1>Messages</h1>
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+                    <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                    <div class="inboxToggle" @click="toggleInbox"><span>Inbox</span></div>
+                    <div class="sentToggle" @click="toggleSent"><span>Sent</span></div>
+                </div>
+                <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
+
+        <div class="row content">
+            <div class="sidebar col-md-2" style="background-color: white; height: 111rem; border-right: solid 1px #c8c8c8">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
                     <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
                     <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
                 </ul>
             </div>
-            <div class="col-sm-10 emailList">
+            <div class="col-sm-12 col-lg-10 emailList">
                 <table id="inbox">
                     <tr>
                         <th>From</th>
@@ -193,7 +202,7 @@
             },
             toggleInbox: function () {
                 $('#inbox').show();
-                $('.keyline-inbox').css('border-color', '#4A4A4A');
+                $('.keyline-inbox').css('border-color', '#636b6f');
                 $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
                 console.log('inbox');
@@ -201,7 +210,7 @@
             toggleSent: function () {
                 $('#inbox').hide();
                 $('.keyline-inbox').css('border-color', 'white');
-                $('.keyline-sent').css('border-color', '#4A4A4A');
+                $('.keyline-sent').css('border-color', '#636b6f');
                 $('#sent').show();
                 console.log('sent');
             },
@@ -232,6 +241,13 @@
                     subject: "",
                     body: ""
                 };
+            },
+            openNav: function() {
+                document.getElementById("mySidenav").style.width = "200px";
+                console.log('menu');
+            },
+            closeNav: function() {
+                document.getElementById("mySidenav").style.width = "0";
             }
         }
 
@@ -266,6 +282,10 @@
     }
     .main{
         height: 115rem;
+    }
+    .row{
+        margin: 0px;
+
     }
     .emailList{
         margin-top: 20px;
@@ -305,14 +325,102 @@
     .modal-body{
         height: 80%
     }
+    .modal-title{
+        margin: -5px 0;
+        justify-content: flex-start;
+    }
     .keyline{
-        border-left: solid 4px $sim-heading;
+        border-left: solid 4px #636b6f;
         padding-left: 10px;
     }
     .keyline-sent{
         border-color: white;
     }
     .keyline-inbox{
-        border-color: $sim-heading;
+        border-color: #636b6f;
+    }
+    .sidebar{
+        display: none;
+    }
+    .flex-header{
+        display: flex;
+        justify-content: space-between;
+    }
+    .mobile-menu{
+        font-size: 26px;
+        color: white;
+    }
+    /* The side navigation menu */
+    .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        height: 115rem;
+        position: absolute; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        right: 0;
+        background-color: #4a4a4a;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    .content {
+        transition: margin-left .5s;
+        padding: 20px;
+    }
+    .inboxToggle{
+        margin: 20px;
+    }
+    .sentToggle{
+        margin: 20px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    @media(min-width: 1224px){
+        .sidebar{
+            display: inherit;
+        }
+        .compose{
+            height: auto;
+            width: auto;
+        }
+        .mobile-menu{
+            display: none;
+        }
+    }
+    @media(min-width: 1400px){
+        .compose{
+            height: 40px;
+            width: 130px;
+        }
     }
 </style>

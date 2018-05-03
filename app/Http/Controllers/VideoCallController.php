@@ -140,10 +140,19 @@ class VideoCallController extends Controller
         file_put_contents($target_file, $data);
         $filename = "/public/storage/".$name;
 
-        DB::table('student_video_submissions')
-            ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'created_at'=> $date]);
+        if($request->has('question')){
+            $question_id = $request->question;
 
+            DB::table('student_video_submissions')
+                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'question_id' => $question_id,'created_at'=> $date]);
+        } else {
+
+            DB::table('student_video_submissions')
+                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id, 'created_at' => $date]);
+        }
 
         return $request->all();
     }
+
+
 }

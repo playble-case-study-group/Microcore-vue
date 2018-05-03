@@ -20,28 +20,17 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="item" v-for="(artifact, key) in gallery" :key="key" :class="{hidden: artifact.hidden}">
-                <div class="thumbnail" @click="openModal(artifact)">
-                </div>
-            </div>
-        </div>
 
-        <!--<br><br>-->
-        <!--<ul class="nav nav-pills">-->
-            <!--<li class="active"><a data-toggle="pill" href="#all" @click="filterArtifacts(false)">All</a></li>-->
-            <!--<li><a data-toggle="pill" href="#group1" @click="filterArtifacts('group')">Group 1</a></li>-->
-            <!--<li><a data-toggle="pill" href="#group2" @click="filterArtifacts('group2')">Group 2</a></li>-->
-            <!--<li><a data-toggle="pill" href="#group3" @click="filterArtifacts('group3')">Group 3</a></li>-->
-        <!--</ul>-->
         <hr>
-        <div class="grid">
-            <div class="item grid-item" v-for="artifact in groupArt">
-                <div class="thumbnail artifact" @click="openModal(artifact)">
-
-                    <img :src="artifact.image" :alt="artifact.title">
-                    <h4>{{ artifact.title }}</h4>
-                    <p>{{ artifact.description}}</p>
+        <div class="card-columns">
+            <div class="card" v-for="artifact in gallery"
+                 v-if="!artifact.hidden"
+                 @click="openModal(artifact)"
+                 :key="artifact.gallery_id">
+                <img class="card-img-top" :src="artifact.image" :alt="artifact.title">
+                <div class="card-body artifact" >
+                    <h4 class="card-title">{{ artifact.title }}</h4>
+                    <p class="card-text">{{ artifact.description}}</p>
                 </div>
             </div>
         </div>
@@ -202,10 +191,10 @@
 
 <style lang="scss" scoped>
     .row {
-        -moz-column-width: 18em;
-        -webkit-column-width: 18em;
-        -moz-column-gap: 1em;
-        -webkit-column-gap:1em;
+        /*-moz-column-width: 18em;*/
+        /*-webkit-column-width: 18em;*/
+        /*-moz-column-gap: 1em;*/
+        /*-webkit-column-gap:1em;*/
 
 
     }
@@ -215,8 +204,8 @@
     }
 
     .item {
-        display: inline-flex;
-        padding:  .25rem;
+        /*display: inline-flex;*/
+        /*padding:  .25rem;*/
     }
 
     .well {
@@ -224,7 +213,7 @@
         display: block;
     }
     .grid{
-        max-width: 1200px;
+        /*max-width: 1200px;*/
     }
     .grid:after {
         content: '';

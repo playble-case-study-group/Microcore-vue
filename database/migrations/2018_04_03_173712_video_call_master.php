@@ -39,6 +39,7 @@ class VideoCallMaster extends Migration
             $table->integer('start_time');
             $table->integer('end_time');
             $table->boolean('record_after')->default(0);
+            $table->integer('recording_duration')->default(0);
             $table->timestamps();
         });
 
@@ -49,6 +50,7 @@ class VideoCallMaster extends Migration
             $table->integer('submission_day');
             $table->integer('character_id');
             $table->integer('user_id');
+            $table->integer('question_id')->default(null);
             $table->timestamps();
         });
 
