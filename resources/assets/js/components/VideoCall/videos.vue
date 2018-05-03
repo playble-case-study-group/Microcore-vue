@@ -200,7 +200,6 @@
                 this.recording = !this.recording;
             },
             askQuestion: function (question) {
-                console.log(!this.responded);
                 this.responded = false;
                 this.currentQuestion = question;
             },
@@ -509,6 +508,9 @@
     }
     .dropdown-menu{
         min-width: 220px;
+    }
+    .dropdown-toggle::after {
+        display:none
     }
     #personal_video{
         height: 125px;

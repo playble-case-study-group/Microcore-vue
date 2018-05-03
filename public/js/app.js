@@ -55629,7 +55629,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 27rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 27rem;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -55852,7 +55852,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.recording = !this.recording;
         },
         askQuestion: function askQuestion(question) {
-            console.log(!this.responded);
             this.responded = false;
             this.currentQuestion = question;
         },
@@ -56173,7 +56172,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 5rem;\n    width: 22rem;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 5rem;\n    width: 22rem;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -56185,6 +56184,9 @@ exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    he
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
 //
 //
 //
@@ -56236,7 +56238,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var timer = setInterval(function () {
                 if (appScope.count > 0) {
                     appScope.count -= 1;
-                    console.log(appScope.count);
                 } else {
                     appScope.warning = true;
                     clearInterval(timer);
@@ -56260,7 +56261,31 @@ var render = function() {
     { attrs: { id: "question" } },
     [
       this.count > 0
-        ? _c("div", [_vm._v("\n        " + _vm._s(this.count) + "\n    ")])
+        ? _c("div", { staticClass: "counterDisplay col-sm-12" }, [
+            !this.warning
+              ? _c("p", [
+                  _vm._v(
+                    "\n            You will have " +
+                      _vm._s(this.countdown) +
+                      " to respond."
+                  ),
+                  _c("br"),
+                  _vm._v("\n            Recording will start in : "),
+                  _c("span", { staticClass: "counter" }, [
+                    _vm._v(_vm._s(this.count))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            this.warning
+              ? _c("p", [
+                  _vm._v(" Time Remaining: "),
+                  _c("span", { staticClass: "counter" }, [
+                    _vm._v(_vm._s(this.count))
+                  ])
+                ])
+              : _vm._e()
+          ])
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.questions, function(question) {

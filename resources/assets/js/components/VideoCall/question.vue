@@ -1,7 +1,10 @@
 <template>
     <div id="question">
-        <div v-if="this.count > 0">
-            {{ this.count }}
+        <div class="counterDisplay col-sm-12" v-if="this.count > 0">
+            <p v-if="!this.warning">
+                You will have {{ this.countdown }} to respond.<br>
+                Recording will start in : <span class="counter">{{ this.count }}</span></p>
+            <p v-if="this.warning"> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
         <button type="button" class="btn btn-success btn-lg button"
              v-for="question in questions"
@@ -49,7 +52,6 @@
                 let timer = setInterval(function () {
                     if (appScope.count > 0) {
                         appScope.count -= 1;
-                        console.log(appScope.count);
                     }
                     else {
                         appScope.warning = true;
@@ -68,6 +70,15 @@
         margin: 2rem;
         height: 5rem;
         width: 22rem;
+    }
+    .counterDisplay {
+        font-size: 24px;
+        text-align: center;
+    }
+    .counter {
+        padding-left: 40px;
+        color: #dc3545;
+
     }
     @media(min-width: 992px){
         .button {
