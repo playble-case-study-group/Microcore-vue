@@ -51515,6 +51515,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -51534,7 +51535,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             recording: false,
             clickedCharacter: 0,
             leaveResponse: false,
-            responded: false
+            responded: false,
+            countdownTime: 0
         };
     },
     mounted: function mounted() {
@@ -51586,9 +51588,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.leaveResponse == true) {
                 console.log('your video will start in three seconds');
                 appScope.answerQuestion();
+                appScope.countdownTime = appScope.currentQuestion.recording_duration;
             } else {
-                this.videoEl.play();
-                console.log('restart video');
+                this.currentQuestion = this.currentQuestions.find(function (question) {
+                    if (question.question_id == appScope.currentQuestion.next_question) {
+                        return question;
+                    }
+                });
                 this.startSelfVideo();
             }
         }
@@ -51710,13 +51716,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     setTimeout(function () {
                         console.log('started');
                         mediaRecorder.start(1000);
-                    }, 3000);
+                    }, 4000);
                 }
                 video.muted = 'true';
             });
 
             var end = false;
-            var timeout = appScope.currentQuestion.recording_duration * 1000;
+            var timeout = appScope.currentQuestion.recording_duration * 1400;
             setTimeout(function () {
                 end = true;
             }, timeout);
@@ -52000,6 +52006,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -52007,11 +52017,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         console.log('Component mounted.');
     },
+    data: function data() {
+        return {
+            count: 0,
+            warning: 0
+        };
+    },
 
-    props: ['questions'],
+    watch: {
+        countdown: function countdown() {
+            if (this.count == 0) {
+                this.count = 3;
+                this.startCount();
+            }
+        },
+        warning: function warning() {
+            this.count = this.countdown;
+            this.startCount();
+        }
+    },
+    props: ['questions', 'countdown'],
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
+        },
+        startCount: function startCount() {
+            var appScope = this;
+            var timer = setInterval(function () {
+                if (appScope.count > 0) {
+                    appScope.count -= 1;
+                    console.log(appScope.count);
+                } else {
+                    appScope.warning = true;
+                    clearInterval(timer);
+                }
+            }, 1000);
         }
     }
 
@@ -52028,21 +52068,30 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "question" } },
-    _vm._l(_vm.questions, function(question) {
-      return _c(
-        "button",
-        {
-          staticClass: "btn btn-success btn-lg button",
-          attrs: { type: "button", id: question.id },
-          on: {
-            click: function($event) {
-              _vm.submitQuestion(question)
-            }
-          }
-        },
-        [_c("b", [_vm._v(_vm._s(question.question))])]
-      )
-    })
+    [
+      this.count > 0
+        ? _c("div", [_vm._v("\n        " + _vm._s(this.count) + "\n    ")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.questions, function(question) {
+        return question.question
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-lg button",
+                attrs: { type: "button", id: question.id },
+                on: {
+                  click: function($event) {
+                    _vm.submitQuestion(question)
+                  }
+                }
+              },
+              [_c("b", [_vm._v(_vm._s(question.question))])]
+            )
+          : _vm._e()
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -52376,7 +52425,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("character-questions", {
-        attrs: { id: "characterQuestions", questions: this.currentQuestions },
+        attrs: {
+          id: "characterQuestions",
+          countdown: this.countdownTime,
+          questions: this.currentQuestions
+        },
         on: { question: _vm.askQuestion }
       })
     ],
