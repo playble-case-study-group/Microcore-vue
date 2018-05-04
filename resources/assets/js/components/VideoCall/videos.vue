@@ -371,7 +371,7 @@
                     };
                 })
             },
-            startAudio: function(){
+            startAudio: function() {
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
@@ -453,7 +453,7 @@
         }
     }
 
-</script>
+</script>git
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
