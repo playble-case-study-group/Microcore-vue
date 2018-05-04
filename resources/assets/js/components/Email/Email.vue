@@ -281,7 +281,7 @@
         color: #c8c8c8;
     }
     .main{
-        height: 115rem;
+        height: 60rem;
     }
     .row{
         margin: 0px;
@@ -315,7 +315,7 @@
         height: 20px;
     }
     #composeModal > .modal-dialog > .modal-content{
-        height: 51rem;
+        height: 44rem;
         width: 50rem;
     }
     #readModal > .modal-dialog > .modal-content{
@@ -357,7 +357,7 @@
     .sidenav {
         height: 100%; /* 100% Full-height */
         width: 0; /* 0 width - change this with JavaScript */
-        height: 115rem;
+        height: 60rem;
         position: absolute; /* Stay in place */
         z-index: 1; /* Stay on top */
         right: 0;
@@ -406,7 +406,7 @@
         .sidebar{
             display: initial;
             background-color: white;
-            height: 111rem;
+            height: 56rem;
             border-right: 1px solid rgb(200, 200, 200);
             padding-left: 0px;
         }
