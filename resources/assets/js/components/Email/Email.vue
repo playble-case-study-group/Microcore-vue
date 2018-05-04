@@ -144,6 +144,37 @@
                 </div>
             </div>
         </div>
+
+        <!-- Reply Modal -->
+        <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header heading">
+                        <h5 class="modal-title">Reply</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <label for="toList" class="col-sm-2">To:</label>
+                            <div class="col-sm-10">
+                                {{ readModalData.from }}
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="toSubject" class="col-sm-2">Subject:</label>
+                            <!--<input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">-->
+                            {{ readModalData.subject }}
+                        </div>
+                        <div class="row form-group">
+                            <p class="email-body">Previous Email: {{ readModalData.body }}</p>
+                            <textarea class="col-sm-12" type="text" id="repBody" v-model="draftEmail.body"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -181,6 +212,8 @@
             $('#sent').hide();
             $('#replyForm').hide();
 
+        },
+        computed: {
         },
         methods: {
             sendemail: function () {
@@ -220,6 +253,7 @@
                 $('#composeModal').modal('show');
             },
             sendEmail: function () {
+                console.log('got here')
                 axios.post('/email', this.draftEmail).then( response => {
                     console.log(response.data)
 
@@ -228,10 +262,19 @@
             },
             replyEmail: function () {
 
-                this.draftEmail.reply = this.readModalData.id;
+//                this.draftEmail.reply = this.readModalData.id;
+//
+//                $('#replyForm').show();
+//                $('.replyEmail').html('Send');
 
-                $('#replyForm').show();
-                $('.replyEmail').html('Send');
+//                this.resetDraftEmail();
+
+                this.draftEmail.to = this.findCharData();
+                this.draftEmail.subject = this.readModalData.subject;
+                $('#readModal').modal('hide');
+                $('#replyModal').modal('show');
+
+
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -248,6 +291,14 @@
             },
             closeNav: function() {
                 document.getElementById("mySidenav").style.width = "0";
+            },
+            findCharData: function(){
+                let appScope = this;
+                var found = this.characters.find(function(element) {
+                    console.log(element);
+                    return element.name == appScope.readModalData.from;
+                });
+                return found;
             }
         }
 
