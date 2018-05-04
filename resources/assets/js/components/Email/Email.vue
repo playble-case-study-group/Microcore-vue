@@ -41,10 +41,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -69,10 +69,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -282,6 +282,7 @@
     }
     .main{
         height: 60rem;
+        overflow-y: scroll;
     }
     .row{
         margin: 0px;
@@ -289,6 +290,12 @@
     }
     .emailList{
         margin-top: 20px;
+    }
+    .truncate{
+        max-width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .compose{
         margin: 20px;
@@ -402,6 +409,11 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
+    @media(min-width: 1024px){
+        .truncate {
+            max-width: 23rem;
+        }
+    }
     @media(min-width: 1224px){
         .sidebar{
             display: initial;
@@ -424,6 +436,9 @@
         }
         #readModal > .modal-dialog > .modal-content{
             width: 50rem;
+        }
+        .truncate{
+            max-width: 20rem;
         }
     }
     @media(min-width: 1400px){

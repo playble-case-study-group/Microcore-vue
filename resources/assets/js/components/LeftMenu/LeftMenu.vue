@@ -48,7 +48,7 @@
 
 <style scoped>
     #left-menu {
-        min-width: 240px;
+        min-width: 193px;
         max-width: 240px;
         min-height: 100vh;
         background-color: white;
@@ -65,6 +65,11 @@
     ul {
         list-style: none;
         padding-left: 0 !important;
+    }
+    @media(min-width: 1024px){
+        #left-menu{
+            min-width: 240px;
+        }
     }
 
 </style>
