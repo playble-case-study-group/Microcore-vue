@@ -7,9 +7,9 @@
             <p v-if="this.warning"> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
         <button type="button" class="btn btn-success btn-lg button"
-             v-for="question in questions"
-                v-if="question.question"
-             :id="question.id"
+                v-for="question in questions"
+                v-if="question.question && showButtons && count == 0"
+                :id="question.id"
                 @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
         </button>
@@ -27,7 +27,8 @@
         data() {
             return{
                 count: 0,
-                warning: 0
+                warning: false,
+                showButtons: true
             }
         },
         watch: {
@@ -35,11 +36,13 @@
               if( this.count == 0 ){
                   this.count = 3;
                   this.startCount();
+                  this.showButtons = false;
               }
           },
            warning: function() {
                this.count = this.countdown;
                this.startCount();
+               this.showButtons = true;
            }
         },
         props: ['questions', 'countdown'],

@@ -55849,7 +55849,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         startStopRecording: function startStopRecording() {
-            this.recording = !this.recording;
+            if (!this.leaveResponse) {
+                console.log('worked');
+                this.recording = !this.recording;
+            }
         },
         askQuestion: function askQuestion(question) {
             this.responded = false;
@@ -56212,7 +56215,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             count: 0,
-            warning: 0
+            warning: false,
+            showButtons: true
         };
     },
 
@@ -56221,11 +56225,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.count == 0) {
                 this.count = 3;
                 this.startCount();
+                this.showButtons = false;
             }
         },
         warning: function warning() {
             this.count = this.countdown;
             this.startCount();
+            this.showButtons = true;
         }
     },
     props: ['questions', 'countdown'],
@@ -56289,7 +56295,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.questions, function(question) {
-        return question.question
+        return question.question && _vm.showButtons && _vm.count == 0
           ? _c(
               "button",
               {
@@ -56608,7 +56614,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm.showRecordingInterface
+        _vm.showRecordingInterface || _vm.leaveResponse
           ? _c(
               "a",
               { attrs: { href: "#" }, on: { click: _vm.startStopRecording } },
@@ -56622,7 +56628,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.showRecordingInterface
+        !_vm.showRecordingInterface && !_vm.leaveResponse
           ? _c(
               "a",
               { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } },
@@ -56811,7 +56817,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.table-of-contents ul[data-v-1c179b00] {\n  list-style-type: none;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n  -webkit-box-shadow: 0px -6px 10px;\n          box-shadow: 0px -6px 10px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 40px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-1c179b00] {\n  cursor: pointer;\n  margin-bottom: 3rem;\n}\n.table-of-contents ul[data-v-1c179b00] {\n  list-style-type: none;\n}\n.article-title[data-v-1c179b00]:hover {\n  text-decoration: underline;\n}\n#library[data-v-1c179b00] {\n  margin-top: 0px;\n}\n#libraryMenu[data-v-1c179b00] {\n  height: 100vh;\n  padding-top: 40px;\n  padding-left: 40px;\n  -webkit-box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n          box-shadow: inset -7px 0 9px -10px rgba(0, 0, 0, 0.4);\n}\n#content-container[data-v-1c179b00] {\n  padding-right: 80px;\n  padding-left: 40px;\n  padding-top: 40px;\n}\n#content-container h1[data-v-1c179b00] {\n  margin-top: 0px;\n}\n", ""]);
 
 // exports
 
