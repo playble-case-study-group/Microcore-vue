@@ -310,16 +310,16 @@
     }
     .reply-contact-name{
         padding-top: 9px;
-        padding-left: 7px;
+        padding-left: 30px;
         position: absolute;
         height: 20px;
     }
     #composeModal > .modal-dialog > .modal-content{
         height: 44rem;
-        width: 50rem;
+        width: 35rem;
     }
     #readModal > .modal-dialog > .modal-content{
-        width: 50rem;
+        width: 35rem;
     }
     .modal-body{
         height: 80%
@@ -418,6 +418,12 @@
         }
         .mobile-menu{
             display: none;
+        }
+        #composeModal > .modal-dialog > .modal-content{
+            width: 50rem;
+        }
+        #readModal > .modal-dialog > .modal-content{
+            width: 50rem;
         }
     }
     @media(min-width: 1400px){
