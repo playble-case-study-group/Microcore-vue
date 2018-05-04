@@ -41,10 +41,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -69,10 +69,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -332,7 +332,8 @@
         color: #c8c8c8;
     }
     .main{
-        height: 115rem;
+        height: 60rem;
+        overflow-y: scroll;
     }
     .row{
         margin: 0px;
@@ -340,6 +341,12 @@
     }
     .emailList{
         margin-top: 20px;
+    }
+    .truncate{
+        max-width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .compose{
         margin: 20px;
@@ -361,16 +368,16 @@
     }
     .reply-contact-name{
         padding-top: 9px;
-        padding-left: 7px;
+        padding-left: 30px;
         position: absolute;
         height: 20px;
     }
     #composeModal > .modal-dialog > .modal-content{
-        height: 51rem;
-        width: 50rem;
+        height: 44rem;
+        width: 35rem;
     }
     #readModal > .modal-dialog > .modal-content{
-        width: 50rem;
+        width: 35rem;
     }
     .modal-body{
         height: 80%
@@ -408,7 +415,7 @@
     .sidenav {
         height: 100%; /* 100% Full-height */
         width: 0; /* 0 width - change this with JavaScript */
-        height: 115rem;
+        height: 60rem;
         position: absolute; /* Stay in place */
         z-index: 1; /* Stay on top */
         right: 0;
@@ -453,11 +460,16 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
+    @media(min-width: 1024px){
+        .truncate {
+            max-width: 23rem;
+        }
+    }
     @media(min-width: 1224px){
         .sidebar{
             display: initial;
             background-color: white;
-            height: 111rem;
+            height: 56rem;
             border-right: 1px solid rgb(200, 200, 200);
             padding-left: 0px;
         }
@@ -469,6 +481,15 @@
         }
         .mobile-menu{
             display: none;
+        }
+        #composeModal > .modal-dialog > .modal-content{
+            width: 50rem;
+        }
+        #readModal > .modal-dialog > .modal-content{
+            width: 50rem;
+        }
+        .truncate{
+            max-width: 20rem;
         }
     }
     @media(min-width: 1400px){

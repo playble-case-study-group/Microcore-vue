@@ -1,8 +1,9 @@
 <template>
     <div id="question">
         <div class="counterDisplay col-sm-12" v-if="this.count > 0">
+            <br><br>
             <p v-if="!this.warning">
-                You will have {{ this.countdown }} to respond.<br>
+                You will have {{ this.countdown }} seconds to respond.<br>
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-if="this.warning"> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
