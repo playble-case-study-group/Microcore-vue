@@ -166,6 +166,10 @@
                         </div>
                         <div class="row form-group">
                             <p class="email-body">Previous Email: {{ readModalData.body }}</p>
+                            <div class="row form-group reply-contact col-sm-12">
+                                <i class="material-icons reply">reply</i>
+                                <span class="reply-contact-name">{{ readModalData.from }}</span>
+                            </div>
                             <textarea class="col-sm-12" type="text" id="repBody" v-model="draftEmail.body"></textarea>
                         </div>
                     </div>

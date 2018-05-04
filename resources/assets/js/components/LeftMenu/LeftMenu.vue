@@ -7,32 +7,31 @@
             <user-tasks>
             </user-tasks>
             <div id="next-day">
-                <button type="button" class="btn btn-invert" v-on:click="PREVIOUS_DAY(); warning()"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button type="button" class="btn btn-invert" data-toggle="modal" data-target="#exampleModal" v-on:click="PREVIOUS_DAY()"><i class="material-icons">keyboard_arrow_left</i></button>
                 <button type="button" class="btn btn-invert" v-on:click="NEXT_DAY()">NEXT DAY <i class="material-icons">keyboard_arrow_right</i></button>
             </div>
             <br>
             <br>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Reset Current Day?</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            This function will reset your current day. All work you have done on this day will be lost.
+                            <br><br>
+
+                            <strong><em>Are you sure you wish to continue?</em></strong>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="resetDay">Continue</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">No, thank you</button>
                         </div>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
                 'NEXT_DAY',
                 'PREVIOUS_DAY'
             ]),
-            warning: function() {
+            resetDay: function() {
                 console.log('test')
             }
         }
