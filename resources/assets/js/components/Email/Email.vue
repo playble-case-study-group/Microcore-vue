@@ -41,10 +41,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -69,10 +69,10 @@
                         <td>
                             {{ email.name }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.subject }}
                         </td>
-                        <td>
+                        <td class="truncate">
                             {{ email.body }}
                         </td>
                         <td>
@@ -144,6 +144,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Reply Modal -->
+        <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header heading">
+                        <h5 class="modal-title">Reply</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <label for="toList" class="col-sm-2">To:</label>
+                            <div class="col-sm-10">
+                                {{ readModalData.from }}
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="toSubject" class="col-sm-2">Subject:</label>
+                            <!--<input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">-->
+                            {{ readModalData.subject }}
+                        </div>
+                        <div class="row form-group">
+                            <p class="email-body">Previous Email: {{ readModalData.body }}</p>
+                            <div class="row form-group reply-contact col-sm-12">
+                                <i class="material-icons reply">reply</i>
+                                <span class="reply-contact-name">{{ readModalData.from }}</span>
+                            </div>
+                            <textarea class="col-sm-12" type="text" id="repBody" v-model="draftEmail.body"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -181,6 +216,8 @@
             $('#sent').hide();
             $('#replyForm').hide();
 
+        },
+        computed: {
         },
         methods: {
             sendemail: function () {
@@ -220,6 +257,7 @@
                 $('#composeModal').modal('show');
             },
             sendEmail: function () {
+                console.log('got here')
                 axios.post('/email', this.draftEmail).then( response => {
                     console.log(response.data)
 
@@ -228,10 +266,19 @@
             },
             replyEmail: function () {
 
-                this.draftEmail.reply = this.readModalData.id;
+//                this.draftEmail.reply = this.readModalData.id;
+//
+//                $('#replyForm').show();
+//                $('.replyEmail').html('Send');
 
-                $('#replyForm').show();
-                $('.replyEmail').html('Send');
+//                this.resetDraftEmail();
+
+                this.draftEmail.to = this.findCharData();
+                this.draftEmail.subject = this.readModalData.subject;
+                $('#readModal').modal('hide');
+                $('#replyModal').modal('show');
+
+
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -248,6 +295,14 @@
             },
             closeNav: function() {
                 document.getElementById("mySidenav").style.width = "0";
+            },
+            findCharData: function(){
+                let appScope = this;
+                var found = this.characters.find(function(element) {
+                    console.log(element);
+                    return element.name == appScope.readModalData.from;
+                });
+                return found;
             }
         }
 
@@ -281,7 +336,8 @@
         color: #c8c8c8;
     }
     .main{
-        height: 115rem;
+        height: 60rem;
+        overflow-y: scroll;
     }
     .row{
         margin: 0px;
@@ -289,6 +345,12 @@
     }
     .emailList{
         margin-top: 20px;
+    }
+    .truncate{
+        max-width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .compose{
         margin: 20px;
@@ -310,16 +372,16 @@
     }
     .reply-contact-name{
         padding-top: 9px;
-        padding-left: 7px;
+        padding-left: 30px;
         position: absolute;
         height: 20px;
     }
     #composeModal > .modal-dialog > .modal-content{
-        height: 51rem;
-        width: 50rem;
+        height: 44rem;
+        width: 35rem;
     }
     #readModal > .modal-dialog > .modal-content{
-        width: 50rem;
+        width: 35rem;
     }
     .modal-body{
         height: 80%
@@ -357,7 +419,7 @@
     .sidenav {
         height: 100%; /* 100% Full-height */
         width: 0; /* 0 width - change this with JavaScript */
-        height: 115rem;
+        height: 60rem;
         position: absolute; /* Stay in place */
         z-index: 1; /* Stay on top */
         right: 0;
@@ -402,11 +464,16 @@
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
+    @media(min-width: 1024px){
+        .truncate {
+            max-width: 23rem;
+        }
+    }
     @media(min-width: 1224px){
         .sidebar{
             display: initial;
             background-color: white;
-            height: 111rem;
+            height: 56rem;
             border-right: 1px solid rgb(200, 200, 200);
             padding-left: 0px;
         }
@@ -418,6 +485,15 @@
         }
         .mobile-menu{
             display: none;
+        }
+        #composeModal > .modal-dialog > .modal-content{
+            width: 50rem;
+        }
+        #readModal > .modal-dialog > .modal-content{
+            width: 50rem;
+        }
+        .truncate{
+            max-width: 20rem;
         }
     }
     @media(min-width: 1400px){

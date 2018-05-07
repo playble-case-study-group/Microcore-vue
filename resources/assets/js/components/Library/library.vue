@@ -110,7 +110,7 @@
     }
     #library {
         margin-top: 0px;
-        box-shadow: 0px -6px 10px;
+        //box-shadow: 0px -6px 10px;
     }
 
     #libraryMenu {

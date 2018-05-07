@@ -37,10 +37,10 @@
             </div>
 
             <!--toolbar buttons-->
-            <a href="#" v-if="showRecordingInterface" @click="startStopRecording">
+            <a href="#" v-if="showRecordingInterface || leaveResponse" @click="startStopRecording">
                 <i id="recording" class="material-icons">fiber_manual_record</i>
             </a>
-            <a href="#" v-if="!showRecordingInterface" @click="changePhoneIcon">
+            <a href="#" v-if="!showRecordingInterface && !leaveResponse" @click="changePhoneIcon">
                 <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
             </a>
             <canvas id="visualizer"></canvas>
@@ -197,10 +197,12 @@
                 }
             },
             startStopRecording: function () {
-                this.recording = !this.recording;
+                if(!this.leaveResponse) {
+                    console.log('worked')
+                    this.recording = !this.recording;
+                }
             },
             askQuestion: function (question) {
-                console.log(!this.responded);
                 this.responded = false;
                 this.currentQuestion = question;
             },
@@ -369,7 +371,7 @@
                     };
                 })
             },
-            startAudio: function(){
+            startAudio: function() {
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
@@ -451,7 +453,7 @@
         }
     }
 
-</script>
+</script>git
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
@@ -509,6 +511,9 @@
     }
     .dropdown-menu{
         min-width: 220px;
+    }
+    .dropdown-toggle::after {
+        display:none
     }
     #personal_video{
         height: 125px;
