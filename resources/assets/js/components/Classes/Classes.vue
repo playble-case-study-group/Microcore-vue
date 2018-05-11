@@ -4,50 +4,61 @@
             <div class="col-sm-12">
                 <h1>Classes</h1>
 
-                <ul class="nav nav-tabs" id="classTab" role="tablist">
-                    <li class="nav-item"
-                        v-for="(clss, index) in classes"
-                        :key="clss.class_id">
-                        <a class="nav-link active"
-                           :id="clss.class_id + '-tab'"
+                <select v-model="curClass" class="custom-select">
+                    <option disabled value="">Please select a class</option>
+                    <option v-for="(clss, index) in classes"
+                            :key="index"
+                            :selected="(index === 0 ? 'selected' : false)"
+                            :value="clss">
+                        {{ clss.name }}
+                    </option>
+                </select>
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a href="#students"
                            data-toggle="tab"
-                           :href="'#' + clss.class_id"
                            role="tab"
-                           :aria-controls="clss.name"
-                           aria-selected="true">
-                            {{ clss.name }}
+                           class="nav-link active">
+                            Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#groups"
+                           data-toggle="tab"
+                           role="tab"
+                           class="nav-link">
+                            Groups
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#assignments"
+                           data-toggle="tab"
+                           role="tab"
+                           class="nav-link">
+                            Assignments
                         </a>
                     </li>
                 </ul>
+
                 <div class="tab-content" id="classTabContent">
-                    <div v-for="(clss, index) in classes"
+                    <div id="students"
                          class="tab-pane fade show active"
-                         :id="clss.class_id"
-                         :key="clss.class_id"
-                         role="tabpanel"
-                         :aria-labelledby="clss.name + '-tab'">
-
-                        <h2>Students</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Day</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="student in clss.students">
-                                    <td>{{ student.name }}</td>
-                                    <td>{{ student.email }}</td>
-                                    <td>{{ student.current_day }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <groups :groups="clss.groups" :unassigned="clss.unAssigned"></groups>
+                         role="tabpanel">
+                        <students :students="curClass.students"></students>
                     </div>
-
+                    <div id="groups"
+                         class="tab-pane fade show"
+                         role="tabpanel">
+                        <groups :groups="curClass.groups"
+                                :classId="curClass.class_id"
+                                :unassigned="curClass.unAssigned"></groups>
+                    </div>
+                    <div id="assignments"
+                         class="tab-pane fade show"
+                         role="tabpanel">
+                        <assignments></assignments>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,12 +68,16 @@
 <script>
     import { mapGetter, mapActions } from 'vuex'
     import groups from './Groups.vue'
+    import students from './Students.vue'
+    import assignments from './Assignments.vue'
 
     export default {
 
         props: ['classes'],
         components: {
-            'groups': groups
+            'groups': groups,
+            'students': students,
+            'assignments': assignments
         },
         data: function () {
             return {
@@ -77,6 +92,9 @@
 
         },
         methods: {
+            changeCurrentClass: function (classId) {
+                this.curClass = _.find(this.classes, {'class_id': classId});
+            },
             addStudent: function (classId, groupId) {
                 if (this.newGroupUser) {
                     // Get class.

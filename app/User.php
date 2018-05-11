@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'email', 'password', 'role', 'assigned'
     ];
 
     /**
@@ -46,6 +46,11 @@ class User extends Authenticatable
             ->select('group_id')
             ->first();
 
-        return $groupId->group_id;
+        if ($groupId) {
+            return $groupId->group_id;
+        } else {
+            return false;
+        }
+
     }
 }

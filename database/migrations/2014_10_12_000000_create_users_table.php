@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('current_day')->default(1);
             $table->string('email')->unique();
             $table->string('password');
+            $table->tinyInteger('assigned')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

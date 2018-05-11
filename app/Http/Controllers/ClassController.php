@@ -47,10 +47,21 @@ class ClassController extends Controller
                     ->where('user_has_group.group_id', $group->group_id)
                     ->get();
 
+                $group->gallery = DB::table('student_gallery')
+                    ->where('group_id', $group->group_id)
+                    ->get();
+
                 // Removing students who have been assigned
                 foreach ($group->students as $student) {
                         $class->unAssigned->forget($student->id);
                 }
+            }
+
+            // Retrieving individual student assignments
+            foreach ($class->students as $student) {
+                $student->emails = DB::table('student_email')
+                    ->where('user_id', $student->id)
+                    ->get();
             }
 
             // Converting unassigned student back to array so we can iterate through them.

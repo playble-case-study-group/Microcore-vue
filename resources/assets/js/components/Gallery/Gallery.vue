@@ -83,35 +83,35 @@
                                               class="form-control"
                                               rows="4"
                                               v-model="modal.description">
-                                </textarea>
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <h4>Tags</h4>
                                     <button v-for="tag in modal.tags"
                                             type="button"
-                                            class="btn btn-primary">
-                                        {{ tag.title }}
+                                            @click="removeTag(tag)"
+                                            class="btn btn-danger">
+                                        {{ tag.title }} &times;
                                     </button>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <v-select v-model="addTag" label="title" :options="modal.tags"></v-select>
+                                        <v-select v-model="newTag" label="title" :options="tags"></v-select>
                                     </div>
                                    <div class="col-sm-2">
-                                       <button class="btn btn-success" @click="addStudent(clss.class_id, group.group_id)">
+                                       <button class="btn btn-success" @click="addTag">
                                            Add Tag
                                        </button>
                                    </div>
 
                                 </div>
                             </div>
-                        </div>
 
-                        <div id="save-art" class="row col-sm-12 d-none form-group">
-                            <button type="button" class="btn btn-outline-info" @click="cancelChanges()"> Cancel </button>
-                            <button type="button" class="btn btn-primary" @click="saveChanges()">Save changes</button>
+                            <div id="save-art" class="row col-sm-12 d-none form-group">
+                                <button type="button" class="btn btn-outline-info" @click="cancelChanges()"> Cancel </button>
+                                <button type="button" class="btn btn-primary" @click="saveChanges()">Save changes</button>
+                            </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -137,7 +137,7 @@
                 artifacts: this.gallery,
                 groupArt: [],
                 showModal: false,
-                addTag: '',
+                newTag: '',
                 modal: {
                     id: 0,
                     editId: 0,
@@ -157,6 +157,16 @@
 
         },
         methods: {
+            removeTag: function (tag) {
+                console.log("removing tag");
+                _.remove(this.modal.tags, tag);
+                this.$forceUpdate();
+            },
+            addTag: function () {
+                if(!_.find(this.modal.tags, this.newTag)) {
+                    this.modal.tags.push(this.newTag);
+                }
+            },
             showAllGallery: function () {
                 this.gallery.forEach( artifact => { artifact.hidden = false });
             },
@@ -205,9 +215,10 @@
                     img: this.modal.image,
                     galleryId: this.modal.id,
                     editID: this.modal.editId,
-                    category: this.modal.category
+                    category: this.modal.category,
+                    tags: this.modal.tags
                 }).then(function( response ){
-                    console.log('success!')
+                    console.log('success!');
                 }).catch(function(){
                     console.log('FAILURE!!');
                 });
@@ -223,6 +234,7 @@
                 let old = this.gallery.find ( art => art.gallery_id === this.modal.id);
                 this.modal.title = old.title;
                 this.modal.description = old.description;
+                this.modal.tags = old.tags;
                 $('#edit-art').addClass('d-none');
                 $('#save-art').addClass('d-none');
                 $('#display-art').removeClass('d-none');

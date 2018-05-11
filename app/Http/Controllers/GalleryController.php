@@ -17,27 +17,59 @@ class GalleryController extends Controller
     {
         $gallery = DB::table('gallery')->get();
 
-        foreach ($gallery as $artifact) {
-            $edited = DB::table('student_gallery')
-                ->where([
-                    ['group_id', Auth::user()->groupId],
-                    ['gallery_id', $artifact->gallery_id],
-                ])
-                ->first();
 
-            if($edited) {
-                $artifact->title = $edited->title;
-                $artifact->description = $edited->description;
+        if (Auth::user()->assigned) {
+            foreach ($gallery as $artifact) {
+                // Searches by group ID
+                $edited = DB::table('student_gallery')
+                    ->where([
+                        ['group_id', Auth::user()->groupId],
+                        ['gallery_id', $artifact->gallery_id],
+                    ])
+                    ->first();
+
+                $artifact->tags = [];
+                if($edited) {
+                    $artifact->title = $edited->title;
+                    $artifact->description = $edited->description;
+
+                    $artifact->tags = DB::table('tag')
+                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tag.tag_id')
+                        ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
+                        ->select('tag.tag_id', 'tag.title')
+                        ->get();
+                }
+
+                $artifact->hidden = false;
+
             }
 
-//            dd($artifact);
+        } else {
 
-            $artifact->hidden = false;
-            $artifact->tags = DB::table('tag')
-                ->join('gallery_has_tag', 'gallery_has_tag.tag_id', 'tag.tag_id')
-                ->where('gallery_has_tag.gallery_id', $artifact->gallery_id)
-                ->select('tag.tag_id', 'tag.title')
-                ->get();
+            foreach ($gallery as $artifact) {
+                // Searches by user ID
+                $edited = DB::table('student_gallery')
+                    ->where([
+                        ['user_id', Auth::user()->id],
+                        ['gallery_id', $artifact->gallery_id],
+                    ])
+                    ->first();
+
+                $artifact->tags = [];
+                if($edited) {
+                    $artifact->title = $edited->title;
+                    $artifact->description = $edited->description;
+
+                    $artifact->tags = DB::table('tag')
+                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tag.tag_id')
+                        ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
+                        ->select('tag.tag_id', 'tag.title')
+                        ->get();
+
+                }
+                $artifact->hidden = false;
+            }
+
         }
 
         $tags = DB::table('tag')->get();
@@ -129,24 +161,41 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
 
-
         $usr = Auth::user();
+
         $usr->classId = DB::table('user_has_class')
             ->where('user_id', $usr->id)
             ->select('class_id')
             ->first();
 
-        $usr->groupId = DB::table('user_has_group')
-            ->where('user_id', $usr->id)
-            ->select('group_id')
-            ->first();
+        $art = '';
 
-        $art = DB::table('student_gallery')
-            ->where([
-                ['gallery_id', $id],
-                ['group_id', $usr->groupId]
-            ])
-            ->first();
+        if ($usr->assigned) {
+            // Assigned to a group
+            $usr->groupId = DB::table('user_has_group')
+                ->where('user_id', $usr->id)
+                ->select('group_id')
+                ->first();
+
+            $art = DB::table('student_gallery')
+                ->where([
+                    ['gallery_id', $id],
+                    ['group_id', $usr->groupId]
+                ])
+                ->first();
+
+        } else {
+            // If they aren't assigned to a group
+            $art = DB::table('student_gallery')
+                ->where([
+                    ['gallery_id', $id],
+                    ['user_id', $usr->id]
+                ])
+                ->first();
+
+        }
+
+
 
         if($art) {
             DB::table('student_gallery')
@@ -155,20 +204,62 @@ class GalleryController extends Controller
                     'title' => $request->title,
                     'description' => $request->description
                 ]);
+
+            if (count($request->tags)) {
+                DB::table('student_gallery_has_tag')
+                    ->where('student_gallery_id', $art->student_gallery_id)
+                    ->delete();
+
+                foreach ($request->tags as $tag) {
+                    DB::table('student_gallery_has_tag')
+                        ->insert([
+                            'student_gallery_id' => $art->student_gallery_id,
+                            'tag_id' => $tag['tag_id']
+                        ]);
+                }
+            }
+
         } else {
-            DB::table('student_gallery')
-                ->insert([
-                    'gallery_id' => $request->galleryId,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'img' => $request->img,
-                    'user_id' => $usr->id,
-                    'group_id' => $usr->groupId->group_id,
-                    'class_id' => $usr->classId->class_id
-                ]);
+
+            $id = 0;
+            if ($usr->assigned) {
+                // Assigned to group
+                $id = DB::table('student_gallery')
+                    ->insertGetId([
+                        'gallery_id' => $request->galleryId,
+                        'title' => $request->title,
+                        'description' => $request->description,
+                        'img' => $request->img,
+                        'user_id' => $usr->id,
+                        'group_id' => $usr->groupId,
+                        'class_id' => $usr->classId->class_id
+                    ]);
+            } else {
+                // Without adding group ID
+                $id = DB::table('student_gallery')
+                    ->insertGetId([
+                        'gallery_id' => $request->galleryId,
+                        'title' => $request->title,
+                        'description' => $request->description,
+                        'img' => $request->img,
+                        'user_id' => $usr->id,
+                        'class_id' => $usr->classId->class_id
+                    ]);
+            }
+
+            if ($request->tags) {
+                foreach ($request->tags as $tag) {
+                    DB::table('gallery_has_tag')
+                        ->insert([
+                            'gallery_id' => $id,
+                            'tag_id' => $tag['tag_id']
+                        ]);
+                }
+            }
+
         }
 
-        return $request->all();
+        return 'Success';
     }
 
     /**

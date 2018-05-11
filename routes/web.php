@@ -58,6 +58,7 @@ Route::resource('/phone', 'PhoneController');
 
 Route::resource('/group', 'GroupController');
 Route::post('/addToGroup', 'GroupController@addToGroup');
+Route::post('removeFromGroup', 'GroupController@removeFromGroup');
 
 Route::resource('/classes', 'ClassController');
 
