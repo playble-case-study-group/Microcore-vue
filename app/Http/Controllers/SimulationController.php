@@ -31,7 +31,7 @@ class SimulationController extends Controller
             ->update(['current_day' => $request->day]);
 
         $removeDay = $request->day;
-        $removeDay = $removeDay++;
+        $removeDay = $removeDay + 1;
 
         DB::table('student_video_submissions')
             ->where('submission_day', $removeDay)

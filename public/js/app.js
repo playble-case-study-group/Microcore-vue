@@ -79602,6 +79602,7 @@ var mutations = {
             }).catch(function (error) {
                 console.log(error.response.data);
             });
+            window.location.reload();
         }
     },
     PREVIOUS_DAY: function PREVIOUS_DAY(state) {
@@ -79612,6 +79613,7 @@ var mutations = {
             }).catch(function (error) {
                 console.log(error.response.data);
             });
+            window.location.reload();
         }
     },
     toggleTask: function toggleTask(state, payload) {

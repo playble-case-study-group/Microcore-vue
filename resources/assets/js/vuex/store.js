@@ -60,6 +60,7 @@ const mutations = {
                 .catch(error => {
                     console.log(error.response.data)
                 })
+            window.location.reload();
         }
     },
     PREVIOUS_DAY: (state) => {
@@ -72,7 +73,7 @@ const mutations = {
                 .catch( error => {
                     console.log(error.response.data)
                 })
-
+            window.location.reload();
         }
     },
     toggleTask: (state, payload) => {

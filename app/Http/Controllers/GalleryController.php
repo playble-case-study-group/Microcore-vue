@@ -202,7 +202,8 @@ class GalleryController extends Controller
                 ->where('student_gallery_id', $art->student_gallery_id)
                 ->update([
                     'title' => $request->title,
-                    'description' => $request->description
+                    'description' => $request->description,
+                    'day' => $usr->current_day
                 ]);
 
             if (count($request->tags)) {
@@ -232,7 +233,8 @@ class GalleryController extends Controller
                         'img' => $request->img,
                         'user_id' => $usr->id,
                         'group_id' => $usr->groupId,
-                        'class_id' => $usr->classId->class_id
+                        'class_id' => $usr->classId->class_id,
+                        'day' => $usr->current_day
                     ]);
             } else {
                 // Without adding group ID
@@ -243,7 +245,8 @@ class GalleryController extends Controller
                         'description' => $request->description,
                         'img' => $request->img,
                         'user_id' => $usr->id,
-                        'class_id' => $usr->classId->class_id
+                        'class_id' => $usr->classId->class_id,
+                        'day' => $usr->current_day
                     ]);
             }
 
