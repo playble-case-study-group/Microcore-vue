@@ -50,6 +50,7 @@ Route::get('/chatbot', function () {
 
 
 Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+Route::post( '/resetDay', 'SimulationController@resetDay' );
 
 
 Route::resource('/library', 'LibraryController');

@@ -65,7 +65,7 @@ const mutations = {
     PREVIOUS_DAY: (state) => {
         if(state.user.current_day > 1) {
             state.user.current_day--;
-            axios.post('/updateday', {id: state.user.id, day: state.user.current_day})
+            axios.post('/resetDay', {id: state.user.id, day: state.user.current_day})
                 .then(response => {
                     // console.log(response)
                 })
