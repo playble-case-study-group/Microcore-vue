@@ -53653,8 +53653,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 //import mapState from 'vuex'
 
@@ -54082,19 +54080,6 @@ var render = function() {
             )
           : _vm._e()
       })
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": ".artifact-modal"
-        }
-      },
-      [_vm._v("Large modal")]
     ),
     _vm._v(" "),
     _c(

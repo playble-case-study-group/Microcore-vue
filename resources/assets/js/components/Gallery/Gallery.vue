@@ -36,8 +36,6 @@
 
 
         <!-- Large modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".artifact-modal">Large modal</button>
-
         <div class="modal fade artifact-modal" tabindex="-1" role="dialog" aria-labelledby="artifactModalDialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
