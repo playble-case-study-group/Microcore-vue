@@ -13,14 +13,15 @@
 
                     </p>
                 </div>
+                <button  >Add Article</button>
             </div>
             <form class="col-sm-8 col-md-9">
+                <button class="" v-if="currentArticle != 1">Delete Article</button>
                 <textarea id="content-container" v-model="currentContent" @keyup="setTime">
                 </textarea>
             </form>
 
         </div>
-
 
     </div>
 </template>
@@ -43,7 +44,7 @@
                 currentArticle: 1,
                 //currentPair is an object containing a pair of articles. These objects come from the wiki table. Notice that the naming can eb confusing.
                 currentPair: 1,
-                languages: ['english', 'spanish'],
+                languages: ['english'],
                 timeout: null
             }
         },
@@ -101,7 +102,6 @@
     #editor {
         background-color: white;
         margin-left: 40px;
-        box-shadow: 2px 1px 2px;
     }
     #libraryMenu {
         height: 100vh;

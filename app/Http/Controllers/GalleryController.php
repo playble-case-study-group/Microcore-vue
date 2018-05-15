@@ -227,32 +227,32 @@ class GalleryController extends Controller
                 // Assigned to group
                 $id = DB::table('student_gallery')
                     ->insertGetId([
-                        'gallery_id' => $request->galleryId,
+                        'student_gallery_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
                         'user_id' => $usr->id,
                         'group_id' => $usr->groupId,
-                        'class_id' => $usr->classId->class_id,
+                        'class_id' => Auth::user()->class_id,
                         'day' => $usr->current_day
                     ]);
             } else {
                 // Without adding group ID
                 $id = DB::table('student_gallery')
                     ->insertGetId([
-                        'gallery_id' => $request->galleryId,
+                        'student_gallery_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
                         'user_id' => $usr->id,
-                        'class_id' => $usr->classId->class_id,
+                        'class_id' => Auth::user()->class_id,
                         'day' => $usr->current_day
                     ]);
             }
 
             if ($request->tags) {
                 foreach ($request->tags as $tag) {
-                    DB::table('gallery_has_tag')
+                    DB::table('student_gallery_has_tag')
                         ->insert([
                             'gallery_id' => $id,
                             'tag_id' => $tag['tag_id']
