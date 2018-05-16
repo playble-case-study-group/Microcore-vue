@@ -8,15 +8,41 @@
                 <h1>menu</h1>
                 <br>
                 <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" >
-                    <h4 class="article-title">{{article[currentLang].title}}</h4>
+                    <h4 class="article-title">{{article.title}}</h4>
                     <p :id="'title-' + article.id">
 
                     </p>
                 </div>
-                <button  >Add Article</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#articleModal">Add Article</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Reset Current Day?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Article Title</label>
+                                        <input type="text" v-model="addedTitle" class="form-control" id="recipient-name">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="addArticle">Sumbit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <form class="col-sm-8 col-md-9">
-                <button class="" v-if="currentArticle != 1">Delete Article</button>
+                <button class="btn btn-danger" v-if="currentArticle != 1" @click="deleteArticle" >Delete Article</button>
                 <textarea id="content-container" v-model="currentContent" @keyup="setTime">
                 </textarea>
             </form>
@@ -45,16 +71,17 @@
                 //currentPair is an object containing a pair of articles. These objects come from the wiki table. Notice that the naming can eb confusing.
                 currentPair: 1,
                 languages: ['english'],
-                timeout: null
+                timeout: null,
+                addedTitle: ''
             }
         },
         methods: {
             showContent: function (id) {
                 let content = this.wiki.find( title => title.id == id);
 
-                this.currentTitle = content[this.currentLang].title;
-                this.currentContent = content[this.currentLang].content;
-                this.currentArticle = content[this.currentLang].id;
+                this.currentTitle = content.title;
+                this.currentContent = content.content;
+                this.currentArticle = content.id;
                 this.currentPair = id;
 
             },
@@ -65,7 +92,7 @@
             },
             updateArticle: function () {
                 let content = this.wiki.find( title => title.id == this.currentPair);
-                content[this.currentLang].content = this.currentContent;
+                content.content = this.currentContent;
 
                 let data = {
                     id: this.currentArticle,
@@ -85,6 +112,32 @@
                 this.timeout = setTimeout(this.updateArticle, 500);
 
 
+            },
+            deleteArticle: function() {
+                let id = this.currentArticle;
+                axios
+                    .post( "/deleteArticle",
+                        {
+                            article_id: id
+                        }
+                    )
+                    .then(r => console.log(r))
+                    .catch(e => console.log(e));
+            },
+            addArticle: function() {
+                let title = this.addedTitle;
+                axios
+                    .post( "/addArticle",
+                        {
+                            article_title: title
+                        }
+                    )
+                    .then(r => {
+                        console.log(r);
+                        this.addedTitle = '';
+                        window.location.reload();
+                    })
+                    .catch(e => console.log(e));
             }
         },
     }

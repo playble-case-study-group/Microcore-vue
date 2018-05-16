@@ -60,7 +60,7 @@ const mutations = {
                 .catch(error => {
                     console.log(error.response.data)
                 })
-            window.location.reload();
+            window.location.href = '/dashboard';
         }
     },
     PREVIOUS_DAY: (state) => {

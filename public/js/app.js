@@ -57365,8 +57365,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return title.id == id;
             });
 
-            this.currentTitle = content[this.currentLang].title;
-            this.currentContent = content[this.currentLang].content;
+            this.currentTitle = content.title;
+            this.currentContent = content.content;
             this.currentArticle = id;
         },
         changeLang: function changeLang(lang) {
@@ -57381,8 +57381,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var appScope = _this;
 
                 setTimeout(function () {
-                    appScope.currentTitle = single.spanish.title;
-                    appScope.currentContent = single.spanish.content;
+                    appScope.currentTitle = single.title;
+                    appScope.currentContent = single.content;
                     appScope.currentArticle = single.id;
                 }, 100);
             };
@@ -76430,7 +76430,7 @@ var render = function() {
                 },
                 [
                   _c("h4", { staticClass: "article-title" }, [
-                    _vm._v(_vm._s(article[_vm.currentLang].title))
+                    _vm._v(_vm._s(article.title))
                   ]),
                   _vm._v(" "),
                   _c("p", { attrs: { id: "title-" + article.id } })
@@ -79375,6 +79375,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -79394,7 +79420,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //currentPair is an object containing a pair of articles. These objects come from the wiki table. Notice that the naming can eb confusing.
             currentPair: 1,
             languages: ['english'],
-            timeout: null
+            timeout: null,
+            addedTitle: ''
         };
     },
     methods: {
@@ -79403,9 +79430,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return title.id == id;
             });
 
-            this.currentTitle = content[this.currentLang].title;
-            this.currentContent = content[this.currentLang].content;
-            this.currentArticle = content[this.currentLang].id;
+            this.currentTitle = content.title;
+            this.currentContent = content.content;
+            this.currentArticle = content.id;
             this.currentPair = id;
         },
         changeLang: function changeLang(lang) {
@@ -79418,7 +79445,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var content = this.wiki.find(function (title) {
                 return title.id == _this.currentPair;
             });
-            content[this.currentLang].content = this.currentContent;
+            content.content = this.currentContent;
 
             var data = {
                 id: this.currentArticle,
@@ -79435,6 +79462,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //use this to adjust how long it takes to make an update in the database. The program will wait for a pause in typing.
             clearTimeout(this.timeout);
             this.timeout = setTimeout(this.updateArticle, 500);
+        },
+        deleteArticle: function deleteArticle() {
+            var id = this.currentArticle;
+            axios.post("/deleteArticle", {
+                article_id: id
+            }).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        },
+        addArticle: function addArticle() {
+            var _this2 = this;
+
+            var title = this.addedTitle;
+            axios.post("/addArticle", {
+                article_title: title
+            }).then(function (r) {
+                console.log(r);
+                _this2.addedTitle = '';
+                window.location.reload();
+            }).catch(function (e) {
+                return console.log(e);
+            });
         }
     }
 });
@@ -79470,7 +79521,7 @@ var render = function() {
               },
               [
                 _c("h4", { staticClass: "article-title" }, [
-                  _vm._v(_vm._s(article[_vm.currentLang].title))
+                  _vm._v(_vm._s(article.title))
                 ]),
                 _vm._v(" "),
                 _c("p", { attrs: { id: "title-" + article.id } })
@@ -79478,14 +79529,102 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("button", [_vm._v("Add Article")])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              attrs: { "data-toggle": "modal", "data-target": "#articleModal" }
+            },
+            [_vm._v("Add Article")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "articleModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "exampleModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("form", [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-form-label",
+                              attrs: { for: "recipient-name" }
+                            },
+                            [_vm._v("Article Title")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.addedTitle,
+                                expression: "addedTitle"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", id: "recipient-name" },
+                            domProps: { value: _vm.addedTitle },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.addedTitle = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: { click: _vm.addArticle }
+                        },
+                        [_vm._v("Sumbit")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ],
         2
       ),
       _vm._v(" "),
       _c("form", { staticClass: "col-sm-8 col-md-9" }, [
         _vm.currentArticle != 1
-          ? _c("button", {}, [_vm._v("Delete Article")])
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: { click: _vm.deleteArticle }
+              },
+              [_vm._v("Delete Article")]
+            )
           : _vm._e(),
         _vm._v(" "),
         _c("textarea", {
@@ -79513,7 +79652,33 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Reset Current Day?")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -79594,7 +79759,7 @@ var mutations = {
             }).catch(function (error) {
                 console.log(error.response.data);
             });
-            window.location.reload();
+            window.location.href = '/dashboard';
         }
     },
     PREVIOUS_DAY: function PREVIOUS_DAY(state) {
