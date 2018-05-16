@@ -79335,7 +79335,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 3rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 40px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    margin-top: 20px;\n    padding-right: 80px;\n    padding-left: 40px;\n    padding-top: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    width: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
+exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 3rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n.delete[data-v-3dab0688] {\n    float: right;\n    margin-top: 40px;\n    margin-right: 20px;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 40px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    margin-top: 20px;\n    padding-right: 80px;\n    padding-left: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    width: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
 
 // exports
 
@@ -79620,7 +79620,7 @@ var render = function() {
           ? _c(
               "button",
               {
-                staticClass: "btn btn-danger",
+                staticClass: "btn btn-danger delete",
                 on: { click: _vm.deleteArticle }
               },
               [_vm._v("Delete Article")]

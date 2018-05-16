@@ -42,7 +42,7 @@
 
             </div>
             <form class="col-sm-8 col-md-9">
-                <button class="btn btn-danger" v-if="currentArticle != 1" @click="deleteArticle" >Delete Article</button>
+                <button class="btn btn-danger delete" v-if="currentArticle != 1" @click="deleteArticle" >Delete Article</button>
                 <textarea id="content-container" v-model="currentContent" @keyup="setTime">
                 </textarea>
             </form>
@@ -152,6 +152,11 @@
     .article-title:hover{
         text-decoration: underline;
     }
+    .delete {
+        float: right;
+        margin-top: 40px;
+        margin-right: 20px;
+    }
     #editor {
         background-color: white;
         margin-left: 40px;
@@ -167,7 +172,6 @@
         margin-top: 20px;
         padding-right: 80px;
         padding-left: 40px;
-        padding-top: 40px;
         resize: none;
         border:none;
         height: 100%;
