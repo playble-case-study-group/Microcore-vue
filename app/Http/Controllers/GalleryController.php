@@ -81,10 +81,10 @@ class GalleryController extends Controller
     public function getArtifacts()
     {
         $id = Auth::user()->id;
-        $baseArtifacts = DB::table('artifacts')
+        $baseArtifacts = DB::table('gallery')
             ->where('created_by', 0)
             ->get();
-        $userArtifacts = DB::table('artifacts')
+        $userArtifacts = DB::table('gallery')
             ->where('created_by', $id)
             ->get();
         $finalArtifacts = array();

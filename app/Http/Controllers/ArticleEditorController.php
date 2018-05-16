@@ -16,6 +16,8 @@ class ArticleEditorController extends Controller
     {
         $wiki = DB::table('article')->get();
 
+        //can be used to support multiple languages if needed.
+        // if wanted, change $wiki to be pulling from the wiki table
         /*foreach ($wiki as $article) {
             $article->english = DB::table('article')
                 ->where('id', $article->lang_1_ar)

@@ -18,8 +18,8 @@
             <div class="sidebar col-md-2">
                 <button class="btn btn-success compose" @click="composeModal">Compose</button>
                 <ul>
-                    <li class="inboxToggle" style="background-color: white;" @click="toggleInbox"><div class="keyline keyline-inbox">Inbox</div></li>
-                    <li class="sentToggle" @click="toggleSent"><div class="keyline keyline-sent">Sent</div></li>
+                    <li class="inboxToggle" @click="toggleInbox"> <div class="keyline keyline-inbox">Inbox</div> </li>
+                    <li class="sentToggle" @click="toggleSent"> <div class="keyline keyline-sent">Sent</div> </li>
                 </ul>
             </div>
             <div class="col-sm-12 col-lg-10 emailList">
@@ -35,24 +35,12 @@
                     <tr v-for="email in characterEmails"
                         @click="readEmail(email)"
                         :key="email.character_email_id">
-                        <td>
-                            <img :src="email.img_small" alt="">
-                        </td>
-                        <td>
-                            {{ email.name }}
-                        </td>
-                        <td class="truncate">
-                            {{ email.subject }}
-                        </td>
-                        <td class="truncate">
-                            {{ email.body }}
-                        </td>
-                        <td>
-                            {{ email.day }}
-                        </td>
-                        <td>
-
-                        </td>
+                        <td> <img :src="email.img_small" alt=""> </td>
+                        <td> {{ email.name }} </td>
+                        <td class="truncate"> {{ email.subject }} </td>
+                        <td class="truncate"> {{ email.body }} </td>
+                        <td> {{ email.day }} </td>
+                        <td> </td>
                     </tr>
                 </table>
                 <table id="sent">
@@ -66,21 +54,11 @@
                     <tr v-for="email in studentEmails"
                         @click="readEmail(email)"
                         :key="email.student_email_id">
-                        <td>
-                            {{ email.name }}
-                        </td>
-                        <td class="truncate">
-                            {{ email.subject }}
-                        </td>
-                        <td class="truncate">
-                            {{ email.body }}
-                        </td>
-                        <td>
-                            {{ email.day }}
-                        </td>
-                        <td>
-
-                        </td>
+                        <td> {{ email.name }} </td>
+                        <td class="truncate"> {{ email.subject }} </td>
+                        <td class="truncate"> {{ email.body }} </td>
+                        <td> {{ email.day }} </td>
+                        <td> </td>
                     </tr>
                 </table>
             </div>
@@ -93,6 +71,9 @@
                 <div class="modal-content">
                     <div class="modal-header heading">
                         <h5 class="modal-title">{{ readModalData.subject }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
@@ -120,6 +101,9 @@
                 <div class="modal-content">
                     <div class="modal-header heading">
                         <h5 class="modal-title">New Email</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="row form-group">
@@ -151,6 +135,9 @@
                 <div class="modal-content">
                     <div class="modal-header heading">
                         <h5 class="modal-title">Reply</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="row form-group">
@@ -192,8 +179,8 @@
         },
         data: function () {
             return {
-                draftemailsubject: "",
-                draftemailbody: "",
+                draftEmailSubject: "",
+                draftEmailBody: "",
                 toCharacter: "",
                 readModalData: {
                     id: 0,
@@ -210,18 +197,24 @@
 
             }
         },
-        props: ['characterEmails', 'characters', 'studentEmails'],
+        props: {
+            characterEmails: Array,
+            characters: Array,
+            studentEmails: Array
+        },
         mounted() {
-            console.log('Component mounted.');
             $('#sent').hide();
             $('#replyForm').hide();
 
         },
-        computed: {
-        },
         methods: {
             sendemail: function () {
-                axios.post('/email', {subject: this.draftemailsubject, body: this.draftemailbody})
+                axios.post(
+                    '/email',
+                    {
+                        subject: this.draftEmailSubject,
+                        body: this.draftEmailBody
+                    })
                     .then( response => {
                     console.log(response);
                     this.emails.push(response.data);
@@ -235,29 +228,26 @@
                 this.readModalData.body = email.body;
 
                 $('#readModal').modal();
-                console.log(email)
             },
             toggleInbox: function () {
                 $('#inbox').show();
                 $('.keyline-inbox').css('border-color', '#636b6f');
                 $('.keyline-sent').css('border-color', 'white');
                 $('#sent').hide();
-                console.log('inbox');
             },
             toggleSent: function () {
                 $('#inbox').hide();
                 $('.keyline-inbox').css('border-color', 'white');
                 $('.keyline-sent').css('border-color', '#636b6f');
                 $('#sent').show();
-                console.log('sent');
             },
             composeModal: function () {
                 this.resetDraftEmail();
 
                 $('#composeModal').modal('show');
             },
+            //duplicate?
             sendEmail: function () {
-                console.log('got here')
                 axios.post('/email', this.draftEmail).then( response => {
                     console.log(response.data)
 
@@ -291,7 +281,6 @@
             },
             openNav: function() {
                 document.getElementById("mySidenav").style.width = "200px";
-                console.log('menu');
             },
             closeNav: function() {
                 document.getElementById("mySidenav").style.width = "0";

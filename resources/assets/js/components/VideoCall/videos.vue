@@ -22,12 +22,12 @@
                 <div id="contacts" class="dropdown-menu">
                     <div class="contact-inner dropdown-item"
                          v-for="person in characters"
-                         :id="person.id"
+                         :key="person.id"
                          @click="loadCallVideo(person.id)">
                         <img class="characterImage" :src="person.img_small">
                         <div class="characterInfo">
-                            <span class="characterName">{{person.name}}</span><br>
-                            <span class="characterPosition">{{person.role}}</span>
+                            <span class="characterName">{{ person.name }}</span><br>
+                            <span class="characterPosition">{{ person.role }}</span>
                         </div>
                         <span class="characterActive" v-if="activeContacts.includes(person.id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
@@ -51,7 +51,7 @@
         <character-questions id="characterQuestions"
                              :countdown="this.countdownTime"
                              :questions="this.currentQuestions"
-                             v-on:question="askQuestion">
+                             @question="askQuestion">
         </character-questions>
 
     </div>
@@ -64,7 +64,11 @@
     import VideoMessage from "./record_message";
 
     export default {
-        props: ['calls', 'characters', 'questions'],
+        props: {
+            calls: Array,
+            characters: Array,
+            questions: Array
+        },
         data: function () {
             return {
                 videoEl: {},
@@ -84,7 +88,6 @@
             this.startSelfVideo();
         },
         components: {
-            VideoMessage,
             'character-questions': question,
             'video-message': videoMessage
         },
@@ -92,7 +95,6 @@
             currentVideo: function () {
                 this.videoEl = document.querySelector('video');
                 if(!this.showRecordingInterface) {
-                    this.currentSrc = this.currentVideo.call_url;
                     this.videoEl.load();
                     this.callIconToggleStatus = "call";
                 }
@@ -109,7 +111,6 @@
                               document.getElementById('call_video').pause();
 
                               if(appScope.currentQuestion.record_after){
-                                  console.log(!appScope.responded);
                                   if(!appScope.responded) {
                                       appScope.leaveResponse = true;
                                   }
@@ -126,7 +127,6 @@
             leaveResponse: function(){
                 let appScope = this;
                 if(this.leaveResponse == true) {
-                    console.log('your video will start in three seconds')
                     appScope.answerQuestion();
                     appScope.countdownTime = appScope.currentQuestion.recording_duration;
                 } else {
@@ -189,16 +189,8 @@
                     this.callIconToggleStatus = "call";
                 }
             },
-            changeMicIcon: function () {
-                if (document.getElementById('mic').innerText === "mic") {
-                    document.getElementById('mic').innerText = "mic_off";
-                } else {
-                    document.getElementById('mic').innerText = "mic";
-                }
-            },
             startStopRecording: function () {
                 if(!this.leaveResponse) {
-                    console.log('worked')
                     this.recording = !this.recording;
                 }
             },
@@ -207,6 +199,7 @@
                 this.currentQuestion = question;
             },
 
+            //these functions handle all video objects and actions
             answerQuestion: function(){
                 //set that we want both audio and video
                 const constraints = {
@@ -221,7 +214,6 @@
             },
             startSelfVideo: function () {
                 //set that we want both audio and video
-                console.log('self video start')
                 const constraints = {
                     audio: {
                         echoCancellation: true,
@@ -238,7 +230,7 @@
             },
             handleFailure: function (error) {
                 //if they don't have browser support, try a lower compatibility function or fail
-                console.error('Reeeejected!', error);
+                console.error(error);
             },
             handleMessage: function (stream) {
                 const video = document.getElementById('personal_video');
@@ -258,7 +250,6 @@
                 video.addEventListener('loadeddata', function () {
                         if(appScope.leaveResponse == true) {
                             setTimeout(function () {
-                                console.log('started')
                                 mediaRecorder.start(1000);
                             }, 4000);
                         }
@@ -277,8 +268,7 @@
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-;                   if(end){
-                        console.log('stopped message')
+                    if(end){
                         mediaRecorder.stop();
                     }
 
@@ -371,6 +361,8 @@
                     };
                 })
             },
+
+            //these functions handle the audio display
             startAudio: function() {
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -411,8 +403,8 @@
             },
             visualize: function (analyser, canvasCtx) {
                 //set the dimensions of animation
-                let WIDTH = 400;
-                let HEIGHT = 150;
+                const WIDTH = 400;
+                const HEIGHT = 150;
 
                 //convert data to the correct format
                 analyser.fftSize = 256;
@@ -441,7 +433,7 @@
                     for (let i = 0; i < bufferLengthAlt; i++) {
                         barHeight = dataArrayAlt[i];
 
-                        canvasCtx.fillStyle = 'rgb(255, '+ (barHeight + 210) + ', 255)';
+                        canvasCtx.fillStyle = 'rgb(255, 255, 255)';
                         canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
 
                         x += barWidth + 1;

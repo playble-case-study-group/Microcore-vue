@@ -2,16 +2,20 @@
     <div class="container main" id="library">
         <div class="row">
             <div class="col-sm-4 col-md-3" id="libraryMenu">
+                <!-- can be used to toggle multiple different language -->
                 <!-- <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
                     <button type="button" :class="['btn', currentLang == lang ? 'btn-invert' : 'btn-default']" @click="changeLang(lang)">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</button>
                 </div>-->
                 <h1>menu</h1>
                 <br>
-                <div v-for="article in wiki" @click="showContent(article.id)" class="menubtn" >
-                    <h4 class="article-title">{{article.title}}</h4>
-                    <p :id="'title-' + article.id">
+                <div v-for="article in wiki"
+                     :key="article.id"
+                     @click="showContent(article.id)"
+                     class="menubtn" >
 
-                    </p>
+                    <h4 class="article-title">{{article.title}}</h4>
+                    <p :id="'title-' + article.id"> </p>
+
                 </div>
             </div>
             <div class="col-sm-8 col-md-9" id="content-container">
@@ -24,7 +28,6 @@
             </div>
         </div>
 
-
     </div>
 </template>
 
@@ -36,7 +39,6 @@
     export default {
 
         mounted() {
-            console.log('Component mounted.')
             this.getAllToc();
         },
         components: {
@@ -50,7 +52,7 @@
                 currentTitle:"",
                 currentContent:"",
                 currentLang:"spanish",
-                currentArticle: 1,
+                currentArticleId: 1,
                 languages: ['spanish']
             }
         },
@@ -60,31 +62,34 @@
 
                 this.currentTitle = content.title;
                 this.currentContent = content.content;
-                this.currentArticle = id;
+                this.currentArticleId = id;
 
             },
-            changeLang: function (lang) {
+            /*changeLang: function (lang) {
                 this.currentLang = lang;
-                this.showContent(this.currentArticle);
+                this.showContent(this.currentArticleId);
 
-            },
+            },*/
             getAllToc: function() {
-                for(let article in this.wiki){
-                    let single = this.wiki[article];
+                for(let i in this.wiki){
+                    let article = this.wiki[i];
                     let appScope = this;
 
+                    // loops through and sets article variables to retrieve all toc items for each article
                     setTimeout(function(){
-                        appScope.currentTitle = single.title;
-                        appScope.currentContent = single.content;
-                        appScope.currentArticle = single.id;
+                        appScope.currentTitle = article.title;
+                        appScope.currentContent = article.content;
+                        appScope.currentArticleId = article.id;
                       }, 100);
                 }
             },
             receiveToc: function (tocHtmlStr) {
-                let title = "#title-" + this.currentArticle;
+                let title = "#title-" + this.currentArticleId;
 
                 if( $(title).children().length <= 0 ) {
                     $(title).append(tocHtmlStr);
+
+                    // css needs to be apended dynamically to the added TOC items
                     $(".table-of-contents").css('list-style-type', 'none');
                     $(".table-of-contents").find('ul').css('list-style-type', 'none');
                     $(".table-of-contents").find('a').css('color', '#636b6f');

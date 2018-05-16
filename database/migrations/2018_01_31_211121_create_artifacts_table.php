@@ -13,7 +13,7 @@ class CreateArtifactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('artifacts', function (Blueprint $table) {
+        Schema::create('gallery', function (Blueprint $table) {
             $table->increments('id');
             $table->text('title');
             $table->text('description');
@@ -29,6 +29,6 @@ class CreateArtifactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artifacts');
+        Schema::dropIfExists('gallery');
     }
 }

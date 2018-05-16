@@ -25,9 +25,11 @@
             'notes': notes,
             'character-video': videos,
         },
-        props: ['calls', 'questions', 'notes', 'contacts'],
-        mounted() {
-            console.log('Component mounted.')
+        props: {
+            calls: Array,
+            questions: Array,
+            notes: Object,
+            contacts: Array
         }
     }
 </script>

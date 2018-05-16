@@ -10,7 +10,10 @@
     import { mapActions } from 'vuex'
 
     export default {
-        props: ['recording', 'clickedCharacter'],
+        props: {
+            recording: Boolean,
+            clickedCharacter: Number
+        },
         watch:{
            recording: function(){
                if(this.recording){
