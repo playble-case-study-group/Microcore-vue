@@ -1,3 +1,4 @@
+
 -- MySQL dump 10.13  Distrib 5.7.21, for macos10.13 (x86_64)
 --
 -- Host: localhost    Database: VueSim
@@ -23,7 +24,7 @@ DROP TABLE IF EXISTS `Tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `description` text,
   `day` int(11) NOT NULL DEFAULT '1',
@@ -39,7 +40,7 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,1),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
+INSERT INTO `Tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,0),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,14 +52,15 @@ DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lang_id` int(11) DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,31 +74,58 @@ INSERT INTO `article` VALUES (9,1,'Civil War','# Civil War<hr>\nNunc at nisi non
 UNLOCK TABLES;
 
 --
--- Table structure for table `artifacts`
+-- Table structure for table `assignment_type`
 --
 
-DROP TABLE IF EXISTS `artifacts`;
+DROP TABLE IF EXISTS `assignment_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artifacts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `assignment_type` (
+  `assign_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `stored_procedure` varchar(255) DEFAULT NULL,
+  `table_columns` json DEFAULT NULL,
+  PRIMARY KEY (`assign_type_id`),
+  UNIQUE KEY `assignment_type_assign_type_id_uindex` (`assign_type_id`),
+  UNIQUE KEY `assignment_type_title_uindex` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artifacts`
+-- Dumping data for table `assignment_type`
 --
 
-LOCK TABLES `artifacts` WRITE;
-/*!40000 ALTER TABLE `artifacts` DISABLE KEYS */;
-INSERT INTO `artifacts` VALUES (1,'Sint at qui.','Natus impedit voluptate est harum minima.','https://lorempixel.com/640/480/?86019','2018-04-04 00:30:59','2018-04-04 00:30:59'),(2,'Sit dolores odio tenetur nihil.','Cupiditate ea quia occaecati alias non quia.','https://lorempixel.com/640/480/?93504','2018-04-04 00:30:59','2018-04-04 00:30:59'),(3,'Optio aliquid delectus voluptas.','Ut et magnam recusandae consequatur laborum.','https://lorempixel.com/640/480/?62136','2018-04-04 00:30:59','2018-04-04 00:30:59'),(4,'Libero dignissimos doloremque veritatis atque.','Ut quia eligendi vel voluptates et hic.','https://lorempixel.com/640/480/?47748','2018-04-04 00:30:59','2018-04-04 00:30:59'),(5,'Ut rerum vero numquam consequatur.','Quia necessitatibus inventore quos fugiat.','https://lorempixel.com/640/480/?38420','2018-04-04 00:30:59','2018-04-04 00:30:59'),(6,'Nihil occaecati voluptate optio ut quia.','Quos repudiandae et sit quam.','https://lorempixel.com/640/480/?13389','2018-04-04 00:30:59','2018-04-04 00:30:59'),(7,'A minima soluta animi illum.','Nisi totam laborum nemo tempore porro.','https://lorempixel.com/640/480/?21971','2018-04-04 00:30:59','2018-04-04 00:30:59'),(8,'Ut est repellendus qui sunt doloremque.','Nihil aspernatur sint non.','https://lorempixel.com/640/480/?41889','2018-04-04 00:30:59','2018-04-04 00:30:59'),(9,'Veritatis recusandae consectetur dolores quos.','Cumque velit necessitatibus sapiente velit ut.','https://lorempixel.com/640/480/?79410','2018-04-04 00:30:59','2018-04-04 00:30:59'),(10,'Pariatur et tempore rerum qui error.','Cumque ad numquam nihil et deleniti ratione.','https://lorempixel.com/640/480/?33134','2018-04-04 00:30:59','2018-04-04 00:30:59'),(11,'Nemo nihil quisquam consequuntur.','Cupiditate mollitia iste porro ab.','https://lorempixel.com/640/480/?80851','2018-04-04 00:30:59','2018-04-04 00:30:59'),(12,'Ratione optio delectus itaque eligendi tempora.','Error illum voluptatibus necessitatibus.','https://lorempixel.com/640/480/?36919','2018-04-04 00:30:59','2018-04-04 00:30:59'),(13,'Et laborum est.','Amet facilis nisi eaque aut.','https://lorempixel.com/640/480/?99516','2018-04-04 00:30:59','2018-04-04 00:30:59'),(14,'Est odit sint.','Inventore sunt amet rerum ea facere.','https://lorempixel.com/640/480/?31693','2018-04-04 00:30:59','2018-04-04 00:30:59'),(15,'Et magnam optio.','Deleniti modi autem nam minus perferendis qui.','https://lorempixel.com/640/480/?68035','2018-04-04 00:30:59','2018-04-04 00:30:59'),(16,'Soluta ex enim delectus qui.','Voluptas sed sit magnam et ipsa non eos.','https://lorempixel.com/640/480/?38639','2018-04-04 00:30:59','2018-04-04 00:30:59'),(17,'Itaque ut officia nisi sit.','Voluptatem laboriosam autem est dignissimos.','https://lorempixel.com/640/480/?75707','2018-04-04 00:30:59','2018-04-04 00:30:59'),(18,'Cupiditate sit ut quaerat corrupti.','Sit dolorem nisi et neque deserunt nihil.','https://lorempixel.com/640/480/?97152','2018-04-04 00:30:59','2018-04-04 00:30:59'),(19,'Quaerat ducimus accusantium quia ut.','Similique molestiae et et minus omnis et sint.','https://lorempixel.com/640/480/?28579','2018-04-04 00:30:59','2018-04-04 00:30:59'),(20,'Molestiae eum tempore et.','Amet expedita et qui sit vero debitis.','https://lorempixel.com/640/480/?46878','2018-04-04 00:30:59','2018-04-04 00:30:59'),(21,'Dignissimos quia voluptatem et nihil.','Sapiente repudiandae voluptatibus et autem.','https://lorempixel.com/640/480/?96936','2018-04-24 23:28:28','2018-04-24 23:28:28'),(22,'Ut facere consequatur.','Aut earum occaecati eligendi asperiores vel.','https://lorempixel.com/640/480/?54976','2018-04-24 23:28:28','2018-04-24 23:28:28'),(23,'Earum autem voluptatem esse quibusdam eveniet.','Aut ex quis consequuntur dicta eius cupiditate.','https://lorempixel.com/640/480/?73690','2018-04-24 23:28:28','2018-04-24 23:28:28'),(24,'Omnis ullam omnis.','Autem quo maxime laborum laboriosam voluptatem.','https://lorempixel.com/640/480/?24307','2018-04-24 23:28:28','2018-04-24 23:28:28'),(25,'Odio quae commodi.','Fuga facilis dignissimos ad.','https://lorempixel.com/640/480/?90990','2018-04-24 23:28:28','2018-04-24 23:28:28'),(26,'Est quis vel explicabo.','Quia dolor mollitia saepe repellat est nihil.','https://lorempixel.com/640/480/?96137','2018-04-24 23:28:28','2018-04-24 23:28:28'),(27,'Sunt nostrum eum ducimus tenetur.','Laudantium possimus deserunt est.','https://lorempixel.com/640/480/?80881','2018-04-24 23:28:28','2018-04-24 23:28:28'),(28,'Aliquid itaque totam assumenda.','Ut aut tenetur a quasi.','https://lorempixel.com/640/480/?93076','2018-04-24 23:28:28','2018-04-24 23:28:28'),(29,'Omnis corrupti harum ullam ab.','Iure qui voluptas facilis ut.','https://lorempixel.com/640/480/?44257','2018-04-24 23:28:28','2018-04-24 23:28:28'),(30,'Veniam temporibus doloremque sapiente minus.','Est autem fugiat aspernatur.','https://lorempixel.com/640/480/?73369','2018-04-24 23:28:28','2018-04-24 23:28:28'),(31,'Iste ut voluptas ut eum.','Est adipisci aspernatur rem.','https://lorempixel.com/640/480/?21062','2018-04-24 23:28:28','2018-04-24 23:28:28'),(32,'Eius voluptatem sed omnis.','Ut dolores a placeat id quidem dolorem.','https://lorempixel.com/640/480/?60742','2018-04-24 23:28:28','2018-04-24 23:28:28'),(33,'Consequatur et est consequatur.','Molestias laudantium in non.','https://lorempixel.com/640/480/?85608','2018-04-24 23:28:28','2018-04-24 23:28:28'),(34,'Omnis fugit excepturi ut molestiae.','Ducimus velit delectus et neque deserunt nemo.','https://lorempixel.com/640/480/?97777','2018-04-24 23:28:28','2018-04-24 23:28:28'),(35,'A vel excepturi.','Ut commodi ut quia voluptatem tempore quis.','https://lorempixel.com/640/480/?18570','2018-04-24 23:28:28','2018-04-24 23:28:28'),(36,'Minima pariatur qui.','Sapiente et perspiciatis qui ea id.','https://lorempixel.com/640/480/?16732','2018-04-24 23:28:28','2018-04-24 23:28:28'),(37,'Atque reprehenderit ullam est expedita et.','Sit minus eos quia ad vitae.','https://lorempixel.com/640/480/?94430','2018-04-24 23:28:28','2018-04-24 23:28:28'),(38,'Praesentium molestiae neque consequatur.','Nesciunt eos quis quia et et natus molestiae.','https://lorempixel.com/640/480/?26786','2018-04-24 23:28:28','2018-04-24 23:28:28'),(39,'Laudantium omnis ab aliquid.','Iusto modi dolorem aliquam.','https://lorempixel.com/640/480/?16183','2018-04-24 23:28:28','2018-04-24 23:28:28'),(40,'Error quisquam adipisci.','Porro et odit consequatur accusamus ut sunt.','https://lorempixel.com/640/480/?74685','2018-04-24 23:28:28','2018-04-24 23:28:28');
-/*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
+LOCK TABLES `assignment_type` WRITE;
+/*!40000 ALTER TABLE `assignment_type` DISABLE KEYS */;
+INSERT INTO `assignment_type` VALUES (1,'Email','CALL retrieve_email_assignments(?,?,?)','[\"user_id\", \"day\", \"body\"]'),(2,'Gallery','CALL retrieve_gallery_assignments(?)',NULL),(3,'Video Call','CALL retrieve_video_assignments(?,?,?,?)',NULL);
+/*!40000 ALTER TABLE `assignment_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignments`
+--
+
+DROP TABLE IF EXISTS `assignments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `assignments` (
+  `assign_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `assign_type_id` int(11) NOT NULL DEFAULT '0',
+  `requirements` json DEFAULT NULL COMMENT 'Array\nEmail [character_id, day]\nGallery []\nVideoCall [question_id, day, character_id]',
+  PRIMARY KEY (`assign_id`),
+  UNIQUE KEY `assignments_assign_id_uindex` (`assign_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='Handles the assignments';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignments`
+--
+
+LOCK TABLES `assignments` WRITE;
+/*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
+INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'[2, 1]'),(2,'Eduardo Email Day 1',1,'[1, 1]'),(3,'Phillip Email Day 2',1,'[3, 1]'),(4,'Gallery Assignment',2,'[]'),(5,'Video call day 1',3,'[1, 1, 1]');
+/*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,13 +136,14 @@ DROP TABLE IF EXISTS `channel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `channel` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `channel_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `channel_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`channel_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +152,7 @@ CREATE TABLE `channel` (
 
 LOCK TABLES `channel` WRITE;
 /*!40000 ALTER TABLE `channel` DISABLE KEYS */;
+INSERT INTO `channel` VALUES (1,'Channel 1','884bfc04fd474126993d40f682471515',NULL,NULL),(2,'Channel 2','c31305b92c7443f1908e821264a193ae',NULL,NULL);
 /*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +184,7 @@ CREATE TABLE `character_email` (
 
 LOCK TABLES `character_email` WRITE;
 /*!40000 ALTER TABLE `character_email` DISABLE KEYS */;
-INSERT INTO `character_email` VALUES (1,'Day 1 Character 1','This email is from the first character on the first day',1,1,0,0,0,'2018-04-24 17:28:17',NULL),(2,'Day 1 Character 2','This email is from the second character on the first day',1,2,0,0,0,'2018-04-24 17:28:17',NULL),(3,'Day 1 Character 3','This email is from the third character on the first day',1,3,0,0,0,'2018-04-24 17:28:17',NULL),(4,'Day 2 Character 1','This email is from the first character on the second day',2,1,0,0,0,'2018-04-24 17:28:17',NULL),(5,'Day 2 Character 2','This email is from the second character on the second day',2,2,0,0,0,'2018-04-24 17:28:17',NULL),(6,'Day 2 Character 3','This email is from the third character on the second day',2,3,0,0,0,'2018-04-24 17:28:17',NULL);
+INSERT INTO `character_email` VALUES (1,'Day 1 Character 1','This email is from the first character on the first day',1,1,0,0,0,'2018-03-14 17:23:26',NULL),(2,'Day 1 Character 2','This email is from the second character on the first day',1,2,0,0,0,'2018-03-14 17:23:26',NULL),(3,'Day 1 Character 3','This email is from the third character on the first day',1,3,0,0,0,'2018-03-14 17:23:26',NULL),(4,'Day 2 Character 1','This email is from the first character on the second day',2,1,0,0,0,'2018-03-14 17:23:26',NULL),(5,'Day 2 Character 2','This email is from the second character on the second day',2,2,0,0,0,'2018-03-14 17:23:26',NULL),(6,'Day 2 Character 3','This email is from the third character on the second day',2,3,0,0,0,'2018-03-14 17:23:26',NULL);
 /*!40000 ALTER TABLE `character_email` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,17 +225,18 @@ DROP TABLE IF EXISTS `chat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `chat` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `chat_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `channel_id` int(11) NOT NULL,
+  `channel_id` int(11) DEFAULT NULL,
+  `character_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `day` int(11) NOT NULL,
-  `character_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `type` int(11) DEFAULT '0',
+  PRIMARY KEY (`chat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +245,7 @@ CREATE TABLE `chat` (
 
 LOCK TABLES `chat` WRITE;
 /*!40000 ALTER TABLE `chat` DISABLE KEYS */;
+INSERT INTO `chat` VALUES (1,1,2,'',1,'Hello!','2018-03-03 01:52:54',NULL,0),(2,1,2,'',1,'what day is it?','2018-03-03 01:53:02',NULL,0),(3,1,2,'Sarah Olsen',1,'It is day 1','2018-03-03 01:53:02',NULL,1),(4,1,2,'',1,'does this work?','2018-03-03 01:53:07',NULL,0),(5,1,2,'Sarah Olsen',1,'This totally works 1','2018-03-03 01:53:07',NULL,1),(6,1,2,'Geoff Wright',1,'This totally works 3','2018-03-03 01:53:07',NULL,1),(7,1,1,'',1,'Does this work?','2018-03-07 05:07:09',NULL,0),(8,1,1,'',1,'Hello!','2018-03-07 05:07:13',NULL,0),(9,1,1,'Some Person',1,'Welcome to channel 1','2018-03-07 05:07:14',NULL,1),(10,1,1,'',1,'does this work?','2018-04-03 21:25:46',NULL,0),(11,1,1,'',1,'hello','2018-04-03 21:25:58',NULL,0),(12,1,1,'Some Person',1,'Welcome to channel 1','2018-04-03 21:25:58',NULL,1),(13,1,2,'',1,'does this work?','2018-04-03 21:26:08',NULL,0),(14,1,2,'Sarah Olsen',1,'This totally works 1','2018-04-03 21:26:08',NULL,1),(15,1,2,'Geoff Wright',1,'This totally works 3','2018-04-03 21:26:08',NULL,1),(16,1,2,'',1,'what day is it?','2018-04-03 21:26:16',NULL,0),(17,1,2,'Sarah Olsen',1,'It is day 1','2018-04-03 21:26:16',NULL,1);
 /*!40000 ALTER TABLE `chat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +273,7 @@ CREATE TABLE `class` (
 
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
-INSERT INTO `class` VALUES (1,'Test Class 1','test_class_1','2018-04-24 17:25:54',NULL),(2,'Test Class 2','test_class_2','2018-04-24 17:25:54',NULL);
+INSERT INTO `class` VALUES (1,'Test Class 1','test_class_1','2018-03-23 16:45:54',NULL),(2,'Test Class 2','test_class_2','2018-03-23 16:45:54',NULL);
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,6 +296,7 @@ CREATE TABLE `class_has_group` (
 
 LOCK TABLES `class_has_group` WRITE;
 /*!40000 ALTER TABLE `class_has_group` DISABLE KEYS */;
+INSERT INTO `class_has_group` VALUES (1,1);
 /*!40000 ALTER TABLE `class_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,34 +334,6 @@ INSERT INTO `dashboard` VALUES (10,1,'/video/fun.mp4','Microcore on Top','New li
 UNLOCK TABLES;
 
 --
--- Table structure for table `emails`
---
-
-DROP TABLE IF EXISTS `emails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `emails` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `from` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `to` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `emails`
---
-
-LOCK TABLES `emails` WRITE;
-/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `gallery`
 --
 
@@ -351,7 +357,8 @@ CREATE TABLE `gallery` (
 
 LOCK TABLES `gallery` WRITE;
 /*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
-INSERT INTO `gallery` VALUES (1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png','2018-05-03 19:22:42',NULL),(2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png','2018-05-03 19:22:42',NULL),(3,'Gallery 3 Title','This is the description','/images/gallery/gallery03.png','2018-05-03 19:22:42',NULL),(4,'Gallery 4 Title','This is the description','/images/gallery/gallery04.png','2018-05-03 19:22:42',NULL),(5,'Gallery 5 Title','This is the description','/images/gallery/gallery05.png','2018-05-03 19:22:42',NULL),(6,'Gallery 6 Title','This is the description','/images/gallery/gallery06.png','2018-05-03 19:22:42',NULL),(7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png','2018-05-03 19:22:42',NULL),(8,'Gallery 8 Title','This is the description','/images/gallery/gallery08.png','2018-05-03 19:22:42',NULL),(9,'Gallery 9 Title','This is the description','/images/gallery/gallery09.png','2018-05-03 19:22:42',NULL),(10,'Gallery 10 Title','This is the description','/images/gallery/gallery10.png','2018-05-03 19:22:42',NULL);
+INSERT INTO `gallery` VALUES (1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png','2018-04-03 19:33:58',NULL),(2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png','2018-04-03 19:33:58',NULL),(3,'Gallery 3 Title','This is the description','/images/gallery/gallery03.png','2018-04-03 19:33:58',NULL),(4,'Gallery 4 Title','This is the description','/images/gallery/gallery04.png','2018-04-03 19:33:58',NULL),(5,'Gallery 5 Title','This is the description','/images/gallery/gallery05.png','2018-04-03 19:33:58',NULL),(6,'Gallery 6 Title','This is the description','/images/gallery/gallery06.png','2018-04-03 19:33:58',NULL),(7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png','2018-04-03 19:33:58',NULL),(8,'Gallery 8 Title','This is the description','/images/gallery/gallery08.png','2018-04-03 19:33:58',NULL),(9,'Gallery 9 Title','This is the description','/images/gallery/gallery09.png','2018-04-03 19:33:58',NULL),(10,'Gallery 10 Title','This is the description','/images/gallery/gallery10.png','2018-04-03 19:33:58',NULL);
+
 /*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +375,8 @@ CREATE TABLE `group` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +385,7 @@ CREATE TABLE `group` (
 
 LOCK TABLES `group` WRITE;
 /*!40000 ALTER TABLE `group` DISABLE KEYS */;
-INSERT INTO `group` VALUES (1,'test 1','2018-05-14 16:17:49',NULL);
+INSERT INTO `group` VALUES (1,'test group 1','2018-03-23 18:19:01',NULL),(2,'Dan Group','2018-04-05 18:20:52',NULL);
 /*!40000 ALTER TABLE `group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,6 +408,7 @@ CREATE TABLE `instructor_has_class` (
 
 LOCK TABLES `instructor_has_class` WRITE;
 /*!40000 ALTER TABLE `instructor_has_class` DISABLE KEYS */;
+INSERT INTO `instructor_has_class` VALUES (8,1),(8,2);
 /*!40000 ALTER TABLE `instructor_has_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -439,18 +448,9 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `migrations`
---
-
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_01_23_193209_createSimulationTable',1),(4,'2018_01_30_205641_CreateEmailTable',1),(5,'2018_01_31_211121_create_artifacts_table',1),(6,'2018_02_16_161514_create_languages_table',1),(7,'2018_02_16_165458_create_wiki_table',1),(8,'2018_02_16_165730_create_article_table',1),(9,'2018_02_23_163617_create_chat_table',1),(10,'2018_02_23_221031_create_channel_table',1),(11,'2018_02_26_173654_create_characters_table',1),(12,'2018_03_14_165128_create_character_email_table',1),(13,'2018_03_14_165143_create_student_email_table',1),(14,'2018_03_14_171240_add_character_email_id_column_to_student_email_table',1),(15,'2018_03_16_193814_add_character_img_to_character_table',1),(16,'2018_03_19_164845_create_student_task_table',1),(17,'2018_03_23_142605_create_group_table',1),(18,'2018_03_23_142635_create_user_has_group_table',1),(19,'2018_03_23_142838_create_class_table',1),(20,'2018_03_23_142902_create_user_has_class_table',1),(21,'2018_03_23_143340_create_class_has_group_table',1),(22,'2018_03_23_144144_create_instructor_has_class_table',1),(23,'2018_03_23_144552_add_role_column_to_users_table',1),(24,'2018_04_03_163459_gallery__master',1),(25,'2018_04_03_173712_video_call_master',1);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `notes`
@@ -460,13 +460,14 @@ DROP TABLE IF EXISTS `notes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notes` (
-  `notes_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `note_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`notes_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `day` int(11) NOT NULL,
+  PRIMARY KEY (`note_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -555,7 +556,7 @@ CREATE TABLE `simulation` (
 
 LOCK TABLES `simulation` WRITE;
 /*!40000 ALTER TABLE `simulation` DISABLE KEYS */;
-INSERT INTO `simulation` VALUES (3,'2018-01-24 02:36:38');
+INSERT INTO `simulation` VALUES (3,'2018-01-23 19:36:38');
 /*!40000 ALTER TABLE `simulation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,9 +577,9 @@ CREATE TABLE `student_email` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `character_email_id` int(11) NOT NULL,
-  `class_id` int(11) DEFAULT NULL,
+  `class_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`student_email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,6 +588,7 @@ CREATE TABLE `student_email` (
 
 LOCK TABLES `student_email` WRITE;
 /*!40000 ALTER TABLE `student_email` DISABLE KEYS */;
+INSERT INTO `student_email` VALUES (1,1,1,'Subject','Body','1',NULL,NULL,2,1),(2,1,1,'Subject 2','Body 2','2',NULL,NULL,1,1);
 /*!40000 ALTER TABLE `student_email` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,6 +601,7 @@ DROP TABLE IF EXISTS `student_gallery`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student_gallery` (
   `student_gallery_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gallery_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -606,7 +609,6 @@ CREATE TABLE `student_gallery` (
   `group_id` int(11) NOT NULL DEFAULT '0',
   `class_id` int(11) NOT NULL DEFAULT '0',
   `day` int(11) NOT NULL,
-  `gallery_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_gallery_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -617,7 +619,7 @@ CREATE TABLE `student_gallery` (
 
 LOCK TABLES `student_gallery` WRITE;
 /*!40000 ALTER TABLE `student_gallery` DISABLE KEYS */;
-INSERT INTO `student_gallery` VALUES (1,'2','2','/images/gallery/gallery01.png',2,2,2,2,2);
+INSERT INTO `student_gallery` VALUES (1,1,'Gallery 1 Title That has changed','This is a description that','/images/gallery/gallery01.png',1,2,1),(3,4,'Gallery 4 Title','This is the description this has changed','/images/gallery/gallery04.png',8,0,1),(4,1,'Gallery 1 Title not in a group','This is the description changed','/images/gallery/gallery01.png',8,0,1),(5,2,'Gallery 2 Title','This is the description here','/images/gallery/gallery02.png',8,0,1),(6,2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png',8,1,1),(7,1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png',8,1,1),(8,7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png',8,1,1);
 /*!40000 ALTER TABLE `student_gallery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -629,9 +631,9 @@ DROP TABLE IF EXISTS `student_gallery_has_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student_gallery_has_tag` (
-  `student_gallery_id` int(11) DEFAULT NULL,
-  `tag_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `student_gallery_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -640,7 +642,7 @@ CREATE TABLE `student_gallery_has_tag` (
 
 LOCK TABLES `student_gallery_has_tag` WRITE;
 /*!40000 ALTER TABLE `student_gallery_has_tag` DISABLE KEYS */;
-INSERT INTO `student_gallery_has_tag` VALUES (1,1),(1,2),(2,2),(6,2);
+INSERT INTO `student_gallery_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1);
 /*!40000 ALTER TABLE `student_gallery_has_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -666,7 +668,7 @@ CREATE TABLE `student_task` (
 
 LOCK TABLES `student_task` WRITE;
 /*!40000 ALTER TABLE `student_task` DISABLE KEYS */;
-INSERT INTO `student_task` VALUES (6,1,0,'2018-04-19 19:49:55','2018-04-27 16:06:50'),(1,1,1,'2018-04-23 21:08:29','2018-05-01 22:28:23'),(2,1,1,'2018-04-23 21:08:29','2018-05-01 22:28:22'),(4,1,1,'2018-04-24 16:29:29','2018-05-02 22:25:58'),(5,1,1,'2018-04-24 16:29:30','2018-05-16 17:27:34'),(3,1,1,'2018-04-27 17:01:39','2018-05-01 22:28:22'),(7,1,0,'2018-04-27 17:01:39','2018-05-03 19:42:46');
+INSERT INTO `student_task` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-03 18:46:28'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49');
 /*!40000 ALTER TABLE `student_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -708,9 +710,10 @@ DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
-  `tag_id` int(11) DEFAULT NULL,
-  `title` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`tag_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -719,7 +722,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'Tag 1'),(2,'Tag 2');
+INSERT INTO `tag` VALUES (1,'Tag 1'),(2,'Tag 2'),(3,'Tag 3'),(4,'Tag 4');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,7 +770,7 @@ CREATE TABLE `user_has_group` (
 
 LOCK TABLES `user_has_group` WRITE;
 /*!40000 ALTER TABLE `user_has_group` DISABLE KEYS */;
-INSERT INTO `user_has_group` VALUES (1,1),(2,1),(3,1);
+INSERT INTO `user_has_group` VALUES (1,2),(1,1),(10,1),(8,1);
 /*!40000 ALTER TABLE `user_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -779,19 +782,19 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `current_day` int(11) NOT NULL DEFAULT '1',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `current_day` int(11) NOT NULL DEFAULT '1',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '0',
-  `assigned` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`),
+  `assigned` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +803,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Matalyn T',2,'matalyn2@byu.edu','$2y$10$WZ726cA2USHejRMk2qj54e3QGri7get48esWgLhm9HjG6MRsECPhW','q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
+INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'NULj7M0YCjPiPybZq5zDTyOmzJENt5NOp2HWTf0gVeTNKUZtKR8mRKhle2rG','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T',2,'matalyn2@byu.edu','$2y$10$WZ726cA2USHejRMk2qj54e3QGri7get48esWgLhm9HjG6MRsECPhW','q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -840,11 +843,12 @@ DROP TABLE IF EXISTS `wiki`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wiki` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `wiki_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lang_1_ar` int(11) NOT NULL,
   `lang_2_ar` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`wiki_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -853,34 +857,32 @@ CREATE TABLE `wiki` (
 
 LOCK TABLES `wiki` WRITE;
 /*!40000 ALTER TABLE `wiki` DISABLE KEYS */;
-INSERT INTO `wiki` VALUES (5,9,10),(6,11,12);
+INSERT INTO `wiki` VALUES (1,1,2),(2,3,4);
 /*!40000 ALTER TABLE `wiki` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'VueSim'
+-- Dumping routines for database 'vuesim_local'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `retrieve_email_assignments` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`matalynt`@`localhost` PROCEDURE `retrieve_email_assignments`(
-	in char_id int,
-	in d int,
-	in cl_id int
-)
+CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_email_assignments`(IN char_id INT, IN d INT, IN cl_id INT)
 BEGIN
-select * from student_email
-where class_id = cl_id 
-and day = d
-and character_id = char_id;
-END ;;
+    SELECT s.day, s.subject, s.body, s.created_at, c.name AS c_name, u.name AS u_name FROM student_email AS s
+      INNER JOIN users AS u ON s.user_id = u.id
+      INNER JOIN characters AS c ON s.character_id = c.id
+    WHERE s.class_id = cl_id
+          and s.day = d
+          and s.character_id = char_id;
+  END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -890,23 +892,18 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`matalynt`@`localhost` PROCEDURE `retrieve_gallery_assignments`(
-	in d int,
-	in cl_id int,
-	in grp_id int
-)
+CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_gallery_assignments`(IN class_id_in INT)
 BEGIN
-select * from student_video_submissions
-where class_id = cl_id 
-and "day" = d
-and group_id = grp_id;
-END ;;
+    SELECT * FROM student_gallery
+    WHERE class_id = class_id_in;
+  END ;;
+
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -916,25 +913,20 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`matalynt`@`localhost` PROCEDURE `retrieve_video_assignments`(
-	in q_id int,
-	in d int,
-	in cl_id int,
-	in char_id int
-)
+CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_video_assignments`(IN question_id_in INT, IN day_in INT, IN character_id_in INT, IN class_id_in INT)
 BEGIN
-select * from student_video_submissions
-where class_id = cl_id 
-and "day" = d
-and character_id = char_id
-and question_id = q_id;
-END ;;
+    select * from student_video_submissions
+    where class_id = class_id_in
+          and day = day_in
+          and character_id = character_id_in
+          and question_id = q_id;
+  END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -951,3 +943,4 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-05-17 11:11:35
+
