@@ -63,3 +63,6 @@ Route::post('removeFromGroup', 'GroupController@removeFromGroup');
 Route::resource('/classes', 'ClassController');
 
 Route::get('/dashboard', 'DashController@loadDash');
+
+Route::resource('/assignments', 'AssignmentController');
+Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');

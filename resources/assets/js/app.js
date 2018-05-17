@@ -29,7 +29,6 @@ Vue.component('library', require('./components/Library/library.vue'));
 Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
-// Vue.component('v-select', require('vue-select'));
 Vue.component('editor', require('./components/Library/articleEditor.vue'));
 
 
