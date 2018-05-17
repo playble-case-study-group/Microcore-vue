@@ -66,12 +66,9 @@ Route::post('removeFromGroup', 'GroupController@removeFromGroup');
 // Class
 Route::resource('/classes', 'ClassController');
 
-<<<<<<< HEAD
-Route::get('/dashboard', 'DashController@loadDash');
-
 Route::resource('/assignments', 'AssignmentController');
 Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');
-=======
+
 // Dash
 Route::get('/dashboard', 'DashController@loadDash');
->>>>>>> 2dcd6ebaddcd008d5a324c65b4381089a4bfdbf2
+
