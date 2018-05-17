@@ -60,19 +60,20 @@ const mutations = {
                 .catch(error => {
                     console.log(error.response.data)
                 })
+            window.location.href = '/dashboard';
         }
     },
     PREVIOUS_DAY: (state) => {
         if(state.user.current_day > 1) {
             state.user.current_day--;
-            axios.post('/updateday', {id: state.user.id, day: state.user.current_day})
+            axios.post('/resetDay', {id: state.user.id, day: state.user.current_day})
                 .then(response => {
                     // console.log(response)
                 })
                 .catch( error => {
                     console.log(error.response.data)
                 })
-
+            window.location.reload();
         }
     },
     toggleTask: (state, payload) => {

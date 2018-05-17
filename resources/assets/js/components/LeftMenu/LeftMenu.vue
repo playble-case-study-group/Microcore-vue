@@ -7,7 +7,7 @@
             <user-tasks>
             </user-tasks>
             <div id="next-day">
-                <button type="button" class="btn btn-invert" data-toggle="modal" data-target="#exampleModal" v-on:click="PREVIOUS_DAY()"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button type="button" class="btn btn-invert" data-toggle="modal" data-target="#exampleModal"><i class="material-icons">keyboard_arrow_left</i></button>
                 <button type="button" class="btn btn-invert" v-on:click="NEXT_DAY()">NEXT DAY <i class="material-icons">keyboard_arrow_right</i></button>
             </div>
             <br>
@@ -68,7 +68,7 @@
                 'PREVIOUS_DAY'
             ]),
             resetDay: function() {
-                console.log('test')
+                this.PREVIOUS_DAY();
             }
         }
 

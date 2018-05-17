@@ -14,9 +14,9 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        $wiki = DB::table('wiki')->get();
+        $wiki = DB::table('article')->get();
 
-        foreach ($wiki as $article) {
+        /*foreach ($wiki as $article) {
             $article->english = DB::table('article')
                 ->where('id', $article->lang_1_ar)
                 ->first();
@@ -24,7 +24,7 @@ class LibraryController extends Controller
             $article->spanish = DB::table('article')
                 ->where('id', $article->lang_2_ar)
                 ->first();
-        }
+        }*/
 
         //dd($wiki);
         return view('library', compact('wiki'));

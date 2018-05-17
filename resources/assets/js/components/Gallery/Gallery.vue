@@ -10,7 +10,7 @@
                 Filter
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a href="#" @click="showAllGallery">Show All</a>
+                <a href="#" class="dropdown-item" @click="showAllGallery">Show All</a>
                 <a v-for="(tag, key) in tags"
                    href="#"
                    class="dropdown-item"
@@ -22,22 +22,23 @@
         </div>
 
         <div class="card-columns">
-            <div class="card" v-for="artifact in gallery"
+            <div class="card"
+                 v-for="artifact in gallery"
                  v-if="!artifact.hidden"
                  @click="openModal(artifact)"
                  :key="artifact.gallery_id">
+
                 <img class="card-img-top" :src="artifact.image" :alt="artifact.title">
                 <div class="card-body artifact" >
                     <h4 class="card-title">{{ artifact.title }}</h4>
                     <p class="card-text">{{ artifact.description}}</p>
                 </div>
+
             </div>
         </div>
 
 
         <!-- Large modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".artifact-modal">Large modal</button>
-
         <div class="modal fade artifact-modal" tabindex="-1" role="dialog" aria-labelledby="artifactModalDialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -71,6 +72,8 @@
                                     <p>{{ modal.description }}</p>
                                 </div>
                             </div>
+
+                            <!-- Form for editing the artifact -->
                             <div id="edit-art" class="d-none">
                                 <div class="form-group">
                                     <h4>Title</h4>
@@ -87,7 +90,8 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>Tags</h4>
-                                    <button v-for="tag in modal.tags"
+                                    <button v-for="(tag, key) in modal.tags"
+                                            :key="key"
                                             type="button"
                                             @click="removeTag(tag)"
                                             class="btn btn-danger">
@@ -122,19 +126,20 @@
 </template>
 
 <script>
-    //import mapState from 'vuex'
-    import Artifact from './Artifact.vue'
+
     import vSelect  from 'vue-select'
-//    import axios from 'axios';
+
 
     export default {
-        props: ['gallery', 'tags'],
+        props: {
+            gallery: Array,
+            tags: Array
+        },
         components: {
             'v-select': vSelect
         },
         data: function(){
             return {
-                artifacts: this.gallery,
                 groupArt: [],
                 showModal: false,
                 newTag: '',
@@ -150,15 +155,10 @@
             }
         },
         mounted() {
-            console.log('Created()');
-            this.filterArtifacts(false);
-
             $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges)
-
         },
         methods: {
             removeTag: function (tag) {
-                console.log("removing tag");
                 _.remove(this.modal.tags, tag);
                 this.$forceUpdate();
             },
@@ -169,29 +169,17 @@
             },
             showAllGallery: function () {
                 this.gallery.forEach( artifact => { artifact.hidden = false });
+                this.$forceUpdate();
             },
             filterGallery: function (tag) {
                   this.gallery.forEach( artifact => {
-                      console.log(!artifact.tags.find( art => { return art.tag_id === tag.tag_id }));
                       if (!artifact.tags.find( art => { return art.tag_id === tag.tag_id })) {
                           artifact.hidden = true;
                       } else {
                           artifact.hidden = false;
                       }
-                  })
-            },
-            filterArtifacts: function(filter) {
-                if (filter) {
-                    let g = [];
-                    this.artifacts.forEach(function (artifact) {
-                        if (artifact.catagory === filter) {      //artifact.catagory.find(function(art) { art === filter}
-                            g.push(artifact);
-                        }
-                    });
-                    this.groupArt = g;
-                } else {
-                    this.groupArt = this.artifacts;
-                }
+                  });
+                this.$forceUpdate();
             },
             openModal: function(modalArtifact) {
                 $('.artifact-modal').modal();
@@ -202,9 +190,9 @@
                 this.modal.editId = modalArtifact.edit_id;
                 this.modal.category = modalArtifact.catagory;
                 this.modal.tags = modalArtifact.tags;
+                this.newTag = this.tags[0];
             },
             closeModal: function() {
-//                this.showModal = false;
                 $('.artifact-modal').modal();
             },
             saveChanges: function() {

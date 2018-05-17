@@ -31,7 +31,8 @@ class User extends Authenticatable
 
 
     protected $appends = [
-        'group_id'
+        'group_id',
+        'class_id'
     ];
 
     /**
@@ -52,5 +53,19 @@ class User extends Authenticatable
             return false;
         }
 
+    }
+
+    public function getClassIdAttribute() {
+
+        $classId = DB::table('user_has_class')
+            ->where('user_id', Auth::id())
+            ->select('class_id')
+            ->first();
+
+        if ($classId) {
+            return $classId->class_id;
+        } else {
+            return false;
+        }
     }
 }

@@ -16,53 +16,62 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
 
+// Home
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', 'HomeController@user');
+
+// Simulation
 Route::post('/updateday', 'SimulationController@updateDay');
 Route::get('/sim', function () {
     return DB::table('simulation')->get();
 });
+Route::post( '/resetDay', 'SimulationController@resetDay' );
 
+// Tasks
 Route::resource('/tasks', 'TasksController');
 Route::post('/tasks/complete', 'TasksController@complete');
 
-
+// Email
 Route::resource('/email', 'EmailController');
 Route::post('/returnemails', 'EmailController@emailData');
 
-Route::resource('/gallery', 'GalleryController');
-
+// Video Call
 Route::resource('/videocall', 'VideoCallController');
 Route::post('/saveFile', 'VideoCallController@saveFile');
 
+// Library
 Route::resource('/library', 'LibraryController');
 Route::resource('/editor', 'ArticleEditorController');
+Route::post('/deleteArticle', 'ArticleEditorController@deleteArticle');
+Route::post('/addArticle', 'ArticleEditorController@addArticle');
 // Route::post('/updateArticle', 'ArticleEditorController@update');
 
+// Chat
 Route::resource('/chat', 'ChatController');
-
 Route::get('/chatbot', function () {
     return view('chatbot');
 });
 
-
+// Gallery
 Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+Route::resource('/gallery', 'GalleryController');
 
-
-Route::resource('/library', 'LibraryController');
-
-Route::resource('/phone', 'PhoneController');
-
+// Group
 Route::resource('/group', 'GroupController');
 Route::post('/addToGroup', 'GroupController@addToGroup');
 Route::post('removeFromGroup', 'GroupController@removeFromGroup');
 
+// Class
 Route::resource('/classes', 'ClassController');
 
+<<<<<<< HEAD
 Route::get('/dashboard', 'DashController@loadDash');
 
 Route::resource('/assignments', 'AssignmentController');
 Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');
+=======
+// Dash
+Route::get('/dashboard', 'DashController@loadDash');
+>>>>>>> 2dcd6ebaddcd008d5a324c65b4381089a4bfdbf2

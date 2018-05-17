@@ -131,6 +131,7 @@ class VideoCallController extends Controller
         $video = $request->blob;
         $day = Auth::user()->current_day;
         $date = date("Y-m-d H:i:s",time());
+        $class_id = Auth::user()->class_id;
 
 
         $data = base64_decode(preg_replace('#^data:text/\w+;base64,#i', '', $video));
@@ -144,11 +145,11 @@ class VideoCallController extends Controller
             $question_id = $request->question;
 
             DB::table('student_video_submissions')
-                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'question_id' => $question_id,'created_at'=> $date]);
+                ->insert(['class_id' => $class_id, 'submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id,'question_id' => $question_id,'created_at'=> $date]);
         } else {
 
             DB::table('student_video_submissions')
-                ->insert(['submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id, 'created_at' => $date]);
+                ->insert(['class_id' => $class_id, 'submission_url' => $filename, 'submission_day' => $day, 'character_id' => $character_id, 'user_id' => $user_id, 'created_at' => $date]);
         }
 
         return $request->all();

@@ -16,13 +16,12 @@
               note: this.notes.note
           }
         },
-        props: ['notes'],
-        computed: {
+        props: {
+            notes: Array
         },
         methods: {
             postUpdatedNote: function () {
-                axios
-                    .post(
+                axios.post(
                         "/videocall",
                         {
                             note: this.note,

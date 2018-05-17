@@ -14,9 +14,11 @@ class ArticleEditorController extends Controller
      */
     public function index()
     {
-        $wiki = DB::table('wiki')->get();
+        $wiki = DB::table('article')->get();
 
-        foreach ($wiki as $article) {
+        //can be used to support multiple languages if needed.
+        // if wanted, change $wiki to be pulling from the wiki table
+        /*foreach ($wiki as $article) {
             $article->english = DB::table('article')
                 ->where('id', $article->lang_1_ar)
                 ->first();
@@ -24,7 +26,7 @@ class ArticleEditorController extends Controller
             $article->spanish = DB::table('article')
                 ->where('id', $article->lang_2_ar)
                 ->first();
-        }
+        }*/
 
         //dd($wiki);
         return view('articleEditor', compact('wiki'));
@@ -89,6 +91,27 @@ class ArticleEditorController extends Controller
             ->update([
                 'content' => $request->content,
                 'updated_at' => DB::raw("NOW()")
+            ]);
+        return "success";
+
+    }
+
+    public function deleteArticle(Request $request)
+    {
+        // get the article object
+        DB::table('article')
+            ->where('id', $request->article_id)
+            ->delete();
+        return $request->all();
+
+    }
+
+    public function addArticle(Request $request)
+    {
+        // get the article object
+        DB::table('article')
+            ->insert([
+                'title' => $request->article_title
             ]);
         return "success";
 

@@ -5,12 +5,12 @@
             <p v-if="!this.warning">
                 You will have {{ this.countdown }} seconds to respond.<br>
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
-            <p v-if="this.warning"> Time Remaining: <span class="counter">{{ this.count }}</span></p>
+            <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
         <button type="button" class="btn btn-success btn-lg button"
                 v-for="question in questions"
                 v-if="question.question && showButtons && count == 0"
-                :id="question.id"
+                :key="question.id"
                 @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
         </button>
@@ -22,9 +22,7 @@
 
     export default {
 
-        mounted() {
-            console.log('Component mounted.')
-        },
+
         data() {
             return{
                 count: 0,
@@ -46,7 +44,10 @@
                this.showButtons = true;
            }
         },
-        props: ['questions', 'countdown'],
+        props: {
+            questions: Array,
+            countdown: Number
+        },
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
