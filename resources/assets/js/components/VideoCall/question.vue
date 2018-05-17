@@ -7,8 +7,10 @@
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
-        <button type="button" class="btn btn-success btn-lg button"
+        <button type="button"
                 v-for="question in questions"
+                class="btn btn-success btn-lg button"
+                :disabled = returnClass(question)
                 v-if="question.question && showButtons && count == 0"
                 :key="question.id"
                 @click="submitQuestion(question)">
@@ -33,7 +35,7 @@
         watch: {
           countdown: function(){
               if( this.count == 0 ){
-                  this.count = 3;
+                  this.count = this.warningTime;
                   this.startCount();
                   this.showButtons = false;
               }
@@ -46,11 +48,23 @@
         },
         props: {
             questions: Array,
-            countdown: Number
+            countdown: Number,
+            warningTime: Number,
+            disabledQuestions: Array
         },
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
+                this.disabledQuestions.push({'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day});
+                this.returnClass(question);
+                this.$forceUpdate();
+                axios.post(
+                    '/clickedQuestion',
+                    {
+                        id: question.question_id
+                    }
+                ).then(res => console.log(res)
+                ).catch( error => console.log(error));
             },
             startCount: function() {
                 let appScope = this;
@@ -63,6 +77,18 @@
                         clearInterval(timer);
                     }
                 }, 1000);
+            },
+            returnClass: function(question) {
+                let clicked = this.disabledQuestions.find( function(el) {
+                    if(el.question_id == question.question_id){
+                        return el;
+                    }
+                })
+                if(clicked){
+                    return true
+                } else{
+                    return false
+                }
             }
         },
 

@@ -51,7 +51,9 @@
         <!--show character questions-->
         <character-questions id="characterQuestions"
                              :countdown="this.countdownTime"
+                             :warningTime="this.warningTime"
                              :questions="this.currentQuestions"
+                             :disabledQuestions="this.disabledQuestions"
                              @question="askQuestion">
         </character-questions>
 
@@ -68,7 +70,8 @@
         props: {
             calls: Array,
             characters: Array,
-            questions: Array
+            questions: Array,
+            disabledQuestions: Array
         },
         data: function () {
             return {
@@ -82,7 +85,8 @@
                 clickedCharacter: 0,
                 leaveResponse: false,
                 responded: false,
-                countdownTime: 0
+                countdownTime: 0,
+                warningTime: 5
             }
         },
         mounted() {
@@ -247,18 +251,23 @@
                 const mediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
+                //how long you would like to warning countdown to be
+                let warning = this.warningTime * 1000;
+                console.log(warning);
+
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
                         if(appScope.leaveResponse == true) {
                             setTimeout(function () {
                                 mediaRecorder.start(1000);
-                            }, 4000);
+                            }, warning );
                         }
                     video.muted = 'true';
                 })
 
                 let end = false;
-                let timeout = appScope.currentQuestion.recording_duration * 1400;
+                let timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
+                console.log(timeout);
                 setTimeout(function () {
                     end = true;
                 }, timeout)

@@ -59024,6 +59024,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -59038,6 +59039,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         calls: Array,
         questions: Array,
+        disabled: Array,
         notes: Object,
         contacts: Array
     }
@@ -59392,6 +59394,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -59402,7 +59406,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         calls: Array,
         characters: Array,
-        questions: Array
+        questions: Array,
+        disabledQuestions: Array
     },
     data: function data() {
         return {
@@ -59416,7 +59421,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             clickedCharacter: 0,
             leaveResponse: false,
             responded: false,
-            countdownTime: 0
+            countdownTime: 0,
+            warningTime: 5
         };
     },
     mounted: function mounted() {
@@ -59580,18 +59586,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var mediaRecorder = new MediaRecorder(stream);
             video.srcObject = stream;
 
+            //how long you would like to warning countdown to be
+            var warning = this.warningTime * 1000;
+            console.log(warning);
+
             //start recording when video is loaded
             video.addEventListener('loadeddata', function () {
                 if (appScope.leaveResponse == true) {
                     setTimeout(function () {
                         mediaRecorder.start(1000);
-                    }, 4000);
+                    }, warning);
                 }
                 video.muted = 'true';
             });
 
             var end = false;
-            var timeout = appScope.currentQuestion.recording_duration * 1400;
+            var timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
+            console.log(timeout);
             setTimeout(function () {
                 end = true;
             }, timeout);
@@ -59884,6 +59895,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -59899,7 +59912,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         countdown: function countdown() {
             if (this.count == 0) {
-                this.count = 3;
+                this.count = this.warningTime;
                 this.startCount();
                 this.showButtons = false;
             }
@@ -59912,11 +59925,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: {
         questions: Array,
-        countdown: Number
+        countdown: Number,
+        warningTime: Number,
+        disabledQuestions: Array
     },
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
+            this.disabledQuestions.push({ 'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day });
+            this.returnClass(question);
+            this.$forceUpdate();
+            axios.post('/clickedQuestion', {
+                id: question.question_id
+            }).then(function (res) {
+                return console.log(res);
+            }).catch(function (error) {
+                return console.log(error);
+            });
         },
         startCount: function startCount() {
             var appScope = this;
@@ -59928,6 +59953,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     clearInterval(timer);
                 }
             }, 1000);
+        },
+        returnClass: function returnClass(question) {
+            var clicked = this.disabledQuestions.find(function (el) {
+                if (el.question_id == question.question_id) {
+                    return el;
+                }
+            });
+            if (clicked) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -59979,7 +60016,7 @@ var render = function() {
               {
                 key: question.id,
                 staticClass: "btn btn-success btn-lg button",
-                attrs: { type: "button" },
+                attrs: { type: "button", disabled: _vm.returnClass(question) },
                 on: {
                   click: function($event) {
                     _vm.submitQuestion(question)
@@ -60333,7 +60370,9 @@ var render = function() {
         attrs: {
           id: "characterQuestions",
           countdown: this.countdownTime,
-          questions: this.currentQuestions
+          warningTime: this.warningTime,
+          questions: this.currentQuestions,
+          disabledQuestions: this.disabledQuestions
         },
         on: { question: _vm.askQuestion }
       })
@@ -60397,7 +60436,8 @@ var render = function() {
           attrs: {
             characters: this.contacts,
             calls: this.calls,
-            questions: this.questions
+            questions: this.questions,
+            disabledQuestions: this.disabled
           }
         })
       ],

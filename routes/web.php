@@ -40,6 +40,7 @@ Route::post('/returnemails', 'EmailController@emailData');
 // Video Call
 Route::resource('/videocall', 'VideoCallController');
 Route::post('/saveFile', 'VideoCallController@saveFile');
+Route::post('/clickedQuestion', 'VideoCallController@disableQuestion');
 
 // Library
 Route::resource('/library', 'LibraryController');

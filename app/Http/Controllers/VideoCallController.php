@@ -21,14 +21,20 @@ class VideoCallController extends Controller
             ->where('day', Auth::user()->current_day)
             ->get();
 
-        $questions = DB::table('question')->get();
+        $questions = DB::table('question')
+            ->get();
+
+        $clicked_questions = DB::table('user_clicked_question')
+            ->where('user_id', Auth::id())
+            ->get();
+
         $notes = DB::table('notes')
             ->select('note')
             ->where('user_id', Auth::id())
             ->first();
         $notes = json_encode($notes);
 
-        return view('videocall', compact('calls', 'questions', 'notes', 'contacts'));
+        return view('videocall', compact('calls', 'questions', 'notes', 'contacts', 'clicked_questions'));
     }
 
     /**
@@ -122,6 +128,14 @@ class VideoCallController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function disableQuestion(Request $request){
+        $question_id = $request->id;
+        DB::table('user_clicked_question')
+            ->insert(['question_id' => $question_id, 'user_id' => Auth::id(), 'day' => Auth::user()->current_day]);
+
+        return $request->all();
     }
 
 
