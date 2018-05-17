@@ -376,7 +376,7 @@
         height: 80%
     }
     .modal-title{
-        margin: -5px 0;
+        margin: -9px 0;
         justify-content: flex-start;
     }
     .keyline{
@@ -403,6 +403,11 @@
     .mobile-menu{
         font-size: 26px;
         color: white;
+    }
+    .close {
+        color: #fff;
+        line-height: 0;
+        margin-top: -15px;
     }
     /* The side navigation menu */
     .sidenav {

@@ -1,14 +1,15 @@
 <template>
     <div id="video">
-        <!--video element to show standard videocalls, hidden when recording component is shown-->
-        <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
-            <source :src="currentVideo.video_url" type="video/mp4">
-        </video>
+        <div class="video-container">
+            <!--video element to show standard videocalls, hidden when recording component is shown-->
+            <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
+                <source :src="currentVideo.video_url" type="video/mp4">
+            </video>
 
-        <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
-            <source src="/video/record.mp4" type="video/mp4">
-        </video>
-
+            <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
+                <source src="/video/record.mp4" type="video/mp4">
+            </video>
+        </div>
         <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
@@ -457,19 +458,23 @@
         height: 30px;
         width: 40px;
     }
+    .video-container {
+        position: relative;
+    }
     #controlBar{
         display: flex;
         justify-content: space-between;
         padding: 0px 10px;
         background-color: $sim-heading;
         height: 40px;
-        font-size: 25px
+        font-size: 25px;
+        margin-top: -7px;
     }
     #recording{
         color: red;
     }
     #call_video{
-        height: 27rem;
+        height: 363px;
         width: 100%;
     }
     .contact-inner{
@@ -508,6 +513,9 @@
         display:none
     }
     #personal_video{
+        position: absolute;
+        right: 0px;
+        top: 244px;
         height: 125px;
         width: 150px;
     }
