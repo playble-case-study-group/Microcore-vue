@@ -69,7 +69,9 @@ class ClassController extends Controller
 
         }
 
-        return view('instructors.classes', compact('classes'));
+        $assignment_types = DB::table('assignment_type')->select('assign_type_id', 'title', 'table_columns')->get();
+
+        return view('instructors.classes', compact('classes', 'assignment_types'));
     }
 
     /**

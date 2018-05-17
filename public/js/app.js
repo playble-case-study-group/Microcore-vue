@@ -30021,7 +30021,6 @@ Vue.component('library', __webpack_require__(165));
 Vue.component('chatbot', __webpack_require__(296));
 Vue.component('slackbot', __webpack_require__(304));
 Vue.component('classes', __webpack_require__(321));
-// Vue.component('v-select', require('vue-select'));
 Vue.component('editor', __webpack_require__(333));
 
 
@@ -77763,7 +77762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['classes'],
+    props: ['classes', 'assignmentTypes'],
     components: {
         'groups': __WEBPACK_IMPORTED_MODULE_1__Groups_vue___default.a,
         'students': __WEBPACK_IMPORTED_MODULE_2__Students_vue___default.a,
@@ -78644,6 +78643,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+throw new Error("Cannot find module \"vue-tables-2\"");
 //
 //
 //
@@ -78686,24 +78686,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+
+    components: {
+        'v-client-table': __WEBPACK_IMPORTED_MODULE_1_vue_tables_2__["ClientTable"].install(Vue, {}, false, 'bootstrap4')
     },
+    props: ['assignmentTypes', 'classId'],
+    mounted: function mounted() {},
 
     data: function data() {
         return {
-            assignmentType: '',
+            assignmentType: {},
             assignmentList: [],
-            curAssignment: {}
+            curAssignment: {},
+            tableData: [],
+            tableColumns: [],
+            tableOptions: {},
+            test: {
+                columns: ['id', 'name', 'age'],
+                tableData: [{ id: 1, name: "John", age: "20" }, { id: 2, name: "Jane", age: "24" }, { id: 3, name: "Susan", age: "16" }, { id: 4, name: "Chris", age: "55" }, { id: 5, name: "Dan", age: "40" }],
+                options: {
+                    // see the options API
+                }
+            }
         };
     },
     watch: {
         assignmentType: function assignmentType() {
-            console.log(this.assignmentType);
+            var _this = this;
+
+            this.tableColumns = JSON.parse(this.assignmentType.table_columns);
+            axios.get('/assignments/' + this.assignmentType.assign_type_id).then(function (response) {
+                _this.assignmentList = response.data;
+            });
+        },
+        curAssignment: function curAssignment() {
+            var _this2 = this;
+
+            var data = {
+                assignId: this.curAssignment.assign_id,
+                classId: this.classId
+            };
+
+            axios.post('/retrieveassignments', data).then(function (response) {
+                _this2.tableData = response.data;
+            });
         }
     },
     methods: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask'])
@@ -78751,15 +78792,29 @@ var render = function() {
               }
             }
           },
-          [
-            _c("option", { attrs: { value: "email" } }, [_vm._v("Email")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "gallery" } }, [_vm._v("Gallery")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "videoCall" } }, [
-              _vm._v("Video Call")
-            ])
-          ]
+          _vm._l(_vm.assignmentTypes, function(type, key) {
+            return _c(
+              "option",
+              {
+                key: key,
+                domProps: { value: type },
+                model: {
+                  value: _vm.assignmentType,
+                  callback: function($$v) {
+                    _vm.assignmentType = $$v
+                  },
+                  expression: "assignmentType"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(type.title) +
+                    "\n                "
+                )
+              ]
+            )
+          })
         )
       ]),
       _vm._v(" "),
@@ -78810,6 +78865,31 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-sm-12" },
+        [
+          _c("v-client-table", {
+            attrs: {
+              data: _vm.tableData,
+              columns: _vm.tableColumns,
+              options: _vm.tableOptions
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "day",
+                fn: function(props) {
+                  return _c("span", {}, [_vm._v(_vm._s(props.row.u_name))])
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
     ])
   ])
 }
@@ -78982,7 +79062,14 @@ var render = function() {
                   staticClass: "tab-pane fade show",
                   attrs: { id: "assignments", role: "tabpanel" }
                 },
-                [_c("assignments")],
+                [
+                  _c("assignments", {
+                    attrs: {
+                      "assignment-types": _vm.assignmentTypes,
+                      "class-id": _vm.curClass.class_id
+                    }
+                  })
+                ],
                 1
               )
             ]

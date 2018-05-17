@@ -57,7 +57,7 @@
                     <div id="assignments"
                          class="tab-pane fade show"
                          role="tabpanel">
-                        <assignments></assignments>
+                        <assignments :assignment-types="assignmentTypes" :class-id="curClass.class_id"></assignments>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
 
     export default {
 
-        props: ['classes'],
+        props: ['classes', 'assignmentTypes'],
         components: {
             'groups': groups,
             'students': students,
