@@ -44,10 +44,11 @@
     }
     .row{
         flex-flow: wrap-reverse;
+        justify-content: space-around;
     }
     @media(min-width:992px){
         #notesParent{
-            height:70rem;
+            height:42rem;
             top: 0px;
         }
     }

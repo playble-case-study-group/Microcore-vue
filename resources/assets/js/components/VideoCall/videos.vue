@@ -460,6 +460,7 @@
     }
     .video-container {
         position: relative;
+        background-color: #000;
     }
     #controlBar{
         display: flex;
@@ -468,13 +469,13 @@
         background-color: $sim-heading;
         height: 40px;
         font-size: 25px;
-        margin-top: -7px;
+        margin-top: 0px;
     }
     #recording{
         color: red;
     }
     #call_video{
-        height: 363px;
+        height: calc(19vh - 11px);
         width: 100%;
     }
     .contact-inner{
@@ -515,9 +516,17 @@
     #personal_video{
         position: absolute;
         right: 0px;
-        top: 244px;
+        top: 128px;
         height: 125px;
         width: 150px;
     }
 
+    @media(min-width:1150px){
+        #call_video {
+            height: calc(23vh - 20px);
+        }
+        #personal_video{
+            top: 173px;
+        }
+    }
 </style>

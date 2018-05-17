@@ -41,7 +41,7 @@
 
     textarea{
         width: 100%;
-        height: 67%;
+        height: 91%;
         border:none;
         padding: 20px;
         resize:none;

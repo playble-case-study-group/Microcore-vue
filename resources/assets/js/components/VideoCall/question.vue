@@ -73,8 +73,8 @@
 <style scoped>
     .button {
         margin: 2rem;
-        height: 5rem;
-        width: 22rem;
+        height: 3rem;
+        width: 26rem;
     }
     .counterDisplay {
         font-size: 24px;
