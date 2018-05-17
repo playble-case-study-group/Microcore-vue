@@ -64,17 +64,17 @@ const mutations = {
         }
     },
     PREVIOUS_DAY: (state) => {
+        axios.post('/resetDay', {id: state.user.id, day: state.user.current_day})
+            .then(response => {
+                 console.log(response)
+            })
+            .catch( error => {
+                console.log(error.response.data)
+            })
         if(state.user.current_day > 1) {
             state.user.current_day--;
-            axios.post('/resetDay', {id: state.user.id, day: state.user.current_day})
-                .then(response => {
-                    // console.log(response)
-                })
-                .catch( error => {
-                    console.log(error.response.data)
-                })
-            window.location.reload();
         }
+        window.location.reload();
     },
     toggleTask: (state, payload) => {
         //console.log(payload)
@@ -82,7 +82,7 @@ const mutations = {
         task.complete = !task.complete;
         axios.post('/tasks/complete', {id: payload, complete: task.complete})
             .then((response) => {
-                console.log(response)
+                //console.log(response)
             }).catch((error) => {
                 console.log(error.response.data)
         })

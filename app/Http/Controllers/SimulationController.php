@@ -26,25 +26,29 @@ class SimulationController extends Controller
     }
 
     public function resetDay (Request $request) {
+        $backDay = $request->day;
+        if($backDay != 1){
+            $backDay -= 1;
+        }
+
         DB::table('users')
             ->where('id', $request->id)
-            ->update(['current_day' => $request->day]);
+            ->update(['current_day' => $backDay]);
 
-        $removeDay = $request->day;
-        $removeDay = $removeDay + 1;
 
+        // if not on the first day, reset the previous day.
         DB::table('student_video_submissions')
-            ->where('submission_day', $removeDay)
+            ->where('submission_day', $request->day)
             ->where('user_id', Auth::id())
             ->delete();
 
         DB::table('student_email')
-            ->where('day', $removeDay)
+            ->where('day', $request->day)
             ->where('user_id', Auth::id())
             ->delete();
 
         DB::table('student_gallery')
-            ->where('day', $removeDay)
+            ->where('day', $request->day)
             ->where('user_id', Auth::id())
             ->delete();
 
