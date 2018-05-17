@@ -43,12 +43,12 @@
                         <td> </td>
                     </tr>
                 </table>
-                <table id="sent">
+                <table id="sent" class="col-sm-12">
                     <tr>
                         <th>To</th>
                         <th>Subject</th>
                         <th>Body</th>
-                        <th>Day</th>
+                        <th>Date</th>
                         <th></th>
                     </tr>
                     <tr v-for="email in studentEmails"

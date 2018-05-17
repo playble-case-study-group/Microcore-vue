@@ -1,8 +1,9 @@
--- MySQL dump 10.13  Distrib 5.7.19, for macos10.12 (x86_64)
+
+-- MySQL dump 10.13  Distrib 5.7.21, for macos10.13 (x86_64)
 --
--- Host: localhost    Database: vuesim_local
+-- Host: localhost    Database: VueSim
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +24,7 @@ DROP TABLE IF EXISTS `Tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `description` text,
   `day` int(11) NOT NULL DEFAULT '1',
@@ -51,14 +52,15 @@ DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lang_id` int(11) NOT NULL,
+  `article_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lang_id` int(11) DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` json NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`article_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,36 +69,8 @@ CREATE TABLE `article` (
 
 LOCK TABLES `article` WRITE;
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
-INSERT INTO `article` VALUES (1,1,'Test English','{\"title\": \"Civil War\", \"content\": \"This is a civil war \", \"subtitles\": [{\"title\": \"Civil War Subtitle 1\", \"content\": \"subtitle 1 contents\", \"subtitles\": []}, {\"title\": \"Civil Ware Subtitle 2\", \"content\": \"subtitle 2 contents\", \"subtitles\": [{\"title\": \"sub-sub-title\", \"content\": \"something\", \"subtitles\": []}]}]}',NULL,NULL),(2,2,'Test Spanish','{\"title\": \"Guerra Civil\", \"content\": \"hola taco burrito\", \"subtitles\": [{\"title\": \"Guerra Civil Subtitle 1\", \"content\": \"subtitle 1 contents\", \"subtitles\": []}, {\"title\": \"Guerra Civil Subtitle 2\", \"content\": \"subtitle 2 contents\", \"subtitles\": [{\"title\": \"sub-sub-title\", \"content\": \"something\", \"subtitles\": []}]}]}',NULL,NULL),(3,1,'Test English','{\"title\": \"Civil War\", \"content\": \"This is a civil war \", \"subtitles\": [{\"title\": \"Civil War Subtitle 1\", \"content\": \"subtitle 1 contents\", \"subtitles\": []}, {\"title\": \"Civil Ware Subtitle 2\", \"content\": \"subtitle 2 contents\", \"subtitles\": [{\"title\": \"sub-sub-title\", \"content\": \"something\", \"subtitles\": []}]}]}',NULL,NULL),(4,2,'Test Spanish','{\"title\": \"Guerra Civil\", \"content\": \"hola taco burrito\", \"subtitles\": [{\"title\": \"Guerra Civil Subtitle 1\", \"content\": \"subtitle 1 contents\", \"subtitles\": []}, {\"title\": \"Guerra Civil Subtitle 2\", \"content\": \"subtitle 2 contents\", \"subtitles\": [{\"title\": \"sub-sub-title\", \"content\": \"something\", \"subtitles\": []}]}]}',NULL,NULL);
+INSERT INTO `article` VALUES (9,1,'Civil War','# Civil War<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,NULL),(10,2,'Guerra Civil','# Guerra Civil<hr>\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n## Madrid 13\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Edificio 1\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,'2018-05-15 19:16:08'),(11,1,'Test English','# Test English<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,NULL),(12,2,'Test Spanish','# Test Spanish<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid 2\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building 2\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n\ntest test test test',NULL,'2018-05-16 20:01:39');
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `artifacts`
---
-
-DROP TABLE IF EXISTS `artifacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artifacts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `artifacts`
---
-
-LOCK TABLES `artifacts` WRITE;
-/*!40000 ALTER TABLE `artifacts` DISABLE KEYS */;
-INSERT INTO `artifacts` VALUES (1,'Vero quae et eum laudantium.','Eum est aut ea.','https://lorempixel.com/640/480/?77365','2018-04-03 21:46:25','2018-04-03 21:46:25'),(2,'Nam voluptate aut minima sunt.','Amet iure possimus enim repellendus suscipit.','https://lorempixel.com/640/480/?43606','2018-04-03 21:46:25','2018-04-03 21:46:25'),(3,'Hic sequi facilis.','Id laudantium vero temporibus consequatur.','https://lorempixel.com/640/480/?73301','2018-04-03 21:46:25','2018-04-03 21:46:25'),(4,'Necessitatibus et soluta maxime doloribus.','Eveniet nam voluptatem nobis autem.','https://lorempixel.com/640/480/?70638','2018-04-03 21:46:25','2018-04-03 21:46:25'),(5,'Illo saepe aut velit dolorem.','Doloribus quas voluptatibus maiores et non.','https://lorempixel.com/640/480/?68409','2018-04-03 21:46:25','2018-04-03 21:46:25'),(6,'Mollitia magnam odit.','Pariatur eius eveniet sed et enim molestias.','https://lorempixel.com/640/480/?49462','2018-04-03 21:46:25','2018-04-03 21:46:25'),(7,'Corrupti rerum repellat sunt.','Quae nemo dicta esse omnis aut corporis alias.','https://lorempixel.com/640/480/?31756','2018-04-03 21:46:25','2018-04-03 21:46:25'),(8,'Repudiandae ad recusandae aut sed.','Animi velit fugit est et enim ullam.','https://lorempixel.com/640/480/?72184','2018-04-03 21:46:25','2018-04-03 21:46:25'),(9,'In suscipit minus.','Corporis molestias delectus qui et.','https://lorempixel.com/640/480/?13140','2018-04-03 21:46:25','2018-04-03 21:46:25'),(10,'Repudiandae ea consequatur soluta.','Corporis libero porro dolores veniam praesentium.','https://lorempixel.com/640/480/?27170','2018-04-03 21:46:25','2018-04-03 21:46:25'),(11,'Doloribus sint rerum impedit deleniti eos.','Nemo rem nisi doloremque corrupti.','https://lorempixel.com/640/480/?39652','2018-04-03 21:46:25','2018-04-03 21:46:25'),(12,'Natus repellat dolores.','Quis et voluptas molestias id quisquam.','https://lorempixel.com/640/480/?74675','2018-04-03 21:46:25','2018-04-03 21:46:25'),(13,'Et eos voluptas deleniti autem.','Ipsa quibusdam et aut necessitatibus.','https://lorempixel.com/640/480/?12043','2018-04-03 21:46:25','2018-04-03 21:46:25'),(14,'Deserunt rerum aliquid quibusdam occaecati velit.','Quis est possimus corrupti et magni nostrum.','https://lorempixel.com/640/480/?47059','2018-04-03 21:46:25','2018-04-03 21:46:25'),(15,'Sed atque facere.','Consequatur consequuntur ab omnis reiciendis.','https://lorempixel.com/640/480/?10741','2018-04-03 21:46:25','2018-04-03 21:46:25'),(16,'Explicabo quo sapiente.','Quod omnis et veritatis ut.','https://lorempixel.com/640/480/?31689','2018-04-03 21:46:25','2018-04-03 21:46:25'),(17,'Commodi enim rerum perferendis iste.','Sed eos omnis expedita suscipit.','https://lorempixel.com/640/480/?69515','2018-04-03 21:46:25','2018-04-03 21:46:25'),(18,'Corporis rerum voluptate eius.','Quod doloribus qui id ut libero.','https://lorempixel.com/640/480/?70009','2018-04-03 21:46:25','2018-04-03 21:46:25'),(19,'Non consequatur sit sit.','Occaecati sit veniam voluptate architecto.','https://lorempixel.com/640/480/?81063','2018-04-03 21:46:25','2018-04-03 21:46:25'),(20,'Dolores perferendis sunt.','In sit nesciunt accusantium voluptate in.','https://lorempixel.com/640/480/?80604','2018-04-03 21:46:25','2018-04-03 21:46:25');
-/*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -155,34 +129,6 @@ INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'[2, 1]'),(2,'Eduardo Em
 UNLOCK TABLES;
 
 --
--- Table structure for table `call`
---
-
-DROP TABLE IF EXISTS `call`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `call` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `day` int(11) NOT NULL DEFAULT '1',
-  `character_id` int(11) NOT NULL,
-  `call_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `call`
---
-
-LOCK TABLES `call` WRITE;
-/*!40000 ALTER TABLE `call` DISABLE KEYS */;
-INSERT INTO `call` VALUES (1,1,1,'/calls/call_11.mp4','2018-03-09 23:11:50',NULL),(2,1,2,'/calls/call_12.mp4','2018-03-09 23:11:50',NULL),(3,2,1,'/calls/call_21.mp4','2018-03-09 23:11:50',NULL),(4,2,2,'/calls/call_22.mp4','2018-03-09 23:11:50',NULL);
-/*!40000 ALTER TABLE `call` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `channel`
 --
 
@@ -190,13 +136,14 @@ DROP TABLE IF EXISTS `channel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `channel` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `channel_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `channel_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`channel_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +225,7 @@ DROP TABLE IF EXISTS `chat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `chat` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `chat_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `channel_id` int(11) DEFAULT NULL,
   `character_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -287,8 +234,9 @@ CREATE TABLE `chat` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `type` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,32 +301,36 @@ INSERT INTO `class_has_group` VALUES (1,1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `emails`
+-- Table structure for table `dashboard`
 --
 
-DROP TABLE IF EXISTS `emails`;
+DROP TABLE IF EXISTS `dashboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `emails` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `from` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `to` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `dashboard` (
+  `dash_id` int(11) NOT NULL AUTO_INCREMENT,
+  `day` int(11) DEFAULT NULL,
+  `day_video` text,
+  `news_headline` text,
+  `news_snippet` text,
+  `stock_value` double DEFAULT NULL,
+  `stock_percentage` int(11) DEFAULT NULL,
+  `message_count` int(11) DEFAULT '0',
+  `email_count` int(11) DEFAULT '0',
+  `stock_status` text,
+  PRIMARY KEY (`dash_id`),
+  UNIQUE KEY `dashboard_dash_id_uindex` (`dash_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `emails`
+-- Dumping data for table `dashboard`
 --
 
-LOCK TABLES `emails` WRITE;
-/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
-INSERT INTO `emails` VALUES (1,'test','thisisatest','me@me.com','you@you.com',NULL,NULL),(2,'test2','hey','you@you.com','me@me.com',NULL,NULL),(3,'a','n','Dan','Dan',NULL,NULL),(4,'hi','test','Dan','Dan',NULL,NULL),(5,'test','test','Dan','Dan',NULL,NULL);
-/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
+LOCK TABLES `dashboard` WRITE;
+/*!40000 ALTER TABLE `dashboard` DISABLE KEYS */;
+INSERT INTO `dashboard` VALUES (10,1,'/video/fun.mp4','Microcore on Top','New life saving drug to hit the market soon!',2.5,5,2,1,'up'),(11,2,'/video/me.mp4','Microcore has Micro-meltdown','Pig explodes on lab grounds. ',3.12,12,3,2,'down'),(12,3,'/video/test.mp4','What will happen to Microcore?','After the pig mess, what is next?',1.2,2,1,3,'up');
+/*!40000 ALTER TABLE `dashboard` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -406,6 +358,7 @@ CREATE TABLE `gallery` (
 LOCK TABLES `gallery` WRITE;
 /*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
 INSERT INTO `gallery` VALUES (1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png','2018-04-03 19:33:58',NULL),(2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png','2018-04-03 19:33:58',NULL),(3,'Gallery 3 Title','This is the description','/images/gallery/gallery03.png','2018-04-03 19:33:58',NULL),(4,'Gallery 4 Title','This is the description','/images/gallery/gallery04.png','2018-04-03 19:33:58',NULL),(5,'Gallery 5 Title','This is the description','/images/gallery/gallery05.png','2018-04-03 19:33:58',NULL),(6,'Gallery 6 Title','This is the description','/images/gallery/gallery06.png','2018-04-03 19:33:58',NULL),(7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png','2018-04-03 19:33:58',NULL),(8,'Gallery 8 Title','This is the description','/images/gallery/gallery08.png','2018-04-03 19:33:58',NULL),(9,'Gallery 9 Title','This is the description','/images/gallery/gallery09.png','2018-04-03 19:33:58',NULL),(10,'Gallery 10 Title','This is the description','/images/gallery/gallery10.png','2018-04-03 19:33:58',NULL);
+
 /*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,6 +376,7 @@ CREATE TABLE `group` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,17 +449,8 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `migrations`
---
-
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_01_23_193209_createSimulationTable',2),(4,'2018_01_30_205641_CreateEmailTable',3),(5,'2018_01_31_211121_create_artifacts_table',4),(6,'2018_02_16_161514_create_languages_table',4),(7,'2018_02_16_165458_create_wiki_table',5),(8,'2018_02_16_165730_create_article_table',6),(9,'2018_02_23_163617_create_chat_table',7),(10,'2018_02_23_221031_create_channel_table',8),(11,'2018_02_26_173005_create_notes_table',9),(12,'2018_02_26_173654_create_characters_table',10),(13,'2018_02_26_175241_create_video_table',11),(14,'2018_03_08_231840_update_video_table',12),(15,'2018_03_09_153947_create_call_table',13),(16,'2018_03_09_154209_create_question_table',13),(17,'2018_03_14_165128_create_character_email_table',14),(18,'2018_03_14_165143_create_student_email_table',14),(19,'2018_03_14_171240_add_character_email_id_column_to_student_email_table',15),(20,'2018_03_16_193814_add_character_img_to_character_table',16),(21,'2018_03_19_164845_create_student_task_table',17),(22,'2018_03_23_142605_create_group_table',18),(23,'2018_03_23_142635_create_user_has_group_table',18),(24,'2018_03_23_142838_create_class_table',18),(25,'2018_03_23_142902_create_user_has_class_table',18),(26,'2018_03_23_143340_create_class_has_group_table',19),(27,'2018_03_23_144144_create_instructor_has_class_table',20),(28,'2018_03_23_144552_add_role_column_to_users_table',21),(32,'2018_04_03_163459_gallery__master',22);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `notes`
@@ -515,13 +460,13 @@ DROP TABLE IF EXISTS `notes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `note_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `day` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`note_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -531,7 +476,7 @@ CREATE TABLE `notes` (
 
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-INSERT INTO `notes` VALUES (2,'1976-08-30 12:27:57','2018-03-09 22:06:14','Nisi quam itaque a soluta et earum. Odit mollitia quia reprehenderit iure voluptatem architecto.',2,1),(10,'1996-12-13 20:53:28','2018-03-09 22:06:14','Sed est vel perferendis voluptatum praesentium soluta. Ratione et ea tenetur tenetur consequuntur.',4,3),(11,'2006-08-21 19:35:13','2018-03-09 22:06:14','Eos fugiat non corporis error. Similique voluptatem sed illum magnam sint nemo sapiente veritatis.',9,3),(19,'1973-06-29 22:13:33','2018-03-09 22:06:14','Repellat et commodi possimus. Hic commodi adipisci eum.',9,2),(26,'1970-12-16 13:53:47','2018-03-09 22:06:14','Excepturi accusantium maxime mollitia aut blanditiis. Omnis consectetur corporis ut veritatis.',3,1),(28,'1971-10-03 01:10:05','2018-03-09 22:06:14','Deserunt quia enim ab eius dolorum praesentium enim soluta. Minus voluptatem optio nam vel sint ut.',1,1),(33,'1979-05-21 20:32:21','2018-03-09 22:06:14','Est ut ut optio aut. Numquam ut qui voluptatem libero quasi explicabo.',7,2),(43,'2002-11-16 15:12:56','2018-03-09 22:06:14','Ex similique veniam enim esse. Ut et facilis non ut magnam autem occaecati sit.',8,3),(44,'2005-08-08 14:20:19','2018-03-09 22:06:14','Omnis rerum consequatur dolor et et. Nihil provident sunt sunt voluptate.',6,2),(46,'1982-12-13 06:22:10','2018-03-09 22:06:14','Nulla porro facere velit perferendis. Velit est repudiandae nobis eveniet omnis.',7,1),(57,'2006-06-15 09:00:09','2018-03-09 22:06:14','Reiciendis est aliquid repellat. Veritatis aut soluta reiciendis error consequatur.',7,1),(60,'2004-01-14 16:25:31','2018-03-09 22:06:14','Dolores officia id iure praesentium esse maxime. Quo quos expedita omnis sunt adipisci ea amet et.',9,1),(66,'1972-03-09 08:46:56','2018-03-09 22:06:14','Hic ea nesciunt officia ullam. Atque assumenda eius error sed commodi autem aliquid.',1,1),(69,'1972-12-26 06:02:02','2018-03-09 22:06:14','Et blanditiis et unde odio. In dolor consectetur eaque aut. Iure inventore illum hic non ipsum eum.',4,2),(76,'1988-11-24 07:05:45','2018-03-09 22:06:14','Ea ea quasi itaque magni suscipit doloremque. Enim sit reprehenderit aut.',2,2),(78,'1993-12-07 13:44:26','2018-03-09 22:06:14','Est quo mollitia ad officia ratione aliquam esse. Aut vero ut molestiae et.',6,3),(87,'1998-03-14 17:42:31','2018-03-09 22:06:14','Aut beatae omnis fugiat. Veritatis qui aut quia nemo omnis.',1,2),(91,'2007-09-23 01:30:16','2018-03-09 22:06:14','Repellendus est sapiente omnis et voluptas illo. Ipsa omnis officia ratione qui voluptate.',3,1),(92,'2000-10-04 03:47:09','2018-03-09 22:06:14','Autem rem quod blanditiis ratione eos molestiae. Ut repellendus est necessitatibus dolore sed.',4,2),(98,'1991-02-15 15:31:38','2018-03-09 22:06:14','Et in tenetur cumque aut libero vero beatae. Quod totam eum ipsam doloremque animi corporis.',2,1);
+INSERT INTO `notes` VALUES (2,'1974-12-29 15:00:18','2018-04-04 00:30:59','Unde vero eveniet et ut. Est voluptatibus ipsum quos sed in.',2),(12,'1994-04-29 01:03:15','2018-04-04 00:30:59','Quasi earum dolores exercitationem qui. Quos aut illo omnis illum dolor impedit eos.',7),(14,'1987-09-05 09:11:12','2018-04-04 00:30:59','Quam ea sit totam. Animi nobis provident tenetur.',4),(20,'1997-07-09 03:22:04','2018-04-04 00:30:59','Autem tempora ab atque non atque quis. Eaque beatae mollitia aut.',5),(29,'1981-09-07 21:14:01','2018-04-04 00:30:59','Ratione eius est et reprehenderit qui aliquam et. Autem rerum in repudiandae a sint repellat unde.',7),(36,'1980-05-28 02:32:09','2018-04-04 00:30:59','Cumque et vel labore. Et nobis est voluptatem.',4),(44,'1989-08-22 19:37:04','2018-04-04 00:30:59','Dolor laudantium vel vero odio est voluptas sed sequi. Sit voluptas quia et esse laborum.',7),(45,'1993-12-29 08:06:53','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(47,'1982-01-03 15:37:29','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(48,'1993-02-17 04:08:54','2018-04-04 00:30:59','Eaque minima blanditiis quod amet harum nemo. Et eum voluptatem minima maiores.',5),(54,'1975-01-04 03:52:12','2018-04-04 00:30:59','Quod eum eum velit. Facere facilis quas sint repellendus optio.',4),(57,'2005-12-06 07:27:38','2018-04-04 00:30:59','Sit similique omnis officiis ipsa nulla. Temporibus minima commodi rerum ea et odio.',2),(58,'1996-04-24 09:34:09','2018-04-04 00:30:59','Et non sunt unde. Quo modi et voluptatem.',9),(65,'1992-10-05 00:28:46','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(68,'1979-04-29 19:16:58','2018-04-04 00:30:59','Quis in sed ipsam nostrum enim. Modi consequatur aperiam qui corrupti quia.',4),(73,'1974-07-10 02:19:37','2018-04-04 00:30:59','Quos repudiandae molestiae aut ut tenetur enim nisi. Recusandae ipsam ut dolorem aut.',8),(74,'1971-11-10 20:15:15','2018-04-04 00:30:59','Aut tempore nulla deleniti nemo aperiam sit et. Et dolorem repudiandae unde.',3),(87,'2011-10-12 15:29:28','2018-04-04 00:30:59','Maxime et vel id aut. Quo dicta incidunt quia nisi vel.',5),(91,'1985-04-22 11:31:04','2018-04-04 00:30:59','Veniam adipisci omnis qui rerum. Cumque iure rem et sequi.',9),(95,'2000-06-19 07:52:11','2018-04-04 00:30:59','Autem dolorem quod quibusdam minus quia. At repellat ut temporibus sed praesentium omnis.',7);
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,15 +512,18 @@ DROP TABLE IF EXISTS `question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `call_id` int(11) NOT NULL,
-  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `start_time` int(11) NOT NULL,
   `end_time` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `record_after` tinyint(1) DEFAULT '0',
+  `recording_duration` int(11) DEFAULT '0',
+  `next_question` int(11) DEFAULT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -584,7 +532,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,1,'Day 1, call 1, question 1',20,30,'2018-03-09 23:11:50',NULL),(2,1,'Day 1, call 1, question 2',35,50,'2018-03-09 23:11:50',NULL),(3,1,'Day 1, call 1, question 3',55,80,'2018-03-09 23:11:50',NULL),(4,2,'Day 1, call 2, question 1',20,30,'2018-03-09 23:11:50',NULL),(5,2,'Day 1, call 2, question 2',60,80,'2018-03-09 23:11:50',NULL),(6,3,'Day 2, call 1, question 1',10,30,'2018-03-09 23:11:50',NULL),(7,3,'Day 2, call 1, question 2',45,70,'2018-03-09 23:11:50',NULL),(8,4,'Day 2, call 2, question 1',10,40,'2018-03-09 23:11:50',NULL),(9,4,'Day 2, call 2, question 2',41,50,'2018-03-09 23:11:50',NULL);
+INSERT INTO `question` VALUES (3,86,'Soluta qui ut sapiente.',17,731,'2015-03-06 20:06:40','2018-04-04 00:30:59',1,120,NULL),(5,26,'Provident aut non amet.',37,964,'2005-05-14 21:10:47','2018-04-04 00:30:59',0,0,NULL),(7,81,'Iste in ab neque magnam.',58,207,'2007-01-04 09:03:22','2018-04-04 00:30:59',1,90,NULL),(9,60,'Quis aut ea facilis.',65,373,'2003-11-26 05:27:29','2018-04-04 00:30:59',0,0,NULL),(17,51,'Odit modi at quo.',35,890,'1974-06-23 09:02:26','2018-04-04 00:30:59',0,0,NULL),(27,34,'Sed rerum aut et.',21,575,'1993-03-08 10:46:51','2018-04-04 00:30:59',0,0,NULL),(39,32,'Autem esse iste aut.',47,696,'2005-08-16 01:54:51','2018-04-04 00:30:59',1,60,NULL),(46,86,'Est quo a non possimus.',97,949,'2001-05-04 19:46:24','2018-04-04 00:30:59',0,0,NULL),(55,51,'Eum est est vel.',20,377,'1975-09-19 08:16:04','2018-04-04 00:30:59',1,30,NULL),(59,41,'Quia quod facere eum at.',62,323,'1999-11-19 15:31:16','2018-04-04 00:30:59',0,0,NULL),(61,8,'Et unde et et.',63,420,'2008-01-15 04:50:23','2018-04-04 00:30:59',0,0,NULL),(62,60,'Id nihil repellat non.',75,719,'2003-01-21 20:06:01','2018-04-04 00:30:59',0,0,NULL),(69,26,'Eos libero velit veniam.',88,611,'1981-12-26 07:08:57','2018-04-04 00:30:59',1,0,NULL),(71,49,'Et est ea atque qui.',82,411,'1995-11-11 09:34:33','2018-04-04 00:30:59',0,0,NULL),(80,8,'Qui ut voluptatibus sed.',62,976,'2001-11-03 06:59:57','2018-04-04 00:30:59',1,90,NULL),(89,64,'Eos qui neque quia.',93,440,'2005-09-23 09:57:02','2018-04-04 00:30:59',1,120,NULL),(90,81,'Vel et asperiores enim.',44,990,'1974-01-22 21:12:23','2018-04-04 00:30:59',0,0,NULL),(94,28,'Impedit sed sint magnam.',76,372,'1997-03-05 14:10:39','2018-04-04 00:30:59',0,0,NULL),(97,19,'Sunt et vel vel autem.',45,908,'1976-06-11 20:13:37','2018-04-04 00:30:59',0,0,NULL),(98,41,'Nisi sed in non.',0,5,'2005-08-03 05:27:59','2018-04-04 00:30:59',1,10,99),(99,41,NULL,6,10,NULL,NULL,0,0,NULL);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -660,8 +608,9 @@ CREATE TABLE `student_gallery` (
   `user_id` int(11) NOT NULL COMMENT 'Id of user who edited the item.',
   `group_id` int(11) NOT NULL DEFAULT '0',
   `class_id` int(11) NOT NULL DEFAULT '0',
+  `day` int(11) NOT NULL,
   PRIMARY KEY (`student_gallery_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -707,7 +656,7 @@ DROP TABLE IF EXISTS `student_task`;
 CREATE TABLE `student_task` (
   `task_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `complete` tinyint(4) DEFAULT '0',
+  `complete` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -721,6 +670,36 @@ LOCK TABLES `student_task` WRITE;
 /*!40000 ALTER TABLE `student_task` DISABLE KEYS */;
 INSERT INTO `student_task` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-03 18:46:28'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49');
 /*!40000 ALTER TABLE `student_task` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_video_submissions`
+--
+
+DROP TABLE IF EXISTS `student_video_submissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_video_submissions` (
+  `submission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `submission_url` varchar(255) DEFAULT NULL,
+  `submission_day` int(11) DEFAULT NULL,
+  `character_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `question_id` int(11) DEFAULT '0',
+  `class_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`submission_id`),
+  UNIQUE KEY `student_video_submissions_submission_id_uindex` (`submission_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_video_submissions`
+--
+
+LOCK TABLES `student_video_submissions` WRITE;
+/*!40000 ALTER TABLE `student_video_submissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student_video_submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -755,13 +734,11 @@ DROP TABLE IF EXISTS `user_has_class`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_has_class` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -770,7 +747,7 @@ CREATE TABLE `user_has_class` (
 
 LOCK TABLES `user_has_class` WRITE;
 /*!40000 ALTER TABLE `user_has_class` DISABLE KEYS */;
-INSERT INTO `user_has_class` VALUES (1,NULL,NULL,7,1),(2,NULL,NULL,9,1),(3,NULL,NULL,10,1),(4,NULL,NULL,1,1),(5,NULL,NULL,8,1);
+INSERT INTO `user_has_class` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `user_has_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -805,7 +782,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -815,7 +792,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '0',
   `assigned` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -826,7 +803,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'NULj7M0YCjPiPybZq5zDTyOmzJENt5NOp2HWTf0gVeTNKUZtKR8mRKhle2rG','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0);
+INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'NULj7M0YCjPiPybZq5zDTyOmzJENt5NOp2HWTf0gVeTNKUZtKR8mRKhle2rG','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T',2,'matalyn2@byu.edu','$2y$10$WZ726cA2USHejRMk2qj54e3QGri7get48esWgLhm9HjG6MRsECPhW','q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -838,17 +815,14 @@ DROP TABLE IF EXISTS `video`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `video` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `video_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `character_id` int(11) NOT NULL,
   `day` int(11) NOT NULL,
-  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start_time` int(11) NOT NULL,
-  `end_time` int(11) NOT NULL,
-  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`video_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -857,7 +831,7 @@ CREATE TABLE `video` (
 
 LOCK TABLES `video` WRITE;
 /*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` VALUES (4,65,2,'Eum consequatur illo odit et.',10,659,'/video/fun.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(6,94,1,'Praesentium iure asperiores voluptas error autem.',31,494,'/video/me.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(8,65,1,'Qui natus doloribus illum est.',93,642,'/video/you.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(13,45,2,'Voluptas similique id eaque quia.',97,493,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(14,65,1,'Eaque maiores id quis et molestiae.',11,926,'/video/me.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(15,45,3,'Dolores eaque molestias perferendis quisquam.',17,935,'/video/me.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(18,88,3,'Est illo veritatis qui voluptatibus maxime saepe.',13,558,'/video/you.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(20,74,3,'Voluptas nisi rerum numquam aut dolores.',81,978,'/video/fun.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(23,89,1,'Eveniet beatae asperiores illo qui.',93,574,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(39,45,2,'Enim velit quos non nisi sit quia quas qui.',32,152,'/video/me.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(41,65,3,'Placeat qui sunt et et commodi dolor.',92,463,'/video/junk.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(47,34,3,'Et dolor eius et magni.',14,365,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(48,34,3,'Velit perferendis officia cumque quia eum quia.',36,798,'/video/junk.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(62,88,3,'Id iusto quam voluptate ut.',67,435,'/video/me.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(67,89,1,'Est nemo voluptas vel ratione fugiat sequi optio.',81,514,'/video/fun.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(68,89,1,'Recusandae voluptatem et sit voluptatem.',34,913,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(72,88,3,'Nulla omnis possimus aut commodi.',26,131,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(73,34,2,'Et odio dolores eos et quia eos.',37,449,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(82,65,1,'Tempora dolore ipsam recusandae eos distinctio.',79,425,'/video/you.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14'),(93,45,2,'Iure est quod libero commodi.',93,216,'/video/test.mp4','2018-03-09 15:06:14','2018-03-09 15:06:14');
+INSERT INTO `video` VALUES (18,2,2,'/video/fun.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(22,1,3,'/video/test.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(28,4,3,'/video/test.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(32,3,1,'/video/junk.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(41,1,2,'/video/me.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(64,4,1,'/video/fun.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(79,3,2,'/video/you.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(81,2,3,'/video/fun.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59'),(82,2,1,'/video/you.mp4','2018-04-04 00:30:59','2018-04-04 00:30:59');
 /*!40000 ALTER TABLE `video` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -869,11 +843,12 @@ DROP TABLE IF EXISTS `wiki`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wiki` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `wiki_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lang_1_ar` int(11) NOT NULL,
   `lang_2_ar` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`wiki_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -928,6 +903,7 @@ BEGIN
     SELECT * FROM student_gallery
     WHERE class_id = class_id_in;
   END ;;
+
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -966,4 +942,5 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-17 11:18:33
+-- Dump completed on 2018-05-17 11:11:35
+

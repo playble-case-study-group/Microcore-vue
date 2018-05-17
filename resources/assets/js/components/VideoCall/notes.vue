@@ -17,7 +17,7 @@
           }
         },
         props: {
-            notes: Array
+            notes: Object
         },
         methods: {
             postUpdatedNote: function () {
