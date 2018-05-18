@@ -78,6 +78,7 @@
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
+                        <hr v-if="readModalData.reply">
                         <div id="replyForm">
                             <div class="row form-group reply-contact">
                                 <i class="material-icons reply">reply</i>
@@ -127,6 +128,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="file" name="emailAttachment" ref="file" id="emailAttachment" @change="setAttachment()">
                         <button class="btn btn-success" @click="sendEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
@@ -183,6 +185,7 @@
         },
         data: function () {
             return {
+
                 draftEmailSubject: "",
                 draftEmailBody: "",
                 toCharacter: "",
@@ -195,6 +198,7 @@
                     reply: ""
                 },
                 draftEmail: {
+                    attachment: null,
                     character_email_id: 0,
                     to: 0,
                     reply: 0,
@@ -222,10 +226,10 @@
                         subject: this.draftEmailSubject,
                         body: this.draftEmailBody
                     })
-                    .then( response => {
-                    console.log(response);
-                    this.emails.push(response.data);
-                })
+                    .then(response => {
+                        console.log(response);
+                        this.emails.push(response.data);
+                    })
             },
             readEmail: function (email) {
                 this.resetDraftEmail();
@@ -236,7 +240,7 @@
                 this.readModalData.reply = email.reply;
                 this.readModalData.character_email_id = email.character_email_id;
 
-                if(email.reply!=null){
+                if (email.reply != null) {
                     //show player name and the email they wrote (using first()?) instead of reply button
                     $('#ReplyEmailId').hide();
 
@@ -268,21 +272,29 @@
             },
             //duplicate?
             sendEmail: function (emailId) {
-                axios.post('/email', this.draftEmail).then( response => {
+                let formData = new FormData();
+                formData.append('character_email_id', this.draftEmail.character_email_id);
+                formData.append('to', this.draftEmail.to.id);
+                formData.append('reply', this.draftEmail.reply);
+                formData.append('subject', this.draftEmail.subject);
+                formData.append('body', this.draftEmail.body)
+                formData.append('attachment', this.draftEmail.attachment);
+
+                axios.post('/email', formData).then(response => {
                     this.resetDraftEmail();
                 });
                 $('#composeModal').modal('hide');
             },
             sendReplyEmail: function (emailId) {
                 let appScope = this;
-                var found = this.characterEmails.find( function(email) {
-                    if( email.character_email_id == emailId){
+                var found = this.characterEmails.find(function (email) {
+                    if (email.character_email_id == emailId) {
                         email.reply = appScope.draftEmail;
-                        return(email);
+                        return (email);
                     }
                 });
                 console.log(found);
-                axios.post('/email', this.draftEmail).then( response => {
+                axios.post('/email', this.draftEmail).then(response => {
                     this.resetDraftEmail();
                     this.$forceUpdate();
                 });
@@ -312,19 +324,22 @@
                     body: ""
                 };
             },
-            openNav: function() {
+            openNav: function () {
                 document.getElementById("mySidenav").style.width = "200px";
             },
-            closeNav: function() {
+            closeNav: function () {
                 document.getElementById("mySidenav").style.width = "0";
             },
-            findCharData: function(){
+            findCharData: function () {
                 let appScope = this;
-                var found = this.characters.find(function(element) {
+                var found = this.characters.find(function (element) {
                     console.log(element);
                     return element.name == appScope.readModalData.from;
                 });
                 return found;
+            },
+            setAttachment: function () {
+                this.draftEmail.attachment = this.$refs.file.files[0];
             }
         }
 
@@ -351,11 +366,6 @@
     }
     td, th {
         padding: 10px;
-    }
-    hr {
-        width: 1px;
-        height: 25px;
-        color: #c8c8c8;
     }
     .main{
         height: 60rem;

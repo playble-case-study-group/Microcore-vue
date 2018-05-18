@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\File;
 
 class EmailController extends Controller
 {
+    private $document_ext = ['pdf'];
     /**
      * Display a listing of the resource.
      *
@@ -69,15 +71,34 @@ class EmailController extends Controller
         if ($request->has("character_email_id")) {
             $char_email_id = $request->character_email_id;
         }
-        DB::table('student_email')->insert([
-            'user_id' => Auth::id(),
-            'character_id' => $request->to['id'],
-            'day' => Auth::user()->current_day,
-            'subject'=> "RE: ".$request->subject,
-            'body' => $request->body,
-            'created_at'=> DB::raw('NOW()'),
-            'character_email_id' => $char_email_id
-        ]);
+            
+        if ($request->has("attachment")) {
+            $file = $request->file('attachment');
+            $path = '/public/' . $this->getUserDir() . '/' . $file['originalName'];
+            if (Storage::putFileAs('/public/' . $this->getUserDir() . '/', $file, $file['originalName'])) {
+                DB::table('student_email')->insert([
+                    'user_id' => Auth::id(),
+                    'character_id' => $request->to['id'],
+                    'day' => Auth::user()->current_day,
+                    'subject' => "RE: " . $request->subject,
+                    'body' => $request->body,
+                    'created_at' => DB::raw('NOW()'),
+                    'character_email_id' => $char_email_id,
+                    'email_attachment' => $path
+                ]);
+            }
+        } else {
+            DB::table('student_email')->insert([
+                'user_id' => Auth::id(),
+                'character_id' => $request->to['id'],
+                'day' => Auth::user()->current_day,
+                'subject' => "RE: " . $request->subject,
+                'body' => $request->body,
+                'created_at' => DB::raw('NOW()'),
+                'character_email_id' => $char_email_id
+            ]);
+        }
+
         return $request->all();
     }
 
