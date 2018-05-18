@@ -86,9 +86,13 @@
                             <div class="row form-group">
                                 <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
+
                         </div>
+                        <h5 v-if="this.readModalData.reply"><b>{{  this.$store.state.user.name }}</b></h5>
+                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
-                    <div class="modal-footer">
+
+                    <div class="modal-footer" id="ReplyEmailId">
                         <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
                     </div>
                 </div>
@@ -123,7 +127,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
             </div>
@@ -161,7 +165,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendReplyEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
             </div>
@@ -183,18 +187,20 @@
                 draftEmailBody: "",
                 toCharacter: "",
                 readModalData: {
+                    character_email_id: 0,
                     id: 0,
                     from: "",
                     subject: "",
-                    body: ""
+                    body: "",
+                    reply: ""
                 },
                 draftEmail: {
+                    character_email_id: 0,
                     to: 0,
                     reply: 0,
                     subject: "",
                     body: ""
                 }
-
             }
         },
         props: {
@@ -209,6 +215,7 @@
         },
         methods: {
             sendemail: function () {
+                //duplicate (I don't think this is used...?)
                 axios.post(
                     '/email',
                     {
@@ -226,6 +233,19 @@
                 this.readModalData.from = email.name;
                 this.readModalData.subject = email.subject;
                 this.readModalData.body = email.body;
+                this.readModalData.reply = email.reply;
+                this.readModalData.character_email_id = email.character_email_id;
+
+                if(email.reply!=null){
+                    //show player name and the email they wrote (using first()?) instead of reply button
+                    $('#ReplyEmailId').hide();
+
+                    console.log(this.$store.state.user.name);
+                }
+                else {
+                    //show reply button
+                    $('#ReplyEmailId').show();
+                }
 
                 $('#readModal').modal();
             },
@@ -247,12 +267,26 @@
                 $('#composeModal').modal('show');
             },
             //duplicate?
-            sendEmail: function () {
+            sendEmail: function (emailId) {
                 axios.post('/email', this.draftEmail).then( response => {
-                    console.log(response.data)
-
                     this.resetDraftEmail();
                 });
+                $('#composeModal').modal('hide');
+            },
+            sendReplyEmail: function (emailId) {
+                let appScope = this;
+                var found = this.characterEmails.find( function(email) {
+                    if( email.character_email_id == emailId){
+                        email.reply = appScope.draftEmail;
+                        return(email);
+                    }
+                });
+                console.log(found);
+                axios.post('/email', this.draftEmail).then( response => {
+                    this.resetDraftEmail();
+                    this.$forceUpdate();
+                });
+                $('#replyModal').modal('hide');
             },
             replyEmail: function () {
 
@@ -265,10 +299,9 @@
 
                 this.draftEmail.to = this.findCharData();
                 this.draftEmail.subject = this.readModalData.subject;
+                this.draftEmail.character_email_id = this.readModalData.character_email_id;
                 $('#readModal').modal('hide');
                 $('#replyModal').modal('show');
-
-
             },
             resetDraftEmail: function () {
                 // Reset the draft email
