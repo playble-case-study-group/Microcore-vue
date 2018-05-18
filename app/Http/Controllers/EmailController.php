@@ -21,6 +21,13 @@ class EmailController extends Controller
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
 
+        foreach($characterEmails as $email){
+            $email->reply = DB::table("student_email")
+                ->where("character_email_id", $email->character_email_id)
+                ->where('user_id', Auth::id())
+                ->first();
+        }
+
         $characters = DB::table('characters')->get();
 
         $studentEmails = DB::table('student_email')
@@ -57,15 +64,19 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
+        $char_email_id = 0;
 //        dd($request->all());
+        if ($request->has("character_email_id")) {
+            $char_email_id = $request->character_email_id;
+        }
         DB::table('student_email')->insert([
             'user_id' => Auth::id(),
             'character_id' => $request->to['id'],
             'day' => Auth::user()->current_day,
-            'subject'=> $request->subject,
+            'subject'=> "RE: ".$request->subject,
             'body' => $request->body,
             'created_at'=> DB::raw('NOW()'),
-            'character_email_id' => $request->reply
+            'character_email_id' => $char_email_id
         ]);
         return $request->all();
     }
