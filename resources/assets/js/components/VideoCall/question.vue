@@ -9,12 +9,12 @@
         </div>
         <button type="button"
                 v-for="question in questions"
-                class="btn btn-success btn-lg button"
-                :disabled = returnClass(question)
+                :class= 'returnClass(question) + "btn btn-success btn-lg button"'
                 v-if="question.question && showButtons && count == 0"
                 :key="question.id"
                 @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
+            <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
         </button>
     </div>
 </template>
@@ -85,9 +85,9 @@
                     }
                 })
                 if(clicked){
-                    return true
+                    return 'visited '
                 } else{
-                    return false
+                    return 'active '
                 }
             }
         },
@@ -101,6 +101,15 @@
         margin: 2rem;
         height: 3rem;
         width: 26rem;
+    }
+    .visited {
+        opacity: 0.65;
+    }
+    .recording{
+        color: #ff4d4d;
+        float: right;
+        font-size: 12px;
+        margin-top: 3px;
     }
     .counterDisplay {
         font-size: 24px;

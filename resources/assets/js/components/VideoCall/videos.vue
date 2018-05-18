@@ -525,7 +525,7 @@
     #personal_video{
         position: absolute;
         right: 0px;
-        top: 128px;
+        top: 137px;
         height: 125px;
         width: 150px;
     }
@@ -535,7 +535,7 @@
             height: calc(23vh - 20px);
         }
         #personal_video{
-            top: 173px;
+            top: 182px;
         }
     }
 </style>
