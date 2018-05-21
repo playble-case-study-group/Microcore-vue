@@ -213,7 +213,7 @@ CREATE TABLE `characters` (
 
 LOCK TABLES `characters` WRITE;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
-INSERT INTO `characters` VALUES (1,'Ernando Suarez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,),(2,'Ana Alba','Marketing','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL,),(3,'Phillip Iniesta','Technical','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL,),(4,'Maria Pique','Educator','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,);
+INSERT INTO `characters` VALUES (1,'Ernando Suarez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL),(2,'Ana Alba','Marketing','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL),(3,'Phillip Iniesta','Technical','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL),(4,'Maria Pique','Educator','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL);
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -627,7 +627,7 @@ UNLOCK TABLES;
 -- Table structure for table `student_gallery_has_tag`
 --
 
-DROP TABLE IF EXISTS `student_gallery_has_tag`;
+DROP TABLE IF EXISTS `student_artifact_has_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student_artifact_has_tag` (
@@ -873,8 +873,9 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DROP PROCEDURE IF EXISTS retrieve_email_assignments;
 DELIMITER ;;
-CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_email_assignments`(IN char_id INT, IN d INT, IN cl_id INT)
+CREATE PROCEDURE `retrieve_email_assignments`(IN char_id INT, IN d INT, IN cl_id INT)
 BEGIN
     SELECT s.day, s.subject, s.body, s.created_at, c.name AS c_name, u.name AS u_name FROM student_emails AS s
       INNER JOIN users AS u ON s.user_id = u.user_id
@@ -897,8 +898,9 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DROP PROCEDURE IF EXISTS retrieve_gallery_assignments;
 DELIMITER ;;
-CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_gallery_assignments`(IN class_id_in INT)
+CREATE PROCEDURE `retrieve_gallery_assignments`(IN class_id_in INT)
 BEGIN
     SELECT * FROM student_artifacts
     WHERE class_id = class_id_in;
@@ -918,8 +920,9 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DROP PROCEDURE IF EXISTS retrieve_video_assignments;
 DELIMITER ;;
-CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_video_assignments`(IN question_id_in INT, IN day_in INT, IN character_id_in INT, IN class_id_in INT)
+CREATE PROCEDURE `retrieve_video_assignments`(IN question_id_in INT, IN day_in INT, IN character_id_in INT, IN class_id_in INT)
 BEGIN
     select * from student_video_submissions
     where class_id = class_id_in
