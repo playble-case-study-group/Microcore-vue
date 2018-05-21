@@ -18,7 +18,7 @@
             <!--dropup module for contacts-->
             <div class="dropup">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i id="phonebook" class="material-icons">contacts</i>
+                    <i id="phonebook" class="material-icons">people</i>
                 </a>
                 <div id="contacts" class="dropdown-menu">
                     <div class="contact-inner dropdown-item"

@@ -152,7 +152,7 @@ class VideoCallController extends Controller
         $name = 'video-'.str_random(4).'.webm';
         $target_file = base_path()."/public/storage/video/".$name;
         file_put_contents($target_file, $data);
-        $filename = "/public/storage/video/".$name;
+        $filename = "/storage/video/".$name;
 
         if($request->has('question')){
             $question_id = $request->question;
@@ -166,11 +166,6 @@ class VideoCallController extends Controller
         }
 
         return $request->all();
-    }
-
-    private function getUserDir()
-    {
-        return Auth::user()->name . '_' . Auth::id();
     }
 
 }

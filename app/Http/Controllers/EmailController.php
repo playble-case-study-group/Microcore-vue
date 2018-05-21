@@ -81,10 +81,9 @@ class EmailController extends Controller
             $file = $request->file('attachment');
             $ext = $file->getClientOriginalExtension();
             $type = $this->getType($ext);
-            $path = '/public/' . $type . '/' . $file->getClientOriginalName();
-
-            if (Storage::putFileAs('/public/' . $type . '/', $file, $file->getClientOriginalName())) {
-                DB::table('student_emails')->insert([
+            $path = '/storage/' . $type . '/' . $file->getClientOriginalName();
+            if (Storage::putFileAs('/storage/' . $type . '/', $file, $file->getClientOriginalName())) {
+                DB::table('student_email')->insert([
                     'user_id' => Auth::id(),
                     'character_id' => $request->to,
                     'day' => Auth::user()->current_day,
@@ -155,11 +154,6 @@ class EmailController extends Controller
         //
     }
 
-
-    private function getUserDir()
-    {
-        return Auth::user()->name . '_' . Auth::id();
-    }
 
 
     /**
