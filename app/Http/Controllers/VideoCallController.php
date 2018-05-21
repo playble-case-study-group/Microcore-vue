@@ -22,13 +22,18 @@ class VideoCallController extends Controller
             ->get();
 
         $questions = DB::table('questions')->get();
+
+        $clicked_questions = DB::table('user_clicked_question')
+            ->where('user_id', Auth::id())
+            ->get();
+
         $notes = DB::table('notes')
             ->select('note')
             ->where('user_id', Auth::id())
             ->first();
         $notes = json_encode($notes);
 
-        return view('videocall', compact('calls', 'questions', 'notes', 'contacts'));
+        return view('videocall', compact('calls', 'questions', 'notes', 'contacts', 'clicked_questions'));
     }
 
     /**
@@ -124,6 +129,14 @@ class VideoCallController extends Controller
         //
     }
 
+    public function disableQuestion(Request $request){
+        $question_id = $request->id;
+        DB::table('user_clicked_question')
+            ->insert(['question_id' => $question_id, 'user_id' => Auth::id(), 'day' => Auth::user()->current_day]);
+
+        return $request->all();
+    }
+
 
     public function saveFile(Request $request){
         $user_id = $request->user;
@@ -137,9 +150,9 @@ class VideoCallController extends Controller
         $data = base64_decode(preg_replace('#^data:text/\w+;base64,#i', '', $video));
         header('Content-Type: video/webm');
         $name = 'video-'.str_random(4).'.webm';
-        $target_file = base_path()."/public/storage/".$name;
+        $target_file = base_path()."/public/storage/video/".$name;
         file_put_contents($target_file, $data);
-        $filename = "/public/storage/".$name;
+        $filename = "/public/storage/video/".$name;
 
         if($request->has('question')){
             $question_id = $request->question;
@@ -155,5 +168,9 @@ class VideoCallController extends Controller
         return $request->all();
     }
 
+    private function getUserDir()
+    {
+        return Auth::user()->name . '_' . Auth::id();
+    }
 
 }

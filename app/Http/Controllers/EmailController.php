@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\File;
+use Illuminate\Support\Facades\Storage;
 
 class EmailController extends Controller
 {
+    private $image_ext = ['jpg', 'jpeg', 'png', 'gif'];
+    private $audio_ext = ['mp3', 'ogg', 'mpga'];
+    private $video_ext = ['mp4', 'mpeg'];
+    private $document_ext = ['doc', 'docx', 'pdf', 'odt'];
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +27,13 @@ class EmailController extends Controller
             ->select('characters.name', 'characters.role', 'character_emails.subject', 'character_emails.body', 'character_emails.day', 'character_emails.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
+
+        foreach($characterEmails as $email){
+            $email->reply = DB::table("student_email")
+                ->where("character_email_id", $email->character_email_id)
+                ->where('user_id', Auth::id())
+                ->first();
+        }
 
         $characters = DB::table('characters')->get();
 
@@ -57,16 +71,42 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        DB::table('student_emails')->insert([
-            'user_id' => Auth::id(),
-            'character_id' => $request->to['id'],
-            'day' => Auth::user()->current_day,
-            'subject'=> $request->subject,
-            'body' => $request->body,
-            'created_at'=> DB::raw('NOW()'),
-            'character_email_id' => $request->reply
-        ]);
+        $char_email_id = 0;
+
+        if ($request->has("character_email_id")) {
+            $char_email_id = $request->character_email_id;
+        }
+            
+        if ($request->has("attachment")) {
+            $file = $request->file('attachment');
+            $ext = $file->getClientOriginalExtension();
+            $type = $this->getType($ext);
+            $path = '/public/' . $type . '/' . $file->getClientOriginalName();
+
+            if (Storage::putFileAs('/public/' . $type . '/', $file, $file->getClientOriginalName())) {
+                DB::table('student_emails')->insert([
+                    'user_id' => Auth::id(),
+                    'character_id' => $request->to,
+                    'day' => Auth::user()->current_day,
+                    'subject' => $request->has('character_email_id') ? "RE: " . $request->subject : $request->subject,
+                    'body' => $request->body,
+                    'created_at' => DB::raw('NOW()'),
+                    'email_attachment' => $path,
+                    'character_email_id' => $char_email_id
+                ]);
+            }
+        } else {
+            DB::table('student_emails')->insert([
+                'user_id' => Auth::id(),
+                'character_id' => $request->to,
+                'day' => Auth::user()->current_day,
+                'subject' => $request->has('character_email_id') ? "RE: " . $request->subject : $request->subject,
+                'body' => $request->body,
+                'created_at' => DB::raw('NOW()'),
+                'character_email_id' => $char_email_id
+            ]);
+        }
+
         return $request->all();
     }
 
@@ -115,4 +155,35 @@ class EmailController extends Controller
         //
     }
 
+<<<<<<< HEAD
+=======
+    }
+
+    private function getUserDir()
+    {
+        return Auth::user()->name . '_' . Auth::id();
+    }
+
+
+    /**
+     * Get type by extension
+     * @param  string $ext Specific extension
+     * @return string      Type
+     */
+    private function getType($ext)
+    {
+        if (in_array($ext, $this->image_ext)) {
+            return 'image';
+        }
+        if (in_array($ext, $this->audio_ext)) {
+            return 'audio';
+        }
+        if (in_array($ext, $this->video_ext)) {
+            return 'video';
+        }
+        if (in_array($ext, $this->document_ext)) {
+            return 'document';
+        }
+    }
+>>>>>>> ffde566f910e62fa414d6dd8f3f19c80c24013fe
 }

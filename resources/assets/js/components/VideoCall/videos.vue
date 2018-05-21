@@ -1,14 +1,15 @@
 <template>
     <div id="video">
-        <!--video element to show standard videocalls, hidden when recording component is shown-->
-        <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
-            <source :src="currentVideo.video_url" type="video/mp4">
-        </video>
+        <div class="video-container">
+            <!--video element to show standard videocalls, hidden when recording component is shown-->
+            <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
+                <source :src="currentVideo.video_url" type="video/mp4">
+            </video>
 
-        <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
-            <source src="/video/record.mp4" type="video/mp4">
-        </video>
-
+            <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
+                <source src="/video/record.mp4" type="video/mp4">
+            </video>
+        </div>
         <!--video recording component, hidden until click on inactive character-->
         <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
@@ -50,7 +51,9 @@
         <!--show character questions-->
         <character-questions id="characterQuestions"
                              :countdown="this.countdownTime"
+                             :warningTime="this.warningTime"
                              :questions="this.currentQuestions"
+                             :disabledQuestions="this.disabledQuestions"
                              @question="askQuestion">
         </character-questions>
 
@@ -67,7 +70,8 @@
         props: {
             calls: Array,
             characters: Array,
-            questions: Array
+            questions: Array,
+            disabledQuestions: Array
         },
         data: function () {
             return {
@@ -81,7 +85,8 @@
                 clickedCharacter: 0,
                 leaveResponse: false,
                 responded: false,
-                countdownTime: 0
+                countdownTime: 0,
+                warningTime: 5
             }
         },
         mounted() {
@@ -246,18 +251,23 @@
                 const mediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
+                //how long you would like to warning countdown to be
+                let warning = this.warningTime * 1000;
+                console.log(warning);
+
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
                         if(appScope.leaveResponse == true) {
                             setTimeout(function () {
                                 mediaRecorder.start(1000);
-                            }, 4000);
+                            }, warning );
                         }
                     video.muted = 'true';
                 })
 
                 let end = false;
-                let timeout = appScope.currentQuestion.recording_duration * 1400;
+                let timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
+                console.log(timeout);
                 setTimeout(function () {
                     end = true;
                 }, timeout)
@@ -457,19 +467,24 @@
         height: 30px;
         width: 40px;
     }
+    .video-container {
+        position: relative;
+        background-color: #000;
+    }
     #controlBar{
         display: flex;
         justify-content: space-between;
         padding: 0px 10px;
         background-color: $sim-heading;
         height: 40px;
-        font-size: 25px
+        font-size: 25px;
+        margin-top: 0px;
     }
     #recording{
         color: red;
     }
     #call_video{
-        height: 27rem;
+        height: calc(19vh - 11px);
         width: 100%;
     }
     .contact-inner{
@@ -508,8 +523,19 @@
         display:none
     }
     #personal_video{
+        position: absolute;
+        right: 0px;
+        top: 137px;
         height: 125px;
         width: 150px;
     }
 
+    @media(min-width:1150px){
+        #call_video {
+            height: calc(23vh - 20px);
+        }
+        #personal_video{
+            top: 182px;
+        }
+    }
 </style>

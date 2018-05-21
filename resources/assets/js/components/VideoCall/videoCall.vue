@@ -7,7 +7,8 @@
                 <character-video class="col-sm-11 col-lg-8"
                                  :characters="this.contacts"
                                  :calls="this.calls"
-                                 :questions="this.questions">
+                                 :questions="this.questions"
+                                 :disabledQuestions="this.disabled">
 
                 </character-video>
         </div>
@@ -28,6 +29,7 @@
         props: {
             calls: Array,
             questions: Array,
+            disabled: Array,
             notes: Object,
             contacts: Array
         }
@@ -44,10 +46,11 @@
     }
     .row{
         flex-flow: wrap-reverse;
+        justify-content: space-around;
     }
     @media(min-width:992px){
         #notesParent{
-            height:70rem;
+            height:42rem;
             top: 0px;
         }
     }

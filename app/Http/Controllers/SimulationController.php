@@ -52,6 +52,12 @@ class SimulationController extends Controller
             ->where('user_id', Auth::id())
             ->delete();
 
+        DB::table('user_clicked_question')
+            ->where('day', $request->day)
+            ->where('user_id', Auth::id())
+            ->delete();
+
+
         return $request->all();
     }
 

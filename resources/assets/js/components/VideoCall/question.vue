@@ -7,12 +7,14 @@
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
-        <button type="button" class="btn btn-success btn-lg button"
+        <button type="button"
                 v-for="question in questions"
+                :class= 'returnClass(question) + "btn btn-success btn-lg button"'
                 v-if="question.question && showButtons && count == 0"
                 :key="question.id"
                 @click="submitQuestion(question)">
             <b>{{ question.question }}</b>
+            <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
         </button>
     </div>
 </template>
@@ -33,7 +35,7 @@
         watch: {
           countdown: function(){
               if( this.count == 0 ){
-                  this.count = 3;
+                  this.count = this.warningTime;
                   this.startCount();
                   this.showButtons = false;
               }
@@ -46,11 +48,23 @@
         },
         props: {
             questions: Array,
-            countdown: Number
+            countdown: Number,
+            warningTime: Number,
+            disabledQuestions: Array
         },
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
+                this.disabledQuestions.push({'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day});
+                this.returnClass(question);
+                this.$forceUpdate();
+                axios.post(
+                    '/clickedQuestion',
+                    {
+                        id: question.question_id
+                    }
+                ).then(res => console.log(res)
+                ).catch( error => console.log(error));
             },
             startCount: function() {
                 let appScope = this;
@@ -63,6 +77,18 @@
                         clearInterval(timer);
                     }
                 }, 1000);
+            },
+            returnClass: function(question) {
+                let clicked = this.disabledQuestions.find( function(el) {
+                    if(el.question_id == question.question_id){
+                        return el;
+                    }
+                })
+                if(clicked){
+                    return 'visited '
+                } else{
+                    return 'active '
+                }
             }
         },
 
@@ -73,8 +99,17 @@
 <style scoped>
     .button {
         margin: 2rem;
-        height: 5rem;
-        width: 22rem;
+        height: 3rem;
+        width: 26rem;
+    }
+    .visited {
+        opacity: 0.65;
+    }
+    .recording{
+        color: #ff4d4d;
+        float: right;
+        font-size: 12px;
+        margin-top: 3px;
     }
     .counterDisplay {
         font-size: 24px;

@@ -78,6 +78,7 @@
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
+                        <hr v-if="readModalData.reply">
                         <div id="replyForm">
                             <div class="row form-group reply-contact">
                                 <i class="material-icons reply">reply</i>
@@ -86,9 +87,13 @@
                             <div class="row form-group">
                                 <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
                             </div>
+
                         </div>
+                        <h5 v-if="this.readModalData.reply"><b>{{  this.$store.state.user.name }}</b></h5>
+                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
-                    <div class="modal-footer">
+
+                    <div class="modal-footer" id="ReplyEmailId">
                         <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
                     </div>
                 </div>
@@ -123,7 +128,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                        <input type="file" name="emailAttachment" ref="file" id="emailAttachment" @change="setAttachment()">
+                        <button class="btn btn-success" @click="sendEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
             </div>
@@ -161,7 +167,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" @click="sendEmail">Send</button>
+                        <button class="btn btn-success" @click="sendReplyEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
             </div>
@@ -179,22 +185,26 @@
         },
         data: function () {
             return {
+
                 draftEmailSubject: "",
                 draftEmailBody: "",
                 toCharacter: "",
                 readModalData: {
+                    character_email_id: 0,
                     id: 0,
                     from: "",
                     subject: "",
-                    body: ""
+                    body: "",
+                    reply: ""
                 },
                 draftEmail: {
+                    attachment: null,
+                    character_email_id: 0,
                     to: 0,
                     reply: 0,
                     subject: "",
                     body: ""
                 }
-
             }
         },
         props: {
@@ -209,16 +219,17 @@
         },
         methods: {
             sendemail: function () {
+                //duplicate (I don't think this is used...?)
                 axios.post(
                     '/email',
                     {
                         subject: this.draftEmailSubject,
                         body: this.draftEmailBody
                     })
-                    .then( response => {
-                    console.log(response);
-                    this.emails.push(response.data);
-                })
+                    .then(response => {
+                        console.log(response);
+                        this.emails.push(response.data);
+                    })
             },
             readEmail: function (email) {
                 this.resetDraftEmail();
@@ -226,6 +237,19 @@
                 this.readModalData.from = email.name;
                 this.readModalData.subject = email.subject;
                 this.readModalData.body = email.body;
+                this.readModalData.reply = email.reply;
+                this.readModalData.character_email_id = email.character_email_id;
+
+                if (email.reply != null) {
+                    //show player name and the email they wrote (using first()?) instead of reply button
+                    $('#ReplyEmailId').hide();
+
+                    console.log(this.$store.state.user.name);
+                }
+                else {
+                    //show reply button
+                    $('#ReplyEmailId').show();
+                }
 
                 $('#readModal').modal();
             },
@@ -247,12 +271,34 @@
                 $('#composeModal').modal('show');
             },
             //duplicate?
-            sendEmail: function () {
-                axios.post('/email', this.draftEmail).then( response => {
-                    console.log(response.data)
+            sendEmail: function (emailId) {
+                let formData = new FormData();
+                formData.append('character_email_id', this.draftEmail.character_email_id);
+                formData.append('to', this.draftEmail.to.id);
+                formData.append('reply', this.draftEmail.reply);
+                formData.append('subject', this.draftEmail.subject);
+                formData.append('body', this.draftEmail.body)
+                formData.append('attachment', this.draftEmail.attachment);
 
+                axios.post('/email', formData).then(response => {
                     this.resetDraftEmail();
                 });
+                $('#composeModal').modal('hide');
+            },
+            sendReplyEmail: function (emailId) {
+                let appScope = this;
+                var found = this.characterEmails.find(function (email) {
+                    if (email.character_email_id == emailId) {
+                        email.reply = appScope.draftEmail;
+                        return (email);
+                    }
+                });
+                console.log(found);
+                axios.post('/email', this.draftEmail).then(response => {
+                    this.resetDraftEmail();
+                    this.$forceUpdate();
+                });
+                $('#replyModal').modal('hide');
             },
             replyEmail: function () {
 
@@ -265,10 +311,9 @@
 
                 this.draftEmail.to = this.findCharData();
                 this.draftEmail.subject = this.readModalData.subject;
+                this.draftEmail.character_email_id = this.readModalData.character_email_id;
                 $('#readModal').modal('hide');
                 $('#replyModal').modal('show');
-
-
             },
             resetDraftEmail: function () {
                 // Reset the draft email
@@ -279,19 +324,22 @@
                     body: ""
                 };
             },
-            openNav: function() {
+            openNav: function () {
                 document.getElementById("mySidenav").style.width = "200px";
             },
-            closeNav: function() {
+            closeNav: function () {
                 document.getElementById("mySidenav").style.width = "0";
             },
-            findCharData: function(){
+            findCharData: function () {
                 let appScope = this;
-                var found = this.characters.find(function(element) {
+                var found = this.characters.find(function (element) {
                     console.log(element);
                     return element.name == appScope.readModalData.from;
                 });
                 return found;
+            },
+            setAttachment: function () {
+                this.draftEmail.attachment = this.$refs.file.files[0];
             }
         }
 
@@ -318,11 +366,6 @@
     }
     td, th {
         padding: 10px;
-    }
-    hr {
-        width: 1px;
-        height: 25px;
-        color: #c8c8c8;
     }
     .main{
         height: 60rem;
@@ -376,7 +419,7 @@
         height: 80%
     }
     .modal-title{
-        margin: -5px 0;
+        margin: -9px 0;
         justify-content: flex-start;
     }
     .keyline{
@@ -403,6 +446,11 @@
     .mobile-menu{
         font-size: 26px;
         color: white;
+    }
+    .close {
+        color: #fff;
+        line-height: 0;
+        margin-top: -15px;
     }
     /* The side navigation menu */
     .sidenav {
