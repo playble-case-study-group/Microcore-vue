@@ -196,14 +196,14 @@ DROP TABLE IF EXISTS `characters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `characters` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `character_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` char(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_small` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_large` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`character_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -213,7 +213,7 @@ CREATE TABLE `characters` (
 
 LOCK TABLES `characters` WRITE;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
-INSERT INTO `characters` VALUES (1,NULL,NULL,'Ernando Suarez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png'),(2,NULL,NULL,'Ana Alba','Marketing','img/characters/ana-small.png','img/characters/ana-large.png'),(3,NULL,NULL,'Phillip Iniesta','Technical','img/characters/phillip-small.png','img/characters/phillip-large.png'),(4,NULL,NULL,'Maria Pique','Educator','img/characters/maria-small.png','img/characters/maria-large.png');
+INSERT INTO `characters` VALUES (1,'Ernando Suarez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,),(2,'Ana Alba','Marketing','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL,),(3,'Phillip Iniesta','Technical','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL,),(4,'Maria Pique','Educator','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,);
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,13 +341,13 @@ DROP TABLE IF EXISTS `artifacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `artifacts` (
-  `gallery_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `artifact_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`gallery_id`)
+  PRIMARY KEY (`artifact_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -461,11 +461,11 @@ DROP TABLE IF EXISTS `notes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notes` (
   `note_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
   `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `day` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`note_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -600,7 +600,7 @@ DROP TABLE IF EXISTS `student_artifacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student_artifacts` (
-  `student_gallery_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `student_artifact_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `gallery_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -609,7 +609,7 @@ CREATE TABLE `student_artifacts` (
   `group_id` int(11) NOT NULL DEFAULT '0',
   `class_id` int(11) NOT NULL DEFAULT '0',
   `day` int(11) NOT NULL,
-  PRIMARY KEY (`student_gallery_id`)
+  PRIMARY KEY (`student_artifact_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -630,8 +630,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `student_gallery_has_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `student_gallery_has_tag` (
-  `student_gallery_id` int(11) NOT NULL,
+CREATE TABLE `student_artifact_has_tag` (
+  `student_artifact_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -640,10 +640,10 @@ CREATE TABLE `student_gallery_has_tag` (
 -- Dumping data for table `student_gallery_has_tag`
 --
 
-LOCK TABLES `student_gallery_has_tag` WRITE;
-/*!40000 ALTER TABLE `student_gallery_has_tag` DISABLE KEYS */;
-INSERT INTO `student_gallery_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1);
-/*!40000 ALTER TABLE `student_gallery_has_tag` ENABLE KEYS */;
+LOCK TABLES `student_artifact_has_tag` WRITE;
+/*!40000 ALTER TABLE `student_artifact_has_tag` DISABLE KEYS */;
+INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1);
+/*!40000 ALTER TABLE `student_artifact_has_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
