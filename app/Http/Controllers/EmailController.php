@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\File;
+use Illuminate\Support\Facades\Storage;
 
 class EmailController extends Controller
 {
-    private $document_ext = ['pdf'];
+    private $image_ext = ['jpg', 'jpeg', 'png', 'gif'];
+    private $audio_ext = ['mp3', 'ogg', 'mpga'];
+    private $video_ext = ['mp4', 'mpeg'];
+    private $document_ext = ['doc', 'docx', 'pdf', 'odt'];
+
     /**
      * Display a listing of the resource.
      *
@@ -74,23 +79,24 @@ class EmailController extends Controller
             
         if ($request->has("attachment")) {
             $file = $request->file('attachment');
-            $path = '/public/' . $this->getUserDir() . '/' . $file['originalName'];
-            if (Storage::putFileAs('/public/' . $this->getUserDir() . '/', $file, $file['originalName'])) {
+            $ext = $file->getClientOriginalExtension();
+            $type = $this->getType($ext);
+            $path = '/public/' . $this->getUserDir() . '/' . $file->getClientOriginalName();
+            if (Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $type . '/', $file, $file->getClientOriginalName())) {
                 DB::table('student_email')->insert([
                     'user_id' => Auth::id(),
-                    'character_id' => $request->to['id'],
+                    'character_id' => $request->to,
                     'day' => Auth::user()->current_day,
                     'subject' => "RE: " . $request->subject,
                     'body' => $request->body,
                     'created_at' => DB::raw('NOW()'),
-                    'character_email_id' => $char_email_id,
                     'email_attachment' => $path
                 ]);
             }
         } else {
             DB::table('student_email')->insert([
                 'user_id' => Auth::id(),
-                'character_id' => $request->to['id'],
+                'character_id' => $request->to,
                 'day' => Auth::user()->current_day,
                 'subject' => "RE: " . $request->subject,
                 'body' => $request->body,
@@ -154,5 +160,32 @@ class EmailController extends Controller
         $emails = DB::table('emails')->get();
         return $emails;
 
+    }
+
+    private function getUserDir()
+    {
+        return Auth::user()->name . '_' . Auth::id();
+    }
+
+
+    /**
+     * Get type by extension
+     * @param  string $ext Specific extension
+     * @return string      Type
+     */
+    private function getType($ext)
+    {
+        if (in_array($ext, $this->image_ext)) {
+            return 'image';
+        }
+        if (in_array($ext, $this->audio_ext)) {
+            return 'audio';
+        }
+        if (in_array($ext, $this->video_ext)) {
+            return 'video';
+        }
+        if (in_array($ext, $this->document_ext)) {
+            return 'document';
+        }
     }
 }
