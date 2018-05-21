@@ -144,7 +144,7 @@
                         </div>
                         <div class="row form-group">
                             <label for="toSubject" class="col-sm-2">Subject:</label>
-                            <!--<input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">-->
+                            <!--<input type="teid" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">-->
                             {{ readModalData.subject }}
                         </div>
                         <div class="row form-group">
