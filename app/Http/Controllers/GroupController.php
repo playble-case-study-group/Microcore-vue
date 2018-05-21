@@ -36,7 +36,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $newGroupId = DB::table('group')
+        $newGroupId = DB::table('groups')
             ->insertGetId([
                 'name' => $request->name,
                 'created_at' => DB::raw('NOW()')
@@ -123,7 +123,7 @@ class GroupController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        DB::table('group')
+        DB::table('groups')
             ->where('group_id', $id)
             ->delete();
 
@@ -135,7 +135,7 @@ class GroupController extends Controller
             ->where('group_id', $id)
             ->delete();
 
-        DB::table('student_gallery')
+        DB::table('student_artifacts')
             ->where('group_id', $id)
             ->delete();
 

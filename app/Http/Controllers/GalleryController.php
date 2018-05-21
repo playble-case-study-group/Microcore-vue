@@ -15,13 +15,13 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $gallery = DB::table('gallery')->get();
+        $gallery = DB::table('artifacts')->get();
 
 
         if (Auth::user()->assigned) {
             foreach ($gallery as $artifact) {
                 // Searches by group ID
-                $edited = DB::table('student_gallery')
+                $edited = DB::table('student_artifacts')
                     ->where([
                         ['group_id', Auth::user()->groupId],
                         ['gallery_id', $artifact->gallery_id],
@@ -33,7 +33,7 @@ class GalleryController extends Controller
                     $artifact->title = $edited->title;
                     $artifact->description = $edited->description;
 
-                    $artifact->tags = DB::table('tag')
+                    $artifact->tags = DB::table('tags')
                         ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tag.tag_id')
                         ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
                         ->select('tag.tag_id', 'tag.title')
@@ -48,9 +48,9 @@ class GalleryController extends Controller
 
             foreach ($gallery as $artifact) {
                 // Searches by user ID
-                $edited = DB::table('student_gallery')
+                $edited = DB::table('student_artifacts')
                     ->where([
-                        ['user_id', Auth::user()->id],
+                        ['user_id', Auth::user()->user_id],
                         ['gallery_id', $artifact->gallery_id],
                     ])
                     ->first();
@@ -60,10 +60,10 @@ class GalleryController extends Controller
                     $artifact->title = $edited->title;
                     $artifact->description = $edited->description;
 
-                    $artifact->tags = DB::table('tag')
-                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tag.tag_id')
+                    $artifact->tags = DB::table('tags')
+                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tags.tag_id')
                         ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
-                        ->select('tag.tag_id', 'tag.title')
+                        ->select('tags.tag_id', 'tags.title')
                         ->get();
 
                 }
@@ -72,7 +72,7 @@ class GalleryController extends Controller
 
         }
 
-        $tags = DB::table('tag')->get();
+        $tags = DB::table('tags')->get();
 
         return view('gallery', compact('gallery', 'tags'));
 
@@ -81,10 +81,10 @@ class GalleryController extends Controller
     public function getArtifacts()
     {
         $id = Auth::user()->id;
-        $baseArtifacts = DB::table('gallery')
+        $baseArtifacts = DB::table('artifacts')
             ->where('created_by', 0)
             ->get();
-        $userArtifacts = DB::table('gallery')
+        $userArtifacts = DB::table('artifacts')
             ->where('created_by', $id)
             ->get();
         $finalArtifacts = array();
@@ -164,7 +164,7 @@ class GalleryController extends Controller
         $usr = Auth::user();
 
         $usr->classId = DB::table('user_has_class')
-            ->where('user_id', $usr->id)
+            ->where('user_id', $usr->user_id)
             ->select('class_id')
             ->first();
 
@@ -173,11 +173,11 @@ class GalleryController extends Controller
         if ($usr->assigned) {
             // Assigned to a group
             $usr->groupId = DB::table('user_has_group')
-                ->where('user_id', $usr->id)
+                ->where('user_id', $usr->user_id)
                 ->select('group_id')
                 ->first();
 
-            $art = DB::table('student_gallery')
+            $art = DB::table('student_artifacts')
                 ->where([
                     ['gallery_id', $id],
                     ['group_id', $usr->groupId]
@@ -186,10 +186,10 @@ class GalleryController extends Controller
 
         } else {
             // If they aren't assigned to a group
-            $art = DB::table('student_gallery')
+            $art = DB::table('student_artifacts')
                 ->where([
                     ['gallery_id', $id],
-                    ['user_id', $usr->id]
+                    ['user_id', $usr->user_id]
                 ])
                 ->first();
 
@@ -198,7 +198,7 @@ class GalleryController extends Controller
 
 
         if($art) {
-            DB::table('student_gallery')
+            DB::table('student_artifacts')
                 ->where('student_gallery_id', $art->student_gallery_id)
                 ->update([
                     'title' => $request->title,
@@ -225,26 +225,26 @@ class GalleryController extends Controller
             $id = 0;
             if ($usr->assigned) {
                 // Assigned to group
-                $id = DB::table('student_gallery')
+                $id = DB::table('student_artifacts')
                     ->insertGetId([
                         'student_gallery_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
-                        'user_id' => $usr->id,
+                        'user_id' => $usr->user_id,
                         'group_id' => $usr->groupId,
                         'class_id' => Auth::user()->class_id,
                         'day' => $usr->current_day
                     ]);
             } else {
                 // Without adding group ID
-                $id = DB::table('student_gallery')
+                $id = DB::table('student_artifacts')
                     ->insertGetId([
                         'student_gallery_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
-                        'user_id' => $usr->id,
+                        'user_id' => $usr->user_id,
                         'class_id' => Auth::user()->class_id,
                         'day' => $usr->current_day
                     ]);

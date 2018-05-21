@@ -14,7 +14,7 @@ class ArticleEditorController extends Controller
      */
     public function index()
     {
-        $wiki = DB::table('article')->get();
+        $wiki = DB::table('articles')->get();
 
         //can be used to support multiple languages if needed.
         // if wanted, change $wiki to be pulling from the wiki table
@@ -86,12 +86,12 @@ class ArticleEditorController extends Controller
     public function update(Request $request)
     {
         // get the article object 
-        DB::table('article')
-            ->where('id', $request->id)
-            ->update([
-                'content' => $request->content,
-                'updated_at' => DB::raw("NOW()")
-            ]);
+//        DB::table('articles')
+//            ->where('id', $request->id)
+//            ->update([
+//                'content' => $request->content,
+//                'updated_at' => DB::raw("NOW()")
+//            ]);
         return "success";
 
     }
@@ -99,7 +99,7 @@ class ArticleEditorController extends Controller
     public function deleteArticle(Request $request)
     {
         // get the article object
-        DB::table('article')
+        DB::table('articles')
             ->where('id', $request->article_id)
             ->delete();
         return $request->all();
@@ -109,7 +109,7 @@ class ArticleEditorController extends Controller
     public function addArticle(Request $request)
     {
         // get the article object
-        DB::table('article')
+        DB::table('articles')
             ->insert([
                 'title' => $request->article_title
             ]);

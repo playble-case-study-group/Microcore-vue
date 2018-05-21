@@ -17,11 +17,11 @@ class VideoCallController extends Controller
     public function index()
     {
         $contacts = DB::table('characters')->get();
-        $calls = DB::table('video')
+        $calls = DB::table('videos')
             ->where('day', Auth::user()->current_day)
             ->get();
 
-        $questions = DB::table('question')->get();
+        $questions = DB::table('questions')->get();
         $notes = DB::table('notes')
             ->select('note')
             ->where('user_id', Auth::id())
