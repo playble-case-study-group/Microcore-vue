@@ -877,7 +877,7 @@ DELIMITER ;;
 CREATE DEFINER=`danielebeling`@`localhost` PROCEDURE `retrieve_email_assignments`(IN char_id INT, IN d INT, IN cl_id INT)
 BEGIN
     SELECT s.day, s.subject, s.body, s.created_at, c.name AS c_name, u.name AS u_name FROM student_emails AS s
-      INNER JOIN users AS u ON s.user_id = u.id
+      INNER JOIN users AS u ON s.user_id = u.user_id
       INNER JOIN characters AS c ON s.character_id = c.id
     WHERE s.class_id = cl_id
           and s.day = d
