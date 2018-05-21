@@ -58169,16 +58169,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -58568,43 +58558,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm.readModalData.reply ? _c("hr") : _vm._e(),
-                _vm._v(" "),
-                _c("div", { attrs: { id: "replyForm" } }, [
-                  _c("div", { staticClass: "row form-group reply-contact" }, [
-                    _c("i", { staticClass: "material-icons reply" }, [
-                      _vm._v("reply")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "reply-contact-name" }, [
-                      _vm._v(_vm._s(_vm.readModalData.from))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row form-group" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.draftEmail.body,
-                          expression: "draftEmail.body"
-                        }
-                      ],
-                      staticClass: "col-sm-12",
-                      attrs: { type: "text", id: "replyBody" },
-                      domProps: { value: _vm.draftEmail.body },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.draftEmail, "body", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
+                _vm._v("git\n                    "),
                 this.readModalData.reply
                   ? _c("h5", [
                       _c("b", [_vm._v(_vm._s(this.$store.state.user.name))])
@@ -58907,7 +58861,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Body")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Date")]),
+      _c("th", [_vm._v("Day")]),
       _vm._v(" "),
       _c("th")
     ])
@@ -58923,7 +58877,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Body")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Date")]),
+      _c("th", [_vm._v("Day")]),
       _vm._v(" "),
       _c("th")
     ])
@@ -60498,7 +60452,7 @@ var staticRenderFns = [
       },
       [
         _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
-          _vm._v("contacts")
+          _vm._v("people")
         ])
       ]
     )

@@ -29,7 +29,7 @@
                         <th></th>
                         <th>Subject</th>
                         <th>Body</th>
-                        <th>Date</th>
+                        <th>Day</th>
                         <th></th>
                     </tr>
                     <tr v-for="email in characterEmails"
@@ -48,7 +48,7 @@
                         <th>To</th>
                         <th>Subject</th>
                         <th>Body</th>
-                        <th>Date</th>
+                        <th>Day</th>
                         <th></th>
                     </tr>
                     <tr v-for="email in studentEmails"
@@ -78,17 +78,7 @@
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
-                        <hr v-if="readModalData.reply">
-                        <div id="replyForm">
-                            <div class="row form-group reply-contact">
-                                <i class="material-icons reply">reply</i>
-                                <span class="reply-contact-name">{{ readModalData.from }}</span>
-                            </div>
-                            <div class="row form-group">
-                                <textarea class="col-sm-12" type="text" id="replyBody" v-model="draftEmail.body"></textarea>
-                            </div>
-
-                        </div>
+                        <hr v-if="readModalData.reply">git
                         <h5 v-if="this.readModalData.reply"><b>{{  this.$store.state.user.name }}</b></h5>
                         <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
