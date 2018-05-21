@@ -53,7 +53,7 @@ const mutations = {
     NEXT_DAY: (state) => {
         if (state.user.current_day < state.simulation.days) {
             state.user.current_day++;
-            axios.post('/updateday', {id: state.user.id, day: state.user.current_day})
+            axios.post('/updateday', {id: state.user.user_id, day: state.user.current_day})
                 .then((response) => {
                     // console.log(response)
                 })
@@ -64,7 +64,7 @@ const mutations = {
         }
     },
     PREVIOUS_DAY: (state) => {
-        axios.post('/resetDay', {id: state.user.id, day: state.user.current_day})
+        axios.post('/resetDay', {id: state.user.user_id, day: state.user.current_day})
             .then(response => {
                  console.log(response)
             })
@@ -77,8 +77,8 @@ const mutations = {
         window.location.reload();
     },
     toggleTask: (state, payload) => {
-        //console.log(payload)
-        let task = state.tasks.find(task => task.id === payload);
+        console.log(payload)
+        let task = state.tasks.find(task => task.task_id === payload);
         task.complete = !task.complete;
         axios.post('/tasks/complete', {id: payload, complete: task.complete})
             .then((response) => {

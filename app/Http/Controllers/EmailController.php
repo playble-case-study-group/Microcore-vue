@@ -15,23 +15,23 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $characterEmails = DB::table('character_email')
-            ->join('characters', 'characters.id', 'character_email.character_id')
-            ->select('characters.name', 'characters.role', 'character_email.subject', 'character_email.body', 'character_email.day', 'character_email.character_email_id', 'characters.img_small')
+        $characterEmails = DB::table('character_emails')
+            ->join('characters', 'characters.id', 'character_emails.character_id')
+            ->select('characters.name', 'characters.role', 'character_emails.subject', 'character_emails.body', 'character_emails.day', 'character_emails.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
 
         $characters = DB::table('characters')->get();
 
-        $studentEmails = DB::table('student_email')
-            ->join('characters','characters.id', 'student_email.character_id')
-            ->select('student_email.body', 'characters.name', 'student_email.day', 'student_email.student_email_id', 'student_email.subject', 'student_email.character_email_id')
+        $studentEmails = DB::table('student_emails')
+            ->join('characters','characters.id', 'student_emails.character_id')
+            ->select('student_emails.body', 'characters.name', 'student_emails.day', 'student_emails.student_email_id', 'student_emails.subject', 'student_emails.character_email_id')
             ->where('user_id', Auth::id())
             ->get();
 
         foreach ($studentEmails as $email) {
             if ($email->character_email_id) {
-                $email->reply = DB::table('character_email')
+                $email->reply = DB::table('character_emails')
                     ->where('character_email_id', $email->character_email_id)
                     ->get();
             }
@@ -58,7 +58,7 @@ class EmailController extends Controller
     public function store(Request $request)
     {
 //        dd($request->all());
-        DB::table('student_email')->insert([
+        DB::table('student_emails')->insert([
             'user_id' => Auth::id(),
             'character_id' => $request->to['id'],
             'day' => Auth::user()->current_day,
@@ -114,13 +114,5 @@ class EmailController extends Controller
     {
         //
     }
-    /**
-     * This route returns email data
-     */
-    public function emailData(Request $request)
-    {
-        $emails = DB::table('emails')->get();
-        return $emails;
 
-    }
 }

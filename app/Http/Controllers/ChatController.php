@@ -16,13 +16,13 @@ class ChatController extends Controller
      */
     public function index()
     {
-        $chats = DB::table('chat')
+        $chats = DB::table('chats')
             ->join('users', 'users.id', '=', 'chat.user_id')
             ->select('users.name', 'chat.channel_id', 'chat.character_name', 'chat.message', 'chat.created_at', 'chat.type')
             ->where('chat.user_id', Auth::id())
             ->get();
 
-        $channels = DB::table('channel')->get();
+        $channels = DB::table('channels')->get();
 
         return view('chatbot', compact('chats', 'channels'));
     }
@@ -47,7 +47,7 @@ class ChatController extends Controller
     {
         // If type == 0 then it is the users chat
         if(!$request->type) {
-            DB::table('chat')->insert([
+            DB::table('chats')->insert([
                 'user_id' => Auth::id(),
                 'day' => $request->day,
                 'message' => $request->message,
@@ -57,7 +57,7 @@ class ChatController extends Controller
             ]);
 
         } else {
-            DB::table('chat')->insert([
+            DB::table('chats')->insert([
                 'user_id' => Auth::id(),
                 'day' => $request->day,
                 'character_name' => $request->character_name,

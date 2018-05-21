@@ -66,7 +66,7 @@ class AssignmentController extends Controller
 
         array_push($arr, $request->classId);
 
-        $type = DB::table('assignment_type')->where('assign_type_id', $assignment->assign_type_id)->first();
+        $type = DB::table('assignment_types')->where('assign_type_id', $assignment->assign_type_id)->first();
 
         $assignments = DB::select($type->stored_procedure, $arr);
 

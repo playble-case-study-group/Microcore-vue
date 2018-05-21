@@ -1,19 +1,11 @@
 <template>
     <li>
         <label>
-            <input v-if="complete" type="checkbox" checked v-on:click="toggleTask(task.id)">
-            <input v-else type="checkbox" v-on:click="toggleTask(task.id)">
+            <input v-if="complete" type="checkbox" checked v-on:click="toggleTask(task.task_id)">
+            <input v-else type="checkbox" v-on:click="toggleTask(task.task_id)">
             <span class="checkmark"></span>
             {{ task.title }}
         </label>
-        <!--<img v-if="complete"-->
-             <!--v-on:click="check(task.id)"-->
-             <!--src="/img/checked.svg"-->
-             <!--alt="complete">-->
-        <!--<img v-else-->
-             <!--v-on:click="check(task.id)"-->
-             <!--src="/img/unchecked.svg"-->
-             <!--alt="incomplete">-->
     </li>
 </template>
 

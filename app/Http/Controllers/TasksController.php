@@ -16,11 +16,11 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = DB::table('Tasks')->get();
+        $tasks = DB::table('tasks')->get();
 
         foreach ($tasks as $task) {
-            $studentTask = DB::table('student_task')->where([
-                ['task_id', $task->id],
+            $studentTask = DB::table('student_tasks')->where([
+                ['task_id', $task->task_id],
                 ['student_id', Auth::id()]
             ])->first();
 
@@ -90,7 +90,7 @@ class TasksController extends Controller
     }
 
     public function complete(Request $request) {
-        $task = DB::table('student_task')
+        $task = DB::table('student_tasks')
             ->where([
                 ['task_id', $request->id],
                 ['student_id', Auth::id()]
@@ -99,14 +99,14 @@ class TasksController extends Controller
 
 
         if ($task) {
-            DB::table('student_task')
+            DB::table('student_tasks')
                 ->where([
                     ['task_id', $request->id],
                     ['student_id', Auth::id()]
                 ])
                 ->update(['complete' => $request->complete, 'updated_at' => DB::raw('NOW()')]);
         } else {
-            DB::table('student_task')
+            DB::table('student_tasks')
                 ->insert([
                     'task_id' => $request->id,
                     'student_id' => Auth::id(),

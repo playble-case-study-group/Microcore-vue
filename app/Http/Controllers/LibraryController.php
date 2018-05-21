@@ -14,7 +14,7 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        $wiki = DB::table('article')->get();
+        $wiki = DB::table('articles')->get();
 
         /*foreach ($wiki as $article) {
             $article->english = DB::table('article')

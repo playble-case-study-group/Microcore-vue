@@ -56492,14 +56492,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -56541,7 +56533,7 @@ var render = function() {
             attrs: { type: "checkbox", checked: "" },
             on: {
               click: function($event) {
-                _vm.toggleTask(_vm.task.id)
+                _vm.toggleTask(_vm.task.task_id)
               }
             }
           })
@@ -56549,7 +56541,7 @@ var render = function() {
             attrs: { type: "checkbox" },
             on: {
               click: function($event) {
-                _vm.toggleTask(_vm.task.id)
+                _vm.toggleTask(_vm.task.task_id)
               }
             }
           }),
@@ -56584,7 +56576,7 @@ var render = function() {
       "ul",
       _vm._l(_vm.CURRENT_TASKS, function(task) {
         return _c("user-task", {
-          key: task.id,
+          key: task.task_id,
           attrs: { task: task, complete: task.complete }
         })
       })
@@ -89579,7 +89571,7 @@ var mutations = {
     NEXT_DAY: function NEXT_DAY(state) {
         if (state.user.current_day < state.simulation.days) {
             state.user.current_day++;
-            axios.post('/updateday', { id: state.user.id, day: state.user.current_day }).then(function (response) {
+            axios.post('/updateday', { id: state.user.user_id, day: state.user.current_day }).then(function (response) {
                 // console.log(response)
             }).catch(function (error) {
                 console.log(error.response.data);
@@ -89588,7 +89580,7 @@ var mutations = {
         }
     },
     PREVIOUS_DAY: function PREVIOUS_DAY(state) {
-        axios.post('/resetDay', { id: state.user.id, day: state.user.current_day }).then(function (response) {
+        axios.post('/resetDay', { id: state.user.user_id, day: state.user.current_day }).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.log(error.response.data);
@@ -89599,9 +89591,9 @@ var mutations = {
         window.location.reload();
     },
     toggleTask: function toggleTask(state, payload) {
-        //console.log(payload)
+        console.log(payload);
         var task = state.tasks.find(function (task) {
-            return task.id === payload;
+            return task.task_id === payload;
         });
         task.complete = !task.complete;
         axios.post('/tasks/complete', { id: payload, complete: task.complete }).then(function (response) {
