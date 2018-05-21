@@ -2,7 +2,7 @@
     <div id="user-tasks">
         <h1>Tasks</h1>
         <ul>
-            <user-task v-for="task in CURRENT_TASKS" v-bind:task="task" v-bind:complete="task.complete" v-bind:key="task.id"></user-task>
+            <user-task v-for="task in CURRENT_TASKS" v-bind:task="task" v-bind:complete="task.complete" v-bind:key="task.task_id"></user-task>
 
         </ul>
         <hr>

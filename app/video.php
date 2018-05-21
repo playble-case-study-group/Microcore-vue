@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class video extends Model
 {
     //
-    public $table = "video";
+    public $table = "videos";
 }

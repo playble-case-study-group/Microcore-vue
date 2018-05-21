@@ -16,7 +16,7 @@ class ClassController extends Controller
     public function index()
     {
         // Get a list of instructors classes
-        $classes = DB::table('class')
+        $classes = DB::table('classes')
             ->join('instructor_has_class', 'instructor_has_class.class_id', '=', 'class.class_id')
             ->where('instructor_has_class.instructor_id', Auth::id())
             ->get();
@@ -30,7 +30,7 @@ class ClassController extends Controller
                 ->where('user_has_class.class_id', $class->class_id)
                 ->get();
 
-            $class->groups = DB::table('group')
+            $class->groups = DB::table('groups')
                 ->join('class_has_group', 'class_has_group.group_id', 'group.group_id')
                 ->select('group.name', 'group.group_id')
                 ->where('class_has_group.class_id', $class->class_id)
@@ -47,7 +47,7 @@ class ClassController extends Controller
                     ->where('user_has_group.group_id', $group->group_id)
                     ->get();
 
-                $group->gallery = DB::table('student_gallery')
+                $group->gallery = DB::table('student_artifacts')
                     ->where('group_id', $group->group_id)
                     ->get();
 
@@ -59,7 +59,7 @@ class ClassController extends Controller
 
             // Retrieving individual student assignments
             foreach ($class->students as $student) {
-                $student->emails = DB::table('student_email')
+                $student->emails = DB::table('student_emails')
                     ->where('user_id', $student->id)
                     ->get();
             }
@@ -69,7 +69,7 @@ class ClassController extends Controller
 
         }
 
-        $assignment_types = DB::table('assignment_type')->select('assign_type_id', 'title', 'table_columns')->get();
+        $assignment_types = DB::table('assignment_types')->select('assign_type_id', 'title', 'table_columns')->get();
 
         return view('instructors.classes', compact('classes', 'assignment_types'));
     }

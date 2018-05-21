@@ -100,7 +100,7 @@ class RegisterController extends Controller
                 'password' => bcrypt($data['password']),
             ]);
 
-            $classId = DB::table('class')
+            $classId = DB::table('classes')
                 ->where('key', $data['class-key'])
                 ->select('class_id')
                 ->first();
