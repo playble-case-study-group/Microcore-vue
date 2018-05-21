@@ -155,9 +155,6 @@ class EmailController extends Controller
         //
     }
 
-<<<<<<< HEAD
-=======
-    }
 
     private function getUserDir()
     {
@@ -185,5 +182,4 @@ class EmailController extends Controller
             return 'document';
         }
     }
->>>>>>> ffde566f910e62fa414d6dd8f3f19c80c24013fe
 }
