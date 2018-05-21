@@ -151,9 +151,9 @@ class VideoCallController extends Controller
         $data = base64_decode(preg_replace('#^data:text/\w+;base64,#i', '', $video));
         header('Content-Type: video/webm');
         $name = 'video-'.str_random(4).'.webm';
-        $target_file = base_path()."/public/storage/" . $this->getUserDir() ."/".$name;
+        $target_file = base_path()."/public/storage/video/".$name;
         file_put_contents($target_file, $data);
-        $filename = "/public/storage/" . $this->getUserDir() ."/".$name;
+        $filename = "/public/storage/video/".$name;
 
         if($request->has('question')){
             $question_id = $request->question;

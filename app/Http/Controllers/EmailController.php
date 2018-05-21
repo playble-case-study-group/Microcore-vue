@@ -81,8 +81,8 @@ class EmailController extends Controller
             $file = $request->file('attachment');
             $ext = $file->getClientOriginalExtension();
             $type = $this->getType($ext);
-            $path = '/public/' . $this->getUserDir() . '/' . $file->getClientOriginalName();
-            if (Storage::putFileAs('/public/' . $this->getUserDir() . '/' . $type . '/', $file, $file->getClientOriginalName())) {
+            $path = '/public/' . $type . '/' . $file->getClientOriginalName();
+            if (Storage::putFileAs('/public/' . $type . '/', $file, $file->getClientOriginalName())) {
                 DB::table('student_email')->insert([
                     'user_id' => Auth::id(),
                     'character_id' => $request->to,
