@@ -263,12 +263,13 @@
             //duplicate?
             sendEmail: function (emailId) {
                 let formData = new FormData();
-                formData.append('character_email_id', this.draftEmail.character_email_id);
-                formData.append('to', this.draftEmail.to.id);
+                formData.append('to', this.draftEmail.to.character_id);
                 formData.append('reply', this.draftEmail.reply);
                 formData.append('subject', this.draftEmail.subject);
                 formData.append('body', this.draftEmail.body)
-                formData.append('attachment', this.draftEmail.attachment);
+                if(this.draftEmail.attachment != null) {
+                    formData.append('attachment', this.draftEmail.attachment);
+                }
 
                 axios.post('/email', formData).then(response => {
                     this.resetDraftEmail();
@@ -308,6 +309,7 @@
             resetDraftEmail: function () {
                 // Reset the draft email
                 this.draftEmail = {
+                    attachment: null,
                     to: 0,
                     reply: 0,
                     subject: "",

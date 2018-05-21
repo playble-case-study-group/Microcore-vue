@@ -9,12 +9,12 @@
                 <h1>menu</h1>
                 <br>
                 <div v-for="article in wiki"
-                     :key="article.id"
-                     @click="showContent(article.id)"
+                     :key="article.article_id"
+                     @click="showContent(article.article_id)"
                      class="menubtn" >
 
                     <h4 class="article-title">{{article.title}}</h4>
-                    <p :id="'title-' + article.id"> </p>
+                    <p :id="'title-' + article.article_id"> </p>
 
                 </div>
             </div>
@@ -58,7 +58,7 @@
         },
         methods: {
             showContent: function (id) {
-                let content = this.wiki.find( title => title.id == id);
+                let content = this.wiki.find( title => title.article_id == id);
 
                 this.currentTitle = content.title;
                 this.currentContent = content.content;
@@ -79,7 +79,7 @@
                     setTimeout(function(){
                         appScope.currentTitle = article.title;
                         appScope.currentContent = article.content;
-                        appScope.currentArticleId = article.id;
+                        appScope.currentArticleId = article.article_id;
                       }, 100);
                 }
             },

@@ -58259,12 +58259,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var formData = new FormData();
-            formData.append('character_email_id', this.draftEmail.character_email_id);
-            formData.append('to', this.draftEmail.to.id);
+            formData.append('to', this.draftEmail.to.character_id);
             formData.append('reply', this.draftEmail.reply);
             formData.append('subject', this.draftEmail.subject);
             formData.append('body', this.draftEmail.body);
-            formData.append('attachment', this.draftEmail.attachment);
+            if (this.draftEmail.attachment != null) {
+                formData.append('attachment', this.draftEmail.attachment);
+            }
 
             axios.post('/email', formData).then(function (response) {
                 _this2.resetDraftEmail();
@@ -58306,6 +58307,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         resetDraftEmail: function resetDraftEmail() {
             // Reset the draft email
             this.draftEmail = {
+                attachment: null,
                 to: 0,
                 reply: 0,
                 subject: "",
@@ -60661,7 +60663,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         showContent: function showContent(id) {
             var content = this.wiki.find(function (title) {
-                return title.id == id;
+                return title.article_id == id;
             });
 
             this.currentTitle = content.title;
@@ -60683,7 +60685,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 setTimeout(function () {
                     appScope.currentTitle = article.title;
                     appScope.currentContent = article.content;
-                    appScope.currentArticleId = article.id;
+                    appScope.currentArticleId = article.article_id;
                 }, 100);
             };
 
@@ -77915,11 +77917,11 @@ var render = function() {
               return _c(
                 "div",
                 {
-                  key: article.id,
+                  key: article.article_id,
                   staticClass: "menubtn",
                   on: {
                     click: function($event) {
-                      _vm.showContent(article.id)
+                      _vm.showContent(article.article_id)
                     }
                   }
                 },
@@ -77928,7 +77930,7 @@ var render = function() {
                     _vm._v(_vm._s(article.title))
                   ]),
                   _vm._v(" "),
-                  _c("p", { attrs: { id: "title-" + article.id } })
+                  _c("p", { attrs: { id: "title-" + article.article_id } })
                 ]
               )
             })

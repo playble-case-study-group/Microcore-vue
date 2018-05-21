@@ -23,13 +23,13 @@ class EmailController extends Controller
     public function index()
     {
         $characterEmails = DB::table('character_emails')
-            ->join('characters', 'characters.id', 'character_emails.character_id')
+            ->join('characters', 'characters.character_id', 'character_emails.character_id')
             ->select('characters.name', 'characters.role', 'character_emails.subject', 'character_emails.body', 'character_emails.day', 'character_emails.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
             ->get();
 
         foreach($characterEmails as $email){
-            $email->reply = DB::table("student_email")
+            $email->reply = DB::table("student_emails")
                 ->where("character_email_id", $email->character_email_id)
                 ->where('user_id', Auth::id())
                 ->first();
@@ -38,7 +38,7 @@ class EmailController extends Controller
         $characters = DB::table('characters')->get();
 
         $studentEmails = DB::table('student_emails')
-            ->join('characters','characters.id', 'student_emails.character_id')
+            ->join('characters','characters.character_id', 'student_emails.character_id')
             ->select('student_emails.body', 'characters.name', 'student_emails.day', 'student_emails.student_email_id', 'student_emails.subject', 'student_emails.character_email_id')
             ->where('user_id', Auth::id())
             ->get();
@@ -71,19 +71,15 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $char_email_id = 0;
 
-        if ($request->has("character_email_id")) {
-            $char_email_id = $request->character_email_id;
-        }
-            
         if ($request->has("attachment")) {
             $file = $request->file('attachment');
             $ext = $file->getClientOriginalExtension();
             $type = $this->getType($ext);
             $path = '/storage/' . $type . '/' . $file->getClientOriginalName();
+
             if (Storage::putFileAs('/storage/' . $type . '/', $file, $file->getClientOriginalName())) {
-                DB::table('student_email')->insert([
+                DB::table('student_emails')->insert([
                     'user_id' => Auth::id(),
                     'character_id' => $request->to,
                     'day' => Auth::user()->current_day,
@@ -91,7 +87,7 @@ class EmailController extends Controller
                     'body' => $request->body,
                     'created_at' => DB::raw('NOW()'),
                     'email_attachment' => $path,
-                    'character_email_id' => $char_email_id
+                    'character_email_id' => $request->has('character_email_id') ? $request->character_email_id : 0,
                 ]);
             }
         } else {
@@ -102,7 +98,7 @@ class EmailController extends Controller
                 'subject' => $request->has('character_email_id') ? "RE: " . $request->subject : $request->subject,
                 'body' => $request->body,
                 'created_at' => DB::raw('NOW()'),
-                'character_email_id' => $char_email_id
+                'character_email_id' => $request->has('character_email_id') ? $request->character_email_id : 0,
             ]);
         }
 
