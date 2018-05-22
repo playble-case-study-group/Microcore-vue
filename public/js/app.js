@@ -57980,7 +57980,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -57994,6 +57994,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58295,6 +58301,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             axios.post('/email', formData).then(function (response) {
+                _this3.studentEmails.push(_this3.draftEmail);
                 _this3.resetDraftEmail();
                 _this3.$forceUpdate();
             });
@@ -58547,16 +58554,20 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header heading" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v(_vm._s(_vm.readModalData.subject))
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ]),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("h5", [_c("b", [_vm._v(_vm._s(_vm.readModalData.from))])]),
+                _c("h5", [
+                  _vm._v(
+                    "\n                        From: " +
+                      _vm._s(_vm.readModalData.from) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "email-body" }, [
                   _vm._v(_vm._s(_vm.readModalData.body))
@@ -58566,9 +58577,19 @@ var render = function() {
                 _vm._v(" "),
                 this.readModalData.reply
                   ? _c("h5", [
-                      _c("b", [_vm._v(_vm._s(this.$store.state.user.name))])
+                      _vm._v(
+                        "\n                        From: " +
+                          _vm._s(this.$store.state.user.name) +
+                          "\n                    "
+                      )
                     ])
                   : _vm._e(),
+                _vm._v(" "),
+                _c("p", [_vm._v("To: " + _vm._s(_vm.readModalData.from))]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                ]),
                 _vm._v(" "),
                 this.readModalData.reply
                   ? _c("div", { staticClass: "email-body" }, [
@@ -58905,18 +58926,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("div", { staticClass: "modal-header heading" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this

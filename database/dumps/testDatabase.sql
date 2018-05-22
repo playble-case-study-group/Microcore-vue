@@ -1,7 +1,6 @@
-
 -- MySQL dump 10.13  Distrib 5.7.21, for macos10.13 (x86_64)
 --
--- Host: localhost    Database: VueSim
+-- Host: localhost    Database: SpanSim
 -- ------------------------------------------------------
 -- Server version	5.7.21
 
@@ -15,34 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `tasks`
---
-
-DROP TABLE IF EXISTS `tasks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tasks` (
-  `task_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text,
-  `day` int(11) NOT NULL DEFAULT '1',
-  `complete` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`task_id`),
-  UNIQUE KEY `tasks_id_uindex` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tasks`
---
-
-LOCK TABLES `tasks` WRITE;
-/*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,0),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
-/*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `articles`
@@ -59,8 +30,7 @@ CREATE TABLE `articles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,12 +39,40 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (9,1,'Civil War','# Civil War<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,NULL),(10,2,'Guerra Civil','# Guerra Civil<hr>\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n## Madrid 13\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Edificio 1\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,'2018-05-15 19:16:08'),(11,1,'Test English','# Test English<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,NULL),(12,2,'Test Spanish','# Test Spanish<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid 2\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building 2\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n\ntest test test test',NULL,'2018-05-16 20:01:39');
+INSERT INTO `articles` VALUES (9,1,'Civil War','# Civil War<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\n<img src=\"http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/201412-a-decoder-madrid.jpg?itok=5QYmpQgP\" style=\"max-width:100%\" alt=\"Madrid\">\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n## Barcelona\n<img src=\"http://www.castlexperience.com/wp-content/uploads/2017/03/barcelona1.jpg\" style=\"max-width:100%\" alt=\"Barcelona\">\nPraesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus.',NULL,'2018-05-22 16:26:58'),(10,2,'Guerra Civil','# Guerra Civil<hr>\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n## Madrid 13\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Edificio 1\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,'2018-05-15 19:16:08'),(11,1,'Test English','# Test English<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.',NULL,NULL),(12,2,'Test Spanish','# Test Spanish<hr>\nNunc at nisi non tortor molestie fermentum ut in est. Nunc elit velit, euismod vehicula mi at, iaculis rutrum velit. Donec sagittis, urna ac blandit tempor, orci turpis gravida dolor, ac sagittis augue sapien et erat. Maecenas maximus sem eget pellentesque auctor. Nulla sed nisi et sem porta sodales id ac ante. Praesent pharetra quam in lacus gravida efficitur. Donec elementum augue sit amet nisl interdum, at finibus ante finibus. Suspendisse fringilla volutpat ultrices.\n## Madrid 2\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mi quam, sodales eu tempus ac, aliquam in odio. Etiam tincidunt pellentesque libero, eu gravida urna porttitor vitae. Vivamus tristique pellentesque dui sed posuere. Phasellus lectus augue, condimentum ut libero nec, egestas fermentum dolor. Praesent finibus tellus eget ultricies facilisis. Pellentesque et commodo ipsum, eu feugiat neque. Praesent volutpat sollicitudin lorem. Nam maximus mollis massa, ut aliquam ante aliquam ut. Integer nec nunc ante. Vivamus dignissim diam in finibus facilisis. Nulla elit urna, accumsan eu urna rhoncus, dignissim blandit purus. Pellentesque nec velit tincidunt, congue eros sed, bibendum turpis. Etiam fermentum, lectus in gravida congue, leo lorem congue erat, sit amet fringilla dolor enim sit amet augue. Donec vestibulum blandit augue, quis pretium arcu sollicitudin at. Donec velit erat, interdum semper nunc sed, efficitur interdum erat. Integer non nulla ac urna ullamcorper consequat ac eu tortor.\n### Building 2\nPraesent euismod dui lorem, vel bibendum mauris varius ut. Pellentesque vehicula ut urna sit amet ultricies. Donec tristique volutpat sagittis. Aenean efficitur iaculis diam a posuere. Proin placerat bibendum convallis. Pellentesque a ante quis dui elementum vehicula. Phasellus hendrerit consequat laoreet. Etiam vel tortor auctor, gravida augue fermentum, maximus mi.\n\ntest test test test',NULL,'2018-05-16 20:01:39');
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `assignment_type`
+-- Table structure for table `artifacts`
+--
+
+DROP TABLE IF EXISTS `artifacts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artifacts` (
+  `artifact_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`artifact_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `artifacts`
+--
+
+LOCK TABLES `artifacts` WRITE;
+/*!40000 ALTER TABLE `artifacts` DISABLE KEYS */;
+INSERT INTO `artifacts` VALUES (11,'Recuerdos de Pandora: Mujer dispuesta a luchar (Barcelona 1936)',' A woman holding a rifle standing on a cannon at the beginning of the war','/images/gallery/Artifact_1.jpg','2018-05-22 18:06:05',NULL),(12,'Fiat C.R. 32 del XVI Gruppo Autonomo \"Cucaracha\" scortano un Savoia-Marchetti S.M.81 in una missione di bombardamento.','Airplanes dropping bombs during the Spanish Civil War','/images/gallery/Artifact_2.jpg','2018-05-22 18:08:01',NULL),(13,'Republican Tank','Photo taken during the Battle of Teruel','/images/gallery/Artifact_3.jpg','2018-05-22 18:08:52',NULL),(14,'Photo of a plane flown in the SCW',' ','/images/gallery/Artifact_4.jpg','2018-05-22 18:10:19',NULL),(15,'Another plane flown in the SCW',' ','/images/gallery/Artifact_5.jpg','2018-05-22 18:12:07',NULL),(16,'Fighting During the Siege of the Alcázar in Toledo',' ','/images/gallery/Artifact_6.jpg','2018-05-22 18:12:32',NULL),(17,'Spanish Civil War - Czechoslovak Gottwald artillery batteries',' ','/images/gallery/Artifact_7.jpg','2018-05-22 18:13:12',NULL),(18,'Refugiados en Francia','Residents of the War Resisters\' Home, hosted by professor Jose Brocca\n','/images/gallery/Artifact_8.jpg','2018-05-22 18:17:29',NULL),(19,'Ayuda suiza a los ninos de espana ','Transport of refugee Children','/images/gallery/Artifact_9.jpg','2018-05-22 18:17:32',NULL),(20,'Ninos de la guerra civil','Children evacuating Spain, giving the republican salute','/images/gallery/Artifact_10.png','2018-05-22 18:17:33',NULL),(21,'Los Internacionales','Internationalist Propaganda - Foreign aid for the Republic \n','/images/gallery/Artifact_11.jpg','2018-05-22 18:17:34',NULL),(22,'Voluntarios de Polonia','Polish volunteers aid in the fight for the second Spanish republic ','/images/gallery/Artifact_12.jpg','2018-05-22 18:17:34',NULL),(23,'Bundesarchiv Bild','Two women eating in the street','/images/gallery/Artifact_13.jpg','2018-05-22 18:21:56',NULL),(24,'La Sonriente Partisana Comunista Milja Marín\n','Smiling Woman','/images/gallery/Artifact_14.jpg','2018-05-22 18:21:58',NULL),(25,'La Familia','3 small children posed for a picture','/images/gallery/Artifact_15.jpg','2018-05-22 18:21:59',NULL),(26,'Spanish War Children','Children standing together making a sign','/images/gallery/Artifact_10.png','2018-05-22 18:22:00',NULL),(27,'Spanish Civil War Mass Grave','Bones found together in a mass grave\n','/images/gallery/Artifact_17.jpg','2018-05-22 18:22:01',NULL),(28,'Surrender of Red Soldier','Soldiers with their hands raised in surrender','/images/gallery/Artifact_18.jpg','2018-05-22 18:22:01',NULL),(29,'Mujer Despuesta a Luchar','Woman with a gun raised in the air\n','/images/gallery/Artifact_1.jpg','2018-05-22 18:22:04',NULL),(30,'Norman Bethune checkers','Men Playing Checkers','/images/gallery/Artifact_19.jpg','2018-05-22 18:28:10',NULL),(31,'Soldiers with Dog','Attribution','/images/gallery/Artifact_20.jpg','2018-05-22 18:28:12',NULL),(32,'Republican sailors playing musical instruments','This is a fun picture with music.','/images/gallery/Artifact_21.jpg','2018-05-22 18:28:14',NULL),(33,'Spanish War Children','Hopeful optimistic children.\n','/images/gallery/Artifact_10.png','2018-05-22 18:28:18',NULL),(34,'Las tristezas de la guerra - ¡Adiós, hijo mío!, de Narcís Martí Cabot','Painting of a father saying goodbye to his son. Shows the hope of coming back to family.','/images/gallery/Artifact_23.jpg','2018-05-22 18:28:17',NULL),(35,'Iglesia de Belén - Destruido en 1936 durante la Guerra Civil de España','Interior of this Church was destroyed during the Spanish Civil War.','/images/gallery/Artifact_24.jpg','2018-05-22 18:28:16',NULL),(36,'Bombing of Guernica Ruins','Impactful image','/images/gallery/Artifact_25.jpg','2018-05-22 18:28:15',NULL),(37,'Mural del Gernika','Mural based on Picasso\'s painting \"Guernica\" that is located in Guernica, Spain','/images/gallery/Artifact_26.jpg','2018-05-22 18:36:14',NULL),(38,'Obra de arte relacionada con la Guerra Civil.JPG','Modern art related to the Spanish Civil War\n','/images/gallery/Artifact_27.jpg','2018-05-22 18:36:17',NULL),(39,'Jardines del Ferial, estela en recuerdo a los caídos en el bombardeo (obra de Jesus Aldama)','Sculpture dedicated to those killed in the bombing of Guernica in Spain.','/images/gallery/Artifact_28.jpg','2018-05-22 18:36:19',NULL),(40,'Medalla de la Guerra Civil de España','Medal given as a result of winning the Spanish Civil War','/images/gallery/Artifact_29.jpg','2018-05-22 18:36:19',NULL),(41,'Australianos en la Guerra Civil de España','Memorial erected in memory to the Australians who fought in the Spanish Civil war.\n','/images/gallery/Artifact_30.jpg','2018-05-22 18:36:21',NULL),(42,'Monumento a las mules de montaña usadas en la Guerra Civil de España','Memorial erected to honor the role that mules played in supplying nationalist groups during the Spanish Civil War.','/images/gallery/Artifact_31.jpg','2018-05-22 18:36:20',NULL),(43,'Estatua al Obispo Diego Ventaja Milan, Almeria, España','Statue of Bishop Diego Ventaja who was killed by marxists during the Spanish Civil War.\n','/images/gallery/Artifact_32.jpg','2018-05-22 18:36:18',NULL),(44,'Spanish War Children','Children evacuating Spain, giving the Republican salute','/images/gallery/Artifact_10.png','2018-05-22 19:03:27',NULL),(45,'Spanish Civil War - Mass grave - Estépar, Burgos.jpg','A mass grave in Burgos, Spain from the Spanish Civil War','/images/gallery/Artifact_17.jpg','2018-05-22 19:03:31',NULL),(46,'Puente, Ronda, España','A bridge from which Republicans were allegedly thrown from by the nationalists.\n','/images/gallery/Artifact_35.jpg','2018-05-22 19:03:32',NULL),(47,'Franco and Hitler Meet at Hendaye','1940 Hitler and Franco in front of soldiers at a train station\n','/images/gallery/Artifact_36.jpg','2018-05-22 19:03:29',NULL),(48,'Evacuation Truck','1937 an evacuation truck from the Swiss to help Spain','/images/gallery/Artifact_37.jpg','2018-05-22 19:03:34',NULL),(49,'War Refugees','January 1937, people walking in the street with animals and wagons\n','/images/gallery/Artifact_38.jpg','2018-05-22 19:03:34',NULL),(50,'Spain Final-guerra-civil','A photograph of a signed letter from Franco declaring the end of the war in Spanish\n','/images/gallery/Artifact_39.jpg','2018-05-22 19:03:33',NULL),(51,'Instruccions a seguir en cas de bombardeig. Consells de Sanitat de Guerra publicats per la Generalitat de Catalunya','An illustrated flyer in Catalan that provides instructions for how to stay safe during a bombing raid\n','/images/gallery/Artifact_40.jpg','2018-05-22 19:03:31',NULL),(52,'Map','Map of the distribution of forces in the Spanish Civil War','/images/gallery/Artifact_41.png','2018-05-22 19:03:35',NULL),(53,'Batalla de Brunete revisada','Map of the Batalla de Brunete\n','/images/gallery/Artifact_42.png','2018-05-22 19:03:29',NULL),(54,'La brigade international durante la Guerra Civil de España, Diciembre 1936 - Enero 1937','Picture of a group of fighters from the international brigade. They are raising their hands in the communist salute.\n','/images/gallery/Artifact_43.jpg','2018-05-22 19:15:42',NULL),(55,'Monumento a los soldados de Hungría en la brigada internacional','Memorial erected to Hungarians who fought in the Spanish Civil War in the International Brigades','/images/gallery/Artifact_44.jpg','2018-05-22 19:15:47',NULL),(56,'International Brigade - tank','Battle of Belchite in 1937','/images/gallery/Artifact_45.jpg','2018-05-22 19:15:45',NULL),(57,'Finnish Volunteer in International Brigade','1937 man named Paavel Pajunen from Finland','/images/gallery/Artifact_46.jpg','2018-05-22 19:15:49',NULL),(58,'Presidente Manuel Azana','Second prime minister to the Second Republic of Spain, later the last president of the Republic\n','/images/gallery/Artifact_47.jpeg','2018-05-22 19:15:47',NULL),(59,'Surrender of Red Soldiers, Somosierra, Madrid',' ','/images/gallery/Artifact_18.jpg','2018-05-22 19:15:45',NULL),(60,'Francisco Franco',' ','/images/gallery/Artifact_49.jpg','2018-05-22 19:15:50',NULL),(61,'Republican Troops on the Aragon Front',' ','/images/gallery/Artifact_50.jpg','2018-05-22 19:15:52',NULL),(62,'Niños en la Guerra Civil de España','Children being evacuated during the Spanish Civil War','/images/gallery/Artifact_10.png','2018-05-22 19:15:46',NULL),(63,'Norman Bethune. El juego de damas, 1937','Dr. Bethune, a Canadian surgeon who served on the frontline of the Spanish Civil War working working for Republican government.','/images/gallery/Artifact_19.jpg','2018-05-22 19:15:51',NULL),(64,'Francoist Troop Demonstration','Crowds and public demonstration in Salamanca\n','/images/gallery/Artifact_53.jpg','2018-05-22 19:15:51',NULL),(65,'Franco ha muerto','Newspaper title for the day he died','/images/gallery/Artifact_54.png','2018-05-22 19:15:44',NULL),(66,'Soldiers in Battle at Madrid','September 1936 - Soldiers marching','/images/gallery/Artifact_55.jpeg','2018-05-22 19:15:54',NULL),(67,'Republican Soldiers','Republican Soldiers walking in the streets of Teruel from December 1937','/images/gallery/Artifact_56.jpg','2018-05-22 19:15:55',NULL),(69,'Republican Soldiers Playing Music','Soldiers are singing and playing instruments aboard a ship in 1937','/images/gallery/Artifact_21.jpg','2018-05-22 19:15:57',NULL),(70,'¡No pasarán! Madrid','A banner in a street in Madrid declaring opposition to facism.','/images/gallery/Artifact_57.jpg','2018-05-22 19:39:42',NULL),(71,'Franco Propaganda','Propaganda for El Generalismo\n','/images/gallery/Artifact_58.jpg','2018-05-22 19:39:44',NULL),(72,'Fascism propaganda','Propaganda for Fascism\n','/images/gallery/Artifact_59.jpg','2018-05-22 19:39:46',NULL),(73,'Youth united for Spain Propaganda','Youth in the war\n','/images/gallery/Artifact_60.jpg','2018-05-22 19:39:45',NULL),(74,'Libertad propaganda ','Iberian federation of libertarian youth \n','/images/gallery/Artifact_11.jpg','2018-05-22 19:39:45',NULL),(75,'8 de noviembre 1936','Propaganda for siege of Madrid \n','/images/gallery/Artifact_62.jpg','2018-05-22 19:39:43',NULL),(76,'Los Internacionales','International volunteers\n','/images/gallery/Artifact_63.jpg','2018-05-22 19:39:47',NULL),(77,'El socialismo es la liberación','strong image of how socialists perceived their lives during the time.','/images/gallery/Artifact_56.jpg','2018-05-22 19:39:48',NULL),(78,'Woman with a rifle near a canon',' ','/images/gallery/Artifact_1.jpg','2018-05-22 19:59:46',NULL),(79,'Recuerdos de Pandora: Mujer dispuesta a luchar (Barcelona 1936)','A woman holding a rifle standing on a cannon at the beginning of the war\n','/images/gallery/Artifact_1.jpg','2018-05-22 19:59:49',NULL),(80,'Women Pleading with Rebels','Women pleading for the lives of prisoners of rebels in Seville\n','/images/gallery/Artifact_67.jpg','2018-05-22 19:59:45',NULL),(81,'Mujeres Soldados','Women in uniform and with rifles\n','/images/gallery/Artifact_68.jpg','2018-05-22 19:59:48',NULL),(82,'Woman soldier overlooking Barcelona','Marina Ginesta, a 17-year-old communist militant, overlooking Barcelona during the Spanish Civil War, 1936\n','/images/gallery/Artifact_69.jpg','2018-05-22 19:59:47',NULL),(83,'Women fighting during the Siege of the Alcazar','Women in combat','/images/gallery/Artifact_64.jpg','2018-05-22 20:04:16',NULL),(84,'Children Playing on the Street','Despite being on a destroyed street with bullet-hole ridden buildings, the children are smiling.\n','/images/gallery/Artifact_70.jpg','2018-05-22 20:09:32',NULL),(85,'Nationalist and Loyalist troops','I like the idea of both hope and despair in this picture because it depends on the perspective of what troops you were supporting.\n','/images/gallery/Artifact_71.jpg','2018-05-22 20:09:33',NULL),(86,'Marina Ginesta','Girl with a gun and wry smile','/images/gallery/Artifact_69.jpg','2018-05-22 20:09:34',NULL),(87,'Unidad y victoria','This is more just hope','/images/gallery/Artifact_74.jpg','2018-05-22 20:09:36',NULL),(88,'Belchite','This is more focused on despair and loss\n','/images/gallery/Artifact_75.jpg','2018-05-22 20:09:35',NULL),(89,'Memorial a los voluntarios de Galés en la Guerra Civil de España','This memorial is found in Alexandra Gardens in Cardiff, United Kingdom\n','/images/gallery/Artifact_76.jpg','2018-05-22 20:32:55',NULL),(90,' Memorial a la Brigada Internacional que vinieron desde Hammersmith y Fulham Inglaterra','Placed in Fulham, United Kingdom to commemorate those who went to fight against Facism in Spain.','/images/gallery/Artifact_77.jpg','2018-05-22 20:32:57',NULL),(91,' Monumento a las brigade internacionals en Londres','Monument constructed in London to honor all those who left the UK to go fight in the Spanish Civil War\n','/images/gallery/Artifact_78.jpg','2018-05-22 20:32:58',NULL),(92,'“Reading International Brigade Memorial” – Monumento','A monument that currently is found in Forbury Gardens in Reading, UK','/images/gallery/Artifact_79.jpg','2018-05-22 20:32:57',NULL),(93,'Homenaje Brigadas Internacionales – Glasgow, Escocia','Monument erected to pay tribute to fighters from Glasgow, Scotland','/images/gallery/Artifact_80.jpg','2018-05-22 20:32:59',NULL),(94,' Monumento a los soldados de Hungría en la brigade internacional','Memorial erected to Hungarians who fought in the Spanish Civil War in the International Brigades. Found in Memorial Park in Budapest, Hungary.','/images/gallery/Artifact_81.jpg','2018-05-22 20:32:59',NULL),(95,' Monumento a la Brigada Internacional. Ubicado en la Universidad de Washinton, EEUU','This monument honors the American young men who went and fought in the Spanish Civil War. Their brigade was named the Abraham Lincoln Brigade and about 3,000 served, half of them buried on Spanish soil.','/images/gallery/Artifact_82.jpg','2018-05-22 20:33:01',NULL),(96,'Australianos en la Guerra Civil de España','Memorial erected in memory to the Australians who fought in the Spanish Civil War. Found in Canberra, Australia.\n','/images/gallery/Artifact_30.jpg','2018-05-22 20:34:02',NULL),(97,' Monumento a las brigada internacional – Madrid','Located 25 kilometers southeast of Madrid. Erected to commerate the battle of Jarama in 1937\n','/images/gallery/Artifact_84.jpg','2018-05-22 20:36:13',NULL),(98,'Monumento cerca a Madrid a Charlie Donnelly de la Brigada Internacional','Monument constructed to the Irish Poet Charlie Donnelly who died in the battle of Jarama in 1937. It is located at Rivas de Vaciamadrid, 20 kilometers southeast of Madrid\n','/images/gallery/Artifact_85.jpg','2018-05-22 20:36:14',NULL),(99,' En camino a ayudar a la frontera','1936 people are in a truck on their way to the warfront, they are not dressed like soldiers, rather they look like civilians with guns.\n','/images/gallery/Artifact_86.jpg','2018-05-22 20:41:51',NULL),(100,' Grupo de Italianos','1937 group of Italian men and women stand with their flag in uniforms','/images/gallery/Artifact_87.jpg','2018-05-22 20:41:53',NULL),(101,'Personas normales','1936 people are smiling standing next to a car, they are from Norway and part of an International Brigade.','/images/gallery/Artifact_88.jpg','2018-05-22 20:41:54',NULL),(102,'Grupo internacional','Men from a different country are talking and preparing for battle.\n\n','/images/gallery/Artifact_89.jpg','2018-05-22 20:41:53',NULL),(103,'Voluntarios de países distintos','Writer Ernest Hemingway volunteered in the Spanish Civil War. He is pictured with two other soldiers from different countries.','/images/gallery/Artifact_90.jpg','2018-05-22 20:41:56',NULL),(104,'Voluntarios de Inglaterra','1936 men from England are saluting towards the camera.\n','/images/gallery/Artifact_91.jpg','2018-05-22 20:41:52',NULL),(105,'Un grupo militar de Yugoslavia','1938 Fighters from Yugoslavia pose for picture\n','/images/gallery/Artifact_92.jpg','2018-05-22 20:41:56',NULL),(106,'Grupo de eslovenos','1937 group from Slovenia posing for a picture with smiles\n','/images/gallery/Artifact_93.jpg','2018-05-22 20:41:57',NULL),(107,'Finnish Volunteer in International Brigade','1937 man named Paavel Pajunen from Finland','/images/gallery/Artifact_94.jpg','2018-05-22 20:41:55',NULL);
+/*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment_types`
 --
 
 DROP TABLE IF EXISTS `assignment_types`;
@@ -143,7 +141,6 @@ CREATE TABLE `channels` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`channel_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +154,7 @@ INSERT INTO `channels` VALUES (1,'Channel 1','884bfc04fd474126993d40f682471515',
 UNLOCK TABLES;
 
 --
--- Table structure for table `character_email`
+-- Table structure for table `character_emails`
 --
 
 DROP TABLE IF EXISTS `character_emails`;
@@ -203,8 +200,9 @@ CREATE TABLE `characters` (
   `img_large` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `email_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +211,7 @@ CREATE TABLE `characters` (
 
 LOCK TABLES `characters` WRITE;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
-INSERT INTO `characters` VALUES (1,'Ernando Suarez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL),(2,'Ana Alba','Marketing','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL),(3,'Phillip Iniesta','Technical','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL),(4,'Maria Pique','Educator','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL);
+INSERT INTO `characters` VALUES (1,'Susana Gomez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,'sgomez@museodevalle.es'),(2,'Beatriz Rodríguez','Exhibit Designer','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL,'beatierod@museodevalle.es'),(3,'Francisco López','Museum Technician','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL,'flopez@museodevalle.es'),(4,'Carmen González','Donor','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,'carmengonzalez@gmail.es'),(5,'Jose Manuel Sánchez','Historian','img/characters/jose-small.jpg','img/characters/jose-large.jpg',NULL,NULL,'joseymariasanchez@yahoo.es'),(6,'Luis Abeyta','Librarian','img/characters/luis-small.jpg','img/characters/luis-large.jpg',NULL,NULL,'luisabeyta@madbiblioteca.es');
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +234,6 @@ CREATE TABLE `chats` (
   `type` int(11) DEFAULT '0',
   PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,6 +244,29 @@ LOCK TABLES `chats` WRITE;
 /*!40000 ALTER TABLE `chats` DISABLE KEYS */;
 INSERT INTO `chats` VALUES (1,1,2,'',1,'Hello!','2018-03-03 01:52:54',NULL,0),(2,1,2,'',1,'what day is it?','2018-03-03 01:53:02',NULL,0),(3,1,2,'Sarah Olsen',1,'It is day 1','2018-03-03 01:53:02',NULL,1),(4,1,2,'',1,'does this work?','2018-03-03 01:53:07',NULL,0),(5,1,2,'Sarah Olsen',1,'This totally works 1','2018-03-03 01:53:07',NULL,1),(6,1,2,'Geoff Wright',1,'This totally works 3','2018-03-03 01:53:07',NULL,1),(7,1,1,'',1,'Does this work?','2018-03-07 05:07:09',NULL,0),(8,1,1,'',1,'Hello!','2018-03-07 05:07:13',NULL,0),(9,1,1,'Some Person',1,'Welcome to channel 1','2018-03-07 05:07:14',NULL,1),(10,1,1,'',1,'does this work?','2018-04-03 21:25:46',NULL,0),(11,1,1,'',1,'hello','2018-04-03 21:25:58',NULL,0),(12,1,1,'Some Person',1,'Welcome to channel 1','2018-04-03 21:25:58',NULL,1),(13,1,2,'',1,'does this work?','2018-04-03 21:26:08',NULL,0),(14,1,2,'Sarah Olsen',1,'This totally works 1','2018-04-03 21:26:08',NULL,1),(15,1,2,'Geoff Wright',1,'This totally works 3','2018-04-03 21:26:08',NULL,1),(16,1,2,'',1,'what day is it?','2018-04-03 21:26:16',NULL,0),(17,1,2,'Sarah Olsen',1,'It is day 1','2018-04-03 21:26:16',NULL,1);
 /*!40000 ALTER TABLE `chats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `class_has_group`
+--
+
+DROP TABLE IF EXISTS `class_has_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `class_has_group` (
+  `class_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `class_has_group`
+--
+
+LOCK TABLES `class_has_group` WRITE;
+/*!40000 ALTER TABLE `class_has_group` DISABLE KEYS */;
+INSERT INTO `class_has_group` VALUES (1,1);
+/*!40000 ALTER TABLE `class_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -275,29 +295,6 @@ LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
 INSERT INTO `classes` VALUES (1,'Test Class 1','test_class_1','2018-03-23 16:45:54',NULL),(2,'Test Class 2','test_class_2','2018-03-23 16:45:54',NULL);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `class_has_group`
---
-
-DROP TABLE IF EXISTS `class_has_group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `class_has_group` (
-  `class_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `class_has_group`
---
-
-LOCK TABLES `class_has_group` WRITE;
-/*!40000 ALTER TABLE `class_has_group` DISABLE KEYS */;
-INSERT INTO `class_has_group` VALUES (1,1);
-/*!40000 ALTER TABLE `class_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -334,35 +331,6 @@ INSERT INTO `dashboard` VALUES (10,1,'/video/fun.mp4','Microcore on Top','New li
 UNLOCK TABLES;
 
 --
--- Table structure for table `artifacts`
---
-
-DROP TABLE IF EXISTS `artifacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `artifacts` (
-  `artifact_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`artifact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `artifacts`
---
-
-LOCK TABLES `artifacts` WRITE;
-/*!40000 ALTER TABLE `artifacts` DISABLE KEYS */;
-INSERT INTO `artifacts` VALUES (1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png','2018-04-03 19:33:58',NULL),(2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png','2018-04-03 19:33:58',NULL),(3,'Gallery 3 Title','This is the description','/images/gallery/gallery03.png','2018-04-03 19:33:58',NULL),(4,'Gallery 4 Title','This is the description','/images/gallery/gallery04.png','2018-04-03 19:33:58',NULL),(5,'Gallery 5 Title','This is the description','/images/gallery/gallery05.png','2018-04-03 19:33:58',NULL),(6,'Gallery 6 Title','This is the description','/images/gallery/gallery06.png','2018-04-03 19:33:58',NULL),(7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png','2018-04-03 19:33:58',NULL),(8,'Gallery 8 Title','This is the description','/images/gallery/gallery08.png','2018-04-03 19:33:58',NULL),(9,'Gallery 9 Title','This is the description','/images/gallery/gallery09.png','2018-04-03 19:33:58',NULL),(10,'Gallery 10 Title','This is the description','/images/gallery/gallery10.png','2018-04-03 19:33:58',NULL);
-
-/*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `groups`
 --
 
@@ -376,7 +344,6 @@ CREATE TABLE `groups` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -449,8 +416,16 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `notes`
@@ -467,18 +442,18 @@ CREATE TABLE `notes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`note_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `notes`
 --
 
--- LOCK TABLES `notes` WRITE;
--- /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
--- INSERT INTO `notes` VALUES (2,'1974-12-29 15:00:18','2018-04-04 00:30:59','Unde vero eveniet et ut. Est voluptatibus ipsum quos sed in.',2),(12,'1994-04-29 01:03:15','2018-04-04 00:30:59','Quasi earum dolores exercitationem qui. Quos aut illo omnis illum dolor impedit eos.',7),(14,'1987-09-05 09:11:12','2018-04-04 00:30:59','Quam ea sit totam. Animi nobis provident tenetur.',4),(20,'1997-07-09 03:22:04','2018-04-04 00:30:59','Autem tempora ab atque non atque quis. Eaque beatae mollitia aut.',5),(29,'1981-09-07 21:14:01','2018-04-04 00:30:59','Ratione eius est et reprehenderit qui aliquam et. Autem rerum in repudiandae a sint repellat unde.',7),(36,'1980-05-28 02:32:09','2018-04-04 00:30:59','Cumque et vel labore. Et nobis est voluptatem.',4),(44,'1989-08-22 19:37:04','2018-04-04 00:30:59','Dolor laudantium vel vero odio est voluptas sed sequi. Sit voluptas quia et esse laborum.',7),(45,'1993-12-29 08:06:53','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(47,'1982-01-03 15:37:29','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(48,'1993-02-17 04:08:54','2018-04-04 00:30:59','Eaque minima blanditiis quod amet harum nemo. Et eum voluptatem minima maiores.',5),(54,'1975-01-04 03:52:12','2018-04-04 00:30:59','Quod eum eum velit. Facere facilis quas sint repellendus optio.',4),(57,'2005-12-06 07:27:38','2018-04-04 00:30:59','Sit similique omnis officiis ipsa nulla. Temporibus minima commodi rerum ea et odio.',2),(58,'1996-04-24 09:34:09','2018-04-04 00:30:59','Et non sunt unde. Quo modi et voluptatem.',9),(65,'1992-10-05 00:28:46','2018-04-04 00:30:59','Aut eius neque aut nobis. Asperiores error incidunt quo cum ut odit. Qui nam nisi expedita odit. test test wut?\n\nwut wut?',1),(68,'1979-04-29 19:16:58','2018-04-04 00:30:59','Quis in sed ipsam nostrum enim. Modi consequatur aperiam qui corrupti quia.',4),(73,'1974-07-10 02:19:37','2018-04-04 00:30:59','Quos repudiandae molestiae aut ut tenetur enim nisi. Recusandae ipsam ut dolorem aut.',8),(74,'1971-11-10 20:15:15','2018-04-04 00:30:59','Aut tempore nulla deleniti nemo aperiam sit et. Et dolorem repudiandae unde.',3),(87,'2011-10-12 15:29:28','2018-04-04 00:30:59','Maxime et vel id aut. Quo dicta incidunt quia nisi vel.',5),(91,'1985-04-22 11:31:04','2018-04-04 00:30:59','Veniam adipisci omnis qui rerum. Cumque iure rem et sequi.',9),(95,'2000-06-19 07:52:11','2018-04-04 00:30:59','Autem dolorem quod quibusdam minus quia. At repellat ut temporibus sed praesentium omnis.',7);
+LOCK TABLES `notes` WRITE;
+/*!40000 ALTER TABLE `notes` DISABLE KEYS */;
+INSERT INTO `notes` VALUES (99,'This is a cool note;jlskdf',13,1,'2018-05-22 16:49:47','2018-05-22 16:50:54');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
--- UNLOCK TABLES;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `password_resets`
@@ -561,35 +536,26 @@ INSERT INTO `simulation` VALUES (3,'2018-01-23 19:36:38');
 UNLOCK TABLES;
 
 --
--- Table structure for table `student_emails`
+-- Table structure for table `student_artifact_has_tag`
 --
 
-DROP TABLE IF EXISTS `student_emails`;
+DROP TABLE IF EXISTS `student_artifact_has_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `student_emails` (
-  `student_email_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL COMMENT 'which student sent it',
-  `day` int(11) NOT NULL DEFAULT '1',
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `character_id` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'character to which it was sent',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `character_email_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`student_email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `student_artifact_has_tag` (
+  `student_artifact_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student_emails`
+-- Dumping data for table `student_artifact_has_tag`
 --
 
-LOCK TABLES `student_emails` WRITE;
-/*!40000 ALTER TABLE `student_emails` DISABLE KEYS */;
-INSERT INTO `student_emails` VALUES (1,1,1,'Subject','Body','1',NULL,NULL,2,1),(2,1,1,'Subject 2','Body 2','2',NULL,NULL,1,1);
-/*!40000 ALTER TABLE `student_emails` ENABLE KEYS */;
+LOCK TABLES `student_artifact_has_tag` WRITE;
+/*!40000 ALTER TABLE `student_artifact_has_tag` DISABLE KEYS */;
+INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1),(9,1);
+/*!40000 ALTER TABLE `student_artifact_has_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -610,7 +576,7 @@ CREATE TABLE `student_artifacts` (
   `class_id` int(11) NOT NULL DEFAULT '0',
   `day` int(11) NOT NULL,
   PRIMARY KEY (`student_artifact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -619,31 +585,41 @@ CREATE TABLE `student_artifacts` (
 
 LOCK TABLES `student_artifacts` WRITE;
 /*!40000 ALTER TABLE `student_artifacts` DISABLE KEYS */;
-INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is a description that','/images/gallery/gallery01.png',1,2,1,1),(3,4,'Gallery 4 Title','This is the description this has changed','/images/gallery/gallery04.png',8,0,1,1),(4,1,'Gallery 1 Title not in a group','This is the description changed','/images/gallery/gallery01.png',8,0,1,1),(5,2,'Gallery 2 Title','This is the description here','/images/gallery/gallery02.png',8,0,1,1),(6,2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png',8,1,1,1),(7,1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png',8,1,1,1),(8,7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png',8,1,1,1);
+INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is a description that','/images/gallery/gallery01.png',1,2,1,1),(3,4,'Gallery 4 Title','This is the description this has changed','/images/gallery/gallery04.png',8,0,1,1),(4,1,'Gallery 1 Title not in a group','This is the description changed','/images/gallery/gallery01.png',8,0,1,1),(5,2,'Gallery 2 Title','This is the description here','/images/gallery/gallery02.png',8,0,1,1),(6,2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png',8,1,1,1),(7,1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png',8,1,1,1),(8,7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png',8,1,1,1),(9,1,'Gallery 1 Title test','This is the description test','/images/gallery/gallery01.png',13,0,0,1);
 /*!40000 ALTER TABLE `student_artifacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `student_gallery_has_tag`
+-- Table structure for table `student_emails`
 --
 
-DROP TABLE IF EXISTS `student_artifact_has_tag`;
+DROP TABLE IF EXISTS `student_emails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `student_artifact_has_tag` (
-  `student_artifact_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `student_emails` (
+  `student_email_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT 'which student sent it',
+  `day` int(11) NOT NULL DEFAULT '1',
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `character_id` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'character to which it was sent',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `character_email_id` int(11) NOT NULL DEFAULT '0',
+  `class_id` int(11) NOT NULL DEFAULT '0',
+  `email_attachment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`student_email_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student_gallery_has_tag`
+-- Dumping data for table `student_emails`
 --
 
-LOCK TABLES `student_artifact_has_tag` WRITE;
-/*!40000 ALTER TABLE `student_artifact_has_tag` DISABLE KEYS */;
-INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1);
-/*!40000 ALTER TABLE `student_artifact_has_tag` ENABLE KEYS */;
+LOCK TABLES `student_emails` WRITE;
+/*!40000 ALTER TABLE `student_emails` DISABLE KEYS */;
+INSERT INTO `student_emails` VALUES (1,1,1,'Subject','Body','1',NULL,NULL,2,1,NULL),(2,1,1,'Subject 2','Body 2','2',NULL,NULL,1,1,NULL),(3,13,1,'adf','asdf','undefined','2018-05-21 21:44:02',NULL,0,0,NULL),(4,13,1,'test','asdfteset','undefined','2018-05-21 21:45:11',NULL,0,0,'/storage/document/Stored Procedure.pdf'),(5,13,1,'test','test','undefined','2018-05-21 22:38:19',NULL,0,0,NULL),(6,13,1,'ASD','adf','1','2018-05-21 22:44:40',NULL,0,0,'/storage/document/ACE-Exam-Dumps-2018.pdf'),(7,13,1,'Day 1 Character 1','ohjkx c','1','2018-05-22 16:04:34',NULL,0,0,NULL),(8,13,1,'RE: Day 1 Character 1','sjdxn,cm','1','2018-05-22 16:06:21',NULL,1,0,NULL),(9,13,1,'RE: Day 1 Character 2','osdjfznvcm','2','2018-05-22 16:08:58',NULL,2,0,'/storage/document/Stored Procedure.pdf'),(10,13,2,'RE: Day 2 Character 2','Hi!\r\n\r\nThank you for your help!\r\n\r\nBye;','2','2018-05-22 17:35:00',NULL,5,0,'/storage/document/ACE-Exam-Dumps-2018.pdf');
+/*!40000 ALTER TABLE `student_emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -668,7 +644,7 @@ CREATE TABLE `student_tasks` (
 
 LOCK TABLES `student_tasks` WRITE;
 /*!40000 ALTER TABLE `student_tasks` DISABLE KEYS */;
-INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-03 18:46:28'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49');
+INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-21 20:58:13'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49'),(4,13,0,'2018-05-22 16:59:20','2018-05-22 16:59:22'),(5,13,0,'2018-05-22 16:59:21','2018-05-22 16:59:22');
 /*!40000 ALTER TABLE `student_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -690,7 +666,7 @@ CREATE TABLE `student_video_submissions` (
   `class_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`submission_id`),
   UNIQUE KEY `student_video_submissions_submission_id_uindex` (`submission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -699,6 +675,7 @@ CREATE TABLE `student_video_submissions` (
 
 LOCK TABLES `student_video_submissions` WRITE;
 /*!40000 ALTER TABLE `student_video_submissions` DISABLE KEYS */;
+INSERT INTO `student_video_submissions` VALUES (139,'/storage/video/video-bYFd.webm',2,1,13,'2018-05-22 23:33:26',98,0);
 /*!40000 ALTER TABLE `student_video_submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -713,7 +690,7 @@ CREATE TABLE `tags` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -722,8 +699,61 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'Tag 1'),(2,'Tag 2'),(3,'Tag 3'),(4,'Tag 4');
+INSERT INTO `tags` VALUES (1,'Art'),(2,'War Paraphernalia'),(3,'Gallery'),(4,'Children'),(5,'Homelife'),(6,'Photographs'),(7,'Women'),(8,'Favorites');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tasks`
+--
+
+DROP TABLE IF EXISTS `tasks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tasks` (
+  `task_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  `day` int(11) NOT NULL DEFAULT '1',
+  `complete` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`task_id`),
+  UNIQUE KEY `tasks_id_uindex` (`task_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tasks`
+--
+
+LOCK TABLES `tasks` WRITE;
+/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,0),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
+/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_asked_questions`
+--
+
+DROP TABLE IF EXISTS `user_asked_questions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_asked_questions` (
+  `user_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `day` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_asked_questions`
+--
+
+LOCK TABLES `user_asked_questions` WRITE;
+/*!40000 ALTER TABLE `user_asked_questions` DISABLE KEYS */;
+INSERT INTO `user_asked_questions` VALUES (13,98,2,'2018-05-22 17:33:05');
+/*!40000 ALTER TABLE `user_asked_questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -794,7 +824,7 @@ CREATE TABLE `users` (
   `assigned` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -803,7 +833,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'NULj7M0YCjPiPybZq5zDTyOmzJENt5NOp2HWTf0gVeTNKUZtKR8mRKhle2rG','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T',2,'matalyn2@byu.edu','$2y$10$WZ726cA2USHejRMk2qj54e3QGri7get48esWgLhm9HjG6MRsECPhW','q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
+INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'tBT8Yl6wVsz9p68dzKnhnL9hBDw4tn1wMtIsmzLizAhqjwibGtbbbGnMySKs','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T','2','matalyn2@byu.edu',0,'q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0),(13,'Matalyn T','matalyn2@byu.edu','$2y$10$pjsIynPsFIzTwS9srTBpCugYms8X2YjzGys04MZSrOSu1cXkNrbCi',2,NULL,'2018-05-22 03:23:58','2018-05-22 03:23:58',1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -848,7 +878,6 @@ CREATE TABLE `wiki` (
   `lang_2_ar` int(11) NOT NULL,
   PRIMARY KEY (`wiki_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -860,81 +889,6 @@ LOCK TABLES `wiki` WRITE;
 INSERT INTO `wiki` VALUES (1,1,2),(2,3,4);
 /*!40000 ALTER TABLE `wiki` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'vuesim_local'
---
-/*!50003 DROP PROCEDURE IF EXISTS `retrieve_email_assignments` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DROP PROCEDURE IF EXISTS retrieve_email_assignments;
-DELIMITER ;;
-CREATE PROCEDURE `retrieve_email_assignments`(IN char_id INT, IN d INT, IN cl_id INT)
-BEGIN
-    SELECT s.day, s.subject, s.body, s.created_at, c.name AS c_name, u.name AS u_name FROM student_emails AS s
-      INNER JOIN users AS u ON s.user_id = u.user_id
-      INNER JOIN characters AS c ON s.character_id = c.id
-    WHERE s.class_id = cl_id
-          and s.day = d
-          and s.character_id = char_id;
-  END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `retrieve_gallery_assignments` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DROP PROCEDURE IF EXISTS retrieve_gallery_assignments;
-DELIMITER ;;
-CREATE PROCEDURE `retrieve_gallery_assignments`(IN class_id_in INT)
-BEGIN
-    SELECT * FROM student_artifacts
-    WHERE class_id = class_id_in;
-  END ;;
-
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `retrieve_video_assignments` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DROP PROCEDURE IF EXISTS retrieve_video_assignments;
-DELIMITER ;;
-CREATE PROCEDURE `retrieve_video_assignments`(IN question_id_in INT, IN day_in INT, IN character_id_in INT, IN class_id_in INT)
-BEGIN
-    select * from student_video_submissions
-    where class_id = class_id_in
-          and day = day_in
-          and character_id = character_id_in
-          and question_id = q_id;
-  END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -945,5 +899,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-17 11:11:35
-
+-- Dump completed on 2018-05-22 16:26:58
