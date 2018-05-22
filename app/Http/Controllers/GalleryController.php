@@ -34,9 +34,9 @@ class GalleryController extends Controller
                     $artifact->description = $edited->description;
 
                     $artifact->tags = DB::table('tags')
-                        ->join('student_artifact_has_tag', 'student_artifact_has_tag.tag_id', 'tag.tag_id')
+                        ->join('student_artifact_has_tag', 'student_artifact_has_tag.tag_id', 'tags.tag_id')
                         ->where('student_artifact_has_tag.student_artifact_id', $edited->student_artifact_id)
-                        ->select('tag.tag_id', 'tag.title')
+                        ->select('tags.tag_id', 'tags.title')
                         ->get();
                 }
 
