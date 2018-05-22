@@ -78,7 +78,7 @@
                     <div class="modal-body">
                         <h5><b>{{ readModalData.from }}</b></h5>
                         <p class="email-body">{{ readModalData.body }}</p>
-                        <hr v-if="readModalData.reply">git
+                        <hr v-if="readModalData.reply">
                         <h5 v-if="this.readModalData.reply"><b>{{  this.$store.state.user.name }}</b></h5>
                         <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
@@ -157,6 +157,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="file" name="emailAttachment" ref="file" id="emailAttachment" @change="setAttachment()">
                         <button class="btn btn-success" @click="sendReplyEmail(draftEmail.character_email_id)">Send</button>
                     </div>
                 </div>
@@ -284,8 +285,18 @@
                         return (email);
                     }
                 });
-                console.log(found);
-                axios.post('/email', this.draftEmail).then(response => {
+
+                let formData = new FormData();
+                formData.append('to', this.draftEmail.to.character_id);
+                formData.append('reply', this.draftEmail.reply);
+                formData.append('subject', this.draftEmail.subject);
+                formData.append('body', this.draftEmail.body)
+                formData.append('character_email_id', this.draftEmail.character_email_id)
+                if(this.draftEmail.attachment != null) {
+                    formData.append('attachment', this.draftEmail.attachment);
+                }
+
+                axios.post('/email', formData).then(response => {
                     this.resetDraftEmail();
                     this.$forceUpdate();
                 });

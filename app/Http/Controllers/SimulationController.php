@@ -20,7 +20,7 @@ class SimulationController extends Controller
 
     public function updateDay (Request $request) {
         DB::table('users')
-            ->where('id', $request->id)
+            ->where('user_id', $request->id)
             ->update(['current_day' => $request->day]);
 
     }
@@ -32,7 +32,7 @@ class SimulationController extends Controller
         }
 
         DB::table('users')
-            ->where('id', $request->id)
+            ->where('user_id', $request->id)
             ->update(['current_day' => $backDay]);
 
 

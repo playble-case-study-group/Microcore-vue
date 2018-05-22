@@ -26,7 +26,7 @@
                  v-for="artifact in gallery"
                  v-if="!artifact.hidden"
                  @click="openModal(artifact)"
-                 :key="artifact.gallery_id">
+                 :key="artifact.artifact_id">
 
                 <img class="card-img-top" :src="artifact.image" :alt="artifact.title">
                 <div class="card-body artifact" >
@@ -186,7 +186,7 @@
                 this.modal.image = modalArtifact.image;
                 this.modal.title = modalArtifact.title;
                 this.modal.description = modalArtifact.description;
-                this.modal.id = modalArtifact.gallery_id;
+                this.modal.id = modalArtifact.artifact_id;
                 this.modal.editId = modalArtifact.edit_id;
                 this.modal.category = modalArtifact.catagory;
                 this.modal.tags = modalArtifact.tags;
@@ -211,7 +211,7 @@
                     console.log('FAILURE!!');
                 });
 
-                let update = this.gallery.find ( art => art.gallery_id === this.modal.id);
+                let update = this.gallery.find ( art => art.artifact_id === this.modal.id);
                 update.description = this.modal.description;
                 update.title = this.modal.title;
                 $('#edit-art').addClass('d-none');
@@ -219,7 +219,7 @@
                 $('#display-art').removeClass('d-none');
             },
             cancelChanges: function () {
-                let old = this.gallery.find ( art => art.gallery_id === this.modal.id);
+                let old = this.gallery.find ( art => art.artifact_id === this.modal.id);
                 this.modal.title = old.title;
                 this.modal.description = old.description;
                 this.modal.tags = old.tags;

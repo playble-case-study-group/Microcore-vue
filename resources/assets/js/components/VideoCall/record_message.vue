@@ -82,7 +82,7 @@
             saveVideoMessage: function(blob, href){
                 //append all needed information into a form
                 let data = new FormData();
-                data.append('user', this.$store.state.user.id);
+                data.append('user', this.$store.state.user.user_id);
                 data.append('character', this.clickedCharacter);
 
                 //fetch the data saved into the blob

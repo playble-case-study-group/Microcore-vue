@@ -24,7 +24,7 @@ class GalleryController extends Controller
                 $edited = DB::table('student_artifacts')
                     ->where([
                         ['group_id', Auth::user()->groupId],
-                        ['gallery_id', $artifact->gallery_id],
+                        ['artifact_id', $artifact->artifact_id],
                     ])
                     ->first();
 
@@ -34,8 +34,8 @@ class GalleryController extends Controller
                     $artifact->description = $edited->description;
 
                     $artifact->tags = DB::table('tags')
-                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tag.tag_id')
-                        ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
+                        ->join('student_artifact_has_tag', 'student_artifact_has_tag.tag_id', 'tag.tag_id')
+                        ->where('student_artifact_has_tag.student_artifact_id', $edited->student_artifact_id)
                         ->select('tag.tag_id', 'tag.title')
                         ->get();
                 }
@@ -51,7 +51,7 @@ class GalleryController extends Controller
                 $edited = DB::table('student_artifacts')
                     ->where([
                         ['user_id', Auth::user()->user_id],
-                        ['gallery_id', $artifact->gallery_id],
+                        ['artifact_id', $artifact->artifact_id],
                     ])
                     ->first();
 
@@ -61,8 +61,8 @@ class GalleryController extends Controller
                     $artifact->description = $edited->description;
 
                     $artifact->tags = DB::table('tags')
-                        ->join('student_gallery_has_tag', 'student_gallery_has_tag.tag_id', 'tags.tag_id')
-                        ->where('student_gallery_has_tag.student_gallery_id', $edited->student_gallery_id)
+                        ->join('student_artifact_has_tag', 'student_artifact_has_tag.tag_id', 'tags.tag_id')
+                        ->where('student_artifact_has_tag.student_artifact_id', $edited->student_artifact_id)
                         ->select('tags.tag_id', 'tags.title')
                         ->get();
 
@@ -179,7 +179,7 @@ class GalleryController extends Controller
 
             $art = DB::table('student_artifacts')
                 ->where([
-                    ['gallery_id', $id],
+                    ['artifact_id', $id],
                     ['group_id', $usr->groupId]
                 ])
                 ->first();
@@ -188,7 +188,7 @@ class GalleryController extends Controller
             // If they aren't assigned to a group
             $art = DB::table('student_artifacts')
                 ->where([
-                    ['gallery_id', $id],
+                    ['artifact_id', $id],
                     ['user_id', $usr->user_id]
                 ])
                 ->first();
@@ -199,7 +199,7 @@ class GalleryController extends Controller
 
         if($art) {
             DB::table('student_artifacts')
-                ->where('student_gallery_id', $art->student_gallery_id)
+                ->where('student_artifact_id', $art->student_artifact_id)
                 ->update([
                     'title' => $request->title,
                     'description' => $request->description,
@@ -207,14 +207,14 @@ class GalleryController extends Controller
                 ]);
 
             if (count($request->tags)) {
-                DB::table('student_gallery_has_tag')
-                    ->where('student_gallery_id', $art->student_gallery_id)
+                DB::table('student_artifact_has_tag')
+                    ->where('student_artifact_id', $art->student_artifact_id)
                     ->delete();
 
                 foreach ($request->tags as $tag) {
-                    DB::table('student_gallery_has_tag')
+                    DB::table('student_artifact_has_tag')
                         ->insert([
-                            'student_gallery_id' => $art->student_gallery_id,
+                            'student_artifact_id' => $art->student_artifact_id,
                             'tag_id' => $tag['tag_id']
                         ]);
                 }
@@ -227,7 +227,7 @@ class GalleryController extends Controller
                 // Assigned to group
                 $id = DB::table('student_artifacts')
                     ->insertGetId([
-                        'student_gallery_id' => $request->galleryId,
+                        'artifact_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
@@ -240,7 +240,7 @@ class GalleryController extends Controller
                 // Without adding group ID
                 $id = DB::table('student_artifacts')
                     ->insertGetId([
-                        'student_gallery_id' => $request->galleryId,
+                        'artifact_id' => $request->galleryId,
                         'title' => $request->title,
                         'description' => $request->description,
                         'img' => $request->img,
@@ -252,9 +252,9 @@ class GalleryController extends Controller
 
             if ($request->tags) {
                 foreach ($request->tags as $tag) {
-                    DB::table('student_gallery_has_tag')
+                    DB::table('student_artifact_has_tag')
                         ->insert([
-                            'gallery_id' => $id,
+                            'artifact_id' => $id,
                             'tag_id' => $tag['tag_id']
                         ]);
                 }

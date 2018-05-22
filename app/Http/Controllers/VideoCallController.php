@@ -23,7 +23,7 @@ class VideoCallController extends Controller
 
         $questions = DB::table('questions')->get();
 
-        $clicked_questions = DB::table('user_clicked_question')
+        $clicked_questions = DB::table('user_asked_questions')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -57,7 +57,7 @@ class VideoCallController extends Controller
         //
         $user_id = $request->user;
         $note = $request->note;
-        $date = date("Y-m-d H:i:s",time());
+
 
         $exist = DB::table('notes')
             ->select('user_id')
@@ -68,10 +68,10 @@ class VideoCallController extends Controller
         if($exist !== "[]"){
             DB::table('notes')
                 ->where('user_id', $user_id)
-                ->update(['note' => $note]);
+                ->update(['note' => $note, 'updated_at' => DB::raw("NOW()")]);
         }else{
             DB::table('notes')
-                ->insert(['user_id' => $user_id,'note' => $note,'created_at'=> $date]);
+                ->insert(['user_id' => $user_id,'note' => $note, 'day' =>  Auth::user()->current_day,'created_at'=> DB::raw("NOW()")]);
         }
         return $request->all();
 
@@ -131,7 +131,7 @@ class VideoCallController extends Controller
 
     public function disableQuestion(Request $request){
         $question_id = $request->id;
-        DB::table('user_clicked_question')
+        DB::table('user_asked_questions')
             ->insert(['question_id' => $question_id, 'user_id' => Auth::id(), 'day' => Auth::user()->current_day]);
 
         return $request->all();

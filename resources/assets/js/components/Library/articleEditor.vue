@@ -9,12 +9,12 @@
                 <h1>menu</h1>
                 <br>
                 <div v-for="article in wiki"
-                     :key="article.id"
-                     @click="showContent(article.id)"
+                     :key="article.article_id"
+                     @click="showContent(article.article_id)"
                      class="menubtn" >
 
                     <h4 class="article-title">{{article.title}}</h4>
-                    <p :id="'title-' + article.id">
+                    <p :id="'title-' + article.article_id">
 
                     </p>
                 </div>
@@ -81,11 +81,11 @@
         },
         methods: {
             showContent: function (id) {
-                let content = this.wiki.find( title => title.id == id);
+                let content = this.wiki.find( title => title.article_id == id);
 
                 this.currentTitle = content.title;
                 this.currentContent = content.content;
-                this.currentArticleId = content.id;
+                this.currentArticleId = content.article_id;
                 this.currentPair = id;
 
             },
@@ -95,7 +95,7 @@
 
             },*/
             updateArticle: function () {
-                let content = this.wiki.find( title => title.id == this.currentPair);
+                let content = this.wiki.find( title => title.article_id == this.currentPair);
                 content.content = this.currentContent;
 
                 let data = {
@@ -148,6 +148,9 @@
 </script>
 
 <style scoped>
+    img {
+        max-width: 100%;
+    }
     .menubtn {
         cursor:pointer;
         margin-bottom: 2rem;

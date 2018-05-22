@@ -23,14 +23,14 @@
                 <div id="contacts" class="dropdown-menu">
                     <div class="contact-inner dropdown-item"
                          v-for="person in characters"
-                         :key="person.id"
-                         @click="loadCallVideo(person.id)">
+                         :key="person.character_id"
+                         @click="loadCallVideo(person.character_id)">
                         <img class="characterImage" :src="person.img_small">
                         <div class="characterInfo">
                             <span class="characterName">{{ person.name }}</span><br>
                             <span class="characterPosition">{{ person.role }}</span>
                         </div>
-                        <span class="characterActive" v-if="activeContacts.includes(person.id)">
+                        <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                         </span>
                     </div>
@@ -38,10 +38,13 @@
             </div>
 
             <!--toolbar buttons-->
-            <a href="#" v-if="showRecordingInterface || leaveResponse" @click="startStopRecording">
+            <a href="#" v-if="recording" @click="startStopRecording">
+                <i id="recording" class="material-icons">stop</i>
+            </a>
+            <a href="#" v-else-if="showRecordingInterface || leaveResponse" @click="startStopRecording">
                 <i id="recording" class="material-icons">fiber_manual_record</i>
             </a>
-            <a href="#" v-if="!showRecordingInterface && !leaveResponse" @click="changePhoneIcon">
+            <a href="#" v-else @click="changePhoneIcon">
                 <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
             </a>
             <canvas id="visualizer"></canvas>
@@ -343,7 +346,7 @@
             saveVideoMessage: function(blob, href){
                 //append all needed information into a form
                 let data = new FormData();
-                data.append('user', this.$store.state.user.id);
+                data.append('user', this.$store.state.user.user_id);
                 data.append('character', this.clickedCharacter);
                 data.append('question', this.currentQuestion.question_id);
 

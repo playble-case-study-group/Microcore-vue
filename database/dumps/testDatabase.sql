@@ -601,7 +601,7 @@ DROP TABLE IF EXISTS `student_artifacts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student_artifacts` (
   `student_artifact_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `gallery_id` int(11) NOT NULL,
+  `artifact_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,

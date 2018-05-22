@@ -25,7 +25,7 @@
                         "/videocall",
                         {
                             note: this.note,
-                            user: this.$store.state.user.id,
+                            user: this.$store.state.user.user_id,
                         }
                     )
                     .then(r => console.log(r))

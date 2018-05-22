@@ -57127,7 +57127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modal.image = modalArtifact.image;
             this.modal.title = modalArtifact.title;
             this.modal.description = modalArtifact.description;
-            this.modal.id = modalArtifact.gallery_id;
+            this.modal.id = modalArtifact.artifact_id;
             this.modal.editId = modalArtifact.edit_id;
             this.modal.category = modalArtifact.catagory;
             this.modal.tags = modalArtifact.tags;
@@ -57155,7 +57155,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             var update = this.gallery.find(function (art) {
-                return art.gallery_id === _this.modal.id;
+                return art.artifact_id === _this.modal.id;
             });
             update.description = this.modal.description;
             update.title = this.modal.title;
@@ -57167,7 +57167,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var old = this.gallery.find(function (art) {
-                return art.gallery_id === _this2.modal.id;
+                return art.artifact_id === _this2.modal.id;
             });
             this.modal.title = old.title;
             this.modal.description = old.description;
@@ -57268,7 +57268,7 @@ var render = function() {
           ? _c(
               "div",
               {
-                key: artifact.gallery_id,
+                key: artifact.artifact_id,
                 staticClass: "card",
                 on: {
                   click: function($event) {
@@ -58161,6 +58161,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58282,8 +58283,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return email;
                 }
             });
-            console.log(found);
-            axios.post('/email', this.draftEmail).then(function (response) {
+
+            var formData = new FormData();
+            formData.append('to', this.draftEmail.to.character_id);
+            formData.append('reply', this.draftEmail.reply);
+            formData.append('subject', this.draftEmail.subject);
+            formData.append('body', this.draftEmail.body);
+            formData.append('character_email_id', this.draftEmail.character_email_id);
+            if (this.draftEmail.attachment != null) {
+                formData.append('attachment', this.draftEmail.attachment);
+            }
+
+            axios.post('/email', formData).then(function (response) {
                 _this3.resetDraftEmail();
                 _this3.$forceUpdate();
             });
@@ -58552,7 +58563,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm.readModalData.reply ? _c("hr") : _vm._e(),
-                _vm._v("git\n                    "),
+                _vm._v(" "),
                 this.readModalData.reply
                   ? _c("h5", [
                       _c("b", [_vm._v(_vm._s(this.$store.state.user.name))])
@@ -58821,6 +58832,20 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
+                _c("input", {
+                  ref: "file",
+                  attrs: {
+                    type: "file",
+                    name: "emailAttachment",
+                    id: "emailAttachment"
+                  },
+                  on: {
+                    change: function($event) {
+                      _vm.setAttachment()
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
                   "button",
                   {
@@ -59207,7 +59232,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         postUpdatedNote: function postUpdatedNote() {
             axios.post("/videocall", {
                 note: this.note,
-                user: this.$store.state.user.id
+                user: this.$store.state.user.user_id
             }).then(function (r) {
                 return console.log(r);
             }).catch(function (e) {
@@ -59373,6 +59398,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
+//
+//
+//
 //
 //
 //
@@ -59710,7 +59738,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         saveVideoMessage: function saveVideoMessage(blob, href) {
             //append all needed information into a form
             var data = new FormData();
-            data.append('user', this.$store.state.user.id);
+            data.append('user', this.$store.state.user.user_id);
             data.append('character', this.clickedCharacter);
             data.append('question', this.currentQuestion.question_id);
 
@@ -60218,7 +60246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         saveVideoMessage: function saveVideoMessage(blob, href) {
             //append all needed information into a form
             var data = new FormData();
-            data.append('user', this.$store.state.user.id);
+            data.append('user', this.$store.state.user.user_id);
             data.append('character', this.clickedCharacter);
 
             //fetch the data saved into the blob
@@ -60345,11 +60373,11 @@ var render = function() {
               return _c(
                 "div",
                 {
-                  key: person.id,
+                  key: person.character_id,
                   staticClass: "contact-inner dropdown-item",
                   on: {
                     click: function($event) {
-                      _vm.loadCallVideo(person.id)
+                      _vm.loadCallVideo(person.character_id)
                     }
                   }
                 },
@@ -60370,7 +60398,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm.activeContacts.includes(person.id)
+                  _vm.activeContacts.includes(person.character_id)
                     ? _c("span", { staticClass: "characterActive" }, [
                         _c("i", { staticClass: "material-icons activeIcon" }, [
                           _vm._v("fiber_manual_record")
@@ -60383,7 +60411,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm.showRecordingInterface || _vm.leaveResponse
+        _vm.recording
           ? _c(
               "a",
               { attrs: { href: "#" }, on: { click: _vm.startStopRecording } },
@@ -60391,25 +60419,36 @@ var render = function() {
                 _c(
                   "i",
                   { staticClass: "material-icons", attrs: { id: "recording" } },
-                  [_vm._v("fiber_manual_record")]
+                  [_vm._v("stop")]
                 )
               ]
             )
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.showRecordingInterface && !_vm.leaveResponse
-          ? _c(
-              "a",
-              { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } },
-              [
-                _c(
-                  "i",
-                  { staticClass: "material-icons", attrs: { id: "call" } },
-                  [_vm._v(_vm._s(this.callIconToggleStatus))]
-                )
-              ]
-            )
-          : _vm._e(),
+          : _vm.showRecordingInterface || _vm.leaveResponse
+            ? _c(
+                "a",
+                { attrs: { href: "#" }, on: { click: _vm.startStopRecording } },
+                [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons",
+                      attrs: { id: "recording" }
+                    },
+                    [_vm._v("fiber_manual_record")]
+                  )
+                ]
+              )
+            : _c(
+                "a",
+                { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } },
+                [
+                  _c(
+                    "i",
+                    { staticClass: "material-icons", attrs: { id: "call" } },
+                    [_vm._v(_vm._s(this.callIconToggleStatus))]
+                  )
+                ]
+              ),
         _vm._v(" "),
         _c("canvas", { attrs: { id: "visualizer" } })
       ]),
@@ -89396,7 +89435,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 2rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n.delete[data-v-3dab0688] {\n    float: right;\n    margin-top: 40px;\n    margin-right: 20px;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 40px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    margin-top: 20px;\n    padding-right: 80px;\n    padding-left: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    width: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-3dab0688] {\n    max-width: 100%;\n}\n.menubtn[data-v-3dab0688] {\n    cursor:pointer;\n    margin-bottom: 2rem;\n}\n.article-title[data-v-3dab0688]:hover{\n    text-decoration: underline;\n}\n.delete[data-v-3dab0688] {\n    float: right;\n    margin-top: 40px;\n    margin-right: 20px;\n}\n#editor[data-v-3dab0688] {\n    background-color: white;\n    margin-left: 40px;\n}\n#libraryMenu[data-v-3dab0688] {\n    height: 100vh;\n    padding-top: 40px;\n    padding-left: 40px;\n    -webkit-box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n            box-shadow: inset -7px 0 9px -10px rgba(0,0,0,0.4);\n}\n#content-container[data-v-3dab0688] {\n    margin-top: 20px;\n    padding-right: 80px;\n    padding-left: 40px;\n    resize: none;\n    border:none;\n    height: 100%;\n    width: 100%;\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    height: -moz-available;          /* WebKit-based browsers will ignore this. */\n    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */\n}\n#content-container h1[data-v-3dab0688] {\n    margin-top: 0px;\n}\n.main[data-v-3dab0688]{\n    margin-top: 0px;\n}\n.row[data-v-3dab0688]{\n    margin: 0px;\n}\n\n", ""]);
 
 // exports
 
@@ -89492,12 +89531,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         showContent: function showContent(id) {
             var content = this.wiki.find(function (title) {
-                return title.id == id;
+                return title.article_id == id;
             });
 
             this.currentTitle = content.title;
             this.currentContent = content.content;
-            this.currentArticleId = content.id;
+            this.currentArticleId = content.article_id;
             this.currentPair = id;
         },
         /*changeLang: function (lang) {
@@ -89508,7 +89547,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             var content = this.wiki.find(function (title) {
-                return title.id == _this.currentPair;
+                return title.article_id == _this.currentPair;
             });
             content.content = this.currentContent;
 
@@ -89577,11 +89616,11 @@ var render = function() {
             return _c(
               "div",
               {
-                key: article.id,
+                key: article.article_id,
                 staticClass: "menubtn",
                 on: {
                   click: function($event) {
-                    _vm.showContent(article.id)
+                    _vm.showContent(article.article_id)
                   }
                 }
               },
@@ -89590,7 +89629,7 @@ var render = function() {
                   _vm._v(_vm._s(article.title))
                 ]),
                 _vm._v(" "),
-                _c("p", { attrs: { id: "title-" + article.id } })
+                _c("p", { attrs: { id: "title-" + article.article_id } })
               ]
             )
           }),

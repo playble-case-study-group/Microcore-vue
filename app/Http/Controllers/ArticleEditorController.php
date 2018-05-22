@@ -85,13 +85,13 @@ class ArticleEditorController extends Controller
 
     public function update(Request $request)
     {
-        // get the article object 
-//        DB::table('articles')
-//            ->where('id', $request->id)
-//            ->update([
-//                'content' => $request->content,
-//                'updated_at' => DB::raw("NOW()")
-//            ]);
+        //get the article object
+        DB::table('articles')
+            ->where('article_id', $request->id)
+            ->update([
+                'content' => $request->content,
+                'updated_at' => DB::raw("NOW()")
+            ]);
         return "success";
 
     }
@@ -100,7 +100,7 @@ class ArticleEditorController extends Controller
     {
         // get the article object
         DB::table('articles')
-            ->where('id', $request->article_id)
+            ->where('article_id', $request->article_id)
             ->delete();
         return $request->all();
 
