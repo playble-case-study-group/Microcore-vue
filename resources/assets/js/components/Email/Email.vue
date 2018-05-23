@@ -84,7 +84,7 @@
                         <h5 v-if="this.readModalData.reply">
                             From: {{  this.$store.state.user.name }}
                         </h5>
-                        <p>Subject: {{ readModalData.subject }}</p>
+                        <p v-if="this.readModalData.reply"git >Subject: {{ readModalData.subject }}</p>
                         <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
 
