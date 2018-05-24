@@ -3,34 +3,30 @@
         <div class="counterDisplay col-sm-12" v-if="this.count > 0">
             <br><br>
             <p v-if="!this.warning">
-                You will have {{ this.countdown }} seconds to respond.<br>
+                You will have {{ this.countdown }} seconds to respond.
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
-        <div class="unaskedQuestions questionList">
-            <span>
-                <p>Question Bank</p>
-                <hr>
-            </span>
+        <div class="unaskedQuestions questionList" v-if="showButtons">
+            <p>Question Bank</p>
+            <hr>
             <button type="button"
                     v-for="question in questions"
                     class= "active btn btn-success btn-lg button"
-                    v-if="question.question && showButtons && !disabledQuestions.includes(question.question_id)"
+                    v-if="question.question && !disabledQuestions.includes(question.question_id)"
                     :key="question.id"
                     @click="submitQuestion(question)">
                 <b>{{ question.question }}</b>
                 <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
             </button>
         </div>
-        <div class="askedQuestions questionList">
-            <span>
-                <p>History</p>
-                <hr>
-            </span>
+        <div class="askedQuestions questionList" v-if="showButtons">
+            <p>History</p>
+            <hr>
             <button type="button"
                     v-for="question in questions"
                     class= "visited btn btn-success btn-lg button"
-                    v-if="question.question && showButtons && disabledQuestions.includes(question.question_id)"
+                    v-if="question.question && disabledQuestions.includes(question.question_id)"
                     :key="question.id"
                     @click="submitQuestion(question)">
                 <b>{{ question.question }}</b>
@@ -124,7 +120,8 @@
         margin-top: 3px;
     }
     .counterDisplay {
-        font-size: 24px;
+        font-size: 16px;
+        top: -30px;
         text-align: center;
     }
     .counter {

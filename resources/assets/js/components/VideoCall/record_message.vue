@@ -1,6 +1,6 @@
 <template>
     <div id="record-message">
-        <video id="record_video" poster="/img/videocall/video-placeholder.jpg" autoplay muted="muted">
+        <video id="record_video" poster="/img/videocall/video-recording-placeholder.jpg" autoplay muted="muted">
             <source src="/video/record.mp4" type="video/mp4">
         </video>
     </div>
@@ -115,8 +115,11 @@
 </script>
 
 <style scoped>
+    #record-message {
+        height: 100%;
+    }
     #record_video{
-        height: calc(19vh - 11px);
+        height: 100%;
         width: 100%;
     }
 

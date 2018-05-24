@@ -235,6 +235,21 @@
                 //start recording
                 navigator.mediaDevices.getUserMedia(constraints)
                     .then(this.handleSuccess.bind(this))
+                    .catch(this.tryAudioOnly);
+            },
+            tryAudioOnly: function(){
+                //set that we want both audio and video
+                const constraints = {
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true
+                    }
+                };
+
+                //this.startAudio();
+                //start recording
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(this.handleSuccess.bind(this))
                     .catch(this.handleFailure);
             },
             handleFailure: function (error) {

@@ -59656,6 +59656,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //this.startAudio();
             //start recording
+            navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.tryAudioOnly);
+        },
+        tryAudioOnly: function tryAudioOnly() {
+            //set that we want both audio and video
+            var constraints = {
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true
+                }
+            };
+
+            //this.startAudio();
+            //start recording
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.handleFailure);
         },
         handleFailure: function handleFailure(error) {
@@ -59954,7 +59967,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: 3rem;\n    width: 15rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        height: 4rem;\n        width: 15rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: 3rem;\n    width: 15rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        height: 4rem;\n        width: 15rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59966,10 +59979,6 @@ exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
-//
-//
 //
 //
 //
@@ -60088,10 +60097,8 @@ var render = function() {
                 _vm._v(
                   "\n            You will have " +
                     _vm._s(this.countdown) +
-                    " seconds to respond."
+                    " seconds to respond.\n            Recording will start in : "
                 ),
-                _c("br"),
-                _vm._v("\n            Recording will start in : "),
                 _c("span", { staticClass: "counter" }, [
                   _vm._v(_vm._s(this.count))
                 ])
@@ -60105,101 +60112,90 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "unaskedQuestions questionList" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._l(_vm.questions, function(question) {
-          return question.question &&
-            _vm.showButtons &&
-            !_vm.disabledQuestions.includes(question.question_id)
-            ? _c(
-                "button",
-                {
-                  key: question.id,
-                  staticClass: "active btn btn-success btn-lg button",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.submitQuestion(question)
-                    }
-                  }
-                },
-                [
-                  _c("b", [_vm._v(_vm._s(question.question))]),
-                  _vm._v(" "),
-                  question.record_after
-                    ? _c("i", { staticClass: "material-icons recording" }, [
-                        _vm._v("fiber_manual_record")
-                      ])
-                    : _vm._e()
-                ]
-              )
-            : _vm._e()
-        })
-      ],
-      2
-    ),
+    _vm.showButtons
+      ? _c(
+          "div",
+          { staticClass: "unaskedQuestions questionList" },
+          [
+            _c("p", [_vm._v("Question Bank")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.questions, function(question) {
+              return question.question &&
+                !_vm.disabledQuestions.includes(question.question_id)
+                ? _c(
+                    "button",
+                    {
+                      key: question.id,
+                      staticClass: "active btn btn-success btn-lg button",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.submitQuestion(question)
+                        }
+                      }
+                    },
+                    [
+                      _c("b", [_vm._v(_vm._s(question.question))]),
+                      _vm._v(" "),
+                      question.record_after
+                        ? _c("i", { staticClass: "material-icons recording" }, [
+                            _vm._v("fiber_manual_record")
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "askedQuestions questionList" },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._l(_vm.questions, function(question) {
-          return question.question &&
-            _vm.showButtons &&
-            _vm.disabledQuestions.includes(question.question_id)
-            ? _c(
-                "button",
-                {
-                  key: question.id,
-                  staticClass: "visited btn btn-success btn-lg button",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.submitQuestion(question)
-                    }
-                  }
-                },
-                [
-                  _c("b", [_vm._v(_vm._s(question.question))]),
-                  _vm._v(" "),
-                  question.record_after
-                    ? _c("i", { staticClass: "material-icons recording" }, [
-                        _vm._v("fiber_manual_record")
-                      ])
-                    : _vm._e()
-                ]
-              )
-            : _vm._e()
-        })
-      ],
-      2
-    )
+    _vm.showButtons
+      ? _c(
+          "div",
+          { staticClass: "askedQuestions questionList" },
+          [
+            _c("p", [_vm._v("History")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.questions, function(question) {
+              return question.question &&
+                _vm.disabledQuestions.includes(question.question_id)
+                ? _c(
+                    "button",
+                    {
+                      key: question.id,
+                      staticClass: "visited btn btn-success btn-lg button",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.submitQuestion(question)
+                        }
+                      }
+                    },
+                    [
+                      _c("b", [_vm._v(_vm._s(question.question))]),
+                      _vm._v(" "),
+                      question.record_after
+                        ? _c("i", { staticClass: "material-icons recording" }, [
+                            _vm._v("fiber_manual_record")
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("p", [_vm._v("Question Bank")]),
-      _vm._v(" "),
-      _c("hr")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [_c("p", [_vm._v("History")]), _vm._v(" "), _c("hr")])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -60244,7 +60240,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: calc(19vh - 11px);\n    width: 100%;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#record-message[data-v-650ab126] {\n    height: 100%;\n}\n#record_video[data-v-650ab126]{\n    height: 100%;\n    width: 100%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60376,7 +60372,7 @@ var render = function() {
       {
         attrs: {
           id: "record_video",
-          poster: "/img/videocall/video-placeholder.jpg",
+          poster: "/img/videocall/video-recording-placeholder.jpg",
           autoplay: "",
           muted: "muted"
         },
