@@ -58167,7 +58167,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -58585,11 +58584,11 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("p", [_vm._v("To: " + _vm._s(_vm.readModalData.from))]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
-                ]),
+                this.readModalData.reply
+                  ? _c("p", { attrs: { git: "" } }, [
+                      _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 this.readModalData.reply
                   ? _c("div", { staticClass: "email-body" }, [
@@ -59079,7 +59078,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 15px;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0px;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 2rem;\n    -ms-flex-item-align: start;\n        align-self: start;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-direction: row-reverse;\n        flex-direction: row-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0;\n}\n}\n@media(min-width: 1350px){\n#notesParent[data-v-31d2957c]{\n        height: 45rem;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -59403,7 +59402,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: calc(19vh - 11px);\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  top: 137px;\n  height: 125px;\n  width: 150px;\n}\n@media (min-width: 1150px) {\n#call_video[data-v-00e307e5] {\n    height: calc(23vh - 20px);\n}\n#personal_video[data-v-00e307e5] {\n    top: 182px;\n}\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -59421,6 +59420,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
+//
 //
 //
 //
@@ -59954,7 +59954,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 3rem;\n    width: 26rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 3rem;\n    width: 26rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59966,6 +59966,19 @@ exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    he
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -60019,6 +60032,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         warningTime: Number,
         disabledQuestions: Array
     },
+    computed: {
+        returnAskedQuestions: function returnAskedQuestions() {
+            var appScope = this;
+            return this.questions.filter(function (el) {
+                return appScope.disabledQuestions.find(function (x) {
+                    return x.question_id == el.question_id;
+                });
+            });
+        },
+        returnUnaskedQuestions: function returnUnaskedQuestions() {
+            var appScope = this;
+            return this.questions.filter(function (el) {
+                return appScope.returnAskedQuestions.find(function (x) {
+                    return x.question_id != el.question_id;
+                });
+            });
+        }
+    },
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
@@ -60043,18 +60074,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     clearInterval(timer);
                 }
             }, 1000);
-        },
-        returnClass: function returnClass(question) {
-            var clicked = this.disabledQuestions.find(function (el) {
-                if (el.question_id == question.question_id) {
-                    return el;
-                }
-            });
-            if (clicked) {
-                return 'visited ';
-            } else {
-                return 'active ';
-            }
         }
     }
 
@@ -60068,45 +60087,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "question" } },
-    [
-      this.count > 0
-        ? _c("div", { staticClass: "counterDisplay col-sm-12" }, [
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            !this.warning
-              ? _c("p", [
-                  _vm._v(
-                    "\n            You will have " +
-                      _vm._s(this.countdown) +
-                      " seconds to respond."
-                  ),
-                  _c("br"),
-                  _vm._v("\n            Recording will start in : "),
-                  _c("span", { staticClass: "counter" }, [
-                    _vm._v(_vm._s(this.count))
-                  ])
+  return _c("div", { attrs: { id: "question" } }, [
+    this.count > 0
+      ? _c("div", { staticClass: "counterDisplay col-sm-12" }, [
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          !this.warning
+            ? _c("p", [
+                _vm._v(
+                  "\n            You will have " +
+                    _vm._s(this.countdown) +
+                    " seconds to respond."
+                ),
+                _c("br"),
+                _vm._v("\n            Recording will start in : "),
+                _c("span", { staticClass: "counter" }, [
+                  _vm._v(_vm._s(this.count))
                 ])
-              : _c("p", [
-                  _vm._v(" Time Remaining: "),
-                  _c("span", { staticClass: "counter" }, [
-                    _vm._v(_vm._s(this.count))
-                  ])
+              ])
+            : _c("p", [
+                _vm._v(" Time Remaining: "),
+                _c("span", { staticClass: "counter" }, [
+                  _vm._v(_vm._s(this.count))
                 ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
+              ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "unaskedQuestions" },
       _vm._l(_vm.questions, function(question) {
         return question.question && _vm.showButtons && _vm.count == 0
           ? _c(
               "button",
               {
                 key: question.id,
-                class:
-                  _vm.returnClass(question) + "btn btn-success btn-lg button",
+                staticClass: "active btn btn-success btn-lg button",
                 attrs: { type: "button" },
                 on: {
                   click: function($event) {
@@ -60126,9 +60144,39 @@ var render = function() {
             )
           : _vm._e()
       })
-    ],
-    2
-  )
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "askedQuestions" },
+      _vm._l(this.returnAskedQuestions, function(question) {
+        return question.question && _vm.showButtons && _vm.count == 0
+          ? _c(
+              "button",
+              {
+                key: question.id,
+                staticClass: "visited btn btn-success btn-lg button",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.submitQuestion(question)
+                  }
+                }
+              },
+              [
+                _c("b", [_vm._v(_vm._s(question.question))]),
+                _vm._v(" "),
+                question.record_after
+                  ? _c("i", { staticClass: "material-icons recording" }, [
+                      _vm._v("fiber_manual_record")
+                    ])
+                  : _vm._e()
+              ]
+            )
+          : _vm._e()
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60175,7 +60223,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: 27rem;\n    width: 100%;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: calc(19vh - 11px);\n    width: 100%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60339,51 +60387,59 @@ var render = function() {
     "div",
     { attrs: { id: "video" } },
     [
-      _c("div", { staticClass: "video-container" }, [
-        !_vm.showRecordingInterface
-          ? _c(
-              "video",
-              {
+      _c(
+        "div",
+        { staticClass: "video-container" },
+        [
+          !_vm.showRecordingInterface
+            ? _c(
+                "video",
+                {
+                  attrs: {
+                    id: "call_video",
+                    poster: "/img/videocall/video-placeholder.jpg"
+                  }
+                },
+                [
+                  _c("source", {
+                    attrs: {
+                      src: _vm.currentVideo.video_url,
+                      type: "video/mp4"
+                    }
+                  })
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.showRecordingInterface
+            ? _c(
+                "video",
+                {
+                  attrs: {
+                    id: "personal_video",
+                    poster: "/img/videocall/video-placeholder.jpg",
+                    autoplay: ""
+                  }
+                },
+                [
+                  _c("source", {
+                    attrs: { src: "/video/record.mp4", type: "video/mp4" }
+                  })
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.showRecordingInterface
+            ? _c("video-message", {
                 attrs: {
-                  id: "call_video",
-                  poster: "/img/videocall/video-placeholder.jpg"
+                  recording: _vm.recording,
+                  clickedCharacter: _vm.clickedCharacter
                 }
-              },
-              [
-                _c("source", {
-                  attrs: { src: _vm.currentVideo.video_url, type: "video/mp4" }
-                })
-              ]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.showRecordingInterface
-          ? _c(
-              "video",
-              {
-                attrs: {
-                  id: "personal_video",
-                  poster: "/img/videocall/video-placeholder.jpg",
-                  autoplay: ""
-                }
-              },
-              [
-                _c("source", {
-                  attrs: { src: "/video/record.mp4", type: "video/mp4" }
-                })
-              ]
-            )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm.showRecordingInterface
-        ? _c("video-message", {
-            attrs: {
-              recording: _vm.recording,
-              clickedCharacter: _vm.clickedCharacter
-            }
-          })
-        : _vm._e(),
+              })
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { attrs: { id: "controlBar" } }, [
         _c("div", { staticClass: "dropup" }, [

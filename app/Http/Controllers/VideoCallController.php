@@ -24,6 +24,7 @@ class VideoCallController extends Controller
         $questions = DB::table('questions')->get();
 
         $clicked_questions = DB::table('user_asked_questions')
+            ->select('question_id')
             ->where('user_id', Auth::id())
             ->get();
 

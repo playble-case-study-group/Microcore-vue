@@ -116,7 +116,7 @@
 
 <style scoped>
     #record_video{
-        height: 27rem;
+        height: calc(19vh - 11px);
         width: 100%;
     }
 

@@ -42,16 +42,24 @@
     }
     #notesParent{
         height:40rem;
-        top: 15px;
+        top: 2rem;
+        align-self: start;
     }
     .row{
         flex-flow: wrap-reverse;
+        flex-direction: row-reverse;
         justify-content: space-around;
     }
+
     @media(min-width:992px){
         #notesParent{
             height:42rem;
-            top: 0px;
+            top: 0;
+        }
+    }
+    @media(min-width: 1350px){
+        #notesParent{
+            height: 45rem;
         }
     }
 

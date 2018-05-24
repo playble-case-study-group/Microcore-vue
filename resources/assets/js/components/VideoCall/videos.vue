@@ -9,9 +9,10 @@
             <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
                 <source src="/video/record.mp4" type="video/mp4">
             </video>
+
+            <!--video recording component, hidden until click on inactive character-->
+            <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
         </div>
-        <!--video recording component, hidden until click on inactive character-->
-        <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
         <div id="controlBar">
 
@@ -473,6 +474,7 @@
     .video-container {
         position: relative;
         background-color: #000;
+        height: 44%;
     }
     #controlBar{
         display: flex;
@@ -487,7 +489,7 @@
         color: red;
     }
     #call_video{
-        height: calc(19vh - 11px);
+        height: 100%;
         width: 100%;
     }
     .contact-inner{
@@ -528,17 +530,9 @@
     #personal_video{
         position: absolute;
         right: 0px;
-        top: 137px;
+        bottom: -6px;
         height: 125px;
         width: 150px;
     }
 
-    @media(min-width:1150px){
-        #call_video {
-            height: calc(23vh - 20px);
-        }
-        #personal_video{
-            top: 182px;
-        }
-    }
 </style>

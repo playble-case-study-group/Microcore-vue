@@ -7,15 +7,28 @@
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
-        <button type="button"
-                v-for="question in questions"
-                :class= 'returnClass(question) + "btn btn-success btn-lg button"'
-                v-if="question.question && showButtons && count == 0"
-                :key="question.id"
-                @click="submitQuestion(question)">
-            <b>{{ question.question }}</b>
-            <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
-        </button>
+        <div class="unaskedQuestions">
+            <button type="button"
+                    v-for="question in questions"
+                    class= "active btn btn-success btn-lg button"
+                    v-if="question.question && showButtons && count == 0"
+                    :key="question.id"
+                    @click="submitQuestion(question)">
+                <b>{{ question.question }}</b>
+                <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
+            </button>
+        </div>
+        <div class="askedQuestions">
+            <button type="button"
+                    v-for="question in this.returnAskedQuestions"
+                    class= "visited btn btn-success btn-lg button"
+                    v-if="question.question && showButtons && count == 0"
+                    :key="question.id"
+                    @click="submitQuestion(question)">
+                <b>{{ question.question }}</b>
+                <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -52,6 +65,20 @@
             warningTime: Number,
             disabledQuestions: Array
         },
+        computed: {
+            returnAskedQuestions: function() {
+                let appScope = this;
+                return this.questions.filter( function(el) {
+                    return appScope.disabledQuestions.find(x => x.question_id == el.question_id)
+                })
+            },
+            returnUnaskedQuestions: function() {
+                let appScope = this;
+                return this.questions.filter( function(el) {
+                    return appScope.returnAskedQuestions.find(x => x.question_id != el.question_id)
+                })
+            }
+        },
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
@@ -78,18 +105,6 @@
                     }
                 }, 1000);
             },
-            returnClass: function(question) {
-                let clicked = this.disabledQuestions.find( function(el) {
-                    if(el.question_id == question.question_id){
-                        return el;
-                    }
-                })
-                if(clicked){
-                    return 'visited '
-                } else{
-                    return 'active '
-                }
-            }
         },
 
     }
@@ -104,6 +119,9 @@
     }
     .visited {
         opacity: 0.65;
+    }
+    .active {
+
     }
     .recording{
         color: #ff4d4d;
