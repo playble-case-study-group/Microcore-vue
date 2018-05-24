@@ -25,17 +25,6 @@
         methods: mapActions([
             'toggleTask'
         ])
-//            {
-//            check: function (id) {
-//                this.taskComplete = !this.taskComplete;
-////                axios.post('/tasks/complete',{id: id, complete: this.taskComplete})
-////                    .then((response)=>{
-//////                        console.log(response)
-////                    }).catch((error)=>{
-//////                    console.log(error.response.data)
-////                })
-//            }
-//        }
     }
 </script>
 
@@ -86,6 +75,7 @@
     /* When the checkbox is checked, add a blue background */
     label input:checked ~ .checkmark {
         background-color: #ABDBFB;
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */

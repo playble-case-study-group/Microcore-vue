@@ -62,13 +62,29 @@ class AssignmentController extends Controller
     {
         $assignment = DB::table('assignments')->where('assign_id', $request->assignId)->first();
 
-        $arr = json_decode($assignment->requirements, true);
+        $reqs = json_decode($assignment->requirements, true);
 
-        array_push($arr, $request->classId);
+        $reqs->classId = $request->classId;
+
+        dd($reqs);
 
         $type = DB::table('assignment_types')->where('assign_type_id', $assignment->assign_type_id)->first();
 
-        $assignments = DB::select($type->stored_procedure, $arr);
+        $assignments = collect();
+
+        switch ($type->assign_type_id) {
+            case 1:
+                $assignments = $this->retrieveEmailAssignments($arr[0], $arr[1], $arr[2]);
+                break;
+            case 2:
+                $assignments = $this->retrieveGalleryAssignments($arr[0]);
+                break;
+            case 3:
+                $assignments = $this->retrieveVideoAssignments($arr[0], $arr[1], $arr[2]);
+                break;
+        }
+
+//        $assignments = DB::select($type->stored_procedure, $arr);
 
         return $assignments;
     }
@@ -105,5 +121,20 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function retrieveEmailAssignments($characterId, $day, $classId)
+    {
+        
+    }
+
+    private function retrieveGalleryAssignments($classId)
+    {
+
+    }
+
+    private function retrieveVideoAssignments($questionId, $day, $classId)
+    {
+
     }
 }

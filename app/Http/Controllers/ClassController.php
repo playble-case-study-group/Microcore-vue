@@ -17,7 +17,7 @@ class ClassController extends Controller
     {
         // Get a list of instructors classes
         $classes = DB::table('classes')
-            ->join('instructor_has_class', 'instructor_has_class.class_id', '=', 'class.class_id')
+            ->join('instructor_has_class', 'instructor_has_class.class_id', '=', 'classes.class_id')
             ->where('instructor_has_class.instructor_id', Auth::id())
             ->get();
 
@@ -25,14 +25,14 @@ class ClassController extends Controller
         // Get the students in each class
         foreach ($classes as $class) {
             $class->students = DB::table('user_has_class')
-                ->join('users', 'users.id', 'user_has_class.user_id')
-                ->select('users.id', 'users.name', 'users.email', 'users.current_day')
+                ->join('users', 'users.user_id', 'user_has_class.user_id')
+                ->select('users.user_id', 'users.name', 'users.email', 'users.current_day')
                 ->where('user_has_class.class_id', $class->class_id)
                 ->get();
 
             $class->groups = DB::table('groups')
-                ->join('class_has_group', 'class_has_group.group_id', 'group.group_id')
-                ->select('group.name', 'group.group_id')
+                ->join('class_has_group', 'class_has_group.group_id', 'groups.group_id')
+                ->select('groups.name', 'groups.group_id')
                 ->where('class_has_group.class_id', $class->class_id)
                 ->get();
 
@@ -42,8 +42,8 @@ class ClassController extends Controller
 
             foreach ($class->groups as $group) {
                 $group->students = DB::table('users')
-                    ->join('user_has_group', 'user_has_group.user_id', 'users.id')
-                    ->select('users.name', 'users.id')
+                    ->join('user_has_group', 'user_has_group.user_id', 'users.user_id')
+                    ->select('users.name', 'users.user_id')
                     ->where('user_has_group.group_id', $group->group_id)
                     ->get();
 
@@ -53,14 +53,14 @@ class ClassController extends Controller
 
                 // Removing students who have been assigned
                 foreach ($group->students as $student) {
-                        $class->unAssigned->forget($student->id);
+                        $class->unAssigned->forget($student->user_id);
                 }
             }
 
             // Retrieving individual student assignments
             foreach ($class->students as $student) {
                 $student->emails = DB::table('student_emails')
-                    ->where('user_id', $student->id)
+                    ->where('user_id', $student->user_id)
                     ->get();
             }
 

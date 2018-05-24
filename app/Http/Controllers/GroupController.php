@@ -60,7 +60,7 @@ class GroupController extends Controller
             ]);
 
         DB::table('users')
-            ->where('id', Auth::id())
+            ->where('user_id', Auth::id())
             ->update(['assigned' => 1]);
 
         return $request->all();
@@ -75,7 +75,7 @@ class GroupController extends Controller
             ])->delete();
 
         DB::table('users')
-            ->where('id', Auth::id())
+            ->where('user_id', Auth::id())
             ->update(['assigned' => 0]);
 
         return $request->all();

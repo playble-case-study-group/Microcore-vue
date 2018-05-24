@@ -70,7 +70,9 @@
                 curAssignment: {},
                 tableData: [],
                 tableColumns: [],
-                tableOptions: {},
+                tableOptions: {
+                    headings: {}
+                },
                 test: {
                     columns: ['id', 'name', 'age'],
                     tableData: [
@@ -88,14 +90,14 @@
         },
         watch: {
             assignmentType: function () {
-                this.tableColumns = JSON.parse(this.assignmentType.table_columns);
+                let table_columns =  JSON.parse(this.assignmentType.table_columns);
+                this.tableColumns = table_columns.columns;
+                this.tableOptions.headings = table_columns.headings;
                 axios.get('/assignments/' + this.assignmentType.assign_type_id).then( response => {
                     this.assignmentList = response.data;
                 });
             },
             curAssignment: function () {
-
-
                 let data = {
                     assignId: this.curAssignment.assign_id,
                     classId: this.classId
