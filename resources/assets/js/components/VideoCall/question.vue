@@ -11,7 +11,7 @@
             <button type="button"
                     v-for="question in questions"
                     class= "active btn btn-success btn-lg button"
-                    v-if="question.question && showButtons && count == 0"
+                    v-if="question.question && showButtons && !disabledQuestions.includes(question.question_id)"
                     :key="question.id"
                     @click="submitQuestion(question)">
                 <b>{{ question.question }}</b>
@@ -20,9 +20,9 @@
         </div>
         <div class="askedQuestions">
             <button type="button"
-                    v-for="question in this.returnAskedQuestions"
+                    v-for="question in questions"
                     class= "visited btn btn-success btn-lg button"
-                    v-if="question.question && showButtons && count == 0"
+                    v-if="question.question && showButtons && disabledQuestions.includes(question.question_id)"
                     :key="question.id"
                     @click="submitQuestion(question)">
                 <b>{{ question.question }}</b>
@@ -64,20 +64,6 @@
             countdown: Number,
             warningTime: Number,
             disabledQuestions: Array
-        },
-        computed: {
-            returnAskedQuestions: function() {
-                let appScope = this;
-                return this.questions.filter( function(el) {
-                    return appScope.disabledQuestions.find(x => x.question_id == el.question_id)
-                })
-            },
-            returnUnaskedQuestions: function() {
-                let appScope = this;
-                return this.questions.filter( function(el) {
-                    return appScope.returnAskedQuestions.find(x => x.question_id != el.question_id)
-                })
-            }
         },
         methods: {
             submitQuestion: function (question) {

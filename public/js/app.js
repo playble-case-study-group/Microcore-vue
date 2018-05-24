@@ -60032,24 +60032,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         warningTime: Number,
         disabledQuestions: Array
     },
-    computed: {
-        returnAskedQuestions: function returnAskedQuestions() {
-            var appScope = this;
-            return this.questions.filter(function (el) {
-                return appScope.disabledQuestions.find(function (x) {
-                    return x.question_id == el.question_id;
-                });
-            });
-        },
-        returnUnaskedQuestions: function returnUnaskedQuestions() {
-            var appScope = this;
-            return this.questions.filter(function (el) {
-                return appScope.returnAskedQuestions.find(function (x) {
-                    return x.question_id != el.question_id;
-                });
-            });
-        }
-    },
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
@@ -60119,7 +60101,9 @@ var render = function() {
       "div",
       { staticClass: "unaskedQuestions" },
       _vm._l(_vm.questions, function(question) {
-        return question.question && _vm.showButtons && _vm.count == 0
+        return question.question &&
+          _vm.showButtons &&
+          !_vm.disabledQuestions.includes(question.question_id)
           ? _c(
               "button",
               {
@@ -60149,8 +60133,10 @@ var render = function() {
     _c(
       "div",
       { staticClass: "askedQuestions" },
-      _vm._l(this.returnAskedQuestions, function(question) {
-        return question.question && _vm.showButtons && _vm.count == 0
+      _vm._l(_vm.questions, function(question) {
+        return question.question &&
+          _vm.showButtons &&
+          _vm.disabledQuestions.includes(question.question_id)
           ? _c(
               "button",
               {

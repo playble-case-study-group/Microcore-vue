@@ -28,6 +28,9 @@ class VideoCallController extends Controller
             ->where('user_id', Auth::id())
             ->get();
 
+        $clicked_questions = collect($clicked_questions)->pluck('question_id')->all();
+        $clicked_questions = json_encode($clicked_questions);
+
         $notes = DB::table('notes')
             ->select('note')
             ->where('user_id', Auth::id())
