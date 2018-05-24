@@ -59402,7 +59402,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -59954,7 +59954,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 3rem;\n    width: 26rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: 3rem;\n    width: 15rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        height: 4rem;\n        width: 15rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59966,6 +59966,14 @@ exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    he
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -60099,72 +60107,99 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "unaskedQuestions" },
-      _vm._l(_vm.questions, function(question) {
-        return question.question &&
-          _vm.showButtons &&
-          !_vm.disabledQuestions.includes(question.question_id)
-          ? _c(
-              "button",
-              {
-                key: question.id,
-                staticClass: "active btn btn-success btn-lg button",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.submitQuestion(question)
+      { staticClass: "unaskedQuestions questionList" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.questions, function(question) {
+          return question.question &&
+            _vm.showButtons &&
+            !_vm.disabledQuestions.includes(question.question_id)
+            ? _c(
+                "button",
+                {
+                  key: question.id,
+                  staticClass: "active btn btn-success btn-lg button",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitQuestion(question)
+                    }
                   }
-                }
-              },
-              [
-                _c("b", [_vm._v(_vm._s(question.question))]),
-                _vm._v(" "),
-                question.record_after
-                  ? _c("i", { staticClass: "material-icons recording" }, [
-                      _vm._v("fiber_manual_record")
-                    ])
-                  : _vm._e()
-              ]
-            )
-          : _vm._e()
-      })
+                },
+                [
+                  _c("b", [_vm._v(_vm._s(question.question))]),
+                  _vm._v(" "),
+                  question.record_after
+                    ? _c("i", { staticClass: "material-icons recording" }, [
+                        _vm._v("fiber_manual_record")
+                      ])
+                    : _vm._e()
+                ]
+              )
+            : _vm._e()
+        })
+      ],
+      2
     ),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "askedQuestions" },
-      _vm._l(_vm.questions, function(question) {
-        return question.question &&
-          _vm.showButtons &&
-          _vm.disabledQuestions.includes(question.question_id)
-          ? _c(
-              "button",
-              {
-                key: question.id,
-                staticClass: "visited btn btn-success btn-lg button",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.submitQuestion(question)
+      { staticClass: "askedQuestions questionList" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.questions, function(question) {
+          return question.question &&
+            _vm.showButtons &&
+            _vm.disabledQuestions.includes(question.question_id)
+            ? _c(
+                "button",
+                {
+                  key: question.id,
+                  staticClass: "visited btn btn-success btn-lg button",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitQuestion(question)
+                    }
                   }
-                }
-              },
-              [
-                _c("b", [_vm._v(_vm._s(question.question))]),
-                _vm._v(" "),
-                question.record_after
-                  ? _c("i", { staticClass: "material-icons recording" }, [
-                      _vm._v("fiber_manual_record")
-                    ])
-                  : _vm._e()
-              ]
-            )
-          : _vm._e()
-      })
+                },
+                [
+                  _c("b", [_vm._v(_vm._s(question.question))]),
+                  _vm._v(" "),
+                  question.record_after
+                    ? _c("i", { staticClass: "material-icons recording" }, [
+                        _vm._v("fiber_manual_record")
+                      ])
+                    : _vm._e()
+                ]
+              )
+            : _vm._e()
+        })
+      ],
+      2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("p", [_vm._v("Question Bank")]),
+      _vm._v(" "),
+      _c("hr")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("p", [_vm._v("History")]), _vm._v(" "), _c("hr")])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

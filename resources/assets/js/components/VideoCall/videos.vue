@@ -514,11 +514,11 @@
         font-size: 14px;
     }
     #characterQuestions{
-        height: 20rem;
+        height: 21rem;
         overflow-y: scroll;
         background-color: white;
         display: flex;
-        flex-flow: wrap;
+        flex-flow: inherit;
         justify-content: space-between;
     }
     .dropdown-menu{

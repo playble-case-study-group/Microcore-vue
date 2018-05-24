@@ -7,7 +7,11 @@
                 Recording will start in : <span class="counter">{{ this.count }}</span></p>
             <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
         </div>
-        <div class="unaskedQuestions">
+        <div class="unaskedQuestions questionList">
+            <span>
+                <p>Question Bank</p>
+                <hr>
+            </span>
             <button type="button"
                     v-for="question in questions"
                     class= "active btn btn-success btn-lg button"
@@ -18,7 +22,11 @@
                 <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
             </button>
         </div>
-        <div class="askedQuestions">
+        <div class="askedQuestions questionList">
+            <span>
+                <p>History</p>
+                <hr>
+            </span>
             <button type="button"
                     v-for="question in questions"
                     class= "visited btn btn-success btn-lg button"
@@ -99,9 +107,9 @@
 
 <style scoped>
     .button {
-        margin: 2rem;
+        margin: 1rem 0;
         height: 3rem;
-        width: 26rem;
+        width: 15rem;
     }
     .visited {
         opacity: 0.65;
@@ -124,17 +132,21 @@
         color: #dc3545;
 
     }
+    .questionList {
+        width: 50%;
+        padding: 15px 25px 0;
+    }
     @media(min-width: 992px){
         .button {
-            margin: 25px 25px;
+            margin: 1rem 0;
             height: 4rem;
-            width: 13rem;
+            width: 15rem;
             white-space: normal;
         }
     }
     @media(min-width: 1400px){
         .button {
-            margin: 2rem 2rem;
+            margin: 1rem 0rem;
             height: 4rem;
             width: 17rem;
         }
