@@ -58,7 +58,9 @@
                              :warningTime="this.warningTime"
                              :questions="this.currentQuestions"
                              :disabledQuestions="this.disabledQuestions"
-                             @question="askQuestion">
+                             @question="askQuestion"
+                             @endEarly="endResponseEarly">
+
         </character-questions>
 
     </div>
@@ -90,7 +92,8 @@
                 leaveResponse: false,
                 responded: false,
                 countdownTime: 0,
-                warningTime: 5
+                warningTime: 5,
+                endMessage: false
             }
         },
         mounted() {
@@ -207,6 +210,9 @@
                 this.responded = false;
                 this.currentQuestion = question;
             },
+            endResponseEarly: function() {
+                this.endMessage = true;
+            },
 
             //these functions handle all video objects and actions
             answerQuestion: function(){
@@ -272,7 +278,6 @@
 
                 //how long you would like to warning countdown to be
                 let warning = this.warningTime * 1000;
-                console.log(warning);
 
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
@@ -284,11 +289,10 @@
                     video.muted = 'true';
                 })
 
-                let end = false;
                 let timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
                 console.log(timeout);
                 setTimeout(function () {
-                    end = true;
+                    appScope.endMessage = true;
                 }, timeout)
 
                 this.startAudio(stream);
@@ -297,7 +301,7 @@
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if(end){
+                    if(appScope.endMessage){
                         mediaRecorder.stop();
                     }
 
@@ -310,6 +314,7 @@
 
                     appScope.leaveResponse = false;
                     appScope.responded = true;
+                    appScope.endMessage = false;
 
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});

@@ -37,6 +37,13 @@ class SimulationController extends Controller
 
 
         // if not on the first day, reset the previous day.
+        $delete_videos = DB::table('student_video_submissions')
+            ->select('submission_url')
+            ->where('submission_day', $request->day)
+            ->where('user_id', Auth::id())
+            ->get();
+        dd($delete_videos);
+
         DB::table('student_video_submissions')
             ->where('submission_day', $request->day)
             ->where('user_id', Auth::id())

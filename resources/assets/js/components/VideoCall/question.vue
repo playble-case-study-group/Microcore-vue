@@ -1,11 +1,15 @@
 <template>
     <div id="question">
-        <div class="counterDisplay col-sm-12" v-if="this.count > 0">
+        <div class="counterDisplay col-sm-12" v-if="this.count > 0"><!---->
             <br><br>
             <p v-if="!this.warning">
                 You will have {{ this.countdown }} seconds to respond.
-                Recording will start in : <span class="counter">{{ this.count }}</span></p>
-            <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
+                Recording will start in : <span class="counter">{{ this.count }}</span>
+            </p>
+            <p v-else>
+                Time Remaining: <span class="counter">{{ this.count }}</span><br><br>
+                <button @click="endResponseEarly" class="btn btn-light">End Recording Early</button>
+            </p>
         </div>
         <div class="unaskedQuestions questionList" v-if="showButtons">
             <p>Question Bank</p>
@@ -72,8 +76,7 @@
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
-                this.disabledQuestions.push({'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day});
-                this.returnClass(question);
+                this.disabledQuestions.push(question.question_id);
                 this.$forceUpdate();
                 axios.post(
                     '/clickedQuestion',
@@ -95,6 +98,10 @@
                     }
                 }, 1000);
             },
+            endResponseEarly: function() {
+                this.count = 0;
+                this.$emit('endEarly');
+            }
         },
 
     }

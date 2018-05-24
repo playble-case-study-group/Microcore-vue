@@ -59486,6 +59486,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -59512,7 +59514,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             leaveResponse: false,
             responded: false,
             countdownTime: 0,
-            warningTime: 5
+            warningTime: 5,
+            endMessage: false
         };
     },
     mounted: function mounted() {
@@ -59632,6 +59635,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.responded = false;
             this.currentQuestion = question;
         },
+        endResponseEarly: function endResponseEarly() {
+            this.endMessage = true;
+        },
 
         //these functions handle all video objects and actions
         answerQuestion: function answerQuestion() {
@@ -59691,7 +59697,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //how long you would like to warning countdown to be
             var warning = this.warningTime * 1000;
-            console.log(warning);
 
             //start recording when video is loaded
             video.addEventListener('loadeddata', function () {
@@ -59703,11 +59708,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 video.muted = 'true';
             });
 
-            var end = false;
             var timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
             console.log(timeout);
             setTimeout(function () {
-                end = true;
+                appScope.endMessage = true;
             }, timeout);
 
             this.startAudio(stream);
@@ -59716,7 +59720,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (end) {
+                if (appScope.endMessage) {
                     mediaRecorder.stop();
                 }
             });
@@ -59728,6 +59732,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 appScope.leaveResponse = false;
                 appScope.responded = true;
+                appScope.endMessage = false;
 
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
@@ -60017,6 +60022,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -60052,8 +60061,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
-            this.disabledQuestions.push({ 'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day });
-            this.returnClass(question);
+            this.disabledQuestions.push(question.question_id);
             this.$forceUpdate();
             axios.post('/clickedQuestion', {
                 id: question.question_id
@@ -60073,6 +60081,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     clearInterval(timer);
                 }
             }, 1000);
+        },
+        endResponseEarly: function endResponseEarly() {
+            this.count = 0;
+            this.$emit('endEarly');
         }
     }
 
@@ -60104,10 +60116,21 @@ var render = function() {
                 ])
               ])
             : _c("p", [
-                _vm._v(" Time Remaining: "),
+                _vm._v("\n            Time Remaining: "),
                 _c("span", { staticClass: "counter" }, [
                   _vm._v(_vm._s(this.count))
-                ])
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light",
+                    on: { click: _vm.endResponseEarly }
+                  },
+                  [_vm._v("End Recording Early")]
+                )
               ])
         ])
       : _vm._e(),
@@ -60240,7 +60263,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#record-message[data-v-650ab126] {\n    height: 100%;\n}\n#record_video[data-v-650ab126]{\n    height: 100%;\n    width: 100%;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#record-message[data-v-650ab126] {\n    height: 100%;\n}\n#record_video[data-v-650ab126]{\n    height: 100%;\n    width: 100%;\n}\n.video-placeholder[data-v-650ab126] {\n    height: 100%;\n    width: 100%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60260,6 +60283,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60268,15 +60317,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         recording: Boolean,
         clickedCharacter: Number
     },
+    data: function data() {
+        return {
+            cancel: null,
+            blob: null,
+            href: null
+        };
+    },
+
     watch: {
         recording: function recording() {
+            this.cancel = this.recording;
+
             if (this.recording) {
                 this.leaveMessage();
             }
+        },
+        clickedCharacter: function clickedCharacter() {
+            this.$forceUpdate();
         }
     },
     methods: {
         leaveMessage: function leaveMessage() {
+            this.blob = null;
+            this.href = null;
+
             //set that we want both audio and video
             var constraints = {
                 video: true,
@@ -60309,12 +60374,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //set local variable to set correct scope
             var appScope = this;
 
+            //set video to timeout if recording goes over 5 mins
+            var timeout = 5 * 60 * 1000;
+            setTimeout(function () {
+                appScope.cancel = false;
+            }, timeout);
+
             //save data as it becomes available. Stop recording if stop button has been triggered
             mediaRecorder.addEventListener('dataavailable', function (e) {
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (appScope.recording == false) {
+                console.log(appScope.recording);
+                if (appScope.cancel == false) {
                     mediaRecorder.stop();
                 }
             });
@@ -60327,11 +60399,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 //save the recorded data to a blob, and give it a url
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
-
-                appScope.saveVideoMessage(blob, href);
+                appScope.blob = blob;
+                appScope.href = href;
+                $('#saveModal').show();
             });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
+            $('#saveModal').hide();
+
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -60354,6 +60429,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 };
             });
+        },
+        clearVideoMessage: function clearVideoMessage() {
+            $('#saveModal').hide();
+            this.blob = null;
+            this.href = null;
         }
     }
 });
@@ -60367,22 +60447,104 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "record-message" } }, [
+    !this.recording
+      ? _c("img", {
+          staticClass: "video-placeholder",
+          attrs: { src: "/img/videocall/video-recording-placeholder.jpg" }
+        })
+      : _c(
+          "video",
+          {
+            attrs: {
+              id: "record_video",
+              poster: "/img/videocall/video-recording-placeholder.jpg",
+              autoplay: "",
+              muted: "muted"
+            },
+            domProps: { muted: true }
+          },
+          [
+            _c("source", {
+              attrs: { src: "/video/record.mp4", type: "video/mp4" }
+            })
+          ]
+        ),
+    _vm._v(" "),
     _c(
-      "video",
+      "div",
       {
+        staticClass: "modal",
         attrs: {
-          id: "record_video",
-          poster: "/img/videocall/video-recording-placeholder.jpg",
-          autoplay: "",
-          muted: "muted"
-        },
-        domProps: { muted: true }
+          id: "saveModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "saveModal",
+          "aria-hidden": "true"
+        }
       },
-      [_c("source", { attrs: { src: "/video/record.mp4", type: "video/mp4" } })]
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "videoOptions btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.saveVideoMessage(_vm.blob, _vm.href)
+                      }
+                    }
+                  },
+                  [_vm._v("Save Message")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "videoOptions btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.clearVideoMessage }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Save Message?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("Would you like to save your recorded message?")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -60557,7 +60719,7 @@ var render = function() {
           questions: this.currentQuestions,
           disabledQuestions: this.disabledQuestions
         },
-        on: { question: _vm.askQuestion }
+        on: { question: _vm.askQuestion, endEarly: _vm.endResponseEarly }
       })
     ],
     1

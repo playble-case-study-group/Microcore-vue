@@ -1,8 +1,34 @@
 <template>
     <div id="record-message">
-        <video id="record_video" poster="/img/videocall/video-recording-placeholder.jpg" autoplay muted="muted">
+        <img v-if="!this.recording" class="video-placeholder" src="/img/videocall/video-recording-placeholder.jpg">
+
+        <video v-else id="record_video" poster="/img/videocall/video-recording-placeholder.jpg" autoplay muted="muted">
             <source src="/video/record.mp4" type="video/mp4">
         </video>
+
+        <div class="modal" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Save Message?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Would you like to save your recorded message?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                                @click="saveVideoMessage(blob,href)"
+                                type="button"
+                                class="videoOptions btn btn-primary">Save Message</button>
+                        <button
+                                @click="clearVideoMessage"
+                                type="button"
+                                class="videoOptions btn btn-secondary"
+                                data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -14,15 +40,30 @@
             recording: Boolean,
             clickedCharacter: Number
         },
+        data() {
+            return {
+                cancel: null,
+                blob: null,
+                href: null
+            }
+        },
         watch:{
            recording: function(){
+               this.cancel = this.recording;
+
                if(this.recording){
                    this.leaveMessage();
                }
-           }
+           },
+            clickedCharacter: function() {
+                this.$forceUpdate();
+            }
         },
         methods: {
             leaveMessage: function(){
+                this.blob = null;
+                this.href = null;
+
                 //set that we want both audio and video
                 const constraints = {
                     video: true,
@@ -57,12 +98,19 @@
                 //set local variable to set correct scope
                 let appScope = this;
 
+                //set video to timeout if recording goes over 5 mins
+                let timeout = 5 * 60 * 1000;
+                setTimeout(function () {
+                    appScope.cancel = false;
+                }, timeout)
+
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if (appScope.recording == false) {
+                    console.log(appScope.recording);
+                    if (appScope.cancel == false) {
                         mediaRecorder.stop();
                     }
                 });
@@ -75,11 +123,14 @@
                     //save the recorded data to a blob, and give it a url
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
-
-                    appScope.saveVideoMessage(blob, href);
+                    appScope.blob = blob;
+                    appScope.href = href;
+                    $('#saveModal').show();
                 })
             },
             saveVideoMessage: function(blob, href){
+                $('#saveModal').hide();
+
                 //append all needed information into a form
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
@@ -108,6 +159,11 @@
                             .catch(e => console.log(e));
                     };
                 })
+            },
+            clearVideoMessage: function() {
+                $('#saveModal').hide();
+                this.blob = null;
+                this.href = null;
             }
         }
     }
@@ -119,6 +175,10 @@
         height: 100%;
     }
     #record_video{
+        height: 100%;
+        width: 100%;
+    }
+    .video-placeholder {
         height: 100%;
         width: 100%;
     }
