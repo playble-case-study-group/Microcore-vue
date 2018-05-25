@@ -70,16 +70,21 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header heading">
-                        <h5 class="modal-title">{{ readModalData.subject }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5><b>{{ readModalData.from }}</b></h5>
+                        <h5>
+                            From: {{ readModalData.from }}
+                        </h5>
+                        <p>Subject: {{ readModalData.subject }}</p>
                         <p class="email-body">{{ readModalData.body }}</p>
                         <hr v-if="readModalData.reply">
-                        <h5 v-if="this.readModalData.reply"><b>{{  this.$store.state.user.name }}</b></h5>
+                        <h5 v-if="this.readModalData.reply">
+                            From: {{  this.$store.state.user.name }}
+                        </h5>
+                        <p v-if="this.readModalData.reply"git >Subject: {{ readModalData.subject }}</p>
                         <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
                     </div>
 
@@ -297,6 +302,7 @@
                 }
 
                 axios.post('/email', formData).then(response => {
+                    this.studentEmails.push(this.draftEmail);
                     this.resetDraftEmail();
                     this.$forceUpdate();
                 });
@@ -395,7 +401,7 @@
         resize: none;
     }
     .email-body{
-        margin: 20px 0 40px;
+        margin: 30px 0 40px;
     }
     .reply{
         font-size: 25px;

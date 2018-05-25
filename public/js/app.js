@@ -57982,7 +57982,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 20px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-52d1ee62] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-52d1ee62], th[data-v-52d1ee62] {\n  padding: 10px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-52d1ee62] {\n  font-size: 25px;\n}\n.reply-contact[data-v-52d1ee62] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-52d1ee62] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -57996,6 +57996,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58297,6 +58302,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             axios.post('/email', formData).then(function (response) {
+                _this3.studentEmails.push(_this3.draftEmail);
                 _this3.resetDraftEmail();
                 _this3.$forceUpdate();
             });
@@ -58549,16 +58555,20 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header heading" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v(_vm._s(_vm.readModalData.subject))
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ]),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("h5", [_c("b", [_vm._v(_vm._s(_vm.readModalData.from))])]),
+                _c("h5", [
+                  _vm._v(
+                    "\n                        From: " +
+                      _vm._s(_vm.readModalData.from) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "email-body" }, [
                   _vm._v(_vm._s(_vm.readModalData.body))
@@ -58568,7 +58578,17 @@ var render = function() {
                 _vm._v(" "),
                 this.readModalData.reply
                   ? _c("h5", [
-                      _c("b", [_vm._v(_vm._s(this.$store.state.user.name))])
+                      _vm._v(
+                        "\n                        From: " +
+                          _vm._s(this.$store.state.user.name) +
+                          "\n                    "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("p", { attrs: { git: "" } }, [
+                      _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -58907,18 +58927,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("div", { staticClass: "modal-header heading" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -59058,7 +59080,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 15px;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0px;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 2rem;\n    -ms-flex-item-align: start;\n        align-self: start;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-direction: row-reverse;\n        flex-direction: row-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0;\n}\n}\n@media(min-width: 1350px){\n#notesParent[data-v-31d2957c]{\n        height: 45rem;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -59382,7 +59404,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: calc(19vh - 11px);\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 20rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: wrap;\n      flex-flow: wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  top: 137px;\n  height: 125px;\n  width: 150px;\n}\n@media (min-width: 1150px) {\n#call_video[data-v-00e307e5] {\n    height: calc(23vh - 20px);\n}\n#personal_video[data-v-00e307e5] {\n    top: 182px;\n}\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -59400,6 +59422,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
+//
+//
+//
 //
 //
 //
@@ -59491,7 +59516,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             leaveResponse: false,
             responded: false,
             countdownTime: 0,
-            warningTime: 5
+            warningTime: 5,
+            endMessage: false
         };
     },
     mounted: function mounted() {
@@ -59611,6 +59637,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.responded = false;
             this.currentQuestion = question;
         },
+        endResponseEarly: function endResponseEarly() {
+            this.endMessage = true;
+        },
 
         //these functions handle all video objects and actions
         answerQuestion: function answerQuestion() {
@@ -59631,6 +59660,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     noiseSuppression: true
                 },
                 video: true
+            };
+
+            //this.startAudio();
+            //start recording
+            navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.tryAudioOnly);
+        },
+        tryAudioOnly: function tryAudioOnly() {
+            //set that we want both audio and video
+            var constraints = {
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true
+                }
             };
 
             //this.startAudio();
@@ -59657,7 +59699,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //how long you would like to warning countdown to be
             var warning = this.warningTime * 1000;
-            console.log(warning);
 
             //start recording when video is loaded
             video.addEventListener('loadeddata', function () {
@@ -59669,11 +59710,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 video.muted = 'true';
             });
 
-            var end = false;
             var timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
             console.log(timeout);
             setTimeout(function () {
-                end = true;
+                appScope.endMessage = true;
             }, timeout);
 
             this.startAudio(stream);
@@ -59682,7 +59722,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (end) {
+                if (appScope.endMessage) {
                     mediaRecorder.stop();
                 }
             });
@@ -59694,6 +59734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 appScope.leaveResponse = false;
                 appScope.responded = true;
+                appScope.endMessage = false;
 
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
@@ -59933,7 +59974,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    height: 3rem;\n    width: 26rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 24px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 25px 25px;\n        height: 4rem;\n        width: 13rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 2rem 2rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: 3rem;\n    width: 15rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        height: 4rem;\n        width: 15rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59945,6 +59986,27 @@ exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 2rem;\n    he
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -60001,8 +60063,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
-            this.disabledQuestions.push({ 'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day });
-            this.returnClass(question);
+            this.disabledQuestions.push(question.question_id);
             this.$forceUpdate();
             axios.post('/clickedQuestion', {
                 id: question.question_id
@@ -60023,17 +60084,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }, 1000);
         },
-        returnClass: function returnClass(question) {
-            var clicked = this.disabledQuestions.find(function (el) {
-                if (el.question_id == question.question_id) {
-                    return el;
-                }
-            });
-            if (clicked) {
-                return 'visited ';
-            } else {
-                return 'active ';
-            }
+        endResponseEarly: function endResponseEarly() {
+            this.count = 0;
+            this.$emit('endEarly');
         }
     }
 
@@ -60047,67 +60100,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "question" } },
-    [
-      this.count > 0
-        ? _c("div", { staticClass: "counterDisplay col-sm-12" }, [
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            !this.warning
-              ? _c("p", [
-                  _vm._v(
-                    "\n            You will have " +
-                      _vm._s(this.countdown) +
-                      " seconds to respond."
-                  ),
-                  _c("br"),
-                  _vm._v("\n            Recording will start in : "),
-                  _c("span", { staticClass: "counter" }, [
-                    _vm._v(_vm._s(this.count))
-                  ])
+  return _c("div", { attrs: { id: "question" } }, [
+    this.count > 0
+      ? _c("div", { staticClass: "counterDisplay col-sm-12" }, [
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          !this.warning
+            ? _c("p", [
+                _vm._v(
+                  "\n            You will have " +
+                    _vm._s(this.countdown) +
+                    " seconds to respond.\n            Recording will start in : "
+                ),
+                _c("span", { staticClass: "counter" }, [
+                  _vm._v(_vm._s(this.count))
                 ])
-              : _c("p", [
-                  _vm._v(" Time Remaining: "),
-                  _c("span", { staticClass: "counter" }, [
-                    _vm._v(_vm._s(this.count))
-                  ])
-                ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.questions, function(question) {
-        return question.question && _vm.showButtons && _vm.count == 0
-          ? _c(
-              "button",
-              {
-                key: question.id,
-                class:
-                  _vm.returnClass(question) + "btn btn-success btn-lg button",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.submitQuestion(question)
-                  }
-                }
-              },
-              [
-                _c("b", [_vm._v(_vm._s(question.question))]),
+              ])
+            : _c("p", [
+                _vm._v("\n            Time Remaining: "),
+                _c("span", { staticClass: "counter" }, [
+                  _vm._v(_vm._s(this.count))
+                ]),
+                _c("br"),
+                _c("br"),
                 _vm._v(" "),
-                question.record_after
-                  ? _c("i", { staticClass: "material-icons recording" }, [
-                      _vm._v("fiber_manual_record")
-                    ])
-                  : _vm._e()
-              ]
-            )
-          : _vm._e()
-      })
-    ],
-    2
-  )
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light",
+                    on: { click: _vm.endResponseEarly }
+                  },
+                  [_vm._v("End Recording Early")]
+                )
+              ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showButtons
+      ? _c(
+          "div",
+          { staticClass: "unaskedQuestions questionList" },
+          [
+            _c("p", [_vm._v("Question Bank")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.questions, function(question) {
+              return question.question &&
+                !_vm.disabledQuestions.includes(question.question_id)
+                ? _c(
+                    "button",
+                    {
+                      key: question.id,
+                      staticClass: "active btn btn-success btn-lg button",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.submitQuestion(question)
+                        }
+                      }
+                    },
+                    [
+                      _c("b", [_vm._v(_vm._s(question.question))]),
+                      _vm._v(" "),
+                      question.record_after
+                        ? _c("i", { staticClass: "material-icons recording" }, [
+                            _vm._v("fiber_manual_record")
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showButtons
+      ? _c(
+          "div",
+          { staticClass: "askedQuestions questionList" },
+          [
+            _c("p", [_vm._v("History")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(_vm.questions, function(question) {
+              return question.question &&
+                _vm.disabledQuestions.includes(question.question_id)
+                ? _c(
+                    "button",
+                    {
+                      key: question.id,
+                      staticClass: "visited btn btn-success btn-lg button",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.submitQuestion(question)
+                        }
+                      }
+                    },
+                    [
+                      _c("b", [_vm._v(_vm._s(question.question))]),
+                      _vm._v(" "),
+                      question.record_after
+                        ? _c("i", { staticClass: "material-icons recording" }, [
+                            _vm._v("fiber_manual_record")
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60154,7 +60265,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#record_video[data-v-650ab126]{\n    height: 27rem;\n    width: 100%;\n}\n\n\n", ""]);
+exports.push([module.i, "\n#record-message[data-v-650ab126] {\n    height: 100%;\n}\n#record_video[data-v-650ab126]{\n    height: 100%;\n    width: 100%;\n}\n.video-placeholder[data-v-650ab126] {\n    height: 100%;\n    width: 100%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60174,6 +60285,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60182,15 +60319,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         recording: Boolean,
         clickedCharacter: Number
     },
+    data: function data() {
+        return {
+            cancel: null,
+            blob: null,
+            href: null
+        };
+    },
+
     watch: {
         recording: function recording() {
+            this.cancel = this.recording;
+
             if (this.recording) {
                 this.leaveMessage();
             }
+        },
+        clickedCharacter: function clickedCharacter() {
+            this.$forceUpdate();
         }
     },
     methods: {
         leaveMessage: function leaveMessage() {
+            this.blob = null;
+            this.href = null;
+
             //set that we want both audio and video
             var constraints = {
                 video: true,
@@ -60223,12 +60376,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //set local variable to set correct scope
             var appScope = this;
 
+            //set video to timeout if recording goes over 5 mins
+            var timeout = 5 * 60 * 1000;
+            setTimeout(function () {
+                appScope.cancel = false;
+            }, timeout);
+
             //save data as it becomes available. Stop recording if stop button has been triggered
             mediaRecorder.addEventListener('dataavailable', function (e) {
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (appScope.recording == false) {
+                console.log(appScope.recording);
+                if (appScope.cancel == false) {
                     mediaRecorder.stop();
                 }
             });
@@ -60241,11 +60401,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 //save the recorded data to a blob, and give it a url
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
-
-                appScope.saveVideoMessage(blob, href);
+                appScope.blob = blob;
+                appScope.href = href;
+                $('#saveModal').show();
             });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
+            $('#saveModal').hide();
+
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -60268,6 +60431,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 };
             });
+        },
+        clearVideoMessage: function clearVideoMessage() {
+            $('#saveModal').hide();
+            this.blob = null;
+            this.href = null;
         }
     }
 });
@@ -60281,22 +60449,104 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "record-message" } }, [
+    !this.recording
+      ? _c("img", {
+          staticClass: "video-placeholder",
+          attrs: { src: "/img/videocall/video-recording-placeholder.jpg" }
+        })
+      : _c(
+          "video",
+          {
+            attrs: {
+              id: "record_video",
+              poster: "/img/videocall/video-recording-placeholder.jpg",
+              autoplay: "",
+              muted: "muted"
+            },
+            domProps: { muted: true }
+          },
+          [
+            _c("source", {
+              attrs: { src: "/video/record.mp4", type: "video/mp4" }
+            })
+          ]
+        ),
+    _vm._v(" "),
     _c(
-      "video",
+      "div",
       {
+        staticClass: "modal",
         attrs: {
-          id: "record_video",
-          poster: "/img/videocall/video-placeholder.jpg",
-          autoplay: "",
-          muted: "muted"
-        },
-        domProps: { muted: true }
+          id: "saveModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "saveModal",
+          "aria-hidden": "true"
+        }
       },
-      [_c("source", { attrs: { src: "/video/record.mp4", type: "video/mp4" } })]
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "videoOptions btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.saveVideoMessage(_vm.blob, _vm.href)
+                      }
+                    }
+                  },
+                  [_vm._v("Save Message")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "videoOptions btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.clearVideoMessage }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Save Message?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("Would you like to save your recorded message?")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -60318,51 +60568,59 @@ var render = function() {
     "div",
     { attrs: { id: "video" } },
     [
-      _c("div", { staticClass: "video-container" }, [
-        !_vm.showRecordingInterface
-          ? _c(
-              "video",
-              {
+      _c(
+        "div",
+        { staticClass: "video-container" },
+        [
+          !_vm.showRecordingInterface
+            ? _c(
+                "video",
+                {
+                  attrs: {
+                    id: "call_video",
+                    poster: "/img/videocall/video-placeholder.jpg"
+                  }
+                },
+                [
+                  _c("source", {
+                    attrs: {
+                      src: _vm.currentVideo.video_url,
+                      type: "video/mp4"
+                    }
+                  })
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.showRecordingInterface
+            ? _c(
+                "video",
+                {
+                  attrs: {
+                    id: "personal_video",
+                    poster: "/img/videocall/video-placeholder.jpg",
+                    autoplay: ""
+                  }
+                },
+                [
+                  _c("source", {
+                    attrs: { src: "/video/record.mp4", type: "video/mp4" }
+                  })
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.showRecordingInterface
+            ? _c("video-message", {
                 attrs: {
-                  id: "call_video",
-                  poster: "/img/videocall/video-placeholder.jpg"
+                  recording: _vm.recording,
+                  clickedCharacter: _vm.clickedCharacter
                 }
-              },
-              [
-                _c("source", {
-                  attrs: { src: _vm.currentVideo.video_url, type: "video/mp4" }
-                })
-              ]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.showRecordingInterface
-          ? _c(
-              "video",
-              {
-                attrs: {
-                  id: "personal_video",
-                  poster: "/img/videocall/video-placeholder.jpg",
-                  autoplay: ""
-                }
-              },
-              [
-                _c("source", {
-                  attrs: { src: "/video/record.mp4", type: "video/mp4" }
-                })
-              ]
-            )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm.showRecordingInterface
-        ? _c("video-message", {
-            attrs: {
-              recording: _vm.recording,
-              clickedCharacter: _vm.clickedCharacter
-            }
-          })
-        : _vm._e(),
+              })
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { attrs: { id: "controlBar" } }, [
         _c("div", { staticClass: "dropup" }, [
@@ -60463,7 +60721,7 @@ var render = function() {
           questions: this.currentQuestions,
           disabledQuestions: this.disabledQuestions
         },
-        on: { question: _vm.askQuestion }
+        on: { question: _vm.askQuestion, endEarly: _vm.endResponseEarly }
       })
     ],
     1

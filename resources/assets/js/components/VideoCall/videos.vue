@@ -9,9 +9,10 @@
             <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
                 <source src="/video/record.mp4" type="video/mp4">
             </video>
+
+            <!--video recording component, hidden until click on inactive character-->
+            <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
         </div>
-        <!--video recording component, hidden until click on inactive character-->
-        <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
 
         <div id="controlBar">
 
@@ -57,7 +58,9 @@
                              :warningTime="this.warningTime"
                              :questions="this.currentQuestions"
                              :disabledQuestions="this.disabledQuestions"
-                             @question="askQuestion">
+                             @question="askQuestion"
+                             @endEarly="endResponseEarly">
+
         </character-questions>
 
     </div>
@@ -89,7 +92,8 @@
                 leaveResponse: false,
                 responded: false,
                 countdownTime: 0,
-                warningTime: 5
+                warningTime: 5,
+                endMessage: false
             }
         },
         mounted() {
@@ -206,6 +210,9 @@
                 this.responded = false;
                 this.currentQuestion = question;
             },
+            endResponseEarly: function() {
+                this.endMessage = true;
+            },
 
             //these functions handle all video objects and actions
             answerQuestion: function(){
@@ -234,6 +241,21 @@
                 //start recording
                 navigator.mediaDevices.getUserMedia(constraints)
                     .then(this.handleSuccess.bind(this))
+                    .catch(this.tryAudioOnly);
+            },
+            tryAudioOnly: function(){
+                //set that we want both audio and video
+                const constraints = {
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true
+                    }
+                };
+
+                //this.startAudio();
+                //start recording
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(this.handleSuccess.bind(this))
                     .catch(this.handleFailure);
             },
             handleFailure: function (error) {
@@ -256,7 +278,6 @@
 
                 //how long you would like to warning countdown to be
                 let warning = this.warningTime * 1000;
-                console.log(warning);
 
                 //start recording when video is loaded
                 video.addEventListener('loadeddata', function () {
@@ -268,11 +289,10 @@
                     video.muted = 'true';
                 })
 
-                let end = false;
                 let timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
                 console.log(timeout);
                 setTimeout(function () {
-                    end = true;
+                    appScope.endMessage = true;
                 }, timeout)
 
                 this.startAudio(stream);
@@ -281,7 +301,7 @@
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if(end){
+                    if(appScope.endMessage){
                         mediaRecorder.stop();
                     }
 
@@ -294,6 +314,7 @@
 
                     appScope.leaveResponse = false;
                     appScope.responded = true;
+                    appScope.endMessage = false;
 
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
@@ -473,6 +494,7 @@
     .video-container {
         position: relative;
         background-color: #000;
+        height: 44%;
     }
     #controlBar{
         display: flex;
@@ -487,7 +509,7 @@
         color: red;
     }
     #call_video{
-        height: calc(19vh - 11px);
+        height: 100%;
         width: 100%;
     }
     .contact-inner{
@@ -512,11 +534,11 @@
         font-size: 14px;
     }
     #characterQuestions{
-        height: 20rem;
+        height: 21rem;
         overflow-y: scroll;
         background-color: white;
         display: flex;
-        flex-flow: wrap;
+        flex-flow: inherit;
         justify-content: space-between;
     }
     .dropdown-menu{
@@ -528,17 +550,9 @@
     #personal_video{
         position: absolute;
         right: 0px;
-        top: 137px;
+        bottom: -6px;
         height: 125px;
         width: 150px;
     }
 
-    @media(min-width:1150px){
-        #call_video {
-            height: calc(23vh - 20px);
-        }
-        #personal_video{
-            top: 182px;
-        }
-    }
 </style>

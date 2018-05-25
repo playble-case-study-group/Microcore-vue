@@ -1,21 +1,42 @@
 <template>
     <div id="question">
-        <div class="counterDisplay col-sm-12" v-if="this.count > 0">
+        <div class="counterDisplay col-sm-12" v-if="this.count > 0"><!---->
             <br><br>
             <p v-if="!this.warning">
-                You will have {{ this.countdown }} seconds to respond.<br>
-                Recording will start in : <span class="counter">{{ this.count }}</span></p>
-            <p v-else> Time Remaining: <span class="counter">{{ this.count }}</span></p>
+                You will have {{ this.countdown }} seconds to respond.
+                Recording will start in : <span class="counter">{{ this.count }}</span>
+            </p>
+            <p v-else>
+                Time Remaining: <span class="counter">{{ this.count }}</span><br><br>
+                <button @click="endResponseEarly" class="btn btn-light">End Recording Early</button>
+            </p>
         </div>
-        <button type="button"
-                v-for="question in questions"
-                :class= 'returnClass(question) + "btn btn-success btn-lg button"'
-                v-if="question.question && showButtons && count == 0"
-                :key="question.id"
-                @click="submitQuestion(question)">
-            <b>{{ question.question }}</b>
-            <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
-        </button>
+        <div class="unaskedQuestions questionList" v-if="showButtons">
+            <p>Question Bank</p>
+            <hr>
+            <button type="button"
+                    v-for="question in questions"
+                    class= "active btn btn-success btn-lg button"
+                    v-if="question.question && !disabledQuestions.includes(question.question_id)"
+                    :key="question.id"
+                    @click="submitQuestion(question)">
+                <b>{{ question.question }}</b>
+                <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
+            </button>
+        </div>
+        <div class="askedQuestions questionList" v-if="showButtons">
+            <p>History</p>
+            <hr>
+            <button type="button"
+                    v-for="question in questions"
+                    class= "visited btn btn-success btn-lg button"
+                    v-if="question.question && disabledQuestions.includes(question.question_id)"
+                    :key="question.id"
+                    @click="submitQuestion(question)">
+                <b>{{ question.question }}</b>
+                <i class="material-icons recording" v-if="question.record_after">fiber_manual_record</i>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -55,8 +76,7 @@
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
-                this.disabledQuestions.push({'user_id': this.$store.state.user.id, 'question_id': question.question_id, 'day': this.$store.state.user.current_day});
-                this.returnClass(question);
+                this.disabledQuestions.push(question.question_id);
                 this.$forceUpdate();
                 axios.post(
                     '/clickedQuestion',
@@ -78,17 +98,9 @@
                     }
                 }, 1000);
             },
-            returnClass: function(question) {
-                let clicked = this.disabledQuestions.find( function(el) {
-                    if(el.question_id == question.question_id){
-                        return el;
-                    }
-                })
-                if(clicked){
-                    return 'visited '
-                } else{
-                    return 'active '
-                }
+            endResponseEarly: function() {
+                this.count = 0;
+                this.$emit('endEarly');
             }
         },
 
@@ -98,12 +110,15 @@
 
 <style scoped>
     .button {
-        margin: 2rem;
+        margin: 1rem 0;
         height: 3rem;
-        width: 26rem;
+        width: 15rem;
     }
     .visited {
         opacity: 0.65;
+    }
+    .active {
+
     }
     .recording{
         color: #ff4d4d;
@@ -112,7 +127,8 @@
         margin-top: 3px;
     }
     .counterDisplay {
-        font-size: 24px;
+        font-size: 16px;
+        top: -30px;
         text-align: center;
     }
     .counter {
@@ -120,17 +136,21 @@
         color: #dc3545;
 
     }
+    .questionList {
+        width: 50%;
+        padding: 15px 25px 0;
+    }
     @media(min-width: 992px){
         .button {
-            margin: 25px 25px;
+            margin: 1rem 0;
             height: 4rem;
-            width: 13rem;
+            width: 15rem;
             white-space: normal;
         }
     }
     @media(min-width: 1400px){
         .button {
-            margin: 2rem 2rem;
+            margin: 1rem 0rem;
             height: 4rem;
             width: 17rem;
         }
