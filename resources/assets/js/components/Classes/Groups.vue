@@ -14,7 +14,7 @@
                 <td>
                     <ul>
                         <li v-for="student in group.students" :key="student.id">
-                            {{ student.name }} <button class="btn btn-sm btn-danger" @click="removeStudent(student, group.group_id)">x</button>
+                            {{ student.name }} <button class="btn btn-sm btn-danger" @click="removeStudent(student.user_id, group.group_id)">x</button>
                         </li>
                         <li>
                             <v-select v-model="newGroupUser" label="name" :options="unassigned"></v-select>
@@ -153,7 +153,6 @@
                 };
 
                 axios.post('/group/' + groupId, data).then( response => {
-                    console.log(response.data);
                     _.remove(this.groups, {'group_id': groupId});
                     $('#deleteGroupModal').modal('hide');
                     this.$forceUpdate();
@@ -161,10 +160,7 @@
             },
             addStudent: function (groupId) {
                 if (this.newGroupUser) {
-
                     let group = _.find(this.groups, {'group_id': groupId});
-
-                    console.log(group);
 
                     // If user is already in a group
                     if (!this.unassigned.includes(this.newGroupUser)) {
@@ -172,33 +168,29 @@
                     } else {
                         let data = {
                             'groupId': groupId,
-                            'userId': this.newGroupUser.id
+                            'userId': this.newGroupUser.user_id
                         };
 
                         axios.post('/addToGroup', data).then( response => {
                             group.students.push(this.newGroupUser);
-                            _.remove(this.unassigned, this.newGroupUser);
-                            console.log('posting');
+                            _.remove(this.unassigned, {'user_id': this.newGroupUser.user_id});
                             this.newGroupUser = "";
 
                         })
                     }
-
-
-
                 }
             },
-            removeStudent: function (student, groupId) {
-                let group = _.find(this.groups, {'group_id': groupId});
+            removeStudent: function (studentId, groupId) {
+                console.log(studentId, groupId);
                 let data = {
-                    userId: student.id,
-                    groupId: group.group_id
+                    userId: studentId,
+                    groupId: groupId
                 };
 
                 axios.post('/removeFromGroup', data).then( response => {
-                    group.students.splice(_.findIndex(group.students, student), 1);
-                    this.unassigned.push(student);
-                    this.$forceUpdate();
+                    let group = _.find(this.groups, {'group_id': groupId});
+                    _.remove(group.students, {'user_id': studentId});
+                    this.unassigned.push(response.data[0]);
                 });
 
             }

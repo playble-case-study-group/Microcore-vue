@@ -64,9 +64,7 @@ class AssignmentController extends Controller
 
         $reqs = json_decode($assignment->requirements, true);
 
-        $reqs->classId = $request->classId;
-
-        dd($reqs);
+        $reqs['classId'] = $request->classId;
 
         $type = DB::table('assignment_types')->where('assign_type_id', $assignment->assign_type_id)->first();
 
@@ -74,13 +72,13 @@ class AssignmentController extends Controller
 
         switch ($type->assign_type_id) {
             case 1:
-                $assignments = $this->retrieveEmailAssignments($arr[0], $arr[1], $arr[2]);
+                $assignments = $this->retrieveEmailAssignments($reqs['characterId'], $reqs['day'], $reqs['classId']);
                 break;
             case 2:
-                $assignments = $this->retrieveGalleryAssignments($arr[0]);
+                $assignments = $this->retrieveGalleryAssignments($reqs['classId']);
                 break;
             case 3:
-                $assignments = $this->retrieveVideoAssignments($arr[0], $arr[1], $arr[2]);
+                $assignments = $this->retrieveVideoAssignments($reqs['questionId'], $reqs['day'], $reqs['classId']);
                 break;
         }
 
@@ -125,11 +123,37 @@ class AssignmentController extends Controller
 
     private function retrieveEmailAssignments($characterId, $day, $classId)
     {
-        
+        return DB::table('student_emails AS s')
+            ->join('users AS u', 'u.user_id', '=', 's.user_id')
+            ->join('characters AS c', 'c.character_id', '=', 's.character_id')
+            ->where([
+                ['s.class_id', '=', $classId],
+                ['s.day', '=', $day],
+                ['s.character_id', '=', $characterId]
+            ])
+            ->select('s.day', 's.subject', 's.body', 's.created_at', 'c.name AS c_name', 'u.name AS u_name')
+            ->get();
     }
 
     private function retrieveGalleryAssignments($classId)
     {
+        $artifacts = DB::table('student_artifacts AS s')
+            ->join('users AS u', 'u.user_id', '=', 's.user_id')
+            ->join('user_has_group AS ug', 'ug.user_id', '=', 'u.user_id')
+            ->join('groups AS g', 'g.group_id', '=', 'ug.group_id')
+            ->where('s.class_id', $classId)
+            ->select('s.title', 's.student_artifact_id', 's.description', 'u.name AS u_name', 's.img', 'g.name AS g_name')
+            ->get();
+
+        foreach ($artifacts as $art) {
+            $art->tags = DB::table('tags')
+                ->join('student_artifact_has_tag', 'student_artifact_has_tag.tag_id', 'tags.tag_id')
+                ->where('student_artifact_has_tag.student_artifact_id', $art->student_artifact_id)
+                ->select('tags.tag_id', 'tags.title')
+                ->get();
+        }
+
+        return $artifacts;
 
     }
 

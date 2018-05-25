@@ -79789,7 +79789,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
 
             axios.post('/group/' + groupId, data).then(function (response) {
-                console.log(response.data);
                 _.remove(_this2.groups, { 'group_id': groupId });
                 $('#deleteGroupModal').modal('hide');
                 _this2.$forceUpdate();
@@ -79799,10 +79798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             if (this.newGroupUser) {
-
                 var group = _.find(this.groups, { 'group_id': groupId });
-
-                console.log(group);
 
                 // If user is already in a group
                 if (!this.unassigned.includes(this.newGroupUser)) {
@@ -79810,31 +79806,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     var data = {
                         'groupId': groupId,
-                        'userId': this.newGroupUser.id
+                        'userId': this.newGroupUser.user_id
                     };
 
                     axios.post('/addToGroup', data).then(function (response) {
                         group.students.push(_this3.newGroupUser);
-                        _.remove(_this3.unassigned, _this3.newGroupUser);
-                        console.log('posting');
+                        _.remove(_this3.unassigned, { 'user_id': _this3.newGroupUser.user_id });
                         _this3.newGroupUser = "";
                     });
                 }
             }
         },
-        removeStudent: function removeStudent(student, groupId) {
+        removeStudent: function removeStudent(studentId, groupId) {
             var _this4 = this;
 
-            var group = _.find(this.groups, { 'group_id': groupId });
+            console.log(studentId, groupId);
             var data = {
-                userId: student.id,
-                groupId: group.group_id
+                userId: studentId,
+                groupId: groupId
             };
 
             axios.post('/removeFromGroup', data).then(function (response) {
-                group.students.splice(_.findIndex(group.students, student), 1);
-                _this4.unassigned.push(student);
-                _this4.$forceUpdate();
+                var group = _.find(_this4.groups, { 'group_id': groupId });
+                _.remove(group.students, { 'user_id': studentId });
+                _this4.unassigned.push(response.data[0]);
             });
         }
     }
@@ -79876,7 +79871,10 @@ var render = function() {
                             staticClass: "btn btn-sm btn-danger",
                             on: {
                               click: function($event) {
-                                _vm.removeStudent(student, group.group_id)
+                                _vm.removeStudent(
+                                  student.user_id,
+                                  group.group_id
+                                )
                               }
                             }
                           },
@@ -80435,6 +80433,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80455,7 +80461,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             tableData: [],
             tableColumns: [],
             tableOptions: {
-                headings: {}
+                headings: {},
+                sortable: []
             },
             test: {
                 columns: ['id', 'name', 'age'],
@@ -80471,8 +80478,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             var table_columns = JSON.parse(this.assignmentType.table_columns);
+            this.tableData = [];
             this.tableColumns = table_columns.columns;
             this.tableOptions.headings = table_columns.headings;
+            this.tableOptions.sortable = table_columns.sortable;
             axios.get('/assignments/' + this.assignmentType.assign_type_id).then(function (response) {
                 _this.assignmentList = response.data;
             });
@@ -88963,9 +88972,34 @@ var render = function() {
             },
             scopedSlots: _vm._u([
               {
+                key: "img",
+                fn: function(props) {
+                  return _c("span", {}, [
+                    _c("img", { attrs: { src: props.row.img, alt: "" } })
+                  ])
+                }
+              },
+              {
                 key: "day",
                 fn: function(props) {
                   return _c("span", {}, [_vm._v(_vm._s(props.row.u_name))])
+                }
+              },
+              {
+                key: "changes",
+                fn: function(props) {
+                  return _c("span", {}, [
+                    _c("h4", [_vm._v(_vm._s(props.row.title))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(props.row.description))]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(props.row.tags, function(tag) {
+                        return _c("li", [_vm._v(_vm._s(tag.title))])
+                      })
+                    )
+                  ])
                 }
               }
             ])

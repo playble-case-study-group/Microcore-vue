@@ -43,7 +43,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <v-client-table :data="tableData" :columns="tableColumns" :options="tableOptions">
+                    <span slot="img" slot-scope="props"><img :src="props.row.img" alt=""></span>
                     <span slot="day" slot-scope="props">{{ props.row.u_name }}</span>
+                    <span slot="changes" slot-scope="props">
+                        <h4>{{ props.row.title }}</h4>
+                        <p>{{ props.row.description }}</p>
+                        <ul>
+                            <li v-for="tag in props.row.tags">{{ tag.title }}</li>
+                        </ul>
+                    </span>
                 </v-client-table>
             </div>
         </div>
@@ -71,7 +79,8 @@
                 tableData: [],
                 tableColumns: [],
                 tableOptions: {
-                    headings: {}
+                    headings: {},
+                    sortable: []
                 },
                 test: {
                     columns: ['id', 'name', 'age'],
@@ -91,8 +100,10 @@
         watch: {
             assignmentType: function () {
                 let table_columns =  JSON.parse(this.assignmentType.table_columns);
+                this.tableData = [];
                 this.tableColumns = table_columns.columns;
                 this.tableOptions.headings = table_columns.headings;
+                this.tableOptions.sortable = table_columns.sortable;
                 axios.get('/assignments/' + this.assignmentType.assign_type_id).then( response => {
                     this.assignmentList = response.data;
                 });

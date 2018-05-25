@@ -254,7 +254,7 @@ class GalleryController extends Controller
                 foreach ($request->tags as $tag) {
                     DB::table('student_artifact_has_tag')
                         ->insert([
-                            'artifact_id' => $id,
+                            'student_artifact_id' => $id,
                             'tag_id' => $tag['tag_id']
                         ]);
                 }

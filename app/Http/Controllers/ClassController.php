@@ -38,7 +38,14 @@ class ClassController extends Controller
 
 
             // Converting unassigned students to object so they can be removed by key.
-            $class->unAssigned = $class->students->keyBy('id');
+            $class->unAssigned = DB::table('user_has_class')
+                ->join('users', 'users.user_id', '=', 'user_has_class.user_id')
+                ->select('users.user_id', 'users.name', 'users.email', 'users.current_day')
+                ->where([
+                    ['user_has_class.class_id', '=' , $class->class_id],
+                    ['users.assigned', '=', 0]
+                ])
+                ->get();
 
             foreach ($class->groups as $group) {
                 $group->students = DB::table('users')
