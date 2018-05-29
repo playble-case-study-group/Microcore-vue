@@ -5,14 +5,21 @@
             <input v-else type="checkbox" v-on:click="toggleTask(task.task_id)">
             <span class="checkmark"></span>
             {{ task.title }}
+            <a href="#" @click="toggle" data-container="body" data-toggle="popover" data-placement="right" :data-content="task.description">
+                <i class="material-icons">info</i>
+            </a>
         </label>
     </li>
 </template>
 
 <script>
     import { mapGetter, mapActions } from 'vuex'
+    import { VTooltip } from 'v-tooltip'
 
     export default {
+        components: {
+          'v-tooltip': VTooltip
+        },
         props: ['task', 'complete'],
         mounted() {
 
@@ -22,9 +29,15 @@
                 taskComplete: this.complete
             }
         },
-        methods: mapActions([
-            'toggleTask'
-        ])
+        methods: {
+            ... mapActions([
+                'toggleTask'
+            ]),
+            toggle: function(){
+                $('[data-toggle="popover"]').popover()
+            }
+        }
+
     }
 </script>
 

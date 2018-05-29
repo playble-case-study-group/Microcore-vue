@@ -181,7 +181,6 @@
         },
         data: function () {
             return {
-
                 draftEmailSubject: "",
                 draftEmailBody: "",
                 toCharacter: "",
@@ -327,7 +326,7 @@
                 // Reset the draft email
                 this.draftEmail = {
                     attachment: null,
-                    to: 0,
+                    to: "Please Select Character from Dropdown",
                     reply: 0,
                     subject: "",
                     body: ""

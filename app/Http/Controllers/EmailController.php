@@ -26,6 +26,7 @@ class EmailController extends Controller
             ->join('characters', 'characters.character_id', 'character_emails.character_id')
             ->select('characters.name', 'characters.role', 'character_emails.subject', 'character_emails.body', 'character_emails.day', 'character_emails.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
+            ->orderBy('day', 'desc')
             ->get();
 
         foreach($characterEmails as $email){
