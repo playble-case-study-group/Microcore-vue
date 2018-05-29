@@ -58036,6 +58036,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inbox_vue__ = __webpack_require__(593);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inbox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__inbox_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue__ = __webpack_require__(594);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sentMail_vue__);
 //
 //
 //
@@ -58115,110 +58119,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     components: {
-        'v-select': __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a
+        'v-select': __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a,
+        'inbox': __WEBPACK_IMPORTED_MODULE_2__inbox_vue___default.a,
+        'sent-mail': __WEBPACK_IMPORTED_MODULE_3__sentMail_vue___default.a
     },
     data: function data() {
         return {
+            showInbox: 1,
+            showSent: 0,
             draftEmailSubject: "",
             draftEmailBody: "",
             toCharacter: "",
@@ -58248,122 +58165,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         $('#sent').hide();
         $('#replyForm').hide();
+        var appScope = this;
+        $('#readModal').on('hidden.bs.modal', function (e) {
+            appScope.resetDraftEmail();
+        });
     },
 
     methods: {
-        sendemail: function sendemail() {
-            var _this = this;
-
-            //duplicate (I don't think this is used...?)
-            axios.post('/email', {
-                subject: this.draftEmailSubject,
-                body: this.draftEmailBody
-            }).then(function (response) {
-                console.log(response);
-                _this.emails.push(response.data);
-            });
-        },
-        readEmail: function readEmail(email) {
-            this.resetDraftEmail();
-            this.readModalData.id = email.character_email_id;
-            this.readModalData.from = email.name;
-            this.readModalData.subject = email.subject;
-            this.readModalData.body = email.body;
-            this.readModalData.reply = email.reply;
-            this.readModalData.character_email_id = email.character_email_id;
-
-            if (email.reply != null) {
-                //show player name and the email they wrote (using first()?) instead of reply button
-                $('#ReplyEmailId').hide();
-
-                console.log(this.$store.state.user.name);
-            } else {
-                //show reply button
-                $('#ReplyEmailId').show();
-            }
-
-            $('#readModal').modal();
-        },
         toggleInbox: function toggleInbox() {
-            $('#inbox').show();
+            this.showInbox = 1;
+            this.showSent = 0;
             $('.keyline-inbox').css('border-color', '#636b6f');
             $('.keyline-sent').css('border-color', 'white');
-            $('#sent').hide();
         },
         toggleSent: function toggleSent() {
-            $('#inbox').hide();
+            this.showInbox = 0;
+            this.showSent = 1;
             $('.keyline-inbox').css('border-color', 'white');
             $('.keyline-sent').css('border-color', '#636b6f');
-            $('#sent').show();
         },
-        composeModal: function composeModal() {
-            this.resetDraftEmail();
-
-            $('#composeModal').modal('show');
+        openNav: function openNav() {
+            document.getElementById("mySidenav").style.width = "200px";
         },
-        //duplicate?
-        sendEmail: function sendEmail(emailId) {
-            var _this2 = this;
-
-            var formData = new FormData();
-            formData.append('to', this.draftEmail.to.character_id);
-            formData.append('reply', this.draftEmail.reply);
-            formData.append('subject', this.draftEmail.subject);
-            formData.append('body', this.draftEmail.body);
-            if (this.draftEmail.attachment != null) {
-                formData.append('attachment', this.draftEmail.attachment);
-            }
-
-            axios.post('/email', formData).then(function (response) {
-                _this2.resetDraftEmail();
-            });
-            $('#composeModal').modal('hide');
-        },
-        sendReplyEmail: function sendReplyEmail(emailId) {
-            var _this3 = this;
-
-            var appScope = this;
-            var found = this.characterEmails.find(function (email) {
-                if (email.character_email_id == emailId) {
-                    email.reply = appScope.draftEmail;
-                    return email;
-                }
-            });
-
-            var formData = new FormData();
-            formData.append('to', this.draftEmail.to.character_id);
-            formData.append('reply', this.draftEmail.reply);
-            formData.append('subject', this.draftEmail.subject);
-            formData.append('body', this.draftEmail.body);
-            formData.append('character_email_id', this.draftEmail.character_email_id);
-            if (this.draftEmail.attachment != null) {
-                formData.append('attachment', this.draftEmail.attachment);
-            }
-
-            axios.post('/email', formData).then(function (response) {
-                _this3.studentEmails.push(_this3.draftEmail);
-                _this3.resetDraftEmail();
-                _this3.$forceUpdate();
-            });
-            $('#replyModal').modal('hide');
-        },
-        replyEmail: function replyEmail() {
-
-            //                this.draftEmail.reply = this.readModalData.id;
-            //
-            //                $('#replyForm').show();
-            //                $('.replyEmail').html('Send');
-
-            //                this.resetDraftEmail();
-
-            this.draftEmail.to = this.findCharData();
-            this.draftEmail.subject = this.readModalData.subject;
-            this.draftEmail.character_email_id = this.readModalData.character_email_id;
-            $('#readModal').modal('hide');
-            $('#replyModal').modal('show');
+        closeNav: function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
         },
         resetDraftEmail: function resetDraftEmail() {
             // Reset the draft email
+            $('.replyForm').css('display', 'none');
+            $('.replyEmail').css('display', 'initial');
+            $('.sendReplyEmail').css('display', 'none');
             this.draftEmail = {
                 attachment: null,
                 to: "Please Select Character from Dropdown",
@@ -58372,23 +58203,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 body: ""
             };
         },
-        openNav: function openNav() {
-            document.getElementById("mySidenav").style.width = "200px";
+        composeModal: function composeModal() {
+            this.resetDraftEmail();
+
+            $('#composeModal').modal('show');
         },
-        closeNav: function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        },
-        findCharData: function findCharData() {
-            var appScope = this;
-            var found = this.characters.find(function (element) {
-                console.log(element);
-                return element.name == appScope.readModalData.from;
+        sendEmail: function sendEmail(emailId) {
+            var _this = this;
+
+            var formData = new FormData();
+            formData.append('to', this.draftEmail.to.character_id);
+            formData.append('reply', this.draftEmail.reply);
+            formData.append('subject', this.draftEmail.subject);
+            formData.append('body', this.draftEmail.body);
+            if (this.draftEmail.attachment != null) {
+                formData.append('attachment', this.draftEmail.attachment);
+            }
+
+            axios.post('/email', formData).then(function (response) {
+                _this.resetDraftEmail();
             });
-            return found;
-        },
-        setAttachment: function setAttachment() {
-            this.draftEmail.attachment = this.$refs.file.files[0];
+            $('#composeModal').modal('hide');
         }
+
     }
 
 });
@@ -58493,170 +58330,27 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12 col-lg-10 emailList" }, [
-        _c(
-          "table",
-          { attrs: { id: "inbox" } },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._l(_vm.characterEmails, function(email) {
-              return _c(
-                "tr",
-                {
-                  key: email.character_email_id,
-                  on: {
-                    click: function($event) {
-                      _vm.readEmail(email)
-                    }
-                  }
-                },
-                [
-                  _c("td", [
-                    _c("img", { attrs: { src: email.img_small, alt: "" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(email.name) + " ")]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "truncate" }, [
-                    _vm._v(" " + _vm._s(email.subject) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "truncate" }, [
-                    _vm._v(" " + _vm._s(email.body) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(email.day) + " ")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]
-              )
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "table",
-          { staticClass: "col-sm-12", attrs: { id: "sent" } },
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._l(_vm.studentEmails, function(email) {
-              return _c(
-                "tr",
-                {
-                  key: email.student_email_id,
-                  on: {
-                    click: function($event) {
-                      _vm.readEmail(email)
-                    }
-                  }
-                },
-                [
-                  _c("td", [_vm._v(" " + _vm._s(email.name) + " ")]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "truncate" }, [
-                    _vm._v(" " + _vm._s(email.subject) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "truncate" }, [
-                    _vm._v(" " + _vm._s(email.body) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(email.day) + " ")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]
-              )
-            })
-          ],
-          2
-        )
-      ])
+      _c(
+        "div",
+        { staticClass: "col-sm-12 col-lg-10 emailList" },
+        [
+          _vm.showInbox
+            ? _c("inbox", {
+                attrs: {
+                  characterEmails: _vm.characterEmails,
+                  characters: _vm.characters,
+                  studentEmails: _vm.studentEmails
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.showSent
+            ? _c("sent-mail", { attrs: { studentEmails: _vm.studentEmails } })
+            : _vm._e()
+        ],
+        1
+      )
     ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "readModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "readModal",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h5", [
-                  _vm._v(
-                    "\n                        From: " +
-                      _vm._s(_vm.readModalData.from) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "email-body" }, [
-                  _vm._v(_vm._s(_vm.readModalData.body))
-                ]),
-                _vm._v(" "),
-                _vm.readModalData.reply ? _c("hr") : _vm._e(),
-                _vm._v(" "),
-                this.readModalData.reply
-                  ? _c("h5", [
-                      _vm._v(
-                        "\n                        From: " +
-                          _vm._s(this.$store.state.user.name) +
-                          "\n                    "
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                this.readModalData.reply
-                  ? _c("p", { attrs: { git: "" } }, [
-                      _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                this.readModalData.reply
-                  ? _c("div", { staticClass: "email-body" }, [
-                      _vm._v(_vm._s(this.readModalData.reply.body))
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-footer", attrs: { id: "ReplyEmailId" } },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success replyEmail",
-                      on: { click: _vm.replyEmail }
-                    },
-                    [_vm._v("Reply")]
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    ),
     _vm._v(" "),
     _c(
       "div",
@@ -58676,7 +58370,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row form-group" }, [
@@ -58796,134 +58490,6 @@ var render = function() {
           ]
         )
       ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "replyModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "readModal",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row form-group" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-sm-2", attrs: { for: "toList" } },
-                    [_vm._v("To:")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-10" }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.readModalData.from) +
-                        "\n                        "
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row form-group" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-sm-2", attrs: { for: "toSubject" } },
-                    [_vm._v("Subject:")]
-                  ),
-                  _vm._v(" "),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm.readModalData.subject) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row form-group" }, [
-                  _c("p", { staticClass: "email-body" }, [
-                    _vm._v("Previous Email: " + _vm._s(_vm.readModalData.body))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "row form-group reply-contact col-sm-12" },
-                    [
-                      _c("i", { staticClass: "material-icons reply" }, [
-                        _vm._v("reply")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "reply-contact-name" }, [
-                        _vm._v(_vm._s(_vm.readModalData.from))
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.draftEmail.body,
-                        expression: "draftEmail.body"
-                      }
-                    ],
-                    staticClass: "col-sm-12",
-                    attrs: { type: "text", id: "repBody" },
-                    domProps: { value: _vm.draftEmail.body },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.draftEmail, "body", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c("input", {
-                  ref: "file",
-                  attrs: {
-                    type: "file",
-                    name: "emailAttachment",
-                    id: "emailAttachment"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.setAttachment()
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success",
-                    on: {
-                      click: function($event) {
-                        _vm.sendReplyEmail(_vm.draftEmail.character_email_id)
-                      }
-                    }
-                  },
-                  [_vm._v("Send")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
     )
   ])
 }
@@ -58932,82 +58498,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("From")]),
-      _vm._v(" "),
-      _c("th"),
-      _vm._v(" "),
-      _c("th", [_vm._v("Subject")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Body")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Day")]),
-      _vm._v(" "),
-      _c("th")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("To")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Subject")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Body")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Day")]),
-      _vm._v(" "),
-      _c("th")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header heading" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header heading" }, [
       _c("h5", { staticClass: "modal-title" }, [_vm._v("New Email")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header heading" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Reply")]),
       _vm._v(" "),
       _c(
         "button",
@@ -90271,6 +89763,989 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(595)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(597)
+/* template */
+var __vue_template__ = __webpack_require__(598)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-57c1bf28"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Email/inbox.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-57c1bf28", Component.options)
+  } else {
+    hotAPI.reload("data-v-57c1bf28", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 594 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(599)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(601)
+/* template */
+var __vue_template__ = __webpack_require__(602)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3c31d779"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Email/sentMail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3c31d779", Component.options)
+  } else {
+    hotAPI.reload("data-v-3c31d779", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 595 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(596);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("18158284", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57c1bf28\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./inbox.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57c1bf28\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./inbox.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 596 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nul[data-v-57c1bf28] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-57c1bf28] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-57c1bf28] {\n  margin: 20px;\n}\n#toBody[data-v-57c1bf28] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: darkgrey;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.toggle[data-v-57c1bf28] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.compose[data-v-57c1bf28] {\n    margin: 0;\n    margin-top: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 597 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            draftEmailSubject: "",
+            draftEmailBody: "",
+            toCharacter: "",
+            readModalData: {
+                character_email_id: 0,
+                id: 0,
+                from: "",
+                subject: "",
+                body: "",
+                reply: ""
+            },
+            draftEmail: {
+                attachment: null,
+                character_email_id: 0,
+                to: 0,
+                reply: 0,
+                subject: "",
+                body: ""
+            }
+        };
+    },
+    props: {
+        characterEmails: Array,
+        characters: Array,
+        studentEmails: Array
+    },
+    mounted: function mounted() {
+        $('#sent').hide();
+        $('#replyForm').hide();
+        var appScope = this;
+        $('#readModal').on('hidden.bs.modal', function (e) {
+            appScope.resetDraftEmail();
+        });
+    },
+
+    methods: {
+        readEmail: function readEmail(email) {
+            this.resetDraftEmail();
+            this.readModalData.id = email.character_email_id;
+            this.readModalData.from = email.name;
+            this.readModalData.subject = email.subject;
+            this.readModalData.body = email.body;
+            this.readModalData.reply = email.reply;
+            this.readModalData.character_email_id = email.character_email_id;
+
+            if (email.reply != null) {
+                //show player name and the email they wrote (using first()?) instead of reply button
+                $('#ReplyEmailId').hide();
+
+                console.log(this.$store.state.user.name);
+            } else {
+                //show reply button
+                $('#ReplyEmailId').show();
+            }
+
+            $('#readModal').modal();
+        },
+        sendEmail: function sendEmail(emailId) {
+            var _this = this;
+
+            var formData = new FormData();
+            formData.append('to', this.draftEmail.to.character_id);
+            formData.append('reply', this.draftEmail.reply);
+            formData.append('subject', this.draftEmail.subject);
+            formData.append('body', this.draftEmail.body);
+            if (this.draftEmail.attachment != null) {
+                formData.append('attachment', this.draftEmail.attachment);
+            }
+
+            axios.post('/email', formData).then(function (response) {
+                _this.resetDraftEmail();
+            });
+            $('#composeModal').modal('hide');
+        },
+        sendReplyEmail: function sendReplyEmail(emailId) {
+            var _this2 = this;
+
+            var appScope = this;
+            var found = this.characterEmails.find(function (email) {
+                if (email.character_email_id == emailId) {
+                    email.reply = appScope.draftEmail;
+                    return email;
+                }
+            });
+
+            var formData = new FormData();
+            formData.append('to', this.draftEmail.to.character_id);
+            formData.append('reply', this.draftEmail.reply);
+            formData.append('subject', this.draftEmail.subject);
+            formData.append('body', this.draftEmail.body);
+            formData.append('character_email_id', this.draftEmail.character_email_id);
+            if (this.draftEmail.attachment != null) {
+                formData.append('attachment', this.draftEmail.attachment);
+            }
+
+            axios.post('/email', formData).then(function (response) {
+                _this2.studentEmails.push(_this2.draftEmail);
+                _this2.resetDraftEmail();
+                _this2.$forceUpdate();
+            });
+            $('#readModal').modal('hide');
+        },
+        replyEmail: function replyEmail() {
+
+            //                this.draftEmail.reply = this.readModalData.id;
+            //
+            //                $('#replyForm').show();
+            //                $('.replyEmail').html('Send');
+
+            //                this.resetDraftEmail();
+            $('.replyForm').css('display', 'inherit');
+            $('.replyEmail').css('display', 'none');
+            $('.sendReplyEmail').css('display', 'initial');
+            this.draftEmail.to = this.findCharData();
+            this.draftEmail.subject = this.readModalData.subject;
+            this.draftEmail.character_email_id = this.readModalData.character_email_id;
+        },
+        resetDraftEmail: function resetDraftEmail() {
+            // Reset the draft email
+            $('.replyForm').css('display', 'none');
+            $('.replyEmail').css('display', 'initial');
+            $('.sendReplyEmail').css('display', 'none');
+            this.draftEmail = {
+                attachment: null,
+                to: "Please Select Character from Dropdown",
+                reply: 0,
+                subject: "",
+                body: ""
+            };
+        },
+        findCharData: function findCharData() {
+            var appScope = this;
+            var found = this.characters.find(function (element) {
+                console.log(element);
+                return element.name == appScope.readModalData.from;
+            });
+            return found;
+        },
+        setAttachment: function setAttachment() {
+            this.draftEmail.attachment = this.$refs.file.files[0];
+        }
+    }
+
+});
+
+/***/ }),
+/* 598 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "inbox" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12 col-lg-10" }, [
+        _c(
+          "table",
+          { attrs: { id: "inbox" } },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.characterEmails, function(email) {
+              return _c(
+                "tr",
+                {
+                  key: email.character_email_id,
+                  on: {
+                    click: function($event) {
+                      _vm.readEmail(email)
+                    }
+                  }
+                },
+                [
+                  _c("td", [
+                    _c("img", { attrs: { src: email.img_small, alt: "" } })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(email.name) + " ")]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "truncate" }, [
+                    _vm._v(" " + _vm._s(email.subject) + " - "),
+                    _c("span", { staticClass: "greyText" }, [
+                      _vm._v(_vm._s(email.body))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(email.day) + " ")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "readModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "readModal",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h5", [
+                  _vm._v(
+                    "\n                        From: " +
+                      _vm._s(_vm.readModalData.from) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "email-body" }, [
+                  _vm._v(_vm._s(_vm.readModalData.body))
+                ]),
+                _vm._v(" "),
+                _vm.readModalData.reply ? _c("hr") : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("h5", [
+                      _vm._v(
+                        "\n                        From: " +
+                          _vm._s(this.$store.state.user.name) +
+                          "\n                    "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("p", [
+                      _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("div", { staticClass: "email-body" }, [
+                      _vm._v(_vm._s(this.readModalData.reply.body))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "replyForm",
+                    staticStyle: { display: "none" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "row form-group reply-contact col-sm-12" },
+                      [
+                        _c("i", { staticClass: "material-icons reply" }, [
+                          _vm._v("reply")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "reply-contact-name" }, [
+                          _vm._v(_vm._s(_vm.readModalData.from))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.draftEmail.body,
+                          expression: "draftEmail.body"
+                        }
+                      ],
+                      staticClass: "col-sm-12",
+                      attrs: { type: "text", id: "repBody" },
+                      domProps: { value: _vm.draftEmail.body },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.draftEmail, "body", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-footer", attrs: { id: "ReplyEmailId" } },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success replyEmail",
+                      on: { click: _vm.replyEmail }
+                    },
+                    [_vm._v("Reply")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success sendReplyEmail",
+                      staticStyle: { display: "none" },
+                      on: {
+                        click: function($event) {
+                          _vm.sendReplyEmail(
+                            _vm.readModalData.character_email_id
+                          )
+                        }
+                      }
+                    },
+                    [_vm._v("Send")]
+                  )
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("From")]),
+      _vm._v(" "),
+      _c("th"),
+      _vm._v(" "),
+      _c("th", [_vm._v("Subject")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Day")]),
+      _vm._v(" "),
+      _c("th")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header heading" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-57c1bf28", module.exports)
+  }
+}
+
+/***/ }),
+/* 599 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(600);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("aad4fcbe", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3c31d779\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sentMail.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3c31d779\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sentMail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 600 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nul[data-v-3c31d779] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-3c31d779] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\ntextarea[data-v-3c31d779] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-3c31d779] {\n  margin: 20px;\n}\n#toBody[data-v-3c31d779] {\n  height: 30rem;\n  resize: none;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-3c31d779] {\n  font-size: 25px;\n}\n.reply-contact[data-v-3c31d779] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-3c31d779] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.toggle[data-v-3c31d779] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-3c31d779] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-3c31d779] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-3c31d779] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-3c31d779] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 601 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {},
+    data: function data() {
+        return {
+            readModalData: {
+                character_email_id: 0,
+                id: 0,
+                from: "",
+                subject: "",
+                body: "",
+                reply: ""
+            }
+        };
+    },
+    props: {
+        studentEmails: Array
+    },
+    mounted: function mounted() {},
+
+    methods: {
+        readEmail: function readEmail(email) {
+            this.readModalData.id = email.character_email_id;
+            this.readModalData.from = email.name;
+            this.readModalData.subject = email.subject;
+            this.readModalData.body = email.body;
+            this.readModalData.reply = email.reply;
+            this.readModalData.character_email_id = email.character_email_id;
+            $('#readModal').modal();
+        }
+    }
+
+});
+
+/***/ }),
+/* 602 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "sent" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12 col-lg-10" }, [
+        _c(
+          "table",
+          { staticClass: "col-sm-12", attrs: { id: "sent" } },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.studentEmails, function(email) {
+              return _c(
+                "tr",
+                {
+                  key: email.student_email_id,
+                  on: {
+                    click: function($event) {
+                      _vm.readEmail(email)
+                    }
+                  }
+                },
+                [
+                  _c("td", [_vm._v(" " + _vm._s(email.name) + " ")]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "truncate" }, [
+                    _vm._v(" " + _vm._s(email.subject) + " - "),
+                    _c("span", { staticClass: "greyText" }, [
+                      _vm._v(_vm._s(email.body))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(email.day) + " ")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "readModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "readModal",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h5", [
+                  _vm._v(
+                    "\n                        From: " +
+                      _vm._s(_vm.readModalData.from) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "email-body" }, [
+                  _vm._v(_vm._s(_vm.readModalData.body))
+                ]),
+                _vm._v(" "),
+                _vm.readModalData.reply ? _c("hr") : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("h5", [
+                      _vm._v(
+                        "\n                        From: " +
+                          _vm._s(this.$store.state.user.name) +
+                          "\n                    "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("p", [
+                      _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                this.readModalData.reply
+                  ? _c("div", { staticClass: "email-body" }, [
+                      _vm._v(_vm._s(this.readModalData.reply.body))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "modal-footer",
+                attrs: { id: "ReplyEmailId" }
+              })
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("To")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Subject")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Day")]),
+      _vm._v(" "),
+      _c("th")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header heading" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3c31d779", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -23,75 +23,18 @@
                 </ul>
             </div>
             <div class="col-sm-12 col-lg-10 emailList">
-                <table id="inbox">
-                    <tr>
-                        <th>From</th>
-                        <th></th>
-                        <th>Subject</th>
-                        <th>Body</th>
-                        <th>Day</th>
-                        <th></th>
-                    </tr>
-                    <tr v-for="email in characterEmails"
-                        @click="readEmail(email)"
-                        :key="email.character_email_id">
-                        <td> <img :src="email.img_small" alt=""> </td>
-                        <td> {{ email.name }} </td>
-                        <td class="truncate"> {{ email.subject }} </td>
-                        <td class="truncate"> {{ email.body }} </td>
-                        <td> {{ email.day }} </td>
-                        <td> </td>
-                    </tr>
-                </table>
-                <table id="sent" class="col-sm-12">
-                    <tr>
-                        <th>To</th>
-                        <th>Subject</th>
-                        <th>Body</th>
-                        <th>Day</th>
-                        <th></th>
-                    </tr>
-                    <tr v-for="email in studentEmails"
-                        @click="readEmail(email)"
-                        :key="email.student_email_id">
-                        <td> {{ email.name }} </td>
-                        <td class="truncate"> {{ email.subject }} </td>
-                        <td class="truncate"> {{ email.body }} </td>
-                        <td> {{ email.day }} </td>
-                        <td> </td>
-                    </tr>
-                </table>
-            </div>
 
-        </div>
+                <inbox
+                        v-if="showInbox"
+                        :characterEmails="characterEmails"
+                        :characters="characters"
+                        :studentEmails="studentEmails">
+                </inbox>
 
-        <!-- Read Modal -->
-        <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header heading">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>
-                            From: {{ readModalData.from }}
-                        </h5>
-                        <p>Subject: {{ readModalData.subject }}</p>
-                        <p class="email-body">{{ readModalData.body }}</p>
-                        <hr v-if="readModalData.reply">
-                        <h5 v-if="this.readModalData.reply">
-                            From: {{  this.$store.state.user.name }}
-                        </h5>
-                        <p v-if="this.readModalData.reply"git >Subject: {{ readModalData.subject }}</p>
-                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
-                    </div>
-
-                    <div class="modal-footer" id="ReplyEmailId">
-                        <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
-                    </div>
-                </div>
+                <sent-mail
+                        v-if="showSent"
+                        :studentEmails="studentEmails">
+                </sent-mail>
             </div>
         </div>
 
@@ -130,57 +73,27 @@
             </div>
         </div>
 
-        <!-- Reply Modal -->
-        <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header heading">
-                        <h5 class="modal-title">Reply</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row form-group">
-                            <label for="toList" class="col-sm-2">To:</label>
-                            <div class="col-sm-10">
-                                {{ readModalData.from }}
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label for="toSubject" class="col-sm-2">Subject:</label>
-                            <!--<input type="teid" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">-->
-                            {{ readModalData.subject }}
-                        </div>
-                        <div class="row form-group">
-                            <p class="email-body">Previous Email: {{ readModalData.body }}</p>
-                            <div class="row form-group reply-contact col-sm-12">
-                                <i class="material-icons reply">reply</i>
-                                <span class="reply-contact-name">{{ readModalData.from }}</span>
-                            </div>
-                            <textarea class="col-sm-12" type="text" id="repBody" v-model="draftEmail.body"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="file" name="emailAttachment" ref="file" id="emailAttachment" @change="setAttachment()">
-                        <button class="btn btn-success" @click="sendReplyEmail(draftEmail.character_email_id)">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </template>
 
 <script>
     import { mapGetter, mapActions } from 'vuex'
     import  vSelect  from 'vue-select'
+    import inbox from './inbox.vue'
+    import sentMail from './sentMail.vue'
+
     export default {
 
         components: {
-            'v-select': vSelect
+            'v-select': vSelect,
+            'inbox': inbox,
+            'sent-mail': sentMail
         },
         data: function () {
             return {
+                showInbox: 1,
+                showSent: 0,
                 draftEmailSubject: "",
                 draftEmailBody: "",
                 toCharacter: "",
@@ -210,62 +123,50 @@
         mounted() {
             $('#sent').hide();
             $('#replyForm').hide();
+            let appScope = this;
+            $('#readModal').on('hidden.bs.modal', function (e) {
+                appScope.resetDraftEmail();
+            })
 
         },
         methods: {
-            sendemail: function () {
-                //duplicate (I don't think this is used...?)
-                axios.post(
-                    '/email',
-                    {
-                        subject: this.draftEmailSubject,
-                        body: this.draftEmailBody
-                    })
-                    .then(response => {
-                        console.log(response);
-                        this.emails.push(response.data);
-                    })
-            },
-            readEmail: function (email) {
-                this.resetDraftEmail();
-                this.readModalData.id = email.character_email_id;
-                this.readModalData.from = email.name;
-                this.readModalData.subject = email.subject;
-                this.readModalData.body = email.body;
-                this.readModalData.reply = email.reply;
-                this.readModalData.character_email_id = email.character_email_id;
-
-                if (email.reply != null) {
-                    //show player name and the email they wrote (using first()?) instead of reply button
-                    $('#ReplyEmailId').hide();
-
-                    console.log(this.$store.state.user.name);
-                }
-                else {
-                    //show reply button
-                    $('#ReplyEmailId').show();
-                }
-
-                $('#readModal').modal();
-            },
             toggleInbox: function () {
-                $('#inbox').show();
+                this.showInbox = 1;
+                this.showSent = 0;
                 $('.keyline-inbox').css('border-color', '#636b6f');
                 $('.keyline-sent').css('border-color', 'white');
-                $('#sent').hide();
             },
             toggleSent: function () {
-                $('#inbox').hide();
+                this.showInbox = 0;
+                this.showSent = 1;
                 $('.keyline-inbox').css('border-color', 'white');
                 $('.keyline-sent').css('border-color', '#636b6f');
-                $('#sent').show();
+
+            },
+            openNav: function () {
+                document.getElementById("mySidenav").style.width = "200px";
+            },
+            closeNav: function () {
+                document.getElementById("mySidenav").style.width = "0";
+            },
+            resetDraftEmail: function () {
+                // Reset the draft email
+                $('.replyForm').css('display', 'none');
+                $('.replyEmail').css('display', 'initial');
+                $('.sendReplyEmail').css('display', 'none');
+                this.draftEmail = {
+                    attachment: null,
+                    to: "Please Select Character from Dropdown",
+                    reply: 0,
+                    subject: "",
+                    body: ""
+                };
             },
             composeModal: function () {
                 this.resetDraftEmail();
 
                 $('#composeModal').modal('show');
             },
-            //duplicate?
             sendEmail: function (emailId) {
                 let formData = new FormData();
                 formData.append('to', this.draftEmail.to.character_id);
@@ -281,74 +182,7 @@
                 });
                 $('#composeModal').modal('hide');
             },
-            sendReplyEmail: function (emailId) {
-                let appScope = this;
-                var found = this.characterEmails.find(function (email) {
-                    if (email.character_email_id == emailId) {
-                        email.reply = appScope.draftEmail;
-                        return (email);
-                    }
-                });
 
-                let formData = new FormData();
-                formData.append('to', this.draftEmail.to.character_id);
-                formData.append('reply', this.draftEmail.reply);
-                formData.append('subject', this.draftEmail.subject);
-                formData.append('body', this.draftEmail.body)
-                formData.append('character_email_id', this.draftEmail.character_email_id)
-                if(this.draftEmail.attachment != null) {
-                    formData.append('attachment', this.draftEmail.attachment);
-                }
-
-                axios.post('/email', formData).then(response => {
-                    this.studentEmails.push(this.draftEmail);
-                    this.resetDraftEmail();
-                    this.$forceUpdate();
-                });
-                $('#replyModal').modal('hide');
-            },
-            replyEmail: function () {
-
-//                this.draftEmail.reply = this.readModalData.id;
-//
-//                $('#replyForm').show();
-//                $('.replyEmail').html('Send');
-
-//                this.resetDraftEmail();
-
-                this.draftEmail.to = this.findCharData();
-                this.draftEmail.subject = this.readModalData.subject;
-                this.draftEmail.character_email_id = this.readModalData.character_email_id;
-                $('#readModal').modal('hide');
-                $('#replyModal').modal('show');
-            },
-            resetDraftEmail: function () {
-                // Reset the draft email
-                this.draftEmail = {
-                    attachment: null,
-                    to: "Please Select Character from Dropdown",
-                    reply: 0,
-                    subject: "",
-                    body: ""
-                };
-            },
-            openNav: function () {
-                document.getElementById("mySidenav").style.width = "200px";
-            },
-            closeNav: function () {
-                document.getElementById("mySidenav").style.width = "0";
-            },
-            findCharData: function () {
-                let appScope = this;
-                var found = this.characters.find(function (element) {
-                    console.log(element);
-                    return element.name == appScope.readModalData.from;
-                });
-                return found;
-            },
-            setAttachment: function () {
-                this.draftEmail.attachment = this.$refs.file.files[0];
-            }
         }
 
     }
