@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,7 +61,7 @@ class GroupController extends Controller
             ]);
 
         DB::table('users')
-            ->where('id', Auth::id())
+            ->where('user_id', $request->userId)
             ->update(['assigned' => 1]);
 
         return $request->all();
@@ -75,10 +76,26 @@ class GroupController extends Controller
             ])->delete();
 
         DB::table('users')
-            ->where('id', Auth::id())
+            ->where('user_id', $request->userId)
             ->update(['assigned' => 0]);
 
-        return $request->all();
+        $user = DB::table('users')
+            ->where('user_id', $request->userId)
+            ->select('current_day', 'email', 'name', 'user_id')
+            ->get();
+
+        return $user;
+    }
+
+    public function deleteGroup(Request $request)
+    {
+        DB::table('user_has_group')
+            ->where('group_id', $request->groupId)
+            ->delete();
+
+        DB::table('groups')
+            ->where('group_id', $request->groupId)
+            ->delete();
     }
 
     /**

@@ -25,13 +25,21 @@
             <div class="card"
                  v-for="artifact in gallery"
                  v-if="!artifact.hidden"
-                 @click="openModal(artifact)"
                  :key="artifact.artifact_id">
 
-                <img class="card-img-top" :src="artifact.image" :alt="artifact.title">
+                <img class="card-img-top"
+                     @click="openModal(artifact)"
+                     :src="artifact.image"
+                     :alt="artifact.title">
                 <div class="card-body artifact" >
                     <h4 class="card-title">{{ artifact.title }}</h4>
                     <p class="card-text">{{ artifact.description}}</p>
+                    <button v-for="tag in artifact.tags"
+                            type="button"
+                            @click="filterGallery(tag)"
+                            class="btn btn-primary tag-btn">
+                        {{ tag.title }}
+                    </button>
                 </div>
 
             </div>
@@ -62,14 +70,14 @@
                                     </div>
                                 </div>
                                 <div class="row col-sm-12">
-                                    <button v-for="tag in modal.tags"
-                                            type="button"
-                                            class="btn btn-primary">
-                                        {{ tag.title }}
-                                    </button>
+                                    <p>{{ modal.description }}</p>
                                 </div>
                                 <div class="row col-sm-12">
-                                    <p>{{ modal.description }}</p>
+                                    <button v-for="tag in modal.tags"
+                                            type="button"
+                                            class="btn btn-primary tag-btn">
+                                        {{ tag.title }}
+                                    </button>
                                 </div>
                             </div>
 
@@ -197,7 +205,7 @@
             },
             saveChanges: function() {
                 axios.put('/gallery/' + this.modal.id, {
-                    user: this.user.id,
+                    user: this.user.user_id,
                     title: this.modal.title,
                     description: this.modal.description,
                     img: this.modal.image,
@@ -255,7 +263,7 @@
         margin-top: 20px;
     }
 
-    .modal-body .btn {
+    .tag-btn {
         margin-right: 10px;
     }
 
