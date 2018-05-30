@@ -31,24 +31,30 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5>
+                        <h5 v-if="this.readModalData.reply">
                             From: {{ readModalData.from }}
                         </h5>
-                        <p>Subject: {{ readModalData.subject }}</p>
-                        <p class="email-body">{{ readModalData.body }}</p>
-                        <hr v-if="readModalData.reply">
-                        <h5 v-if="this.readModalData.reply">
+                        <h5 v-else>
                             From: {{  this.$store.state.user.name }}
                         </h5>
-                        <p v-if="this.readModalData.reply">Subject: {{ readModalData.subject }}</p>
-                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
-
+                        <p>Subject: {{ readModalData.subject }}</p>
+                        <p class="email-body" v-if="this.readModalData.reply">{{ readModalData.reply.body }}</p>
+                        <div class="email-body" v-else>{{ this.readModalData.body }}</div>
+                        <span v-if="this.readModalData.reply">
+                            <hr>
+                            <h5>
+                                From: {{  this.$store.state.user.name }}
+                            </h5>
+                            <p>Subject: {{ readModalData.subject }}</p>
+                            <div class="email-body">{{ this.readModalData.body }}</div>
+                        </span>
                     </div>
                     <div class="modal-footer" id="ReplyEmailId">
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 

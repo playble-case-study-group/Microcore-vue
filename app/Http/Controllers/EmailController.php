@@ -48,7 +48,7 @@ class EmailController extends Controller
             if ($email->character_email_id) {
                 $email->reply = DB::table('character_emails')
                     ->where('character_email_id', $email->character_email_id)
-                    ->get();
+                    ->first();
             }
         }
         return view('email', compact('characterEmails', 'characters', 'studentEmails'));
