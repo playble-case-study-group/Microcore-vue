@@ -237,7 +237,7 @@
         height: 20px;
     }
     .greyText {
-        color: darkgrey;
+        color: grey;
     }
     .read {
         background-color: #f0f0f0;
