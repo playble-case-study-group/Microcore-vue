@@ -12,6 +12,7 @@
                     </tr>
                     <tr v-for="email in characterEmails"
                         @click="readEmail(email)"
+                        :class=" email.read ? 'read' : 'unread'"
                         :key="email.character_email_id">
                         <td> <img :src="email.img_small" alt=""> </td>
                         <td> {{ email.name }} </td>
@@ -116,12 +117,22 @@
                 if (email.reply != null) {
                     //show player name and the email they wrote (using first()?) instead of reply button
                     $('#ReplyEmailId').hide();
-
-                    console.log(this.$store.state.user.name);
                 }
                 else {
                     //show reply button
                     $('#ReplyEmailId').show();
+                }
+
+                //indicate that an email has been read
+                if(!email.read) {
+                    email.read = true;
+                    axios.post(
+                        "/readEmail",
+                        {
+                            email_id: email.character_email_id
+                        })
+                        .then(res => console.log(res))
+                        .catch(err => console.log(err))
                 }
 
                 $('#readModal').modal();
@@ -227,6 +238,9 @@
     }
     .greyText {
         color: darkgrey;
+    }
+    .read {
+        background-color: #f0f0f0;
     }
     #readModal > .modal-dialog > .modal-content{
         width: 35rem;

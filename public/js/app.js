@@ -58325,7 +58325,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: darkgrey;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: darkgrey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f0f0f0;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -58337,6 +58337,7 @@ exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  heigh
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
 //
 //
 //
@@ -58455,11 +58456,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (email.reply != null) {
                 //show player name and the email they wrote (using first()?) instead of reply button
                 $('#ReplyEmailId').hide();
-
-                console.log(this.$store.state.user.name);
             } else {
                 //show reply button
                 $('#ReplyEmailId').show();
+            }
+
+            //indicate that an email has been read
+            if (!email.read) {
+                email.read = true;
+                axios.post("/readEmail", {
+                    email_id: email.character_email_id
+                }).then(function (res) {
+                    return console.log(res);
+                }).catch(function (err) {
+                    return console.log(err);
+                });
             }
 
             $('#readModal').modal();
@@ -58550,6 +58561,7 @@ var render = function() {
                 "tr",
                 {
                   key: email.character_email_id,
+                  class: email.read ? "read" : "unread",
                   on: {
                     click: function($event) {
                       _vm.readEmail(email)

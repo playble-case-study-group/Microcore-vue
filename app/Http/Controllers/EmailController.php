@@ -36,6 +36,18 @@ class EmailController extends Controller
                 ->first();
         }
 
+        foreach($characterEmails as $email){
+            $read = DB::table("student_read_emails")
+                ->where("character_email_id", $email->character_email_id)
+                ->where('user_id', Auth::id())
+                ->first();
+            if($read){
+                $email->read = true;
+            } else {
+                $email->read = false;
+            }
+        }
+
         $characters = DB::table('characters')->get();
 
         $studentEmails = DB::table('student_emails')
@@ -107,6 +119,25 @@ class EmailController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function readEmail(Request $request)
+    {
+        $email_id = $request->email_id;
+
+        DB::table('student_read_emails')->insert([
+            'user_id' => Auth::id(),
+            'day' => Auth::user()->current_day,
+            'created_at' => DB::raw('NOW()'),
+            'character_email_id' => $email_id,
+        ]);
+        return $request->all();
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -150,8 +181,6 @@ class EmailController extends Controller
     {
         //
     }
-
-
 
     /**
      * Get type by extension

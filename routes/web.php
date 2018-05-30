@@ -36,6 +36,7 @@ Route::post('/tasks/complete', 'TasksController@complete');
 // Email
 Route::resource('/email', 'EmailController');
 Route::post('/returnemails', 'EmailController@emailData');
+Route::post('/readEmail', 'EmailController@readEmail');
 
 // Video Call
 Route::resource('/videocall', 'VideoCallController');
