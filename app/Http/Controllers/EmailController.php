@@ -26,6 +26,7 @@ class EmailController extends Controller
             ->join('characters', 'characters.character_id', 'character_emails.character_id')
             ->select('characters.name', 'characters.role', 'character_emails.subject', 'character_emails.body', 'character_emails.day', 'character_emails.character_email_id', 'characters.img_small')
             ->where('day', '<=', Auth::user()->current_day)
+            ->orderBy('day', 'desc')
             ->get();
 
         foreach($characterEmails as $email){
@@ -33,6 +34,18 @@ class EmailController extends Controller
                 ->where("character_email_id", $email->character_email_id)
                 ->where('user_id', Auth::id())
                 ->first();
+        }
+
+        foreach($characterEmails as $email){
+            $read = DB::table("student_read_emails")
+                ->where("character_email_id", $email->character_email_id)
+                ->where('user_id', Auth::id())
+                ->first();
+            if($read){
+                $email->read = true;
+            } else {
+                $email->read = false;
+            }
         }
 
         $characters = DB::table('characters')->get();
@@ -47,7 +60,7 @@ class EmailController extends Controller
             if ($email->character_email_id) {
                 $email->reply = DB::table('character_emails')
                     ->where('character_email_id', $email->character_email_id)
-                    ->get();
+                    ->first();
             }
         }
         return view('email', compact('characterEmails', 'characters', 'studentEmails'));
@@ -106,6 +119,25 @@ class EmailController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function readEmail(Request $request)
+    {
+        $email_id = $request->email_id;
+
+        DB::table('student_read_emails')->insert([
+            'user_id' => Auth::id(),
+            'day' => Auth::user()->current_day,
+            'created_at' => DB::raw('NOW()'),
+            'character_email_id' => $email_id,
+        ]);
+        return $request->all();
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -149,8 +181,6 @@ class EmailController extends Controller
     {
         //
     }
-
-
 
     /**
      * Get type by extension

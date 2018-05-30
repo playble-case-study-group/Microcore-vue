@@ -35,7 +35,6 @@ Vue.component('editor', require('./components/Library/articleEditor.vue'));
 import store from './vuex/store';
 import { mapActions } from 'vuex';
 
-
 const app = new Vue({
     el: '#app',
     store,

@@ -1,10 +1,14 @@
 <template>
     <li>
         <label>
-            <input v-if="complete" type="checkbox" checked v-on:click="toggleTask(task.task_id)">
-            <input v-else type="checkbox" v-on:click="toggleTask(task.task_id)">
-            <span class="checkmark"></span>
-            {{ task.title }}
+            <input v-if="complete" type="checkbox" checked >
+            <input v-else type="checkbox">
+            <span class="checkmark" v-on:click="toggleTask(task.task_id)"></span>
+            <span class="navigation" v-on:click="navigateToComponent">{{ task.title }}</span>
+
+            <a href="#" data-container="body" data-toggle="popover" data-placement="right" :data-content="task.description">
+                <i class="material-icons">info</i>
+            </a>
         </label>
     </li>
 </template>
@@ -15,16 +19,22 @@
     export default {
         props: ['task', 'complete'],
         mounted() {
-
+            $('[data-toggle="popover"]').popover()
         },
         data: function () {
             return {
                 taskComplete: this.complete
             }
         },
-        methods: mapActions([
-            'toggleTask'
-        ])
+        methods: {
+            ... mapActions([
+                'toggleTask'
+            ]),
+            navigateToComponent: function(){
+                window.location.href = "/gallery";
+            }
+        }
+
     }
 </script>
 
@@ -42,7 +52,6 @@
         padding-left: 28px;
         margin-top: 11px;
         margin-bottom: 12px;
-        cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -51,14 +60,13 @@
 
     /* Hide the browser's default checkbox */
     label input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
+        display: none;
     }
 
     /* Create a custom checkbox */
     .checkmark {
         position: absolute;
+        cursor: pointer;
         top: 4px;
         left: 0;
         height: 16px;
@@ -67,13 +75,17 @@
         border: 1px solid $sim-heading;
     }
 
+    .navigation {
+        cursor: pointer;
+    }
+
     /* On mouse-over, add a grey background color */
-    label:hover input ~ .checkmark {
+    .checkmark:hover {
         background-color: #ccc;
     }
 
     /* When the checkbox is checked, add a blue background */
-    label input:checked ~ .checkmark {
+    input:checked ~ .checkmark {
         background-color: #ABDBFB;
         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
     }
@@ -86,7 +98,7 @@
     }
 
     /* Show the checkmark when checked */
-    label input:checked ~ .checkmark:after {
+    input:checked ~ .checkmark:after {
         display: block;
     }
 

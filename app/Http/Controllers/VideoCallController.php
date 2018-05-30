@@ -156,7 +156,7 @@ class VideoCallController extends Controller
         $name = 'video-'.str_random(4).'.webm';
         $target_file = base_path()."/public/storage/video/".$name;
         file_put_contents($target_file, $data);
-        $filename = "/storage/video/".$name;
+        $filename = "storage/video/".$name;
 
         if($request->has('question')){
             $question_id = $request->question;

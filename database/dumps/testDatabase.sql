@@ -1,8 +1,9 @@
+
 -- MySQL dump 10.13  Distrib 5.7.19, for macos10.12 (x86_64)
 --
 -- Host: localhost    Database: vuesim_v2
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -95,7 +96,7 @@ CREATE TABLE `assignment_types` (
 
 LOCK TABLES `assignment_types` WRITE;
 /*!40000 ALTER TABLE `assignment_types` DISABLE KEYS */;
-INSERT INTO `assignment_types` VALUES (1,'Email','CALL retrieve_email_assignments(?,?,?)','{\"columns\": [\"u_name\", \"c_name\", \"subject\", \"body\", \"created_at\"], \"headings\": {\"body\": \"Body\", \"c_name\": \"Character (To)\", \"u_name\": \"Student (From)\", \"subject\": \"Subject\", \"created_at\": \"Submitted\"}, \"sortable\": [\"u_name\", \"created_at\"]}'),(2,'Gallery','CALL retrieve_gallery_assignments(?)','{\"columns\": [\"img\", \"changes\", \"u_name\", \"g_name\"], \"headings\": {\"img\": \"Artifact\", \"g_name\": \"Group\", \"u_name\": \"Student\", \"changes\": \"Changes\"}, \"sortable\": [\"u_name\", \"g_name\"]}'),(3,'Video Call','CALL retrieve_video_assignments(?,?,?,?)',NULL);
+INSERT INTO `assignment_types` VALUES (1,'Email','CALL retrieve_email_assignments(?,?,?)','[\"user_id\", \"day\", \"body\"]'),(2,'Gallery','CALL retrieve_gallery_assignments(?)',NULL),(3,'Video Call','CALL retrieve_video_assignments(?,?,?,?)',NULL);
 /*!40000 ALTER TABLE `assignment_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +123,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'{\"day\": 1, \"characterId\": 2}'),(2,'Eduardo Email Day 1',1,'{\"day\": 1, \"characterId\": 1}'),(3,'Phillip Email Day 2',1,'{\"day\": 1, \"characterId\": 3}'),(4,'Gallery Assignment',2,'{}'),(5,'Video call day 1',3,'{\"day\": 1, \"questionId\": 1, \"characterId\": 1}');
+INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'[2, 1]'),(2,'Eduardo Email Day 1',1,'[1, 1]'),(3,'Phillip Email Day 2',1,'[3, 1]'),(4,'Gallery Assignment',2,'[]'),(5,'Video call day 1',3,'[1, 1, 1]');
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +212,7 @@ CREATE TABLE `characters` (
 
 LOCK TABLES `characters` WRITE;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
-INSERT INTO `characters` VALUES (1,'Susana Gomez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,'sgomez@museodevalle.es'),(2,'Beatriz Rodríguez','Exhibit Designer','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL,'beatierod@museodevalle.es'),(3,'Francisco López','Museum Technician','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL,'flopez@museodevalle.es'),(4,'Carmen González','Donor','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,'carmengonzalez@gmail.es'),(5,'Jose Manuel Sánchez','Historian','img/characters/jose-small.jpg','img/characters/jose-large.jpg',NULL,NULL,'joseymariasanchez@yahoo.es'),(6,'Luis Abeyta','Librarian','img/characters/luis-small.jpg','img/characters/luis-large.jpg',NULL,NULL,'luisabeyta@madbiblioteca.es');
+INSERT INTO `characters` VALUES (1,'Susana Gomez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,'sgomez@museodevalle.es'),(2,'Beatriz Rodríguez','Exhibit Designer','img/characters/beatrix-small.jpeg','img/characters/beatrix-large.jpeg',NULL,NULL,'beatierod@museodevalle.es'),(3,'Francisco López','Museum Technician','img/characters/Fransico-small.jpg','img/characters/Fransico-large.jpg',NULL,NULL,'flopez@museodevalle.es'),(4,'Carmen González','Donor','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,'carmengonzalez@gmail.es'),(5,'Jose Manuel Sánchez','Historian','img/characters/jose-small.jpg','img/characters/jose-large.jpg',NULL,NULL,'joseymariasanchez@yahoo.es'),(6,'Luis Abeyta','Librarian','img/characters/luis-small.jpg','img/characters/luis-large.jpg',NULL,NULL,'luisabeyta@madbiblioteca.es');
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +266,7 @@ CREATE TABLE `class_has_group` (
 
 LOCK TABLES `class_has_group` WRITE;
 /*!40000 ALTER TABLE `class_has_group` DISABLE KEYS */;
-INSERT INTO `class_has_group` VALUES (1,1),(1,3);
+INSERT INTO `class_has_group` VALUES (1,1);
 /*!40000 ALTER TABLE `class_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +353,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'test group 1','2018-03-23 18:19:01',NULL),(2,'Dan Group','2018-04-05 18:20:52',NULL),(3,'Group 2','2018-05-25 15:36:27',NULL);
+INSERT INTO `groups` VALUES (1,'test group 1','2018-03-23 18:19:01',NULL),(2,'Dan Group','2018-04-05 18:20:52',NULL);
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -554,7 +555,7 @@ CREATE TABLE `student_artifact_has_tag` (
 
 LOCK TABLES `student_artifact_has_tag` WRITE;
 /*!40000 ALTER TABLE `student_artifact_has_tag` DISABLE KEYS */;
-INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(8,1),(7,1),(7,2),(4,1),(4,2);
+INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1),(9,1);
 /*!40000 ALTER TABLE `student_artifact_has_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,7 +577,7 @@ CREATE TABLE `student_artifacts` (
   `class_id` int(11) NOT NULL DEFAULT '0',
   `day` int(11) NOT NULL,
   PRIMARY KEY (`student_artifact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -585,7 +586,7 @@ CREATE TABLE `student_artifacts` (
 
 LOCK TABLES `student_artifacts` WRITE;
 /*!40000 ALTER TABLE `student_artifacts` DISABLE KEYS */;
-INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is the description asfffdsa','/images/gallery/gallery01.png',8,1,1,2),(2,1,'Gallery 1 Title in group two','This is the description.Tosh.0 is a weekly topical series hosted by comedian Daniel Tosh that delves into all aspects of the internet, from the ingenious to the absurd to the medically inadvisable. Through segments like Video Breakdown, 20 Seconds on the Clock and Web Redemption, Tosh has established himself as the preeminent expert on exhibitionist weirdos, injurious idiots and the best worst things on the web.','/images/gallery/gallery01.png',9,3,1,1),(3,6,'Sith Lord','See the 97 notifications ready and waiting just for you','/images/gallery/gallery06.png',9,3,1,1),(4,4,'Some Poster','This is the description. This is pretty cool.','/images/gallery/gallery04.png',9,3,1,1);
+INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is a description that','/images/gallery/gallery01.png',1,2,1,1),(3,4,'Gallery 4 Title','This is the description this has changed','/images/gallery/gallery04.png',8,0,1,1),(4,1,'Gallery 1 Title not in a group','This is the description changed','/images/gallery/gallery01.png',8,0,1,1),(5,2,'Gallery 2 Title','This is the description here','/images/gallery/gallery02.png',8,0,1,1),(6,2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png',8,1,1,1),(7,1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png',8,1,1,1),(8,7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png',8,1,1,1);
 /*!40000 ALTER TABLE `student_artifacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -618,8 +619,32 @@ CREATE TABLE `student_emails` (
 
 LOCK TABLES `student_emails` WRITE;
 /*!40000 ALTER TABLE `student_emails` DISABLE KEYS */;
-INSERT INTO `student_emails` VALUES (1,1,1,'Subject','Body','1',NULL,NULL,2,1,NULL),(2,1,1,'Subject 2','Body 2','2',NULL,NULL,1,1,NULL);
 /*!40000 ALTER TABLE `student_emails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_read_emails`
+--
+
+DROP TABLE IF EXISTS `student_read_emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_read_emails` (
+  `character_email_id` int(11) DEFAULT NULL,
+  `day` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_read_emails`
+--
+
+LOCK TABLES `student_read_emails` WRITE;
+/*!40000 ALTER TABLE `student_read_emails` DISABLE KEYS */;
+INSERT INTO `student_read_emails` VALUES (3,1,13,'2018-05-30 17:37:07');
+/*!40000 ALTER TABLE `student_read_emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -644,7 +669,7 @@ CREATE TABLE `student_tasks` (
 
 LOCK TABLES `student_tasks` WRITE;
 /*!40000 ALTER TABLE `student_tasks` DISABLE KEYS */;
-INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-21 20:58:13'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49'),(4,13,0,'2018-05-22 16:59:20','2018-05-23 16:27:48'),(5,13,0,'2018-05-22 16:59:21','2018-05-23 15:55:12');
+INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-21 20:58:13'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49'),(4,13,0,'2018-05-22 16:59:20','2018-05-29 20:28:11'),(5,13,0,'2018-05-22 16:59:21','2018-05-29 19:38:55'),(6,13,0,'2018-05-29 19:34:49','2018-05-29 19:34:52');
 /*!40000 ALTER TABLE `student_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -717,7 +742,7 @@ CREATE TABLE `tasks` (
   `complete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`task_id`),
   UNIQUE KEY `tasks_id_uindex` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -726,7 +751,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,0),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
+INSERT INTO `tasks` VALUES (1,'Introduce Yourself to the Team','This is the first task',1,1),(2,'Gather Information','Gather background information on the Spanish Civil War in preparation for a meeting with the Educational Specialist from Spain’s Ministry of Education and the Prado Museum’s Educational Director.',1,0),(4,'Interview a Potential Donor','Call a Carmen about her potential donations to the museum.',2,1),(5,'Respond to the Head Curator','Respond to the Head Curators email about you meeting with the donor.',2,1),(6,'Find Gallery Theme','Day 3 Task 1',2,1),(7,'Send email with Audience Anaysis','Write email describing the audience for your exhibition. What do you know about the audience? What does the audience know and what don\'t they know about the Spanish Civil war? What will your team contribute?  ',1,0),(8,'Interview a Retired Historian','Interview the Librarian about your discovered resources.',3,0),(9,'Interview the Librarian','Try to get additional information from the Librarian about the artifacts you\'ve found.',3,0),(10,'Curate your Gallery Exhibition','Make Gallery selections for the Exhibition in preperation for display.',3,0),(11,'Call Donor about Artifact','Call donor about additional artifacts.',4,0),(12,'Write Artifact Descriptions','Work on the introduction to your exhibition, and prepare a one page explaination about the Spanish Civil War.',4,0),(13,'Update the Head Curator','Update the Head Curator about your Exhibition, and learn best practices for descriptive texts.',4,0),(14,'Organize your Exhibition','Finalize your Exhibition.',5,0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -775,7 +800,7 @@ CREATE TABLE `user_has_class` (
 
 LOCK TABLES `user_has_class` WRITE;
 /*!40000 ALTER TABLE `user_has_class` DISABLE KEYS */;
-INSERT INTO `user_has_class` VALUES (1,1,NULL,NULL),(7,1,NULL,NULL),(8,1,NULL,NULL),(9,1,NULL,NULL),(10,1,NULL,NULL);
+INSERT INTO `user_has_class` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `user_has_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -798,7 +823,7 @@ CREATE TABLE `user_has_group` (
 
 LOCK TABLES `user_has_group` WRITE;
 /*!40000 ALTER TABLE `user_has_group` DISABLE KEYS */;
-INSERT INTO `user_has_group` VALUES (1,1),(8,1),(7,1),(10,3),(9,3);
+INSERT INTO `user_has_group` VALUES (1,2),(1,1),(10,1),(8,1);
 /*!40000 ALTER TABLE `user_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -831,7 +856,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'vVcFzoOMg78RH0YpGKEHw6w2e24djKRZWFeDBDZqsxkQtNtIHHX42t6fFlrO','2018-01-11 01:04:23','2018-01-11 01:04:23',0,1),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,1),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'nFu6A0gvCwTaTp3cX4yMwTaO96eSpm6CzOWsOlXFnHlbjuFtghrtCuNOujRV','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'0TZZkCmVN5eseoh3NToxMXBGCErsYHIDJWGoyGW5NNmdyWxoTAGCREmfo52P','2018-03-24 04:24:58','2018-03-24 04:24:58',0,1),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,1),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T','2','matalyn2@byu.edu',0,'q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
+INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'tBT8Yl6wVsz9p68dzKnhnL9hBDw4tn1wMtIsmzLizAhqjwibGtbbbGnMySKs','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T','2','matalyn2@byu.edu',0,'q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0),(13,'Matalyn T','matalyn2@byu.edu','$2y$10$pjsIynPsFIzTwS9srTBpCugYms8X2YjzGys04MZSrOSu1cXkNrbCi',2,NULL,'2018-05-22 03:23:58','2018-05-22 03:23:58',1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -897,4 +922,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-30 15:24:13
+
+-- Dump completed on 2018-05-30 11:43:36
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class SimulationController extends Controller
 {
@@ -42,7 +43,10 @@ class SimulationController extends Controller
             ->where('submission_day', $request->day)
             ->where('user_id', Auth::id())
             ->get();
-        dd($delete_videos);
+
+        $delete_videos = collect($delete_videos)->pluck('submission_url')->all();
+
+        File::delete($delete_videos);
 
         DB::table('student_video_submissions')
             ->where('submission_day', $request->day)
@@ -54,12 +58,17 @@ class SimulationController extends Controller
             ->where('user_id', Auth::id())
             ->delete();
 
+        DB::table('student_read_emails')
+            ->where('day', $request->day)
+            ->where('user_id', Auth::id())
+            ->delete();
+
         DB::table('student_artifacts')
             ->where('day', $request->day)
             ->where('user_id', Auth::id())
             ->delete();
 
-        DB::table('user_clicked_question')
+        DB::table('user_asked_questions')
             ->where('day', $request->day)
             ->where('user_id', Auth::id())
             ->delete();
