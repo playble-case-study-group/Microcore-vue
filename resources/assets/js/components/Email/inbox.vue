@@ -72,9 +72,6 @@
     export default {
         data: function () {
             return {
-                draftEmailSubject: "",
-                draftEmailBody: "",
-                toCharacter: "",
                 readModalData: {
                     character_email_id: 0,
                     id: 0,
@@ -99,7 +96,6 @@
             studentEmails: Array
         },
         mounted() {
-            $('#sent').hide();
             $('#replyForm').hide();
             let appScope = this;
             $('#readModal').on('hidden.bs.modal', function (e) {
@@ -130,29 +126,8 @@
 
                 $('#readModal').modal();
             },
-            sendEmail: function (emailId) {
-                let formData = new FormData();
-                formData.append('to', this.draftEmail.to.character_id);
-                formData.append('reply', this.draftEmail.reply);
-                formData.append('subject', this.draftEmail.subject);
-                formData.append('body', this.draftEmail.body)
-                if(this.draftEmail.attachment != null) {
-                    formData.append('attachment', this.draftEmail.attachment);
-                }
-
-                axios.post('/email', formData).then(response => {
-                    this.resetDraftEmail();
-                });
-                $('#composeModal').modal('hide');
-            },
             sendReplyEmail: function (emailId) {
-                let appScope = this;
-                var found = this.characterEmails.find(function (email) {
-                    if (email.character_email_id == emailId) {
-                        email.reply = appScope.draftEmail;
-                        return email
-                    }
-                });
+                this.$emit('sentReply', this.draftEmail, emailId);
 
                 let formData = new FormData();
                 formData.append('to', this.draftEmail.to.character_id);
@@ -165,7 +140,6 @@
                 }
 
                 axios.post('/email', formData).then(response => {
-                    this.studentEmails.push(this.draftEmail);
                     this.resetDraftEmail();
                     this.$forceUpdate();
                 });
@@ -218,18 +192,6 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    ul {
-        padding-left: 0;
-        list-style: none;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-    li {
-        height: 40px;
-        margin-left: -10px;
-        margin-right: -10px;
-        padding: 10px 12px;
-    }
     textarea{
         resize: none;
         height: 20rem;
@@ -245,13 +207,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-    .compose{
-        margin: 20px;
-    }
-    #toBody{
-        height: 30rem;
-        resize: none;
     }
     .email-body{
         margin: 30px 0 40px;
@@ -273,10 +228,6 @@
     .greyText {
         color: darkgrey;
     }
-    #composeModal > .modal-dialog > .modal-content{
-        height: 44rem;
-        width: 35rem;
-    }
     #readModal > .modal-dialog > .modal-content{
         width: 35rem;
     }
@@ -286,10 +237,6 @@
     .modal-title{
         margin: -9px 0;
         justify-content: flex-start;
-    }
-    .toggle {
-        margin: 20px;
-        cursor: pointer;
     }
     .flex-header{
         display: flex;
@@ -302,15 +249,6 @@
         }
     }
     @media(min-width: 1224px){
-        .compose{
-            margin: 0;
-            margin-top: 20px;
-            //height: auto;
-            //width: auto;
-        }
-        #composeModal > .modal-dialog > .modal-content{
-            width: 50rem;
-        }
         #readModal > .modal-dialog > .modal-content{
             width: 50rem;
         }

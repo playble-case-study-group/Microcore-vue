@@ -26,6 +26,7 @@
 
                 <inbox
                         v-if="showInbox"
+                        @sentReply="updateSent"
                         :characterEmails="characterEmails"
                         :characters="characters"
                         :studentEmails="studentEmails">
@@ -94,17 +95,6 @@
             return {
                 showInbox: 1,
                 showSent: 0,
-                draftEmailSubject: "",
-                draftEmailBody: "",
-                toCharacter: "",
-                readModalData: {
-                    character_email_id: 0,
-                    id: 0,
-                    from: "",
-                    subject: "",
-                    body: "",
-                    reply: ""
-                },
                 draftEmail: {
                     attachment: null,
                     character_email_id: 0,
@@ -121,10 +111,8 @@
             studentEmails: Array
         },
         mounted() {
-            $('#sent').hide();
-            $('#replyForm').hide();
             let appScope = this;
-            $('#readModal').on('hidden.bs.modal', function (e) {
+            $('#composeModal').on('hidden.bs.modal', function (e) {
                 appScope.resetDraftEmail();
             })
 
@@ -177,14 +165,38 @@
                     formData.append('attachment', this.draftEmail.attachment);
                 }
 
+                //update student emails to show sent message
+                this.draftEmail.name = this.draftEmail.to.name;
+                this.draftEmail.day = this.$store.state.user.current_day;
+                this.studentEmails.push(this.draftEmail);
+
                 axios.post('/email', formData).then(response => {
                     this.resetDraftEmail();
                 });
                 $('#composeModal').modal('hide');
             },
+            updateSent: function(draft, emailId) {
 
+                //update studentEmails to reflt the reply
+                let appScope = this;
+                this.characterEmails.find(function (email) {
+                    if (email.character_email_id == emailId) {
+                        email.reply = draft;
+
+                        draft.day = appScope.$store.state.user.current_day;
+                        draft.name = draft.to.name;
+                        draft.reply = email;
+
+                        appScope.studentEmails.push(draft);
+
+                        return email
+                    }
+                });
+
+
+
+            }
         }
-
     }
 </script>
 
@@ -201,13 +213,6 @@
         margin-left: -10px;
         margin-right: -10px;
         padding: 10px 12px;
-    }
-    textarea{
-        resize: none;
-        height: 20rem;
-    }
-    td, th {
-        padding: 10px;
     }
     .main{
         height: 60rem;
@@ -235,20 +240,6 @@
     }
     .email-body{
         margin: 30px 0 40px;
-    }
-    .reply{
-        font-size: 25px;
-    }
-    .reply-contact{
-        border: solid 1px;
-        border-bottom: 0;
-        margin-bottom: 0;
-    }
-    .reply-contact-name{
-        padding-top: 9px;
-        padding-left: 30px;
-        position: absolute;
-        height: 20px;
     }
     #composeModal > .modal-dialog > .modal-content{
         height: 44rem;
