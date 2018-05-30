@@ -1,7 +1,7 @@
 <template>
     <div class="sent">
         <div class="row">
-            <div class="col-sm-12 col-lg-10">
+            <div class="col-sm-12">
                 <table id="sent" class="col-sm-12">
                     <tr>
                         <th>To</th>
@@ -48,8 +48,6 @@
                             <p>Subject: {{ readModalData.subject }}</p>
                             <div class="email-body">{{ this.readModalData.body }}</div>
                         </span>
-                    </div>
-                    <div class="modal-footer" id="ReplyEmailId">
                     </div>
                 </div>
             </div>

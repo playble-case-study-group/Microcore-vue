@@ -58947,8 +58947,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -58996,7 +58994,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "sent" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12 col-lg-10" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
         _c(
           "table",
           { staticClass: "col-sm-12", attrs: { id: "sent" } },
@@ -59106,12 +59104,7 @@ var render = function() {
                       ])
                     ])
                   : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "modal-footer",
-                attrs: { id: "ReplyEmailId" }
-              })
+              ])
             ])
           ]
         )
