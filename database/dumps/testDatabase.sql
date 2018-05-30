@@ -1,10 +1,8 @@
-
--- MySQL dump 10.13  Distrib 5.7.19, for macos10.12 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.21, for macos10.13 (x86_64)
 --
--- Host: localhost    Database: vuesim_v2
-
+-- Host: localhost    Database: SpanSim
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -60,8 +58,7 @@ CREATE TABLE `artifacts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`artifact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,16 +70,6 @@ LOCK TABLES `artifacts` WRITE;
 INSERT INTO `artifacts` VALUES (11,'Recuerdos de Pandora: Mujer dispuesta a luchar (Barcelona 1936)',' A woman holding a rifle standing on a cannon at the beginning of the war','/images/gallery/Artifact_1.jpg','2018-05-22 18:06:05',NULL),(12,'Fiat C.R. 32 del XVI Gruppo Autonomo \"Cucaracha\" scortano un Savoia-Marchetti S.M.81 in una missione di bombardamento.','Airplanes dropping bombs during the Spanish Civil War','/images/gallery/Artifact_2.jpg','2018-05-22 18:08:01',NULL),(13,'Republican Tank','Photo taken during the Battle of Teruel','/images/gallery/Artifact_3.jpg','2018-05-22 18:08:52',NULL),(14,'Photo of a plane flown in the SCW',' ','/images/gallery/Artifact_4.jpg','2018-05-22 18:10:19',NULL),(15,'Another plane flown in the SCW',' ','/images/gallery/Artifact_5.jpg','2018-05-22 18:12:07',NULL),(16,'Fighting During the Siege of the Alcázar in Toledo',' ','/images/gallery/Artifact_6.jpg','2018-05-22 18:12:32',NULL),(17,'Spanish Civil War - Czechoslovak Gottwald artillery batteries',' ','/images/gallery/Artifact_7.jpg','2018-05-22 18:13:12',NULL),(18,'Refugiados en Francia','Residents of the War Resisters\' Home, hosted by professor Jose Brocca\n','/images/gallery/Artifact_8.jpg','2018-05-22 18:17:29',NULL),(19,'Ayuda suiza a los ninos de espana ','Transport of refugee Children','/images/gallery/Artifact_9.jpg','2018-05-22 18:17:32',NULL),(20,'Ninos de la guerra civil','Children evacuating Spain, giving the republican salute','/images/gallery/Artifact_10.png','2018-05-22 18:17:33',NULL),(21,'Los Internacionales','Internationalist Propaganda - Foreign aid for the Republic \n','/images/gallery/Artifact_11.jpg','2018-05-22 18:17:34',NULL),(22,'Voluntarios de Polonia','Polish volunteers aid in the fight for the second Spanish republic ','/images/gallery/Artifact_12.jpg','2018-05-22 18:17:34',NULL),(23,'Bundesarchiv Bild','Two women eating in the street','/images/gallery/Artifact_13.jpg','2018-05-22 18:21:56',NULL),(24,'La Sonriente Partisana Comunista Milja Marín\n','Smiling Woman','/images/gallery/Artifact_14.jpg','2018-05-22 18:21:58',NULL),(25,'La Familia','3 small children posed for a picture','/images/gallery/Artifact_15.jpg','2018-05-22 18:21:59',NULL),(26,'Spanish War Children','Children standing together making a sign','/images/gallery/Artifact_10.png','2018-05-22 18:22:00',NULL),(27,'Spanish Civil War Mass Grave','Bones found together in a mass grave\n','/images/gallery/Artifact_17.jpg','2018-05-22 18:22:01',NULL),(28,'Surrender of Red Soldier','Soldiers with their hands raised in surrender','/images/gallery/Artifact_18.jpg','2018-05-22 18:22:01',NULL),(29,'Mujer Despuesta a Luchar','Woman with a gun raised in the air\n','/images/gallery/Artifact_1.jpg','2018-05-22 18:22:04',NULL),(30,'Norman Bethune checkers','Men Playing Checkers','/images/gallery/Artifact_19.jpg','2018-05-22 18:28:10',NULL),(31,'Soldiers with Dog','Attribution','/images/gallery/Artifact_20.jpg','2018-05-22 18:28:12',NULL),(32,'Republican sailors playing musical instruments','This is a fun picture with music.','/images/gallery/Artifact_21.jpg','2018-05-22 18:28:14',NULL),(33,'Spanish War Children','Hopeful optimistic children.\n','/images/gallery/Artifact_10.png','2018-05-22 18:28:18',NULL),(34,'Las tristezas de la guerra - ¡Adiós, hijo mío!, de Narcís Martí Cabot','Painting of a father saying goodbye to his son. Shows the hope of coming back to family.','/images/gallery/Artifact_23.jpg','2018-05-22 18:28:17',NULL),(35,'Iglesia de Belén - Destruido en 1936 durante la Guerra Civil de España','Interior of this Church was destroyed during the Spanish Civil War.','/images/gallery/Artifact_24.jpg','2018-05-22 18:28:16',NULL),(36,'Bombing of Guernica Ruins','Impactful image','/images/gallery/Artifact_25.jpg','2018-05-22 18:28:15',NULL),(37,'Mural del Gernika','Mural based on Picasso\'s painting \"Guernica\" that is located in Guernica, Spain','/images/gallery/Artifact_26.jpg','2018-05-22 18:36:14',NULL),(38,'Obra de arte relacionada con la Guerra Civil.JPG','Modern art related to the Spanish Civil War\n','/images/gallery/Artifact_27.jpg','2018-05-22 18:36:17',NULL),(39,'Jardines del Ferial, estela en recuerdo a los caídos en el bombardeo (obra de Jesus Aldama)','Sculpture dedicated to those killed in the bombing of Guernica in Spain.','/images/gallery/Artifact_28.jpg','2018-05-22 18:36:19',NULL),(40,'Medalla de la Guerra Civil de España','Medal given as a result of winning the Spanish Civil War','/images/gallery/Artifact_29.jpg','2018-05-22 18:36:19',NULL),(41,'Australianos en la Guerra Civil de España','Memorial erected in memory to the Australians who fought in the Spanish Civil war.\n','/images/gallery/Artifact_30.jpg','2018-05-22 18:36:21',NULL),(42,'Monumento a las mules de montaña usadas en la Guerra Civil de España','Memorial erected to honor the role that mules played in supplying nationalist groups during the Spanish Civil War.','/images/gallery/Artifact_31.jpg','2018-05-22 18:36:20',NULL),(43,'Estatua al Obispo Diego Ventaja Milan, Almeria, España','Statue of Bishop Diego Ventaja who was killed by marxists during the Spanish Civil War.\n','/images/gallery/Artifact_32.jpg','2018-05-22 18:36:18',NULL),(44,'Spanish War Children','Children evacuating Spain, giving the Republican salute','/images/gallery/Artifact_10.png','2018-05-22 19:03:27',NULL),(45,'Spanish Civil War - Mass grave - Estépar, Burgos.jpg','A mass grave in Burgos, Spain from the Spanish Civil War','/images/gallery/Artifact_17.jpg','2018-05-22 19:03:31',NULL),(46,'Puente, Ronda, España','A bridge from which Republicans were allegedly thrown from by the nationalists.\n','/images/gallery/Artifact_35.jpg','2018-05-22 19:03:32',NULL),(47,'Franco and Hitler Meet at Hendaye','1940 Hitler and Franco in front of soldiers at a train station\n','/images/gallery/Artifact_36.jpg','2018-05-22 19:03:29',NULL),(48,'Evacuation Truck','1937 an evacuation truck from the Swiss to help Spain','/images/gallery/Artifact_37.jpg','2018-05-22 19:03:34',NULL),(49,'War Refugees','January 1937, people walking in the street with animals and wagons\n','/images/gallery/Artifact_38.jpg','2018-05-22 19:03:34',NULL),(50,'Spain Final-guerra-civil','A photograph of a signed letter from Franco declaring the end of the war in Spanish\n','/images/gallery/Artifact_39.jpg','2018-05-22 19:03:33',NULL),(51,'Instruccions a seguir en cas de bombardeig. Consells de Sanitat de Guerra publicats per la Generalitat de Catalunya','An illustrated flyer in Catalan that provides instructions for how to stay safe during a bombing raid\n','/images/gallery/Artifact_40.jpg','2018-05-22 19:03:31',NULL),(52,'Map','Map of the distribution of forces in the Spanish Civil War','/images/gallery/Artifact_41.png','2018-05-22 19:03:35',NULL),(53,'Batalla de Brunete revisada','Map of the Batalla de Brunete\n','/images/gallery/Artifact_42.png','2018-05-22 19:03:29',NULL),(54,'La brigade international durante la Guerra Civil de España, Diciembre 1936 - Enero 1937','Picture of a group of fighters from the international brigade. They are raising their hands in the communist salute.\n','/images/gallery/Artifact_43.jpg','2018-05-22 19:15:42',NULL),(55,'Monumento a los soldados de Hungría en la brigada internacional','Memorial erected to Hungarians who fought in the Spanish Civil War in the International Brigades','/images/gallery/Artifact_44.jpg','2018-05-22 19:15:47',NULL),(56,'International Brigade - tank','Battle of Belchite in 1937','/images/gallery/Artifact_45.jpg','2018-05-22 19:15:45',NULL),(57,'Finnish Volunteer in International Brigade','1937 man named Paavel Pajunen from Finland','/images/gallery/Artifact_46.jpg','2018-05-22 19:15:49',NULL),(58,'Presidente Manuel Azana','Second prime minister to the Second Republic of Spain, later the last president of the Republic\n','/images/gallery/Artifact_47.jpeg','2018-05-22 19:15:47',NULL),(59,'Surrender of Red Soldiers, Somosierra, Madrid',' ','/images/gallery/Artifact_18.jpg','2018-05-22 19:15:45',NULL),(60,'Francisco Franco',' ','/images/gallery/Artifact_49.jpg','2018-05-22 19:15:50',NULL),(61,'Republican Troops on the Aragon Front',' ','/images/gallery/Artifact_50.jpg','2018-05-22 19:15:52',NULL),(62,'Niños en la Guerra Civil de España','Children being evacuated during the Spanish Civil War','/images/gallery/Artifact_10.png','2018-05-22 19:15:46',NULL),(63,'Norman Bethune. El juego de damas, 1937','Dr. Bethune, a Canadian surgeon who served on the frontline of the Spanish Civil War working working for Republican government.','/images/gallery/Artifact_19.jpg','2018-05-22 19:15:51',NULL),(64,'Francoist Troop Demonstration','Crowds and public demonstration in Salamanca\n','/images/gallery/Artifact_53.jpg','2018-05-22 19:15:51',NULL),(65,'Franco ha muerto','Newspaper title for the day he died','/images/gallery/Artifact_54.png','2018-05-22 19:15:44',NULL),(66,'Soldiers in Battle at Madrid','September 1936 - Soldiers marching','/images/gallery/Artifact_55.jpeg','2018-05-22 19:15:54',NULL),(67,'Republican Soldiers','Republican Soldiers walking in the streets of Teruel from December 1937','/images/gallery/Artifact_56.jpg','2018-05-22 19:15:55',NULL),(69,'Republican Soldiers Playing Music','Soldiers are singing and playing instruments aboard a ship in 1937','/images/gallery/Artifact_21.jpg','2018-05-22 19:15:57',NULL),(70,'¡No pasarán! Madrid','A banner in a street in Madrid declaring opposition to facism.','/images/gallery/Artifact_57.jpg','2018-05-22 19:39:42',NULL),(71,'Franco Propaganda','Propaganda for El Generalismo\n','/images/gallery/Artifact_58.jpg','2018-05-22 19:39:44',NULL),(72,'Fascism propaganda','Propaganda for Fascism\n','/images/gallery/Artifact_59.jpg','2018-05-22 19:39:46',NULL),(73,'Youth united for Spain Propaganda','Youth in the war\n','/images/gallery/Artifact_60.jpg','2018-05-22 19:39:45',NULL),(74,'Libertad propaganda ','Iberian federation of libertarian youth \n','/images/gallery/Artifact_11.jpg','2018-05-22 19:39:45',NULL),(75,'8 de noviembre 1936','Propaganda for siege of Madrid \n','/images/gallery/Artifact_62.jpg','2018-05-22 19:39:43',NULL),(76,'Los Internacionales','International volunteers\n','/images/gallery/Artifact_63.jpg','2018-05-22 19:39:47',NULL),(77,'El socialismo es la liberación','strong image of how socialists perceived their lives during the time.','/images/gallery/Artifact_56.jpg','2018-05-22 19:39:48',NULL),(78,'Woman with a rifle near a canon',' ','/images/gallery/Artifact_1.jpg','2018-05-22 19:59:46',NULL),(79,'Recuerdos de Pandora: Mujer dispuesta a luchar (Barcelona 1936)','A woman holding a rifle standing on a cannon at the beginning of the war\n','/images/gallery/Artifact_1.jpg','2018-05-22 19:59:49',NULL),(80,'Women Pleading with Rebels','Women pleading for the lives of prisoners of rebels in Seville\n','/images/gallery/Artifact_67.jpg','2018-05-22 19:59:45',NULL),(81,'Mujeres Soldados','Women in uniform and with rifles\n','/images/gallery/Artifact_68.jpg','2018-05-22 19:59:48',NULL),(82,'Woman soldier overlooking Barcelona','Marina Ginesta, a 17-year-old communist militant, overlooking Barcelona during the Spanish Civil War, 1936\n','/images/gallery/Artifact_69.jpg','2018-05-22 19:59:47',NULL),(83,'Women fighting during the Siege of the Alcazar','Women in combat','/images/gallery/Artifact_64.jpg','2018-05-22 20:04:16',NULL),(84,'Children Playing on the Street','Despite being on a destroyed street with bullet-hole ridden buildings, the children are smiling.\n','/images/gallery/Artifact_70.jpg','2018-05-22 20:09:32',NULL),(85,'Nationalist and Loyalist troops','I like the idea of both hope and despair in this picture because it depends on the perspective of what troops you were supporting.\n','/images/gallery/Artifact_71.jpg','2018-05-22 20:09:33',NULL),(86,'Marina Ginesta','Girl with a gun and wry smile','/images/gallery/Artifact_69.jpg','2018-05-22 20:09:34',NULL),(87,'Unidad y victoria','This is more just hope','/images/gallery/Artifact_74.jpg','2018-05-22 20:09:36',NULL),(88,'Belchite','This is more focused on despair and loss\n','/images/gallery/Artifact_75.jpg','2018-05-22 20:09:35',NULL),(89,'Memorial a los voluntarios de Galés en la Guerra Civil de España','This memorial is found in Alexandra Gardens in Cardiff, United Kingdom\n','/images/gallery/Artifact_76.jpg','2018-05-22 20:32:55',NULL),(90,' Memorial a la Brigada Internacional que vinieron desde Hammersmith y Fulham Inglaterra','Placed in Fulham, United Kingdom to commemorate those who went to fight against Facism in Spain.','/images/gallery/Artifact_77.jpg','2018-05-22 20:32:57',NULL),(91,' Monumento a las brigade internacionals en Londres','Monument constructed in London to honor all those who left the UK to go fight in the Spanish Civil War\n','/images/gallery/Artifact_78.jpg','2018-05-22 20:32:58',NULL),(92,'“Reading International Brigade Memorial” – Monumento','A monument that currently is found in Forbury Gardens in Reading, UK','/images/gallery/Artifact_79.jpg','2018-05-22 20:32:57',NULL),(93,'Homenaje Brigadas Internacionales – Glasgow, Escocia','Monument erected to pay tribute to fighters from Glasgow, Scotland','/images/gallery/Artifact_80.jpg','2018-05-22 20:32:59',NULL),(94,' Monumento a los soldados de Hungría en la brigade internacional','Memorial erected to Hungarians who fought in the Spanish Civil War in the International Brigades. Found in Memorial Park in Budapest, Hungary.','/images/gallery/Artifact_81.jpg','2018-05-22 20:32:59',NULL),(95,' Monumento a la Brigada Internacional. Ubicado en la Universidad de Washinton, EEUU','This monument honors the American young men who went and fought in the Spanish Civil War. Their brigade was named the Abraham Lincoln Brigade and about 3,000 served, half of them buried on Spanish soil.','/images/gallery/Artifact_82.jpg','2018-05-22 20:33:01',NULL),(96,'Australianos en la Guerra Civil de España','Memorial erected in memory to the Australians who fought in the Spanish Civil War. Found in Canberra, Australia.\n','/images/gallery/Artifact_30.jpg','2018-05-22 20:34:02',NULL),(97,' Monumento a las brigada internacional – Madrid','Located 25 kilometers southeast of Madrid. Erected to commerate the battle of Jarama in 1937\n','/images/gallery/Artifact_84.jpg','2018-05-22 20:36:13',NULL),(98,'Monumento cerca a Madrid a Charlie Donnelly de la Brigada Internacional','Monument constructed to the Irish Poet Charlie Donnelly who died in the battle of Jarama in 1937. It is located at Rivas de Vaciamadrid, 20 kilometers southeast of Madrid\n','/images/gallery/Artifact_85.jpg','2018-05-22 20:36:14',NULL),(99,' En camino a ayudar a la frontera','1936 people are in a truck on their way to the warfront, they are not dressed like soldiers, rather they look like civilians with guns.\n','/images/gallery/Artifact_86.jpg','2018-05-22 20:41:51',NULL),(100,' Grupo de Italianos','1937 group of Italian men and women stand with their flag in uniforms','/images/gallery/Artifact_87.jpg','2018-05-22 20:41:53',NULL),(101,'Personas normales','1936 people are smiling standing next to a car, they are from Norway and part of an International Brigade.','/images/gallery/Artifact_88.jpg','2018-05-22 20:41:54',NULL),(102,'Grupo internacional','Men from a different country are talking and preparing for battle.\n\n','/images/gallery/Artifact_89.jpg','2018-05-22 20:41:53',NULL),(103,'Voluntarios de países distintos','Writer Ernest Hemingway volunteered in the Spanish Civil War. He is pictured with two other soldiers from different countries.','/images/gallery/Artifact_90.jpg','2018-05-22 20:41:56',NULL),(104,'Voluntarios de Inglaterra','1936 men from England are saluting towards the camera.\n','/images/gallery/Artifact_91.jpg','2018-05-22 20:41:52',NULL),(105,'Un grupo militar de Yugoslavia','1938 Fighters from Yugoslavia pose for picture\n','/images/gallery/Artifact_92.jpg','2018-05-22 20:41:56',NULL),(106,'Grupo de eslovenos','1937 group from Slovenia posing for a picture with smiles\n','/images/gallery/Artifact_93.jpg','2018-05-22 20:41:57',NULL),(107,'Finnish Volunteer in International Brigade','1937 man named Paavel Pajunen from Finland','/images/gallery/Artifact_94.jpg','2018-05-22 20:41:55',NULL);
 /*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping data for table `artifacts` easy test data
---
-
--- LOCK TABLES `artifacts` WRITE;
--- /*!40000 ALTER TABLE `artifacts` DISABLE KEYS */;
--- INSERT INTO `artifacts` VALUES (1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png','2018-04-03 19:33:58',NULL),(2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png','2018-04-03 19:33:58',NULL),(3,'Gallery 3 Title','This is the description','/images/gallery/gallery03.png','2018-04-03 19:33:58',NULL),(4,'Gallery 4 Title','This is the description','/images/gallery/gallery04.png','2018-04-03 19:33:58',NULL),(5,'Gallery 5 Title','This is the description','/images/gallery/gallery05.png','2018-04-03 19:33:58',NULL),(6,'Gallery 6 Title','This is the description','/images/gallery/gallery06.png','2018-04-03 19:33:58',NULL),(7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png','2018-04-03 19:33:58',NULL),(8,'Gallery 8 Title','This is the description','/images/gallery/gallery08.png','2018-04-03 19:33:58',NULL),(9,'Gallery 9 Title','This is the description','/images/gallery/gallery09.png','2018-04-03 19:33:58',NULL),(10,'Gallery 10 Title','This is the description','/images/gallery/gallery10.png','2018-04-03 19:33:58',NULL);
--- /*!40000 ALTER TABLE `artifacts` ENABLE KEYS */;
--- UNLOCK TABLES;
 
 --
 -- Table structure for table `assignment_types`
@@ -108,7 +95,7 @@ CREATE TABLE `assignment_types` (
 
 LOCK TABLES `assignment_types` WRITE;
 /*!40000 ALTER TABLE `assignment_types` DISABLE KEYS */;
-INSERT INTO `assignment_types` VALUES (1,'Email','CALL retrieve_email_assignments(?,?,?)','{\"columns\": [\"u_name\", \"c_name\", \"subject\", \"body\", \"created_at\"], \"headings\": {\"body\": \"Body\", \"c_name\": \"Character (To)\", \"u_name\": \"Student (From)\", \"subject\": \"Subject\", \"created_at\": \"Submitted\"}, \"sortable\": [\"u_name\", \"created_at\"]}'),(2,'Gallery','CALL retrieve_gallery_assignments(?)','{\"columns\": [\"img\", \"changes\", \"u_name\", \"g_name\"], \"headings\": {\"img\": \"Artifact\", \"g_name\": \"Group\", \"u_name\": \"Student\", \"changes\": \"Changes\"}, \"sortable\": [\"u_name\", \"g_name\"]}'),(3,'Video Call','CALL retrieve_video_assignments(?,?,?,?)',NULL);
+INSERT INTO `assignment_types` VALUES (1,'Email','CALL retrieve_email_assignments(?,?,?)','[\"user_id\", \"day\", \"body\"]'),(2,'Gallery','CALL retrieve_gallery_assignments(?)',NULL),(3,'Video Call','CALL retrieve_video_assignments(?,?,?,?)',NULL);
 /*!40000 ALTER TABLE `assignment_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +122,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'{\"day\": 1, \"characterId\": 2}'),(2,'Eduardo Email Day 1',1,'{\"day\": 1, \"characterId\": 1}'),(3,'Phillip Email Day 2',1,'{\"day\": 1, \"characterId\": 3}'),(4,'Gallery Assignment',2,'{}'),(5,'Video call day 1',3,'{\"day\": 1, \"questionId\": 1, \"characterId\": 1}');
+INSERT INTO `assignments` VALUES (1,'Ana Email Day 1',1,'[2, 1]'),(2,'Eduardo Email Day 1',1,'[1, 1]'),(3,'Phillip Email Day 2',1,'[3, 1]'),(4,'Gallery Assignment',2,'[]'),(5,'Video call day 1',3,'[1, 1, 1]');
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +211,7 @@ CREATE TABLE `characters` (
 
 LOCK TABLES `characters` WRITE;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
-INSERT INTO `characters` VALUES (1,'Susana Gomez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,'sgomez@museodevalle.es'),(2,'Beatriz Rodríguez','Exhibit Designer','img/characters/ana-small.png','img/characters/ana-large.png',NULL,NULL,'beatierod@museodevalle.es'),(3,'Francisco López','Museum Technician','img/characters/phillip-small.png','img/characters/phillip-large.png',NULL,NULL,'flopez@museodevalle.es'),(4,'Carmen González','Donor','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,'carmengonzalez@gmail.es'),(5,'Jose Manuel Sánchez','Historian','img/characters/jose-small.jpg','img/characters/jose-large.jpg',NULL,NULL,'joseymariasanchez@yahoo.es'),(6,'Luis Abeyta','Librarian','img/characters/luis-small.jpg','img/characters/luis-large.jpg',NULL,NULL,'luisabeyta@madbiblioteca.es');
+INSERT INTO `characters` VALUES (1,'Susana Gomez','Head Curator','img/characters/ernando-small.png','img/characters/ernando-large.png',NULL,NULL,'sgomez@museodevalle.es'),(2,'Beatriz Rodríguez','Exhibit Designer','img/characters/beatrix-small.jpeg','img/characters/beatrix-large.jpeg',NULL,NULL,'beatierod@museodevalle.es'),(3,'Francisco López','Museum Technician','img/characters/Fransico-small.jpg','img/characters/Fransico-large.jpg',NULL,NULL,'flopez@museodevalle.es'),(4,'Carmen González','Donor','img/characters/maria-small.png','img/characters/maria-large.png',NULL,NULL,'carmengonzalez@gmail.es'),(5,'Jose Manuel Sánchez','Historian','img/characters/jose-small.jpg','img/characters/jose-large.jpg',NULL,NULL,'joseymariasanchez@yahoo.es'),(6,'Luis Abeyta','Librarian','img/characters/luis-small.jpg','img/characters/luis-large.jpg',NULL,NULL,'luisabeyta@madbiblioteca.es');
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,7 +265,7 @@ CREATE TABLE `class_has_group` (
 
 LOCK TABLES `class_has_group` WRITE;
 /*!40000 ALTER TABLE `class_has_group` DISABLE KEYS */;
-INSERT INTO `class_has_group` VALUES (1,1),(1,3);
+INSERT INTO `class_has_group` VALUES (1,1);
 /*!40000 ALTER TABLE `class_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,8 +343,7 @@ CREATE TABLE `groups` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +352,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'test group 1','2018-03-23 18:19:01',NULL),(2,'Dan Group','2018-04-05 18:20:52',NULL),(3,'Group 2','2018-05-25 15:36:27',NULL);
+INSERT INTO `groups` VALUES (1,'test group 1','2018-03-23 18:19:01',NULL),(2,'Dan Group','2018-04-05 18:20:52',NULL);
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,7 +416,6 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +442,7 @@ CREATE TABLE `notes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`note_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -569,7 +554,7 @@ CREATE TABLE `student_artifact_has_tag` (
 
 LOCK TABLES `student_artifact_has_tag` WRITE;
 /*!40000 ALTER TABLE `student_artifact_has_tag` DISABLE KEYS */;
-INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(8,1),(7,1),(7,2),(4,1),(4,2);
+INSERT INTO `student_artifact_has_tag` VALUES (1,1),(1,2),(5,1),(4,1),(6,1),(7,1),(8,1),(9,1);
 /*!40000 ALTER TABLE `student_artifact_has_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -591,7 +576,7 @@ CREATE TABLE `student_artifacts` (
   `class_id` int(11) NOT NULL DEFAULT '0',
   `day` int(11) NOT NULL,
   PRIMARY KEY (`student_artifact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -600,7 +585,7 @@ CREATE TABLE `student_artifacts` (
 
 LOCK TABLES `student_artifacts` WRITE;
 /*!40000 ALTER TABLE `student_artifacts` DISABLE KEYS */;
-INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is the description asfffdsa','/images/gallery/gallery01.png',8,1,1,2),(2,1,'Gallery 1 Title in group two','This is the description.Tosh.0 is a weekly topical series hosted by comedian Daniel Tosh that delves into all aspects of the internet, from the ingenious to the absurd to the medically inadvisable. Through segments like Video Breakdown, 20 Seconds on the Clock and Web Redemption, Tosh has established himself as the preeminent expert on exhibitionist weirdos, injurious idiots and the best worst things on the web.','/images/gallery/gallery01.png',9,3,1,1),(3,6,'Sith Lord','See the 97 notifications ready and waiting just for you','/images/gallery/gallery06.png',9,3,1,1),(4,4,'Some Poster','This is the description. This is pretty cool.','/images/gallery/gallery04.png',9,3,1,1);
+INSERT INTO `student_artifacts` VALUES (1,1,'Gallery 1 Title That has changed','This is a description that','/images/gallery/gallery01.png',1,2,1,1),(3,4,'Gallery 4 Title','This is the description this has changed','/images/gallery/gallery04.png',8,0,1,1),(4,1,'Gallery 1 Title not in a group','This is the description changed','/images/gallery/gallery01.png',8,0,1,1),(5,2,'Gallery 2 Title','This is the description here','/images/gallery/gallery02.png',8,0,1,1),(6,2,'Gallery 2 Title','This is the description','/images/gallery/gallery02.png',8,1,1,1),(7,1,'Gallery 1 Title','This is the description','/images/gallery/gallery01.png',8,1,1,1),(8,7,'Gallery 7 Title','This is the description','/images/gallery/gallery07.png',8,1,1,1);
 /*!40000 ALTER TABLE `student_artifacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,7 +609,7 @@ CREATE TABLE `student_emails` (
   `class_id` int(11) NOT NULL DEFAULT '0',
   `email_attachment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`student_email_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -633,8 +618,32 @@ CREATE TABLE `student_emails` (
 
 LOCK TABLES `student_emails` WRITE;
 /*!40000 ALTER TABLE `student_emails` DISABLE KEYS */;
-INSERT INTO `student_emails` VALUES (1,1,1,'Subject','Body','1',NULL,NULL,2,1,NULL),(2,1,1,'Subject 2','Body 2','2',NULL,NULL,1,1,NULL);
 /*!40000 ALTER TABLE `student_emails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_read_emails`
+--
+
+DROP TABLE IF EXISTS `student_read_emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_read_emails` (
+  `character_email_id` int(11) DEFAULT NULL,
+  `day` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_read_emails`
+--
+
+LOCK TABLES `student_read_emails` WRITE;
+/*!40000 ALTER TABLE `student_read_emails` DISABLE KEYS */;
+INSERT INTO `student_read_emails` VALUES (3,1,13,'2018-05-30 17:37:07');
+/*!40000 ALTER TABLE `student_read_emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -659,7 +668,7 @@ CREATE TABLE `student_tasks` (
 
 LOCK TABLES `student_tasks` WRITE;
 /*!40000 ALTER TABLE `student_tasks` DISABLE KEYS */;
-INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-21 20:58:13'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49'),(4,13,0,'2018-05-22 16:59:20','2018-05-23 16:27:48'),(5,13,0,'2018-05-22 16:59:21','2018-05-23 15:55:12');
+INSERT INTO `student_tasks` VALUES (1,1,1,'2018-03-19 17:25:22','2018-05-21 20:58:13'),(2,1,1,'2018-03-19 17:25:25','2018-05-03 00:06:09'),(3,1,1,'2018-03-19 17:25:29','2018-05-03 00:06:09'),(7,1,1,'2018-03-27 15:10:05','2018-05-03 00:06:10'),(1,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:18'),(2,8,1,'2018-03-27 17:03:38','2018-03-28 19:31:19'),(3,8,1,'2018-03-27 17:03:39','2018-03-28 19:31:19'),(7,8,1,'2018-03-27 17:03:40','2018-03-28 19:39:32'),(4,8,1,'2018-03-28 19:31:23','2018-05-03 15:57:41'),(5,8,0,'2018-03-28 19:31:30','2018-05-15 17:56:49'),(4,13,0,'2018-05-22 16:59:20','2018-05-29 20:28:11'),(5,13,0,'2018-05-22 16:59:21','2018-05-29 19:38:55'),(6,13,0,'2018-05-29 19:34:49','2018-05-29 19:34:52');
 /*!40000 ALTER TABLE `student_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -682,7 +691,6 @@ CREATE TABLE `student_video_submissions` (
   PRIMARY KEY (`submission_id`),
   UNIQUE KEY `student_video_submissions_submission_id_uindex` (`submission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -733,7 +741,7 @@ CREATE TABLE `tasks` (
   `complete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`task_id`),
   UNIQUE KEY `tasks_id_uindex` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +750,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Task 1','This is the first task',1,1),(2,'Task 2','This is the second task',1,0),(3,'Task 3','This is the third task',1,0),(4,'Task 1','Day 2 Task 1',2,1),(5,'Task 2','Day 2 Task 2',2,1),(6,'Task 1 ','Day 3 Task 1',3,1),(7,'Task 2','Day 3 Task 2',1,0);
+INSERT INTO `tasks` VALUES (1,'Introduce Yourself to the Team','This is the first task',1,1),(2,'Gather Information','Gather background information on the Spanish Civil War in preparation for a meeting with the Educational Specialist from Spain’s Ministry of Education and the Prado Museum’s Educational Director.',1,0),(4,'Interview a Potential Donor','Call a Carmen about her potential donations to the museum.',2,1),(5,'Respond to the Head Curator','Respond to the Head Curators email about you meeting with the donor.',2,1),(6,'Find Gallery Theme','Day 3 Task 1',2,1),(7,'Send email with Audience Anaysis','Write email describing the audience for your exhibition. What do you know about the audience? What does the audience know and what don\'t they know about the Spanish Civil war? What will your team contribute?  ',1,0),(8,'Interview a Retired Historian','Interview the Librarian about your discovered resources.',3,0),(9,'Interview the Librarian','Try to get additional information from the Librarian about the artifacts you\'ve found.',3,0),(10,'Curate your Gallery Exhibition','Make Gallery selections for the Exhibition in preperation for display.',3,0),(11,'Call Donor about Artifact','Call donor about additional artifacts.',4,0),(12,'Write Artifact Descriptions','Work on the introduction to your exhibition, and prepare a one page explaination about the Spanish Civil War.',4,0),(13,'Update the Head Curator','Update the Head Curator about your Exhibition, and learn best practices for descriptive texts.',4,0),(14,'Organize your Exhibition','Finalize your Exhibition.',5,0);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +799,7 @@ CREATE TABLE `user_has_class` (
 
 LOCK TABLES `user_has_class` WRITE;
 /*!40000 ALTER TABLE `user_has_class` DISABLE KEYS */;
-INSERT INTO `user_has_class` VALUES (1,1,NULL,NULL),(7,1,NULL,NULL),(8,1,NULL,NULL),(9,1,NULL,NULL),(10,1,NULL,NULL);
+INSERT INTO `user_has_class` VALUES (1,1,NULL,NULL);
 /*!40000 ALTER TABLE `user_has_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -814,7 +822,7 @@ CREATE TABLE `user_has_group` (
 
 LOCK TABLES `user_has_group` WRITE;
 /*!40000 ALTER TABLE `user_has_group` DISABLE KEYS */;
-INSERT INTO `user_has_group` VALUES (1,1),(8,1),(7,1),(10,3),(9,3);
+INSERT INTO `user_has_group` VALUES (1,2),(1,1),(10,1),(8,1);
 /*!40000 ALTER TABLE `user_has_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -838,8 +846,7 @@ CREATE TABLE `users` (
   `assigned` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -848,7 +855,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'vVcFzoOMg78RH0YpGKEHw6w2e24djKRZWFeDBDZqsxkQtNtIHHX42t6fFlrO','2018-01-11 01:04:23','2018-01-11 01:04:23',0,1),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,1),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'nFu6A0gvCwTaTp3cX4yMwTaO96eSpm6CzOWsOlXFnHlbjuFtghrtCuNOujRV','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'0TZZkCmVN5eseoh3NToxMXBGCErsYHIDJWGoyGW5NNmdyWxoTAGCREmfo52P','2018-03-24 04:24:58','2018-03-24 04:24:58',0,1),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,1),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T','2','matalyn2@byu.edu',0,'q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0);
+INSERT INTO `users` VALUES (1,'Dan','de6eling@gmail.com','$2y$10$K.a/gbbcosHWKgwBqEiZSuabVZNxzjTRVlSnx0ezB/F3wf5MzaA6O',1,'tBT8Yl6wVsz9p68dzKnhnL9hBDw4tn1wMtIsmzLizAhqjwibGtbbbGnMySKs','2018-01-11 01:04:23','2018-01-11 01:04:23',0,0),(7,'student','student@test.com','$2y$10$GnPD5u8IaWqMolFyGRKhGuqefI61DjjoKtAepXd.ITdTGLm/PORo6',1,'i19DOXxXKiC2zWBP2KVEBLTYm9VBAYv2F5idlRZzdIXfZZ8EevKyz1j39tc2','2018-03-23 22:58:02','2018-03-23 22:58:02',0,0),(8,'instructor','instructor@test.com','$2y$10$V3Dh8ybhaR5tMeCSG8F3j.Ls95/Lj3zKZmfKBWUVudaItddmUfGry',2,'5RiKEcFI8cxhK0X5k8K5syPWS2sbsoOXcLHU1atsIpfMefAU8n3OgoJFUV1E','2018-03-23 23:21:19','2018-03-23 23:21:19',1,1),(9,'student 2','student2@test.com','$2y$10$IuqZiBOBIl10i7gT.26iUOmVRcLbA9k2LZVmvhaqishbPXSwsZRhO',1,'wjlZyXBw3w6u20M0eZK8mkO7phBy7cgp38eQGss6LiZHtVMrRdL9U2rO1KFG','2018-03-24 04:24:58','2018-03-24 04:24:58',0,0),(10,'student 3','student3@test.com','$2y$10$ok5g3RV67tAaFfiegaz1POnTrrG2Y2dgrfaRVzKoMjGFvSAqsmG9i',1,'1fJUErLGhnaUH8KEsgKDwL0bhvx9yH7QAIzN2RaXfAHp7xEdhODYBa3RQXbC','2018-03-24 04:28:29','2018-03-24 04:28:29',0,0),(11,'anna','annacguthrie5@gmail.com','$2y$10$a974OGMituSDLhWMd6dPvu3.h0.jOczVvc2D2ofOlmk/Qi4IUEiQ2',1,NULL,'2018-05-04 23:26:26','2018-05-04 23:26:26',1,0),(12,'Matalyn T','2','matalyn2@byu.edu',0,'q5S7U8WZSGezoDejDC1cnyaPH8QztCNixvTrYejrsL68Dv3TkunNL1Juz6cA','2018-04-04 00:31:27','2018-04-04 00:31:27',1,0),(13,'Matalyn T','matalyn2@byu.edu','$2y$10$pjsIynPsFIzTwS9srTBpCugYms8X2YjzGys04MZSrOSu1cXkNrbCi',2,NULL,'2018-05-22 03:23:58','2018-05-22 03:23:58',1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -914,4 +921,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-
+-- Dump completed on 2018-05-30 11:43:36
