@@ -242,6 +242,9 @@
     .read {
         background-color: #f0f0f0;
     }
+    .unread {
+        font-weight: bold;
+    }
     #readModal > .modal-dialog > .modal-content{
         width: 35rem;
     }

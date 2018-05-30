@@ -22,55 +22,68 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', 'HomeController@user');
 
-// Simulation
-Route::post('/updateday', 'SimulationController@updateDay');
-Route::get('/sim', function () {
-    return DB::table('simulation')->get();
+
+Route::group(['middleware'=>['auth', 'admin']], function() {
+    //Library
+    Route::resource('/editor', 'ArticleEditorController');
+    Route::post('/deleteArticle', 'ArticleEditorController@deleteArticle');
+    Route::post('/addArticle', 'ArticleEditorController@addArticle');
 });
-Route::post( '/resetDay', 'SimulationController@resetDay' );
+
+
+Route::group(['middleware'=>['auth', 'instructor']], function() {
+    // Class
+    Route::resource('/classes', 'ClassController');
+    Route::resource('/assignments', 'AssignmentController');
+    Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');
+});
+
+
+
+Route::group(['middleware'=>['auth', 'student']], function() {
+    // Simulation
+    Route::post('/updateday', 'SimulationController@updateDay');
+    Route::get('/sim', function () {
+        return DB::table('simulation')->get();
+    });
+    Route::post( '/resetDay', 'SimulationController@resetDay' );
 
 // Tasks
-Route::resource('/tasks', 'TasksController');
-Route::post('/tasks/complete', 'TasksController@complete');
+    Route::resource('/tasks', 'TasksController');
+    Route::post('/tasks/complete', 'TasksController@complete');
 
 // Email
-Route::resource('/email', 'EmailController');
-Route::post('/returnemails', 'EmailController@emailData');
-Route::post('/readEmail', 'EmailController@readEmail');
+    Route::resource('/email', 'EmailController');
+    Route::post('/returnemails', 'EmailController@emailData');
+    Route::post('/readEmail', 'EmailController@readEmail');
 
 // Video Call
-Route::resource('/videocall', 'VideoCallController');
-Route::post('/saveFile', 'VideoCallController@saveFile');
-Route::post('/clickedQuestion', 'VideoCallController@disableQuestion');
+    Route::resource('/videocall', 'VideoCallController');
+    Route::post('/saveFile', 'VideoCallController@saveFile');
+    Route::post('/clickedQuestion', 'VideoCallController@disableQuestion');
 
 // Library
-Route::resource('/library', 'LibraryController');
-Route::resource('/editor', 'ArticleEditorController');
-Route::post('/deleteArticle', 'ArticleEditorController@deleteArticle');
-Route::post('/addArticle', 'ArticleEditorController@addArticle');
+    Route::resource('/library', 'LibraryController');
 // Route::post('/updateArticle', 'ArticleEditorController@update');
 
 // Chat
-Route::resource('/chat', 'ChatController');
-Route::get('/chatbot', function () {
-    return view('chatbot');
-});
+    Route::resource('/chat', 'ChatController');
+    Route::get('/chatbot', function () {
+        return view('chatbot');
+    });
 
 // Gallery
-Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
-Route::resource('/gallery', 'GalleryController');
+    Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+    Route::resource('/gallery', 'GalleryController');
 
 // Group
-Route::resource('/group', 'GroupController');
-Route::post('/addToGroup', 'GroupController@addToGroup');
-Route::post('removeFromGroup', 'GroupController@removeFromGroup');
+    Route::resource('/group', 'GroupController');
+    Route::post('/addToGroup', 'GroupController@addToGroup');
+    Route::post('removeFromGroup', 'GroupController@removeFromGroup');
 
-// Class
-Route::resource('/classes', 'ClassController');
-
-Route::resource('/assignments', 'AssignmentController');
-Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');
 
 // Dash
-Route::get('/dashboard', 'DashController@loadDash');
+    Route::get('/dashboard', 'DashController@loadDash');
+});
+
 
