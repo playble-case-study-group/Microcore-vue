@@ -2,7 +2,7 @@
     <div id="question">
         <div class="counterDisplay col-sm-12" v-if="this.count > 0"><!---->
             <br><br>
-            <p v-if="!this.warning">
+            <p v-if="this.warning">
                 You will have {{ this.countdown }} seconds to respond.
                 Recording will start in : <span class="counter">{{ this.count }}</span>
             </p>
@@ -49,34 +49,21 @@
         data() {
             return{
                 count: 0,
-                warning: false,
                 showButtons: true
             }
         },
         watch: {
           countdown: function(){
-              console.log('countdown changed');
-              if(this.count == 0) {
-                  this.count = this.warningTime;
-                  this.startCount();
-                  console.log('countdown is zero');
-                  this.showButtons = false;
-              }
+              this.count = this.countdown;
+              this.startCount();
+              this.showButtons = false;
+
           },
-           warning: function() {
-              if(this.warning == true) {
-                  this.count = this.countdown;
-                  console.log('warning changed');
-                  this.startCount();
-              } else {
-                  this.showButtons = true;
-              }
-           }
         },
         props: {
             questions: Array,
             countdown: Number,
-            warningTime: Number,
+            warning: Boolean,
             disabledQuestions: Array
         },
         methods: {
@@ -90,25 +77,30 @@
                     {
                         id: question.question_id
                     }
-                ).then(res => console.log('question submitted successfully')
+                ).then(res => console.log(res)
                 ).catch( error => console.log(error));
             },
             startCount: function() {
-                console.log('start count fired');
+
                 let appScope = this;
                 let timer = setInterval(function () {
                     if (appScope.count > 0) {
                         appScope.count -= 1;
                     }
                     else {
-                        appScope.warning = true;
+                        if(appScope.warning == true) {
+                            appScope.$emit('finishedWarning');
+                        } else {
+                            appScope.$emit('finishedCountdown')
+                            appScope.showButtons = true;
+                        }
                         clearInterval(timer);
                     }
                 }, 1000);
             },
             endResponseEarly: function() {
                 this.count = 0;
-                this.$emit('endEarly');
+                this.$emit('finishedCountdown');
             }
         },
 

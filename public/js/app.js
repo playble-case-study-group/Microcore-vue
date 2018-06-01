@@ -60128,6 +60128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -60153,8 +60154,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             clickedCharacter: 0,
             leaveResponse: false,
             studentResponded: false,
-            recordingDuration: 0,
             warningTime: 5,
+            timerDuration: 0,
+            warning: false,
             endMessage: false
         };
     },
@@ -60191,32 +60193,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
                     paused = true;
                     document.getElementById('call_video').pause();
-                    console.log('current question paused');
+
                     if (appScope.currentQuestion.record_after) {
-                        console.log('leave response triggered');
                         appScope.studentVideoResponse();
-                        appScope.leaveResponse = true;
                     }
                 }
             });
         },
         videoMessageInterface: function videoMessageInterface() {
-            console.log('video message interface changed');
             if (this.videoMessageInterface == false) {
                 this.startSelfVideo();
-            }
-        },
-        leaveResponse: function leaveResponse() {
-            console.log('leave Response changed');
-            var appScope = this;
-            if (this.leaveResponse) {
-                this.answerQuestion();
-            } else {
-                this.currentQuestion = this.currentQuestions.find(function (question) {
-                    if (question.question_id == appScope.currentQuestion.next_question) {
-                        return question;
-                    }
-                });
             }
         }
     },
@@ -60235,7 +60221,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         studentVideoResponse: function studentVideoResponse() {
-            console.log('student video response fired');
+            this.timerDuration = this.warningTime;
+            this.warning = true;
+        },
+        finishedWarning: function finishedWarning() {
+            this.warning = false;
+            this.answerQuestion();
+        },
+        finishedCountdown: function finishedCountdown() {
+            this.endMessage = true;
+        },
+        callNextQuestion: function callNextQuestion() {
+            var appScope = this;
+            this.currentQuestion = this.currentQuestions.find(function (question) {
+                if (question.question_id == appScope.currentQuestion.next_question) {
+                    return question;
+                }
+            });
+            this.startSelfVideo();
         },
         loadCallVideo: function loadCallVideo(person_id) {
             console.log('load video call fired');
@@ -60262,14 +60265,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         leaveMessage: function leaveMessage() {
-            console.log('leave message fired');
             this.videoMessageInterface = true;
             this.currentQuestions = [];
             this.currentQuestion = {};
             this.currentVideo = {};
         },
         changePhoneIcon: function changePhoneIcon() {
-            console.log('change phone icon fired');
             if (this.callIconToggleStatus === "call") {
                 this.videoEl.play();
                 this.callIconToggleStatus = "call_end";
@@ -60278,21 +60279,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.callIconToggleStatus = "call";
             }
         },
-        startStopRecording: function startStopRecording() {
-            console.log('start stop recording fired');
-            if (!this.leaveResponse) {
-                this.recording = !this.recording;
-            }
-        },
         askQuestion: function askQuestion(question) {
-            console.log('ask question fired');
             this.studentResponded = false;
             //sends to a watch function
             this.currentQuestion = question;
         },
-        endResponseEarly: function endResponseEarly() {
-            console.log('end response early fired');
-            this.endMessage = true;
+        startStopRecording: function startStopRecording() {
+            //used when leaving a video message
+            if (!this.leaveResponse) {
+                this.recording = !this.recording;
+            }
         },
 
         //these functions handle all video objects and actions
@@ -60308,7 +60304,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleMessage.bind(this)).catch(this.handleFailure);
         },
         startSelfVideo: function startSelfVideo() {
-            console.log('start self video fired');
             //set that we want both audio and video
             var constraints = {
                 audio: {
@@ -60337,13 +60332,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.handleFailure);
         },
         handleFailure: function handleFailure(error) {
-            console.log('handle failure fired');
             //if they don't have browser support, try a lower compatibility function or fail
             console.error(error);
         },
         handleMessage: function handleMessage(stream) {
             console.log('handle message called');
-            this.recordingDuration = this.currentQuestion.recording_duration;
+            this.timerDuration = this.currentQuestion.recording_duration;
             var video = document.getElementById('personal_video');
 
             var recordedChunks = [];
@@ -60357,19 +60351,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var messageMediaRecorder = new MediaRecorder(stream);
             video.srcObject = stream;
 
-            //how long you would like to warning countdown to be
-            var warning = this.warningTime * 1000;
-
             //start recording when video is loaded
-            setTimeout(function () {
-                messageMediaRecorder.start(1000);
-
-                //sets video timeout to both warning time and recording duration.
-                var timeout = appScope.currentQuestion.recording_duration * 1000;
-                setTimeout(function () {
-                    appScope.endMessage = true;
-                }, timeout);
-            }, warning);
+            console.log('start recorded video');
+            messageMediaRecorder.start(1000);
 
             //mutes personal recording to avoid reverb and audio looping
             video.muted = 'true';
@@ -60380,6 +60364,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     recordedChunks.push(e.data);
                 }
                 if (appScope.endMessage && messageMediaRecorder.state == 'recording') {
+                    console.log('stop recorded video');
                     messageMediaRecorder.stop();
                 }
             });
@@ -60389,18 +60374,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 audioStream.stop();
                 videoStream.stop();
 
-                appScope.leaveResponse = false;
                 appScope.studentResponded = true;
                 appScope.endMessage = false;
 
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
                 var href = URL.createObjectURL(new Blob(recordedChunks), { type: 'video/webm' });
 
+                //call nect question when response is done.
+                appScope.callNextQuestion();
                 appScope.saveVideoMessage(blob, href);
             });
         },
         handleSuccess: function handleSuccess(stream) {
-            console.log('handle success fired');
             var video = document.getElementById('personal_video');
 
             var audioStream = stream.getTracks()[0];
@@ -60411,6 +60396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             video.srcObject = stream;
 
             //start recording when video is loaded
+            console.log('started non-recorded video');
             mediaRecorder.start(3000);
             video.muted = 'true';
 
@@ -60418,7 +60404,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var appScope = this;
             //save data as it becomes available. Stop recording if stop button has been triggered
             mediaRecorder.addEventListener('dataavailable', function (e) {
-                if (appScope.leaveResponse == true && mediaRecorder.state != 'inactive') {
+                if (appScope.warning == true && mediaRecorder.state != 'inactive') {
+                    console.log('stopped non-recorded video');
                     mediaRecorder.stop();
                 }
             });
@@ -60430,7 +60417,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
-            console.log('handle save video message fired');
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -60460,7 +60446,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         startAudio: function startAudio() {
             var _this2 = this;
 
-            console.log('handle start audio fired');
             //start collecting audio stream
             navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
                 // store streaming data chunks in array
@@ -60498,7 +60483,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(console.error);
         },
         visualize: function visualize(analyser, canvasCtx) {
-            console.log('handle visualize fired');
             //set the dimensions of animation
             var WIDTH = 400;
             var HEIGHT = 150;
@@ -60689,35 +60673,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             count: 0,
-            warning: false,
             showButtons: true
         };
     },
 
     watch: {
         countdown: function countdown() {
-            console.log('countdown changed');
-            if (this.count == 0) {
-                this.count = this.warningTime;
-                this.startCount();
-                console.log('countdown is zero');
-                this.showButtons = false;
-            }
-        },
-        warning: function warning() {
-            if (this.warning == true) {
-                this.count = this.countdown;
-                console.log('warning changed');
-                this.startCount();
-            } else {
-                this.showButtons = true;
-            }
+            this.count = this.countdown;
+            this.startCount();
+            this.showButtons = false;
         }
     },
     props: {
         questions: Array,
         countdown: Number,
-        warningTime: Number,
+        warning: Boolean,
         disabledQuestions: Array
     },
     methods: {
@@ -60729,26 +60699,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/clickedQuestion', {
                 id: question.question_id
             }).then(function (res) {
-                return console.log('question submitted successfully');
+                return console.log(res);
             }).catch(function (error) {
                 return console.log(error);
             });
         },
         startCount: function startCount() {
-            console.log('start count fired');
+
             var appScope = this;
             var timer = setInterval(function () {
                 if (appScope.count > 0) {
                     appScope.count -= 1;
                 } else {
-                    appScope.warning = true;
+                    if (appScope.warning == true) {
+                        appScope.$emit('finishedWarning');
+                    } else {
+                        appScope.$emit('finishedCountdown');
+                        appScope.showButtons = true;
+                    }
                     clearInterval(timer);
                 }
             }, 1000);
         },
         endResponseEarly: function endResponseEarly() {
             this.count = 0;
-            this.$emit('endEarly');
+            this.$emit('finishedCountdown');
         }
     }
 
@@ -60768,7 +60743,7 @@ var render = function() {
           _c("br"),
           _c("br"),
           _vm._v(" "),
-          !this.warning
+          this.warning
             ? _c("p", [
                 _vm._v(
                   "\n            You will have " +
@@ -61370,12 +61345,16 @@ var render = function() {
       _c("character-questions", {
         attrs: {
           id: "characterQuestions",
-          countdown: this.recordingDuration,
-          warningTime: this.warningTime,
+          countdown: this.timerDuration,
+          warning: this.warning,
           questions: this.currentQuestions,
           disabledQuestions: this.disabledQuestions
         },
-        on: { question: _vm.askQuestion, endEarly: _vm.endResponseEarly }
+        on: {
+          question: _vm.askQuestion,
+          finishedCountdown: _vm.finishedCountdown,
+          finishedWarning: _vm.finishedWarning
+        }
       })
     ],
     1

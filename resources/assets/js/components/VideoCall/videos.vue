@@ -54,12 +54,13 @@
 
         <!--show character questions-->
         <character-questions id="characterQuestions"
-                             :countdown="this.recordingDuration"
-                             :warningTime="this.warningTime"
+                             :countdown="this.timerDuration"
+                             :warning="this.warning"
                              :questions="this.currentQuestions"
                              :disabledQuestions="this.disabledQuestions"
                              @question="askQuestion"
-                             @endEarly="endResponseEarly">
+                             @finishedCountdown="finishedCountdown"
+                             @finishedWarning="finishedWarning">
 
         </character-questions>
 
@@ -91,8 +92,9 @@
                 clickedCharacter: 0,
                 leaveResponse: false,
                 studentResponded: false,
-                recordingDuration: 0,
                 warningTime: 5,
+                timerDuration: 0,
+                warning: false,
                 endMessage: false
             }
         },
@@ -128,34 +130,19 @@
                       if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
                           paused = true;
                           document.getElementById('call_video').pause();
-                          console.log('current question paused');
+
                           if(appScope.currentQuestion.record_after){
-                              console.log('leave response triggered');
                               appScope.studentVideoResponse();
-                              appScope.leaveResponse = true;
+
                           }
                     }
                 });
             },
             videoMessageInterface: function(){
-                console.log('video message interface changed');
                 if(this.videoMessageInterface == false){
                     this.startSelfVideo();
                 }
             },
-            leaveResponse: function(){
-                console.log('leave Response changed')
-                let appScope = this;
-                if(this.leaveResponse) {
-                    this.answerQuestion();
-                } else {
-                    this.currentQuestion = this.currentQuestions.find(function(question){
-                        if(question.question_id == appScope.currentQuestion.next_question){
-                            return question;
-                        }
-                    });
-                }
-            }
         },
         computed: {
             activeContacts: function() {
@@ -170,7 +157,24 @@
         },
         methods: {
             studentVideoResponse: function () {
-                console.log('student video response fired');
+                this.timerDuration = this.warningTime;
+                this.warning = true;
+            },
+            finishedWarning: function() {
+                this.warning = false;
+                this.answerQuestion();
+            },
+            finishedCountdown: function() {
+                this.endMessage = true;
+            },
+            callNextQuestion: function() {
+                let appScope = this;
+                this.currentQuestion = this.currentQuestions.find(function(question){
+                    if(question.question_id == appScope.currentQuestion.next_question){
+                        return question;
+                    }
+                });
+                this.startSelfVideo();
             },
             loadCallVideo: function (person_id) {
                 console.log('load video call fired');
@@ -197,14 +201,12 @@
                 }
             },
             leaveMessage: function () {
-                console.log('leave message fired');
                 this.videoMessageInterface = true;
                 this.currentQuestions = [];
                 this.currentQuestion = {};
                 this.currentVideo = {};
             },
             changePhoneIcon: function () {
-                console.log('change phone icon fired');
                 if (this.callIconToggleStatus === "call") {
                     this.videoEl.play();
                     this.callIconToggleStatus = "call_end";
@@ -213,22 +215,16 @@
                     this.callIconToggleStatus = "call";
                 }
             },
-            startStopRecording: function () {
-                console.log('start stop recording fired');
-                if(!this.leaveResponse) {
-                    this.recording = !this.recording;
-                }
-            },
             askQuestion: function (question) {
-                console.log('ask question fired');
                 this.studentResponded = false;
                 //sends to a watch function
                 this.currentQuestion = question;
-
             },
-            endResponseEarly: function() {
-                console.log('end response early fired');
-                this.endMessage = true;
+            startStopRecording: function () {
+                //used when leaving a video message
+                if(!this.leaveResponse) {
+                    this.recording = !this.recording;
+                }
             },
 
             //these functions handle all video objects and actions
@@ -246,7 +242,6 @@
                     .catch(this.handleFailure);
             },
             startSelfVideo: function () {
-                console.log('start self video fired');
                 //set that we want both audio and video
                 const constraints = {
                     audio: {
@@ -279,13 +274,12 @@
                     .catch(this.handleFailure);
             },
             handleFailure: function (error) {
-                console.log('handle failure fired');
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error(error);
             },
             handleMessage: function (stream) {
                 console.log('handle message called');
-                this.recordingDuration = this.currentQuestion.recording_duration;
+                this.timerDuration = this.currentQuestion.recording_duration;
                 const video = document.getElementById('personal_video');
 
                 const recordedChunks = [];
@@ -299,21 +293,9 @@
                 const messageMediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
-                //how long you would like to warning countdown to be
-                let warning = this.warningTime * 1000;
-
                 //start recording when video is loaded
-                setTimeout(function () {
-                    messageMediaRecorder.start(1000);
-
-                    //sets video timeout to both warning time and recording duration.
-                    let timeout = appScope.currentQuestion.recording_duration * 1000;
-                    setTimeout(function () {
-                        appScope.endMessage = true;
-                    }, timeout)
-
-                }, warning);
-
+                console.log('start recorded video')
+                messageMediaRecorder.start(1000);
 
                 //mutes personal recording to avoid reverb and audio looping
                 video.muted = 'true';
@@ -324,9 +306,9 @@
                         recordedChunks.push(e.data);
                     }
                     if(appScope.endMessage && messageMediaRecorder.state == 'recording'){
+                        console.log('stop recorded video')
                         messageMediaRecorder.stop();
                     }
-
                 });
 
                 //when recording stops, save the video object and stop displaying video stream
@@ -334,13 +316,14 @@
                     audioStream.stop();
                     videoStream.stop();
 
-                    appScope.leaveResponse = false;
                     appScope.studentResponded = true;
                     appScope.endMessage = false;
 
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
                     var href = URL.createObjectURL(new Blob(recordedChunks), {type: 'video/webm'});
 
+                    //call nect question when response is done.
+                    appScope.callNextQuestion();
                     appScope.saveVideoMessage(blob, href);
 
 
@@ -349,7 +332,6 @@
 
             },
             handleSuccess: function (stream) {
-                console.log('handle success fired');
                 const video = document.getElementById('personal_video');
 
                 let audioStream = stream.getTracks()[0];
@@ -360,6 +342,7 @@
                 video.srcObject = stream;
 
                 //start recording when video is loaded
+                console.log('started non-recorded video')
                 mediaRecorder.start(3000);
                 video.muted = 'true';
 
@@ -368,7 +351,8 @@
                 let appScope = this;
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
-                    if (appScope.leaveResponse == true && mediaRecorder.state != 'inactive') {
+                    if (appScope.warning == true && mediaRecorder.state != 'inactive') {
+                        console.log('stopped non-recorded video')
                         mediaRecorder.stop();
                     }
                 });
@@ -382,7 +366,6 @@
                 })
             },
             saveVideoMessage: function(blob, href){
-                console.log('handle save video message fired');
                 //append all needed information into a form
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
@@ -416,7 +399,6 @@
 
             //these functions handle the audio display
             startAudio: function() {
-                console.log('handle start audio fired');
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
@@ -455,7 +437,6 @@
                 }).catch(console.error);
             },
             visualize: function (analyser, canvasCtx) {
-                console.log('handle visualize fired');
                 //set the dimensions of animation
                 const WIDTH = 400;
                 const HEIGHT = 150;
