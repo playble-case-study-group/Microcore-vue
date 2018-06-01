@@ -58,13 +58,18 @@
               if( this.count == 0 ){
                   this.count = this.warningTime;
                   this.startCount();
+                  console.log(this.countdown);
                   this.showButtons = false;
               }
           },
            warning: function() {
-               this.count = this.countdown;
-               this.startCount();
-               this.showButtons = true;
+              if(this.warning == true) {
+                  this.count = this.countdown;
+                  console.log(this.warning);
+                  this.startCount();
+              } else {
+                  this.showButtons = true;
+              }
            }
         },
         props: {
@@ -76,6 +81,7 @@
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
+                this.warning = false;
                 this.disabledQuestions.push(question.question_id);
                 this.$forceUpdate();
                 axios.post(

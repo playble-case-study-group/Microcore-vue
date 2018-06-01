@@ -109,8 +109,7 @@
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    console.log(appScope.recording);
-                    if (appScope.cancel == false) {
+                    if (appScope.cancel == false && mediaRecorder.state != 'inactive') {
                         mediaRecorder.stop();
                     }
                 });
