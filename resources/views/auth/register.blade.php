@@ -97,7 +97,7 @@
 
                         {{-- Student Form --}}
 
-                        <div id="student-form" class="hidden">
+                        <div id="student-form" class="d-none">
                             <div class="form-group{{ $errors->has('class-key') ? ' has-error' : '' }}">
                                 <label for="class-key" class="col-md-4 control-label">Class Key</label>
 
@@ -116,7 +116,7 @@
 
                         {{-- Teacher Form --}}
 
-                        <div id="teacher-form" class="hidden">
+                        <div id="teacher-form" class="d-none">
                             <div class="form-group{{ $errors->has('instructor-key') ? ' has-error' : '' }}">
                                 <label for="instructor-key" class="col-md-4 control-label">Instructor Key</label>
 
@@ -157,11 +157,11 @@
         function role(role) {
             console.log(role);
             if (role === 'student') {
-                $('#teacher-form').addClass('hidden').val('');
-                $('#student-form').removeClass('hidden');
+                $('#teacher-form').addClass('d-none').val('');
+                $('#student-form').removeClass('d-none');
             } else {
-                $('#student-form').addClass('hidden').val('');
-                $('#teacher-form').removeClass('hidden');
+                $('#student-form').addClass('d-none').val('');
+                $('#teacher-form').removeClass('d-none');
             }
         }
     </script>
