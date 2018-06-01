@@ -2,16 +2,16 @@
     <div id="video">
         <div class="video-container">
             <!--video element to show standard videocalls, hidden when recording component is shown-->
-            <video v-if="!showRecordingInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
+            <video v-if="!videoMessageInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
                 <source :src="currentVideo.video_url" type="video/mp4">
             </video>
 
-            <video v-if="!showRecordingInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
+            <video v-if="!videoMessageInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
                 <source src="/video/record.mp4" type="video/mp4">
             </video>
 
             <!--video recording component, hidden until click on inactive character-->
-            <video-message v-if="showRecordingInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
+            <video-message v-if="videoMessageInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
         </div>
 
         <div id="controlBar">
@@ -40,10 +40,10 @@
 
             <!--toolbar buttons-->
             <a href="#" v-if="recording" @click="startStopRecording">
-                <i id="recording" class="material-icons">stop</i>
+                <i class="material-icons recording">stop</i>
             </a>
-            <a href="#" v-else-if="showRecordingInterface || leaveResponse" @click="startStopRecording">
-                <i id="recording" class="material-icons">fiber_manual_record</i>
+            <a href="#" v-else-if="videoMessageInterface || leaveResponse" @click="startStopRecording">
+                <i class="material-icons recording">fiber_manual_record</i>
             </a>
             <a href="#" v-else @click="changePhoneIcon">
                 <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
@@ -54,7 +54,7 @@
 
         <!--show character questions-->
         <character-questions id="characterQuestions"
-                             :countdown="this.countdownTime"
+                             :countdown="this.recordingDuration"
                              :warningTime="this.warningTime"
                              :questions="this.currentQuestions"
                              :disabledQuestions="this.disabledQuestions"
@@ -86,68 +86,72 @@
                 currentQuestion: {},
                 currentQuestions: [],
                 currentVideo: {},
-                showRecordingInterface: false,
+                videoMessageInterface: false,
                 recording: false,
                 clickedCharacter: 0,
                 leaveResponse: false,
-                responded: false,
-                countdownTime: 0,
+                studentResponded: false,
+                recordingDuration: 0,
                 warningTime: 5,
                 endMessage: false
             }
-        },
-        mounted() {
-            this.startSelfVideo();
         },
         components: {
             'character-questions': question,
             'video-message': videoMessage
         },
+        mounted() {
+            this.startSelfVideo();
+        },
+        updated() {
+            if(this.videoMessageInterface == false){
+                this.videoEl = document.getElementById('call_video');
+            }
+        },
         watch: {
             currentVideo: function () {
-                this.videoEl = document.querySelector('video');
-                if(!this.showRecordingInterface) {
+                console.log('current video changed');
+                if(!this.videoMessageInterface) {
                     this.videoEl.load();
                     this.callIconToggleStatus = "call";
                 }
             },
             currentQuestion: function () {
-                if(!this.showRecordingInterface) {
-                    document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
-                    document.getElementById('call_video').play()
-                    this.callIconToggleStatus = "call_end";
+                console.log('current question changed');
+                document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
+                document.getElementById('call_video').play();
+                this.callIconToggleStatus = "call_end";
 
-                    let appScope = this;
-                    document.getElementById('call_video').addEventListener("timeupdate", function () {
-                          if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
-                              document.getElementById('call_video').pause();
-
-                              if(appScope.currentQuestion.record_after){
-                                  if(!appScope.responded) {
-                                      appScope.leaveResponse = true;
-                                  }
-                              }
-                        }
-                    });
-                }
+                let appScope = this;
+                document.getElementById('call_video').addEventListener("timeupdate", function () {
+                      if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
+                          document.getElementById('call_video').pause();
+                          console.log('current question paused');
+                          if(appScope.currentQuestion.record_after){
+                              console.log('leave response triggered');
+                              appScope.studentVideoResponse();
+                              appScope.leaveResponse = true;
+                          }
+                    }
+                });
             },
-            showRecordingInterface: function(){
-                if(this.showRecordingInterface == false){
+            videoMessageInterface: function(){
+                console.log('video message interface changed');
+                if(this.videoMessageInterface == false){
                     this.startSelfVideo();
                 }
             },
             leaveResponse: function(){
+                console.log('leave Response changed')
                 let appScope = this;
-                if(this.leaveResponse == true) {
-                    appScope.answerQuestion();
-                    appScope.countdownTime = appScope.currentQuestion.recording_duration;
+                if(this.leaveResponse) {
+                    this.answerQuestion();
                 } else {
                     this.currentQuestion = this.currentQuestions.find(function(question){
                         if(question.question_id == appScope.currentQuestion.next_question){
                             return question;
                         }
-                    })
-                    this.startSelfVideo();
+                    });
                 }
             }
         },
@@ -163,7 +167,11 @@
             }
         },
         methods: {
+            studentVideoResponse: function () {
+                console.log('student video response fired');
+            },
             loadCallVideo: function (person_id) {
+                console.log('load video call fired');
                 this.clickedCharacter = person_id;
 
                 //check if the contact clicked on is active
@@ -174,7 +182,7 @@
                 })
                 if (activeCall) {
                     //if active, return the questions associated with them
-                    this.showRecordingInterface = false;
+                    this.videoMessageInterface = false;
                     this.currentQuestions = this.questions.filter((question) => {
                         if (question.call_id == activeCall.video_id) {
                             return question;
@@ -187,12 +195,14 @@
                 }
             },
             leaveMessage: function () {
-                this.showRecordingInterface = true;
+                console.log('leave message fired');
+                this.videoMessageInterface = true;
                 this.currentQuestions = [];
                 this.currentQuestion = {};
                 this.currentVideo = {};
             },
             changePhoneIcon: function () {
+                console.log('change phone icon fired');
                 if (this.callIconToggleStatus === "call") {
                     this.videoEl.play();
                     this.callIconToggleStatus = "call_end";
@@ -202,20 +212,26 @@
                 }
             },
             startStopRecording: function () {
+                console.log('start stop recording fired');
                 if(!this.leaveResponse) {
                     this.recording = !this.recording;
                 }
             },
             askQuestion: function (question) {
-                this.responded = false;
+                console.log('ask question fired');
+                this.studentResponded = false;
+                //sends to a watch function
                 this.currentQuestion = question;
+
             },
             endResponseEarly: function() {
+                console.log('end response early fired');
                 this.endMessage = true;
             },
 
             //these functions handle all video objects and actions
             answerQuestion: function(){
+                console.log('answer question fired');
                 //set that we want both audio and video
                 const constraints = {
                     video: true,
@@ -228,6 +244,7 @@
                     .catch(this.handleFailure);
             },
             startSelfVideo: function () {
+                console.log('start self video fired');
                 //set that we want both audio and video
                 const constraints = {
                     audio: {
@@ -244,6 +261,7 @@
                     .catch(this.tryAudioOnly);
             },
             tryAudioOnly: function(){
+                console.log('try audio only fired');
                 //set that we want both audio and video
                 const constraints = {
                     audio: {
@@ -259,10 +277,13 @@
                     .catch(this.handleFailure);
             },
             handleFailure: function (error) {
+                console.log('handle failure fired');
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error(error);
             },
             handleMessage: function (stream) {
+                console.log('handle message called');
+                this.recordingDuration = this.currentQuestion.recording_duration;
                 const video = document.getElementById('personal_video');
 
                 const recordedChunks = [];
@@ -273,47 +294,46 @@
                 let appScope = this;
 
                 //initialize and display recording stream
-                const mediaRecorder = new MediaRecorder(stream);
+                const messageMediaRecorder = new MediaRecorder(stream);
                 video.srcObject = stream;
 
                 //how long you would like to warning countdown to be
                 let warning = this.warningTime * 1000;
 
                 //start recording when video is loaded
-                video.addEventListener('loadeddata', function () {
-                        if(appScope.leaveResponse == true) {
-                            setTimeout(function () {
-                                mediaRecorder.start(1000);
-                            }, warning );
-                        }
-                    video.muted = 'true';
-                })
-
-                let timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
-                console.log(timeout);
                 setTimeout(function () {
-                    appScope.endMessage = true;
-                }, timeout)
+                    messageMediaRecorder.start(1000);
 
-                this.startAudio(stream);
+                    //sets video timeout to both warning time and recording duration.
+                    let timeout = appScope.currentQuestion.recording_duration * 1000;
+                    setTimeout(function () {
+                        appScope.endMessage = true;
+                    }, timeout)
+
+                }, warning);
+
+
+                //mutes personal recording to avoid reverb and audio looping
+                video.muted = 'true';
+
                 //save data as it becomes available. Stop recording if stop button has been triggered
-                mediaRecorder.addEventListener('dataavailable', function (e) {
+                messageMediaRecorder.addEventListener('dataavailable', function (e) {
                     if (e.data.size > 0) {
                         recordedChunks.push(e.data);
                     }
-                    if(appScope.endMessage){
-                        mediaRecorder.stop();
+                    if(appScope.endMessage && messageMediaRecorder.state == 'recording'){
+                        messageMediaRecorder.stop();
                     }
 
                 });
 
                 //when recording stops, save the video object and stop displaying video stream
-                mediaRecorder.addEventListener('stop', function () {
+                messageMediaRecorder.addEventListener('stop', function () {
                     audioStream.stop();
                     videoStream.stop();
 
                     appScope.leaveResponse = false;
-                    appScope.responded = true;
+                    appScope.studentResponded = true;
                     appScope.endMessage = false;
 
                     const blob = new Blob(recordedChunks, {type: 'video/webm'});
@@ -327,9 +347,9 @@
 
             },
             handleSuccess: function (stream) {
+                console.log('handle success fired');
                 const video = document.getElementById('personal_video');
 
-                const recordedChunks = [];
                 let audioStream = stream.getTracks()[0];
                 let videoStream = stream.getTracks()[1];
 
@@ -338,20 +358,15 @@
                 video.srcObject = stream;
 
                 //start recording when video is loaded
-                video.addEventListener('loadeddata', function () {
-                    mediaRecorder.start(3000);
-                    video.muted = 'true';
-                })
+                mediaRecorder.start(3000);
+                video.muted = 'true';
+
 
                 //set local variable to set correct scope
                 let appScope = this;
-                this.startAudio(stream);
                 //save data as it becomes available. Stop recording if stop button has been triggered
                 mediaRecorder.addEventListener('dataavailable', function (e) {
-                    if (e.data.size > 0) {
-                        recordedChunks.push(e.data);
-                    }
-                    if (appScope.leaveResponse == true) {
+                    if (appScope.leaveResponse == true && mediaRecorder.state != 'inactive') {
                         mediaRecorder.stop();
                     }
                 });
@@ -365,6 +380,7 @@
                 })
             },
             saveVideoMessage: function(blob, href){
+                console.log('handle save video message fired');
                 //append all needed information into a form
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
@@ -398,6 +414,7 @@
 
             //these functions handle the audio display
             startAudio: function() {
+                console.log('handle start audio fired');
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
@@ -436,6 +453,7 @@
                 }).catch(console.error);
             },
             visualize: function (analyser, canvasCtx) {
+                console.log('handle visualize fired');
                 //set the dimensions of animation
                 const WIDTH = 400;
                 const HEIGHT = 150;
@@ -505,7 +523,7 @@
         font-size: 25px;
         margin-top: 0px;
     }
-    #recording{
+    .recording{
         color: red;
     }
     #call_video{

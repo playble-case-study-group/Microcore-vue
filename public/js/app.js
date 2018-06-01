@@ -58515,7 +58515,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f0f0f0;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -60042,7 +60042,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n#recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n.recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -60148,69 +60148,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentQuestion: {},
             currentQuestions: [],
             currentVideo: {},
-            showRecordingInterface: false,
+            videoMessageInterface: false,
             recording: false,
             clickedCharacter: 0,
             leaveResponse: false,
-            responded: false,
-            countdownTime: 0,
+            studentResponded: false,
+            recordingDuration: 0,
             warningTime: 5,
             endMessage: false
         };
     },
-    mounted: function mounted() {
-        this.startSelfVideo();
-    },
-
     components: {
         'character-questions': __WEBPACK_IMPORTED_MODULE_1__question_vue___default.a,
         'video-message': __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default.a
     },
+    mounted: function mounted() {
+        this.startSelfVideo();
+    },
+    updated: function updated() {
+        if (this.videoMessageInterface == false) {
+            this.videoEl = document.getElementById('call_video');
+        }
+    },
+
     watch: {
         currentVideo: function currentVideo() {
-            this.videoEl = document.querySelector('video');
-            if (!this.showRecordingInterface) {
+            console.log('current video changed');
+            if (!this.videoMessageInterface) {
                 this.videoEl.load();
                 this.callIconToggleStatus = "call";
             }
         },
         currentQuestion: function currentQuestion() {
-            if (!this.showRecordingInterface) {
-                document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
-                document.getElementById('call_video').play();
-                this.callIconToggleStatus = "call_end";
+            console.log('current question changed');
+            document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
+            document.getElementById('call_video').play();
+            this.callIconToggleStatus = "call_end";
 
-                var appScope = this;
-                document.getElementById('call_video').addEventListener("timeupdate", function () {
-                    if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
-                        document.getElementById('call_video').pause();
-
-                        if (appScope.currentQuestion.record_after) {
-                            if (!appScope.responded) {
-                                appScope.leaveResponse = true;
-                            }
-                        }
+            var appScope = this;
+            document.getElementById('call_video').addEventListener("timeupdate", function () {
+                if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
+                    document.getElementById('call_video').pause();
+                    console.log('current question paused');
+                    if (appScope.currentQuestion.record_after) {
+                        console.log('leave response triggered');
+                        appScope.studentVideoResponse();
+                        appScope.leaveResponse = true;
                     }
-                });
-            }
+                }
+            });
         },
-        showRecordingInterface: function showRecordingInterface() {
-            if (this.showRecordingInterface == false) {
+        videoMessageInterface: function videoMessageInterface() {
+            console.log('video message interface changed');
+            if (this.videoMessageInterface == false) {
                 this.startSelfVideo();
             }
         },
         leaveResponse: function leaveResponse() {
+            console.log('leave Response changed');
             var appScope = this;
-            if (this.leaveResponse == true) {
-                appScope.answerQuestion();
-                appScope.countdownTime = appScope.currentQuestion.recording_duration;
+            if (this.leaveResponse) {
+                this.answerQuestion();
             } else {
                 this.currentQuestion = this.currentQuestions.find(function (question) {
                     if (question.question_id == appScope.currentQuestion.next_question) {
                         return question;
                     }
                 });
-                this.startSelfVideo();
             }
         }
     },
@@ -60228,7 +60232,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        studentVideoResponse: function studentVideoResponse() {
+            console.log('student video response fired');
+        },
         loadCallVideo: function loadCallVideo(person_id) {
+            console.log('load video call fired');
             this.clickedCharacter = person_id;
 
             //check if the contact clicked on is active
@@ -60239,7 +60247,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             if (activeCall) {
                 //if active, return the questions associated with them
-                this.showRecordingInterface = false;
+                this.videoMessageInterface = false;
                 this.currentQuestions = this.questions.filter(function (question) {
                     if (question.call_id == activeCall.video_id) {
                         return question;
@@ -60252,12 +60260,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         leaveMessage: function leaveMessage() {
-            this.showRecordingInterface = true;
+            console.log('leave message fired');
+            this.videoMessageInterface = true;
             this.currentQuestions = [];
             this.currentQuestion = {};
             this.currentVideo = {};
         },
         changePhoneIcon: function changePhoneIcon() {
+            console.log('change phone icon fired');
             if (this.callIconToggleStatus === "call") {
                 this.videoEl.play();
                 this.callIconToggleStatus = "call_end";
@@ -60267,20 +60277,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         startStopRecording: function startStopRecording() {
+            console.log('start stop recording fired');
             if (!this.leaveResponse) {
                 this.recording = !this.recording;
             }
         },
         askQuestion: function askQuestion(question) {
-            this.responded = false;
+            console.log('ask question fired');
+            this.studentResponded = false;
+            //sends to a watch function
             this.currentQuestion = question;
         },
         endResponseEarly: function endResponseEarly() {
+            console.log('end response early fired');
             this.endMessage = true;
         },
 
         //these functions handle all video objects and actions
         answerQuestion: function answerQuestion() {
+            console.log('answer question fired');
             //set that we want both audio and video
             var constraints = {
                 video: true,
@@ -60291,6 +60306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleMessage.bind(this)).catch(this.handleFailure);
         },
         startSelfVideo: function startSelfVideo() {
+            console.log('start self video fired');
             //set that we want both audio and video
             var constraints = {
                 audio: {
@@ -60305,6 +60321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.tryAudioOnly);
         },
         tryAudioOnly: function tryAudioOnly() {
+            console.log('try audio only fired');
             //set that we want both audio and video
             var constraints = {
                 audio: {
@@ -60318,10 +60335,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.handleFailure);
         },
         handleFailure: function handleFailure(error) {
+            console.log('handle failure fired');
             //if they don't have browser support, try a lower compatibility function or fail
             console.error(error);
         },
         handleMessage: function handleMessage(stream) {
+            console.log('handle message called');
+            this.recordingDuration = this.currentQuestion.recording_duration;
             var video = document.getElementById('personal_video');
 
             var recordedChunks = [];
@@ -60332,46 +60352,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var appScope = this;
 
             //initialize and display recording stream
-            var mediaRecorder = new MediaRecorder(stream);
+            var messageMediaRecorder = new MediaRecorder(stream);
             video.srcObject = stream;
 
             //how long you would like to warning countdown to be
             var warning = this.warningTime * 1000;
 
             //start recording when video is loaded
-            video.addEventListener('loadeddata', function () {
-                if (appScope.leaveResponse == true) {
-                    setTimeout(function () {
-                        mediaRecorder.start(1000);
-                    }, warning);
-                }
-                video.muted = 'true';
-            });
-
-            var timeout = (appScope.currentQuestion.recording_duration + this.warningTime) * 1000;
-            console.log(timeout);
             setTimeout(function () {
-                appScope.endMessage = true;
-            }, timeout);
+                messageMediaRecorder.start(1000);
 
-            this.startAudio(stream);
+                //sets video timeout to both warning time and recording duration.
+                var timeout = appScope.currentQuestion.recording_duration * 1000;
+                setTimeout(function () {
+                    appScope.endMessage = true;
+                }, timeout);
+            }, warning);
+
+            //mutes personal recording to avoid reverb and audio looping
+            video.muted = 'true';
+
             //save data as it becomes available. Stop recording if stop button has been triggered
-            mediaRecorder.addEventListener('dataavailable', function (e) {
+            messageMediaRecorder.addEventListener('dataavailable', function (e) {
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                if (appScope.endMessage) {
-                    mediaRecorder.stop();
+                if (appScope.endMessage && messageMediaRecorder.state == 'recording') {
+                    messageMediaRecorder.stop();
                 }
             });
 
             //when recording stops, save the video object and stop displaying video stream
-            mediaRecorder.addEventListener('stop', function () {
+            messageMediaRecorder.addEventListener('stop', function () {
                 audioStream.stop();
                 videoStream.stop();
 
                 appScope.leaveResponse = false;
-                appScope.responded = true;
+                appScope.studentResponded = true;
                 appScope.endMessage = false;
 
                 var blob = new Blob(recordedChunks, { type: 'video/webm' });
@@ -60381,9 +60398,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         handleSuccess: function handleSuccess(stream) {
+            console.log('handle success fired');
             var video = document.getElementById('personal_video');
 
-            var recordedChunks = [];
             var audioStream = stream.getTracks()[0];
             var videoStream = stream.getTracks()[1];
 
@@ -60392,20 +60409,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             video.srcObject = stream;
 
             //start recording when video is loaded
-            video.addEventListener('loadeddata', function () {
-                mediaRecorder.start(3000);
-                video.muted = 'true';
-            });
+            mediaRecorder.start(3000);
+            video.muted = 'true';
 
             //set local variable to set correct scope
             var appScope = this;
-            this.startAudio(stream);
             //save data as it becomes available. Stop recording if stop button has been triggered
             mediaRecorder.addEventListener('dataavailable', function (e) {
-                if (e.data.size > 0) {
-                    recordedChunks.push(e.data);
-                }
-                if (appScope.leaveResponse == true) {
+                if (appScope.leaveResponse == true && mediaRecorder.state != 'inactive') {
                     mediaRecorder.stop();
                 }
             });
@@ -60417,6 +60428,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
+            console.log('handle save video message fired');
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -60446,6 +60458,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         startAudio: function startAudio() {
             var _this2 = this;
 
+            console.log('handle start audio fired');
             //start collecting audio stream
             navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
                 // store streaming data chunks in array
@@ -60483,6 +60496,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(console.error);
         },
         visualize: function visualize(analyser, canvasCtx) {
+            console.log('handle visualize fired');
             //set the dimensions of animation
             var WIDTH = 400;
             var HEIGHT = 150;
@@ -60680,16 +60694,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         countdown: function countdown() {
+            console.log('countdown changed');
             if (this.count == 0) {
                 this.count = this.warningTime;
                 this.startCount();
+                console.log('countdown is zero');
                 this.showButtons = false;
             }
         },
         warning: function warning() {
-            this.count = this.countdown;
-            this.startCount();
-            this.showButtons = true;
+            if (this.warning == true) {
+                this.count = this.countdown;
+                console.log('warning changed');
+                this.startCount();
+            } else {
+                this.showButtons = true;
+            }
         }
     },
     props: {
@@ -60701,17 +60721,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         submitQuestion: function submitQuestion(question) {
             this.$emit('question', question);
+            this.warning = false;
             this.disabledQuestions.push(question.question_id);
             this.$forceUpdate();
             axios.post('/clickedQuestion', {
                 id: question.question_id
             }).then(function (res) {
-                return console.log(res);
+                return console.log('question submitted successfully');
             }).catch(function (error) {
                 return console.log(error);
             });
         },
         startCount: function startCount() {
+            console.log('start count fired');
             var appScope = this;
             var timer = setInterval(function () {
                 if (appScope.count > 0) {
@@ -61025,8 +61047,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (e.data.size > 0) {
                     recordedChunks.push(e.data);
                 }
-                console.log(appScope.recording);
-                if (appScope.cancel == false) {
+                if (appScope.cancel == false && mediaRecorder.state != 'inactive') {
                     mediaRecorder.stop();
                 }
             });
@@ -61210,7 +61231,7 @@ var render = function() {
         "div",
         { staticClass: "video-container" },
         [
-          !_vm.showRecordingInterface
+          !_vm.videoMessageInterface
             ? _c(
                 "video",
                 {
@@ -61230,7 +61251,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          !_vm.showRecordingInterface
+          !_vm.videoMessageInterface
             ? _c(
                 "video",
                 {
@@ -61248,7 +61269,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.showRecordingInterface
+          _vm.videoMessageInterface
             ? _c("video-message", {
                 attrs: {
                   recording: _vm.recording,
@@ -61314,26 +61335,19 @@ var render = function() {
               "a",
               { attrs: { href: "#" }, on: { click: _vm.startStopRecording } },
               [
-                _c(
-                  "i",
-                  { staticClass: "material-icons", attrs: { id: "recording" } },
-                  [_vm._v("stop")]
-                )
+                _c("i", { staticClass: "material-icons recording" }, [
+                  _vm._v("stop")
+                ])
               ]
             )
-          : _vm.showRecordingInterface || _vm.leaveResponse
+          : _vm.videoMessageInterface || _vm.leaveResponse
             ? _c(
                 "a",
                 { attrs: { href: "#" }, on: { click: _vm.startStopRecording } },
                 [
-                  _c(
-                    "i",
-                    {
-                      staticClass: "material-icons",
-                      attrs: { id: "recording" }
-                    },
-                    [_vm._v("fiber_manual_record")]
-                  )
+                  _c("i", { staticClass: "material-icons recording" }, [
+                    _vm._v("fiber_manual_record")
+                  ])
                 ]
               )
             : _c(
@@ -61354,7 +61368,7 @@ var render = function() {
       _c("character-questions", {
         attrs: {
           id: "characterQuestions",
-          countdown: this.countdownTime,
+          countdown: this.recordingDuration,
           warningTime: this.warningTime,
           questions: this.currentQuestions,
           disabledQuestions: this.disabledQuestions

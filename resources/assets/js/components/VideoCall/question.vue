@@ -55,16 +55,22 @@
         },
         watch: {
           countdown: function(){
-              if( this.count == 0 ){
+              console.log('countdown changed');
+              if(this.count == 0) {
                   this.count = this.warningTime;
                   this.startCount();
+                  console.log('countdown is zero');
                   this.showButtons = false;
               }
           },
            warning: function() {
-               this.count = this.countdown;
-               this.startCount();
-               this.showButtons = true;
+              if(this.warning == true) {
+                  this.count = this.countdown;
+                  console.log('warning changed');
+                  this.startCount();
+              } else {
+                  this.showButtons = true;
+              }
            }
         },
         props: {
@@ -76,6 +82,7 @@
         methods: {
             submitQuestion: function (question) {
                 this.$emit('question', question)
+                this.warning = false;
                 this.disabledQuestions.push(question.question_id);
                 this.$forceUpdate();
                 axios.post(
@@ -83,10 +90,11 @@
                     {
                         id: question.question_id
                     }
-                ).then(res => console.log(res)
+                ).then(res => console.log('question submitted successfully')
                 ).catch( error => console.log(error));
             },
             startCount: function() {
+                console.log('start count fired');
                 let appScope = this;
                 let timer = setInterval(function () {
                     if (appScope.count > 0) {

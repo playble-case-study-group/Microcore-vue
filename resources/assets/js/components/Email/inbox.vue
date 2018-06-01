@@ -240,7 +240,7 @@
         color: grey;
     }
     .read {
-        background-color: #f0f0f0;
+        background-color: #f5f8fa;
     }
     .unread {
         font-weight: bold;
