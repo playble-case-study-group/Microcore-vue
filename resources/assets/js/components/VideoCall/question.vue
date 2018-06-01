@@ -66,9 +66,8 @@
            warning: function() {
               if(this.warning == true) {
                   this.count = this.countdown;
-                  console.log('warning changed');
+                  console.log('warning is true');
                   this.startCount();
-              } else {
                   this.showButtons = true;
               }
            }
@@ -90,18 +89,20 @@
                     {
                         id: question.question_id
                     }
-                ).then(res => console.log('question submitted successfully')
+                ).then(res => console.log(res)
                 ).catch( error => console.log(error));
             },
             startCount: function() {
-                console.log('start count fired');
+
                 let appScope = this;
                 let timer = setInterval(function () {
                     if (appScope.count > 0) {
+                        console.log('count is greater than 0');
                         appScope.count -= 1;
                     }
                     else {
                         appScope.warning = true;
+                        console.log('count is 0');
                         clearInterval(timer);
                     }
                 }, 1000);

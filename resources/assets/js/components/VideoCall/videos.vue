@@ -202,7 +202,6 @@
                 this.currentVideo = {};
             },
             changePhoneIcon: function () {
-                console.log('change phone icon fired');
                 if (this.callIconToggleStatus === "call") {
                     this.videoEl.play();
                     this.callIconToggleStatus = "call_end";
@@ -244,7 +243,6 @@
                     .catch(this.handleFailure);
             },
             startSelfVideo: function () {
-                console.log('start self video fired');
                 //set that we want both audio and video
                 const constraints = {
                     audio: {
@@ -277,7 +275,6 @@
                     .catch(this.handleFailure);
             },
             handleFailure: function (error) {
-                console.log('handle failure fired');
                 //if they don't have browser support, try a lower compatibility function or fail
                 console.error(error);
             },
@@ -347,7 +344,6 @@
 
             },
             handleSuccess: function (stream) {
-                console.log('handle success fired');
                 const video = document.getElementById('personal_video');
 
                 let audioStream = stream.getTracks()[0];
@@ -380,7 +376,6 @@
                 })
             },
             saveVideoMessage: function(blob, href){
-                console.log('handle save video message fired');
                 //append all needed information into a form
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
@@ -414,7 +409,6 @@
 
             //these functions handle the audio display
             startAudio: function() {
-                console.log('handle start audio fired');
                 //start collecting audio stream
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                     // store streaming data chunks in array
@@ -453,7 +447,6 @@
                 }).catch(console.error);
             },
             visualize: function (analyser, canvasCtx) {
-                console.log('handle visualize fired');
                 //set the dimensions of animation
                 const WIDTH = 400;
                 const HEIGHT = 150;

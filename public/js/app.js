@@ -60267,7 +60267,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentVideo = {};
         },
         changePhoneIcon: function changePhoneIcon() {
-            console.log('change phone icon fired');
             if (this.callIconToggleStatus === "call") {
                 this.videoEl.play();
                 this.callIconToggleStatus = "call_end";
@@ -60306,7 +60305,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleMessage.bind(this)).catch(this.handleFailure);
         },
         startSelfVideo: function startSelfVideo() {
-            console.log('start self video fired');
             //set that we want both audio and video
             var constraints = {
                 audio: {
@@ -60335,7 +60333,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.handleFailure);
         },
         handleFailure: function handleFailure(error) {
-            console.log('handle failure fired');
             //if they don't have browser support, try a lower compatibility function or fail
             console.error(error);
         },
@@ -60398,7 +60395,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         handleSuccess: function handleSuccess(stream) {
-            console.log('handle success fired');
             var video = document.getElementById('personal_video');
 
             var audioStream = stream.getTracks()[0];
@@ -60428,7 +60424,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
-            console.log('handle save video message fired');
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -60458,7 +60453,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         startAudio: function startAudio() {
             var _this2 = this;
 
-            console.log('handle start audio fired');
             //start collecting audio stream
             navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
                 // store streaming data chunks in array
@@ -60496,7 +60490,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(console.error);
         },
         visualize: function visualize(analyser, canvasCtx) {
-            console.log('handle visualize fired');
             //set the dimensions of animation
             var WIDTH = 400;
             var HEIGHT = 150;
@@ -60705,9 +60698,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         warning: function warning() {
             if (this.warning == true) {
                 this.count = this.countdown;
-                console.log('warning changed');
+                console.log('warning is true');
                 this.startCount();
-            } else {
                 this.showButtons = true;
             }
         }
@@ -60727,19 +60719,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/clickedQuestion', {
                 id: question.question_id
             }).then(function (res) {
-                return console.log('question submitted successfully');
+                return console.log(res);
             }).catch(function (error) {
                 return console.log(error);
             });
         },
         startCount: function startCount() {
-            console.log('start count fired');
+
             var appScope = this;
             var timer = setInterval(function () {
                 if (appScope.count > 0) {
+                    console.log('count is greater than 0');
                     appScope.count -= 1;
                 } else {
                     appScope.warning = true;
+                    console.log('count is 0');
                     clearInterval(timer);
                 }
             }, 1000);
