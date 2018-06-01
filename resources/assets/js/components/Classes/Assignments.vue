@@ -52,6 +52,12 @@
                             <li v-for="tag in props.row.tags">{{ tag.title }}</li>
                         </ul>
                     </span>
+                    <span slot="response" slot-scope="props">
+                        <video controls>
+                            <source :src="props.row.response" type="video/webm">
+                            I'm sorry; your browser doesn't support HTML5 video in WebM with VP8/VP9 or MP4 with H.264.
+                        </video>
+                    </span>
                 </v-client-table>
             </div>
         </div>
@@ -99,11 +105,21 @@
         },
         watch: {
             assignmentType: function () {
-                let table_columns =  JSON.parse(this.assignmentType.table_columns);
+                // Clear table data
                 this.tableData = [];
+
+                // Clear Assignment list
+                this.assignmentList = [];
+
+                // Reset table columns to assignment type
+                let table_columns =  JSON.parse(this.assignmentType.table_columns);
                 this.tableColumns = table_columns.columns;
+
+                // Manage table options
                 this.tableOptions.headings = table_columns.headings;
                 this.tableOptions.sortable = table_columns.sortable;
+
+                // Retrieves assignments according to type.
                 axios.get('/assignments/' + this.assignmentType.assign_type_id).then( response => {
                     this.assignmentList = response.data;
                 });

@@ -81383,6 +81383,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -81419,11 +81425,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         assignmentType: function assignmentType() {
             var _this = this;
 
-            var table_columns = JSON.parse(this.assignmentType.table_columns);
+            // Clear table data
             this.tableData = [];
+
+            // Clear Assignment list
+            this.assignmentList = [];
+
+            // Reset table columns to assignment type
+            var table_columns = JSON.parse(this.assignmentType.table_columns);
             this.tableColumns = table_columns.columns;
+
+            // Manage table options
             this.tableOptions.headings = table_columns.headings;
             this.tableOptions.sortable = table_columns.sortable;
+
+            // Retrieves assignments according to type.
             axios.get('/assignments/' + this.assignmentType.assign_type_id).then(function (response) {
                 _this.assignmentList = response.data;
             });
@@ -90051,6 +90067,21 @@ var render = function() {
                     )
                   ])
                 }
+              },
+              {
+                key: "response",
+                fn: function(props) {
+                  return _c("span", {}, [
+                    _c("video", { attrs: { controls: "" } }, [
+                      _c("source", {
+                        attrs: { src: props.row.response, type: "video/webm" }
+                      }),
+                      _vm._v(
+                        "\n                        I'm sorry; your browser doesn't support HTML5 video in WebM with VP8/VP9 or MP4 with H.264.\n                    "
+                      )
+                    ])
+                  ])
+                }
               }
             ])
           })
@@ -90123,128 +90154,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container", staticStyle: { "margin-right": "100px" } },
-    [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-12" }, [
-          _c("h1", [_vm._v("Classes")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curClass,
-                  expression: "curClass"
-                }
-              ],
-              staticClass: "custom-select",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.curClass = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("h1", [_vm._v("Classes")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.curClass,
+                expression: "curClass"
               }
-            },
-            [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select a class")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.classes, function(clss, index) {
-                return _c(
-                  "option",
-                  {
-                    key: index,
-                    domProps: {
-                      selected: index === 0 ? "selected" : false,
-                      value: clss
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(clss.name) +
-                        "\n                "
-                    )
-                  ]
-                )
-              })
             ],
-            2
-          ),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tab-content", attrs: { id: "classTabContent" } },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade show active",
-                  attrs: { id: "students", role: "tabpanel" }
-                },
-                [
-                  _c("students", { attrs: { students: _vm.curClass.students } })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade show",
-                  attrs: { id: "groups", role: "tabpanel" }
-                },
-                [
-                  _c("groups", {
-                    attrs: {
-                      groups: _vm.curClass.groups,
-                      classId: _vm.curClass.class_id,
-                      unassigned: _vm.curClass.unAssigned
-                    }
+            staticClass: "custom-select",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
                   })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.curClass = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { disabled: "", value: "" } }, [
+              _vm._v("Please select a class")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.classes, function(clss, index) {
+              return _c(
+                "option",
                 {
-                  staticClass: "tab-pane fade show",
-                  attrs: { id: "assignments", role: "tabpanel" }
+                  key: index,
+                  domProps: {
+                    selected: index === 0 ? "selected" : false,
+                    value: clss
+                  }
                 },
                 [
-                  _c("assignments", {
-                    attrs: {
-                      "assignment-types": _vm.assignmentTypes,
-                      "class-id": _vm.curClass.class_id
-                    }
-                  })
-                ],
-                1
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(clss.name) +
+                      "\n                "
+                  )
+                ]
               )
-            ]
-          )
-        ])
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tab-content", attrs: { id: "classTabContent" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show active",
+                attrs: { id: "students", role: "tabpanel" }
+              },
+              [_c("students", { attrs: { students: _vm.curClass.students } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show",
+                attrs: { id: "groups", role: "tabpanel" }
+              },
+              [
+                _c("groups", {
+                  attrs: {
+                    groups: _vm.curClass.groups,
+                    classId: _vm.curClass.class_id,
+                    unassigned: _vm.curClass.unAssigned
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show",
+                attrs: { id: "assignments", role: "tabpanel" }
+              },
+              [
+                _c("assignments", {
+                  attrs: {
+                    "assignment-types": _vm.assignmentTypes,
+                    "class-id": _vm.curClass.class_id
+                  }
+                })
+              ],
+              1
+            )
+          ]
+        )
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {

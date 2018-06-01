@@ -78,7 +78,7 @@ class AssignmentController extends Controller
                 $assignments = $this->retrieveGalleryAssignments($reqs['classId']);
                 break;
             case 3:
-                $assignments = $this->retrieveVideoAssignments($reqs['questionId'], $reqs['day'], $reqs['classId']);
+                $assignments = $this->retrieveVideoAssignments($reqs['questionId'], $reqs['day'], $reqs['characterId'], $reqs['classId']);
                 break;
         }
 
@@ -157,8 +157,18 @@ class AssignmentController extends Controller
 
     }
 
-    private function retrieveVideoAssignments($questionId, $day, $classId)
+    private function retrieveVideoAssignments($questionId, $day, $characterId, $classId)
     {
-
+        return DB::table('student_video_submissions AS s')
+            ->join('users AS u', 'u.user_id', '=', 's.user_id')
+            ->join('questions AS q', 'q.question_id', '=', 's.question_id')
+            ->where([
+                ['s.question_id', '=', $questionId],
+                ['s.submission_day', '=', $day],
+                ['s.character_id', '=', $characterId],
+                ['s.class_id', '=', $classId]
+            ])
+            ->select('u.name AS u_name', 'q.question', 's.submission_url AS response')
+            ->get();
     }
 }
