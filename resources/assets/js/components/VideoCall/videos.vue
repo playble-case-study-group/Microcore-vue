@@ -123,8 +123,10 @@
                 this.callIconToggleStatus = "call_end";
 
                 let appScope = this;
+                let paused = false;
                 document.getElementById('call_video').addEventListener("timeupdate", function () {
-                      if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time) {
+                      if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
+                          paused = true;
                           document.getElementById('call_video').pause();
                           console.log('current question paused');
                           if(appScope.currentQuestion.record_after){
