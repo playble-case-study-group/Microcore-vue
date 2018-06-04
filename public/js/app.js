@@ -58373,6 +58373,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'none');
             $('.replyEmail').css('display', 'initial');
             $('.sendReplyEmail').css('display', 'none');
+            $('#emailAttachment').val(null);
+            this.$refs.file.value = '';
             this.draftEmail = {
                 attachment: null,
                 to: "Please Select Character from Dropdown",
@@ -58425,6 +58427,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return email;
                 }
             });
+        },
+        setAttachment: function setAttachment() {
+            this.draftEmail.attachment = this.$refs.file.files[0];
         }
     }
 });
@@ -58596,6 +58601,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58627,6 +58633,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         $('#replyForm').hide();
+        $('#emailAttachment').css('display', 'none');
         var appScope = this;
         $('#readModal').on('hidden.bs.modal', function (e) {
             appScope.resetDraftEmail();
@@ -58685,6 +58692,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.$forceUpdate();
             });
             $('#readModal').modal('hide');
+            $('#emailAttachment').css('display', 'none');
         },
         replyEmail: function replyEmail() {
 
@@ -58697,6 +58705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'inherit');
             $('.replyEmail').css('display', 'none');
             $('.sendReplyEmail').css('display', 'initial');
+            $('#emailAttachment').css('display', 'initial');
             this.draftEmail.to = this.findCharData();
             this.draftEmail.subject = this.readModalData.subject;
             this.draftEmail.character_email_id = this.readModalData.character_email_id;
@@ -58706,6 +58715,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'none');
             $('.replyEmail').css('display', 'initial');
             $('.sendReplyEmail').css('display', 'none');
+            $('#emailAttachment').css('display', 'none');
+            $('#emailAttachment').val(null);
+            this.$refs.file.value = '';
             this.draftEmail = {
                 attachment: null,
                 to: "Please Select Character from Dropdown",
@@ -58903,6 +58915,20 @@ var render = function() {
                     },
                     [_vm._v("Reply")]
                   ),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "file",
+                    attrs: {
+                      type: "file",
+                      name: "emailAttachment",
+                      id: "emailAttachment"
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.setAttachment()
+                      }
+                    }
+                  }),
                   _vm._v(" "),
                   _c(
                     "button",
