@@ -52,3 +52,6 @@ $border-radius-sm:     0px;
 
 ////** Padding between columns. Gets divided in half for the left and right.
 //$grid-gutter-width:         20px;
+$spacer: 1rem !default;
+$navbar-nav-link-padding-x:         1rem;
+$navbar-padding-y:                  $spacer;
