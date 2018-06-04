@@ -56718,8 +56718,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     },
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask']), {
-        navigateToComponent: function navigateToComponent() {
-            window.location.href = "/gallery";
+        navigateToComponent: function navigateToComponent(task) {
+            window.location.href = task.component_link;
         }
     })
 
@@ -56750,7 +56750,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "span",
-        { staticClass: "navigation", on: { click: _vm.navigateToComponent } },
+        {
+          staticClass: "navigation",
+          on: {
+            click: function($event) {
+              _vm.navigateToComponent(_vm.task)
+            }
+          }
+        },
         [_vm._v(_vm._s(_vm.task.title))]
       ),
       _vm._v(" "),
@@ -57477,54 +57484,61 @@ var render = function() {
       { staticClass: "card-columns" },
       _vm._l(_vm.gallery, function(artifact) {
         return !artifact.hidden
-          ? _c("div", { key: artifact.artifact_id, staticClass: "card" }, [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: { src: artifact.image, alt: artifact.title },
+          ? _c(
+              "div",
+              {
+                key: artifact.artifact_id,
+                staticClass: "card",
                 on: {
                   click: function($event) {
                     _vm.openModal(artifact)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-body artifact" },
-                [
-                  _c("h4", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(artifact.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(artifact.description))
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(artifact.tags, function(tag) {
-                    return _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary tag-btn",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.filterGallery(tag)
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: artifact.image, alt: artifact.title }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-body artifact" },
+                  [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(artifact.title))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(artifact.description))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(artifact.tags, function(tag) {
+                      return _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary tag-btn",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.filterGallery(tag)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(tag.title) +
-                            "\n                "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(tag.title) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
           : _vm._e()
       })
     ),
@@ -58373,6 +58387,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'none');
             $('.replyEmail').css('display', 'initial');
             $('.sendReplyEmail').css('display', 'none');
+            $('#emailAttachment').val(null);
+            this.$refs.file.value = '';
             this.draftEmail = {
                 attachment: null,
                 to: "Please Select Character from Dropdown",
@@ -58425,6 +58441,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return email;
                 }
             });
+        },
+        setAttachment: function setAttachment() {
+            this.draftEmail.attachment = this.$refs.file.files[0];
         }
     }
 });
@@ -58596,6 +58615,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58627,6 +58647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         $('#replyForm').hide();
+        $('#emailAttachment').css('display', 'none');
         var appScope = this;
         $('#readModal').on('hidden.bs.modal', function (e) {
             appScope.resetDraftEmail();
@@ -58685,6 +58706,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.$forceUpdate();
             });
             $('#readModal').modal('hide');
+            $('#emailAttachment').css('display', 'none');
         },
         replyEmail: function replyEmail() {
 
@@ -58697,6 +58719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'inherit');
             $('.replyEmail').css('display', 'none');
             $('.sendReplyEmail').css('display', 'initial');
+            $('#emailAttachment').css('display', 'initial');
             this.draftEmail.to = this.findCharData();
             this.draftEmail.subject = this.readModalData.subject;
             this.draftEmail.character_email_id = this.readModalData.character_email_id;
@@ -58706,6 +58729,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.replyForm').css('display', 'none');
             $('.replyEmail').css('display', 'initial');
             $('.sendReplyEmail').css('display', 'none');
+            $('#emailAttachment').css('display', 'none');
+            $('#emailAttachment').val(null);
+            this.$refs.file.value = '';
             this.draftEmail = {
                 attachment: null,
                 to: "Please Select Character from Dropdown",
@@ -58903,6 +58929,20 @@ var render = function() {
                     },
                     [_vm._v("Reply")]
                   ),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "file",
+                    attrs: {
+                      type: "file",
+                      name: "emailAttachment",
+                      id: "emailAttachment"
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.setAttachment()
+                      }
+                    }
+                  }),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -59751,12 +59791,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        $('#submitSuccess').hide();
+        $('#submitFailure').hide();
+    },
 
     components: {
         'notes': __WEBPACK_IMPORTED_MODULE_1__notes_vue___default.a,
@@ -59768,6 +59828,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         disabled: Array,
         notes: Object,
         contacts: Array
+    },
+    methods: {
+        alertSaveSuccess: function alertSaveSuccess() {
+            $('#submitSuccess').show();
+            $('#submitSuccess').alert();
+            setTimeout(function () {
+                $('#submitSuccess').hide();
+            }, 5000);
+        },
+        alertSaveFailure: function alertSaveFailure() {
+            $('#submitFailure').show();
+            $('#submitFailure').alert();
+            setTimeout(function () {
+                $('#submitFailure').hide();
+            }, 5000);
+        }
     }
 });
 
@@ -60129,6 +60205,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60166,6 +60249,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.startSelfVideo();
+        this.startAudio();
     },
     updated: function updated() {
         if (this.videoMessageInterface == false) {
@@ -60175,30 +60259,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         currentVideo: function currentVideo() {
-            console.log('current video changed');
             if (!this.videoMessageInterface) {
                 this.videoEl.load();
                 this.callIconToggleStatus = "call";
             }
         },
         currentQuestion: function currentQuestion() {
-            console.log('current question changed');
-            document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
-            document.getElementById('call_video').play();
-            this.callIconToggleStatus = "call_end";
+            //if statement needed to avoid a change when currentQuestion changes to null
+            if (!this.videoMessageInterface) {
+                document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
+                document.getElementById('call_video').play();
+                this.callIconToggleStatus = "call_end";
 
-            var appScope = this;
-            var paused = false;
-            document.getElementById('call_video').addEventListener("timeupdate", function () {
-                if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
-                    paused = true;
-                    document.getElementById('call_video').pause();
+                var appScope = this;
+                var paused = false;
+                document.getElementById('call_video').addEventListener("timeupdate", function () {
+                    if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
+                        paused = true;
+                        document.getElementById('call_video').pause();
 
-                    if (appScope.currentQuestion.record_after) {
-                        appScope.studentVideoResponse();
+                        if (appScope.currentQuestion.record_after) {
+                            appScope.studentVideoResponse();
+                        }
                     }
-                }
-            });
+                });
+            }
         },
         videoMessageInterface: function videoMessageInterface() {
             if (this.videoMessageInterface == false) {
@@ -60418,6 +60503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
             //append all needed information into a form
+            var appScope = this;
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
             data.append('character', this.clickedCharacter);
@@ -60434,12 +60520,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     data.append('blob', base64data);
                     //submit form with all needed data
                     axios.post("/saveFile", data).then(function (r) {
-                        return console.log(r);
+                        appScope.saveSuccess();
                     }).catch(function (e) {
-                        return console.log(e);
+                        appScope.saveFailure();
                     });
                 };
             });
+        },
+        saveSuccess: function saveSuccess() {
+            this.$emit('alertSuccess');
+        },
+        saveFailure: function saveFailure() {
+            this.$emit('alertFailure');
         },
 
         //these functions handle the audio display
@@ -60458,7 +60550,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 analyser.maxDecibels = -10;
                 analyser.smoothingTimeConstant = 0.85;
                 analyser.fftSize = 256;
-
                 //get canvas element that will display the animation
                 var canvasCtx = document.getElementById('visualizer');
                 canvasCtx = canvasCtx.getContext("2d");
@@ -60952,6 +61043,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     props: {
         recording: Boolean,
         clickedCharacter: Number
@@ -61044,7 +61136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
             $('#saveModal').hide();
-
+            var appScope = this;
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -61061,9 +61153,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     data.append('blob', base64data);
                     //submit form with all needed data
                     axios.post("/saveFile", data).then(function (r) {
-                        return console.log(r);
+                        appScope.$emit('saveSuccess');
                     }).catch(function (e) {
-                        return console.log(e);
+                        appScope.$emit('saveFailure');
                     });
                 };
             });
@@ -61251,6 +61343,10 @@ var render = function() {
                 attrs: {
                   recording: _vm.recording,
                   clickedCharacter: _vm.clickedCharacter
+                },
+                on: {
+                  saveSuccess: _vm.saveSuccess,
+                  saveFailure: _vm.saveFailure
                 }
               })
             : _vm._e()
@@ -61402,6 +61498,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "videocall" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -61418,6 +61518,10 @@ var render = function() {
             calls: this.calls,
             questions: this.questions,
             disabledQuestions: this.disabled
+          },
+          on: {
+            alertSuccess: _vm.alertSaveSuccess,
+            alertFailure: _vm.alertSaveFailure
           }
         })
       ],
@@ -61425,7 +61529,66 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-success alert-dismissible fade show",
+        attrs: { id: "submitSuccess", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Success!")]),
+        _vm._v(" Your video was submitted successfully.\n    ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-danger alert-dismissible fade show",
+        attrs: { id: "submitFailure", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Uh oh!")]),
+        _vm._v(" There was an error in submitting your video.\n    ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

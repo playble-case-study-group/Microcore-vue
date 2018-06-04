@@ -1,10 +1,26 @@
 <template>
     <div id="videocall" class="container">
+
+        <div class="alert alert-success alert-dismissible fade show" id="submitSuccess" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Success!</strong> Your video was submitted successfully.
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show" id="submitFailure" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Uh oh!</strong> There was an error in submitting your video.
+        </div>
         <div class="row">
                 <notes id="notesParent" class="col-sm-11 col-lg-3"
                        :notes="this.notes">
                 </notes>
                 <character-video class="col-sm-11 col-lg-8"
+                                 @alertSuccess="alertSaveSuccess"
+                                 @alertFailure="alertSaveFailure"
                                  :characters="this.contacts"
                                  :calls="this.calls"
                                  :questions="this.questions"
@@ -21,7 +37,10 @@
     import videos from './videos.vue'
 
     export default {
-
+        mounted() {
+            $('#submitSuccess').hide();
+            $('#submitFailure').hide();
+        },
         components: {
             'notes': notes,
             'character-video': videos,
@@ -32,6 +51,25 @@
             disabled: Array,
             notes: Object,
             contacts: Array
+        },
+        methods: {
+            alertSaveSuccess: function() {
+                $('#submitSuccess').show();
+                $('#submitSuccess').alert();
+                setTimeout(function(){
+                        $('#submitSuccess').hide();
+                    }, 5000);
+
+            },
+            alertSaveFailure: function() {
+                $('#submitFailure').show();
+                $('#submitFailure').alert();
+                setTimeout( function()
+                    {
+                        $('#submitFailure').hide();
+                    }, 5000);
+
+            }
         }
     }
 </script>

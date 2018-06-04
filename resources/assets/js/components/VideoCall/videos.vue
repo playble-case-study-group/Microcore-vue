@@ -11,7 +11,14 @@
             </video>
 
             <!--video recording component, hidden until click on inactive character-->
-            <video-message v-if="videoMessageInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
+            <video-message
+                    v-if="videoMessageInterface"
+                    @saveSuccess="saveSuccess"
+                    @saveFailure="saveFailure"
+                    :recording="recording"
+                    :clickedCharacter="clickedCharacter">
+
+            </video-message>
         </div>
 
         <div id="controlBar">
@@ -104,6 +111,7 @@
         },
         mounted() {
             this.startSelfVideo();
+            this.startAudio();
         },
         updated() {
             if(this.videoMessageInterface == false){
@@ -112,31 +120,32 @@
         },
         watch: {
             currentVideo: function () {
-                console.log('current video changed');
                 if(!this.videoMessageInterface) {
                     this.videoEl.load();
                     this.callIconToggleStatus = "call";
                 }
             },
             currentQuestion: function () {
-                console.log('current question changed');
-                document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
-                document.getElementById('call_video').play();
-                this.callIconToggleStatus = "call_end";
+                //if statement needed to avoid a change when currentQuestion changes to null
+                if(!this.videoMessageInterface) {
+                    document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
+                    document.getElementById('call_video').play();
+                    this.callIconToggleStatus = "call_end";
 
-                let appScope = this;
-                let paused = false;
-                document.getElementById('call_video').addEventListener("timeupdate", function () {
-                      if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
-                          paused = true;
-                          document.getElementById('call_video').pause();
+                    let appScope = this;
+                    let paused = false;
+                    document.getElementById('call_video').addEventListener("timeupdate", function () {
+                        if (document.getElementById('call_video').currentTime >= appScope.currentQuestion.end_time && !paused) {
+                            paused = true;
+                            document.getElementById('call_video').pause();
 
-                          if(appScope.currentQuestion.record_after){
-                              appScope.studentVideoResponse();
+                            if (appScope.currentQuestion.record_after) {
+                                appScope.studentVideoResponse();
 
-                          }
-                    }
-                });
+                            }
+                        }
+                    });
+                }
             },
             videoMessageInterface: function(){
                 if(this.videoMessageInterface == false){
@@ -367,6 +376,7 @@
             },
             saveVideoMessage: function(blob, href){
                 //append all needed information into a form
+                let appScope = this;
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
                 data.append('character', this.clickedCharacter);
@@ -391,10 +401,16 @@
                                 "/saveFile",
                                 data
                             )
-                            .then(r => console.log(r))
-                            .catch(e => console.log(e));
+                            .then(r => { appScope.saveSuccess(); })
+                            .catch(e => { appScope.saveFailure(); });
                     };
                 })
+            },
+            saveSuccess: function(){
+                this.$emit('alertSuccess');
+            },
+            saveFailure: function() {
+                this.$emit('alertFailure');
             },
 
             //these functions handle the audio display
@@ -411,7 +427,6 @@
                     analyser.maxDecibels = -10;
                     analyser.smoothingTimeConstant = 0.85;
                     analyser.fftSize = 256;
-
                     //get canvas element that will display the animation
                     let canvasCtx = document.getElementById('visualizer');
                     canvasCtx = canvasCtx.getContext("2d");

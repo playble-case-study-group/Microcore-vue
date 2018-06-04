@@ -57,6 +57,7 @@
                     </div>
                     <div class="modal-footer" id="ReplyEmailId">
                         <button class="btn btn-success replyEmail" @click="replyEmail">Reply</button>
+                        <input type="file" name="emailAttachment" ref="file" id="emailAttachment" @change="setAttachment()">
                         <button class="btn btn-success sendReplyEmail" style="display: none;" @click="sendReplyEmail(readModalData.character_email_id)">Send</button>
                     </div>
                 </div>
@@ -98,6 +99,7 @@
         },
         mounted() {
             $('#replyForm').hide();
+            $('#emailAttachment').css('display', 'none');
             let appScope = this;
             $('#readModal').on('hidden.bs.modal', function (e) {
                 appScope.resetDraftEmail();
@@ -155,6 +157,7 @@
                     this.$forceUpdate();
                 });
                 $('#readModal').modal('hide');
+                $('#emailAttachment').css('display', 'none');
             },
             replyEmail: function () {
 
@@ -167,6 +170,7 @@
                 $('.replyForm').css('display', 'inherit');
                 $('.replyEmail').css('display', 'none');
                 $('.sendReplyEmail').css('display', 'initial');
+                $('#emailAttachment').css('display', 'initial');
                 this.draftEmail.to = this.findCharData();
                 this.draftEmail.subject = this.readModalData.subject;
                 this.draftEmail.character_email_id = this.readModalData.character_email_id;
@@ -177,6 +181,9 @@
                 $('.replyForm').css('display', 'none');
                 $('.replyEmail').css('display', 'initial');
                 $('.sendReplyEmail').css('display', 'none');
+                $('#emailAttachment').css('display', 'none');
+                $('#emailAttachment').val(null);
+                this.$refs.file.value = '';
                 this.draftEmail = {
                     attachment: null,
                     to: "Please Select Character from Dropdown",

@@ -19,6 +19,9 @@ class DashController extends Controller
             ->select('note')
             ->where('user_id', Auth::id())
             ->first();
+        if($notes == null){
+            $notes = (object)['note' => ''];
+        }
         $notes = json_encode($notes);
 
         return view('dash', compact('dash', 'notes'));

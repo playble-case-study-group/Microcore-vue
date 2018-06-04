@@ -142,6 +142,8 @@
                 $('.replyForm').css('display', 'none');
                 $('.replyEmail').css('display', 'initial');
                 $('.sendReplyEmail').css('display', 'none');
+                $('#emailAttachment').val(null);
+                this.$refs.file.value = '';
                 this.draftEmail = {
                     attachment: null,
                     to: "Please Select Character from Dropdown",
@@ -192,9 +194,9 @@
                         return email
                     }
                 });
-
-
-
+            },
+            setAttachment: function () {
+                this.draftEmail.attachment = this.$refs.file.files[0];
             }
         }
     }

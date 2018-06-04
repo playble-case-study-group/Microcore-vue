@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class VideoCallController extends Controller
 {
@@ -35,6 +35,9 @@ class VideoCallController extends Controller
             ->select('note')
             ->where('user_id', Auth::id())
             ->first();
+        if($notes == null){
+            $notes = (object)['note' => ''];
+        }
         $notes = json_encode($notes);
 
         return view('videocall', compact('calls', 'questions', 'notes', 'contacts', 'clicked_questions'));
@@ -155,6 +158,11 @@ class VideoCallController extends Controller
         header('Content-Type: video/webm');
         $name = 'video-'.str_random(4).'.webm';
         $target_file = base_path()."/public/storage/video/".$name;
+
+        if(!File::exists('storage/video/')) {
+            File::makeDirectory('storage/video/');
+        }
+
         file_put_contents($target_file, $data);
         $filename = "storage/video/".$name;
 

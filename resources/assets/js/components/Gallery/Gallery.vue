@@ -23,12 +23,12 @@
 
         <div class="card-columns">
             <div class="card"
+                 @click="openModal(artifact)"
                  v-for="artifact in gallery"
                  v-if="!artifact.hidden"
                  :key="artifact.artifact_id">
 
                 <img class="card-img-top"
-                     @click="openModal(artifact)"
                      :src="artifact.image"
                      :alt="artifact.title">
                 <div class="card-body artifact" >
