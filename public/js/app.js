@@ -56718,8 +56718,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     },
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask']), {
-        navigateToComponent: function navigateToComponent() {
-            window.location.href = "/gallery";
+        navigateToComponent: function navigateToComponent(task) {
+            window.location.href = task.component_link;
         }
     })
 
@@ -56750,7 +56750,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "span",
-        { staticClass: "navigation", on: { click: _vm.navigateToComponent } },
+        {
+          staticClass: "navigation",
+          on: {
+            click: function($event) {
+              _vm.navigateToComponent(_vm.task)
+            }
+          }
+        },
         [_vm._v(_vm._s(_vm.task.title))]
       ),
       _vm._v(" "),

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use App\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class EmailController extends Controller
@@ -91,7 +91,11 @@ class EmailController extends Controller
             $type = $this->getType($ext);
             $path = '/storage/' . $type . '/' . $file->getClientOriginalName();
 
-            if (Storage::putFileAs('/storage/' . $type . '/', $file, $file->getClientOriginalName())) {
+            if(!File::exists('public/storage/document/')) {
+                File::makeDirectory('storage/document/');
+            }
+
+            if (Storage::putFileAs('/public/' . $type . '/', $file, $file->getClientOriginalName())) {
                 DB::table('student_emails')->insert([
                     'user_id' => Auth::id(),
                     'character_id' => $request->to,
