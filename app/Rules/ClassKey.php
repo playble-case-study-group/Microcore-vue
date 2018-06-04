@@ -26,7 +26,7 @@ class ClassKey implements Rule
      */
     public function passes($attribute, $value)
     {
-        $key = DB::table('class')
+        $key = DB::table('classes')
             ->where('key', $value)
             ->first();
 
