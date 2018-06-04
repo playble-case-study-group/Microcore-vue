@@ -36,6 +36,7 @@
     import { mapActions } from 'vuex'
 
     export default {
+
         props: {
             recording: Boolean,
             clickedCharacter: Number
@@ -129,7 +130,7 @@
             },
             saveVideoMessage: function(blob, href){
                 $('#saveModal').hide();
-
+                let appScope = this;
                 //append all needed information into a form
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
@@ -154,8 +155,12 @@
                                 "/saveFile",
                                 data
                             )
-                            .then(r => console.log(r))
-                            .catch(e => console.log(e));
+                            .then(r => {
+                                appScope.$emit('saveSuccess');
+                                })
+                            .catch(e => {
+                                appScope.$emit('saveFailure');
+                            });
                     };
                 })
             },

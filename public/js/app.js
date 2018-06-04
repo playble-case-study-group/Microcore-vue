@@ -59784,12 +59784,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        $('#submitSuccess').hide();
+        $('#submitFailure').hide();
+    },
 
     components: {
         'notes': __WEBPACK_IMPORTED_MODULE_1__notes_vue___default.a,
@@ -59801,6 +59821,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         disabled: Array,
         notes: Object,
         contacts: Array
+    },
+    methods: {
+        alertSaveSuccess: function alertSaveSuccess() {
+            $('#submitSuccess').show();
+            $('#submitSuccess').alert();
+            setTimeout(function () {
+                $('#submitSuccess').hide();
+            }, 5000);
+        },
+        alertSaveFailure: function alertSaveFailure() {
+            $('#submitFailure').show();
+            $('#submitFailure').alert();
+            setTimeout(function () {
+                $('#submitFailure').hide();
+            }, 5000);
+        }
     }
 });
 
@@ -60162,6 +60198,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60451,6 +60494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
             //append all needed information into a form
+            var appScope = this;
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
             data.append('character', this.clickedCharacter);
@@ -60467,12 +60511,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     data.append('blob', base64data);
                     //submit form with all needed data
                     axios.post("/saveFile", data).then(function (r) {
-                        return console.log(r);
+                        appScope.saveSuccess();
                     }).catch(function (e) {
-                        return console.log(e);
+                        appScope.saveFailure();
                     });
                 };
             });
+        },
+        saveSuccess: function saveSuccess() {
+            this.$emit('alertSuccess');
+        },
+        saveFailure: function saveFailure() {
+            this.$emit('alertFailure');
         },
 
         //these functions handle the audio display
@@ -60985,6 +61035,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     props: {
         recording: Boolean,
         clickedCharacter: Number
@@ -61077,7 +61128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveVideoMessage: function saveVideoMessage(blob, href) {
             $('#saveModal').hide();
-
+            var appScope = this;
             //append all needed information into a form
             var data = new FormData();
             data.append('user', this.$store.state.user.user_id);
@@ -61094,9 +61145,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     data.append('blob', base64data);
                     //submit form with all needed data
                     axios.post("/saveFile", data).then(function (r) {
-                        return console.log(r);
+                        appScope.$emit('saveSuccess');
                     }).catch(function (e) {
-                        return console.log(e);
+                        appScope.$emit('saveFailure');
                     });
                 };
             });
@@ -61284,6 +61335,10 @@ var render = function() {
                 attrs: {
                   recording: _vm.recording,
                   clickedCharacter: _vm.clickedCharacter
+                },
+                on: {
+                  saveSuccess: _vm.saveSuccess,
+                  saveFailure: _vm.saveFailure
                 }
               })
             : _vm._e()
@@ -61435,6 +61490,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "videocall" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -61451,6 +61510,10 @@ var render = function() {
             calls: this.calls,
             questions: this.questions,
             disabledQuestions: this.disabled
+          },
+          on: {
+            alertSuccess: _vm.alertSaveSuccess,
+            alertFailure: _vm.alertSaveFailure
           }
         })
       ],
@@ -61458,7 +61521,66 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-success alert-dismissible fade show",
+        attrs: { id: "submitSuccess", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Success!")]),
+        _vm._v(" Your video was submitted successfully.\n    ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-danger alert-dismissible fade show",
+        attrs: { id: "submitFailure", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Uh oh!")]),
+        _vm._v(" There was an error in submitting your video.\n    ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

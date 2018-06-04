@@ -159,7 +159,7 @@ class VideoCallController extends Controller
         $name = 'video-'.str_random(4).'.webm';
         $target_file = base_path()."/public/storage/video/".$name;
 
-        if(!File::exists('public/storage/video/')) {
+        if(!File::exists('storage/video/')) {
             File::makeDirectory('storage/video/');
         }
 

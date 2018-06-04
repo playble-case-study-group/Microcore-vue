@@ -11,7 +11,14 @@
             </video>
 
             <!--video recording component, hidden until click on inactive character-->
-            <video-message v-if="videoMessageInterface" :recording="recording" :clickedCharacter="clickedCharacter"></video-message>
+            <video-message
+                    v-if="videoMessageInterface"
+                    @saveSuccess="saveSuccess"
+                    @saveFailure="saveFailure"
+                    :recording="recording"
+                    :clickedCharacter="clickedCharacter">
+
+            </video-message>
         </div>
 
         <div id="controlBar">
@@ -367,6 +374,7 @@
             },
             saveVideoMessage: function(blob, href){
                 //append all needed information into a form
+                let appScope = this;
                 let data = new FormData();
                 data.append('user', this.$store.state.user.user_id);
                 data.append('character', this.clickedCharacter);
@@ -391,10 +399,16 @@
                                 "/saveFile",
                                 data
                             )
-                            .then(r => console.log(r))
-                            .catch(e => console.log(e));
+                            .then(r => { appScope.saveSuccess(); })
+                            .catch(e => { appScope.saveFailure(); });
                     };
                 })
+            },
+            saveSuccess: function(){
+                this.$emit('alertSuccess');
+            },
+            saveFailure: function() {
+                this.$emit('alertFailure');
             },
 
             //these functions handle the audio display
