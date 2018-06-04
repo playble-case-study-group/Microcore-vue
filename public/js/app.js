@@ -57484,54 +57484,61 @@ var render = function() {
       { staticClass: "card-columns" },
       _vm._l(_vm.gallery, function(artifact) {
         return !artifact.hidden
-          ? _c("div", { key: artifact.artifact_id, staticClass: "card" }, [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: { src: artifact.image, alt: artifact.title },
+          ? _c(
+              "div",
+              {
+                key: artifact.artifact_id,
+                staticClass: "card",
                 on: {
                   click: function($event) {
                     _vm.openModal(artifact)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-body artifact" },
-                [
-                  _c("h4", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(artifact.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(artifact.description))
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(artifact.tags, function(tag) {
-                    return _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary tag-btn",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.filterGallery(tag)
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: artifact.image, alt: artifact.title }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-body artifact" },
+                  [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(artifact.title))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(artifact.description))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(artifact.tags, function(tag) {
+                      return _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary tag-btn",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.filterGallery(tag)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(tag.title) +
-                            "\n                "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(tag.title) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
           : _vm._e()
       })
     ),
