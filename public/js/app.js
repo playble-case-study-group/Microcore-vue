@@ -60242,6 +60242,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.startSelfVideo();
+        this.startAudio();
     },
     updated: function updated() {
         if (this.videoMessageInterface == false) {
@@ -60541,7 +60542,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 analyser.maxDecibels = -10;
                 analyser.smoothingTimeConstant = 0.85;
                 analyser.fftSize = 256;
-
                 //get canvas element that will display the animation
                 var canvasCtx = document.getElementById('visualizer');
                 canvasCtx = canvasCtx.getContext("2d");

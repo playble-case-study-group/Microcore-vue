@@ -111,6 +111,7 @@
         },
         mounted() {
             this.startSelfVideo();
+            this.startAudio();
         },
         updated() {
             if(this.videoMessageInterface == false){
@@ -425,7 +426,6 @@
                     analyser.maxDecibels = -10;
                     analyser.smoothingTimeConstant = 0.85;
                     analyser.fftSize = 256;
-
                     //get canvas element that will display the animation
                     let canvasCtx = document.getElementById('visualizer');
                     canvasCtx = canvasCtx.getContext("2d");
