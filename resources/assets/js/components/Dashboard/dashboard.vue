@@ -50,7 +50,6 @@
 
         props: ['dash', 'notes'],
         mounted() {
-            console.log('Component mounted.')
             this.changeStockCSS();
         },
         data: function(){
@@ -107,6 +106,7 @@
     .dash-heading{
         color: $sim-heading;
         text-align: center;
+        margin: 1.5rem 0 0;
     }
     .dash-video{
         height: 425px;
@@ -114,7 +114,7 @@
         margin: auto;
     }
     .dash-content{
-        margin: 2rem;
+        margin: 1rem;
     }
     .dash-notify{
         color: #ce0d0d;
@@ -122,14 +122,14 @@
     }
     .dash-stocks{
         display: flex;
-        margin: 0 4rem;
+        margin: 0 1rem;
         font-size: 27px;
     }
     .dash-stockStatus{
         font-size: 24px;
     }
     .dash-count{
-        margin-top: 4rem;
+        margin-top: 2.5rem;
     }
     .dash-update{
         position: absolute;
@@ -150,6 +150,9 @@
             flex-flow: initial;
             justify-content: space-evenly;
             flex-wrap: wrap;
+        }
+        .dash-update {
+
         }
         .dash-card{
             margin: 2rem 0;
