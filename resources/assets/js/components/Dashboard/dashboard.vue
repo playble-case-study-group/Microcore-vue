@@ -20,7 +20,7 @@
                 </div>
                 <div class="dash-card dash-small col-sm-10 col-md-3">
                     <h3 class="dash-heading">Updates</h3>
-                    <div class="dash-content">
+                    <div class="dash-content dash-content2">
                         <i class="material-icons dash-notify">priority_high</i>
                         <span class="dash-update">{{ this.dash.message_count }} Unread Messages</span>
                         <br>
@@ -114,7 +114,7 @@
         margin: auto;
     }
     .dash-content{
-        margin: 1rem;
+        margin: 1rem 0;
     }
     .dash-notify{
         color: #ce0d0d;
@@ -150,9 +150,6 @@
             flex-flow: initial;
             justify-content: space-evenly;
             flex-wrap: wrap;
-        }
-        .dash-update {
-
         }
         .dash-card{
             margin: 2rem 0;
