@@ -1,5 +1,5 @@
 <template>
-    <div id="video">
+    <div id="video" class="col-sm-12">
         <div class="video-container">
             <!--video element to show standard videocalls, hidden when recording component is shown-->
             <video v-if="!videoMessageInterface" id="call_video" poster="/img/videocall/video-placeholder.jpg">
@@ -85,7 +85,8 @@
             calls: Array,
             characters: Array,
             questions: Array,
-            disabledQuestions: Array
+            disabledQuestions: Array,
+            clickedCharacter: Number
         },
         data: function () {
             return {
@@ -96,7 +97,6 @@
                 currentVideo: {},
                 videoMessageInterface: false,
                 recording: false,
-                clickedCharacter: 0,
                 leaveResponse: false,
                 studentResponded: false,
                 warningTime: 5,
@@ -112,6 +112,7 @@
         mounted() {
             this.startSelfVideo();
             this.startAudio();
+            this.loadCallVideo(this.clickedCharacter);
         },
         updated() {
             if(this.videoMessageInterface == false){
@@ -121,7 +122,7 @@
         watch: {
             currentVideo: function () {
                 if(!this.videoMessageInterface) {
-                    this.videoEl.load();
+                    document.getElementById('call_video').load();
                     this.callIconToggleStatus = "call";
                 }
             },
@@ -503,6 +504,9 @@
     a {
         color: white;
     }
+    img {
+        align-self: center;
+    }
     canvas {
         height: 30px;
         width: 40px;
@@ -532,6 +536,7 @@
         padding: 10px;
         display: flex;
         flex-flow: row;
+        cursor: pointer;
     }
     .contact-inner:nth-child(even) {
         border-top: solid 1px;
@@ -543,7 +548,7 @@
         width: 58%;
     }
     .characterActive{
-        color: #3c763d;
+        color: #57AB58;
         align-self:center;
     }
     .activeIcon{

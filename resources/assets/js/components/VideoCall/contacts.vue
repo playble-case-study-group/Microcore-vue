@@ -1,0 +1,126 @@
+<template>
+    <div id="contacts" class="container">
+
+        <div class="contact-list" v-if="clickedCharacter == 0">
+            <div class="heading">
+                <h3>Contacts</h3>
+            </div>
+            <div class="contact-inner"
+                 v-for="person in characters"
+                 :key="person.character_id"
+                 @click="selectCharacter(person.character_id)">
+                <div>
+                    <img class="characterImage" :src="person.img_small">
+                    <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
+                            <i class="material-icons activeIcon">fiber_manual_record</i>
+                    </span>
+                </div>
+                <div class="characterInfo">
+                    <span class="characterName">{{ person.name }}</span><br>
+                    <span class="characterPosition">{{ person.role }}</span>
+                </div>
+                <span id="call">
+                    <i class="material-icons">call</i>
+                </span>
+            </div>
+        </div>
+
+        <character-video
+                         v-else
+                         @alertSuccess="alertSaveSuccess"
+                         @alertFailure="alertSaveFailure"
+                         :clickedCharacter="this.clickedCharacter"
+                         :characters="this.characters"
+                         :calls="this.calls"
+                         :questions="this.questions"
+                         :disabledQuestions="this.disabledQuestions">
+
+        </character-video>
+    </div>
+</template>
+
+<script>
+    import { mapActions } from 'vuex'
+    import notes from './notes.vue'
+    import videos from './videos.vue'
+
+    export default {
+        mounted() {
+            $('#submitSuccess').hide();
+            $('#submitFailure').hide();
+        },
+        components: {
+            'character-video': videos
+        },
+        props: {
+            calls: Array,
+            questions: Array,
+            disabledQuestions: Array,
+            characters: Array
+        },
+        data: function() {
+          return {
+              clickedCharacter: 0
+          }
+        },
+        computed: {
+            activeContacts: function() {
+                return this.calls.filter((character) => {
+                    if(character.day === this.$store.state.user.current_day){
+                        return character.character_id;
+                    }
+                }).map((character) => {
+                    return character.character_id;
+                })
+            }
+        },
+        methods: {
+            selectCharacter: function(character_id) {
+                this.clickedCharacter = character_id;
+            },
+            alertSaveSuccess: function() {
+                this.$emit('alertSuccess');
+            },
+            alertSaveFailure: function() {
+                this.$emit('alertFailure');
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    img {
+        align-self: center;
+        position: relative;
+    }
+    .contact-list {
+        background-color: white;
+    }
+    .characterActive{
+        color: #57AB58;
+        position: relative;
+        margin-left: -16px;
+        bottom: -24px;
+    }
+    .contact-inner{
+        padding: 10px;
+        display: flex;
+        flex-flow: row;
+        cursor: pointer;
+        justify-content: space-evenly;
+    }
+    .contact-inner:nth-child(even) {
+        border-top: solid 1px;
+        border-bottom: solid 1px;
+        border-color: #d9dcde;
+    }
+    .characterInfo{
+        width: 50%;
+    }
+    #call {
+        align-self: center;
+        font-size: 24px;
+    }
+
+
+</style>

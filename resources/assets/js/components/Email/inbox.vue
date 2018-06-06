@@ -153,9 +153,10 @@
                 }
 
                 axios.post('/email', formData).then(response => {
+                    this.$emit('submitSuccess');
                     this.resetDraftEmail();
                     this.$forceUpdate();
-                });
+                }).catch(err => this.$emit('submitFailure'));
                 $('#readModal').modal('hide');
                 $('#emailAttachment').css('display', 'none');
             },
@@ -216,6 +217,9 @@
     }
     td, th {
         padding: 10px;
+    }
+    tr {
+        cursor: pointer;
     }
     .row{
         margin: 0px;

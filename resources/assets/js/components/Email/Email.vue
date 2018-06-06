@@ -1,44 +1,60 @@
 <template>
-    <div class="container main">
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show hidden" id="submitSuccess" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Success!</strong> Your email was sent successfully.
+        </div>
 
-        <div class="row">
-            <div role="banner" class="heading flex-header col-sm-12">
-                <h1>Messages</h1>
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
-                    <button class="btn btn-success compose" @click="composeModal">Compose</button>
-                    <div class="toggle" @click="toggleInbox"><span>Inbox</span></div>
-                    <div class="toggle" @click="toggleSent"><span>Sent</span></div>
+        <div class="alert alert-danger alert-dismissible fade show hidden" id="submitFailure" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Uh oh!</strong> There was an error in sending your email.
+        </div>
+
+        <div class="main">
+            <div class="row">
+                <div role="banner" class="heading flex-header col-sm-12">
+                    <h1>Messages</h1>
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+                        <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                        <div class="toggle" @click="toggleInbox"><span>Inbox</span></div>
+                        <div class="toggle" @click="toggleSent"><span>Sent</span></div>
+                    </div>
+                    <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
                 </div>
-                <a href="#"><i class="material-icons mobile-menu" @click="openNav">menu</i></a>
+            </div>
+
+            <div class="row content">
+                <div class="sidebar col-md-2">
+                    <button class="btn btn-success compose" @click="composeModal">Compose</button>
+                    <ul>
+                        <li class="inboxToggle" @click="toggleInbox"> <div class="keyline keyline-inbox">Inbox</div> </li>
+                        <li class="sentToggle" @click="toggleSent"> <div class="keyline keyline-sent">Sent</div> </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-lg-10 emailList">
+
+                    <inbox
+                            v-if="showInbox"
+                            @submitSuccess="submitSuccess"
+                            @submitFailure="submitFailure"
+                            @sentReply="updateSent"
+                            :characterEmails="characterEmails"
+                            :characters="characters"
+                            :studentEmails="studentEmails">
+                    </inbox>
+
+                    <sent-mail
+                            v-if="showSent"
+                            :studentEmails="studentEmails">
+                    </sent-mail>
+                </div>
             </div>
         </div>
-
-        <div class="row content">
-            <div class="sidebar col-md-2">
-                <button class="btn btn-success compose" @click="composeModal">Compose</button>
-                <ul>
-                    <li class="inboxToggle" @click="toggleInbox"> <div class="keyline keyline-inbox">Inbox</div> </li>
-                    <li class="sentToggle" @click="toggleSent"> <div class="keyline keyline-sent">Sent</div> </li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-lg-10 emailList">
-
-                <inbox
-                        v-if="showInbox"
-                        @sentReply="updateSent"
-                        :characterEmails="characterEmails"
-                        :characters="characters"
-                        :studentEmails="studentEmails">
-                </inbox>
-
-                <sent-mail
-                        v-if="showSent"
-                        :studentEmails="studentEmails">
-                </sent-mail>
-            </div>
-        </div>
-
         <!-- Compose Modal -->
         <div class="modal fade" id="composeModal" tabindex="-1" role="dialog" aria-labelledby="readModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -60,7 +76,7 @@
                         </div>
                         <div class="row form-group">
                             <label for="toSubject" class="col-sm-2">Subject:</label>
-                            <input type="text" id="toSubject" name="toSubject" class="col-sm-10" v-model="draftEmail.subject">
+                            <input type="text" id="toSubject" name="toSubject" v-model="draftEmail.subject">
                         </div>
                         <div class="row form-group">
                             <textarea class="col-sm-12" type="text" id="toBody" v-model="draftEmail.body"></textarea>
@@ -111,6 +127,8 @@
             studentEmails: Array
         },
         mounted() {
+            $('#submitFailure').show();
+            $('#submitSuccess').hide();
             let appScope = this;
             $('#composeModal').on('hidden.bs.modal', function (e) {
                 appScope.resetDraftEmail();
@@ -170,11 +188,12 @@
                 //update student emails to show sent message
                 this.draftEmail.name = this.draftEmail.to.name;
                 this.draftEmail.day = this.$store.state.user.current_day;
-                this.studentEmails.push(this.draftEmail);
+                this.studentEmails.unshift(this.draftEmail);
 
                 axios.post('/email', formData).then(response => {
+                    this.submitSuccess();
                     this.resetDraftEmail();
-                });
+                }).catch(err => this.submitFailure());
                 $('#composeModal').modal('hide');
             },
             updateSent: function(draft, emailId) {
@@ -189,7 +208,7 @@
                         draft.name = draft.to.name;
                         draft.reply = email;
 
-                        appScope.studentEmails.push(draft);
+                        appScope.studentEmails.unshift(draft);
 
                         return email
                     }
@@ -197,6 +216,24 @@
             },
             setAttachment: function () {
                 this.draftEmail.attachment = this.$refs.file.files[0];
+            },
+            submitSuccess: function() {
+                $('#submitFailure').hide();
+                $('#submitSuccess').show();
+                $('#submitSuccess').removeClass("hidden");
+                $('#submitSuccess').alert();
+                setTimeout(function(){
+                    $('#submitSuccess').addClass("hidden");
+                }, 2500);
+            },
+            submitFailure: function() {
+                $('#submitSuccess').hide();
+                $('#submitFailure').show();
+                $('#submitFailure').alert();
+                setTimeout( function()
+                {
+                    $('#submitFailure').hide();
+                }, 2500);
             }
         }
     }
@@ -224,6 +261,9 @@
         margin: 0px;
 
     }
+    .hidden {
+        visibility: hidden;
+    }
     .emailList{
         margin-top: 20px;
     }
@@ -239,6 +279,12 @@
     #toBody{
         height: 30rem;
         resize: none;
+    }
+    #toSubject {
+        width: 80%;
+        border-radius: 4px;
+        border-width: 1px;
+        margin-left: 14px;
     }
     .email-body{
         margin: 30px 0 40px;
