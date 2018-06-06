@@ -25,7 +25,11 @@
                 <li class="nav-item"><a class="nav-link" href="/library">Library</a></li>
                 <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                 <li class="nav-item"><a class="nav-link" href="/videocall">Video Call</a></li>
-                <li class="nav-item"><a class="nav-link" href="/email">Email</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/email">Email
+                        <span class="badge badge-pill badge-danger">{{ $notifications }}</span>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                         {{ Auth::user()->name }} <span class="caret"></span>
