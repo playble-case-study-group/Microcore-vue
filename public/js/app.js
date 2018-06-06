@@ -57134,7 +57134,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n@media (min-width: 992px) and (max-width: 1199.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 3;\n            column-count: 3;\n}\n}\n@media (min-width: 1200px) and (max-width: 1599.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 4;\n            column-count: 4;\n}\n}\n@media (min-width: 1600px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 5;\n            column-count: 5;\n}\n}\n#boardList[data-v-3f7e9a0e] {\n  margin: 50px 0;\n  list-style: none;\n  text-decoration: none;\n  cursor: pointer;\n  -webkit-columns: 100px 3;\n  /* Chrome, Safari, Opera */\n  /* Firefox */\n  columns: 100px 3;\n}\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-3f7e9a0e], #edit-art[data-v-3f7e9a0e] {\n  margin-top: 20px;\n}\n.tag-btn[data-v-3f7e9a0e] {\n  margin-right: 10px;\n}\n.modal-body img[data-v-3f7e9a0e] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.card-img-overlay[data-v-3f7e9a0e] {\n  display: none;\n  pointer-events: none;\n}\n.card-img-overlay .btn[data-v-3f7e9a0e] {\n  pointer-events: auto;\n}\n.card:hover .card-img-overlay[data-v-3f7e9a0e] {\n  display: block;\n}\n.card-img-overlay button[data-v-3f7e9a0e] {\n  z-index: 20;\n}\n@media (min-width: 992px) and (max-width: 1199.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 3;\n            column-count: 3;\n}\n}\n@media (min-width: 1200px) and (max-width: 1599.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 4;\n            column-count: 4;\n}\n}\n@media (min-width: 1600px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 5;\n            column-count: 5;\n}\n}\n#boardList[data-v-3f7e9a0e] {\n  margin: 50px 0;\n  list-style: none;\n  text-decoration: none;\n  cursor: pointer;\n  -webkit-columns: 100px 3;\n  /* Chrome, Safari, Opera */\n  /* Firefox */\n  columns: 100px 3;\n}\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-3f7e9a0e], #edit-art[data-v-3f7e9a0e] {\n  margin-top: 20px;\n}\n.tag-btn[data-v-3f7e9a0e] {\n  margin-right: 10px;\n}\n.modal-body img[data-v-3f7e9a0e] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -57147,6 +57147,34 @@ exports.push([module.i, "\n@media (min-width: 992px) and (max-width: 1199.98px) 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Artifact_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57279,24 +57307,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.gallery.forEach(function (artifact) {
                 artifact.hidden = false;
             });
+            $('.no-artifacts').addClass('d-none');
             this.$forceUpdate();
         },
         filterGallery: function filterGallery(tag) {
+            var visibleArtifactCount = 0;
             this.gallery.forEach(function (artifact) {
                 if (!artifact.tags.find(function (art) {
                     return art.tag_id === tag.tag_id;
                 })) {
                     artifact.hidden = true;
                 } else {
+                    visibleArtifactCount++;
                     artifact.hidden = false;
                 }
             });
+            console.log(visibleArtifactCount);
+            if (!visibleArtifactCount) {
+                $('.no-artifacts').removeClass('d-none');
+            } else {
+                $('.no-artifacts').addClass('d-none');
+            }
+
             this.boardTitle = tag.title;
             this.$forceUpdate();
         },
         openArtifact: function openArtifact(modalArtifact) {
             this.$refs.openModal.openModal();
             this.artifactData = modalArtifact;
+        },
+        addTag: function addTag(artifact) {
+            $('#addTagModal').modal();
         }
     }
 });
@@ -58004,6 +58045,14 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
+            _c("p", { staticClass: "no-artifacts d-none" }, [
+              _vm._v(
+                "There are no artifacts with the " +
+                  _vm._s(_vm.boardTitle) +
+                  " tag."
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "div",
               { staticClass: "card-columns" },
@@ -58022,6 +58071,25 @@ var render = function() {
                             }
                           }
                         }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-img-overlay" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-default",
+                              on: {
+                                click: function($event) {
+                                  _vm.addTag(artifact)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Add Tag\n                        "
+                              )
+                            ]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -58052,12 +58120,6 @@ var render = function() {
                               },
                               [_vm._v(_vm._s(artifact.description))]
                             ),
-                            _vm._v(" "),
-                            _c("button", { staticClass: "btn btn-default" }, [
-                              _vm._v(
-                                "\n                            Add Tag\n                        "
-                              )
-                            ]),
                             _vm._v(" "),
                             _vm._l(artifact.tags, function(tag) {
                               return _c(
@@ -58100,11 +58162,80 @@ var render = function() {
           ],
           1
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
+        },
+        [_vm._v("\n        Launch demo modal\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addTagModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("img", {
+                      staticClass: "img-fluid",
+                      attrs: { src: _vm.addTag.title, alt: "" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" })
+                ])
+              ])
+            ]
+          )
+        ]
+      )
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
