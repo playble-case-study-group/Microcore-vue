@@ -8,7 +8,11 @@ Vue.use(Vuex);
 const state = {
     tasks: [],
     user: {},
-    simulation: {}
+    simulation: {},
+    notifications: {
+        newEmails: 0,
+        newArtifacts: 0
+    }
 }
 
 const getters = {
@@ -86,6 +90,18 @@ const mutations = {
             }).catch((error) => {
                 console.log(error.response.data)
         })
+    },
+    RETRIEVE_NEW_EMAILS: (state) => {
+        axios.post('/getemailnotifications').then( data => {
+            console.log(data);
+            state.notifications.newEmails = data;
+        })
+    },
+    RETRIEVE_NEW_ARTIFACTS: (state) => {
+        axios.post('/getgallerynotifications').then( data => {
+            console.log(data);
+            state.notifications.newArtifacts = data;
+        })
     }
 }
 
@@ -98,7 +114,9 @@ const actions = {
     PREVIOUS_DAY: ({commit}) => commit('PREVIOUS_DAY'),
     toggleTask(context, payload) {
         context.commit('toggleTask', payload)
-    }
+    },
+    RETRIEVE_NEW_EMAILS: ({commit}) => commit('RETRIEVE_NEW_EMAILS'),
+    RETRIEVE_NEW_ARTIFACTS: ({commit}) => commit('RETRIEVE_NEW_ARTIFACTS')
 }
 
 export default new Vuex.Store({

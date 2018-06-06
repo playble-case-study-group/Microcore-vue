@@ -48,7 +48,7 @@
 
     export default {
 
-        props: ['dash', 'notes'],
+        props: ['dash', 'notes', 'title'],
         mounted() {
             this.changeStockCSS();
         },
