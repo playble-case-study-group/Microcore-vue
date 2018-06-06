@@ -47,6 +47,9 @@ Route::group(['middleware'=>['auth', 'student']], function() {
         return DB::table('simulation')->get();
     });
     Route::post( '/resetDay', 'SimulationController@resetDay' );
+    Route::post('/getemailnotifications', 'SimulationController@getEmailNotifications');
+    Route::post('/getgallerynotifications', 'SimulationController@getGaleryNotifications');
+
 
 // Tasks
     Route::resource('/tasks', 'TasksController');

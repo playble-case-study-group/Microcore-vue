@@ -77,4 +77,30 @@ class SimulationController extends Controller
         return $request->all();
     }
 
+    public static function getEmailNotifications() {
+
+        $emails = DB::table('character_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->count();
+
+        $read_emails = DB::table('student_read_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->where('user_id', Auth::id())
+            ->count();
+
+        $total_unread = $emails - $read_emails;
+
+        return $total_unread;
+    }
+
+    public static function getGalleryNotifications() {
+
+        $artifacts = DB::table('artifacts')
+            ->where('day', '=' ,Auth::user()->current_day)
+            ->count();
+
+
+        return $artifacts;
+    }
+
 }

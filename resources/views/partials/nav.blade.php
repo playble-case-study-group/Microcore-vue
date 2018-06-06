@@ -30,6 +30,10 @@
                         <span class="badge badge-pill badge-danger">{{ $notifications }}</span>
                     </a>
                 </li>
+                <navigation></navigation>
+                <navigation></navigation>
+                <navigation></navigation>
+                <navigation></navigation>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                         {{ Auth::user()->name }} <span class="caret"></span>

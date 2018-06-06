@@ -9,15 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class Nav extends Authenticatable
 {
-    use Notifiable;
 
     public static function getNotifications() {
 
-        $classId = DB::table('dashboard')
-            ->where('day', Auth::user()->current_day)
-            ->select('email_count')
-            ->first();
+        $emails = DB::table('character_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->count();
 
-            return $classId->email_count;
+        $read_emails = DB::table('student_read_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->where('user_id', Auth::id())
+            ->count();
+
+        $total_unread = $emails - $read_emails;
+
+            return $total_unread;
     }
 }

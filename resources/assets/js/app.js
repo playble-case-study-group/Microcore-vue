@@ -30,6 +30,7 @@ Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
 Vue.component('editor', require('./components/Library/articleEditor.vue'));
+Vue.component('navigation', require('./components/NavigationLink/navigation.vue'));
 
 
 import store from './vuex/store';
