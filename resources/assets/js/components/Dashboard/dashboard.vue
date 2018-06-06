@@ -20,7 +20,7 @@
                 </div>
                 <div class="dash-card dash-small col-sm-10 col-md-3">
                     <h3 class="dash-heading">Updates</h3>
-                    <div class="dash-content">
+                    <div class="dash-content dash-content2">
                         <i class="material-icons dash-notify">priority_high</i>
                         <span class="dash-update">{{ this.dash.message_count }} Unread Messages</span>
                         <br>
@@ -50,7 +50,6 @@
 
         props: ['dash', 'notes', 'title'],
         mounted() {
-            console.log('Component mounted.')
             this.changeStockCSS();
         },
         data: function(){
@@ -107,6 +106,7 @@
     .dash-heading{
         color: $sim-heading;
         text-align: center;
+        margin: 1.5rem 0 0;
     }
     .dash-video{
         height: 425px;
@@ -114,7 +114,7 @@
         margin: auto;
     }
     .dash-content{
-        margin: 2rem;
+        margin: 1rem 0;
     }
     .dash-notify{
         color: #ce0d0d;
@@ -122,14 +122,14 @@
     }
     .dash-stocks{
         display: flex;
-        margin: 0 4rem;
+        margin: 0 1rem;
         font-size: 27px;
     }
     .dash-stockStatus{
         font-size: 24px;
     }
     .dash-count{
-        margin-top: 4rem;
+        margin-top: 2.5rem;
     }
     .dash-update{
         position: absolute;

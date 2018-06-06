@@ -3,7 +3,7 @@
         <div class="counterDisplay col-sm-12" v-if="this.count > 0"><!---->
             <br><br>
             <p v-if="this.warning">
-                You will have {{ this.countdown }} seconds to respond.
+                You will have {{ this.activeQuestion.recording_duration }} seconds to respond.
                 Recording will start in : <span class="counter">{{ this.count }}</span>
             </p>
             <p v-else>
@@ -49,7 +49,8 @@
         data() {
             return{
                 count: 0,
-                showButtons: true
+                showButtons: true,
+                activeQuestion: {}
             }
         },
         watch: {
@@ -68,6 +69,7 @@
         },
         methods: {
             submitQuestion: function (question) {
+                this.activeQuestion = question;
                 this.$emit('question', question)
                 this.warning = false;
                 this.disabledQuestions.push(question.question_id);

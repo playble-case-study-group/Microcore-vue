@@ -70,3 +70,8 @@ $container-max-widths: (
         xl: 1140px,
         xxl: 1540px
 );
+
+$spacer: 1rem !default;
+$navbar-nav-link-padding-x:         1rem;
+$navbar-padding-y:                  $spacer;
+

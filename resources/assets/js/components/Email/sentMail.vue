@@ -96,6 +96,9 @@
     td, th {
         padding: 10px;
     }
+    tr {
+        cursor: pointer;
+    }
     .row{
         margin: 0px;
 

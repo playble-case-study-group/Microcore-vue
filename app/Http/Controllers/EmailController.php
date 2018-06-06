@@ -54,6 +54,7 @@ class EmailController extends Controller
             ->join('characters','characters.character_id', 'student_emails.character_id')
             ->select('student_emails.body', 'characters.name', 'student_emails.day', 'student_emails.student_email_id', 'student_emails.subject', 'student_emails.character_email_id')
             ->where('user_id', Auth::id())
+            ->orderBy('student_email_id', 'desc')
             ->get();
 
         foreach ($studentEmails as $email) {

@@ -58200,7 +58200,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 2rem;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 4rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 4rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 10rem;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #4A4A4A;\n  text-align: center;\n  margin: 1.5rem 0 0;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 1rem 0;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 1rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 2.5rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #4A4A4A;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 10rem;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
 
 // exports
 
@@ -58264,7 +58264,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['dash', 'notes', 'title'],
     mounted: function mounted() {
-        console.log('Component mounted.');
         this.changeStockCSS();
     },
 
@@ -58340,7 +58339,7 @@ var render = function() {
         _c("div", { staticClass: "dash-card dash-small col-sm-10 col-md-3" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Updates")]),
           _vm._v(" "),
-          _c("div", { staticClass: "dash-content" }, [
+          _c("div", { staticClass: "dash-content dash-content2" }, [
             _c("i", { staticClass: "material-icons dash-notify" }, [
               _vm._v("priority_high")
             ]),
@@ -58506,7 +58505,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.hidden[data-v-52d1ee62] {\n  visibility: hidden;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n#toSubject[data-v-52d1ee62] {\n  width: 80%;\n  border-radius: 4px;\n  border-width: 1px;\n  margin-left: 14px;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #636b6f;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #636b6f;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #4a4a4a;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -58524,6 +58523,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inbox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__inbox_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sentMail_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58637,6 +58652,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         studentEmails: Array
     },
     mounted: function mounted() {
+        $('#submitFailure').show();
+        $('#submitSuccess').hide();
         var appScope = this;
         $('#composeModal').on('hidden.bs.modal', function (e) {
             appScope.resetDraftEmail();
@@ -58697,10 +58714,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //update student emails to show sent message
             this.draftEmail.name = this.draftEmail.to.name;
             this.draftEmail.day = this.$store.state.user.current_day;
-            this.studentEmails.push(this.draftEmail);
+            this.studentEmails.unshift(this.draftEmail);
 
             axios.post('/email', formData).then(function (response) {
+                _this.submitSuccess();
                 _this.resetDraftEmail();
+            }).catch(function (err) {
+                return _this.submitFailure();
             });
             $('#composeModal').modal('hide');
         },
@@ -58716,7 +58736,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     draft.name = draft.to.name;
                     draft.reply = email;
 
-                    appScope.studentEmails.push(draft);
+                    appScope.studentEmails.unshift(draft);
 
                     return email;
                 }
@@ -58724,6 +58744,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         setAttachment: function setAttachment() {
             this.draftEmail.attachment = this.$refs.file.files[0];
+        },
+        submitSuccess: function submitSuccess() {
+            $('#submitFailure').hide();
+            $('#submitSuccess').show();
+            $('#submitSuccess').removeClass("hidden");
+            $('#submitSuccess').alert();
+            setTimeout(function () {
+                $('#submitSuccess').addClass("hidden");
+            }, 2500);
+        },
+        submitFailure: function submitFailure() {
+            $('#submitSuccess').hide();
+            $('#submitFailure').show();
+            $('#submitFailure').alert();
+            setTimeout(function () {
+                $('#submitFailure').hide();
+            }, 2500);
         }
     }
 });
@@ -58814,7 +58851,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\ntr[data-v-57c1bf28] {\n  cursor: pointer;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -58982,8 +59019,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             axios.post('/email', formData).then(function (response) {
+                _this.$emit('submitSuccess');
                 _this.resetDraftEmail();
                 _this.$forceUpdate();
+            }).catch(function (err) {
+                return _this.$emit('submitFailure');
             });
             $('#readModal').modal('hide');
             $('#emailAttachment').css('display', 'none');
@@ -59380,7 +59420,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\ntr[data-v-3c31d779] {\n  cursor: pointer;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59664,119 +59704,129 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container main" }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        {
-          staticClass: "heading flex-header col-sm-12",
-          attrs: { role: "banner" }
-        },
-        [
-          _c("h1", [_vm._v("Messages")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sidenav", attrs: { id: "mySidenav" } }, [
-            _c(
-              "a",
-              {
-                staticClass: "closebtn",
-                attrs: { href: "javascript:void(0)" },
-                on: { click: _vm.closeNav }
-              },
-              [_vm._v("×")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success compose",
-                on: { click: _vm.composeModal }
-              },
-              [_vm._v("Compose")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "toggle", on: { click: _vm.toggleInbox } },
-              [_c("span", [_vm._v("Inbox")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "toggle", on: { click: _vm.toggleSent } },
-              [_c("span", [_vm._v("Sent")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "#" } }, [
-            _c(
-              "i",
-              {
-                staticClass: "material-icons mobile-menu",
-                on: { click: _vm.openNav }
-              },
-              [_vm._v("menu")]
-            )
-          ])
-        ]
-      )
-    ]),
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "row content" }, [
-      _c("div", { staticClass: "sidebar col-md-2" }, [
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "main" }, [
+      _c("div", { staticClass: "row" }, [
         _c(
-          "button",
+          "div",
           {
-            staticClass: "btn btn-success compose",
-            on: { click: _vm.composeModal }
+            staticClass: "heading flex-header col-sm-12",
+            attrs: { role: "banner" }
           },
-          [_vm._v("Compose")]
-        ),
-        _vm._v(" "),
-        _c("ul", [
-          _c(
-            "li",
-            { staticClass: "inboxToggle", on: { click: _vm.toggleInbox } },
-            [
-              _c("div", { staticClass: "keyline keyline-inbox" }, [
-                _vm._v("Inbox")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
-            [
-              _c("div", { staticClass: "keyline keyline-sent" }, [
-                _vm._v("Sent")
-              ])
-            ]
-          )
-        ])
+          [
+            _c("h1", [_vm._v("Messages")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "sidenav", attrs: { id: "mySidenav" } }, [
+              _c(
+                "a",
+                {
+                  staticClass: "closebtn",
+                  attrs: { href: "javascript:void(0)" },
+                  on: { click: _vm.closeNav }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success compose",
+                  on: { click: _vm.composeModal }
+                },
+                [_vm._v("Compose")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "toggle", on: { click: _vm.toggleInbox } },
+                [_c("span", [_vm._v("Inbox")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "toggle", on: { click: _vm.toggleSent } },
+                [_c("span", [_vm._v("Sent")])]
+              )
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c(
+                "i",
+                {
+                  staticClass: "material-icons mobile-menu",
+                  on: { click: _vm.openNav }
+                },
+                [_vm._v("menu")]
+              )
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-sm-12 col-lg-10 emailList" },
-        [
-          _vm.showInbox
-            ? _c("inbox", {
-                attrs: {
-                  characterEmails: _vm.characterEmails,
-                  characters: _vm.characters,
-                  studentEmails: _vm.studentEmails
-                },
-                on: { sentReply: _vm.updateSent }
-              })
-            : _vm._e(),
+      _c("div", { staticClass: "row content" }, [
+        _c("div", { staticClass: "sidebar col-md-2" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success compose",
+              on: { click: _vm.composeModal }
+            },
+            [_vm._v("Compose")]
+          ),
           _vm._v(" "),
-          _vm.showSent
-            ? _c("sent-mail", { attrs: { studentEmails: _vm.studentEmails } })
-            : _vm._e()
-        ],
-        1
-      )
+          _c("ul", [
+            _c(
+              "li",
+              { staticClass: "inboxToggle", on: { click: _vm.toggleInbox } },
+              [
+                _c("div", { staticClass: "keyline keyline-inbox" }, [
+                  _vm._v("Inbox")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "sentToggle", on: { click: _vm.toggleSent } },
+              [
+                _c("div", { staticClass: "keyline keyline-sent" }, [
+                  _vm._v("Sent")
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-sm-12 col-lg-10 emailList" },
+          [
+            _vm.showInbox
+              ? _c("inbox", {
+                  attrs: {
+                    characterEmails: _vm.characterEmails,
+                    characters: _vm.characters,
+                    studentEmails: _vm.studentEmails
+                  },
+                  on: {
+                    submitSuccess: _vm.submitSuccess,
+                    submitFailure: _vm.submitFailure,
+                    sentReply: _vm.updateSent
+                  }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.showSent
+              ? _c("sent-mail", { attrs: { studentEmails: _vm.studentEmails } })
+              : _vm._e()
+          ],
+          1
+        )
+      ])
     ]),
     _vm._v(" "),
     _c(
@@ -59797,7 +59847,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row form-group" }, [
@@ -59846,7 +59896,6 @@ var render = function() {
                         expression: "draftEmail.subject"
                       }
                     ],
-                    staticClass: "col-sm-10",
                     attrs: { type: "text", id: "toSubject", name: "toSubject" },
                     domProps: { value: _vm.draftEmail.subject },
                     on: {
@@ -59921,6 +59970,64 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-success alert-dismissible fade show hidden",
+        attrs: { id: "submitSuccess", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Success!")]),
+        _vm._v(" Your email was sent successfully.\n    ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert alert-danger alert-dismissible fade show hidden",
+        attrs: { id: "submitFailure", role: "alert" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "alert",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _c("strong", [_vm._v("Uh oh!")]),
+        _vm._v(" There was an error in sending your email.\n    ")
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -60038,7 +60145,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 3rem 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 2rem;\n    -ms-flex-item-align: start;\n        align-self: start;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-direction: row-reverse;\n        flex-direction: row-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0;\n}\n}\n@media(min-width: 1350px){\n#notesParent[data-v-31d2957c]{\n        height: 45rem;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n#videocall[data-v-31d2957c]{\n    margin: 60px 3rem;\n}\n#notesParent[data-v-31d2957c]{\n    height:40rem;\n    top: 2rem;\n    -ms-flex-item-align: start;\n        align-self: start;\n}\n.row[data-v-31d2957c]{\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: reverse;\n        -ms-flex-flow: wrap-reverse;\n            flex-flow: wrap-reverse;\n    -ms-flex-direction: row-reverse;\n        flex-direction: row-reverse;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.alert[data-v-31d2957c] {\n    margin-top: -45px;\n}\n.hidden[data-v-31d2957c] {\n    visibility: hidden;\n}\n@media(min-width:992px){\n#notesParent[data-v-31d2957c]{\n        height:42rem;\n        top: 0;\n}\n}\n@media(min-width: 1350px){\n#notesParent[data-v-31d2957c]{\n        height: 45rem;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -60052,8 +60159,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__notes_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_vue__ = __webpack_require__(550);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__contacts_vue__);
+//
+//
 //
 //
 //
@@ -60094,13 +60203,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        $('#submitSuccess').hide();
-        $('#submitFailure').hide();
+        $('#submitFailure').show();
     },
 
     components: {
         'notes': __WEBPACK_IMPORTED_MODULE_1__notes_vue___default.a,
-        'character-video': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a
+        'contacts': __WEBPACK_IMPORTED_MODULE_2__contacts_vue___default.a
     },
     props: {
         calls: Array,
@@ -60111,18 +60219,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         alertSaveSuccess: function alertSaveSuccess() {
+            $('#submitFailure').hide();
             $('#submitSuccess').show();
+            $('#submitSuccess').removeClass("hidden");
             $('#submitSuccess').alert();
             setTimeout(function () {
-                $('#submitSuccess').hide();
-            }, 5000);
+                $('#submitSuccess').addClass("hidden");
+            }, 2500);
         },
         alertSaveFailure: function alertSaveFailure() {
+            $('#submitSuccess').hide();
             $('#submitFailure').show();
             $('#submitFailure').alert();
             setTimeout(function () {
                 $('#submitFailure').hide();
-            }, 5000);
+            }, 2500);
         }
     }
 });
@@ -60398,7 +60509,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n.recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #3c763d;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-00e307e5] {\n  color: white;\n}\nimg[data-v-00e307e5] {\n  -ms-flex-item-align: center;\n      align-self: center;\n}\ncanvas[data-v-00e307e5] {\n  height: 30px;\n  width: 40px;\n}\n.video-container[data-v-00e307e5] {\n  position: relative;\n  background-color: #000;\n  height: 44%;\n}\n#controlBar[data-v-00e307e5] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0px 10px;\n  background-color: #4A4A4A;\n  height: 40px;\n  font-size: 25px;\n  margin-top: 0px;\n}\n.recording[data-v-00e307e5] {\n  color: red;\n}\n#call_video[data-v-00e307e5] {\n  height: 100%;\n  width: 100%;\n}\n.contact-inner[data-v-00e307e5] {\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row;\n          flex-flow: row;\n  cursor: pointer;\n}\n.contact-inner[data-v-00e307e5]:nth-child(even) {\n  border-top: solid 1px;\n  border-bottom: solid 1px;\n  border-color: #d9dcde;\n}\n.characterInfo[data-v-00e307e5] {\n  margin-left: 2rem;\n  width: 58%;\n}\n.characterActive[data-v-00e307e5] {\n  color: #57AB58;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.activeIcon[data-v-00e307e5] {\n  font-size: 14px;\n}\n#characterQuestions[data-v-00e307e5] {\n  height: 21rem;\n  overflow-y: scroll;\n  background-color: white;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: inherit;\n          flex-flow: inherit;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.dropdown-menu[data-v-00e307e5] {\n  min-width: 220px;\n}\n.dropdown-toggle[data-v-00e307e5]::after {\n  display: none;\n}\n#personal_video[data-v-00e307e5] {\n  position: absolute;\n  right: 0px;\n  bottom: -6px;\n  height: 125px;\n  width: 150px;\n}\n", ""]);
 
 // exports
 
@@ -60503,7 +60614,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         calls: Array,
         characters: Array,
         questions: Array,
-        disabledQuestions: Array
+        disabledQuestions: Array,
+        clickedCharacter: Number
     },
     data: function data() {
         return {
@@ -60514,7 +60626,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentVideo: {},
             videoMessageInterface: false,
             recording: false,
-            clickedCharacter: 0,
             leaveResponse: false,
             studentResponded: false,
             warningTime: 5,
@@ -60530,6 +60641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.startSelfVideo();
         this.startAudio();
+        this.loadCallVideo(this.clickedCharacter);
     },
     updated: function updated() {
         if (this.videoMessageInterface == false) {
@@ -60540,7 +60652,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         currentVideo: function currentVideo() {
             if (!this.videoMessageInterface) {
-                this.videoEl.load();
+                document.getElementById('call_video').load();
                 this.callIconToggleStatus = "call";
             }
         },
@@ -61044,7 +61156,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             count: 0,
-            showButtons: true
+            showButtons: true,
+            activeQuestion: {}
         };
     },
 
@@ -61063,6 +61176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         submitQuestion: function submitQuestion(question) {
+            this.activeQuestion = question;
             this.$emit('question', question);
             this.warning = false;
             this.disabledQuestions.push(question.question_id);
@@ -61118,7 +61232,7 @@ var render = function() {
             ? _c("p", [
                 _vm._v(
                   "\n            You will have " +
-                    _vm._s(this.countdown) +
+                    _vm._s(this.activeQuestion.recording_duration) +
                     " seconds to respond.\n            Recording will start in : "
                 ),
                 _c("span", { staticClass: "counter" }, [
@@ -61574,7 +61688,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "video" } },
+    { staticClass: "col-sm-12", attrs: { id: "video" } },
     [
       _c(
         "div",
@@ -61791,7 +61905,7 @@ var render = function() {
           attrs: { id: "notesParent", notes: this.notes }
         }),
         _vm._v(" "),
-        _c("character-video", {
+        _c("contacts", {
           staticClass: "col-sm-11 col-lg-8",
           attrs: {
             characters: this.contacts,
@@ -61817,7 +61931,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "alert alert-success alert-dismissible fade show",
+        staticClass: "alert alert-success alert-dismissible fade show hidden",
         attrs: { id: "submitSuccess", role: "alert" }
       },
       [
@@ -61835,7 +61949,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("strong", [_vm._v("Success!")]),
-        _vm._v(" Your video was submitted successfully.\n    ")
+        _vm._v(" Your video was sent successfully.\n    ")
       ]
     )
   },
@@ -61846,7 +61960,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "alert alert-danger alert-dismissible fade show",
+        staticClass: "alert alert-danger alert-dismissible fade show hidden",
         attrs: { id: "submitFailure", role: "alert" }
       },
       [
@@ -61864,7 +61978,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("strong", [_vm._v("Uh oh!")]),
-        _vm._v(" There was an error in submitting your video.\n    ")
+        _vm._v(" There was an error in sending your video.\n    ")
       ]
     )
   }
@@ -91361,6 +91475,314 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(551)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(553)
+/* template */
+var __vue_template__ = __webpack_require__(554)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-167963c0"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/VideoCall/contacts.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-167963c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-167963c0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 551 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(552);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("32ad5fd8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-167963c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./contacts.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-167963c0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./contacts.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 552 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n.characterInfo[data-v-167963c0]{\n    width: 50%;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 553 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__notes_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        $('#submitSuccess').hide();
+        $('#submitFailure').hide();
+    },
+
+    components: {
+        'character-video': __WEBPACK_IMPORTED_MODULE_2__videos_vue___default.a
+    },
+    props: {
+        calls: Array,
+        questions: Array,
+        disabledQuestions: Array,
+        characters: Array
+    },
+    data: function data() {
+        return {
+            clickedCharacter: 0
+        };
+    },
+    computed: {
+        activeContacts: function activeContacts() {
+            var _this = this;
+
+            return this.calls.filter(function (character) {
+                if (character.day === _this.$store.state.user.current_day) {
+                    return character.character_id;
+                }
+            }).map(function (character) {
+                return character.character_id;
+            });
+        }
+    },
+    methods: {
+        selectCharacter: function selectCharacter(character_id) {
+            this.clickedCharacter = character_id;
+        },
+        alertSaveSuccess: function alertSaveSuccess() {
+            this.$emit('alertSuccess');
+        },
+        alertSaveFailure: function alertSaveFailure() {
+            this.$emit('alertFailure');
+        }
+    }
+});
+
+/***/ }),
+/* 554 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container", attrs: { id: "contacts" } },
+    [
+      _vm.clickedCharacter == 0
+        ? _c(
+            "div",
+            { staticClass: "contact-list" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.characters, function(person) {
+                return _c(
+                  "div",
+                  {
+                    key: person.character_id,
+                    staticClass: "contact-inner",
+                    on: {
+                      click: function($event) {
+                        _vm.selectCharacter(person.character_id)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", [
+                      _c("img", {
+                        staticClass: "characterImage",
+                        attrs: { src: person.img_small }
+                      }),
+                      _vm._v(" "),
+                      _vm.activeContacts.includes(person.character_id)
+                        ? _c("span", { staticClass: "characterActive" }, [
+                            _c(
+                              "i",
+                              { staticClass: "material-icons activeIcon" },
+                              [_vm._v("fiber_manual_record")]
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "characterInfo" }, [
+                      _c("span", { staticClass: "characterName" }, [
+                        _vm._v(_vm._s(person.name))
+                      ]),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "characterPosition" }, [
+                        _vm._v(_vm._s(person.role))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        : _c("character-video", {
+            attrs: {
+              clickedCharacter: this.clickedCharacter,
+              characters: this.characters,
+              calls: this.calls,
+              questions: this.questions,
+              disabledQuestions: this.disabledQuestions
+            },
+            on: {
+              alertSuccess: _vm.alertSaveSuccess,
+              alertFailure: _vm.alertSaveFailure
+            }
+          })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "heading" }, [
+      _c("h3", [_vm._v("Contacts")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "call" } }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("call")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-167963c0", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

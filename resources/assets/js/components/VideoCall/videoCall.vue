@@ -1,24 +1,26 @@
 <template>
     <div id="videocall" class="container">
 
-        <div class="alert alert-success alert-dismissible fade show" id="submitSuccess" role="alert">
+        <div class="alert alert-success alert-dismissible fade show hidden" id="submitSuccess" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>Success!</strong> Your video was submitted successfully.
+            <strong>Success!</strong> Your video was sent successfully.
         </div>
 
-        <div class="alert alert-danger alert-dismissible fade show" id="submitFailure" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show hidden" id="submitFailure" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>Uh oh!</strong> There was an error in submitting your video.
+            <strong>Uh oh!</strong> There was an error in sending your video.
         </div>
+
+
         <div class="row">
                 <notes id="notesParent" class="col-sm-11 col-lg-3"
                        :notes="this.notes">
                 </notes>
-                <character-video class="col-sm-11 col-lg-8"
+                <contacts class="col-sm-11 col-lg-8"
                                  @alertSuccess="alertSaveSuccess"
                                  @alertFailure="alertSaveFailure"
                                  :characters="this.contacts"
@@ -26,7 +28,7 @@
                                  :questions="this.questions"
                                  :disabledQuestions="this.disabled">
 
-                </character-video>
+                </contacts>
         </div>
     </div>
 </template>
@@ -34,16 +36,15 @@
 <script>
     import { mapActions } from 'vuex'
     import notes from './notes.vue'
-    import videos from './videos.vue'
+    import contacts from './contacts.vue'
 
     export default {
         mounted() {
-            $('#submitSuccess').hide();
-            $('#submitFailure').hide();
+            $('#submitFailure').show();
         },
         components: {
             'notes': notes,
-            'character-video': videos,
+            'contacts': contacts
         },
         props: {
             calls: Array,
@@ -54,20 +55,23 @@
         },
         methods: {
             alertSaveSuccess: function() {
+                $('#submitFailure').hide();
                 $('#submitSuccess').show();
+                $('#submitSuccess').removeClass("hidden");
                 $('#submitSuccess').alert();
                 setTimeout(function(){
-                        $('#submitSuccess').hide();
-                    }, 5000);
+                        $('#submitSuccess').addClass("hidden");
+                    }, 2500);
 
             },
             alertSaveFailure: function() {
+                $('#submitSuccess').hide();
                 $('#submitFailure').show();
                 $('#submitFailure').alert();
                 setTimeout( function()
                     {
                         $('#submitFailure').hide();
-                    }, 5000);
+                    }, 2500);
 
             }
         }
@@ -76,7 +80,7 @@
 
 <style scoped>
     #videocall{
-        margin: 3rem 3rem;
+        margin: 60px 3rem;
     }
     #notesParent{
         height:40rem;
@@ -87,6 +91,12 @@
         flex-flow: wrap-reverse;
         flex-direction: row-reverse;
         justify-content: space-around;
+    }
+    .alert {
+        margin-top: -45px;
+    }
+    .hidden {
+        visibility: hidden;
     }
 
     @media(min-width:992px){

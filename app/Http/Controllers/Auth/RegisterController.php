@@ -107,7 +107,7 @@ class RegisterController extends Controller
 
             DB::table('user_has_class')
                 ->insert([
-                    'user_id' => $user->id,
+                    'user_id' => $user->user_id,
                     'class_id' => $classId->class_id
                 ]);
 
