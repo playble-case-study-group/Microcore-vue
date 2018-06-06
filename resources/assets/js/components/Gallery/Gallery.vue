@@ -1,141 +1,81 @@
 <template>
-    <div id="gallery" class="container">
-
-
-        <!-- The Gallery View -->
-        <h1>Welcome to the Gallery</h1>
-        <hr>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filter
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item" @click="showAllGallery">Show All</a>
-                <a v-for="(tag, key) in tags"
-                   href="#"
-                   class="dropdown-item"
-                   @click="filterGallery(tag)"
-                   :key="key">
-                    {{ tag.title }}
-                </a>
+    <div id="gallery" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <ul id="boardList">
+                    <li><a href="#" @click="showAllGallery"><b>Show All</b></a></li>
+                    <li v-for="(tag, key) in tags" :key="key">
+                        <a href="#"
+                           @click="filterGallery(tag)">
+                            {{ tag.title }}
+                        </a >
+                    </li>
+                </ul>
+                <!--<div class="dropdown">-->
+                    <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--Filter-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                        <!--<a href="#" class="dropdown-item" @click="showAllGallery">Show All</a>-->
+                        <!--<a v-for="(tag, key) in tags"-->
+                           <!--href="#"-->
+                           <!--class="dropdown-item"-->
+                           <!--@click="filterGallery(tag)"-->
+                           <!--:key="key">-->
+                            <!--{{ tag.title }}-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h1>{{ boardTitle }}</h1>
+                <hr>
+                <div class="card-columns">
+                    <div class="card"
+                         v-for="artifact in gallery"
+                         v-if="!artifact.hidden"
+                         :key="artifact.artifact_id">
 
-        <div class="card-columns">
-            <div class="card"
-                 @click="openModal(artifact)"
-                 v-for="artifact in gallery"
-                 v-if="!artifact.hidden"
-                 :key="artifact.artifact_id">
-
-                <img class="card-img-top"
-                     :src="artifact.image"
-                     :alt="artifact.title">
-                <div class="card-body artifact" >
-                    <h4 class="card-title">{{ artifact.title }}</h4>
-                    <p class="card-text">{{ artifact.description}}</p>
-                    <button v-for="tag in artifact.tags"
-                            type="button"
-                            @click="filterGallery(tag)"
-                            class="btn btn-primary tag-btn">
-                        {{ tag.title }}
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- Large modal -->
-        <div class="modal fade artifact-modal" tabindex="-1" role="dialog" aria-labelledby="artifactModalDialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row col-sm-12">
-                                <img slot="image" :src="modal.image" :alt="modal.title" class="img-responsive">
-                            </div>
-                            <div id="display-art">
-                                <div class="row">
-                                    <div class="col-sm-10">
-                                        <h4>{{ modal.title }}</h4>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-primary btn-sm" @click="editArtifact()" type="button">Edit Artifact</button>
-                                    </div>
-                                </div>
-                                <div class="row col-sm-12">
-                                    <p>{{ modal.description }}</p>
-                                </div>
-                                <div class="row col-sm-12">
-                                    <button v-for="tag in modal.tags"
-                                            type="button"
-                                            class="btn btn-primary tag-btn">
-                                        {{ tag.title }}
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Form for editing the artifact -->
-                            <div id="edit-art" class="d-none">
-                                <div class="form-group">
-                                    <h4>Title</h4>
-                                    <input id="formTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Please enter a title..." v-model="modal.title">
-                                </div>
-                                <div class="form-group">
-                                    <h4>Description</h4>
-                                    <textarea id="formDescription"
-                                              placeholder="Please add artifact description..."
-                                              class="form-control"
-                                              rows="4"
-                                              v-model="modal.description">
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <h4>Tags</h4>
-                                    <button v-for="(tag, key) in modal.tags"
-                                            :key="key"
-                                            type="button"
-                                            @click="removeTag(tag)"
-                                            class="btn btn-danger">
-                                        {{ tag.title }} &times;
-                                    </button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <v-select v-model="newTag" label="title" :options="tags"></v-select>
-                                    </div>
-                                   <div class="col-sm-2">
-                                       <button class="btn btn-success" @click="addTag">
-                                           Add Tag
-                                       </button>
-                                   </div>
-
-                                </div>
-                            </div>
-
-                            <div id="save-art" class="row col-sm-12 d-none form-group">
-                                <button type="button" class="btn btn-outline-info" @click="cancelChanges()"> Cancel </button>
-                                <button type="button" class="btn btn-primary" @click="saveChanges()">Save changes</button>
-                            </div>
+                        <img class="card-img-top"
+                             @click="openArtifact(artifact)"
+                             :src="artifact.image"
+                             :alt="artifact.title">
+                        <div class="card-body artifact" >
+                            <h4 class="card-title" @click="openArtifact(artifact)">{{ artifact.title }}</h4>
+                            <p class="card-text" @click="openArtifact(artifact)">{{ artifact.description}}</p>
+                            <button class="btn btn-default">
+                                Add Tag
+                            </button>
+                            <button v-for="tag in artifact.tags"
+                                    type="button"
+                                    @click="filterGallery(tag)"
+                                    class="btn btn-primary tag-btn">
+                                {{ tag.title }}
+                            </button>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
+
+                <artifact :artifactData="artifactData"
+                          :tags="tags"
+                          ref="openModal"
+                          @nextArtifact="nextArtifact"
+                          @previousArtifact="previousArtifact">
+                </artifact>
             </div>
         </div>
+
+
 
     </div>
 </template>
 
 <script>
 
-    import vSelect  from 'vue-select'
+    import artifact from './Artifact.vue'
 
 
     export default {
@@ -144,14 +84,15 @@
             tags: Array
         },
         components: {
-            'v-select': vSelect
+            'artifact': artifact
         },
         data: function(){
             return {
+                boardTitle: "All Artifacts",
                 groupArt: [],
                 showModal: false,
                 newTag: '',
-                modal: {
+                artifactData: {
                     id: 0,
                     editId: 0,
                     category: 0,
@@ -163,19 +104,31 @@
             }
         },
         mounted() {
-            $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges)
+
         },
         methods: {
-            removeTag: function (tag) {
-                _.remove(this.modal.tags, tag);
-                this.$forceUpdate();
+            nextArtifact: function () {
+                let appScope = this;
+                let curArtId = this.artifactData.artifact_id;
+                let galleryLen = this.gallery.length;
+                this.gallery.find( function (artifact, index) {
+                    if (artifact.artifact_id === curArtId) {
+                        (index + 1 === galleryLen) ? appScope.openArtifact(appScope.gallery[0]) : appScope.openArtifact(appScope.gallery[index + 1])
+                    }
+                })
             },
-            addTag: function () {
-                if(!_.find(this.modal.tags, this.newTag)) {
-                    this.modal.tags.push(this.newTag);
-                }
+            previousArtifact: function () {
+                let appScope = this;
+                let curArtId = this.artifactData.artifact_id;
+                let galleryLen = this.gallery.length;
+                this.gallery.find( function (artifact, index) {
+                    if (artifact.artifact_id === curArtId) {
+                        (index - 1 === -1) ? appScope.openArtifact(appScope.gallery[galleryLen - 1]) : appScope.openArtifact(appScope.gallery[index - 1])
+                    }
+                })
             },
             showAllGallery: function () {
+                this.boardTitle = "All Artifacts";
                 this.gallery.forEach( artifact => { artifact.hidden = false });
                 this.$forceUpdate();
             },
@@ -187,69 +140,43 @@
                           artifact.hidden = false;
                       }
                   });
+                  this.boardTitle = tag.title;
                 this.$forceUpdate();
             },
-            openModal: function(modalArtifact) {
-                $('.artifact-modal').modal();
-                this.modal.image = modalArtifact.image;
-                this.modal.title = modalArtifact.title;
-                this.modal.description = modalArtifact.description;
-                this.modal.id = modalArtifact.artifact_id;
-                this.modal.editId = modalArtifact.edit_id;
-                this.modal.category = modalArtifact.catagory;
-                this.modal.tags = modalArtifact.tags;
-                this.newTag = this.tags[0];
-            },
-            closeModal: function() {
-                $('.artifact-modal').modal();
-            },
-            saveChanges: function() {
-                axios.put('/gallery/' + this.modal.id, {
-                    user: this.user.user_id,
-                    title: this.modal.title,
-                    description: this.modal.description,
-                    img: this.modal.image,
-                    galleryId: this.modal.id,
-                    editID: this.modal.editId,
-                    category: this.modal.category,
-                    tags: this.modal.tags
-                }).then(function( response ){
-                    console.log('success!');
-                }).catch(function(){
-                    console.log('FAILURE!!');
-                });
-
-                let update = this.gallery.find ( art => art.artifact_id === this.modal.id);
-                update.description = this.modal.description;
-                update.title = this.modal.title;
-                $('#edit-art').addClass('d-none');
-                $('#save-art').addClass('d-none');
-                $('#display-art').removeClass('d-none');
-            },
-            cancelChanges: function () {
-                let old = this.gallery.find ( art => art.artifact_id === this.modal.id);
-                this.modal.title = old.title;
-                this.modal.description = old.description;
-                this.modal.tags = old.tags;
-                $('#edit-art').addClass('d-none');
-                $('#save-art').addClass('d-none');
-                $('#display-art').removeClass('d-none');
-            },
-            editArtifact: function () {
-                $('#display-art').addClass('d-none');
-                $('#edit-art').removeClass('d-none');
-                $('#save-art').removeClass('d-none');
-            }
-        },
-        computed: {
-            user: function() {
-                return this.$store.state.user;
+            openArtifact: function(modalArtifact) {
+                this.$refs.openModal.openModal();
+                this.artifactData = modalArtifact;
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    @import "../../../sass/variables";
+    @import "../../../sass/mixins/breakpoints";
+
+    .card-columns {
+        @include media-breakpoint-only(lg) {
+            column-count: 3;
+        }
+        @include media-breakpoint-only(xl) {
+            column-count: 4;
+        }
+        @include media-breakpoint-only(xxl) {
+            column-count: 5;
+        }
+    }
+
+    #boardList {
+        margin: 50px 0;
+        list-style: none;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-columns: 100px 3; /* Chrome, Safari, Opera */
+        -moz-columns: 100px 3; /* Firefox */
+        columns: 100px 3;
+    }
+
     .row {
         /*-moz-column-width: 18em;*/
         /*-webkit-column-width: 18em;*/
