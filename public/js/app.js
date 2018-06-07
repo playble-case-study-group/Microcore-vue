@@ -57137,7 +57137,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n@media (min-width: 992px) and (max-width: 1199.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 3;\n            column-count: 3;\n}\n}\n@media (min-width: 1200px) and (max-width: 1599.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 4;\n            column-count: 4;\n}\n}\n@media (min-width: 1600px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 5;\n            column-count: 5;\n}\n}\n#boardList[data-v-3f7e9a0e] {\n  margin: 50px 0;\n  list-style: none;\n  text-decoration: none;\n  cursor: pointer;\n  -webkit-columns: 100px 3;\n  /* Chrome, Safari, Opera */\n  /* Firefox */\n  columns: 100px 3;\n}\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-3f7e9a0e], #edit-art[data-v-3f7e9a0e] {\n  margin-top: 20px;\n}\n.tag-btn[data-v-3f7e9a0e] {\n  margin-right: 10px;\n}\n.modal-body img[data-v-3f7e9a0e] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.card-img-overlay[data-v-3f7e9a0e] {\n  display: none;\n  pointer-events: none;\n}\n.card-img-overlay .btn[data-v-3f7e9a0e] {\n  pointer-events: auto;\n}\n.card:hover .card-img-overlay[data-v-3f7e9a0e] {\n  display: block;\n}\n.card-img-overlay button[data-v-3f7e9a0e] {\n  z-index: 20;\n}\n@media (min-width: 992px) and (max-width: 1199.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 3;\n            column-count: 3;\n}\n}\n@media (min-width: 1200px) and (max-width: 1599.98px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 4;\n            column-count: 4;\n}\n}\n@media (min-width: 1600px) {\n.card-columns[data-v-3f7e9a0e] {\n    -webkit-column-count: 5;\n            column-count: 5;\n}\n}\n#boardList[data-v-3f7e9a0e] {\n  margin: 50px 0;\n  list-style: none;\n  text-decoration: none;\n  cursor: pointer;\n  -webkit-columns: 100px 3;\n  /* Chrome, Safari, Opera */\n  /* Firefox */\n  columns: 100px 3;\n}\n.row[data-v-3f7e9a0e] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-3f7e9a0e], #edit-art[data-v-3f7e9a0e] {\n  margin-top: 20px;\n}\n.tag-btn[data-v-3f7e9a0e] {\n  margin-right: 10px;\n}\n.modal-body img[data-v-3f7e9a0e] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-3f7e9a0e] {\n  background-color: white;\n}\n.item[data-v-3f7e9a0e] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-3f7e9a0e] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-3f7e9a0e] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-3f7e9a0e]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-3f7e9a0e] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -57150,6 +57150,34 @@ exports.push([module.i, "\n@media (min-width: 992px) and (max-width: 1199.98px) 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue__ = __webpack_require__(553);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Artifact_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Artifact_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57284,200 +57312,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.gallery.forEach(function (artifact) {
                 artifact.hidden = false;
             });
+            $('.no-artifacts').addClass('d-none');
             this.$forceUpdate();
         },
         filterGallery: function filterGallery(tag) {
+            var visibleArtifactCount = 0;
             this.gallery.forEach(function (artifact) {
                 if (!artifact.tags.find(function (art) {
                     return art.tag_id === tag.tag_id;
                 })) {
                     artifact.hidden = true;
                 } else {
+                    visibleArtifactCount++;
                     artifact.hidden = false;
                 }
             });
+            console.log(visibleArtifactCount);
+            if (!visibleArtifactCount) {
+                $('.no-artifacts').removeClass('d-none');
+            } else {
+                $('.no-artifacts').addClass('d-none');
+            }
+
             this.boardTitle = tag.title;
             this.$forceUpdate();
         },
         openArtifact: function openArtifact(modalArtifact) {
             this.$refs.openModal.openModal();
             this.artifactData = modalArtifact;
+        },
+        addTag: function addTag(artifact) {
+            $('#addTagModal').modal();
         }
     }
 });
 
 /***/ }),
 /* 160 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container-fluid", attrs: { id: "gallery" } },
-    [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-12 col-md-12 col-lg-12" }, [
-          _c(
-            "ul",
-            { attrs: { id: "boardList" } },
-            [
-              _c("li", [
-                _c(
-                  "a",
-                  { attrs: { href: "#" }, on: { click: _vm.showAllGallery } },
-                  [_c("b", [_vm._v("Show All")])]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.tags, function(tag, key) {
-                return _c("li", { key: key }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          _vm.filterGallery(tag)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(tag.title) +
-                          "\n                    "
-                      )
-                    ]
-                  )
-                ])
-              })
-            ],
-            2
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-sm-12 col-md-12 col-lg-12" },
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.boardTitle))]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-columns" },
-              _vm._l(_vm.gallery, function(artifact) {
-                return !artifact.hidden
-                  ? _c(
-                      "div",
-                      { key: artifact.artifact_id, staticClass: "card" },
-                      [
-                        _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: { src: artifact.image, alt: artifact.title },
-                          on: {
-                            click: function($event) {
-                              _vm.openArtifact(artifact)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "card-body artifact" },
-                          [
-                            _c(
-                              "h4",
-                              {
-                                staticClass: "card-title",
-                                on: {
-                                  click: function($event) {
-                                    _vm.openArtifact(artifact)
-                                  }
-                                }
-                              },
-                              [_vm._v(_vm._s(artifact.title))]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "card-text",
-                                on: {
-                                  click: function($event) {
-                                    _vm.openArtifact(artifact)
-                                  }
-                                }
-                              },
-                              [_vm._v(_vm._s(artifact.description))]
-                            ),
-                            _vm._v(" "),
-                            _c("button", { staticClass: "btn btn-default" }, [
-                              _vm._v(
-                                "\n                            Add Tag\n                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(artifact.tags, function(tag) {
-                              return _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary tag-btn",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.filterGallery(tag)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(tag.title) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              })
-            ),
-            _vm._v(" "),
-            _c("artifact", {
-              ref: "openModal",
-              attrs: { artifactData: _vm.artifactData, tags: _vm.tags },
-              on: {
-                nextArtifact: _vm.nextArtifact,
-                previousArtifact: _vm.previousArtifact
-              }
-            })
-          ],
-          1
-        )
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3f7e9a0e", module.exports)
-  }
-}
+throw new Error("Module build failed: SyntaxError: Unexpected token (1:2635)\n    at Parser.pp$4.raise (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2610:13)\n    at Parser.pp.unexpected (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:637:8)\n    at Parser.pp$3.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2094:10)\n    at Parser.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:4372:24)\n    at Parser.pp$3.parseExprSubscripts (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1955:19)\n    at Parser.pp$3.parseMaybeUnary (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1932:17)\n    at Parser.pp$3.parseExprOps (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1874:19)\n    at Parser.pp$3.parseMaybeConditional (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1857:19)\n    at Parser.pp$3.parseMaybeAssign (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1832:19)\n    at Parser.pp$3.parsePropertyValue (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2310:87)\n    at Parser.parseObj (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:4472:14)\n    at Parser.pp$3.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2077:17)\n    at Parser.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:4372:24)\n    at Parser.pp$3.parseExprSubscripts (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1955:19)\n    at Parser.pp$3.parseMaybeUnary (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1932:17)\n    at Parser.pp$3.parseExprOps (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1874:19)\n    at Parser.pp$3.parseMaybeConditional (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1857:19)\n    at Parser.pp$3.parseMaybeAssign (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1832:19)\n    at Parser.pp$3.parsePropertyValue (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2310:87)\n    at Parser.parseObj (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:4472:14)\n    at Parser.pp$3.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2077:17)\n    at Parser.parseExprAtom (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:4372:24)\n    at Parser.pp$3.parseExprSubscripts (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1955:19)\n    at Parser.pp$3.parseMaybeUnary (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1932:17)\n    at Parser.pp$3.parseExprOps (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1874:19)\n    at Parser.pp$3.parseMaybeConditional (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1857:19)\n    at Parser.pp$3.parseMaybeAssign (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1832:19)\n    at Parser.pp$3.parseExprList (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:2528:20)\n    at Parser.pp$3.parseSubscripts (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1983:29)\n    at Parser.pp$3.parseExprSubscripts (/Users/matalynt/Sites/spansim/node_modules/vue-template-es2015-compiler/buble.js:1958:21)");
 
 /***/ }),
 /* 161 */

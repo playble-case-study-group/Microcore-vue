@@ -32,22 +32,26 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <h1>{{ boardTitle }}</h1>
                 <hr>
+                <p class="no-artifacts d-none">There are no artifacts with the {{ boardTitle }} tag.</p>
                 <div class="card-columns">
                     <div class="card"
                          v-for="artifact in gallery"
                          v-if="!artifact.hidden"
                          :key="artifact.artifact_id">
-
                         <img class="card-img-top"
                              @click="openArtifact(artifact)"
                              :src="artifact.image"
                              :alt="artifact.title">
+                        <div class="card-img-overlay">
+                            <button class="btn btn-default" @click="addTag(artifact)">
+                                Add Tag
+                            </button>
+                        </div>
+
                         <div class="card-body artifact" >
                             <h4 class="card-title" @click="openArtifact(artifact)">{{ artifact.title }}</h4>
                             <p class="card-text" @click="openArtifact(artifact)">{{ artifact.description}}</p>
-                            <button class="btn btn-default">
-                                Add Tag
-                            </button>
+
                             <button v-for="tag in artifact.tags"
                                     type="button"
                                     @click="filterGallery(tag)"
@@ -68,7 +72,31 @@
             </div>
         </div>
 
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button>
 
+        <!-- Modal -->
+        <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-6">
+                            <img :src="" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-sm-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -130,22 +158,35 @@
             showAllGallery: function () {
                 this.boardTitle = "All Artifacts";
                 this.gallery.forEach( artifact => { artifact.hidden = false });
+                $('.no-artifacts').addClass('d-none');
                 this.$forceUpdate();
             },
             filterGallery: function (tag) {
-                  this.gallery.forEach( artifact => {
-                      if (!artifact.tags.find( art => { return art.tag_id === tag.tag_id })) {
-                          artifact.hidden = true;
-                      } else {
-                          artifact.hidden = false;
-                      }
-                  });
-                  this.boardTitle = tag.title;
+                let visibleArtifactCount = 0;
+                this.gallery.forEach( artifact => {
+                    if (!artifact.tags.find( art => { return art.tag_id === tag.tag_id })) {
+                        artifact.hidden = true;
+                    } else {
+                        visibleArtifactCount++;
+                        artifact.hidden = false;
+                    }
+                });
+                console.log(visibleArtifactCount);
+                if (!visibleArtifactCount) {
+                    $('.no-artifacts').removeClass('d-none');
+                } else {
+                    $('.no-artifacts').addClass('d-none');
+                }
+
+                this.boardTitle = tag.title;
                 this.$forceUpdate();
             },
             openArtifact: function(modalArtifact) {
                 this.$refs.openModal.openModal();
                 this.artifactData = modalArtifact;
+            },
+            addTag: function (artifact) {
+                $('#addTagModal').modal()
             }
         }
     }
@@ -154,6 +195,23 @@
 <style lang="scss" scoped>
     @import "../../../sass/variables";
     @import "../../../sass/mixins/breakpoints";
+
+    .card-img-overlay {
+        display: none;
+        pointer-events:none;
+    }
+
+    .card-img-overlay .btn {
+        pointer-events: auto;
+    }
+
+    .card:hover .card-img-overlay {
+        display: block;
+    }
+
+    .card-img-overlay button {
+        z-index: 20;
+    }
 
     .card-columns {
         @include media-breakpoint-only(lg) {
