@@ -30,6 +30,7 @@ Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
 Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
 Vue.component('editor', require('./components/Library/articleEditor.vue'));
+Vue.component('navigation', require('./components/NavigationLink/navigation.vue'));
 Vue.component('v-select', require('vue-select'));
 
 import store from './vuex/store';
@@ -46,7 +47,9 @@ const app = new Vue({
     methods: mapActions([
         'GET_TASKS',
         'GET_USER',
-        'GET_SIMULATION'
+        'GET_SIMULATION',
+        'RETRIEVE_NEW_EMAILS',
+        'RETRIEVE_NEW_ARTIFACTS'
     ]),
     mounted() {
 
@@ -55,6 +58,8 @@ const app = new Vue({
             this.GET_TASKS();
             this.GET_USER();
             this.GET_SIMULATION();
+            this.RETRIEVE_NEW_EMAILS();
+            this.RETRIEVE_NEW_ARTIFACTS();
         }).catch(error => {
             console.log( error);
         })

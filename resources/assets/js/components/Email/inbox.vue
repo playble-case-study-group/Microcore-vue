@@ -124,20 +124,22 @@
                     //show reply button
                     $('#ReplyEmailId').show();
                 }
-
-                //indicate that an email has been read
+                 //indicate that an email has been read
                 if(!email.read) {
-                    email.read = true;
+
                     axios.post(
                         "/readEmail",
                         {
                             email_id: email.character_email_id
                         })
-                        .then(res => console.log(res))
+                        .then(res => {
+                            email.read = true;
+                            this.$emit('dispatchEmailEvent', email);
+                        })
                         .catch(err => console.log(err))
                 }
-
-                $('#readModal').modal();
+                console.log(email);
+                $('#readModal').modal()
             },
             sendReplyEmail: function (emailId) {
                 this.$emit('sentReply', this.draftEmail, emailId);

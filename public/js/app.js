@@ -33693,6 +33693,7 @@ Vue.component('chatbot', __webpack_require__(343));
 Vue.component('slackbot', __webpack_require__(351));
 Vue.component('classes', __webpack_require__(368));
 Vue.component('editor', __webpack_require__(545));
+Vue.component('navigation', __webpack_require__(555));
 Vue.component('v-select', __webpack_require__(18));
 
 
@@ -33706,7 +33707,7 @@ var app = new Vue({
             user: {}
         };
     },
-    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['GET_TASKS', 'GET_USER', 'GET_SIMULATION']),
+    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['GET_TASKS', 'GET_USER', 'GET_SIMULATION', 'RETRIEVE_NEW_EMAILS', 'RETRIEVE_NEW_ARTIFACTS']),
     mounted: function mounted() {
         var _this = this;
 
@@ -33715,6 +33716,8 @@ var app = new Vue({
             _this.GET_TASKS();
             _this.GET_USER();
             _this.GET_SIMULATION();
+            _this.RETRIEVE_NEW_EMAILS();
+            _this.RETRIEVE_NEW_ARTIFACTS();
         }).catch(function (error) {
             console.log(error);
         });
@@ -57313,7 +57316,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newTagModal: {}
         };
     },
-    mounted: function mounted() {},
+    beforeUpdate: function beforeUpdate() {
+        this.$store.dispatch('CLEAR_GALLERY_NOTIFICATIONS');
+    },
 
     methods: {
         nextArtifact: function nextArtifact() {
@@ -58587,7 +58592,9 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "dash-update" }, [
-              _vm._v(_vm._s(this.dash.message_count) + " Unread Messages")
+              _c("a", { attrs: { href: "#" } }, [
+                _vm._v(_vm._s(this.dash.message_count) + " Unread Messages")
+              ])
             ]),
             _vm._v(" "),
             _c("br"),
@@ -58597,7 +58604,9 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "dash-update" }, [
-              _vm._v(_vm._s(this.dash.email_count) + " Unread Emails")
+              _c("a", { attrs: { href: "/email" } }, [
+                _vm._v(_vm._s(this.dash.email_count) + " Unread Emails")
+              ])
             ])
           ])
         ]),
@@ -58861,6 +58870,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -59003,6 +59013,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             setTimeout(function () {
                 $('#submitFailure').hide();
             }, 2500);
+        },
+        dispatchVuexEvent: function dispatchVuexEvent(email) {
+            console.log('email in parent before dispatch');
+            console.log(email);
+            this.$store.commit('RETRIEVE_NEW_EMAILS');
+            console.log('email in parent after dispatch');
+            console.log(email);
         }
     }
 });
@@ -59215,6 +59232,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         readEmail: function readEmail(email) {
+            var _this = this;
+
             this.resetDraftEmail();
             this.readModalData.id = email.character_email_id;
             this.readModalData.from = email.name;
@@ -59230,23 +59249,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 //show reply button
                 $('#ReplyEmailId').show();
             }
-
             //indicate that an email has been read
             if (!email.read) {
-                email.read = true;
+
                 axios.post("/readEmail", {
                     email_id: email.character_email_id
                 }).then(function (res) {
-                    return console.log(res);
+                    email.read = true;
+                    _this.$emit('dispatchEmailEvent', email);
                 }).catch(function (err) {
                     return console.log(err);
                 });
             }
-
+            console.log(email);
             $('#readModal').modal();
         },
         sendReplyEmail: function sendReplyEmail(emailId) {
-            var _this = this;
+            var _this2 = this;
 
             this.$emit('sentReply', this.draftEmail, emailId);
 
@@ -59261,11 +59280,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             axios.post('/email', formData).then(function (response) {
-                _this.$emit('submitSuccess');
-                _this.resetDraftEmail();
-                _this.$forceUpdate();
+                _this2.$emit('submitSuccess');
+                _this2.resetDraftEmail();
+                _this2.$forceUpdate();
             }).catch(function (err) {
-                return _this.$emit('submitFailure');
+                return _this2.$emit('submitFailure');
             });
             $('#readModal').modal('hide');
             $('#emailAttachment').css('display', 'none');
@@ -60057,7 +60076,8 @@ var render = function() {
                   on: {
                     submitSuccess: _vm.submitSuccess,
                     submitFailure: _vm.submitFailure,
-                    sentReply: _vm.updateSent
+                    sentReply: _vm.updateSent,
+                    dispatchEmailEvent: _vm.dispatchVuexEvent
                   }
                 })
               : _vm._e(),
@@ -91823,6 +91843,7 @@ var state = {
     user: {},
     simulation: {},
     notifications: {
+
         newEmails: 0,
         newArtifacts: 0
     }
@@ -91907,16 +91928,24 @@ var mutations = {
         });
     },
     RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(state) {
-        axios.post('/getemailnotifications').then(function (data) {
-            console.log(data);
-            state.notifications.newEmails = data;
+        axios.post('/getemailnotifications').then(function (response) {
+            console.log(response.data);
+            state.notifications.newEmails = response.data; //this is the problem line
+        }).catch(function (err) {
+            return console.log(err);
         });
     },
     RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(state) {
-        axios.post('/getgallerynotifications').then(function (data) {
-            console.log(data);
-            state.notifications.newArtifacts = data;
+        axios.post('/getgallerynotifications').then(function (response) {
+            console.log(response.data);
+            state.notifications.newArtifacts = response.data;
+        }).catch(function (err) {
+            return console.log(err);
         });
+    },
+    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(state) {
+        state.notifications.newArtifacts = 0;
+        console.log('clear?');
     }
 };
 
@@ -91956,6 +91985,10 @@ var actions = {
     RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(_ref8) {
         var commit = _ref8.commit;
         return commit('RETRIEVE_NEW_ARTIFACTS');
+    },
+    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(_ref9) {
+        var commit = _ref9.commit;
+        return commit('CLEAR_GALLERY_NOTIFICATIONS');
     }
 };
 
@@ -91971,6 +92004,113 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(556)
+/* template */
+var __vue_template__ = __webpack_require__(557)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NavigationLink/navigation.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ecda4c24", Component.options)
+  } else {
+    hotAPI.reload("data-v-ecda4c24", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 556 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        title: String,
+        link: String,
+        notifications: Number
+    }
+});
+
+/***/ }),
+/* 557 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
+    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
+      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
+      _vm.notifications > 0
+        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
+            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ecda4c24", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

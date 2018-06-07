@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use function MongoDB\BSON\toJSON;
 
 class SimulationController extends Controller
 {
@@ -75,6 +77,33 @@ class SimulationController extends Controller
 
 
         return $request->all();
+    }
+
+    public static function getEmailNotifications() {
+
+        $emails = DB::table('character_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->count();
+
+        $read_emails = DB::table('student_read_emails')
+            ->where('day', '<=' ,Auth::user()->current_day)
+            ->where('user_id', Auth::id())
+            ->count();
+
+        $total_unread = $emails - $read_emails;
+
+        return $total_unread;
+    }
+
+    public static function getGalleryNotifications() {
+
+        $artifacts = DB::table('artifacts')
+            ->where('day', '=' ,Auth::user()->current_day)
+            ->count();
+
+        $artifact_count = $artifacts;
+
+        return $artifact_count;
     }
 
 }

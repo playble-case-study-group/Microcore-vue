@@ -10,8 +10,9 @@ const state = {
     user: {},
     simulation: {},
     notifications: {
+
         newEmails: 0,
-        newArtifacts: 0
+        newArtifacts: 0,
     }
 }
 
@@ -92,16 +93,22 @@ const mutations = {
         })
     },
     RETRIEVE_NEW_EMAILS: (state) => {
-        axios.post('/getemailnotifications').then( data => {
-            console.log(data);
-            state.notifications.newEmails = data;
-        })
+        axios.post('/getemailnotifications')
+            .then( response => {
+                console.log(response.data);
+                state.notifications.newEmails = response.data; //this is the problem line
+        }).catch(err =>console.log(err))
     },
     RETRIEVE_NEW_ARTIFACTS: (state) => {
-        axios.post('/getgallerynotifications').then( data => {
-            console.log(data);
-            state.notifications.newArtifacts = data;
-        })
+            axios.post('/getgallerynotifications')
+                .then(response => {
+                    console.log(response.data);
+                    state.notifications.newArtifacts = response.data;
+                }).catch(err => console.log(err))
+    },
+    CLEAR_GALLERY_NOTIFICATIONS: (state) => {
+        state.notifications.newArtifacts = 0;
+        console.log('clear?')
     }
 }
 
@@ -116,7 +123,8 @@ const actions = {
         context.commit('toggleTask', payload)
     },
     RETRIEVE_NEW_EMAILS: ({commit}) => commit('RETRIEVE_NEW_EMAILS'),
-    RETRIEVE_NEW_ARTIFACTS: ({commit}) => commit('RETRIEVE_NEW_ARTIFACTS')
+    RETRIEVE_NEW_ARTIFACTS: ({commit}) => commit('RETRIEVE_NEW_ARTIFACTS'),
+    CLEAR_GALLERY_NOTIFICATIONS: ({commit}) => commit('CLEAR_GALLERY_NOTIFICATIONS')
 }
 
 export default new Vuex.Store({

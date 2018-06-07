@@ -22,10 +22,10 @@
                     <h3 class="dash-heading">Updates</h3>
                     <div class="dash-content dash-content2">
                         <i class="material-icons dash-notify">priority_high</i>
-                        <span class="dash-update">{{ this.dash.message_count }} Unread Messages</span>
+                        <span class="dash-update"><a href="#">{{ this.dash.message_count }} Unread Messages</a></span>
                         <br>
                         <i class="material-icons dash-notify">priority_high</i>
-                        <span class="dash-update">{{ this.dash.email_count }} Unread Emails</span>
+                        <span class="dash-update"><a href="/email">{{ this.dash.email_count }} Unread Emails</a></span>
                     </div>
                 </div>
                 <div class="dash-card dash-big col-sm-10 col-md-7">
