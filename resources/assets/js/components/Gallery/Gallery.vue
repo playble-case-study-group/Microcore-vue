@@ -11,21 +11,6 @@
                         </a >
                     </li>
                 </ul>
-                <!--<div class="dropdown">-->
-                    <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                        <!--Filter-->
-                    <!--</button>-->
-                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-                        <!--<a href="#" class="dropdown-item" @click="showAllGallery">Show All</a>-->
-                        <!--<a v-for="(tag, key) in tags"-->
-                           <!--href="#"-->
-                           <!--class="dropdown-item"-->
-                           <!--@click="filterGallery(tag)"-->
-                           <!--:key="key">-->
-                            <!--{{ tag.title }}-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
             </div>
         </div>
         <div class="row">
@@ -66,20 +51,16 @@
                 <artifact :artifactData="artifactData"
                           :tags="tags"
                           ref="openModal"
+                          @saveArtifactChanges="saveArtifactChanges"
                           @nextArtifact="nextArtifact"
                           @previousArtifact="previousArtifact">
                 </artifact>
             </div>
         </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-        </button>
-
-        <!-- Modal -->
+        <!-- Add Tag Modal -->
         <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -88,7 +69,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-sm-6">
-                            <img :src="" alt="" class="img-fluid">
+                            <img :src="newTagModal.image" alt="" class="img-fluid">
+                            <h4>{{ newTagModal.title }}</h4>
                         </div>
                         <div class="col-sm-6">
 
@@ -128,7 +110,8 @@
                     title: '',
                     description: '',
                     tags: []
-                }
+                },
+                newTagModal: {}
             }
         },
         mounted() {
@@ -186,7 +169,11 @@
                 this.artifactData = modalArtifact;
             },
             addTag: function (artifact) {
+                this.newTagModal = artifact;
                 $('#addTagModal').modal()
+            },
+            saveArtifactChanges: function () {
+                this.$forceUpdate()
             }
         }
     }
@@ -207,10 +194,6 @@
 
     .card:hover .card-img-overlay {
         display: block;
-    }
-
-    .card-img-overlay button {
-        z-index: 20;
     }
 
     .card-columns {
@@ -250,6 +233,11 @@
 
     .tag-btn {
         margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .card-text, .card-title, .card-img-top {
+        cursor: pointer;
     }
 
     .modal-body img {

@@ -27,7 +27,7 @@
                 <li class="nav-item"><a class="nav-link" href="/videocall">Video Call</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="/email">Email
-                        <span class="badge badge-pill badge-danger">{{ $notifications }}</span>
+                        {{--<span class="badge badge-pill badge-danger">{{ $notifications }}</span>--}}
                     </a>
                 </li>
                 <li class="nav-item dropdown">
