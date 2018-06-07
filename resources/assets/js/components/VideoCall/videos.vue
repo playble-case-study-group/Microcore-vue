@@ -52,8 +52,8 @@
             <a href="#" v-else-if="videoMessageInterface || leaveResponse" @click="startStopRecording">
                 <i class="material-icons recording">fiber_manual_record</i>
             </a>
-            <a href="#" v-else @click="changePhoneIcon">
-                <i id="call" class="material-icons">{{this.callIconToggleStatus}}</i>
+            <a href="#" v-else @click="revertToContactsPage">
+                <i id="call" class="material-icons">call_end</i>
             </a>
             <canvas id="visualizer"></canvas>
 
@@ -91,7 +91,6 @@
         data: function () {
             return {
                 videoEl: {},
-                callIconToggleStatus: "call",
                 currentQuestion: {},
                 currentQuestions: [],
                 currentVideo: {},
@@ -187,15 +186,14 @@
                 this.startSelfVideo();
             },
             loadCallVideo: function (person_id) {
-                console.log('load video call fired');
                 this.clickedCharacter = person_id;
-
                 //check if the contact clicked on is active
                 let activeCall = this.calls.find((call) => {
                     if (call.character_id === person_id) {
                         return call;
                     }
                 })
+
                 if (activeCall) {
                     //if active, return the questions associated with them
                     this.videoMessageInterface = false;
@@ -205,6 +203,11 @@
                         }
                     })
                     this.currentVideo = activeCall;
+                    this.currentQuestion = this.currentQuestions.find((question) => {
+                        if (question.first_question) {
+                            return question;
+                        }
+                    })
                 } else {
                     //if not active, leave a message
                     this.leaveMessage();
@@ -216,14 +219,9 @@
                 this.currentQuestion = {};
                 this.currentVideo = {};
             },
-            changePhoneIcon: function () {
-                if (this.callIconToggleStatus === "call") {
-                    this.videoEl.play();
-                    this.callIconToggleStatus = "call_end";
-                } else {
-                    this.videoEl.pause();
-                    this.callIconToggleStatus = "call";
-                }
+            revertToContactsPage: function () {
+                this.videoEl.pause();
+                this.$emit('showContacts');
             },
             askQuestion: function (question) {
                 this.studentResponded = false;

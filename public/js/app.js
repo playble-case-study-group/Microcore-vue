@@ -33651,7 +33651,7 @@ function getValue(val, filterByDate, dateFormat) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(107);
-module.exports = __webpack_require__(551);
+module.exports = __webpack_require__(554);
 
 
 /***/ }),
@@ -33660,7 +33660,7 @@ module.exports = __webpack_require__(551);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(550);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(553);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 
 /**
@@ -33693,7 +33693,7 @@ Vue.component('chatbot', __webpack_require__(343));
 Vue.component('slackbot', __webpack_require__(351));
 Vue.component('classes', __webpack_require__(368));
 Vue.component('editor', __webpack_require__(545));
-Vue.component('navigation', __webpack_require__(555));
+Vue.component('navigation', __webpack_require__(550));
 Vue.component('v-select', __webpack_require__(18));
 
 
@@ -60777,6 +60777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -60824,6 +60825,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         alertSaveFailure: function alertSaveFailure() {
             this.$emit('alertFailure');
+        },
+        showContacts: function showContacts() {
+            this.clickedCharacter = 0;
         }
     }
 });
@@ -61025,7 +61029,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             videoEl: {},
-            callIconToggleStatus: "call",
             currentQuestion: {},
             currentQuestions: [],
             currentVideo: {},
@@ -61123,15 +61126,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.startSelfVideo();
         },
         loadCallVideo: function loadCallVideo(person_id) {
-            console.log('load video call fired');
             this.clickedCharacter = person_id;
-
             //check if the contact clicked on is active
             var activeCall = this.calls.find(function (call) {
                 if (call.character_id === person_id) {
                     return call;
                 }
             });
+
             if (activeCall) {
                 //if active, return the questions associated with them
                 this.videoMessageInterface = false;
@@ -61141,6 +61143,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
                 this.currentVideo = activeCall;
+                this.currentQuestion = this.currentQuestions.find(function (question) {
+                    if (question.first_question) {
+                        return question;
+                    }
+                });
             } else {
                 //if not active, leave a message
                 this.leaveMessage();
@@ -61152,14 +61159,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentQuestion = {};
             this.currentVideo = {};
         },
-        changePhoneIcon: function changePhoneIcon() {
-            if (this.callIconToggleStatus === "call") {
-                this.videoEl.play();
-                this.callIconToggleStatus = "call_end";
-            } else {
-                this.videoEl.pause();
-                this.callIconToggleStatus = "call";
-            }
+        revertToContactsPage: function revertToContactsPage() {
+            this.videoEl.pause();
+            this.$emit('showContacts');
         },
         askQuestion: function askQuestion(question) {
             this.studentResponded = false;
@@ -62224,12 +62226,15 @@ var render = function() {
               )
             : _c(
                 "a",
-                { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } },
+                {
+                  attrs: { href: "#" },
+                  on: { click: _vm.revertToContactsPage }
+                },
                 [
                   _c(
                     "i",
                     { staticClass: "material-icons", attrs: { id: "call" } },
-                    [_vm._v(_vm._s(this.callIconToggleStatus))]
+                    [_vm._v("call_end")]
                   )
                 ]
               ),
@@ -62365,7 +62370,8 @@ var render = function() {
             },
             on: {
               alertSuccess: _vm.alertSaveSuccess,
-              alertFailure: _vm.alertSaveFailure
+              alertFailure: _vm.alertSaveFailure,
+              showContacts: _vm.showContacts
             }
           })
     ],
@@ -62386,7 +62392,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { attrs: { id: "call" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("call")])
+      _c("i", { staticClass: "material-icons" }, [_vm._v("videocam")])
     ])
   }
 ]
@@ -91827,6 +91833,110 @@ if (false) {
 
 /***/ }),
 /* 550 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(551)
+/* template */
+var __vue_template__ = __webpack_require__(552)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NavigationLink/navigation.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ecda4c24", Component.options)
+  } else {
+    hotAPI.reload("data-v-ecda4c24", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 551 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        title: String,
+        link: String,
+        notifications: Number
+    }
+});
+
+/***/ }),
+/* 552 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
+    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
+      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
+      _vm.notifications > 0
+        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
+            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ecda4c24", module.exports)
+  }
+}
+
+/***/ }),
+/* 553 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92000,117 +92110,10 @@ var actions = {
 }));
 
 /***/ }),
-/* 551 */
+/* 554 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(556)
-/* template */
-var __vue_template__ = __webpack_require__(557)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/NavigationLink/navigation.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ecda4c24", Component.options)
-  } else {
-    hotAPI.reload("data-v-ecda4c24", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 556 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        title: String,
-        link: String,
-        notifications: Number
-    }
-});
-
-/***/ }),
-/* 557 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
-    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
-      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
-      _vm.notifications > 0
-        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
-            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
-          ])
-        : _vm._e()
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ecda4c24", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
