@@ -43,6 +43,7 @@
                             @submitSuccess="submitSuccess"
                             @submitFailure="submitFailure"
                             @sentReply="updateSent"
+                            @dispatchEmailEvent="dispatchVuexEvent"
                             :characterEmails="characterEmails"
                             :characters="characters"
                             :studentEmails="studentEmails">
@@ -181,7 +182,7 @@
                 formData.append('reply', this.draftEmail.reply);
                 formData.append('subject', this.draftEmail.subject);
                 formData.append('body', this.draftEmail.body)
-                if(this.draftEmail.attachment != null) {
+                if (this.draftEmail.attachment != null) {
                     formData.append('attachment', this.draftEmail.attachment);
                 }
 
@@ -196,7 +197,7 @@
                 }).catch(err => this.submitFailure());
                 $('#composeModal').modal('hide');
             },
-            updateSent: function(draft, emailId) {
+            updateSent: function (draft, emailId) {
 
                 //update studentEmails to reflt the reply
                 let appScope = this;
@@ -217,23 +218,29 @@
             setAttachment: function () {
                 this.draftEmail.attachment = this.$refs.file.files[0];
             },
-            submitSuccess: function() {
+            submitSuccess: function () {
                 $('#submitFailure').hide();
                 $('#submitSuccess').show();
                 $('#submitSuccess').removeClass("hidden");
                 $('#submitSuccess').alert();
-                setTimeout(function(){
+                setTimeout(function () {
                     $('#submitSuccess').addClass("hidden");
                 }, 2500);
             },
-            submitFailure: function() {
+            submitFailure: function () {
                 $('#submitSuccess').hide();
                 $('#submitFailure').show();
                 $('#submitFailure').alert();
-                setTimeout( function()
-                {
+                setTimeout(function () {
                     $('#submitFailure').hide();
                 }, 2500);
+            },
+            dispatchVuexEvent: function (email) {
+                console.log('email in parent before dispatch')
+                console.log(email)
+                this.$store.commit('RETRIEVE_NEW_EMAILS');
+                console.log('email in parent after dispatch')
+                console.log(email)
             }
         }
     }

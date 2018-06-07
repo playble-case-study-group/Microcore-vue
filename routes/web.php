@@ -48,7 +48,7 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     });
     Route::post( '/resetDay', 'SimulationController@resetDay' );
     Route::post('/getemailnotifications', 'SimulationController@getEmailNotifications');
-    Route::post('/getgallerynotifications', 'SimulationController@getGaleryNotifications');
+    Route::post('/getgallerynotifications', 'SimulationController@getGalleryNotifications');
 
 
 // Tasks

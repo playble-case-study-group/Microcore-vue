@@ -47,7 +47,9 @@ const app = new Vue({
     methods: mapActions([
         'GET_TASKS',
         'GET_USER',
-        'GET_SIMULATION'
+        'GET_SIMULATION',
+        'RETRIEVE_NEW_EMAILS',
+        'RETRIEVE_NEW_ARTIFACTS'
     ]),
     mounted() {
 
@@ -56,6 +58,8 @@ const app = new Vue({
             this.GET_TASKS();
             this.GET_USER();
             this.GET_SIMULATION();
+            this.RETRIEVE_NEW_EMAILS();
+            this.RETRIEVE_NEW_ARTIFACTS();
         }).catch(error => {
             console.log( error);
         })

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use function MongoDB\BSON\toJSON;
 
 class SimulationController extends Controller
 {
@@ -99,8 +101,9 @@ class SimulationController extends Controller
             ->where('day', '=' ,Auth::user()->current_day)
             ->count();
 
+        $artifact_count = $artifacts;
 
-        return $artifacts;
+        return $artifact_count;
     }
 
 }

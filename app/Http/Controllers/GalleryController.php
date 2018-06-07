@@ -16,7 +16,7 @@ class GalleryController extends Controller
     public function index()
     {
         $gallery = DB::table('artifacts')
-            ->where('release_day', '<=' ,Auth::user()->current_day)
+            ->where('day', '<=' ,Auth::user()->current_day)
             ->get();
 
 

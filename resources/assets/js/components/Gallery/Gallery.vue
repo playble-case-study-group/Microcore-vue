@@ -103,8 +103,8 @@
                 }
             }
         },
-        mounted() {
-
+        beforeUpdate() {
+            this.$store.dispatch('CLEAR_GALLERY_NOTIFICATIONS');
         },
         methods: {
             nextArtifact: function () {
