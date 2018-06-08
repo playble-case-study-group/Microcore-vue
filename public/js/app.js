@@ -33662,6 +33662,7 @@ module.exports = __webpack_require__(554);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__vuex_store__ = __webpack_require__(553);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -33708,6 +33709,7 @@ var app = new Vue({
         };
     },
     methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['GET_TASKS', 'GET_USER', 'GET_SIMULATION', 'RETRIEVE_NEW_EMAILS', 'RETRIEVE_NEW_ARTIFACTS']),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['GET_TASKS'])),
     mounted: function mounted() {
         var _this = this;
 
@@ -56289,6 +56291,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -56301,6 +56308,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         'user-tasks': __WEBPACK_IMPORTED_MODULE_1__Tasks_vue___default.a,
         'counter': __WEBPACK_IMPORTED_MODULE_2__Counter_vue___default.a
     },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(['DAY_TASKS_COMPLETE'])),
     props: ['user'],
     data: function data() {
         return {
@@ -57012,7 +57020,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-invert",
-              attrs: { type: "button" },
+              attrs: { type: "button", disabled: !_vm.DAY_TASKS_COMPLETE },
               on: {
                 click: function($event) {
                   _vm.NEXT_DAY()
@@ -57020,7 +57028,7 @@ var render = function() {
               }
             },
             [
-              _vm._v("NEXT DAY "),
+              _vm._v("\n                NEXT DAY "),
               _c("i", { staticClass: "material-icons" }, [
                 _vm._v("keyboard_arrow_right")
               ])
@@ -91854,14 +91862,17 @@ var getters = {
         });
     },
     DAY_TASKS_COMPLETE: function DAY_TASKS_COMPLETE(state) {
-        console.log(state.tasks);
         var tasks = state.tasks.filter(function (task) {
             return task.day === state.user.current_day;
         });
-        console.log(tasks);
-        tasks.filter(function (task) {
+        tasks = tasks.filter(function (task) {
             return task.complete == false;
         });
+        if (tasks.length) {
+            return false;
+        } else {
+            return true;
+        }
     },
     TASKS_BY_DAY: function TASKS_BY_DAY(state) {
         return _.groupBy(state.tasks, 'day');
@@ -91869,6 +91880,7 @@ var getters = {
     CURRENT_DAY: function CURRENT_DAY(state) {
         return state.user.current_day;
     }
+
 };
 
 var mutations = {
@@ -91879,13 +91891,12 @@ var mutations = {
             state.simulation = response.data[0];
         });
     },
-
     // Retrieves tasks from database when the application loads
     // See app.js mounted for call
-    GET_TASKS: function GET_TASKS(state) {
-        axios.get('/tasks').then(function (response) {
-            state.tasks = response.data;
-        });
+    GET_TASKS: function GET_TASKS(state, tasks) {
+        // axios.get('/tasks').then(response => {
+        state.tasks = tasks;
+        // });
     },
 
     // Retrieves user from database when appliction loads.
@@ -91960,7 +91971,12 @@ var actions = {
     },
     GET_TASKS: function GET_TASKS(_ref2) {
         var commit = _ref2.commit;
-        return commit('GET_TASKS');
+
+        axios.get('/tasks').then(function (r) {
+            return r.data;
+        }).then(function (tasks) {
+            commit('GET_TASKS', tasks);
+        });
     },
     GET_USER: function GET_USER(_ref3) {
         var commit = _ref3.commit;

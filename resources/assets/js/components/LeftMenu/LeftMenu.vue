@@ -8,7 +8,12 @@
             </user-tasks>
             <div id="next-day">
                 <button type="button" class="btn btn-invert" data-toggle="modal" data-target="#exampleModal"><i class="material-icons">keyboard_arrow_left</i></button>
-                <button type="button" class="btn btn-invert" v-on:click="NEXT_DAY()">NEXT DAY <i class="material-icons">keyboard_arrow_right</i></button>
+                <button type="button"
+                        class="btn btn-invert"
+                        :disabled="!DAY_TASKS_COMPLETE"
+                        @click="NEXT_DAY()">
+                    NEXT DAY <i class="material-icons">keyboard_arrow_right</i>
+                </button>
             </div>
             <br>
             <br>
@@ -44,13 +49,18 @@
     import Progress from './Progress.vue';
     import Tasks from './Tasks.vue';
     import Counter from '../Counter.vue';
-    import {mapActions} from 'vuex';
+    import {mapActions, mapGetters} from 'vuex';
 
     export default {
         components: {
             'user-progress': Progress,
             'user-tasks': Tasks,
             'counter': Counter
+        },
+        computed: {
+            ...mapGetters([
+                'DAY_TASKS_COMPLETE'
+            ])
         },
         props: ['user'],
         data: function () {

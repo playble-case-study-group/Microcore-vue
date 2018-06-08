@@ -34,7 +34,7 @@ Vue.component('navigation', require('./components/NavigationLink/navigation.vue'
 Vue.component('v-select', require('vue-select'));
 
 import store from './vuex/store';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 const app = new Vue({
     el: '#app',
@@ -51,6 +51,11 @@ const app = new Vue({
         'RETRIEVE_NEW_EMAILS',
         'RETRIEVE_NEW_ARTIFACTS'
     ]),
+    computed: {
+        ...mapGetters([
+            'GET_TASKS'
+        ])
+    },
     mounted() {
 
         // When the program loads we are going to get the user object and all tasks.  See store.js
