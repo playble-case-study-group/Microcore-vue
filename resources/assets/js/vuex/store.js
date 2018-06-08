@@ -22,17 +22,21 @@ const getters = {
         return state.tasks.filter(task => task.day === state.user.current_day);
     },
     DAY_TASKS_COMPLETE: (state) => {
-        console.log(state.tasks);
         let tasks = state.tasks.filter(task => task.day === state.user.current_day);
-        console.log(tasks);
-        tasks.filter(task => task.complete == false);
+        tasks = tasks.filter(task => task.complete == false);
+        if (tasks.length) {
+            return false;
+        } else {
+            return true;
+        }
     },
     TASKS_BY_DAY: (state) => {
         return _.groupBy(state.tasks, 'day');
     },
     CURRENT_DAY: (state) => {
         return state.user.current_day;
-    }
+    },
+
 }
 
 const mutations = {
@@ -43,13 +47,12 @@ const mutations = {
             state.simulation = response.data[0];
         })
     },
-
-    // Retrieves tasks from database when the application loads
+// Retrieves tasks from database when the application loads
     // See app.js mounted for call
-    GET_TASKS: (state) => {
-        axios.get('/tasks').then(response => {
-            state.tasks = response.data;
-        });
+    GET_TASKS: (state, tasks) => {
+        // axios.get('/tasks').then(response => {
+            state.tasks = tasks;
+        // });
     },
 
     // Retrieves user from database when appliction loads.
@@ -120,7 +123,13 @@ const mutations = {
 
 const actions = {
     GET_SIMULATION: ({commit}) => commit('GET_SIMULATION'),
-    GET_TASKS: ({commit}) => commit('GET_TASKS'),
+    GET_TASKS: ({commit}) => {
+        axios.get('/tasks')
+            .then(r => r.data)
+            .then(tasks => {
+                commit('GET_TASKS', tasks)
+            });
+    },
     GET_USER: ({commit}) => commit('GET_USER'),
     GET_NOTES: ({commit}) => commit('GET_NOTES'),
     NEXT_DAY: ({commit}) => commit('NEXT_DAY'),
