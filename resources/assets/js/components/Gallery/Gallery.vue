@@ -28,9 +28,10 @@
                              :src="artifact.image"
                              :alt="artifact.title">
                         <div class="card-img-overlay">
-                            <button class="btn btn-default" @click="addTag(artifact)">
+                            <button class="btn btn-default" @click="openArtifact(artifact)">
                                 Add Tag
                             </button>
+                            <!--<v-select v-model="newTag" label="title" :options="tags" :placeholder="'Add Tag'"></v-select>-->
                         </div>
 
                         <div class="card-body artifact" >
@@ -55,28 +56,6 @@
                           @nextArtifact="nextArtifact"
                           @previousArtifact="previousArtifact">
                 </artifact>
-            </div>
-        </div>
-
-        <!-- Add Tag Modal -->
-        <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-sm-6">
-                            <img :src="newTagModal.image" alt="" class="img-fluid">
-                            <h4>{{ newTagModal.title }}</h4>
-                        </div>
-                        <div class="col-sm-6">
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

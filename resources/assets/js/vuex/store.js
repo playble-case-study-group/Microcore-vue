@@ -21,6 +21,12 @@ const getters = {
         // console.log("TASKS: ", state.tasks.filter(task => task.day === state.user.current_day));
         return state.tasks.filter(task => task.day === state.user.current_day);
     },
+    DAY_TASKS_COMPLETE: (state) => {
+        console.log(state.tasks);
+        let tasks = state.tasks.filter(task => task.day === state.user.current_day);
+        console.log(tasks);
+        tasks.filter(task => task.complete == false);
+    },
     TASKS_BY_DAY: (state) => {
         return _.groupBy(state.tasks, 'day');
     },
@@ -95,20 +101,17 @@ const mutations = {
     RETRIEVE_NEW_EMAILS: (state) => {
         axios.post('/getemailnotifications')
             .then( response => {
-                console.log(response.data);
                 state.notifications.newEmails = response.data; //this is the problem line
         }).catch(err =>console.log(err))
     },
     RETRIEVE_NEW_ARTIFACTS: (state) => {
             axios.post('/getgallerynotifications')
                 .then(response => {
-                    console.log(response.data);
                     state.notifications.newArtifacts = response.data;
                 }).catch(err => console.log(err))
     },
     CLEAR_GALLERY_NOTIFICATIONS: (state) => {
         state.notifications.newArtifacts = 0;
-        console.log('clear?')
     }
 }
 

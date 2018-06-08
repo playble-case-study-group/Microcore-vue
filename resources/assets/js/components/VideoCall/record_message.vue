@@ -10,16 +10,16 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Save Message?</h5>
+                        <h5 class="modal-title">Send Message?</h5>
                     </div>
                     <div class="modal-body">
-                        <p>Would you like to save your recorded message?</p>
+                        <p>Would you like to send your recorded message?</p>
                     </div>
                     <div class="modal-footer">
                         <button
                                 @click="saveVideoMessage(blob,href)"
                                 type="button"
-                                class="videoOptions btn btn-primary">Save Message</button>
+                                class="videoOptions btn btn-primary">Send Message</button>
                         <button
                                 @click="clearVideoMessage"
                                 type="button"
