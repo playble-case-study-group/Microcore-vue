@@ -272,6 +272,11 @@
         display: flex;
         justify-content: space-between;
     }
+    .close {
+        color: #fff;
+        line-height: 0;
+        margin-top: -15px;
+    }
 
     @media(min-width: 1024px){
         .truncate {

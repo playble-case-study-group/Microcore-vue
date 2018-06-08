@@ -13,6 +13,7 @@
             <!--video recording component, hidden until click on inactive character-->
             <video-message
                     v-if="videoMessageInterface"
+                    @showContacts="revertToContactsPage"
                     @saveSuccess="saveSuccess"
                     @saveFailure="saveFailure"
                     :recording="recording"
@@ -199,7 +200,9 @@
                 this.currentVideo = {};
             },
             revertToContactsPage: function () {
-                this.videoEl.pause();
+                if(!this.videoMessageInterface) {
+                    this.videoEl.pause();
+                }
                 this.$emit('showContacts');
             },
             askQuestion: function (question) {

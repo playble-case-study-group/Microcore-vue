@@ -20,7 +20,7 @@
                     <span class="characterPosition">{{ person.role }}</span>
                 </div>
                 <span id="call">
-                    <i class="material-icons">videocam</i>
+                    <i class="videocam material-icons">videocam</i>
                 </span>
             </div>
         </div>
@@ -93,9 +93,15 @@
 </script>
 
 <style scoped>
+    h3 {
+        padding: 10px;
+    }
     img {
         align-self: center;
         position: relative;
+    }
+    .videocam {
+        color: grey;
     }
     .contact-list {
         background-color: white;

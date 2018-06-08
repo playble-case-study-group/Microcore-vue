@@ -97,13 +97,36 @@ class SimulationController extends Controller
 
     public static function getGalleryNotifications() {
 
-        $artifacts = DB::table('artifacts')
+        $visited_gallery = DB::table('student_visited_gallery')
             ->where('day', '=' ,Auth::user()->current_day)
+            ->where('user_id', Auth::id())
             ->count();
 
-        $artifact_count = $artifacts;
+        $artifact_count = 0;
+
+        if($visited_gallery == 0) {
+            $artifacts = DB::table('artifacts')
+                ->where('day', '=' ,Auth::user()->current_day)
+                ->count();
+            $artifact_count = $artifacts;
+        }
 
         return $artifact_count;
+    }
+
+    public static function visitedGallery(Request $request) {
+
+        $visited_gallery = DB::table('student_visited_gallery')
+            ->where('day', '=' ,Auth::user()->current_day)
+            ->where('user_id', Auth::id())
+            ->count();
+
+        if($visited_gallery == 0) {
+            DB::table('student_visited_gallery')
+                ->insert(['user_id' => Auth::id(), 'day' => Auth::user()->current_day]);
+
+        }
+        return $request->all();
     }
 
 }
