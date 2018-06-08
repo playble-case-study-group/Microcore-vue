@@ -21,31 +21,11 @@
             </video-message>
         </div>
 
+        <!--toolbar buttons-->
         <div id="controlBar">
+            <!-- blank icon to balance toolbar-->
+            <i id="phonebook" class="material-icons"></i>
 
-            <!--dropup module for contacts-->
-            <div class="dropup">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i id="phonebook" class="material-icons">people</i>
-                </a>
-                <div id="contacts" class="dropdown-menu">
-                    <div class="contact-inner dropdown-item"
-                         v-for="person in characters"
-                         :key="person.character_id"
-                         @click="loadCallVideo(person.character_id)">
-                        <img class="characterImage" :src="person.img_small">
-                        <div class="characterInfo">
-                            <span class="characterName">{{ person.name }}</span><br>
-                            <span class="characterPosition">{{ person.role }}</span>
-                        </div>
-                        <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
-                            <i class="material-icons activeIcon">fiber_manual_record</i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!--toolbar buttons-->
             <a href="#" v-if="recording" @click="startStopRecording">
                 <i class="material-icons recording">stop</i>
             </a>
@@ -56,7 +36,6 @@
                 <i id="call" class="material-icons">call_end</i>
             </a>
             <canvas id="visualizer"></canvas>
-
         </div>
 
         <!--show character questions-->
