@@ -60991,27 +60991,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -62156,53 +62135,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { attrs: { id: "controlBar" } }, [
-        _c("div", { staticClass: "dropup" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "contacts" } },
-            _vm._l(_vm.characters, function(person) {
-              return _c(
-                "div",
-                {
-                  key: person.character_id,
-                  staticClass: "contact-inner dropdown-item",
-                  on: {
-                    click: function($event) {
-                      _vm.loadCallVideo(person.character_id)
-                    }
-                  }
-                },
-                [
-                  _c("img", {
-                    staticClass: "characterImage",
-                    attrs: { src: person.img_small }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "characterInfo" }, [
-                    _c("span", { staticClass: "characterName" }, [
-                      _vm._v(_vm._s(person.name))
-                    ]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "characterPosition" }, [
-                      _vm._v(_vm._s(person.role))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm.activeContacts.includes(person.character_id)
-                    ? _c("span", { staticClass: "characterActive" }, [
-                        _c("i", { staticClass: "material-icons activeIcon" }, [
-                          _vm._v("fiber_manual_record")
-                        ])
-                      ])
-                    : _vm._e()
-                ]
-              )
-            })
-          )
-        ]),
+        _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }),
         _vm._v(" "),
         _vm.recording
           ? _c(
@@ -62260,30 +62193,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle",
-        attrs: {
-          href: "#",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }, [
-          _vm._v("people")
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
