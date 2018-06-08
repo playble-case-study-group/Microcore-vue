@@ -81,13 +81,16 @@ class SimulationController extends Controller
 
     public static function getEmailNotifications() {
 
+        $current_day = Auth::user()->current_day;
+        $user_id = Auth::id();
+
         $emails = DB::table('character_emails')
-            ->where('day', '<=' ,Auth::user()->current_day)
+            ->where('day', '<=', $current_day)
             ->count();
 
         $read_emails = DB::table('student_read_emails')
-            ->where('day', '<=' ,Auth::user()->current_day)
-            ->where('user_id', Auth::id())
+            ->where('day', '<=', $current_day)
+            ->where('user_id', $user_id)
             ->count();
 
         $total_unread = $emails - $read_emails;

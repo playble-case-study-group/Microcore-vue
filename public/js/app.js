@@ -58854,11 +58854,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, 2500);
         },
         dispatchVuexEvent: function dispatchVuexEvent(email) {
-            console.log('email in parent before dispatch');
-            console.log(email);
-            this.$store.commit('RETRIEVE_NEW_EMAILS');
-            console.log('email in parent after dispatch');
-            console.log(email);
+            var appScope = this;
+            setTimeout(function () {
+                appScope.$store.dispatch('RETRIEVE_NEW_EMAILS');
+            }, 5000);
         }
     }
 });
@@ -91845,12 +91844,8 @@ var mutations = {
             console.log(error.response.data);
         });
     },
-    RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(state) {
-        axios.post('/getemailnotifications').then(function (response) {
-            state.notifications.newEmails = response.data; //this is the problem line
-        }).catch(function (err) {
-            return console.log(err);
-        });
+    RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(state, amount) {
+        state.notifications.newEmails = amount; //this is the problem line
     },
     RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(state) {
         axios.post('/getgallerynotifications').then(function (response) {
@@ -91904,7 +91899,14 @@ var actions = {
 
     RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(_ref7) {
         var commit = _ref7.commit;
-        return commit('RETRIEVE_NEW_EMAILS');
+
+        axios.post('/getemailnotifications').then(function (response) {
+            return response.data;
+        }).then(function (res) {
+            return commit('RETRIEVE_NEW_EMAILS', res);
+        }).catch(function (err) {
+            return console.log(err);
+        });
     },
     RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(_ref8) {
         var commit = _ref8.commit;

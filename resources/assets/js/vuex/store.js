@@ -101,11 +101,8 @@ const mutations = {
                 console.log(error.response.data)
         })
     },
-    RETRIEVE_NEW_EMAILS: (state) => {
-        axios.post('/getemailnotifications')
-            .then( response => {
-                state.notifications.newEmails = response.data; //this is the problem line
-        }).catch(err =>console.log(err))
+    RETRIEVE_NEW_EMAILS: (state, amount) => {
+        state.notifications.newEmails = amount; //this is the problem line
     },
     RETRIEVE_NEW_ARTIFACTS: (state) => {
             axios.post('/getgallerynotifications')
@@ -137,7 +134,12 @@ const actions = {
     toggleTask(context, payload) {
         context.commit('toggleTask', payload)
     },
-    RETRIEVE_NEW_EMAILS: ({commit}) => commit('RETRIEVE_NEW_EMAILS'),
+    RETRIEVE_NEW_EMAILS: ({commit}) => {
+        axios.post('/getemailnotifications')
+            .then( response => response.data)
+            .then( res => commit('RETRIEVE_NEW_EMAILS', res))
+            .catch(err =>console.log(err))
+    },
     RETRIEVE_NEW_ARTIFACTS: ({commit}) => commit('RETRIEVE_NEW_ARTIFACTS'),
     CLEAR_GALLERY_NOTIFICATIONS: ({commit}) => commit('CLEAR_GALLERY_NOTIFICATIONS')
 }
