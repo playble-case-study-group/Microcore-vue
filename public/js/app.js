@@ -60664,6 +60664,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -60711,6 +60712,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         alertSaveFailure: function alertSaveFailure() {
             this.$emit('alertFailure');
+        },
+        showContacts: function showContacts() {
+            this.clickedCharacter = 0;
         }
     }
 });
@@ -60912,7 +60916,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             videoEl: {},
-            callIconToggleStatus: "call",
             currentQuestion: {},
             currentQuestions: [],
             currentVideo: {},
@@ -61010,15 +61013,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.startSelfVideo();
         },
         loadCallVideo: function loadCallVideo(person_id) {
-            console.log('load video call fired');
             this.clickedCharacter = person_id;
-
             //check if the contact clicked on is active
             var activeCall = this.calls.find(function (call) {
                 if (call.character_id === person_id) {
                     return call;
                 }
             });
+
             if (activeCall) {
                 //if active, return the questions associated with them
                 this.videoMessageInterface = false;
@@ -61028,6 +61030,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
                 this.currentVideo = activeCall;
+                this.currentQuestion = this.currentQuestions.find(function (question) {
+                    if (question.first_question) {
+                        return question;
+                    }
+                });
             } else {
                 //if not active, leave a message
                 this.leaveMessage();
@@ -61039,14 +61046,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentQuestion = {};
             this.currentVideo = {};
         },
-        changePhoneIcon: function changePhoneIcon() {
-            if (this.callIconToggleStatus === "call") {
-                this.videoEl.play();
-                this.callIconToggleStatus = "call_end";
-            } else {
-                this.videoEl.pause();
-                this.callIconToggleStatus = "call";
-            }
+        revertToContactsPage: function revertToContactsPage() {
+            this.videoEl.pause();
+            this.$emit('showContacts');
         },
         askQuestion: function askQuestion(question) {
             this.studentResponded = false;
@@ -62111,12 +62113,15 @@ var render = function() {
               )
             : _c(
                 "a",
-                { attrs: { href: "#" }, on: { click: _vm.changePhoneIcon } },
+                {
+                  attrs: { href: "#" },
+                  on: { click: _vm.revertToContactsPage }
+                },
                 [
                   _c(
                     "i",
                     { staticClass: "material-icons", attrs: { id: "call" } },
-                    [_vm._v(_vm._s(this.callIconToggleStatus))]
+                    [_vm._v("call_end")]
                   )
                 ]
               ),
@@ -62252,7 +62257,8 @@ var render = function() {
             },
             on: {
               alertSuccess: _vm.alertSaveSuccess,
-              alertFailure: _vm.alertSaveFailure
+              alertFailure: _vm.alertSaveFailure,
+              showContacts: _vm.showContacts
             }
           })
     ],
@@ -62273,7 +62279,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { attrs: { id: "call" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("call")])
+      _c("i", { staticClass: "material-icons" }, [_vm._v("videocam")])
     ])
   }
 ]

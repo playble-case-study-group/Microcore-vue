@@ -20,7 +20,7 @@
                     <span class="characterPosition">{{ person.role }}</span>
                 </div>
                 <span id="call">
-                    <i class="material-icons">call</i>
+                    <i class="material-icons">videocam</i>
                 </span>
             </div>
         </div>
@@ -29,6 +29,7 @@
                          v-else
                          @alertSuccess="alertSaveSuccess"
                          @alertFailure="alertSaveFailure"
+                         @showContacts="showContacts"
                          :clickedCharacter="this.clickedCharacter"
                          :characters="this.characters"
                          :calls="this.calls"
@@ -83,6 +84,9 @@
             },
             alertSaveFailure: function() {
                 this.$emit('alertFailure');
+            },
+            showContacts: function() {
+                this.clickedCharacter = 0;
             }
         }
     }
