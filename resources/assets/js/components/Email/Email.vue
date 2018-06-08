@@ -236,11 +236,8 @@
                 }, 2500);
             },
             dispatchVuexEvent: function (email) {
-                console.log('email in parent before dispatch')
-                console.log(email)
-                this.$store.commit('RETRIEVE_NEW_EMAILS');
-                console.log('email in parent after dispatch')
-                console.log(email)
+                this.$store.commit('SET_NEW_EMAILS');
+                this.$forceUpdate();
             }
         }
     }

@@ -89,7 +89,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     public function complete(Request $request) {
@@ -107,11 +107,12 @@ class TasksController extends Controller
                     ['task_id', $request->id],
                     ['student_id', Auth::id()]
                 ])
-                ->update(['complete' => $request->complete, 'updated_at' => DB::raw('NOW()')]);
+                ->update(['complete' => !($task->complete), 'updated_at' => DB::raw('NOW()')]);
         } else {
             DB::table('student_tasks')
                 ->insert([
                     'task_id' => $request->id,
+                    'complete' => 1,
                     'student_id' => Auth::id(),
                     'created_at' => DB::raw('NOW()')
                 ]);

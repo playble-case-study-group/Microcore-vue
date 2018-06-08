@@ -45,11 +45,11 @@ const app = new Vue({
         }
     },
     methods: mapActions([
-        'GET_TASKS',
-        'GET_USER',
-        'GET_SIMULATION',
-        'RETRIEVE_NEW_EMAILS',
-        'RETRIEVE_NEW_ARTIFACTS'
+        'SET_TASKS',
+        'SET_USER',
+        'SET_SIMULATION',
+        'SET_NEW_EMAILS',
+        'SET_NEW_ARTIFACTS'
     ]),
     computed: {
         ...mapGetters([
@@ -60,11 +60,11 @@ const app = new Vue({
 
         // When the program loads we are going to get the user object and all tasks.  See store.js
         axios.get('/user').then( response => {
-            this.GET_TASKS();
-            this.GET_USER();
-            this.GET_SIMULATION();
-            this.RETRIEVE_NEW_EMAILS();
-            this.RETRIEVE_NEW_ARTIFACTS();
+            this.SET_TASKS();
+            this.SET_USER();
+            this.SET_SIMULATION();
+            this.SET_NEW_EMAILS();
+            this.SET_NEW_ARTIFACTS();
         }).catch(error => {
             console.log( error);
         })

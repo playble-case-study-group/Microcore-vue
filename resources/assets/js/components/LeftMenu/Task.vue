@@ -3,7 +3,7 @@
         <label>
             <input v-if="complete" type="checkbox" checked >
             <input v-else type="checkbox">
-            <span class="checkmark" v-on:click="toggleTask(task.task_id)"></span>
+            <span class="checkmark" v-on:click="TOGGLE_TASK(task.task_id)"></span>
             <span class="navigation" v-on:click="navigateToComponent(task)">{{ task.title }}</span>
 
             <a href="#" data-container="body" data-toggle="popover" data-placement="right" :data-content="task.description">
@@ -28,7 +28,7 @@
         },
         methods: {
             ... mapActions([
-                'toggleTask'
+                'TOGGLE_TASK'
             ]),
             navigateToComponent: function(task){
                 window.location.href = task.component_link;
