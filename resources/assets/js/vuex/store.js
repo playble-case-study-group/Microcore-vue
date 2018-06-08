@@ -114,7 +114,10 @@ const mutations = {
                 }).catch(err => console.log(err))
     },
     CLEAR_GALLERY_NOTIFICATIONS: (state) => {
-        state.notifications.newArtifacts = 0;
+        axios.post('/visitedgallery')
+            .then(response => {
+                state.notifications.newArtifacts = 0;
+            }).catch(err => console.log(err))
     }
 }
 

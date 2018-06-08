@@ -49,7 +49,7 @@
             }
         },
         watch:{
-           recording: function(){
+            recording: function(){
                this.cancel = this.recording;
 
                if(this.recording){
@@ -163,6 +163,7 @@
                             });
                     };
                 })
+                this.$emit('showContacts');
             },
             clearVideoMessage: function() {
                 $('#saveModal').hide();

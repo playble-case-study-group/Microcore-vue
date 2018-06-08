@@ -93,7 +93,7 @@
                 newTagModal: {}
             }
         },
-        beforeUpdate() {
+        mounted() {
             this.$store.dispatch('CLEAR_GALLERY_NOTIFICATIONS');
         },
         methods: {

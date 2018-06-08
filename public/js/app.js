@@ -57305,7 +57305,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newTagModal: {}
         };
     },
-    beforeUpdate: function beforeUpdate() {
+    mounted: function mounted() {
         this.$store.dispatch('CLEAR_GALLERY_NOTIFICATIONS');
     },
 
@@ -58356,9 +58356,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -58442,18 +58439,6 @@ var render = function() {
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Updates")]),
           _vm._v(" "),
           _c("div", { staticClass: "dash-content dash-content2" }, [
-            _c("i", { staticClass: "material-icons dash-notify" }, [
-              _vm._v("priority_high")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "dash-update" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(_vm._s(this.dash.message_count) + " Unread Messages")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
             _c("i", { staticClass: "material-icons dash-notify" }, [
               _vm._v("priority_high")
             ]),
@@ -58965,7 +58950,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\ntr[data-v-57c1bf28] {\n  cursor: pointer;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\ntr[data-v-57c1bf28] {\n  cursor: pointer;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-57c1bf28] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59536,7 +59521,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\ntr[data-v-3c31d779] {\n  cursor: pointer;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\ntr[data-v-3c31d779] {\n  cursor: pointer;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-3c31d779] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -60616,7 +60601,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n.characterInfo[data-v-167963c0]{\n    width: 50%;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
+exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n.characterInfo[data-v-167963c0]{\n    width: 50%;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60887,6 +60872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -61035,7 +61021,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentVideo = {};
         },
         revertToContactsPage: function revertToContactsPage() {
-            this.videoEl.pause();
+            if (!this.videoMessageInterface) {
+                this.videoEl.pause();
+            }
             this.$emit('showContacts');
         },
         askQuestion: function askQuestion(question) {
@@ -61835,6 +61823,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 };
             });
+            this.$emit('showContacts');
         },
         clearVideoMessage: function clearVideoMessage() {
             $('#saveModal').hide();
@@ -62021,6 +62010,7 @@ var render = function() {
                   clickedCharacter: _vm.clickedCharacter
                 },
                 on: {
+                  showContacts: _vm.revertToContactsPage,
                   saveSuccess: _vm.saveSuccess,
                   saveFailure: _vm.saveFailure
                 }
@@ -62198,7 +62188,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { attrs: { id: "call" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("videocam")])
+      _c("i", { staticClass: "videocam material-icons" }, [_vm._v("videocam")])
     ])
   }
 ]
@@ -91871,7 +91861,11 @@ var mutations = {
         });
     },
     CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(state) {
-        state.notifications.newArtifacts = 0;
+        axios.post('/visitedgallery').then(function (response) {
+            state.notifications.newArtifacts = 0;
+        }).catch(function (err) {
+            return console.log(err);
+        });
     }
 };
 
