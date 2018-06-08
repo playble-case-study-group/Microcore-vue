@@ -57460,7 +57460,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.title-row input[data-v-0d9f3ac6], .description-row textarea[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6] {\n  display: none;\n}\n.description-edit[data-v-0d9f3ac6], .description-cancel[data-v-0d9f3ac6], .description-save[data-v-0d9f3ac6], .title-edit[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6] {\n  display: none;\n  cursor: pointer;\n  font-size: 18px;\n}\n.title-row:hover .title-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n.description-row:hover .description-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n#previousBtn[data-v-0d9f3ac6], #nextBtn[data-v-0d9f3ac6] {\n  position: relative;\n  top: 15vh;\n  /*bottom: 50vh;*/\n}\n#previousBtn[data-v-0d9f3ac6] {\n  right: 100px;\n}\n#nextBtn[data-v-0d9f3ac6] {\n  left: 100px;\n}\n.row[data-v-0d9f3ac6] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-0d9f3ac6], #edit-art[data-v-0d9f3ac6] {\n  margin-top: 20px;\n}\n#artifact-tags[data-v-0d9f3ac6] {\n  margin-bottom: 1rem;\n}\n.tag-btn[data-v-0d9f3ac6] {\n  margin-right: 10px;\n  margin-bottom: 10px;\n}\n.modal-body img[data-v-0d9f3ac6] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-0d9f3ac6] {\n  background-color: white;\n}\n.item[data-v-0d9f3ac6] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-0d9f3ac6] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-0d9f3ac6] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-0d9f3ac6]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-0d9f3ac6] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.description-actions[data-v-0d9f3ac6], .title-actions[data-v-0d9f3ac6] {\n  position: relative;\n  left: 15px;\n}\n.title-row input[data-v-0d9f3ac6], .description-row textarea[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6] {\n  display: none;\n}\n.description-edit[data-v-0d9f3ac6], .description-cancel[data-v-0d9f3ac6], .description-save[data-v-0d9f3ac6], .title-edit[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6] {\n  display: none;\n  cursor: pointer;\n  font-size: 18px;\n}\n.title-row:hover .title-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n.description-row:hover .description-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n#previousBtn[data-v-0d9f3ac6], #nextBtn[data-v-0d9f3ac6] {\n  position: relative;\n  top: 15vh;\n  /*bottom: 50vh;*/\n}\n#previousBtn[data-v-0d9f3ac6] {\n  right: 100px;\n}\n#nextBtn[data-v-0d9f3ac6] {\n  left: 100px;\n}\n.row[data-v-0d9f3ac6] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-0d9f3ac6], #edit-art[data-v-0d9f3ac6] {\n  margin-top: 20px;\n}\n#artifact-tags[data-v-0d9f3ac6] {\n  margin-bottom: 1rem;\n}\n.tag-btn[data-v-0d9f3ac6] {\n  margin-right: 10px;\n  margin-bottom: 10px;\n}\n.modal-body img[data-v-0d9f3ac6] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-0d9f3ac6] {\n  background-color: white;\n}\n.item[data-v-0d9f3ac6] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-0d9f3ac6] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-0d9f3ac6] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-0d9f3ac6]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-0d9f3ac6] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -57580,12 +57580,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.artifact-modal').modal();
         },
         newTag: function newTag() {
-            console.log(this.newTag);
             this.addTag();
         }
     },
     mounted: function mounted() {
-        $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges);
+        $('.artifact-modal').on('hidden.bs.modal');
     },
 
     methods: {
@@ -57628,14 +57627,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$forceUpdate();
         },
         addTag: function addTag() {
-            console.log('add Tag called');
-            if (!_.find(this.artifactData.tags, this.newTag)) {
-                this.artifactData.tags.push(this.newTag);
-                this.saveChanges();
-                this.newTag = null;
-            } else {
-                console.log('tag exists already');
-                this.newTag = null;
+            if (this.newTag) {
+                if (!_.find(this.artifactData.tags, this.newTag)) {
+                    this.artifactData.tags.push(this.newTag);
+                    this.saveChanges();
+                } else {
+                    console.log('tag exists already');
+                }
+                this.$refs.clearSelection.clearSelection();
             }
         },
         closeModal: function closeModal() {
@@ -57827,7 +57826,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-1" }, [
+                    _c("div", { staticClass: "title-actions" }, [
                       _c(
                         "i",
                         {
@@ -57895,7 +57894,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-1" }, [
+                    _c("div", { staticClass: "description-actions" }, [
                       _c(
                         "i",
                         {
@@ -57964,10 +57963,12 @@ var render = function() {
                       { staticClass: "col-sm-12" },
                       [
                         _c("v-select", {
+                          ref: "clearSelection",
                           attrs: {
                             label: "title",
                             options: _vm.tags,
-                            placeholder: "Add Tag"
+                            placeholder: "Add Tag",
+                            resetOnOptionsChange: true
                           },
                           model: {
                             value: _vm.newTag,
