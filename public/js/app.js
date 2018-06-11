@@ -33708,18 +33708,18 @@ var app = new Vue({
             user: {}
         };
     },
-    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['GET_TASKS', 'GET_USER', 'GET_SIMULATION', 'RETRIEVE_NEW_EMAILS', 'RETRIEVE_NEW_ARTIFACTS']),
+    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['SET_TASKS', 'SET_USER', 'SET_SIMULATION', 'SET_NEW_EMAILS', 'SET_NEW_ARTIFACTS']),
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['GET_TASKS'])),
     mounted: function mounted() {
         var _this = this;
 
         // When the program loads we are going to get the user object and all tasks.  See store.js
         axios.get('/user').then(function (response) {
-            _this.GET_TASKS();
-            _this.GET_USER();
-            _this.GET_SIMULATION();
-            _this.RETRIEVE_NEW_EMAILS();
-            _this.RETRIEVE_NEW_ARTIFACTS();
+            _this.SET_TASKS();
+            _this.SET_USER();
+            _this.SET_SIMULATION();
+            _this.SET_NEW_EMAILS();
+            _this.SET_NEW_ARTIFACTS();
         }).catch(function (error) {
             console.log(error);
         });
@@ -56777,7 +56777,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             taskComplete: this.complete
         };
     },
-    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['toggleTask']), {
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['TOGGLE_TASK']), {
         navigateToComponent: function navigateToComponent(task) {
             window.location.href = task.component_link;
         }
@@ -56803,7 +56803,7 @@ var render = function() {
         staticClass: "checkmark",
         on: {
           click: function($event) {
-            _vm.toggleTask(_vm.task.task_id)
+            _vm.TOGGLE_TASK(_vm.task.task_id)
           }
         }
       }),
@@ -58842,10 +58842,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, 2500);
         },
         dispatchVuexEvent: function dispatchVuexEvent(email) {
-            var appScope = this;
-            setTimeout(function () {
-                appScope.$store.dispatch('RETRIEVE_NEW_EMAILS');
-            }, 5000);
+            this.$store.commit('SET_NEW_EMAILS');
+            this.$forceUpdate();
         }
     }
 });
@@ -91773,6 +91771,12 @@ var getters = {
             return true;
         }
     },
+    GET_NEW_EMAILS: function GET_NEW_EMAILS(state) {
+        return state.notifications.newEmails;
+    },
+    GET_NEW_ARTIFACTS: function GET_NEW_ARTIFACTS(state) {
+        return state.notifications.newArtifacts;
+    },
     TASKS_BY_DAY: function TASKS_BY_DAY(state) {
         return _.groupBy(state.tasks, 'day');
     },
@@ -91785,14 +91789,14 @@ var getters = {
 var mutations = {
 
     // Retrieves global information about the simulation
-    GET_SIMULATION: function GET_SIMULATION(state) {
+    SET_SIMULATION: function SET_SIMULATION(state) {
         axios.get('/sim').then(function (response) {
             state.simulation = response.data[0];
         });
     },
     // Retrieves tasks from database when the application loads
     // See app.js mounted for call
-    GET_TASKS: function GET_TASKS(state, tasks) {
+    SET_TASKS: function SET_TASKS(state, tasks) {
         // axios.get('/tasks').then(response => {
         state.tasks = tasks;
         // });
@@ -91800,7 +91804,7 @@ var mutations = {
 
     // Retrieves user from database when appliction loads.
     // See app.js mounted for call
-    GET_USER: function GET_USER(state) {
+    SET_USER: function SET_USER(state) {
         axios.get('/user').then(function (response) {
             return state.user = response.data;
         }).catch(function (error) {
@@ -91832,22 +91836,16 @@ var mutations = {
         }
         window.location.reload();
     },
-    toggleTask: function toggleTask(state, payload) {
-        console.log(payload);
+    TOGGLE_TASK: function TOGGLE_TASK(state, payload) {
         var task = state.tasks.find(function (task) {
             return task.task_id === payload;
         });
         task.complete = !task.complete;
-        axios.post('/tasks/complete', { id: payload, complete: task.complete }).then(function (response) {
-            //console.log(response)
-        }).catch(function (error) {
-            console.log(error.response.data);
-        });
     },
-    RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(state, amount) {
-        state.notifications.newEmails = amount; //this is the problem line
+    SET_NEW_EMAILS: function SET_NEW_EMAILS(state, newEmails) {
+        state.notifications.newEmails = newEmails; //this is the problem line
     },
-    RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(state) {
+    SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(state) {
         axios.post('/getgallerynotifications').then(function (response) {
             state.notifications.newArtifacts = response.data;
         }).catch(function (err) {
@@ -91864,56 +91862,54 @@ var mutations = {
 };
 
 var actions = {
-    GET_SIMULATION: function GET_SIMULATION(_ref) {
+    SET_SIMULATION: function SET_SIMULATION(_ref) {
         var commit = _ref.commit;
-        return commit('GET_SIMULATION');
+        return commit('SET_SIMULATION');
     },
-    GET_TASKS: function GET_TASKS(_ref2) {
+    SET_TASKS: function SET_TASKS(_ref2) {
         var commit = _ref2.commit;
 
         axios.get('/tasks').then(function (r) {
             return r.data;
         }).then(function (tasks) {
-            commit('GET_TASKS', tasks);
+            commit('SET_TASKS', tasks);
         });
     },
-    GET_USER: function GET_USER(_ref3) {
+    SET_USER: function SET_USER(_ref3) {
         var commit = _ref3.commit;
-        return commit('GET_USER');
+        return commit('SET_USER');
     },
-    GET_NOTES: function GET_NOTES(_ref4) {
+    SET_NEW_EMAILS: function SET_NEW_EMAILS(_ref4) {
         var commit = _ref4.commit;
-        return commit('GET_NOTES');
-    },
-    NEXT_DAY: function NEXT_DAY(_ref5) {
-        var commit = _ref5.commit;
-        return commit('NEXT_DAY');
-    },
-    PREVIOUS_DAY: function PREVIOUS_DAY(_ref6) {
-        var commit = _ref6.commit;
-        return commit('PREVIOUS_DAY');
-    },
-    toggleTask: function toggleTask(context, payload) {
-        context.commit('toggleTask', payload);
-    },
-
-    RETRIEVE_NEW_EMAILS: function RETRIEVE_NEW_EMAILS(_ref7) {
-        var commit = _ref7.commit;
 
         axios.post('/getemailnotifications').then(function (response) {
-            return response.data;
-        }).then(function (res) {
-            return commit('RETRIEVE_NEW_EMAILS', res);
+            commit('SET_NEW_EMAILS', response.data);
         }).catch(function (err) {
             return console.log(err);
         });
     },
-    RETRIEVE_NEW_ARTIFACTS: function RETRIEVE_NEW_ARTIFACTS(_ref8) {
-        var commit = _ref8.commit;
-        return commit('RETRIEVE_NEW_ARTIFACTS');
+    SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(_ref5) {
+        var commit = _ref5.commit;
+        return commit('SET_NEW_ARTIFACTS');
     },
-    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(_ref9) {
-        var commit = _ref9.commit;
+    NEXT_DAY: function NEXT_DAY(_ref6) {
+        var commit = _ref6.commit;
+        return commit('NEXT_DAY');
+    },
+    PREVIOUS_DAY: function PREVIOUS_DAY(_ref7) {
+        var commit = _ref7.commit;
+        return commit('PREVIOUS_DAY');
+    },
+    TOGGLE_TASK: function TOGGLE_TASK(context, payload) {
+        axios.post('/tasks/complete', { id: payload }).then(function (response) {
+            context.commit('TOGGLE_TASK', payload);
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    },
+
+    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(_ref8) {
+        var commit = _ref8.commit;
         return commit('CLEAR_GALLERY_NOTIFICATIONS');
     }
 };

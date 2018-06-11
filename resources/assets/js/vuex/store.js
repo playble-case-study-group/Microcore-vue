@@ -30,6 +30,12 @@ const getters = {
             return true;
         }
     },
+    GET_NEW_EMAILS: (state) => {
+        return state.notifications.newEmails;
+    },
+    GET_NEW_ARTIFACTS: (state) => {
+        return state.notifications.newArtifacts;
+    },
     TASKS_BY_DAY: (state) => {
         return _.groupBy(state.tasks, 'day');
     },
@@ -42,14 +48,14 @@ const getters = {
 const mutations = {
 
     // Retrieves global information about the simulation
-    GET_SIMULATION: (state) => {
+    SET_SIMULATION: (state) => {
         axios.get('/sim').then(response => {
             state.simulation = response.data[0];
         })
     },
 // Retrieves tasks from database when the application loads
     // See app.js mounted for call
-    GET_TASKS: (state, tasks) => {
+    SET_TASKS: (state, tasks) => {
         // axios.get('/tasks').then(response => {
             state.tasks = tasks;
         // });
@@ -57,7 +63,7 @@ const mutations = {
 
     // Retrieves user from database when appliction loads.
     // See app.js mounted for call
-    GET_USER: (state) => {
+    SET_USER: (state) => {
         axios.get('/user').then(response => state.user = response.data).catch( error => console.log(error));
     },
 
@@ -90,21 +96,14 @@ const mutations = {
         }
         window.location.reload();
     },
-    toggleTask: (state, payload) => {
-        console.log(payload)
+    TOGGLE_TASK: (state, payload) => {
         let task = state.tasks.find(task => task.task_id === payload);
         task.complete = !task.complete;
-        axios.post('/tasks/complete', {id: payload, complete: task.complete})
-            .then((response) => {
-                //console.log(response)
-            }).catch((error) => {
-                console.log(error.response.data)
-        })
     },
-    RETRIEVE_NEW_EMAILS: (state, amount) => {
-        state.notifications.newEmails = amount; //this is the problem line
+    SET_NEW_EMAILS: (state, newEmails) => {
+        state.notifications.newEmails = newEmails; //this is the problem line
     },
-    RETRIEVE_NEW_ARTIFACTS: (state) => {
+    SET_NEW_ARTIFACTS: (state) => {
             axios.post('/getgallerynotifications')
                 .then(response => {
                     state.notifications.newArtifacts = response.data;
@@ -119,28 +118,34 @@ const mutations = {
 }
 
 const actions = {
-    GET_SIMULATION: ({commit}) => commit('GET_SIMULATION'),
-    GET_TASKS: ({commit}) => {
+    SET_SIMULATION: ({commit}) => commit('SET_SIMULATION'),
+    SET_TASKS: ({commit}) => {
         axios.get('/tasks')
             .then(r => r.data)
             .then(tasks => {
-                commit('GET_TASKS', tasks)
+                commit('SET_TASKS', tasks)
             });
     },
-    GET_USER: ({commit}) => commit('GET_USER'),
-    GET_NOTES: ({commit}) => commit('GET_NOTES'),
+    SET_USER: ({commit}) => commit('SET_USER'),
+    SET_NEW_EMAILS: ({commit}) => {
+        axios.post('/getemailnotifications')
+            .then( response => {
+                commit('SET_NEW_EMAILS', response.data);
+            })
+            .catch(err =>console.log(err))
+
+    },
+    SET_NEW_ARTIFACTS: ({commit}) => commit('SET_NEW_ARTIFACTS'),
     NEXT_DAY: ({commit}) => commit('NEXT_DAY'),
     PREVIOUS_DAY: ({commit}) => commit('PREVIOUS_DAY'),
-    toggleTask(context, payload) {
-        context.commit('toggleTask', payload)
+    TOGGLE_TASK(context, payload) {
+        axios.post('/tasks/complete', {id: payload})
+            .then((response) => {
+                context.commit('TOGGLE_TASK', payload)
+            }).catch((error) => {
+                console.log(error.response)
+            });
     },
-    RETRIEVE_NEW_EMAILS: ({commit}) => {
-        axios.post('/getemailnotifications')
-            .then( response => response.data)
-            .then( res => commit('RETRIEVE_NEW_EMAILS', res))
-            .catch(err =>console.log(err))
-    },
-    RETRIEVE_NEW_ARTIFACTS: ({commit}) => commit('RETRIEVE_NEW_ARTIFACTS'),
     CLEAR_GALLERY_NOTIFICATIONS: ({commit}) => commit('CLEAR_GALLERY_NOTIFICATIONS')
 }
 

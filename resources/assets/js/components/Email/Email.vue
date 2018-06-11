@@ -236,10 +236,8 @@
                 }, 2500);
             },
             dispatchVuexEvent: function (email) {
-                let appScope = this;
-                setTimeout(function(){
-                    appScope.$store.dispatch('RETRIEVE_NEW_EMAILS');
-                }, 5000);
+                this.$store.commit('SET_NEW_EMAILS');
+                this.$forceUpdate();
             }
         }
     }
