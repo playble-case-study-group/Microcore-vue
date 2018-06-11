@@ -1,9 +1,8 @@
 <template>
     <li>
         <label>
-            <input v-if="complete" type="checkbox" checked >
-            <input v-else type="checkbox">
-            <span class="checkmark" v-on:click="TOGGLE_TASK(task.task_id)"></span>
+            <span class="checkmark unchecked" v-if="!task.complete" v-on:click="TOGGLE_TASK(task.task_id)"></span>
+            <span class="checkmark checked" v-if="task.complete" v-on:click="TOGGLE_TASK(task.task_id)"></span>
             <span class="navigation" v-on:click="navigateToComponent(task)">{{ task.title }}</span>
             <div class="task-description">
                 {{ task.description }}
@@ -87,7 +86,7 @@
     }
 
     /* When the checkbox is checked, add a blue background */
-    input:checked ~ .checkmark {
+    .checked {
         background-color: #ABDBFB;
         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
     }
@@ -100,7 +99,7 @@
     }
 
     /* Show the checkmark when checked */
-    input:checked ~ .checkmark:after {
+    .checked ~ .checkmark:after {
         display: block;
     }
 
