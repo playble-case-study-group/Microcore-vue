@@ -57629,6 +57629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     console.log('tag exists already');
                 }
+                this.newTag = '';
                 this.$refs.clearSelection.clearSelection();
             }
         },
@@ -57652,14 +57653,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
 
-            $('#edit-art').addClass('d-none');
-            $('#save-art').addClass('d-none');
-            $('#display-art').removeClass('d-none');
-        },
-        cancelChanges: function cancelChanges() {
-            this.artifactData.title = this.originalArtifact.title;
-            this.artifactData.description = this.originalArtifact.description;
-            this.newTag = null;
             $('#edit-art').addClass('d-none');
             $('#save-art').addClass('d-none');
             $('#display-art').removeClass('d-none');

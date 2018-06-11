@@ -70,6 +70,12 @@ class SimulationController extends Controller
             ->where('user_id', Auth::id())
             ->delete();
 
+        DB::table('student_tasks')
+            ->join('tasks', 'student_tasks.task_id', '=','tasks.task_id')
+            ->where('day', $request->day)
+            ->where('student_id', Auth::id())
+            ->delete();
+
         DB::table('user_asked_questions')
             ->where('day', $request->day)
             ->where('user_id', Auth::id())
