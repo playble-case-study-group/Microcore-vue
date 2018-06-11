@@ -125,20 +125,24 @@
                     $('#ReplyEmailId').show();
                 }
                  //indicate that an email has been read
+
                 if(!email.read) {
 
-                    axios.post(
-                        "/readEmail",
-                        {
-                            email_id: email.character_email_id
-                        })
+                    let data = {
+                        email_id: email.character_email_id
+                    };
+
+                    axios.post("/readEmail", data)
                         .then(res => {
                             email.read = true;
-                            this.$emit('dispatchEmailEvent', email);
+                            this.$store.commit('SET_NEW_EMAILS')
+//                            ;
+//                            this.$emit('dispatchEmailEvent', email);
                         })
                         .catch(err => console.log(err))
                 }
-                console.log(email);
+
+                email.read = true;
                 $('#readModal').modal()
             },
             sendReplyEmail: function (emailId) {

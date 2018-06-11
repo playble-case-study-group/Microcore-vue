@@ -59074,18 +59074,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('#ReplyEmailId').show();
             }
             //indicate that an email has been read
+
             if (!email.read) {
 
-                axios.post("/readEmail", {
+                var data = {
                     email_id: email.character_email_id
-                }).then(function (res) {
+                };
+
+                axios.post("/readEmail", data).then(function (res) {
                     email.read = true;
-                    _this.$emit('dispatchEmailEvent', email);
+                    _this.$store.commit('SET_NEW_EMAILS');
+                    //                            ;
+                    //                            this.$emit('dispatchEmailEvent', email);
                 }).catch(function (err) {
                     return console.log(err);
                 });
             }
-            console.log(email);
+
+            email.read = true;
             $('#readModal').modal();
         },
         sendReplyEmail: function sendReplyEmail(emailId) {
