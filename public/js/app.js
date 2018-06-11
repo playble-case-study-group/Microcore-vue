@@ -56737,7 +56737,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  display: none;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  cursor: pointer;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 1px solid #4A4A4A;\n}\n.navigation[data-v-70c68067] {\n  cursor: pointer;\n}\n\n/* On mouse-over, add a grey background color */\n.checkmark[data-v-70c68067]:hover {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\ninput:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #ABDBFB;\n  background: url(\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg\") no-repeat center center;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\ninput:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
+exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  display: none;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  cursor: pointer;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 1px solid #4A4A4A;\n}\n.navigation[data-v-70c68067] {\n  cursor: pointer;\n}\n.task-description[data-v-70c68067] {\n  font-size: 12px;\n  color: grey;\n}\n\n/* On mouse-over, add a grey background color */\n.checkmark[data-v-70c68067]:hover {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\ninput:checked ~ .checkmark[data-v-70c68067] {\n  background-color: #ABDBFB;\n  background: url(\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg\") no-repeat center center;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\ninput:checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
 
 // exports
 
@@ -56765,15 +56765,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['task', 'complete'],
-    mounted: function mounted() {
-        $('[data-toggle="popover"]').popover();
-    },
+    mounted: function mounted() {},
 
     data: function data() {
         return {
@@ -56824,19 +56821,9 @@ var render = function() {
         [_vm._v(_vm._s(_vm.task.title))]
       ),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "#",
-            "data-container": "body",
-            "data-toggle": "popover",
-            "data-placement": "right",
-            "data-content": _vm.task.description
-          }
-        },
-        [_c("i", { staticClass: "material-icons" }, [_vm._v("info")])]
-      )
+      _c("div", { staticClass: "task-description" }, [
+        _vm._v("\n            " + _vm._s(_vm.task.description) + "\n        ")
+      ])
     ])
   ])
 }
@@ -57460,7 +57447,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.title-row input[data-v-0d9f3ac6], .description-row textarea[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6] {\n  display: none;\n}\n.description-edit[data-v-0d9f3ac6], .description-cancel[data-v-0d9f3ac6], .description-save[data-v-0d9f3ac6], .title-edit[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6] {\n  display: none;\n  cursor: pointer;\n  font-size: 18px;\n}\n.title-row:hover .title-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n.description-row:hover .description-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n#previousBtn[data-v-0d9f3ac6], #nextBtn[data-v-0d9f3ac6] {\n  position: relative;\n  top: 15vh;\n  /*bottom: 50vh;*/\n}\n#previousBtn[data-v-0d9f3ac6] {\n  right: 100px;\n}\n#nextBtn[data-v-0d9f3ac6] {\n  left: 100px;\n}\n.row[data-v-0d9f3ac6] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-0d9f3ac6], #edit-art[data-v-0d9f3ac6] {\n  margin-top: 20px;\n}\n#artifact-tags[data-v-0d9f3ac6] {\n  margin-bottom: 1rem;\n}\n.tag-btn[data-v-0d9f3ac6] {\n  margin-right: 10px;\n  margin-bottom: 10px;\n}\n.modal-body img[data-v-0d9f3ac6] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-0d9f3ac6] {\n  background-color: white;\n}\n.item[data-v-0d9f3ac6] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-0d9f3ac6] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-0d9f3ac6] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-0d9f3ac6]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-0d9f3ac6] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
+exports.push([module.i, "\n.description-actions[data-v-0d9f3ac6], .title-actions[data-v-0d9f3ac6] {\n  position: relative;\n  left: 15px;\n}\n.title-row input[data-v-0d9f3ac6], .description-row textarea[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6] {\n  display: none;\n}\n.description-edit[data-v-0d9f3ac6], .description-cancel[data-v-0d9f3ac6], .description-save[data-v-0d9f3ac6], .title-edit[data-v-0d9f3ac6], .title-cancel[data-v-0d9f3ac6], .title-save[data-v-0d9f3ac6] {\n  display: none;\n  cursor: pointer;\n  font-size: 18px;\n}\n.title-row:hover .title-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n.description-row:hover .description-edit[data-v-0d9f3ac6] {\n  display: block;\n}\n#previousBtn[data-v-0d9f3ac6], #nextBtn[data-v-0d9f3ac6] {\n  position: relative;\n  top: 15vh;\n  /*bottom: 50vh;*/\n}\n#previousBtn[data-v-0d9f3ac6] {\n  right: 100px;\n}\n#nextBtn[data-v-0d9f3ac6] {\n  left: 100px;\n}\n.row[data-v-0d9f3ac6] {\n  /*-moz-column-width: 18em;*/\n  /*-webkit-column-width: 18em;*/\n  /*-moz-column-gap: 1em;*/\n  /*-webkit-column-gap:1em;*/\n}\n#display-art[data-v-0d9f3ac6], #edit-art[data-v-0d9f3ac6] {\n  margin-top: 20px;\n}\n#artifact-tags[data-v-0d9f3ac6] {\n  margin-bottom: 1rem;\n}\n.tag-btn[data-v-0d9f3ac6] {\n  margin-right: 10px;\n  margin-bottom: 10px;\n}\n.modal-body img[data-v-0d9f3ac6] {\n  width: 100%;\n  height: 100%;\n}\n.artifact[data-v-0d9f3ac6] {\n  background-color: white;\n}\n.item[data-v-0d9f3ac6] {\n  /*display: inline-flex;*/\n  /*padding:  .25rem;*/\n}\n.well[data-v-0d9f3ac6] {\n  position: relative;\n  display: block;\n}\n.grid[data-v-0d9f3ac6] {\n  /*max-width: 1200px;*/\n}\n.grid[data-v-0d9f3ac6]:after {\n  content: '';\n  display: block;\n  clear: both;\n}\n.grid-item[data-v-0d9f3ac6] {\n  float: left;\n  width: 240px;\n  height: auto;\n}\n", ""]);
 
 // exports
 
@@ -57580,12 +57567,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('.artifact-modal').modal();
         },
         newTag: function newTag() {
-            console.log(this.newTag);
             this.addTag();
         }
     },
     mounted: function mounted() {
-        $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges);
+        $('.artifact-modal').on('hidden.bs.modal');
     },
 
     methods: {
@@ -57628,14 +57614,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$forceUpdate();
         },
         addTag: function addTag() {
-            console.log('add Tag called');
-            if (!_.find(this.artifactData.tags, this.newTag)) {
-                this.artifactData.tags.push(this.newTag);
-                this.saveChanges();
-                this.newTag = null;
-            } else {
-                console.log('tag exists already');
-                this.newTag = null;
+            if (this.newTag) {
+                if (!_.find(this.artifactData.tags, this.newTag)) {
+                    this.artifactData.tags.push(this.newTag);
+                    this.saveChanges();
+                } else {
+                    console.log('tag exists already');
+                }
+                this.$refs.clearSelection.clearSelection();
             }
         },
         closeModal: function closeModal() {
@@ -57827,7 +57813,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-1" }, [
+                    _c("div", { staticClass: "title-actions" }, [
                       _c(
                         "i",
                         {
@@ -57895,7 +57881,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-1" }, [
+                    _c("div", { staticClass: "description-actions" }, [
                       _c(
                         "i",
                         {
@@ -57964,10 +57950,12 @@ var render = function() {
                       { staticClass: "col-sm-12" },
                       [
                         _c("v-select", {
+                          ref: "clearSelection",
                           attrs: {
                             label: "title",
                             options: _vm.tags,
-                            placeholder: "Add Tag"
+                            placeholder: "Add Tag",
+                            resetOnOptionsChange: true
                           },
                           model: {
                             value: _vm.newTag,
@@ -60599,7 +60587,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n.characterInfo[data-v-167963c0]{\n    width: 50%;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
+exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -60815,6 +60803,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__record_message_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__record_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__record_message__);
+//
+//
 //
 //
 //
@@ -62019,7 +62009,17 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { attrs: { id: "controlBar" } }, [
-        _c("i", { staticClass: "material-icons", attrs: { id: "phonebook" } }),
+        _c(
+          "a",
+          { attrs: { href: "#" }, on: { click: _vm.revertToContactsPage } },
+          [
+            _c(
+              "i",
+              { staticClass: "material-icons", attrs: { id: "phonebook" } },
+              [_vm._v("people")]
+            )
+          ]
+        ),
         _vm._v(" "),
         _vm.recording
           ? _c(
@@ -62111,7 +62111,7 @@ var render = function() {
                   "div",
                   {
                     key: person.character_id,
-                    staticClass: "contact-inner",
+                    staticClass: "contact-inner col-sm-12",
                     on: {
                       click: function($event) {
                         _vm.selectCharacter(person.character_id)
@@ -62119,7 +62119,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", [
+                    _c("div", { staticClass: "col-sm-2" }, [
                       _c("img", {
                         staticClass: "characterImage",
                         attrs: { src: person.img_small }
@@ -62136,7 +62136,7 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "characterInfo" }, [
+                    _c("div", { staticClass: "characterInfo col-sm-5" }, [
                       _c("span", { staticClass: "characterName" }, [
                         _vm._v(_vm._s(person.name))
                       ]),
@@ -62185,7 +62185,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { attrs: { id: "call" } }, [
+    return _c("span", { staticClass: "col-sm-5", attrs: { id: "call" } }, [
       _c("i", { staticClass: "videocam material-icons" }, [_vm._v("videocam")])
     ])
   }

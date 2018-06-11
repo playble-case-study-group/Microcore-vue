@@ -5,21 +5,21 @@
             <div class="heading">
                 <h3>Contacts</h3>
             </div>
-            <div class="contact-inner"
+            <div class="contact-inner col-sm-12"
                  v-for="person in characters"
                  :key="person.character_id"
                  @click="selectCharacter(person.character_id)">
-                <div>
+                <div class="col-sm-2">
                     <img class="characterImage" :src="person.img_small">
                     <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
                 </div>
-                <div class="characterInfo">
+                <div class="characterInfo col-sm-5">
                     <span class="characterName">{{ person.name }}</span><br>
                     <span class="characterPosition">{{ person.role }}</span>
                 </div>
-                <span id="call">
+                <span id="call" class="col-sm-5">
                     <i class="videocam material-icons">videocam</i>
                 </span>
             </div>
@@ -117,15 +117,12 @@
         display: flex;
         flex-flow: row;
         cursor: pointer;
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
     .contact-inner:nth-child(even) {
         border-top: solid 1px;
         border-bottom: solid 1px;
         border-color: #d9dcde;
-    }
-    .characterInfo{
-        width: 50%;
     }
     #call {
         align-self: center;

@@ -34,7 +34,7 @@
                                         <h4>{{ artifactData.title }}</h4>
                                         <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Please enter a title..." v-model="artifactData.title">
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="title-actions">
                                         <i class="material-icons title-edit" @click="titleEdit( artifactData.title )">edit</i>
                                         <i class="material-icons title-save" @click="titleSave">check</i>
                                         <i class="material-icons title-cancel" @click="titleCancel">cancel</i>
@@ -47,9 +47,9 @@
                                                   class="form-control"
                                                   rows="4"
                                                   v-model="artifactData.description">
-                                    </textarea>
+                                        </textarea>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="description-actions">
                                         <i class="material-icons description-edit" @click="descriptionEdit(artifactData.description)">edit</i>
                                         <i class="material-icons description-save" @click="descriptionSave">check</i>
                                         <i class="material-icons description-cancel" @click="descriptionCancel">cancel</i>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <v-select v-model="newTag" label="title" :options="tags" :placeholder="'Add Tag'"></v-select>
+                                        <v-select ref="clearSelection" v-model="newTag" label="title" :options="tags" :placeholder="'Add Tag'" :resetOnOptionsChange="true" ></v-select>
                                     </div>
                                 </div>
                             </div>
@@ -105,12 +105,11 @@
                 $('.artifact-modal').modal();
             },
             newTag: function () {
-                console.log(this.newTag);
                 this.addTag();
             }
         },
         mounted() {
-            $('.artifact-modal').on('hidden.bs.modal', this.cancelChanges)
+            $('.artifact-modal').on('hidden.bs.modal')
         },
         methods: {
             titleEdit: function (title) {
@@ -152,15 +151,16 @@
                 this.$forceUpdate();
             },
             addTag: function () {
-                console.log('add Tag called');
-                if(!_.find(this.artifactData.tags, this.newTag)) {
-                    this.artifactData.tags.push(this.newTag);
-                    this.saveChanges();
-                    this.newTag = null;
-                } else {
-                    console.log('tag exists already');
-                    this.newTag = null;
+                if (this.newTag) {
+                    if(!_.find(this.artifactData.tags, this.newTag)) {
+                        this.artifactData.tags.push(this.newTag);
+                        this.saveChanges();
+                    } else {
+                        console.log('tag exists already');
+                    }
+                    this.$refs.clearSelection.clearSelection();
                 }
+
 
             },
             closeModal: function() {
@@ -210,6 +210,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .description-actions, .title-actions {
+        position: relative;
+        left: 15px;
+    }
 
     .title-row input, .description-row textarea, .title-save, .title-cancel {
         display: none;

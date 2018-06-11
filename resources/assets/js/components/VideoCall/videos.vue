@@ -25,7 +25,9 @@
         <!--toolbar buttons-->
         <div id="controlBar">
             <!-- blank icon to balance toolbar-->
-            <i id="phonebook" class="material-icons"></i>
+            <a href="#" @click="revertToContactsPage">
+                <i id="phonebook" class="material-icons">people</i>
+            </a>
 
             <a href="#" v-if="recording" @click="startStopRecording">
                 <i class="material-icons recording">stop</i>

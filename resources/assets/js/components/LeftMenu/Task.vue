@@ -5,10 +5,9 @@
             <input v-else type="checkbox">
             <span class="checkmark" v-on:click="toggleTask(task.task_id)"></span>
             <span class="navigation" v-on:click="navigateToComponent(task)">{{ task.title }}</span>
-
-            <a href="#" data-container="body" data-toggle="popover" data-placement="right" :data-content="task.description">
-                <i class="material-icons">info</i>
-            </a>
+            <div class="task-description">
+                {{ task.description }}
+            </div>
         </label>
     </li>
 </template>
@@ -19,7 +18,6 @@
     export default {
         props: ['task', 'complete'],
         mounted() {
-            $('[data-toggle="popover"]').popover()
         },
         data: function () {
             return {
@@ -77,6 +75,10 @@
 
     .navigation {
         cursor: pointer;
+    }
+    .task-description {
+        font-size: 12px;
+        color: grey;
     }
 
     /* On mouse-over, add a grey background color */
