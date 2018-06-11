@@ -102,12 +102,14 @@ class TasksController extends Controller
 
 
         if ($task) {
+            $complete = !$task->complete;
+
             DB::table('student_tasks')
                 ->where([
                     ['task_id', $request->id],
                     ['student_id', Auth::id()]
                 ])
-                ->update(['complete' => !($task->complete), 'updated_at' => DB::raw('NOW()')]);
+                ->update(['complete' => $complete, 'updated_at' => DB::raw('NOW()')]);
         } else {
             DB::table('student_tasks')
                 ->insert([

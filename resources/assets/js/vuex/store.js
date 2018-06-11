@@ -98,10 +98,23 @@ const mutations = {
     },
     TOGGLE_TASK: (state, payload) => {
         let task = state.tasks.find(task => task.task_id === payload);
-        task.complete = !task.complete;
+
+        console.log(task.complete);
+        if(task.complete == true){
+            console.log('change to false')
+            task.complete = false;
+            return;
+        }
+        if(task.complete == false){
+            console.log('change to true')
+            task.complete = true;
+            return;
+        }
+        console.log(task.complete);
     },
     SET_NEW_EMAILS: (state, newEmails) => {
         state.notifications.newEmails = newEmails; //this is the problem line
+        return;
     },
     SET_NEW_ARTIFACTS: (state) => {
             axios.post('/getgallerynotifications')
@@ -125,6 +138,7 @@ const actions = {
             .then(tasks => {
                 commit('SET_TASKS', tasks)
             });
+        return;
     },
     SET_USER: ({commit}) => commit('SET_USER'),
     SET_NEW_EMAILS: ({commit}) => {
@@ -132,7 +146,8 @@ const actions = {
             .then( response => {
                 commit('SET_NEW_EMAILS', response.data);
             })
-            .catch(err =>console.log(err))
+            .catch(err =>console.log(err));
+        return;
 
     },
     SET_NEW_ARTIFACTS: ({commit}) => commit('SET_NEW_ARTIFACTS'),
