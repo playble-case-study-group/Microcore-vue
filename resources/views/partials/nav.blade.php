@@ -29,26 +29,22 @@
                 <navigation
                         :title="'Library'"
                         :link="'/library'">
-                    <span slot="nav-icon"><img src="/img/TOP/library-icon.svg" alt="library"></span>
                 </navigation>
                 <navigation
                         :title="'Gallery'"
                         :link="'/gallery'"
                         :notifications="$store.state.notifications.newArtifacts">
-                    <span slot="nav-icon"><img src="/img/TOP/gallery-icon.svg" alt="gallery"></span>
                 </navigation>
                 <navigation
                         :title="'Video Call'"
                         :link="'/videocall'">
-                    <span slot="nav-icon"><img src="/img/TOP/video-icon.svg" alt="video call"></span>
                 </navigation>
                 <navigation
                         :title="'Email'"
                         :link="'/email'"
                         :notifications="$store.state.notifications.newEmails">
-                    <span slot="nav-icon"><img src="/img/TOP/mail-icon.svg" alt="email"></span>
                 </navigation>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="text-transform: uppercase !important; font-family: 'Raleway', sans-serif;">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
@@ -69,4 +65,3 @@
         </ul>
     </div>
 </nav>
-

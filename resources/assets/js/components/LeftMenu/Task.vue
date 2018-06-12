@@ -88,8 +88,8 @@
 
     /* When the checkbox is checked, add a blue background */
     .checked {
-        background-color: #ABDBFB;
-        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
+        background-color: #A7BBC2;
+        background: url("/public/img/icon-check.svg") no-repeat center center;
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */

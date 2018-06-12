@@ -56737,7 +56737,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  display: none;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  cursor: pointer;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 1px solid #4A4A4A;\n}\n.navigation[data-v-70c68067] {\n  cursor: pointer;\n  font-family: \"Raleway\", sans-serif;\n}\n.task-description[data-v-70c68067] {\n  font-size: 14px;\n  color: grey;\n}\n\n/* On mouse-over, add a grey background color */\n.checkmark[data-v-70c68067]:hover {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.checked[data-v-70c68067] {\n  background-color: #ABDBFB;\n  background: url(\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg\") no-repeat center center;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\n.checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
+exports.push([module.i, "\nli[data-v-70c68067] {\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nlabel[data-v-70c68067] {\n  display: block;\n  position: relative;\n  padding-left: 28px;\n  margin-top: 11px;\n  margin-bottom: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\nlabel input[data-v-70c68067] {\n  display: none;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-70c68067] {\n  position: absolute;\n  cursor: pointer;\n  top: 4px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #eee;\n  border: 1px solid #4A4A4A;\n}\n.navigation[data-v-70c68067] {\n  cursor: pointer;\n  font-family: \"Raleway\", sans-serif;\n}\n.task-description[data-v-70c68067] {\n  font-size: 14px;\n  color: grey;\n}\n\n/* On mouse-over, add a grey background color */\n.checkmark[data-v-70c68067]:hover {\n  background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.checked[data-v-70c68067] {\n  background-color: #A7BBC2;\n  background: url(\"/public/img/icon-check.svg\") no-repeat center center;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-70c68067]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\n.checked ~ .checkmark[data-v-70c68067]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n/*label .checkmark:after {*/\n/*left: 9px;*/\n/*top: 5px;*/\n/*width: 5px;*/\n/*height: 10px;*/\n/*border: solid white;*/\n/*border-width: 0 3px 3px 0;*/\n/*-webkit-transform: rotate(45deg);*/\n/*-ms-transform: rotate(45deg);*/\n/*transform: rotate(45deg);*/\n/*}*/\n", ""]);
 
 // exports
 
@@ -91693,14 +91693,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        this.getActivePath();
+    },
+
     props: {
         title: String,
         link: String,
         notifications: Number
+    },
+    data: function data() {
+        return {
+            isActive: ''
+        };
+    },
+    methods: {
+        getActivePath: function getActivePath() {
+            this.isActive = window.location.pathname;
+        }
     }
+
 });
 
 /***/ }),
@@ -91957,7 +91973,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.nav-icon[data-v-ecda4c24] {\n    position: relative;\n    top: -2px;\n    padding-right: 5px;\n}\n.badge-danger[data-v-ecda4c24] {\n    background-color: #942921;\n}\n", ""]);
+exports.push([module.i, "\n.nav-link[data-v-ecda4c24] {\n    text-transform: uppercase;\n    font-family: \"Raleway\", sans-serif;\n}\n.nav-icon[data-v-ecda4c24] {\n    position: relative;\n    top: -2px;\n    padding-right: 5px;\n}\n.badge-danger[data-v-ecda4c24] {\n    background-color: #942921;\n}\n.active[data-v-ecda4c24]{\n    color: #942921 !important;\n}\n", ""]);
 
 // exports
 
@@ -91971,15 +91987,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
-    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
-      _c("span", { staticClass: "nav-icon" }, [_vm._t("nav-icon")], 2),
-      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
-      _vm.notifications > 0
-        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
-            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
-          ])
-        : _vm._e()
-    ])
+    _c(
+      "a",
+      {
+        class: _vm.isActive == _vm.link ? "nav-link " + "active" : "nav-link",
+        attrs: { href: _vm.link }
+      },
+      [
+        _c("img", {
+          staticClass: "nav-icon",
+          attrs: {
+            src:
+              _vm.isActive == _vm.link
+                ? "/img/TOP" + _vm.link + "-icon-selected.svg"
+                : "/img/TOP" + _vm.link + "-icon.svg",
+            alt: _vm.link
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "nav-icon" }, [_vm._t("nav-icon")], 2),
+        _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
+        _vm.notifications > 0
+          ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
+              _vm._v(
+                "\n            " + _vm._s(_vm.notifications) + "\n        "
+              )
+            ])
+          : _vm._e()
+      ]
+    )
   ])
 }
 var staticRenderFns = []
