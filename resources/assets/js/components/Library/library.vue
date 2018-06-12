@@ -6,7 +6,7 @@
                 <!-- <div :class="['btn-group', 'd-none', 'd-sm-block', 'd-md-none']" role="group" aria-label="..." v-for="lang in languages">
                     <button type="button" :class="['btn', currentLang == lang ? 'btn-invert' : 'btn-default']" @click="changeLang(lang)">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</button>
                 </div>-->
-                <h1>menu</h1>
+                <h1>Table of Contents</h1>
                 <br>
                 <div v-for="article in wiki"
                      :key="article.article_id"

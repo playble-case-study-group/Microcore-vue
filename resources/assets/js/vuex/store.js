@@ -112,15 +112,15 @@ const mutations = {
         }
         console.log(task.complete);
     },
-    SET_NEW_EMAILS: (state, newEmails) => {
+    UPDATE_NEW_EMAILS: (state, newEmails) => {
+        console.log("mutation: ", newEmails);
         state.notifications.newEmails = newEmails; //this is the problem line
-        return;
     },
     SET_NEW_ARTIFACTS: (state) => {
-            axios.post('/getgallerynotifications')
-                .then(response => {
-                    state.notifications.newArtifacts = response.data;
-                }).catch(err => console.log(err))
+        axios.post('/getgallerynotifications')
+            .then(response => {
+                state.notifications.newArtifacts = response.data;
+            }).catch(err => console.log(err))
     },
     CLEAR_GALLERY_NOTIFICATIONS: (state) => {
         axios.post('/visitedgallery')
@@ -144,10 +144,10 @@ const actions = {
     SET_NEW_EMAILS: ({commit}) => {
         axios.post('/getemailnotifications')
             .then( response => {
-                commit('SET_NEW_EMAILS', response.data);
+                console.log('action: ', response.data);
+                commit('UPDATE_NEW_EMAILS', response.data);
             })
             .catch(err =>console.log(err));
-        return;
 
     },
     SET_NEW_ARTIFACTS: ({commit}) => commit('SET_NEW_ARTIFACTS'),

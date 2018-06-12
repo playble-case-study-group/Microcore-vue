@@ -89,7 +89,8 @@
                     reply: 0,
                     subject: "",
                     body: ""
-                }
+                },
+                currentEmail: {}
             }
         },
         props: {
@@ -102,12 +103,20 @@
             $('#emailAttachment').css('display', 'none');
             let appScope = this;
             $('#readModal').on('hidden.bs.modal', function (e) {
+
+                appScope.currentEmail.read = true;
+                let msg = appScope.characterEmails.find( email => email.character_email_id == appScope.currentEmail.character_email_id);
+                msg.read = true;
                 appScope.resetDraftEmail();
             })
 
         },
         methods: {
+            ...mapActions([
+                'SET_NEW_EMAILS'
+            ]),
             readEmail: function (email) {
+                this.currentEmail = email;
                 this.resetDraftEmail();
                 this.readModalData.id = email.character_email_id;
                 this.readModalData.from = email.name;
@@ -125,20 +134,32 @@
                     $('#ReplyEmailId').show();
                 }
                  //indicate that an email has been read
-                if(!email.read) {
-
-                    axios.post(
-                        "/readEmail",
-                        {
-                            email_id: email.character_email_id
-                        })
+                if (!email.read) {
+                    let data = {
+                        email_id: email.character_email_id
+                    };
+                    axios.post("/readEmail", data)
                         .then(res => {
-                            email.read = true;
-                            this.$emit('dispatchEmailEvent', email);
+
+                            const promise = new Promise((resolve, reject) => {
+                                if (this.SET_NEW_EMAILS()) {
+                                    resolve();
+                                } else {
+                                    reject(Error('it broke'));
+                                }
+                            });
+
+                            promise.then( result => {
+                                console.log('result: ', email);
+                                email.read = true;
+                            }, err => {
+                                console.log(err);
+                            });
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => console.log(err));
                 }
-                console.log(email);
+
+
                 $('#readModal').modal()
             },
             sendReplyEmail: function (emailId) {
