@@ -60894,6 +60894,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'character-questions': __WEBPACK_IMPORTED_MODULE_1__question_vue___default.a,
         'video-message': __WEBPACK_IMPORTED_MODULE_2__record_message_vue___default.a
     },
+
     mounted: function mounted() {
         this.startSelfVideo();
         this.startAudio();
@@ -61040,28 +61041,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         startSelfVideo: function startSelfVideo() {
             //set that we want both audio and video
             var constraints = {
-                audio: {
-                    echoCancellation: true,
-                    noiseSuppression: true
-                },
+                audio: true,
                 video: true
             };
-
-            //this.startAudio();
-            //start recording
-            navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.tryAudioOnly);
-        },
-        tryAudioOnly: function tryAudioOnly() {
-            console.log('try audio only fired');
-            //set that we want both audio and video
-            var constraints = {
-                audio: {
-                    echoCancellation: true,
-                    noiseSuppression: true
-                }
-            };
-
-            //this.startAudio();
             //start recording
             navigator.mediaDevices.getUserMedia(constraints).then(this.handleSuccess.bind(this)).catch(this.handleFailure);
         },

@@ -90,6 +90,7 @@
             'character-questions': question,
             'video-message': videoMessage
         },
+
         mounted() {
             this.startSelfVideo();
             this.startAudio();
@@ -236,30 +237,9 @@
             startSelfVideo: function () {
                 //set that we want both audio and video
                 const constraints = {
-                    audio: {
-                        echoCancellation: true,
-                        noiseSuppression: true
-                    },
+                    audio: true,
                     video: true
                 };
-
-                //this.startAudio();
-                //start recording
-                navigator.mediaDevices.getUserMedia(constraints)
-                    .then(this.handleSuccess.bind(this))
-                    .catch(this.tryAudioOnly);
-            },
-            tryAudioOnly: function(){
-                console.log('try audio only fired');
-                //set that we want both audio and video
-                const constraints = {
-                    audio: {
-                        echoCancellation: true,
-                        noiseSuppression: true
-                    }
-                };
-
-                //this.startAudio();
                 //start recording
                 navigator.mediaDevices.getUserMedia(constraints)
                     .then(this.handleSuccess.bind(this))

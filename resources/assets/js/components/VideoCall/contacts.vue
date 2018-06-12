@@ -124,6 +124,7 @@
         border-bottom: solid 1px;
         border-color: #d9dcde;
     }
+
     #call {
         align-self: center;
         font-size: 24px;
