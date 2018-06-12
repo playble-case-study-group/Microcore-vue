@@ -89,6 +89,22 @@ class GroupController extends Controller
 
     public function deleteGroup(Request $request)
     {
+        $usrs = DB::table('user_has_group')
+            ->where('group_id', $request->groupId)
+            ->get();
+
+        if ($usrs) {
+            foreach ($usrs as $usr) {
+                DB::table('users')
+                    ->where('user_id', $usr->user_id)
+                    ->update(['assigned' => 0]);
+
+                DB::table('student_artifacts')
+                    ->where('user_id', $usr->user_id)
+                    ->update(['group_id' => null]);
+            }
+        }
+
         DB::table('user_has_group')
             ->where('group_id', $request->groupId)
             ->delete();
