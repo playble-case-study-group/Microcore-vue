@@ -27,4 +27,7 @@
         top: -2px;
         padding-right: 5px;
     }
+    .badge-danger {
+        background-color: #942921;
+    }
 </style>
