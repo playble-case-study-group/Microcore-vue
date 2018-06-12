@@ -212,10 +212,20 @@
         display: none;
     }
 
-    .description-edit, .description-cancel, .description-save, .title-edit, .title-cancel, .title-save {
+    .description-cancel, .description-save, .title-cancel, .title-save {
         display: none;
         cursor: pointer;
         font-size: 18px;
+    }
+    .title-edit, .description-edit {
+        cursor: pointer;
+        font-sice: 18px;
+    }
+    .description-cancel, .title-cancel {
+        color: #942921;
+    }
+    .description-save, .title-save {
+        color: green;
     }
 
     .title-row:hover .title-edit {

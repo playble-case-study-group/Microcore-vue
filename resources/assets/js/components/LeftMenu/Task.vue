@@ -74,9 +74,10 @@
 
     .navigation {
         cursor: pointer;
+        font-family: "Raleway", sans-serif;
     }
     .task-description {
-        font-size: 12px;
+        font-size: 14px;
         color: grey;
     }
 
