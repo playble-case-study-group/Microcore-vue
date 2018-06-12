@@ -43,7 +43,6 @@
                             @submitSuccess="submitSuccess"
                             @submitFailure="submitFailure"
                             @sentReply="updateSent"
-                            @dispatchEmailEvent="dispatchVuexEvent"
                             :characterEmails="characterEmails"
                             :characters="characters"
                             :studentEmails="studentEmails">
@@ -234,10 +233,6 @@
                 setTimeout(function () {
                     $('#submitFailure').hide();
                 }, 2500);
-            },
-            dispatchVuexEvent: function (email) {
-                this.$store.commit('SET_NEW_EMAILS');
-                this.$forceUpdate();
             }
         }
     }

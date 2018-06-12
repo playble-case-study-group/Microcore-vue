@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Cinzel|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 // Icons
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -13,6 +13,18 @@
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 
+.navbar-brand span {
+  font-family: $font-family-serif;
+  position: relative;
+  top: -7px !important;
+}
+
+.navbar-brand small {
+  position: relative;
+  top: 10px;
+  right: 145px;
+}
+
 h1  {
   font-size: 18pt;
   font-weight: bold;
@@ -20,17 +32,17 @@ h1  {
 
 h2 {
   font-size: 16pt;
-  font-family: $font-family-sans-serif;
+  //font-family: $font-family-sans-serif;
 }
 
 h3 {
   font-size: 14pt;
-  font-family: $font-family-sans-serif;
+  //font-family: $font-family-sans-serif;
 }
 
 body {
   font-size: 12pt;
-  font-family: $font-family-sans-serif;
+  //font-family: $font-family-sans-serif;
 }
 
 .material-icons {

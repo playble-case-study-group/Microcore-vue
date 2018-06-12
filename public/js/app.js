@@ -58705,7 +58705,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -58848,10 +58847,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             setTimeout(function () {
                 $('#submitFailure').hide();
             }, 2500);
-        },
-        dispatchVuexEvent: function dispatchVuexEvent(email) {
-            this.$store.commit('SET_NEW_EMAILS');
-            this.$forceUpdate();
         }
     }
 });
@@ -58954,6 +58949,8 @@ exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  heigh
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -59045,7 +59042,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 reply: 0,
                 subject: "",
                 body: ""
-            }
+            },
+            currentEmail: {}
         };
     },
     props: {
@@ -59058,14 +59056,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#emailAttachment').css('display', 'none');
         var appScope = this;
         $('#readModal').on('hidden.bs.modal', function (e) {
+
+            appScope.currentEmail.read = true;
+            var msg = appScope.characterEmails.find(function (email) {
+                return email.character_email_id == appScope.currentEmail.character_email_id;
+            });
+            msg.read = true;
             appScope.resetDraftEmail();
         });
     },
 
-    methods: {
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['SET_NEW_EMAILS']), {
         readEmail: function readEmail(email) {
             var _this = this;
 
+            this.currentEmail = email;
             this.resetDraftEmail();
             this.readModalData.id = email.character_email_id;
             this.readModalData.from = email.name;
@@ -59082,24 +59087,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('#ReplyEmailId').show();
             }
             //indicate that an email has been read
-
             if (!email.read) {
-
                 var data = {
                     email_id: email.character_email_id
                 };
-
                 axios.post("/readEmail", data).then(function (res) {
-                    email.read = true;
-                    _this.$store.commit('SET_NEW_EMAILS');
-                    //                            ;
-                    //                            this.$emit('dispatchEmailEvent', email);
+
+                    var promise = new Promise(function (resolve, reject) {
+                        if (_this.SET_NEW_EMAILS()) {
+                            resolve();
+                        } else {
+                            reject(Error('it broke'));
+                        }
+                    });
+
+                    promise.then(function (result) {
+                        console.log('result: ', email);
+                        email.read = true;
+                    }, function (err) {
+                        console.log(err);
+                    });
                 }).catch(function (err) {
                     return console.log(err);
                 });
             }
 
-            email.read = true;
             $('#readModal').modal();
         },
         sendReplyEmail: function sendReplyEmail(emailId) {
@@ -59170,7 +59182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setAttachment: function setAttachment() {
             this.draftEmail.attachment = this.$refs.file.files[0];
         }
-    }
+    })
 
 });
 
@@ -59914,8 +59926,7 @@ var render = function() {
                   on: {
                     submitSuccess: _vm.submitSuccess,
                     submitFailure: _vm.submitFailure,
-                    sentReply: _vm.updateSent,
-                    dispatchEmailEvent: _vm.dispatchVuexEvent
+                    sentReply: _vm.updateSent
                   }
                 })
               : _vm._e(),
@@ -79756,7 +79767,7 @@ var render = function() {
           "div",
           { staticClass: "col-sm-4 col-md-3", attrs: { id: "libraryMenu" } },
           [
-            _c("h1", [_vm._v("menu")]),
+            _c("h1", [_vm._v("Table of Contents")]),
             _vm._v(" "),
             _c("br"),
             _vm._v(" "),
@@ -91642,17 +91653,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(558)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(551)
 /* template */
-var __vue_template__ = __webpack_require__(552)
+var __vue_template__ = __webpack_require__(560)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-ecda4c24"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -91702,6 +91717,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -91713,35 +91729,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 552 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
-    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
-      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
-      _vm.notifications > 0
-        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
-            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
-          ])
-        : _vm._e()
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ecda4c24", module.exports)
-  }
-}
-
-/***/ }),
+/* 552 */,
 /* 553 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -91868,9 +91856,9 @@ var mutations = {
         }
         console.log(task.complete);
     },
-    SET_NEW_EMAILS: function SET_NEW_EMAILS(state, newEmails) {
+    UPDATE_NEW_EMAILS: function UPDATE_NEW_EMAILS(state, newEmails) {
+        console.log("mutation: ", newEmails);
         state.notifications.newEmails = newEmails; //this is the problem line
-        return;
     },
     SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(state) {
         axios.post('/getgallerynotifications').then(function (response) {
@@ -91911,11 +91899,11 @@ var actions = {
         var commit = _ref4.commit;
 
         axios.post('/getemailnotifications').then(function (response) {
-            commit('SET_NEW_EMAILS', response.data);
+            console.log('action: ', response.data);
+            commit('UPDATE_NEW_EMAILS', response.data);
         }).catch(function (err) {
             return console.log(err);
         });
-        return;
     },
     SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(_ref5) {
         var commit = _ref5.commit;
@@ -91955,6 +91943,79 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(559);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("2f683d9e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ecda4c24\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./navigation.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ecda4c24\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./navigation.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 559 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.nav-icon[data-v-ecda4c24] {\n    position: relative;\n    top: -2px;\n    padding-right: 5px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 560 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item", attrs: { id: "navigation" } }, [
+    _c("a", { staticClass: "nav-link", attrs: { href: _vm.link } }, [
+      _c("span", { staticClass: "nav-icon" }, [_vm._t("nav-icon")], 2),
+      _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
+      _vm.notifications > 0
+        ? _c("span", { staticClass: "badge badge-pill badge-danger" }, [
+            _vm._v("\n            " + _vm._s(_vm.notifications) + "\n        ")
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ecda4c24", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

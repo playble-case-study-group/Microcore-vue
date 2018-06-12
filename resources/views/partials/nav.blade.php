@@ -2,7 +2,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-default navbar-static-top">
     <!-- Branding Image -->
     <a class="navbar-brand" href="{{ url('/home') }}">
-        {{ config('app.name', 'Museum of Spain') }}
+        <img src="img/logo/red.png" alt="logo">
+        <span>{{ config('app.name', 'Museum of Spain') }}</span>
+        <small>With a sub title</small>
+
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,21 +29,24 @@
                 <navigation
                         :title="'Library'"
                         :link="'/library'">
+                    <span slot="nav-icon"><img src="/img/TOP/library-icon.svg" alt="library"></span>
                 </navigation>
                 <navigation
                         :title="'Gallery'"
                         :link="'/gallery'"
                         :notifications="$store.state.notifications.newArtifacts">
-
+                    <span slot="nav-icon"><img src="/img/TOP/gallery-icon.svg" alt="gallery"></span>
                 </navigation>
                 <navigation
                         :title="'Video Call'"
                         :link="'/videocall'">
+                    <span slot="nav-icon"><img src="/img/TOP/video-icon.svg" alt="video call"></span>
                 </navigation>
                 <navigation
                         :title="'Email'"
                         :link="'/email'"
                         :notifications="$store.state.notifications.newEmails">
+                    <span slot="nav-icon"><img src="/img/TOP/mail-icon.svg" alt="email"></span>
                 </navigation>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
