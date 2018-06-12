@@ -158,6 +158,7 @@
                     } else {
                         console.log('tag exists already');
                     }
+                    this.newTag = '';
                     this.$refs.clearSelection.clearSelection();
                 }
 
@@ -183,14 +184,6 @@
                     console.log(error);
                 });
 
-                $('#edit-art').addClass('d-none');
-                $('#save-art').addClass('d-none');
-                $('#display-art').removeClass('d-none');
-            },
-            cancelChanges: function () {
-                this.artifactData.title = this.originalArtifact.title;
-                this.artifactData.description = this.originalArtifact.description;
-                this.newTag = null;
                 $('#edit-art').addClass('d-none');
                 $('#save-art').addClass('d-none');
                 $('#display-art').removeClass('d-none');
