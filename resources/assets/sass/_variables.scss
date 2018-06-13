@@ -1,6 +1,6 @@
 
 //// Simulation Brand
-$sim-heading: #4A4A4A;
+$sim-heading: #074462;
 $body-bg: #f5f8fa;
 $sim-popover-border-color: rgba(0, 0, 0, 0.25);
 $sim-margin: 40px;
@@ -49,6 +49,7 @@ $headings-font-family: $font-family-serif;
 $border-radius:        0px;
 $border-radius-lg:     0px;
 $border-radius-sm:     0px;
+$white:    #fff;
 
 ////** Padding between columns. Gets divided in half for the left and right.
 //$grid-gutter-width:         20px;
@@ -74,4 +75,6 @@ $container-max-widths: (
 $spacer: 1rem !default;
 $navbar-nav-link-padding-x:         1rem;
 $navbar-padding-y:                  $spacer;
+$navbar-dark-color:                 rgba($white, .75);
+$navbar-dark-hover-color:           rgba($white, 1);
 

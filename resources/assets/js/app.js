@@ -23,7 +23,7 @@ Vue.component('left-menu', require('./components/LeftMenu/LeftMenu.vue'));
 Vue.component('gallery', require('./components/Gallery/Gallery'));
 Vue.component('dash', require('./components/Dashboard/dashboard.vue'));
 Vue.component('email', require('./components/Email/Email.vue'));
-Vue.component('gallery', require('./components/Gallery/Gallery.vue'));
+//Vue.component('gallery', require('./components/Gallery/Gallery.vue'));
 Vue.component('videocall', require('./components/VideoCall/videoCall.vue'));
 Vue.component('library', require('./components/Library/library.vue'));
 // Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
@@ -31,6 +31,8 @@ Vue.component('library', require('./components/Library/library.vue'));
 Vue.component('classes', require('./components/Classes/Classes.vue'));
 Vue.component('editor', require('./components/Library/articleEditor.vue'));
 Vue.component('navigation', require('./components/NavigationLink/navigation.vue'));
+Vue.component('about', require('./components/About/about.vue'));
+Vue.component('characters', require('./components/Characters/characters.vue'));
 Vue.component('v-select', require('vue-select'));
 
 import store from './vuex/store';

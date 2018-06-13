@@ -434,7 +434,7 @@
                     analyser.getByteFrequencyData(dataArrayAlt);
 
                     //set canvas background color and add animation
-                    canvasCtx.fillStyle = '#4a4a4a';
+                    canvasCtx.fillStyle = '#0c4460';
                     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
                     //define the width of audio bar display

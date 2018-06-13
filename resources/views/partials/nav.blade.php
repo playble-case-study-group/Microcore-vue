@@ -1,10 +1,8 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white navbar-default navbar-static-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-blue navbar-default navbar-static-top">
     <!-- Branding Image -->
     <a class="navbar-brand" href="{{ url('/home') }}">
-        <img src="img/logo/red.png" alt="logo">
-        <span>{{ config('app.name', 'Museum of Spain') }}</span>
-        <small>With a sub title</small>
+        <img id="logo" src="img/logo/Microcore_Logo-White.svg" alt="logo">
 
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,11 +29,6 @@
                         :link="'/library'">
                 </navigation>
                 <navigation
-                        :title="'Gallery'"
-                        :link="'/gallery'"
-                        :notifications="$store.state.notifications.newArtifacts">
-                </navigation>
-                <navigation
                         :title="'Video Call'"
                         :link="'/videocall'">
                 </navigation>
@@ -50,6 +43,8 @@
                     </a>
 
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/about">About</a>
+                        <a class="dropdown-item" href="/team">The Team</a>
                         @if(Auth::user()->role == 2)
                             <a class="dropdown-item" href="/classes">Classes</a>
                         @endif

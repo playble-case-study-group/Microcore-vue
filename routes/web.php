@@ -71,14 +71,14 @@ Route::group(['middleware'=>['auth', 'student']], function() {
 // Route::post('/updateArticle', 'ArticleEditorController@update');
 
 // Chat
-    Route::resource('/chat', 'ChatController');
-    Route::get('/chatbot', function () {
+    //Route::resource('/chat', 'ChatController');
+    /*Route::get('/chatbot', function () {
         return view('chatbot');
-    });
+    });*/
 
 // Gallery
-    Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
-    Route::resource('/gallery', 'GalleryController');
+    //Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+    //Route::resource('/gallery', 'GalleryController');
 
 // Group
     Route::resource('/group', 'GroupController');
@@ -89,5 +89,11 @@ Route::group(['middleware'=>['auth', 'student']], function() {
 // Dash
     Route::get('/dashboard', 'DashController@loadDash');
 });
+
+//About
+    Route::get('/about', 'AboutController@index');
+
+//Characters
+    Route::get('/team', 'CharactersController@index');
 
 

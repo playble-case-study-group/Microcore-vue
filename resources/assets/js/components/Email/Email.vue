@@ -139,14 +139,14 @@
             toggleInbox: function () {
                 this.showInbox = 1;
                 this.showSent = 0;
-                $('.keyline-inbox').css('border-color', '#636b6f');
+                $('.keyline-inbox').css('border-color', '#074462');
                 $('.keyline-sent').css('border-color', 'white');
             },
             toggleSent: function () {
                 this.showInbox = 0;
                 this.showSent = 1;
                 $('.keyline-inbox').css('border-color', 'white');
-                $('.keyline-sent').css('border-color', '#636b6f');
+                $('.keyline-sent').css('border-color', '#074462');
 
             },
             openNav: function () {
@@ -303,14 +303,14 @@
         justify-content: flex-start;
     }
     .keyline{
-        border-left: solid 4px #636b6f;
+        border-left: solid 4px #074462;
         padding-left: 20px;
     }
     .keyline-sent{
         border-color: white;
     }
     .keyline-inbox{
-        border-color: #636b6f;
+        border-color: #074462;
     }
     .sidebar{
         display: none;
@@ -340,7 +340,7 @@
         position: absolute; /* Stay in place */
         z-index: 1; /* Stay on top */
         right: 0;
-        background-color: #4a4a4a;
+        background-color: #074462;
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
