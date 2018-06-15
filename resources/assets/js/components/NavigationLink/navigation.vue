@@ -44,7 +44,7 @@
     .nav-icon {
         position: relative;
         top: -2px;
-        padding-right: 2px;
+        padding-right: 2 px;
     }
     .active{
         font-weight: bold;

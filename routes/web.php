@@ -97,3 +97,11 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     Route::get('/team', 'CharactersController@index');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
