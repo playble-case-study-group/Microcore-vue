@@ -14,6 +14,9 @@
                     <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
+                    <span class="badge badge-pill badge-danger" v-if="contactMessages.includes(person.character_id)">
+                        1
+                    </span>
                 </div>
                 <div class="characterInfo col-sm-5">
                     <span class="characterName">{{ person.name }}</span><br>
@@ -67,7 +70,16 @@
         computed: {
             activeContacts: function() {
                 return this.calls.filter((character) => {
-                    if(character.day === this.$store.state.user.current_day){
+                    if(!character.video_message){
+                        return character.character_id;
+                    }
+                }).map((character) => {
+                    return character.character_id;
+                })
+            },
+            contactMessages: function() {
+                return this.calls.filter((character) => {
+                    if(character.video_message){
                         return character.character_id;
                     }
                 }).map((character) => {

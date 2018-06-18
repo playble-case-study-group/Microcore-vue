@@ -105,15 +105,13 @@
             currentVideo: function () {
                 if(!this.videoMessageInterface) {
                     document.getElementById('call_video').load();
-                    this.callIconToggleStatus = "call";
                 }
             },
             currentQuestion: function () {
                 //if statement needed to avoid a change when currentQuestion changes to null
-                if(!this.videoMessageInterface) {
+                if(!this.videoMessageInterface && !this.currentVideo.video_message) {
                     document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
                     document.getElementById('call_video').play();
-                    this.callIconToggleStatus = "call_end";
 
                     let appScope = this;
                     let paused = false;
@@ -128,6 +126,12 @@
                             }
                         }
                     });
+                } else if(this.currentVideo.video_message) {
+                    let appScope = this;
+                    document.getElementById('call_video').play();
+                    document.getElementById('call_video').onended = function(e) {
+                        appScope.revertToContactsPage();
+                    };
                 }
             },
             videoMessageInterface: function(){
@@ -191,6 +195,7 @@
                             return question;
                         }
                     })
+
                 } else {
                     //if not active, leave a message
                     this.leaveMessage();

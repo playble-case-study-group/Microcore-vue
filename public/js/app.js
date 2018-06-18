@@ -33491,6 +33491,7 @@ Vue.component('editor', __webpack_require__(519));
 Vue.component('navigation', __webpack_require__(524));
 Vue.component('about', __webpack_require__(529));
 Vue.component('characters', __webpack_require__(534));
+Vue.component('clickable-map', __webpack_require__(544));
 Vue.component('v-select', __webpack_require__(18));
 
 
@@ -60511,6 +60512,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -60538,10 +60542,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         activeContacts: function activeContacts() {
-            var _this = this;
-
             return this.calls.filter(function (character) {
-                if (character.day === _this.$store.state.user.current_day) {
+                if (!character.video_message) {
+                    return character.character_id;
+                }
+            }).map(function (character) {
+                return character.character_id;
+            });
+        },
+        contactMessages: function contactMessages() {
+            return this.calls.filter(function (character) {
+                if (character.video_message) {
                     return character.character_id;
                 }
             }).map(function (character) {
@@ -60777,15 +60788,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         currentVideo: function currentVideo() {
             if (!this.videoMessageInterface) {
                 document.getElementById('call_video').load();
-                this.callIconToggleStatus = "call";
             }
         },
         currentQuestion: function currentQuestion() {
             //if statement needed to avoid a change when currentQuestion changes to null
-            if (!this.videoMessageInterface) {
+            if (!this.videoMessageInterface && !this.currentVideo.video_message) {
                 document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
                 document.getElementById('call_video').play();
-                this.callIconToggleStatus = "call_end";
 
                 var appScope = this;
                 var paused = false;
@@ -60799,6 +60808,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     }
                 });
+            } else if (this.currentVideo.video_message) {
+                var _appScope = this;
+                document.getElementById('call_video').play();
+                document.getElementById('call_video').onended = function (e) {
+                    _appScope.revertToContactsPage();
+                };
             }
         },
         videoMessageInterface: function videoMessageInterface() {
@@ -61981,6 +61996,18 @@ var render = function() {
                               [_vm._v("fiber_manual_record")]
                             )
                           ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.contactMessages.includes(person.character_id)
+                        ? _c(
+                            "span",
+                            { staticClass: "badge badge-pill badge-danger" },
+                            [
+                              _vm._v(
+                                "\n                    1\n                "
+                              )
+                            ]
+                          )
                         : _vm._e()
                     ]),
                     _vm._v(" "),
@@ -90554,7 +90581,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.character[data-v-005cb6b8] {\n  background-color: white;\n  margin: 2rem 1rem;\n  padding: 0;\n  cursor: pointer;\n}\n.not-selected[data-v-005cb6b8] {\n  display: inline-block;\n  width: 100%;\n  overflow: hidden;\n  position: relative;\n}\n.not-selected:hover > .character-info[data-v-005cb6b8] {\n  -webkit-transition: all .2s ease-out;\n  transition: all .2s ease-out;\n  background-color: #28a745;\n  color: white;\n}\n.img-large[data-v-005cb6b8] {\n  display: block;\n  margin: auto;\n}\n.character-info[data-v-005cb6b8] {\n  display: block;\n  height: -webkit-max-content;\n  height: -moz-max-content;\n  height: max-content;\n  text-align: center;\n  font-family: \"Raleway\", sans-serif;\n}\n.container[data-v-005cb6b8] {\n  margin: 40px;\n}\n.selected[data-v-005cb6b8] {\n  padding: 20px;\n  background-color: #28a745;\n  color: white;\n  display: block;\n  overflow: hidden;\n  position: relative;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.sans-serif[data-v-005cb6b8] {\n  font-family: Raleway, sans-serif;\n}\n", ""]);
 
 // exports
 
@@ -90566,6 +90593,8 @@ exports.push([module.i, "\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
 //
 //
 //
@@ -90604,21 +90633,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.selectedCharacter = this.characters[0];
     },
     mounted: function mounted() {
-        $('.selected').hide();
+        var selected = '#' + this.selectedCharacter.character_id;
+        $(selected).toggleClass(' active');
+        this.previous = selected;
     },
 
     data: function data() {
         return {
-            selectedCharacter: null
+            selectedCharacter: null,
+            previous: null
         };
     },
     methods: {
         selectCharacter: function selectCharacter(character) {
+            $(this.previous).toggleClass(' active');
             this.selectedCharacter = character;
-            var notSelected = '.not-selected-' + character.character_id;
-            var selected = '.selected-' + character.character_id;
-            $(selected).slideToggle();
-            $(notSelected).slideToggle();
+            var selected = '#' + character.character_id;
+            this.previous = selected;
+            $(selected).toggleClass(' active');
         }
     }
 });
@@ -90631,55 +90663,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container", attrs: { id: "about" } }, [
-    _c("h2", [_vm._v("\n        Meet the Team behind Microcore\n    ")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.characters, function(character) {
-        return _c(
-          "div",
-          {
-            key: character.character_id,
-            staticClass: "character col-sm-5",
-            attrs: { id: character.character_id },
-            on: {
-              click: function($event) {
-                _vm.selectCharacter(character)
-              }
-            }
-          },
-          [
-            _c(
-              "span",
-              { class: "not-selected not-selected-" + character.character_id },
-              [
-                _c("img", {
-                  staticClass: "img-large",
-                  attrs: { src: character.img_large }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "character-info" }, [
-                  _c("p", [_vm._v(" " + _vm._s(character.name))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(" " + _vm._s(character.role))])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { class: "selected selected-" + character.character_id },
-              [_c("p", [_vm._v(" " + _vm._s(character.about) + " ")])]
-            )
-          ]
-        )
-      })
-    )
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "container main", attrs: { id: "characters" } },
+      [
+        _c("h1", { staticClass: "greeting" }, [
+          _c("img", { attrs: { src: "img/about4.jpg" } })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "display" }, [
+          _c("h2", [_vm._v("Our History")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            Microcore was founded in 2002 by CEO Eric Johnson as a way to make the benefits of nanotechnology accessible to the medical industry. Driven by a commitment to excellence and creativity, Microcore strives to adapt the world's most advanced and innovative technologies to the medical industry for optimal patient care.\n\n            The nanotechnology around which Microcore was built is both versatile and robust. Nanobots are used in many different industries, from aerospace to construction, but it was not until Microcore's founding that this impressive technology was tailored and applied to the medical field.\n\n            Since Microcore's beginning, we’ve continued to innovate, expand, and improve. Today, Mircocore researches and manufactures different types of nanobots that target specific ailments, helping to accelerate patient recovery and enhance care.\n        "
+            )
+          ]),
+          _vm._v(" "),
+          _c("h2", [_vm._v("Our Products")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            The TNG-3.01®Nanobot was originally patented by Microcore in 2005 to help reduce recovery time for patients by 1/3 through mimicking the regeneration and growth of human tissue. The TNG-3.01® continues to be one of our most revolutionary products along with YT-1301® and YT-2600®, which are used for treating various forms of cancer.\n\n            Today, Microcore is working on the finishing stages of a 10 year research project for a nanobot, the MCT-8472®, designed to substantially increase the rate of healing for broken bones through replicating and bonding to human bone.\n        "
+            )
+          ]),
+          _vm._v(" "),
+          _c("h2", [_vm._v("Our Commitment")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n            With a robust research and development arm, Microcore is committed to continue looking for innovative ways to bring nanotechnology to bear on the world's toughest illnesses. At Microcore, our highest value is the well-being of patients around the world, and it is our commitment to them that drives us to strive for the best medical solutions in the world.\n        "
+            )
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -90775,7 +90802,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-54e8c208] {\n  border-radius: 50%;\n}\n.row[data-v-54e8c208] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.sans-serif[data-v-54e8c208] {\n  font-family: Raleway, sans-serif;\n}\n.character[data-v-54e8c208] {\n  cursor: pointer;\n  background-color: white;\n  margin: 2rem 1.5rem;\n  text-align: center;\n  height: 15rem;\n  font-family: Raleway, sans-serif;\n}\n.character[data-v-54e8c208]:hover, .active[data-v-54e8c208] {\n  -webkit-transform: scale(1.15);\n          transform: scale(1.15);\n  background-color: rgba(40, 167, 69, 0.75);\n  color: white;\n}\n.character-inner[data-v-54e8c208] {\n  padding-top: 2.5rem;\n}\n.character-name[data-v-54e8c208] {\n  margin: 5px 0px;\n  padding-top: 10px;\n}\n.img-small[data-v-54e8c208] {\n  width: 50%;\n  display: block;\n  margin: auto;\n}\n.img-large[data-v-54e8c208] {\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.container[data-v-54e8c208] {\n  margin: 40px;\n}\n", ""]);
+exports.push([module.i, "\nimg[data-v-54e8c208] {\n  border-radius: 50%;\n}\n.greeting[data-v-54e8c208] {\n  text-align: center;\n  margin-bottom: 60px;\n  font-size: 32px;\n}\n.row[data-v-54e8c208] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.sans-serif[data-v-54e8c208] {\n  font-family: Raleway, sans-serif;\n}\n.listed-characters[data-v-54e8c208] {\n  grid-column-start: 1;\n  grid-row-start: 1;\n  margin: auto;\n}\n.selected-character[data-v-54e8c208] {\n  grid-column-start: 2;\n  grid-row-start: 1;\n  padding: 40px;\n}\n#characters[data-v-54e8c208] {\n  margin: 0 40px;\n  padding-top: 40px;\n}\n.display[data-v-54e8c208] {\n  display: grid;\n  grid-template-columns: 50%;\n  justify-items: center;\n}\n.character[data-v-54e8c208] {\n  cursor: pointer;\n  margin: 1rem 1rem;\n  text-align: center;\n  height: 15rem;\n  font-family: Raleway, sans-serif;\n  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.19);\n          box-shadow: 0 0 10px rgba(0, 0, 0, 0.19);\n}\n.character[data-v-54e8c208]:hover, .active[data-v-54e8c208] {\n  -webkit-transform: scale(1.1);\n          transform: scale(1.1);\n  -webkit-transition: -webkit-transform .25s;\n  transition: -webkit-transform .25s;\n  transition: transform .25s;\n  transition: transform .25s, -webkit-transform .25s;\n  background-color: rgba(40, 167, 69, 0.75);\n  color: white;\n}\n.character-inner[data-v-54e8c208] {\n  padding-top: 2.5rem;\n}\n.character-name[data-v-54e8c208] {\n  margin: 5px 0px;\n  padding-top: 10px;\n}\n.role[data-v-54e8c208] {\n  border-bottom: 2px solid #ee6031;\n}\n.img-small[data-v-54e8c208] {\n  width: 50%;\n  display: block;\n  margin: auto;\n}\n.img-large[data-v-54e8c208] {\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.container[data-v-54e8c208] {\n  margin: 40px;\n}\n", ""]);
 
 // exports
 
@@ -90787,6 +90814,8 @@ exports.push([module.i, "\nimg[data-v-54e8c208] {\n  border-radius: 50%;\n}\n.ro
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
 //
 //
 //
@@ -90859,67 +90888,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container", attrs: { id: "characters" } }, [
-    _c("h2", [_vm._v("\n        Meet the Team behind Microcore\n    ")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "selected-character row" }, [
-      _c("img", {
-        staticClass: "img-large col-sm-4",
-        attrs: { src: _vm.selectedCharacter.img_large }
-      }),
+  return _c(
+    "div",
+    { staticClass: "container main", attrs: { id: "characters" } },
+    [
+      _c("h1", { staticClass: "greeting" }, [
+        _vm._v("\n        Meet the Team behind Microcore\n    ")
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "about col-sm-6" }, [
-        _c("h2", { staticClass: "sans-serif title" }, [
-          _vm._v(" " + _vm._s(_vm.selectedCharacter.name))
+      _c("div", { staticClass: "display" }, [
+        _c("div", { staticClass: "selected-character" }, [
+          _c("img", {
+            staticClass: "img-large col-sm-6",
+            attrs: { src: _vm.selectedCharacter.img_large }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "about col-sm-12" }, [
+            _c("h2", { staticClass: "sans-serif title" }, [
+              _vm._v(" " + _vm._s(_vm.selectedCharacter.name))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "sans-serif role" }, [
+              _vm._v(" " + _vm._s(_vm.selectedCharacter.role))
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v(" " + _vm._s(_vm.selectedCharacter.about) + " ")])
+          ])
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "sans-serif" }, [
-          _vm._v(" " + _vm._s(_vm.selectedCharacter.role))
-        ]),
+        _c("hr"),
         _vm._v(" "),
-        _c("p", [_vm._v(" " + _vm._s(_vm.selectedCharacter.about) + " ")])
+        _c(
+          "div",
+          { staticClass: "listed-characters row" },
+          _vm._l(_vm.characters, function(character) {
+            return (character.character_id == _vm.selectedCharacter.character_id
+            ? (_vm.selected = "true")
+            : (_vm.selected = "false"))
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "character col-sm-5",
+                    attrs: { id: character.character_id },
+                    on: {
+                      click: function($event) {
+                        _vm.selectCharacter(character)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "character-inner" }, [
+                      _c("img", {
+                        staticClass: "img-small",
+                        attrs: { src: character.img_large }
+                      }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "character-name" }, [
+                        _vm._v(" " + _vm._s(character.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(" " + _vm._s(character.role))])
+                    ])
+                  ]
+                )
+              : _vm._e()
+          })
+        )
       ])
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.characters, function(character) {
-        return (character.character_id == _vm.selectedCharacter.character_id
-        ? (_vm.selected = "true")
-        : (_vm.selected = "false"))
-          ? _c(
-              "div",
-              {
-                staticClass: "character col-sm-2",
-                attrs: { id: character.character_id },
-                on: {
-                  click: function($event) {
-                    _vm.selectCharacter(character)
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "character-inner" }, [
-                  _c("img", {
-                    staticClass: "img-small",
-                    attrs: { src: character.img_large }
-                  }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "character-name" }, [
-                    _vm._v(" " + _vm._s(character.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(" " + _vm._s(character.role))])
-                ])
-              ]
-            )
-          : _vm._e()
-      })
-    )
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -91145,6 +91182,721 @@ var actions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(545)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(547)
+/* template */
+var __vue_template__ = __webpack_require__(548)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-170f1a48"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ClickableMap/clickableMap.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-170f1a48", Component.options)
+  } else {
+    hotAPI.reload("data-v-170f1a48", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 545 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(546);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("7edf0c4e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-170f1a48\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./clickableMap.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-170f1a48\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./clickableMap.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 546 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nimg[data-v-170f1a48] {\n    height: 100%;\n    width: 100%;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 547 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_image_map_resizer__ = __webpack_require__(549);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_image_map_resizer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_image_map_resizer__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        $('map').imageMapResize();
+    },
+
+    props: {},
+    methods: {}
+});
+
+/***/ }),
+/* 548 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container", attrs: { id: "videocall" } }, [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "pigModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Dead Pig")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: "/img/scene/DeadPig.png" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "incidentReportModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Incident Report")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: "/img/scene/IncidentReport.png" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "computerScreenModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Results")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: "/img/scene/MCAnimalTestCS.png" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "testResultsModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Results")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: "/img/scene/Clipboard.png" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "whiteboard1Modal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Notes")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: "img/scene/Note.png" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("img", {
+          attrs: {
+            id: "Image-Maps-Com-image-maps-2016-10-04-135016",
+            src: "/img/scene/SmallPigProblems.jpg",
+            border: "1",
+            width: "1249",
+            height: "909",
+            orgWidth: "1249",
+            orgHeight: "909",
+            usemap: "#image-maps-2016-11-01-111008",
+            alt: ""
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "map",
+          {
+            attrs: {
+              name: "image-maps-2016-11-01-111008",
+              id: "ImageMapsCom-image-maps-2016-11-01-111008"
+            }
+          },
+          [
+            _c("area", {
+              attrs: {
+                shape: "rect",
+                coords: "1247,907,1249,909",
+                alt: "Image Map",
+                title: "Image Map",
+                href:
+                  "http://www.image-maps.com/index.php?aff=mapped_users_75936"
+              }
+            }),
+            _vm._v(" "),
+            _c("area", {
+              staticStyle: { outline: "none" },
+              attrs: {
+                id: "deadPig",
+                alt: "",
+                title: "",
+                "data-toggle": "modal",
+                "data-target": "#pigModal",
+                shape: "poly",
+                coords:
+                  "265,588,217,603,181,602,142,609,121,618,89,630,57,639,49,639,56,626,46,626,23,627,29,615,35,602,47,589,53,573,58,561,63,545,71,535,78,544,84,552,115,539,137,530,172,528,191,528,208,527,224,524,242,519,265,523,277,531,289,539,294,551,294,562,294,576,286,584,278,588",
+                target: "#pigmodal"
+              }
+            }),
+            _vm._v(" "),
+            _c("area", {
+              attrs: {
+                alt: "White Board",
+                title: "whiteBoard1",
+                shape: "poly",
+                coords: "992,159,995,418,1063,406,1066,173",
+                target: "_self",
+                "data-toggle": "modal",
+                "data-target": "#whiteboard1Modal"
+              }
+            }),
+            _vm._v(" "),
+            _c("area", {
+              attrs: {
+                alt: "Computer",
+                title: "Computer",
+                shape: "poly",
+                coords: "265,272,268,333,330,330,329,273",
+                target: "_self",
+                "data-toggle": "modal",
+                "data-target": "#computerScreenModal"
+              }
+            }),
+            _vm._v(" "),
+            _c("area", {
+              attrs: {
+                alt: "Incident Report",
+                title: "IncidentReport",
+                shape: "poly",
+                coords: "798,437,837,449,869,442,834,432",
+                target: "_self",
+                "data-toggle": "modal",
+                "data-target": "#incidentReportModal"
+              }
+            }),
+            _vm._v(" "),
+            _c("area", {
+              attrs: {
+                alt: "Clipboard Report",
+                title: "Clipboard",
+                shape: "poly",
+                coords: "1112,310,1111,366,1153,367,1154,312",
+                target: "_self",
+                "data-toggle": "modal",
+                "data-target": "#testResultsModal"
+              }
+            })
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-170f1a48", module.exports)
+  }
+}
+
+/***/ }),
+/* 549 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! Image Map Resizer (imageMapResizer.min.js ) - v1.0.7 - 2018-05-01
+ *  Desc: Resize HTML imageMap to scaled image.
+ *  Copyright: (c) 2018 David J. Bradshaw - dave@bradshaw.net
+ *  License: MIT
+ */
+
+!function(){"use strict";function a(){function a(){function a(a,d){function e(a){var d=1===(f=1-f)?"width":"height";return c[d]+Math.floor(Number(a)*b[d])}var f=0;j[d].coords=a.split(",").map(e).join(",")}var b={width:l.width/l.naturalWidth,height:l.height/l.naturalHeight},c={width:parseInt(window.getComputedStyle(l,null).getPropertyValue("padding-left"),10),height:parseInt(window.getComputedStyle(l,null).getPropertyValue("padding-top"),10)};k.forEach(a)}function b(a){return a.coords.replace(/ *, */g,",").replace(/ +/g,",")}function c(){clearTimeout(m),m=setTimeout(a,250)}function d(){l.width===l.naturalWidth&&l.height===l.naturalHeight||a()}function e(){l.addEventListener("load",a,!1),window.addEventListener("focus",a,!1),window.addEventListener("resize",c,!1),window.addEventListener("readystatechange",a,!1),document.addEventListener("fullscreenchange",a,!1)}function f(){return"function"==typeof i._resize}function g(a){return document.querySelector('img[usemap="'+a+'"]')}function h(){j=i.getElementsByTagName("area"),k=Array.prototype.map.call(j,b),l=g("#"+i.name)||g(i.name),i._resize=a}var i=this,j=null,k=null,l=null,m=null;f()?i._resize():(h(),e(),d())}function b(){function b(a){if(!a.tagName)throw new TypeError("Object is not a valid DOM element");if("MAP"!==a.tagName.toUpperCase())throw new TypeError("Expected <MAP> tag, found <"+a.tagName+">.")}function c(c){c&&(b(c),a.call(c),d.push(c))}var d;return function(a){switch(d=[],typeof a){case"undefined":case"string":Array.prototype.forEach.call(document.querySelectorAll(a||"map"),c);break;case"object":c(a);break;default:throw new TypeError("Unexpected data type ("+typeof a+").")}return d}} true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"object"==typeof module&&"object"==typeof module.exports?module.exports=b():window.imageMapResize=b(),"jQuery"in window&&(jQuery.fn.imageMapResize=function(){return this.filter("map").each(a).end()})}();
+//# sourceMappingURL=imageMapResizer.map
 
 /***/ })
 /******/ ]);

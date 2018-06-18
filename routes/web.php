@@ -96,12 +96,11 @@ Route::group(['middleware'=>['auth', 'student']], function() {
 //Characters
     Route::get('/team', 'CharactersController@index');
 
+//Clickable Map
+    Route::get('/scene', 'MapController@index');
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

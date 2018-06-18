@@ -1,27 +1,29 @@
 <template>
-    <div id="characters" class="container">
-        <h2>
+    <div id="characters" class="container main">
+        <h1 class="greeting">
             Meet the Team behind Microcore
-        </h2>
-        <div class="selected-character row">
-            <img :src="selectedCharacter.img_large" class="img-large col-sm-4">
-            <div class="about col-sm-6">
-                <h2 class="sans-serif title"> {{ selectedCharacter.name }}</h2>
-                <p class="sans-serif"> {{ selectedCharacter.role }}</p>
-                <p> {{ selectedCharacter.about }} </p>
+        </h1>
+        <div class="display">
+            <div class="selected-character">
+                <img :src="selectedCharacter.img_large" class="img-large col-sm-6">
+                <div class="about col-sm-12">
+                    <h2 class="sans-serif title"> {{ selectedCharacter.name }}</h2>
+                    <p class="sans-serif role"> {{ selectedCharacter.role }}</p>
+                    <p> {{ selectedCharacter.about }} </p>
+                </div>
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div v-for="character in characters"
-                 v-if="character.character_id == selectedCharacter.character_id ? selected='true' : selected='false'"
-                 class="character col-sm-2"
-                 :id="character.character_id"
-                 @click="selectCharacter(character)">
-                <div class="character-inner">
-                    <img :src="character.img_large" class="img-small">
-                    <p class="character-name"> {{ character.name }}</p>
-                    <p> {{ character.role }}</p>
+            <hr>
+            <div class="listed-characters row">
+                <div v-for="character in characters"
+                     v-if="character.character_id == selectedCharacter.character_id ? selected='true' : selected='false'"
+                     class="character col-sm-5"
+                     :id="character.character_id"
+                     @click="selectCharacter(character)">
+                    <div class="character-inner">
+                        <img :src="character.img_large" class="img-small">
+                        <p class="character-name"> {{ character.name }}</p>
+                        <p> {{ character.role }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +69,11 @@
     img {
         border-radius: 50%;
     }
+    .greeting {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 32px;
+    }
     .row {
         justify-content: center;
     }
@@ -74,16 +81,36 @@
         font-family: Raleway, sans-serif;
 
     }
+    .listed-characters {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        margin: auto;
+    }
+    .selected-character {
+        grid-column-start: 2;
+        grid-row-start: 1;
+        padding: 40px;
+    }
+    #characters {
+        margin: 0 40px;
+        padding-top: 40px;
+    }
+    .display {
+        display: grid;
+        grid-template-columns: 50%;
+        justify-items: center;
+    }
     .character {
         cursor: pointer;
-        background-color: white;
-        margin: 2rem 1.5rem;
+        margin: 1rem 1rem;
         text-align: center;
         height: 15rem;
         font-family: Raleway, sans-serif;
+        box-shadow: 0 0 10px rgba(0,0,0,.19);
     }
     .character:hover, .active {
-        transform: scale(1.15);
+        transform: scale(1.1);
+        transition: transform .25s;
         background-color: rgba(40, 167, 69, .75);
         color: white;
     }
@@ -92,7 +119,11 @@
     }
     .character-name {
         margin: 5px 0px;
+
         padding-top: 10px;
+    }
+    .role {
+        border-bottom: 2px solid #ee6031;
     }
     .img-small {
         width: 50%;

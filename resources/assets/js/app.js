@@ -33,6 +33,7 @@ Vue.component('editor', require('./components/Library/articleEditor.vue'));
 Vue.component('navigation', require('./components/NavigationLink/navigation.vue'));
 Vue.component('about', require('./components/About/about.vue'));
 Vue.component('characters', require('./components/Characters/characters.vue'));
+Vue.component('clickable-map', require('./components/ClickableMap/clickableMap.vue'));
 Vue.component('v-select', require('vue-select'));
 
 import store from './vuex/store';

@@ -1,25 +1,27 @@
 <template>
-    <div id="about" class="container">
-        <h2>
-            Meet the Team behind Microcore
-        </h2>
-        <div class="row">
-            <div v-for="character in characters"
-                 :key="character.character_id"
-                 :id="character.character_id"
-                 class="character col-sm-5"
-                 @click="selectCharacter(character)">
-                <span :class="'not-selected not-selected-' + character.character_id">
-                    <img :src="character.img_large" class="img-large">
-                    <span class="character-info">
-                        <p> {{ character.name }}</p>
-                        <p> {{ character.role }}</p>
-                    </span>
-                </span>
-                <span :class="'selected selected-' + character.character_id">
-                    <p> {{ character.about }} </p>
-                </span>
-            </div>
+    <div id="characters" class="container main">
+        <h1 class="greeting">
+            <img src="img/about4.jpg">
+        </h1>
+        <div class="display">
+            <h2>Our History</h2>
+            <p>
+                Microcore was founded in 2002 by CEO Eric Johnson as a way to make the benefits of nanotechnology accessible to the medical industry. Driven by a commitment to excellence and creativity, Microcore strives to adapt the world's most advanced and innovative technologies to the medical industry for optimal patient care.
+
+                The nanotechnology around which Microcore was built is both versatile and robust. Nanobots are used in many different industries, from aerospace to construction, but it was not until Microcore's founding that this impressive technology was tailored and applied to the medical field.
+
+                Since Microcore's beginning, we’ve continued to innovate, expand, and improve. Today, Mircocore researches and manufactures different types of nanobots that target specific ailments, helping to accelerate patient recovery and enhance care.
+            </p>
+            <h2>Our Products</h2>
+            <p>
+                The TNG-3.01®Nanobot was originally patented by Microcore in 2005 to help reduce recovery time for patients by 1/3 through mimicking the regeneration and growth of human tissue. The TNG-3.01® continues to be one of our most revolutionary products along with YT-1301® and YT-2600®, which are used for treating various forms of cancer.
+
+                Today, Microcore is working on the finishing stages of a 10 year research project for a nanobot, the MCT-8472®, designed to substantially increase the rate of healing for broken bones through replicating and bonding to human bone.
+            </p>
+            <h2>Our Commitment</h2>
+            <p>
+                With a robust research and development arm, Microcore is committed to continue looking for innovative ways to bring nanotechnology to bear on the world's toughest illnesses. At Microcore, our highest value is the well-being of patients around the world, and it is our commitment to them that drives us to strive for the best medical solutions in the world.
+            </p>
         </div>
     </div>
 </template>
@@ -36,20 +38,23 @@
             this.selectedCharacter = this.characters[0];
         },
         mounted() {
-          $('.selected').hide();
+            let selected = '#' + this.selectedCharacter.character_id;
+            $(selected).toggleClass(' active');
+            this.previous = selected;
         },
         data: function(){
             return {
-                selectedCharacter: null
+                selectedCharacter: null,
+                previous: null
             }
         },
         methods:{
             selectCharacter: function (character) {
+                $(this.previous).toggleClass(' active');
                 this.selectedCharacter = character;
-                let notSelected = '.not-selected-' + character.character_id;
-                let selected = '.selected-' + character.character_id;
-                $(selected).slideToggle();
-                $(notSelected).slideToggle();
+                let selected = '#' + character.character_id;
+                this.previous = selected;
+                $(selected).toggleClass(' active');
             }
         }
     }
@@ -57,49 +62,16 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
+    img {
+
+    }
     .row {
         justify-content: center;
     }
-    .character {
-        background-color: white;
-        margin: 2rem 1rem;
-        padding: 0;
-        cursor: pointer;
+    .sans-serif {
+        font-family: Raleway, sans-serif;
+
     }
-    .not-selected {
-        display: inline-block;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-    .not-selected:hover > .character-info {
-        -moz-transition: all .2s ease-out;
-        -o-transition: all .2s ease-out;
-        -webkit-transition: all .2s ease-out;
-        transition: all .2s ease-out;
-        background-color: #28a745;
-        color: white;
-    }
-    .img-large {
-        display: block;
-        margin: auto;
-    }
-    .character-info {
-        display: block;
-        height: max-content;
-        text-align: center;
-        font-family: "Raleway", sans-serif;
-    }
-    .container {
-        margin: 40px;
-    }
-    .selected {
-        padding: 20px;
-        background-color: #28a745;
-        color: white;
-        display: block;
-        overflow: hidden;
-        position: relative;
-    }
+
 
 </style>

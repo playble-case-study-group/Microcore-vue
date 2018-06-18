@@ -37,6 +37,12 @@
                         :link="'/email'"
                         :notifications="$store.state.notifications.newEmails">
                 </navigation>
+                @if(Auth::user()->current_day > 1)
+                <navigation
+                        :title="'Scene'"
+                        :link="'/scene'">
+                </navigation>
+                @endif
                 <li class="nav-item dropdown" style="text-transform: uppercase !important; font-family: 'Raleway', sans-serif;">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                         {{ Auth::user()->name }} <span class="caret"></span>
