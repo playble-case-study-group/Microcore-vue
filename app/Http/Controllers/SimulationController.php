@@ -138,4 +138,16 @@ class SimulationController extends Controller
         return $request->all();
     }
 
+    public static function getVideoCallNotifications() {
+
+        $current_day = Auth::user()->current_day;
+
+        $video_messages = DB::table('videos')
+            ->where('day', '<=', $current_day)
+            ->where('video_message', 1)
+            ->count();
+
+        return $video_messages;
+    }
+
 }

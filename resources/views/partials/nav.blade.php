@@ -30,7 +30,8 @@
                 </navigation>
                 <navigation
                         :title="'Video Call'"
-                        :link="'/videocall'">
+                        :link="'/videocall'"
+                        :notifications="$store.state.notifications.newVideoMessages">
                 </navigation>
                 <navigation
                         :title="'Email'"

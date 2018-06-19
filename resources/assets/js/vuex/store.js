@@ -13,6 +13,7 @@ const state = {
 
         newEmails: 0,
         newArtifacts: 0,
+        newVideoMessages: 0,
     }
 }
 
@@ -32,6 +33,9 @@ const getters = {
     },
     GET_NEW_EMAILS: (state) => {
         return state.notifications.newEmails;
+    },
+    GET_NEW_VIDEO_MESSAGES: (state) => {
+        return state.notifications.newVideoMessages;
     },
     GET_NEW_ARTIFACTS: (state) => {
         return state.notifications.newArtifacts;
@@ -116,6 +120,10 @@ const mutations = {
         console.log("mutation: ", newEmails);
         state.notifications.newEmails = newEmails; //this is the problem line
     },
+    UPDATE_NEW_VIDEO_MESSAGES: (state, newVideoMessages) => {
+        console.log("mutation: ", newVideoMessages);
+        state.notifications.newVideoMessages = newVideoMessages; //this is the problem line
+    },
     SET_NEW_ARTIFACTS: (state) => {
         axios.post('/getgallerynotifications')
             .then(response => {
@@ -148,6 +156,15 @@ const actions = {
                 commit('UPDATE_NEW_EMAILS', response.data);
             })
             .catch(err =>console.log(err));
+
+    },
+    SET_NEW_VIDEO_MESSAGES: ({commit}) => {
+        axios.post('/getvideocallnotifications')
+            .then( response => {
+            console.log('action: ', response.data);
+        commit('UPDATE_NEW_VIDEO_MESSAGES', response.data);
+        })
+        .catch(err =>console.log(err));
 
     },
     SET_NEW_ARTIFACTS: ({commit}) => commit('SET_NEW_ARTIFACTS'),

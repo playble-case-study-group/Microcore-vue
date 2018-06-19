@@ -22,7 +22,7 @@
                     <h3 class="dash-heading">Updates</h3>
                     <div class="dash-content dash-content2">
                         <i class="material-icons dash-notify">priority_high</i>
-                        <span class="dash-update"><a href="/email">{{ this.dash.email_count }} Unread Emails</a></span>
+                        <span class="dash-update"><a href="/email">{{ this.unread }} Unread Emails</a></span>
                     </div>
                 </div>
                 <div class="dash-card dash-big col-sm-10 col-md-7">
@@ -45,7 +45,7 @@
 
     export default {
 
-        props: ['dash', 'notes', 'title'],
+        props: ['dash', 'notes', 'unread'],
         mounted() {
             this.changeStockCSS();
         },

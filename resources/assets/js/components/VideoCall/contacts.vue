@@ -18,11 +18,11 @@
                         1
                     </span>
                 </div>
-                <div class="characterInfo col-sm-5">
+                <div class="characterInfo col-sm-6">
                     <span class="characterName">{{ person.name }}</span><br>
                     <span class="characterPosition">{{ person.role }}</span>
                 </div>
-                <span id="call" class="col-sm-5">
+                <span id="call" class="col-sm-3">
                     <i class="videocam material-icons">videocam</i>
                 </span>
             </div>

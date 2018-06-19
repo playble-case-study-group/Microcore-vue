@@ -33505,7 +33505,7 @@ var app = new Vue({
             user: {}
         };
     },
-    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['SET_TASKS', 'SET_USER', 'SET_SIMULATION', 'SET_NEW_EMAILS', 'SET_NEW_ARTIFACTS']),
+    methods: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['SET_TASKS', 'SET_USER', 'SET_SIMULATION', 'SET_NEW_EMAILS', 'SET_NEW_ARTIFACTS', 'SET_NEW_VIDEO_MESSAGES']),
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['GET_TASKS'])),
     mounted: function mounted() {
         var _this = this;
@@ -33516,6 +33516,7 @@ var app = new Vue({
             _this.SET_USER();
             _this.SET_SIMULATION();
             _this.SET_NEW_EMAILS();
+            _this.SET_NEW_VIDEO_MESSAGES();
             _this.SET_NEW_ARTIFACTS();
         }).catch(function (error) {
             console.log(error);
@@ -58200,7 +58201,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['dash', 'notes', 'title'],
+    props: ['dash', 'notes', 'unread'],
     mounted: function mounted() {
         this.changeStockCSS();
     },
@@ -58284,7 +58285,7 @@ var render = function() {
             _vm._v(" "),
             _c("span", { staticClass: "dash-update" }, [
               _c("a", { attrs: { href: "/email" } }, [
-                _vm._v(_vm._s(this.dash.email_count) + " Unread Emails")
+                _vm._v(_vm._s(this.unread) + " Unread Emails")
               ])
             ])
           ])
@@ -62011,7 +62012,7 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "characterInfo col-sm-5" }, [
+                    _c("div", { staticClass: "characterInfo col-sm-6" }, [
                       _c("span", { staticClass: "characterName" }, [
                         _vm._v(_vm._s(person.name))
                       ]),
@@ -62060,7 +62061,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "col-sm-5", attrs: { id: "call" } }, [
+    return _c("span", { staticClass: "col-sm-3", attrs: { id: "call" } }, [
       _c("i", { staticClass: "videocam material-icons" }, [_vm._v("videocam")])
     ])
   }
@@ -90581,7 +90582,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.sans-serif[data-v-005cb6b8] {\n  font-family: Raleway, sans-serif;\n}\n", ""]);
+exports.push([module.i, "\n.logo[data-v-005cb6b8] {\n  width: 100%;\n  height: 100%;\n}\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.sans-serif[data-v-005cb6b8] {\n  font-family: Raleway, sans-serif;\n}\n.orange-heading[data-v-005cb6b8] {\n  color: #d35e31;\n}\n.display[data-v-005cb6b8] {\n  max-width: 1024px;\n  margin: auto;\n}\n.text-container[data-v-005cb6b8] {\n  margin: 80px;\n}\n.nanobot[data-v-005cb6b8] {\n  float: right;\n}\n.quote[data-v-005cb6b8] {\n  float: left;\n}\n", ""]);
 
 // exports
 
@@ -90593,6 +90594,11 @@ exports.push([module.i, "\n.row[data-v-005cb6b8] {\n  -webkit-box-pack: center;\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -90674,33 +90680,61 @@ var staticRenderFns = [
       "div",
       { staticClass: "container main", attrs: { id: "characters" } },
       [
-        _c("h1", { staticClass: "greeting" }, [
-          _c("img", { attrs: { src: "img/about4.jpg" } })
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "display" }, [
-          _c("h2", [_vm._v("Our History")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n            Microcore was founded in 2002 by CEO Eric Johnson as a way to make the benefits of nanotechnology accessible to the medical industry. Driven by a commitment to excellence and creativity, Microcore strives to adapt the world's most advanced and innovative technologies to the medical industry for optimal patient care.\n\n            The nanotechnology around which Microcore was built is both versatile and robust. Nanobots are used in many different industries, from aerospace to construction, but it was not until Microcore's founding that this impressive technology was tailored and applied to the medical field.\n\n            Since Microcore's beginning, we’ve continued to innovate, expand, and improve. Today, Mircocore researches and manufactures different types of nanobots that target specific ailments, helping to accelerate patient recovery and enhance care.\n        "
-            )
+          _c("h1", { staticClass: "greeting" }, [
+            _c("img", { staticClass: "logo", attrs: { src: "img/about4.jpg" } })
           ]),
           _vm._v(" "),
-          _c("h2", [_vm._v("Our Products")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n            The TNG-3.01®Nanobot was originally patented by Microcore in 2005 to help reduce recovery time for patients by 1/3 through mimicking the regeneration and growth of human tissue. The TNG-3.01® continues to be one of our most revolutionary products along with YT-1301® and YT-2600®, which are used for treating various forms of cancer.\n\n            Today, Microcore is working on the finishing stages of a 10 year research project for a nanobot, the MCT-8472®, designed to substantially increase the rate of healing for broken bones through replicating and bonding to human bone.\n        "
-            )
-          ]),
-          _vm._v(" "),
-          _c("h2", [_vm._v("Our Commitment")]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n            With a robust research and development arm, Microcore is committed to continue looking for innovative ways to bring nanotechnology to bear on the world's toughest illnesses. At Microcore, our highest value is the well-being of patients around the world, and it is our commitment to them that drives us to strive for the best medical solutions in the world.\n        "
-            )
+          _c("div", { staticClass: "text-container" }, [
+            _c("h2", { staticClass: "orange-heading" }, [
+              _vm._v("Our History")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n                Microcore was founded in 2002 by CEO Eric Johnson as a way to make the benefits of nanotechnology accessible to the medical industry. Driven by a commitment to excellence and creativity, Microcore strives to adapt the world's most advanced and innovative technologies to the medical industry for optimal patient care.\n"
+              ),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                The nanotechnology around which Microcore was built is both versatile and robust. Nanobots are used in many different industries, from aerospace to construction, but it was not until Microcore's founding that this impressive technology was tailored and applied to the medical field.\n\n"
+              ),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                Since Microcore's beginning, we’ve continued to innovate, expand, and improve. Today, Mircocore researches and manufactures different types of nanobots that target specific ailments, helping to accelerate patient recovery and enhance care.\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "orange-heading" }, [
+              _vm._v("Our Products")
+            ]),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "col-sm-4 nanobot",
+              attrs: { src: "img/Virus3.png" }
+            }),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n                The TNG-3.01®Nanobot was originally patented by Microcore in 2005 to help reduce recovery time for patients by 1/3 through mimicking the regeneration and growth of human tissue. The TNG-3.01® continues to be one of our most revolutionary products along with YT-1301® and YT-2600®, which are used for treating various forms of cancer.\n"
+              ),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                Today, Microcore is working on the finishing stages of a 10 year research project for a nanobot, the MCT-8472®, designed to substantially increase the rate of healing for broken bones through replicating and bonding to human bone.\n\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "orange-heading" }, [
+              _vm._v("Our Commitment")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n                With a robust research and development arm, Microcore is committed to continue looking for innovative ways to bring nanotechnology to bear on the world's toughest illnesses. At Microcore, our highest value is the well-being of patients around the world, and it is our commitment to them that drives us to strive for the best medical solutions in the world.\n            "
+              )
+            ])
           ])
         ])
       ]
@@ -90988,7 +91022,8 @@ var state = {
     notifications: {
 
         newEmails: 0,
-        newArtifacts: 0
+        newArtifacts: 0,
+        newVideoMessages: 0
     }
 };
 
@@ -91014,6 +91049,9 @@ var getters = {
     },
     GET_NEW_EMAILS: function GET_NEW_EMAILS(state) {
         return state.notifications.newEmails;
+    },
+    GET_NEW_VIDEO_MESSAGES: function GET_NEW_VIDEO_MESSAGES(state) {
+        return state.notifications.newVideoMessages;
     },
     GET_NEW_ARTIFACTS: function GET_NEW_ARTIFACTS(state) {
         return state.notifications.newArtifacts;
@@ -91099,6 +91137,10 @@ var mutations = {
         console.log("mutation: ", newEmails);
         state.notifications.newEmails = newEmails; //this is the problem line
     },
+    UPDATE_NEW_VIDEO_MESSAGES: function UPDATE_NEW_VIDEO_MESSAGES(state, newVideoMessages) {
+        console.log("mutation: ", newVideoMessages);
+        state.notifications.newVideoMessages = newVideoMessages; //this is the problem line
+    },
     SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(state) {
         axios.post('/getgallerynotifications').then(function (response) {
             state.notifications.newArtifacts = response.data;
@@ -91144,16 +91186,26 @@ var actions = {
             return console.log(err);
         });
     },
-    SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(_ref5) {
+    SET_NEW_VIDEO_MESSAGES: function SET_NEW_VIDEO_MESSAGES(_ref5) {
         var commit = _ref5.commit;
+
+        axios.post('/getvideocallnotifications').then(function (response) {
+            console.log('action: ', response.data);
+            commit('UPDATE_NEW_VIDEO_MESSAGES', response.data);
+        }).catch(function (err) {
+            return console.log(err);
+        });
+    },
+    SET_NEW_ARTIFACTS: function SET_NEW_ARTIFACTS(_ref6) {
+        var commit = _ref6.commit;
         return commit('SET_NEW_ARTIFACTS');
     },
-    NEXT_DAY: function NEXT_DAY(_ref6) {
-        var commit = _ref6.commit;
+    NEXT_DAY: function NEXT_DAY(_ref7) {
+        var commit = _ref7.commit;
         return commit('NEXT_DAY');
     },
-    PREVIOUS_DAY: function PREVIOUS_DAY(_ref7) {
-        var commit = _ref7.commit;
+    PREVIOUS_DAY: function PREVIOUS_DAY(_ref8) {
+        var commit = _ref8.commit;
         return commit('PREVIOUS_DAY');
     },
     TOGGLE_TASK: function TOGGLE_TASK(context, payload) {
@@ -91164,8 +91216,8 @@ var actions = {
         });
     },
 
-    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(_ref8) {
-        var commit = _ref8.commit;
+    CLEAR_GALLERY_NOTIFICATIONS: function CLEAR_GALLERY_NOTIFICATIONS(_ref9) {
+        var commit = _ref9.commit;
         return commit('CLEAR_GALLERY_NOTIFICATIONS');
     }
 };

@@ -14,6 +14,7 @@ class DashController extends Controller
         $dash = DB::table('dashboard')
             ->where('day', Auth::user()->current_day)
             ->first();
+
         $dash = json_encode($dash);
         $notes = DB::table('notes')
             ->select('note')

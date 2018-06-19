@@ -50,6 +50,8 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     Route::post('/getemailnotifications', 'SimulationController@getEmailNotifications');
     Route::post('/getgallerynotifications', 'SimulationController@getGalleryNotifications');
     Route::post('/visitedgallery', 'SimulationController@visitedGallery');
+    Route::post('/getvideocallnotifications', 'SimulationController@getVideoCallNotifications');
+
 
 
 // Tasks

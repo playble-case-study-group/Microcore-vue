@@ -52,7 +52,8 @@ const app = new Vue({
         'SET_USER',
         'SET_SIMULATION',
         'SET_NEW_EMAILS',
-        'SET_NEW_ARTIFACTS'
+        'SET_NEW_ARTIFACTS',
+        'SET_NEW_VIDEO_MESSAGES'
     ]),
     computed: {
         ...mapGetters([
@@ -67,6 +68,7 @@ const app = new Vue({
             this.SET_USER();
             this.SET_SIMULATION();
             this.SET_NEW_EMAILS();
+            this.SET_NEW_VIDEO_MESSAGES();
             this.SET_NEW_ARTIFACTS();
         }).catch(error => {
             console.log( error);
