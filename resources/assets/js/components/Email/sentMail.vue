@@ -38,7 +38,7 @@
                             From: {{  this.$store.state.user.name }}
                         </h5>
                         <p>Subject: {{ readModalData.subject }}</p>
-                        <p class="email-body" v-if="this.readModalData.reply">{{ readModalData.reply.body }}</p>
+                        <p class="email-body pre-formatted" v-if="this.readModalData.reply">{{ readModalData.reply.body }}</p>
                         <div class="email-body" v-else>{{ this.readModalData.body }}</div>
                         <span v-if="this.readModalData.reply">
                             <hr>
@@ -46,7 +46,7 @@
                                 From: {{  this.$store.state.user.name }}
                             </h5>
                             <p>Subject: {{ readModalData.subject }}</p>
-                            <div class="email-body">{{ this.readModalData.body }}</div>
+                            <div class="email-body pre-formatted">{{ this.readModalData.body }}</div>
                         </span>
                     </div>
                 </div>
@@ -102,6 +102,9 @@
     .row{
         margin: 0px;
 
+    }
+    .pre-formatted {
+        white-space: pre-line;
     }
     .truncate{
         max-width: 115px;

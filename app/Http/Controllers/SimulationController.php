@@ -143,7 +143,7 @@ class SimulationController extends Controller
         $current_day = Auth::user()->current_day;
 
         $video_messages = DB::table('videos')
-            ->where('day', '<=', $current_day)
+            ->where('day', '=', $current_day)
             ->where('video_message', 1)
             ->count();
 

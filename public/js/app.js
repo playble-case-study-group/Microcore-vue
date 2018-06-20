@@ -58782,7 +58782,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\ntr[data-v-57c1bf28] {\n  cursor: pointer;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-57c1bf28] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntextarea[data-v-57c1bf28] {\n  resize: none;\n  height: 20rem;\n}\ntd[data-v-57c1bf28], th[data-v-57c1bf28] {\n  padding: 10px;\n}\ntr[data-v-57c1bf28] {\n  cursor: pointer;\n}\n.row[data-v-57c1bf28] {\n  margin: 0px;\n}\n.pre-formatted[data-v-57c1bf28] {\n  white-space: pre-line;\n}\n.truncate[data-v-57c1bf28] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.email-body[data-v-57c1bf28] {\n  margin: 30px 0 40px;\n}\n.reply[data-v-57c1bf28] {\n  font-size: 25px;\n}\n.reply-contact[data-v-57c1bf28] {\n  border: solid 1px;\n  border-bottom: 0;\n  margin-bottom: 0;\n}\n.reply-contact-name[data-v-57c1bf28] {\n  padding-top: 9px;\n  padding-left: 30px;\n  position: absolute;\n  height: 20px;\n}\n.greyText[data-v-57c1bf28] {\n  color: grey;\n}\n.read[data-v-57c1bf28] {\n  background-color: #f5f8fa;\n}\n.unread[data-v-57c1bf28] {\n  font-weight: bold;\n}\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n  width: 35rem;\n}\n.modal-body[data-v-57c1bf28] {\n  height: 80%;\n}\n.modal-title[data-v-57c1bf28] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-57c1bf28] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-57c1bf28] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-57c1bf28] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-57c1bf28] {\n    width: 50rem;\n}\n.truncate[data-v-57c1bf28] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59026,6 +59026,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         setAttachment: function setAttachment() {
             this.draftEmail.attachment = this.$refs.file.files[0];
+        },
+        addNewLine: function addNewLine(message) {
+            var lines = message.split('\n');
+            console.log(lines);
         }
     })
 
@@ -59119,7 +59123,7 @@ var render = function() {
                   _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "email-body" }, [
+                _c("p", { staticClass: "email-body pre-formatted" }, [
                   _vm._v(_vm._s(_vm.readModalData.body))
                 ]),
                 _vm._v(" "),
@@ -59142,7 +59146,7 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 this.readModalData.reply
-                  ? _c("div", { staticClass: "email-body" }, [
+                  ? _c("div", { staticClass: "email-body pre-formatted" }, [
                       _vm._v(_vm._s(this.readModalData.reply.body))
                     ])
                   : _vm._e(),
@@ -59376,7 +59380,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\ntr[data-v-3c31d779] {\n  cursor: pointer;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-3c31d779] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\ntd[data-v-3c31d779], th[data-v-3c31d779] {\n  padding: 10px;\n}\ntr[data-v-3c31d779] {\n  cursor: pointer;\n}\n.row[data-v-3c31d779] {\n  margin: 0px;\n}\n.pre-formatted[data-v-3c31d779] {\n  white-space: pre-line;\n}\n.truncate[data-v-3c31d779] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.greyText[data-v-3c31d779] {\n  color: darkgrey;\n}\n.email-body[data-v-3c31d779] {\n  margin: 30px 0 40px;\n}\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n  width: 35rem;\n}\n.modal-body[data-v-3c31d779] {\n  height: 80%;\n}\n.modal-title[data-v-3c31d779] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.flex-header[data-v-3c31d779] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.close[data-v-3c31d779] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n@media (min-width: 1024px) {\n.truncate[data-v-3c31d779] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n#readModal > .modal-dialog > .modal-content[data-v-3c31d779] {\n    width: 50rem;\n}\n.truncate[data-v-3c31d779] {\n    max-width: 35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -59572,7 +59576,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 this.readModalData.reply
-                  ? _c("p", { staticClass: "email-body" }, [
+                  ? _c("p", { staticClass: "email-body pre-formatted" }, [
                       _vm._v(_vm._s(_vm.readModalData.reply.body))
                     ])
                   : _c("div", { staticClass: "email-body" }, [
@@ -59595,7 +59599,7 @@ var render = function() {
                         _vm._v("Subject: " + _vm._s(_vm.readModalData.subject))
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "email-body" }, [
+                      _c("div", { staticClass: "email-body pre-formatted" }, [
                         _vm._v(_vm._s(this.readModalData.body))
                       ])
                     ])
@@ -60793,7 +60797,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         currentQuestion: function currentQuestion() {
             //if statement needed to avoid a change when currentQuestion changes to null
-            if (!this.videoMessageInterface && !this.currentVideo.video_message) {
+            if (!this.videoMessageInterface && !this.currentVideo.video_message && this.currentQuestion) {
                 document.getElementById('call_video').currentTime = parseInt(this.currentQuestion.start_time) + 0.51;
                 document.getElementById('call_video').play();
 
@@ -60815,6 +60819,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 document.getElementById('call_video').onended = function (e) {
                     _appScope.revertToContactsPage();
                 };
+            } else {
+                console.log('test');
+                document.getElementById('call_video').play();
             }
         },
         videoMessageInterface: function videoMessageInterface() {
@@ -61600,7 +61607,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         handleFailure: function handleFailure(error) {
             //if they don't have browser support, try a lower compatibility function or fail
-            console.error('Reeeejected!', error);
+            console.error('Reeeejected2!', error);
         },
         handleSuccess: function handleSuccess(stream) {
             var video = document.querySelector('video');
@@ -91324,7 +91331,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-170f1a48] {\n    height: 100%;\n    width: 100%;\n}\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-170f1a48] {\n    height: 100%;\n    width: 100%;\n}\n.btn-blue[data-v-170f1a48] {\n    background-color: #2b4765;\n    color: white;\n}\n\n", ""]);
 
 // exports
 
@@ -91338,6 +91345,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_image_map_resizer__ = __webpack_require__(549);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_image_map_resizer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_image_map_resizer__);
+//
+//
+//
+//
 //
 //
 //
@@ -91496,10 +91507,22 @@ var staticRenderFns = [
         [
           _c(
             "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
             [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Dead Pig")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -91515,15 +91538,6 @@ var staticRenderFns = [
                         _vm._v("×")
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "myModalLabel" }
-                    },
-                    [_vm._v("Dead Pig")]
                   )
                 ]),
                 _vm._v(" "),
@@ -91538,7 +91552,7 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-default",
+                      staticClass: "btn btn-default btn-blue",
                       attrs: { type: "button", "data-dismiss": "modal" }
                     },
                     [_vm._v("Close")]
@@ -91564,10 +91578,22 @@ var staticRenderFns = [
         [
           _c(
             "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
             [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Incident Report")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -91583,15 +91609,6 @@ var staticRenderFns = [
                         _vm._v("×")
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "myModalLabel" }
-                    },
-                    [_vm._v("Incident Report")]
                   )
                 ]),
                 _vm._v(" "),
@@ -91606,7 +91623,7 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-default",
+                      staticClass: "btn btn-default btn-blue",
                       attrs: { type: "button", "data-dismiss": "modal" }
                     },
                     [_vm._v("Close")]
@@ -91632,10 +91649,22 @@ var staticRenderFns = [
         [
           _c(
             "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
             [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Results")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -91651,15 +91680,6 @@ var staticRenderFns = [
                         _vm._v("×")
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "myModalLabel" }
-                    },
-                    [_vm._v("Test Results")]
                   )
                 ]),
                 _vm._v(" "),
@@ -91674,7 +91694,7 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-default",
+                      staticClass: "btn btn-default btn-blue",
                       attrs: { type: "button", "data-dismiss": "modal" }
                     },
                     [_vm._v("Close")]
@@ -91700,10 +91720,22 @@ var staticRenderFns = [
         [
           _c(
             "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
             [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Results")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -91719,15 +91751,6 @@ var staticRenderFns = [
                         _vm._v("×")
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "myModalLabel" }
-                    },
-                    [_vm._v("Test Results")]
                   )
                 ]),
                 _vm._v(" "),
@@ -91742,7 +91765,7 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-default",
+                      staticClass: "btn btn-default btn-blue",
                       attrs: { type: "button", "data-dismiss": "modal" }
                     },
                     [_vm._v("Close")]
@@ -91768,10 +91791,22 @@ var staticRenderFns = [
         [
           _c(
             "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
             [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Test Notes")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -91787,15 +91822,6 @@ var staticRenderFns = [
                         _vm._v("×")
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "h4",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "myModalLabel" }
-                    },
-                    [_vm._v("Test Notes")]
                   )
                 ]),
                 _vm._v(" "),
@@ -91810,7 +91836,7 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-default",
+                      staticClass: "btn btn-default btn-blue",
                       attrs: { type: "button", "data-dismiss": "modal" }
                     },
                     [_vm._v("Close")]

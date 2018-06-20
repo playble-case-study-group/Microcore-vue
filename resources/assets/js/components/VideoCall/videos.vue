@@ -109,7 +109,7 @@
             },
             currentQuestion: function () {
                 //if statement needed to avoid a change when currentQuestion changes to null
-                if(!this.videoMessageInterface && !this.currentVideo.video_message) {
+                if(!this.videoMessageInterface && !this.currentVideo.video_message && this.currentQuestion) {
                     document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
                     document.getElementById('call_video').play();
 
@@ -132,6 +132,9 @@
                     document.getElementById('call_video').onended = function(e) {
                         appScope.revertToContactsPage();
                     };
+                } else {
+                    console.log('test')
+                    document.getElementById('call_video').play();
                 }
             },
             videoMessageInterface: function(){

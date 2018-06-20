@@ -38,13 +38,13 @@
                             From: {{ readModalData.from }}
                         </h5>
                         <p>Subject: {{ readModalData.subject }}</p>
-                        <p class="email-body">{{ readModalData.body }}</p>
+                        <p class="email-body pre-formatted">{{ readModalData.body }}</p>
                         <hr v-if="readModalData.reply">
                         <h5 v-if="this.readModalData.reply">
                             From: {{  this.$store.state.user.name }}
                         </h5>
                         <p v-if="this.readModalData.reply">Subject: {{ readModalData.subject }}</p>
-                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
+                        <div class="email-body pre-formatted" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
 
                         <div class="replyForm" style="display: none;">
                             <div class="row form-group reply-contact col-sm-12">
@@ -226,6 +226,10 @@
             },
             setAttachment: function () {
                 this.draftEmail.attachment = this.$refs.file.files[0];
+            },
+            addNewLine: function(message) {
+                const lines = message.split('\n');
+                console.log(lines);
             }
         }
 
@@ -246,6 +250,9 @@
     }
     .row{
         margin: 0px;
+    }
+    .pre-formatted {
+        white-space: pre-line;
     }
     .truncate{
         max-width: 115px;
