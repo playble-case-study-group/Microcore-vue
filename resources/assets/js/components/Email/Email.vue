@@ -70,7 +70,6 @@
                             <label for="toList" class="col-sm-2">To:</label>
                             <div class="col-sm-10">
                                 <v-select :options="characters" label="name" v-model="draftEmail.to" id="toList">
-
                                 </v-select>
                             </div>
                         </div>
@@ -164,7 +163,7 @@
                 this.$refs.file.value = '';
                 this.draftEmail = {
                     attachment: null,
-                    to: "Please Select Character from Dropdown",
+                    to: 'Select from Dropdown',
                     reply: 0,
                     subject: "",
                     body: ""
@@ -274,6 +273,7 @@
     }
     .compose{
         margin: 20px;
+        width: 8rem;
     }
     #toBody{
         height: 30rem;

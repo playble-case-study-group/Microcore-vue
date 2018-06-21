@@ -66,15 +66,13 @@
                 }
             },
             postUpdatedNote: function () {
-                axios
-                    .post(
-                        "/videocall",
-                        {
-                            note: this.note,
-                            user: this.$store.state.user.id,
-                        }
-                    )
-                    .then(r => console.log(r))
+                let data = {
+                    note: this.note,
+                    user: this.$store.state.user.user_id,
+                }
+
+                axios.post("/videocall", data)
+                    .then(r => this.savedNotification())
                     .catch(e => console.log(e));
             },
         }

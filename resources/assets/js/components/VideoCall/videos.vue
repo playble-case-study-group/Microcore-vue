@@ -7,7 +7,7 @@
             </video>
 
             <video v-if="!videoMessageInterface" id="personal_video" poster="/img/videocall/video-placeholder.jpg" autoplay>
-                <source src="/video/record.mp4" type="video/mp4">
+                <source src="" type="video/mp4">
             </video>
 
             <!--video recording component, hidden until click on inactive character-->

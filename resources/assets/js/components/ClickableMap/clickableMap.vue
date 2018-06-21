@@ -90,6 +90,23 @@
             </div>
         </div>
 
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Look Around</h4>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Click around the scene to find clues about the incident.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-blue" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -124,6 +141,7 @@
     export default {
         mounted() {
             $('map').imageMapResize();
+            $('#infoModal').modal('show');
         },
         props: {
 

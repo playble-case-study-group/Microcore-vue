@@ -14,9 +14,12 @@
                     <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
-                    <span class="badge badge-pill badge-danger notify" v-if="contactMessages.includes(person.character_id)">
-                        1
+                    <span class="characterInactive" v-else>
+                            <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
+                    <!--<span class="badge badge-pill badge-danger notify" v-if="contactMessages.includes(person.character_id)">
+                        1
+                    </span>-->
                 </div>
                 <div class="characterInfo col-sm-6">
                     <span class="characterName">{{ person.name }}</span><br>
@@ -126,6 +129,13 @@
     }
     .characterActive{
         color: #57AB58;
+        position: relative;
+
+        margin-left: 30px;
+        bottom: 14px;
+    }
+    .characterInactive{
+        color: #dc3545;
         position: relative;
 
         margin-left: 30px;

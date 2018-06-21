@@ -58225,11 +58225,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         postUpdatedNote: function postUpdatedNote() {
-            axios.post("/videocall", {
+            var _this = this;
+
+            var data = {
                 note: this.note,
-                user: this.$store.state.user.id
-            }).then(function (r) {
-                return console.log(r);
+                user: this.$store.state.user.user_id
+            };
+
+            axios.post("/videocall", data).then(function (r) {
+                return _this.savedNotification();
             }).catch(function (e) {
                 return console.log(e);
             });
@@ -58438,7 +58442,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.hidden[data-v-52d1ee62] {\n  visibility: hidden;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n#toSubject[data-v-52d1ee62] {\n  width: 80%;\n  border-radius: 4px;\n  border-width: 1px;\n  margin-left: 14px;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #074462;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #074462;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #074462;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-52d1ee62] {\n  padding-left: 0;\n  list-style: none;\n  cursor: pointer;\n  margin-top: 20px;\n}\nli[data-v-52d1ee62] {\n  height: 40px;\n  margin-left: -10px;\n  margin-right: -10px;\n  padding: 10px 12px;\n}\n.main[data-v-52d1ee62] {\n  height: 60rem;\n  overflow-y: scroll;\n}\n.row[data-v-52d1ee62] {\n  margin: 0px;\n}\n.hidden[data-v-52d1ee62] {\n  visibility: hidden;\n}\n.emailList[data-v-52d1ee62] {\n  margin-top: 20px;\n}\n.truncate[data-v-52d1ee62] {\n  max-width: 115px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.compose[data-v-52d1ee62] {\n  margin: 20px;\n  width: 8rem;\n}\n#toBody[data-v-52d1ee62] {\n  height: 30rem;\n  resize: none;\n}\n#toSubject[data-v-52d1ee62] {\n  width: 80%;\n  border-radius: 4px;\n  border-width: 1px;\n  margin-left: 14px;\n}\n.email-body[data-v-52d1ee62] {\n  margin: 30px 0 40px;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  height: 44rem;\n  width: 35rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n  width: 35rem;\n}\n.modal-body[data-v-52d1ee62] {\n  height: 80%;\n}\n.modal-title[data-v-52d1ee62] {\n  margin: -9px 0;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.keyline[data-v-52d1ee62] {\n  border-left: solid 4px #074462;\n  padding-left: 20px;\n}\n.keyline-sent[data-v-52d1ee62] {\n  border-color: white;\n}\n.keyline-inbox[data-v-52d1ee62] {\n  border-color: #074462;\n}\n.sidebar[data-v-52d1ee62] {\n  display: none;\n}\n.toggle[data-v-52d1ee62] {\n  margin: 20px;\n  cursor: pointer;\n}\n.flex-header[data-v-52d1ee62] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.mobile-menu[data-v-52d1ee62] {\n  font-size: 26px;\n  color: white;\n}\n.close[data-v-52d1ee62] {\n  color: #fff;\n  line-height: 0;\n  margin-top: -15px;\n}\n\n/* The side navigation menu */\n.sidenav[data-v-52d1ee62] {\n  height: 100%;\n  /* 100% Full-height */\n  width: 0;\n  /* 0 width - change this with JavaScript */\n  height: 60rem;\n  position: absolute;\n  /* Stay in place */\n  z-index: 1;\n  /* Stay on top */\n  right: 0;\n  background-color: #074462;\n  overflow-x: hidden;\n  /* Disable horizontal scroll */\n  padding-top: 60px;\n  /* Place content 60px from the top */\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n  /* 0.5 second transition effect to slide in the sidenav */\n}\n\n/* The navigation menu links */\n.sidenav a[data-v-52d1ee62] {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  -webkit-transition: 0.3s;\n  transition: 0.3s;\n}\n\n/* When you mouse over the navigation links, change their color */\n.sidenav a[data-v-52d1ee62]:hover {\n  color: #f1f1f1;\n}\n\n/* Position and style the close button (top right corner) */\n.sidenav .closebtn[data-v-52d1ee62] {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Style page content - use this if you want to push the page content to the right when you open the side navigation */\n.content[data-v-52d1ee62] {\n  -webkit-transition: margin-left .5s;\n  transition: margin-left .5s;\n  padding: 20px;\n}\n\n/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */\n@media screen and (max-height: 450px) {\n.sidenav[data-v-52d1ee62] {\n    padding-top: 15px;\n}\n.sidenav a[data-v-52d1ee62] {\n    font-size: 18px;\n}\n}\n@media (min-width: 1024px) {\n.truncate[data-v-52d1ee62] {\n    max-width: 23rem;\n}\n}\n@media (min-width: 1224px) {\n.sidebar[data-v-52d1ee62] {\n    display: initial;\n    background-color: white;\n    height: 56rem;\n    border-right: 1px solid #c8c8c8;\n    padding-left: 0px;\n}\n.compose[data-v-52d1ee62] {\n    margin: 0;\n    margin-top: 20px;\n}\n.mobile-menu[data-v-52d1ee62] {\n    display: none;\n}\n#composeModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n#readModal > .modal-dialog > .modal-content[data-v-52d1ee62] {\n    width: 50rem;\n}\n.truncate[data-v-52d1ee62] {\n    max-width: 20rem;\n}\n}\n@media (min-width: 1400px) {\n.compose[data-v-52d1ee62] {\n    height: 40px;\n    width: 130px;\n}\n}\n", ""]);
 
 // exports
 
@@ -58456,7 +58460,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inbox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__inbox_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sentMail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sentMail_vue__);
-//
 //
 //
 //
@@ -58621,7 +58624,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$refs.file.value = '';
             this.draftEmail = {
                 attachment: null,
-                to: "Please Select Character from Dropdown",
+                to: 'Select from Dropdown',
                 reply: 0,
                 subject: "",
                 body: ""
@@ -60457,7 +60460,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.notify[data-v-167963c0] {\n    position: relative;\n    margin-left: 30px;\n    bottom: 17px\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n\n    margin-left: 30px;\n    bottom: 14px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n@media(min-width: 1092px){\n.notify[data-v-167963c0] {\n        margin-left: -16px;\n        bottom: -17px\n}\n.characterActive[data-v-167963c0]{\n        margin-left: -16px;\n        bottom: -24px;\n}\n}\n\n\n\n", ""]);
+exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.notify[data-v-167963c0] {\n    position: relative;\n    margin-left: 30px;\n    bottom: 17px\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n\n    margin-left: 30px;\n    bottom: 14px;\n}\n.characterInactive[data-v-167963c0]{\n    color: #dc3545;\n    position: relative;\n\n    margin-left: 30px;\n    bottom: 14px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n@media(min-width: 1092px){\n.notify[data-v-167963c0] {\n        margin-left: -16px;\n        bottom: -17px\n}\n.characterActive[data-v-167963c0]{\n        margin-left: -16px;\n        bottom: -24px;\n}\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -60473,6 +60476,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__notes_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__notes_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__videos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__videos_vue__);
+//
+//
+//
 //
 //
 //
@@ -61224,7 +61230,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: auto;\n    width: auto;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: auto;\n    width: 100%;\n    width: -moz-available;/* WebKit-based browsers will ignore this. */\n    width: -webkit-fill-available;/* Mozilla-based browsers will ignore this. */\n    width: fill-available;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -61854,11 +61860,7 @@ var render = function() {
                     autoplay: ""
                   }
                 },
-                [
-                  _c("source", {
-                    attrs: { src: "/video/record.mp4", type: "video/mp4" }
-                  })
-                ]
+                [_c("source", { attrs: { src: "", type: "video/mp4" } })]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -62004,22 +62006,13 @@ var render = function() {
                               [_vm._v("fiber_manual_record")]
                             )
                           ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.contactMessages.includes(person.character_id)
-                        ? _c(
-                            "span",
-                            {
-                              staticClass:
-                                "badge badge-pill badge-danger notify"
-                            },
-                            [
-                              _vm._v(
-                                "\n                    1\n                "
-                              )
-                            ]
-                          )
-                        : _vm._e()
+                        : _c("span", { staticClass: "characterInactive" }, [
+                            _c(
+                              "i",
+                              { staticClass: "material-icons activeIcon" },
+                              [_vm._v("fiber_manual_record")]
+                            )
+                          ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "characterInfo col-sm-6" }, [
@@ -91467,6 +91460,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -91474,6 +91484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         $('map').imageMapResize();
+        $('#infoModal').modal('show');
     },
 
     props: {},
@@ -91833,6 +91844,75 @@ var staticRenderFns = [
                     staticStyle: { width: "100%" },
                     attrs: { src: "img/scene/Note.png" }
                   })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default btn-blue",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "infoModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "myModalLabel" }
+                    },
+                    [_vm._v("Look Around")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Click around the scene to find clues about the incident."
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [

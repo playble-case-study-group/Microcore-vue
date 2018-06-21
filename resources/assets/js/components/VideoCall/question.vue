@@ -114,7 +114,10 @@
     .button {
         margin: 1rem 0;
         height: auto;
-        width: auto;
+        width: 100%;
+        width: -moz-available;/* WebKit-based browsers will ignore this. */
+        width: -webkit-fill-available;/* Mozilla-based browsers will ignore this. */
+        width: fill-available;
     }
     .visited {
         opacity: 0.65;

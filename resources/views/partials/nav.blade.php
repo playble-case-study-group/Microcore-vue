@@ -28,7 +28,7 @@
                         :link="'/library'">
                 </navigation>
                 <navigation
-                        :title="'Video Call'"
+                        :title="'Phone'"
                         :link="'/videocall'"
                         :notifications="$store.state.notifications.newVideoMessages">
                 </navigation>
