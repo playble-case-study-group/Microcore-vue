@@ -3,7 +3,6 @@
 /public/storage
 /public/video
 /public/calls
-/public/video
 /storage/*.key
 /vendor
 /.idea
