@@ -9,7 +9,7 @@
                 <div class="about col-sm-12">
                     <h2 class="sans-serif title"> {{ selectedCharacter.name }}</h2>
                     <p class="sans-serif role"> {{ selectedCharacter.role }}</p>
-                    <p> {{ selectedCharacter.about }} </p>
+                    <p class="pre-formatted"> {{ selectedCharacter.about }} </p>
                 </div>
             </div>
             <hr>
@@ -69,6 +69,9 @@
     img {
         border-radius: 50%;
     }
+    .pre-formatted {
+        white-space: pre-line;
+    }
     .greeting {
         text-align: center;
         margin-bottom: 60px;
@@ -85,6 +88,7 @@
         grid-column-start: 1;
         grid-row-start: 1;
         margin: auto;
+        margin-top: 0;
     }
     .selected-character {
         grid-column-start: 2;
