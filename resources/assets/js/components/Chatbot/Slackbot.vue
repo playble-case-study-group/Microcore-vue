@@ -150,6 +150,7 @@
                             channel_id: this.current_channel_id
                         };
 
+                        console.log(this.client_messages[this.current_channel_id]);
                         this.client_messages[this.current_channel_id].push(message);
 
                         axios.post('/chat', message).then( response => {/* console.log(response) */});

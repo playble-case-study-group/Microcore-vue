@@ -92810,6 +92810,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                         channel_id: _this3.current_channel_id
                     };
 
+                    console.log(_this3.client_messages[_this3.current_channel_id]);
                     _this3.client_messages[_this3.current_channel_id].push(message);
 
                     axios.post('/chat', message).then(function (response) {/* console.log(response) */});
