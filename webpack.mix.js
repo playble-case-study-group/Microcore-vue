@@ -13,9 +13,5 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-<<<<<<< HEAD
    .browserSync('http://microcore.localhost');
-=======
-   .browserSync('http://vuesim.local');
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
