@@ -16,7 +16,13 @@ class TasksController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $tasks = DB::table('tasks')->get();
+=======
+        $tasks = DB::table('tasks')
+            ->join('task_type', 'tasks.task_type_id', '=', 'task_type.task_type_id')
+            ->get();
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
 
         foreach ($tasks as $task) {

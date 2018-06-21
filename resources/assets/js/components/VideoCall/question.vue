@@ -113,8 +113,13 @@
 <style scoped>
     .button {
         margin: 1rem 0;
+<<<<<<< HEAD
         height: auto;
         width: auto;
+=======
+        height: 3rem;
+        width: 15rem;
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
     .visited {
         opacity: 0.65;
@@ -145,13 +150,23 @@
     @media(min-width: 992px){
         .button {
             margin: 1rem 0;
+<<<<<<< HEAD
+=======
+            height: 4rem;
+            width: 15rem;
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
             white-space: normal;
         }
     }
     @media(min-width: 1400px){
         .button {
             margin: 1rem 0rem;
+<<<<<<< HEAD
 
+=======
+            height: 4rem;
+            width: 17rem;
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
         }
     }
 </style>

@@ -28,6 +28,17 @@ Route::group(['middleware'=>['auth', 'admin']], function() {
     Route::resource('/editor', 'ArticleEditorController');
     Route::post('/deleteArticle', 'ArticleEditorController@deleteArticle');
     Route::post('/addArticle', 'ArticleEditorController@addArticle');
+<<<<<<< HEAD
+});
+
+
+Route::group(['middleware'=>['auth', 'instructor']], function() {
+    // Class
+    Route::resource('/classes', 'ClassController');
+    Route::resource('/assignments', 'AssignmentController');
+    Route::post('/retrieveassignments', 'AssignmentController@retrieveAssignments');
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 });
 
 
@@ -40,6 +51,18 @@ Route::group(['middleware'=>['auth', 'instructor']], function() {
 
 
 
+Route::group(['middleware'=>['auth', 'student']], function() {
+    // Simulation
+    Route::post('/updateday', 'SimulationController@updateDay');
+    Route::get('/sim', function () {
+        return DB::table('simulation')->get();
+    });
+    Route::post( '/resetDay', 'SimulationController@resetDay' );
+    Route::post('/getemailnotifications', 'SimulationController@getEmailNotifications');
+    Route::post('/getgallerynotifications', 'SimulationController@getGalleryNotifications');
+    Route::post('/visitedgallery', 'SimulationController@visitedGallery');
+
+<<<<<<< HEAD
 Route::group(['middleware'=>['auth', 'student']], function() {
     // Simulation
     Route::post('/updateday', 'SimulationController@updateDay');
@@ -68,6 +91,23 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     Route::post('/saveFile', 'VideoCallController@saveFile');
     Route::post('/clickedQuestion', 'VideoCallController@disableQuestion');
 
+=======
+
+// Tasks
+    Route::resource('/tasks', 'TasksController');
+    Route::post('/tasks/complete', 'TasksController@complete');
+
+// Email
+    Route::resource('/email', 'EmailController');
+    Route::post('/returnemails', 'EmailController@emailData');
+    Route::post('/readEmail', 'EmailController@readEmail');
+
+// Video Call
+    Route::resource('/videocall', 'VideoCallController');
+    Route::post('/saveFile', 'VideoCallController@saveFile');
+    Route::post('/clickedQuestion', 'VideoCallController@disableQuestion');
+
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 // Library
     Route::resource('/library', 'LibraryController');
 // Route::post('/updateArticle', 'ArticleEditorController@update');
@@ -79,8 +119,13 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     });
 
 // Gallery
+<<<<<<< HEAD
     //Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
     //Route::resource('/gallery', 'GalleryController');
+=======
+    Route::get( '/getartifacts', 'GalleryController@getArtifacts' );
+    Route::resource('/gallery', 'GalleryController');
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
 // Group
     Route::resource('/group', 'GroupController');
@@ -92,6 +137,7 @@ Route::group(['middleware'=>['auth', 'student']], function() {
     Route::get('/dashboard', 'DashController@loadDash');
 });
 
+<<<<<<< HEAD
 //About
     Route::get('/about', 'AboutController@index');
 
@@ -105,4 +151,6 @@ Route::group(['middleware'=>['auth', 'student']], function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 

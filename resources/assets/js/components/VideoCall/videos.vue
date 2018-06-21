@@ -105,13 +105,24 @@
             currentVideo: function () {
                 if(!this.videoMessageInterface) {
                     document.getElementById('call_video').load();
+<<<<<<< HEAD
+=======
+                    this.callIconToggleStatus = "call";
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                 }
             },
             currentQuestion: function () {
                 //if statement needed to avoid a change when currentQuestion changes to null
+<<<<<<< HEAD
                 if(!this.videoMessageInterface && !this.currentVideo.video_message && this.currentQuestion) {
                     document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
                     document.getElementById('call_video').play();
+=======
+                if(!this.videoMessageInterface) {
+                    document.getElementById('call_video').currentTime = (parseInt(this.currentQuestion.start_time) + 0.51);
+                    document.getElementById('call_video').play();
+                    this.callIconToggleStatus = "call_end";
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
                     let appScope = this;
                     let paused = false;
@@ -126,6 +137,7 @@
                             }
                         }
                     });
+<<<<<<< HEAD
                 } else if(this.currentVideo.video_message) {
                     let appScope = this;
                     document.getElementById('call_video').play();
@@ -135,6 +147,8 @@
                 } else {
                     console.log('test')
                     document.getElementById('call_video').play();
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                 }
             },
             videoMessageInterface: function(){
@@ -198,7 +212,10 @@
                             return question;
                         }
                     })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                 } else {
                     //if not active, leave a message
                     this.leaveMessage();
@@ -442,7 +459,11 @@
                     analyser.getByteFrequencyData(dataArrayAlt);
 
                     //set canvas background color and add animation
+<<<<<<< HEAD
                     canvasCtx.fillStyle = '#0c4460';
+=======
+                    canvasCtx.fillStyle = '#4a4a4a';
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
                     //define the width of audio bar display

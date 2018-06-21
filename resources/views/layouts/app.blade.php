@@ -8,7 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<<<<<<< HEAD
     <title>{{ config('app.name', 'Microcore') }}</title>
+=======
+    <title>{{ config('app.name', 'Museum of Spain') }}</title>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

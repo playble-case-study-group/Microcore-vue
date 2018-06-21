@@ -138,6 +138,7 @@ class SimulationController extends Controller
         return $request->all();
     }
 
+<<<<<<< HEAD
     public static function getVideoCallNotifications() {
 
         $current_day = Auth::user()->current_day;
@@ -150,4 +151,6 @@ class SimulationController extends Controller
         return $video_messages;
     }
 
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 }

@@ -14,6 +14,7 @@
                     <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
+<<<<<<< HEAD
                     <span class="badge badge-pill badge-danger notify" v-if="contactMessages.includes(person.character_id)">
                         1
                     </span>
@@ -23,6 +24,14 @@
                     <span class="characterPosition">{{ person.role }}</span>
                 </div>
                 <span id="call" class="col-sm-3">
+=======
+                </div>
+                <div class="characterInfo col-sm-5">
+                    <span class="characterName">{{ person.name }}</span><br>
+                    <span class="characterPosition">{{ person.role }}</span>
+                </div>
+                <span id="call" class="col-sm-5">
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                     <i class="videocam material-icons">videocam</i>
                 </span>
             </div>
@@ -70,6 +79,7 @@
         computed: {
             activeContacts: function() {
                 return this.calls.filter((character) => {
+<<<<<<< HEAD
                     if(!character.video_message){
                         return character.character_id;
                     }
@@ -80,6 +90,9 @@
             contactMessages: function() {
                 return this.calls.filter((character) => {
                     if(character.video_message){
+=======
+                    if(character.day === this.$store.state.user.current_day){
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                         return character.character_id;
                     }
                 }).map((character) => {
@@ -112,11 +125,14 @@
         align-self: center;
         position: relative;
     }
+<<<<<<< HEAD
     .notify {
         position: relative;
         margin-left: 30px;
         bottom: 17px
     }
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     .videocam {
         color: grey;
     }
@@ -126,8 +142,13 @@
     .characterActive{
         color: #57AB58;
         position: relative;
+<<<<<<< HEAD
         margin-left: 30px;
         bottom: 14px;
+=======
+        margin-left: -16px;
+        bottom: -24px;
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
     .contact-inner{
         padding: 10px;
@@ -146,6 +167,7 @@
         align-self: center;
         font-size: 24px;
     }
+<<<<<<< HEAD
     @media(min-width: 1092px){
         .notify {
             margin-left: -16px;
@@ -156,6 +178,8 @@
             bottom: -24px;
         }
     }
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
 
 </style>

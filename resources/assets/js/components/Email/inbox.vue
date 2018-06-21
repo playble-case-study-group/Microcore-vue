@@ -38,13 +38,21 @@
                             From: {{ readModalData.from }}
                         </h5>
                         <p>Subject: {{ readModalData.subject }}</p>
+<<<<<<< HEAD
                         <p class="email-body pre-formatted">{{ readModalData.body }}</p>
+=======
+                        <p class="email-body">{{ readModalData.body }}</p>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                         <hr v-if="readModalData.reply">
                         <h5 v-if="this.readModalData.reply">
                             From: {{  this.$store.state.user.name }}
                         </h5>
                         <p v-if="this.readModalData.reply">Subject: {{ readModalData.subject }}</p>
+<<<<<<< HEAD
                         <div class="email-body pre-formatted" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
+=======
+                        <div class="email-body" v-if="this.readModalData.reply">{{ this.readModalData.reply.body }}</div>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
                         <div class="replyForm" style="display: none;">
                             <div class="row form-group reply-contact col-sm-12">
@@ -226,10 +234,13 @@
             },
             setAttachment: function () {
                 this.draftEmail.attachment = this.$refs.file.files[0];
+<<<<<<< HEAD
             },
             addNewLine: function(message) {
                 const lines = message.split('\n');
                 console.log(lines);
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
             }
         }
 
@@ -251,9 +262,12 @@
     .row{
         margin: 0px;
     }
+<<<<<<< HEAD
     .pre-formatted {
         white-space: pre-line;
     }
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     .truncate{
         max-width: 115px;
         overflow: hidden;

@@ -38,7 +38,11 @@
                             From: {{  this.$store.state.user.name }}
                         </h5>
                         <p>Subject: {{ readModalData.subject }}</p>
+<<<<<<< HEAD
                         <p class="email-body pre-formatted" v-if="this.readModalData.reply">{{ readModalData.reply.body }}</p>
+=======
+                        <p class="email-body" v-if="this.readModalData.reply">{{ readModalData.reply.body }}</p>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                         <div class="email-body" v-else>{{ this.readModalData.body }}</div>
                         <span v-if="this.readModalData.reply">
                             <hr>
@@ -46,7 +50,11 @@
                                 From: {{  this.$store.state.user.name }}
                             </h5>
                             <p>Subject: {{ readModalData.subject }}</p>
+<<<<<<< HEAD
                             <div class="email-body pre-formatted">{{ this.readModalData.body }}</div>
+=======
+                            <div class="email-body">{{ this.readModalData.body }}</div>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                         </span>
                     </div>
                 </div>
@@ -103,9 +111,12 @@
         margin: 0px;
 
     }
+<<<<<<< HEAD
     .pre-formatted {
         white-space: pre-line;
     }
+=======
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     .truncate{
         max-width: 115px;
         overflow: hidden;

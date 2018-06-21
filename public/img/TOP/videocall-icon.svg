@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.998" height="21.998" viewBox="0 0 62 62">
   <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
 <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        ">
@@ -29,3 +30,18 @@
 <?xpacket end="w"?></metadata>
 <image y="8" width="62" height="41" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAPCAQAAABKZPfjAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfiBg0FBRpsrPKAAAAArklEQVQoz83QIQoCQRTG8f+MLixutYhiNb1kEW/gDQTBZFUvIIjJtMUbmLyCYDeKzKxg8ABGy4KbNIjsCjKDzS997/HjhacMDBjTIOMzioAzc9kXVqbPBldEEgBbJ9CscGcJYCdcOJapenDNdonpAKEyKRUnToneTfPwXI7yqvkhf4OVR9yLOPTgEz2S1180Nw++ylaEGZApM2TtxG05ANgWJWVgxJTmV2hZyC4fn/7bI2+bKsL3AAAAAElFTkSuQmCC"/>
 </svg>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>TOP/video-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="TOP/video-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="003-video-camera-copy" transform="translate(0.000000, 2.000000)" fill="#4A4A4A" fill-rule="nonzero">
+            <path d="M14.9785276,1.79447853 L14.9785276,8.02453988 C14.9785276,8.50613497 14.4570552,8.80674847 14.0398773,8.56748466 L11.4447853,7.07055215 L11.4447853,7.49693252 C11.4447853,8.7791411 10.404908,9.8190184 9.12269939,9.8190184 L2.32208589,9.8190184 C1.0398773,9.8190184 0,8.7791411 0,7.49693252 L0,2.32822086 C0,1.04601227 1.0398773,0.00613496933 2.32208589,0.00613496933 L9.12576687,0.00613496933 C10.4079755,0.00613496933 11.4478528,1.04601227 11.4478528,2.32822086 L11.4478528,2.75460123 L14.0429448,1.25766871 C14.4570552,1.01226994 14.9785276,1.31595092 14.9785276,1.79447853 Z" id="Shape"></path>
+        </g>
+        <rect id="Rectangle-17" x="0" y="0" width="15" height="15"></rect>
+    </g>
+</svg>
+>>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
