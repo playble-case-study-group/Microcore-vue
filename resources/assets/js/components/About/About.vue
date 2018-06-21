@@ -15,7 +15,7 @@
                 Since Microcore's beginning, we’ve continued to innovate, expand, and improve. Today, Mircocore researches and manufactures different types of nanobots that target specific ailments, helping to accelerate patient recovery and enhance care.
             </p>
             <h2 class="orange-heading">Our Products</h2>
-                <img class="col-sm-4 nanobot" src="img/Virus3.png">
+                <img class="col-sm-5 nanobot" src="img/Virus3.png">
             <p>
                 The TNG-3.01®Nanobot was originally patented by Microcore in 2005 to help reduce recovery time for patients by 1/3 through mimicking the regeneration and growth of human tissue. The TNG-3.01® continues to be one of our most revolutionary products along with YT-1301® and YT-2600®, which are used for treating various forms of cancer.
 <br><br>

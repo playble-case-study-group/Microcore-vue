@@ -60459,7 +60459,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: -16px;\n    bottom: -24px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n\n\n", ""]);
+exports.push([module.i, "\nh3[data-v-167963c0] {\n    padding: 10px;\n}\nimg[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    position: relative;\n}\n.notify[data-v-167963c0] {\n    position: relative;\n    margin-left: 30px;\n    bottom: 17px\n}\n.videocam[data-v-167963c0] {\n    color: grey;\n}\n.contact-list[data-v-167963c0] {\n    background-color: white;\n}\n.characterActive[data-v-167963c0]{\n    color: #57AB58;\n    position: relative;\n    margin-left: 30px;\n    bottom: 14px;\n}\n.contact-inner[data-v-167963c0]{\n    padding: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row;\n            flex-flow: row;\n    cursor: pointer;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.contact-inner[data-v-167963c0]:nth-child(even) {\n    border-top: solid 1px;\n    border-bottom: solid 1px;\n    border-color: #d9dcde;\n}\n#call[data-v-167963c0] {\n    -ms-flex-item-align: center;\n        align-self: center;\n    font-size: 24px;\n}\n@media(min-width: 1092px){\n.notify[data-v-167963c0] {\n        margin-left: -16px;\n        bottom: -17px\n}\n.characterActive[data-v-167963c0]{\n        margin-left: -16px;\n        bottom: -24px;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -61224,7 +61224,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: 3rem;\n    width: 15rem;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        height: 4rem;\n        width: 15rem;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n        height: 4rem;\n        width: 17rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-c56baf9a] {\n    margin: 1rem 0;\n    height: auto;\n    width: auto;\n}\n.visited[data-v-c56baf9a] {\n    opacity: 0.65;\n}\n.active[data-v-c56baf9a] {\n}\n.recording[data-v-c56baf9a]{\n    color: #ff4d4d;\n    float: right;\n    font-size: 12px;\n    margin-top: 3px;\n}\n.counterDisplay[data-v-c56baf9a] {\n    font-size: 16px;\n    top: -30px;\n    text-align: center;\n}\n.counter[data-v-c56baf9a] {\n    padding-left: 40px;\n    color: #dc3545;\n}\n.questionList[data-v-c56baf9a] {\n    width: 50%;\n    padding: 15px 25px 0;\n}\n@media(min-width: 992px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0;\n        white-space: normal;\n}\n}\n@media(min-width: 1400px){\n.button[data-v-c56baf9a] {\n        margin: 1rem 0rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -62009,7 +62009,10 @@ var render = function() {
                       _vm.contactMessages.includes(person.character_id)
                         ? _c(
                             "span",
-                            { staticClass: "badge badge-pill badge-danger" },
+                            {
+                              staticClass:
+                                "badge badge-pill badge-danger notify"
+                            },
                             [
                               _vm._v(
                                 "\n                    1\n                "
@@ -90718,7 +90721,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("img", {
-              staticClass: "col-sm-4 nanobot",
+              staticClass: "col-sm-5 nanobot",
               attrs: { src: "img/Virus3.png" }
             }),
             _vm._v(" "),

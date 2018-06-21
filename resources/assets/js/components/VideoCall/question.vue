@@ -113,8 +113,8 @@
 <style scoped>
     .button {
         margin: 1rem 0;
-        height: 3rem;
-        width: 15rem;
+        height: auto;
+        width: auto;
     }
     .visited {
         opacity: 0.65;
@@ -145,16 +145,13 @@
     @media(min-width: 992px){
         .button {
             margin: 1rem 0;
-            height: 4rem;
-            width: 15rem;
             white-space: normal;
         }
     }
     @media(min-width: 1400px){
         .button {
             margin: 1rem 0rem;
-            height: 4rem;
-            width: 17rem;
+
         }
     }
 </style>

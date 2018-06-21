@@ -14,7 +14,7 @@
                     <span class="characterActive" v-if="activeContacts.includes(person.character_id)">
                             <i class="material-icons activeIcon">fiber_manual_record</i>
                     </span>
-                    <span class="badge badge-pill badge-danger" v-if="contactMessages.includes(person.character_id)">
+                    <span class="badge badge-pill badge-danger notify" v-if="contactMessages.includes(person.character_id)">
                         1
                     </span>
                 </div>
@@ -112,6 +112,11 @@
         align-self: center;
         position: relative;
     }
+    .notify {
+        position: relative;
+        margin-left: 30px;
+        bottom: 17px
+    }
     .videocam {
         color: grey;
     }
@@ -121,8 +126,8 @@
     .characterActive{
         color: #57AB58;
         position: relative;
-        margin-left: -16px;
-        bottom: -24px;
+        margin-left: 30px;
+        bottom: 14px;
     }
     .contact-inner{
         padding: 10px;
@@ -140,6 +145,16 @@
     #call {
         align-self: center;
         font-size: 24px;
+    }
+    @media(min-width: 1092px){
+        .notify {
+            margin-left: -16px;
+            bottom: -17px
+        }
+        .characterActive{
+            margin-left: -16px;
+            bottom: -24px;
+        }
     }
 
 
