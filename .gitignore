@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/calls
+/public/video
 /storage/*.key
 /vendor
 /.idea
