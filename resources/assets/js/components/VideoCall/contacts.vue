@@ -125,14 +125,11 @@
         align-self: center;
         position: relative;
     }
-<<<<<<< HEAD
     .notify {
         position: relative;
         margin-left: 30px;
         bottom: 17px
     }
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     .videocam {
         color: grey;
     }
@@ -142,13 +139,9 @@
     .characterActive{
         color: #57AB58;
         position: relative;
-<<<<<<< HEAD
+
         margin-left: 30px;
         bottom: 14px;
-=======
-        margin-left: -16px;
-        bottom: -24px;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
     .contact-inner{
         padding: 10px;
@@ -167,7 +160,6 @@
         align-self: center;
         font-size: 24px;
     }
-<<<<<<< HEAD
     @media(min-width: 1092px){
         .notify {
             margin-left: -16px;
@@ -178,8 +170,7 @@
             bottom: -24px;
         }
     }
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
+
 
 
 </style>

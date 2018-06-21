@@ -1,11 +1,7 @@
 <template>
     <li class="nav-item" id="navigation">
         <a :class="isActive == link ? 'nav-link ' + 'active' : 'nav-link'" :href="link" >
-<<<<<<< HEAD
             <img :src=" isActive == link ? '/img/TOP'+ link +'-icon-selected.png' : '/img/TOP'+ link +'-icon.png'" :alt="link" class="nav-icon">
-=======
-            <img :src=" isActive == link ? '/img/TOP'+ link +'-icon-selected.svg' : '/img/TOP'+ link +'-icon.svg'" :alt="link" class="nav-icon">
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
             <span class="nav-icon"><slot name="nav-icon" ></slot></span>
             {{ title }}
             <span v-if="notifications > 0" class="badge badge-pill badge-danger">

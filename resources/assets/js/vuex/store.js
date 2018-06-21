@@ -13,10 +13,7 @@ const state = {
 
         newEmails: 0,
         newArtifacts: 0,
-<<<<<<< HEAD
         newVideoMessages: 0,
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
 }
 
@@ -37,12 +34,9 @@ const getters = {
     GET_NEW_EMAILS: (state) => {
         return state.notifications.newEmails;
     },
-<<<<<<< HEAD
     GET_NEW_VIDEO_MESSAGES: (state) => {
         return state.notifications.newVideoMessages;
     },
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     GET_NEW_ARTIFACTS: (state) => {
         return state.notifications.newArtifacts;
     },
@@ -126,13 +120,10 @@ const mutations = {
         console.log("mutation: ", newEmails);
         state.notifications.newEmails = newEmails; //this is the problem line
     },
-<<<<<<< HEAD
     UPDATE_NEW_VIDEO_MESSAGES: (state, newVideoMessages) => {
         console.log("mutation: ", newVideoMessages);
         state.notifications.newVideoMessages = newVideoMessages; //this is the problem line
     },
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     SET_NEW_ARTIFACTS: (state) => {
         axios.post('/getgallerynotifications')
             .then(response => {
@@ -167,7 +158,6 @@ const actions = {
             .catch(err =>console.log(err));
 
     },
-<<<<<<< HEAD
     SET_NEW_VIDEO_MESSAGES: ({commit}) => {
         axios.post('/getvideocallnotifications')
             .then( response => {
@@ -177,8 +167,6 @@ const actions = {
         .catch(err =>console.log(err));
 
     },
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     SET_NEW_ARTIFACTS: ({commit}) => commit('SET_NEW_ARTIFACTS'),
     NEXT_DAY: ({commit}) => commit('NEXT_DAY'),
     PREVIOUS_DAY: ({commit}) => commit('PREVIOUS_DAY'),

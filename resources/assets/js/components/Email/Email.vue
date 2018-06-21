@@ -139,22 +139,14 @@
             toggleInbox: function () {
                 this.showInbox = 1;
                 this.showSent = 0;
-<<<<<<< HEAD
                 $('.keyline-inbox').css('border-color', '#074462');
-=======
-                $('.keyline-inbox').css('border-color', '#636b6f');
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
                 $('.keyline-sent').css('border-color', 'white');
             },
             toggleSent: function () {
                 this.showInbox = 0;
                 this.showSent = 1;
                 $('.keyline-inbox').css('border-color', 'white');
-<<<<<<< HEAD
                 $('.keyline-sent').css('border-color', '#074462');
-=======
-                $('.keyline-sent').css('border-color', '#636b6f');
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 
             },
             openNav: function () {

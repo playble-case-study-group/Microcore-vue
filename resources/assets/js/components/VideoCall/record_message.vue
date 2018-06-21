@@ -78,11 +78,8 @@
             },
             handleFailure: function(error){
                 //if they don't have browser support, try a lower compatibility function or fail
-<<<<<<< HEAD
                 console.error('Reeeejected2!', error);
-=======
-                console.error('Reeeejected!', error);
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
+
             },
             handleSuccess: function(stream) {
                 const video = document.querySelector('video');

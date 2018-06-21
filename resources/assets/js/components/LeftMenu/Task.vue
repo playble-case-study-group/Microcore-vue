@@ -28,11 +28,8 @@
                 'TOGGLE_TASK'
             ]),
             navigateToComponent: function(task){
-<<<<<<< HEAD
                 window.location.href = task.task_type;
-=======
-                window.location.href = task.component_link;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
+
             }
         }
 

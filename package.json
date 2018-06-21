@@ -22,7 +22,6 @@
     "vue-template-compiler": "^2.5.16"
   },
   "dependencies": {
-<<<<<<< HEAD
     "api-ai-javascript": "^2.0.0-beta.21",
     "axios": "^0.17",
     "bootstrap": "^4.1.1",
@@ -30,15 +29,6 @@
     "ioredis": "^3.2.2",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",
-=======
-    "vue": "^2.5.7",
-    "lodash": "^4.17.5",
-    "axios": "^0.17",
-    "jquery": "^3.3.1",
-    "api-ai-javascript": "^2.0.0-beta.21",
-    "bootstrap": "^4.1.1",
-    "ioredis": "^3.2.2",
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     "markdown-toc": "^1.2.0",
     "node-sass": "^4.7.2",
     "npm": "^5.7.1",
@@ -46,10 +36,7 @@
     "socket.io": "^2.0.4",
     "tooltip": "^1.6.1",
     "update": "^0.7.4",
-<<<<<<< HEAD
     "vue": "^2.5.7",
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     "vue-markdown": "^2.2.4",
     "vue-select": "^2.4.0",
     "vue-tables-2": "^1.4.50",

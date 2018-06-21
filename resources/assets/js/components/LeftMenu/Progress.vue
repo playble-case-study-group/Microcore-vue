@@ -7,20 +7,14 @@
                 <span v-for="task in day"
                       v-if="task.complete"
                       class="task">
-<<<<<<< HEAD
                     <img src="/img/complete-orange.png" alt="complete">
-=======
-                    <img src="/img/complete-blue.png" alt="complete">
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
+
                 </span>
                 <span v-for="task in day"
                       v-if="!task.complete"
                       class="task">
-<<<<<<< HEAD
                     <img src="/img/incomplete-orange.png" alt="incomplete">
-=======
-                    <img src="/img/incomplete-blue.png" alt="incomplete">
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
+
                 </span>
             </li>
         </ul>

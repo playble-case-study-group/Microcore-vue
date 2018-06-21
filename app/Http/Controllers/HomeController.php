@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-=======
 use Illuminate\Http\Request;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
