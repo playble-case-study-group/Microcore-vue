@@ -73,10 +73,10 @@ Route::group(['middleware'=>['auth', 'student']], function() {
 // Route::post('/updateArticle', 'ArticleEditorController@update');
 
 // Chat
-    //Route::resource('/chat', 'ChatController');
-    /*Route::get('/chatbot', function () {
+    Route::resource('/chat', 'ChatController');
+    Route::get('/chatbot', function () {
         return view('chatbot');
-    });*/
+    });
 
 // Gallery
     //Route::get( '/getartifacts', 'GalleryController@getArtifacts' );

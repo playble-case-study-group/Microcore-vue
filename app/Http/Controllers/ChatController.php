@@ -17,9 +17,9 @@ class ChatController extends Controller
     public function index()
     {
         $chats = DB::table('chats')
-            ->join('users', 'users.id', '=', 'chat.user_id')
-            ->select('users.name', 'chat.channel_id', 'chat.character_name', 'chat.message', 'chat.created_at', 'chat.type')
-            ->where('chat.user_id', Auth::id())
+            ->join('users', 'users.user_id', '=', 'chats.user_id')
+            ->select('users.name', 'chats.channel_id', 'chats.character_name', 'chats.message', 'chats.created_at', 'chats.type')
+            ->where('chats.user_id', Auth::id())
             ->get();
 
         $channels = DB::table('channels')->get();
