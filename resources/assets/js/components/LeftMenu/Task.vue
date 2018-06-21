@@ -90,11 +90,7 @@
     /* When the checkbox is checked, add a blue background */
     .checked {
         background-color: #A7BBC2;
-<<<<<<< HEAD
         background: url("/img/icon-check.png") no-repeat center center;
-=======
-        background: url("/public/img/icon-check.svg") no-repeat center center;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
 
     /* Create the checkmark/indicator (hidden when not checked) */

@@ -44,19 +44,9 @@
     .nav-icon {
         position: relative;
         top: -2px;
-<<<<<<< HEAD
         padding-right: 2 px;
     }
     .active{
         font-weight: bold;
-=======
-        padding-right: 5px;
-    }
-    .badge-danger {
-        background-color: #942921;
-    }
-    .active{
-        color: #942921 !important;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
 </style>

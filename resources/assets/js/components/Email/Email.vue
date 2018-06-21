@@ -303,22 +303,14 @@
         justify-content: flex-start;
     }
     .keyline{
-<<<<<<< HEAD
         border-left: solid 4px #074462;
-=======
-        border-left: solid 4px #636b6f;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
         padding-left: 20px;
     }
     .keyline-sent{
         border-color: white;
     }
     .keyline-inbox{
-<<<<<<< HEAD
         border-color: #074462;
-=======
-        border-color: #636b6f;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     }
     .sidebar{
         display: none;
@@ -348,11 +340,7 @@
         position: absolute; /* Stay in place */
         z-index: 1; /* Stay on top */
         right: 0;
-<<<<<<< HEAD
         background-color: #074462;
-=======
-        background-color: #4a4a4a;
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

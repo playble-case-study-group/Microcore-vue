@@ -23,7 +23,6 @@ Vue.component('left-menu', require('./components/LeftMenu/LeftMenu.vue'));
 Vue.component('gallery', require('./components/Gallery/Gallery'));
 Vue.component('dash', require('./components/Dashboard/dashboard.vue'));
 Vue.component('email', require('./components/Email/Email.vue'));
-<<<<<<< HEAD
 //Vue.component('gallery', require('./components/Gallery/Gallery.vue'));
 Vue.component('videocall', require('./components/VideoCall/videoCall.vue'));
 Vue.component('library', require('./components/Library/library.vue'));
@@ -35,16 +34,6 @@ Vue.component('navigation', require('./components/NavigationLink/navigation.vue'
 Vue.component('about', require('./components/About/about.vue'));
 Vue.component('characters', require('./components/Characters/characters.vue'));
 Vue.component('clickable-map', require('./components/ClickableMap/clickableMap.vue'));
-=======
-Vue.component('gallery', require('./components/Gallery/Gallery.vue'));
-Vue.component('videocall', require('./components/VideoCall/videoCall.vue'));
-Vue.component('library', require('./components/Library/library.vue'));
-// Vue.component('chatbot', require('./components/Chatbot/Chatbot.vue'));
-// Vue.component('slackbot', require('./components/Chatbot/Slackbot.vue'));
-Vue.component('classes', require('./components/Classes/Classes.vue'));
-Vue.component('editor', require('./components/Library/articleEditor.vue'));
-Vue.component('navigation', require('./components/NavigationLink/navigation.vue'));
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
 Vue.component('v-select', require('vue-select'));
 
 import store from './vuex/store';
@@ -63,12 +52,8 @@ const app = new Vue({
         'SET_USER',
         'SET_SIMULATION',
         'SET_NEW_EMAILS',
-<<<<<<< HEAD
         'SET_NEW_ARTIFACTS',
         'SET_NEW_VIDEO_MESSAGES'
-=======
-        'SET_NEW_ARTIFACTS'
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     ]),
     computed: {
         ...mapGetters([
@@ -83,10 +68,7 @@ const app = new Vue({
             this.SET_USER();
             this.SET_SIMULATION();
             this.SET_NEW_EMAILS();
-<<<<<<< HEAD
             this.SET_NEW_VIDEO_MESSAGES();
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
             this.SET_NEW_ARTIFACTS();
         }).catch(error => {
             console.log( error);

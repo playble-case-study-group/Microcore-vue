@@ -125,7 +125,7 @@
 
                             }
                         }
-                    });
+                        });
                 } else if(this.currentVideo.video_message) {
                     let appScope = this;
                     document.getElementById('call_video').play();

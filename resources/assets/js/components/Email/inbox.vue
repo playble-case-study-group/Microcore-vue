@@ -247,12 +247,10 @@
     .row{
         margin: 0px;
     }
-<<<<<<< HEAD
+
     .pre-formatted {
         white-space: pre-line;
     }
-=======
->>>>>>> 23ae1613c2682474ae9099201263f564a66a50e6
     .truncate{
         max-width: 115px;
         overflow: hidden;
