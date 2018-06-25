@@ -94,12 +94,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Look Around</h4>
+                        <h4 class="modal-title" id="myModalLabel">Microcore Testing Lab</h4>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>Click around the scene to find clues about the incident.</p>
+                        <p>Click around the scene to gain more information about the incident.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-blue" data-dismiss="modal">Close</button>

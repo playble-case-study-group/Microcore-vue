@@ -1,6 +1,6 @@
 <template>
     <li class="clearfix">
-        <img :src="channel.img" alt="avatar" />
+        <img :src="channel.img_small" alt="avatar" />
         <div class="about">
             <div class="name">{{ channel.name }}</div>
             <div class="status">
