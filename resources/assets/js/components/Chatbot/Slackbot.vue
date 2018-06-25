@@ -1,6 +1,7 @@
 <template>
     <div class="container clearfix">
         <div class="people-list" id="people-list">
+            <h2 class="list-title">Online</h2>
             <!--<div class="search">-->
                 <!--<input type="text" placeholder="search"/>-->
                 <!--<i class="fa fa-search"></i>-->
@@ -235,11 +236,15 @@
         background: #444753;
         /*border-radius: 5px;*/
     }
+    .list-title {
+        padding-left: 20px;
+    }
 
     .people-list {
         width: 260px;
         float: left;
         color: white;
+        margin-top: 35px;
 
         .search {
             padding: 20px;
@@ -289,7 +294,7 @@
     }
 
     .chat {
-        width: 590px;
+        width: 650px;
         float: left;
         background: #F2F5F8;
         border-top-right-radius: 5px;
@@ -334,7 +339,7 @@
             padding: 0px 20px;
             border-bottom: 2px solid white;
             overflow-y: scroll;
-            height: 575px;
+            height: 675px;
 
             .message-data {
                 margin-bottom: 10px;
