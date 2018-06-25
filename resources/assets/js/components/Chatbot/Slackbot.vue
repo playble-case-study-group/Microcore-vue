@@ -7,6 +7,7 @@
             <!--</div>-->
             <ul class="list">
                 <slack-channel v-for="(channel, key) in channels"
+                               class="pointer"
                             :channel="channel"
                             v-on:click.native="changeChannel(key)"
                             :key="key">
@@ -16,7 +17,7 @@
 
         <div class="chat">
             <div class="chat-header clearfix">
-                <img :src="channels[current_client_index].img_small" alt="avatar"/>
+                <img class="selected-character" :src="channels[current_client_index].img_small" alt="avatar"/>
 
                 <div class="chat-about">
                     <div class="chat-with">{{ channels[current_client_index].name }}</div>
@@ -159,34 +160,34 @@
                         this.client_messages[this.current_channel_id].push(message);
 
 
-                        axios.post('/chat', message).then( response => {/* console.log(response) */});
+                        axios.post('/chat', message).then( res => {/* console.log(response) */
 
-                        // empty the message each time it sends
-                        this.sendMessage = "";
+                            // empty the message each time it sends
+                            this.sendMessage = "";
 
-                        if(response.result.fulfillment.messages) {
-                            //let payload = response.result.fulfillment.messages.filter(msg => msg.type === 4);
-                            let payload = response.result.fulfillment.messages;
-                            if (payload.length) {
+                            if(response.result.fulfillment.messages) {
+                                //let payload = response.result.fulfillment.messages.filter(msg => msg.type === 4);
+                                let payload = response.result.fulfillment.messages;
+                                if (payload.length) {
 
-                                payload.forEach(msg => {
+                                    payload.forEach(msg => {
 
-                                    console.log(msg);
-                                    let data = {
-                                        day: this.$store.getters.CURRENT_DAY,
-                                        channel_id: this.current_channel_id,
-                                        message: msg.speech,
-                                        type: 1
-                                    };
+                                        console.log(msg);
+                                        let data = {
+                                            day: this.$store.getters.CURRENT_DAY,
+                                            channel_id: this.current_channel_id,
+                                            message: msg.speech,
+                                            type: 1
+                                        };
 
-                                    axios.post('/chat', data).then( response => { /* console.log(response) */ });
-                                    this.client_messages[this.current_channel_id].push(data)
-                                });
+                                        axios.post('/chat', data).then( response => { /* console.log(response) */ });
+                                        this.client_messages[this.current_channel_id].push(data)
+                                    });
+
+                                }
 
                             }
-
-                        }
-
+                        });
                         // Disable text area to prevent double input
                         document.getElementById('message-to-send').removeAttribute('disabled');
                         document.getElementById('message-to-send').focus();
@@ -194,12 +195,6 @@
 
                     });
                 });
-
-
-
-
-
-
             },
             scrollChat: function () {
                 let chatHist = document.getElementById('chat-history');
@@ -228,6 +223,10 @@
 
     li {
         list-style: none;
+    }
+
+    .pointer {
+        cursor: pointer;
     }
 
     .container {
@@ -304,6 +303,8 @@
 
             img {
                 float: left;
+                border-radius: 50%;
+                border: 2px solid $green;
             }
 
             .chat-about {

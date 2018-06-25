@@ -20,3 +20,13 @@
 
     }
 </script>
+
+<style scoped lang="scss">
+    $green: #86BB71;
+    $blue: #94C2ED;
+
+    img {
+        border-radius: 50%;
+        border: 2px solid $blue;
+    }
+</style>
