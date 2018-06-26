@@ -1,7 +1,7 @@
 <template>
     <li class="nav-item" id="navigation">
         <a :class="isActive == link ? 'nav-link ' + 'active' : 'nav-link'" :href="link" >
-            <img :src=" isActive == link ? '/img/TOP'+ link +'-icon-selected.png' : '/img/TOP'+ link +'-icon.png'" :alt="link" class="nav-icon">
+            <img v-if="image" :src=" isActive == link ? '/img/TOP'+ link +'-icon-selected.png' : '/img/TOP'+ link +'-icon.png'" :alt="link" class="nav-icon">
             <span class="nav-icon"><slot name="nav-icon" ></slot></span>
             {{ title }}
             <span v-if="notifications > 0" class="badge badge-pill badge-danger">
@@ -18,6 +18,7 @@
           this.getActivePath();
         },
         props: {
+            image: Boolean,
             title: String,
             link: String,
             notifications: Number

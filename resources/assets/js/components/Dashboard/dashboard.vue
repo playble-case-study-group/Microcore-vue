@@ -28,9 +28,10 @@
                 </div>
                 <div class="dash-card dash-big col-sm-10 col-md-7">
                     <h3 class="dash-heading">Daily News</h3>
-                    <video class="dash-video col-sm-12" poster="/img/videocall/video-placeholder.jpg" controls>
+                    <video class="dash-video col-sm-12" poster="/img/videocall/video-placeholder.jpg" v-if="this.dash.day_video" controls>
                         <source :src="this.dash.day_video" type="video/mp4">
                     </video>
+                    <img v-else class="col-sm-12 dash-video" src="/images/no-video.png">
                 </div>
                 <div class="dash-card dash-big col-sm-10 col-md-3">
                     <h3 class="dash-heading">My Notes</h3>
@@ -106,7 +107,7 @@
     .dash-video{
         height: 425px;
         display: block;
-        margin: auto;
+        margin: 1rem auto;
     }
     .dash-content{
         margin: 1rem 0;

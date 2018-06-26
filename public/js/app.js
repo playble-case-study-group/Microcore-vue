@@ -58271,7 +58271,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #074462;\n  text-align: center;\n  margin: 1.5rem 0 0;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 1rem 0;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 1rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 2.5rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #074462;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 80px;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #074462;\n  text-align: center;\n  margin: 1.5rem 0 0;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: 1rem auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 1rem 0;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 1rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 2.5rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #074462;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 80px;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
 
 // exports
 
@@ -58283,6 +58283,7 @@ exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(1);
+//
 //
 //
 //
@@ -58427,21 +58428,26 @@ var render = function() {
         _c("div", { staticClass: "dash-card dash-big col-sm-10 col-md-7" }, [
           _c("h3", { staticClass: "dash-heading" }, [_vm._v("Daily News")]),
           _vm._v(" "),
-          _c(
-            "video",
-            {
-              staticClass: "dash-video col-sm-12",
-              attrs: {
-                poster: "/img/videocall/video-placeholder.jpg",
-                controls: ""
-              }
-            },
-            [
-              _c("source", {
-                attrs: { src: this.dash.day_video, type: "video/mp4" }
+          this.dash.day_video
+            ? _c(
+                "video",
+                {
+                  staticClass: "dash-video col-sm-12",
+                  attrs: {
+                    poster: "/img/videocall/video-placeholder.jpg",
+                    controls: ""
+                  }
+                },
+                [
+                  _c("source", {
+                    attrs: { src: this.dash.day_video, type: "video/mp4" }
+                  })
+                ]
+              )
+            : _c("img", {
+                staticClass: "col-sm-12 dash-video",
+                attrs: { src: "/images/no-video.png" }
               })
-            ]
-          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "dash-card dash-big col-sm-10 col-md-3" }, [
@@ -91974,6 +91980,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     props: {
+        image: Boolean,
         title: String,
         link: String,
         notifications: Number
@@ -92007,16 +92014,18 @@ var render = function() {
         attrs: { href: _vm.link }
       },
       [
-        _c("img", {
-          staticClass: "nav-icon",
-          attrs: {
-            src:
-              _vm.isActive == _vm.link
-                ? "/img/TOP" + _vm.link + "-icon-selected.png"
-                : "/img/TOP" + _vm.link + "-icon.png",
-            alt: _vm.link
-          }
-        }),
+        _vm.image
+          ? _c("img", {
+              staticClass: "nav-icon",
+              attrs: {
+                src:
+                  _vm.isActive == _vm.link
+                    ? "/img/TOP" + _vm.link + "-icon-selected.png"
+                    : "/img/TOP" + _vm.link + "-icon.png",
+                alt: _vm.link
+              }
+            })
+          : _vm._e(),
         _vm._v(" "),
         _c("span", { staticClass: "nav-icon" }, [_vm._t("nav-icon")], 2),
         _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
