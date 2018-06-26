@@ -82,6 +82,10 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
+    a {
+        text-decoration: none;
+        color: black;
+    }
     .d-flex{
         display: flex;
         flex-flow: column-reverse;
@@ -100,7 +104,7 @@
         height: 500px;
     }
     .dash-heading{
-        color: $sim-heading;
+        color: #ee6031;
         text-align: center;
         margin: 1.5rem 0 0;
     }
