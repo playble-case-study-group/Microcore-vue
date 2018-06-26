@@ -3,17 +3,17 @@
         <h1>Progress</h1>
         <ul>
             <li v-for="day in TASKS_BY_DAY">
-                <img :src="'/img/days/day-' + day[0].day + '.png'" alt="day" class="day">
+                <img :src="'/img/days/day-' + day[0].day + '.svg'" alt="day" class="day">
                 <span v-for="task in day"
                       v-if="task.complete"
                       class="task">
-                    <img src="/img/left-menu/complete-orange.png" alt="complete">
+                    <img src="/img/left-menu/complete.svg" alt="complete">
 
                 </span>
                 <span v-for="task in day"
                       v-if="!task.complete"
                       class="task">
-                    <img src="/img/left-menu/incomplete-orange.png" alt="incomplete">
+                    <img src="/img/left-menu/incomplete.svg" alt="incomplete">
 
                 </span>
             </li>
