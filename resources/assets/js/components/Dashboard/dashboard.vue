@@ -151,7 +151,7 @@
         }
         .dash-small{
             height: 200px;
-            margin-top: 10rem;
+            margin-top: 80px;
         }
         .col-md-3 {
             width: 30%;

@@ -58271,7 +58271,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #074462;\n  text-align: center;\n  margin: 1.5rem 0 0;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 1rem 0;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 1rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 2.5rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #074462;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 10rem;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.d-flex[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-flow: column-reverse;\n          flex-flow: column-reverse;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n  background-color: white;\n  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  margin: auto;\n  margin-top: 2rem;\n}\n.dash-small[data-v-06f5821c] {\n  height: 200px;\n}\n.dash-big[data-v-06f5821c] {\n  height: 500px;\n}\n.dash-heading[data-v-06f5821c] {\n  color: #074462;\n  text-align: center;\n  margin: 1.5rem 0 0;\n}\n.dash-video[data-v-06f5821c] {\n  height: 425px;\n  display: block;\n  margin: auto;\n}\n.dash-content[data-v-06f5821c] {\n  margin: 1rem 0;\n}\n.dash-notify[data-v-06f5821c] {\n  color: #ce0d0d;\n  font-size: 20px;\n}\n.dash-stocks[data-v-06f5821c] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0 1rem;\n  font-size: 27px;\n}\n.dash-stockStatus[data-v-06f5821c] {\n  font-size: 24px;\n}\n.dash-count[data-v-06f5821c] {\n  margin-top: 2.5rem;\n}\n.dash-update[data-v-06f5821c] {\n  position: absolute;\n  margin-top: 4px;\n}\nhr[data-v-06f5821c] {\n  width: 1px;\n  height: 100px;\n  background-color: #074462;\n}\ntextarea[data-v-06f5821c] {\n  height: 400px;\n  border: none;\n  resize: none;\n}\n@media (min-width: 992px) {\n.d-flex[data-v-06f5821c] {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: initial;\n            flex-flow: initial;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n}\n.dash-card[data-v-06f5821c] {\n    margin: 2rem 0;\n}\n.dash-small[data-v-06f5821c] {\n    height: 200px;\n    margin-top: 80px;\n}\n.col-md-3[data-v-06f5821c] {\n    width: 30%;\n}\n.col-md-7[data-v-06f5821c] {\n    width: 63%;\n}\n}\n", ""]);
 
 // exports
 
@@ -60913,7 +60913,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.startSelfVideo();
         this.startAudio();
-        this.loadCallVideo(this.clickedCharacter);
+        this.playIntroVideo();
     },
     updated: function updated() {
         if (this.videoMessageInterface == false) {
@@ -60924,6 +60924,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         currentVideo: function currentVideo() {
             if (!this.videoMessageInterface) {
+                document.getElementById('call_video').src = this.currentVideo.video_url;
                 document.getElementById('call_video').load();
             }
         },
@@ -60952,7 +60953,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _appScope.revertToContactsPage();
                 };
             } else {
-                console.log('test');
                 document.getElementById('call_video').play();
             }
         },
@@ -60996,8 +60996,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.startSelfVideo();
         },
+        playIntroVideo: function playIntroVideo() {
+            var video = document.getElementById('call_video');
+            video.src = '/video/Ringing.mp4';
+            video.play();
+
+            var appScope = this;
+            video.onended = function (e) {
+                appScope.loadCallVideo(appScope.clickedCharacter);
+            };
+        },
         loadCallVideo: function loadCallVideo(person_id) {
-            this.clickedCharacter = person_id;
+            //this.clickedCharacter = person_id;
             //check if the contact clicked on is active
             var activeCall = this.calls.find(function (call) {
                 if (call.character_id === person_id) {
@@ -61013,6 +61023,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         return question;
                     }
                 });
+
                 this.currentVideo = activeCall;
                 this.currentQuestion = this.currentQuestions.find(function (question) {
                     if (question.first_question) {

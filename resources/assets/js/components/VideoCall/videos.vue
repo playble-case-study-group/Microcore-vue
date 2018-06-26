@@ -94,7 +94,7 @@
         mounted() {
             this.startSelfVideo();
             this.startAudio();
-            this.loadCallVideo(this.clickedCharacter);
+            this.playIntroVideo();
         },
         updated() {
             if(this.videoMessageInterface == false){
@@ -104,6 +104,7 @@
         watch: {
             currentVideo: function () {
                 if(!this.videoMessageInterface) {
+                    document.getElementById('call_video').src = this.currentVideo.video_url;
                     document.getElementById('call_video').load();
                 }
             },
@@ -133,7 +134,6 @@
                         appScope.revertToContactsPage();
                     };
                 } else {
-                    console.log('test')
                     document.getElementById('call_video').play();
 
                 }
@@ -176,8 +176,19 @@
                 });
                 this.startSelfVideo();
             },
+            playIntroVideo: function() {
+                let video = document.getElementById('call_video');
+                video.src = '/video/Ringing.mp4';
+                video.play();
+
+                let appScope = this;
+                video.onended = function(e) {
+                    appScope.loadCallVideo(appScope.clickedCharacter);
+                };
+
+            },
             loadCallVideo: function (person_id) {
-                this.clickedCharacter = person_id;
+                //this.clickedCharacter = person_id;
                 //check if the contact clicked on is active
                 let activeCall = this.calls.find((call) => {
                     if (call.character_id === person_id) {
@@ -193,6 +204,7 @@
                             return question;
                         }
                     })
+
                     this.currentVideo = activeCall;
                     this.currentQuestion = this.currentQuestions.find((question) => {
                         if (question.first_question) {
