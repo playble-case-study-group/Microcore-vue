@@ -136,6 +136,7 @@
     }
     .img-large {
         align-self: center;
+        margin-bottom: 1rem;
     }
     .container {
         margin: 40px;
