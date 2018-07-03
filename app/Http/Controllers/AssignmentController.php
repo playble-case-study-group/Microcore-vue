@@ -131,8 +131,9 @@ class AssignmentController extends Controller
                 ['s.day', '=', $day],
                 ['s.character_id', '=', $characterId]
             ])
-            ->select('s.day', 's.subject', 's.body', 's.created_at', 'c.name AS c_name', 'u.name AS u_name')
+            ->select('s.day', 's.subject', 's.body', 's.email_attachment', 's.created_at', 'c.name AS c_name', 'u.name AS u_name')
             ->get();
+
     }
 
     private function retrieveGalleryAssignments($classId)

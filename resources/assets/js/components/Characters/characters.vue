@@ -21,7 +21,7 @@
                      @click="selectCharacter(character)">
                     <div class="character-inner">
                         <img :src="character.img_large" class="img-small">
-                        <p class="character-name"> {{ character.name }}</p>
+                        <h3 class="character-name"> {{ character.name }}</h3>
                         <p> {{ character.role }}</p>
                     </div>
                 </div>
@@ -115,11 +115,16 @@
     .character:hover, .active {
         transform: scale(1.1);
         transition: transform .25s;
-        background-color: rgba(40, 167, 69, .75);
-        color: white;
+        background-color: #fff;
+        color: black;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
     .character-inner {
         padding-top: 2.5rem;
+
+        p {
+            font-size: 11pt;
+        }
     }
     .character-name {
         margin: 5px 0px;

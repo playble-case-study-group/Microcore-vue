@@ -67,7 +67,7 @@ class User extends Authenticatable
         if ($classId) {
             return $classId->class_id;
         } else {
-            return false;
+            return 0;
         }
     }
 }
